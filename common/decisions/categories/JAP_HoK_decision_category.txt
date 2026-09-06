@@ -1,0 +1,8 @@
+# HoK Korea-war bridge. The rest of Japan's categories come from target 1.19.2.
+JAP_war_on_korea_category = {
+	icon = military_operation
+
+	allowed = {
+		original_tag = JAP
+	}
+}
