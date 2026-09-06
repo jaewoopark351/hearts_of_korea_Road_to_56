@@ -28,20 +28,24 @@ country_event = {
 	is_triggered_only = yes
 	
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
 				date < 1949.1.1
 			} 
-		}
-		NOT = {	#Hearts of Korea MOD
 			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
 		DEN_aat = no #Denmark has custom election events
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		NOT = {
@@ -91,29 +95,24 @@ country_event = {
 	is_triggered_only = yes
 	
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
 				date < 1949.1.1
-			}
-		}
-		NOT = { #AUS cannot rearm no matter what the public wants under these treaties
+			} 
 			AND = {
-				tag = AUS
-				OR = {
-					has_idea = AUS_treaty_of_saint_germain_en_laye
-					has_idea = AUS_revised_treaty_of_saint_germain_en_laye
-				}
-			}
-		}
-		NOT = {	#Hearts of Korea MOD
-			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
 		DEN_aat = no #Denmark has custom election events
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		has_war = no
@@ -183,6 +182,13 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
@@ -196,16 +202,14 @@ country_event = {
 				has_dlc = "Trial of Allegiance"
 				tag = BRA
 			}
-		}
-		NOT = {	#Hearts of Korea MOD
 			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
+		NOT = { has_focus_tree = r56_portuguese_focus }
 		DEN_aat = no #Denmark has custom election events
 		NOR_AAT = no
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		NOT = { has_idea = fascism_defeated }
@@ -260,6 +264,13 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
@@ -278,25 +289,22 @@ country_event = {
 				tag = BRA
 			}
 			AND = {
-				has_dlc = "Thunder at Our Gates"
-				tag = INS
+				original_tag = LUX
+				has_country_flag = LUX_elections_starting
 			}
-		}
-		NOT = {	#Hearts of Korea MOD
 			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
 		DEN_aat = no #Denmark has custom election events
 		NOR_AAT = no
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		NOT = { has_idea = communism_defeated }
 		communism > 0.15
 	}
-	
+
 	option = {
 		name = election.5.a
 		ai_chance = {
@@ -367,6 +375,13 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
@@ -385,19 +400,12 @@ country_event = {
 				tag = BRA
 			}
 			AND = {
-				has_dlc = "Thunder at Our Gates"
-				tag = INS
-			}
-		}
-		NOT = {	#Hearts of Korea MOD
-			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
 		DEN_aat = no #Denmark has custom election events
 		NOR_aat = no
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		democratic < 0.5
@@ -486,6 +494,13 @@ country_event = {
 	}
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
@@ -500,15 +515,9 @@ country_event = {
 				tag = BRA
 			}
 		}
-		NOT = {	#Hearts of Korea MOD
-			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
-			}
-		}
+		NOT = { has_focus_tree = r56_portuguese_focus }
 		DEN_aat = no #Denmark has custom election events
 		NOR_aat = no 
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		has_country_flag = coalition_with_fascists
@@ -576,6 +585,13 @@ country_event = {
 	}
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
@@ -590,15 +606,8 @@ country_event = {
 				tag = BRA
 			}
 		}
-		NOT = {	#Hearts of Korea MOD
-			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
-			}
-		}
 		DEN_aat = no #Denmark has custom election events
 		NOR_aat = no 
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		has_country_flag = coalition_with_communists
@@ -665,12 +674,18 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		has_government = democratic
 		fascism > 0.5
 		is_puppet = no
 		DEN_aat = no #Denmark has custom election events
 		NOR_AAT = no 
-		AST_taog = no #Australia has custom election events
 		NOT = {
 			AND = {
 				original_tag = SPR
@@ -692,11 +707,9 @@ country_event = {
 				has_dlc = "Trial of Allegiance"
 				tag = BRA
 			}
-		}
-		NOT = {	#Hearts of Korea MOD
 			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
 	}
@@ -734,13 +747,19 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 
 		has_government = democratic
 		communism > 0.5
 		is_puppet = no
 		DEN_aat = no #Denmark has custom election events
 		NOR_AAT = no 
-		AST_taog = no #Australia has custom election events
 		NOT = {
 			AND = {
 				original_tag = GRE
@@ -754,11 +773,13 @@ country_event = {
 				has_dlc = "Trial of Allegiance"
 				tag = BRA
 			}
-		}
-		NOT = {	#Hearts of Korea MOD
 			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				original_tag = LUX
+				has_country_flag = LUX_elections_starting
+			}
+			AND = {
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
 	}
@@ -796,20 +817,23 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = {
 				Tag = USA
 				date < 1949.1.1
 			}
-		}
-		NOT = {	#Hearts of Korea MOD
 			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
-		DEN_aat = no #Denmark has custom election events
-		AST_taog = no #Australia has custom election events
 		has_government = democratic
 		has_idea_with_trait = motorized_equipment_manufacturer
 	}
@@ -856,19 +880,24 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
 				date < 1949.1.1
 			} 
-		}
-		NOT = {	#Hearts of Korea MOD
 			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
-		AST_taog = no #Australia has custom election events
+		tag = ENG
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		has_war = yes
@@ -884,14 +913,6 @@ country_event = {
 			}
 		}
 		add_stability = -0.05
-		if =  {
-			limit = {
-				original_tag = DEN
-				has_dlc = "Arms Against Tyranny"
-			}
-			clr_country_flag = DEN_at_war_flag #This is done to be able to trigger the following event:
-			country_event = { id = denmark_political_events.3 }
-		}
 	}
 
 	option = {
@@ -930,19 +951,23 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
 				date < 1949.1.1
 			} 
-		}
-		NOT = {	#Hearts of Korea MOD
 			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
+				tag = GER
+				has_completed_focus = GER_hold_new_elections
 			}
 		}
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = democratic
 		has_war = yes
@@ -998,19 +1023,19 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
 				date < 1949.1.1
 			} 
 		}
-		NOT = {	#Hearts of Korea MOD
-			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
-			}
-		}
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = fascism
 		fascism > 0.5
@@ -1032,19 +1057,19 @@ country_event = {
 	is_triggered_only = yes
 
 	trigger = {
+		# HOK owns Korea's post-focus election flow.
+		NOT = {
+			AND = {
+				tag = KOR
+				has_completed_focus = KOR_democracy_advance_forward
+			}
+		}
 		NOT = { 
 			AND = { 
 				tag = USA 
 				date < 1949.1.1
 			}
 		}
-		NOT = {	#Hearts of Korea MOD
-			AND = {
-				tag = KOR
-				has_completed_focus = KOR_democracy_advance_forward 
-			}
-		}
-		AST_taog = no #Australia has custom election events
 		OR = { NOT = { original_tag = SPR } NOT = { date < 1937.1.1 } }
 		has_government = fascism
 		NOT = { fascism > 0.5 }

@@ -62,51 +62,6 @@ kor_gookppong_status = {
 		desc = "GOOKPPONG_MIDDLE_POWER_ENABLED_TEXT_DESC"
 	}
 }
-fin_finnppong_status = {
-	name = "FINNPPONG_STATUS"
-	group = "RULE_GROUP_GOOKPPONG_SETUP"
-	default = {
-		name = DEFAULT
-		text = "RULE_OPTION_DEFAULT"
-		desc = "RULE_OPTION_DEFAULT_FINNPPONG_DESC"
-	}
-	option = {
-		name = FINNPPONG_ENABLED
-		text = "FINNPPONG_ENABLED_TEXT"
-		desc = "FINNPPONG_ENABLED_TEXT_DESC"
-	}
-}
-mon_mongppong_status = {
-	name = "MONGPPONG_STATUS"
-	group = "RULE_GROUP_GOOKPPONG_SETUP"
-	default = {
-		name = DEFAULT
-		text = "RULE_OPTION_DEFAULT"
-		desc = "RULE_OPTION_DEFAULT_MONGPPONG_DESC"
-	}
-	option = {
-		name = MONGPPONG_ENABLED
-		text = "MONGPPONG_ENABLED_TEXT"
-		desc = "MONGPPONG_ENABLED_TEXT_DESC"
-	}
-}
-sov_sibbppong_status = {
-	name = "SIBBPPONG_STATUS"
-	group = "RULE_GROUP_GOOKPPONG_SETUP"
-	default = {
-		name = DEFAULT
-		text = "RULE_OPTION_DEFAULT"
-		desc = "RULE_OPTION_DEFAULT_SIBBPPONG_DESC"
-	}
-	option = {
-		name = SIBBPPONG_ENABLED
-		text = "SIBBPPONG_ENABLED_TEXT"
-		desc = "SIBBPPONG_ENABLED_TEXT_DESC"
-	}
-}
-
-
-
 #baebakee_option_status = {
 #	name = "BAEBAKEE_STATUS"
 #	group = "RULE_GROUP_GOOKPPONG_SETUP"

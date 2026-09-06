@@ -5,10 +5,10 @@
 - 상태: 현재 설계 기준
 - 작성일: 2026-09-06
 - 적용 대상: C:\hoi\hearts_of_korea_Road_to_56
-- 구현 상태: 설계·기준선 수립 단계
-- 런타임 호환성: 미완료
+- 구현 상태: 1차 정적 포팅과 후속 HOK 한국 자산·KOR 기술 보정 완료
+- 런타임 호환성: 21:28 비한국 국가와 21:30 KOR C0가 database/history 로드 후 같은 새 게임 crash; 후속 항구 배치 산출물은 재검증 대기
 
-이 문서는 어떤 소스를 기준으로 무엇을 보존하고 어떻게 병합할지 정의한다. 파일을 실제로 이식했다거나 게임 검증을 통과했다는 기록이 아니다.
+이 문서는 어떤 소스를 기준으로 무엇을 보존하고 어떻게 병합하는지 정의한다. 2026-09-06 1차 구현에서 지도와 공용 파일 리베이스, 한국 콘텐츠 이식 및 정적 검사를 수행했다. HOK 한국 자산과 KOR 기술을 보정한 21:28/21:30 산출물도 13,569 province와 history를 로드했지만 singleplayer launch 직후 같은 접근 위반으로 종료됐다. 이후 확인한 한국 해안 항구 spawn 7행 누락을 보정했으나 새 산출물은 아직 실행하지 않았으므로 gameplay 호환성은 미완료다.
 
 ## 2. 목표와 비목표
 
@@ -55,12 +55,29 @@ descriptor의 dependency 선언은 의도를 표현할 뿐 실제 물리적 로�
 
 ## 5. 콘텐츠 소유 원칙
 
-- HOK 고유 한국 콘텐츠: 의도를 보존하되 RT56의 현재 schema와 연결점에 맞게 이식한다.
+- HOK 고유 한국 콘텐츠: **HOK를 기본 소유자로 삼고**, 의도를 보존하되 RT56의 현재 schema와 연결점에 맞게 이식한다.
 - RT56 전 세계·공유 콘텐츠: 기본적으로 유지한다.
-- 양쪽이 한국을 변경한 경우: 어느 한쪽을 자동 승자로 정하지 않고 기능별 병합 결정을 기록한다.
+- 일반 중국·일본 콘텐츠: RT56을 기본 소유자로 삼는다.
+- 한중·한일 접경 콘텐츠: RT56 base에 HOK 한국 경로에 필요한 hook만 병합한다.
+- 양쪽이 한국을 변경한 경우: 최종 한국 동작과 표현은 HOK 보존을 기본값으로 하되, 현재 schema의 registry와 연결점은 충돌 없이 병합한다.
 - 새 접착 코드: 기존 전역 ID와 충돌하지 않는 프로젝트 전용 prefix/namespace를 사용한다.
 - HOK 상속 ID: RT56 및 바닐라와 충돌하지 않고 의미가 유지될 때 보존한다.
-- 지속 ID를 바꿔야 하는 경우: 참조 closure와 세이브 영향을 기록하고 별도 승인을 받은 마이그레이션으로 처리한다.
+- 지속 ID를 바꿔야 하는 경우: 참조 closure와 세이브 영향을 기록한 명시적 마이그레이션으로 처리한다. 이번 포트의 승인된 지도 ID 마이그레이션은 ADR-0002에 기록한다.
+
+세부 소유권 결정은 [ADR-0004](decisions/0004-hok-korean-content-priority.md)를 따른다.
+
+| 영역 | 기본 소유자 | 통합 방식 |
+|---|---|---|
+| KOR gameplay와 한국 지역 설계 | HOK | ID·밸런스·결과를 보존하며 현재 RT56 연결점으로 migration |
+| KOR 경로가 만드는 `KCH`, `KJP` 등의 후속 결과 | HOK | 한국 경로의 reference closure로 보존 |
+| 일반 JAP/CHI/PRC/군벌 | RT56 | donor whole-file을 사용하지 않음 |
+| 한중·한일 상호작용 | RT56 + HOK delta | 현재 host base에 KOR trigger/effect/event hook만 three-way merge |
+| 한국 `.wav`·`.dds`·`.tga` 등 presentation payload | HOK | 형식·소비 경로를 검사한 의도적 `ASSET_COPY`/override |
+| `.asset`·`.gfx`·entity·sprite·soundeffect registry | 단일 merged owner | 현재 schema를 base로 HOK 의미를 병합하고 중복 ID를 금지 |
+
+현재 음성 구현은 compat의 `sound/r56_vo_Korean.asset`이 RT56의 category/compressor를 유지하면서 HOK의 sound 정의, 재생 목록, 가중, `volume=1.0`과 WAV 18개를 소비한다. donor `sound/voice_korea.asset`은 싣지 않는다. 기본 경·중·대형 항공기는 RT56의 기존 `KOR_*` registry ID를 다시 정의하지 않고 `hok_rt56_` mesh/entity ID로 HOK mesh·texture를 연결하며, 중형 entity에는 현행 공중보급 state만 병합했다. 두 구조 모두 정적으로는 단일 소유지만 실제 VFS 우선순위·청취·렌더링은 새 cold start에서 확인해야 한다.
+
+여기서 payload 소유권과 registry 소유권은 별개다. 예를 들어 RT56의 한 개 음성 asset 정의가 ID를 등록하면서 동일 가상경로의 HOK WAV를 소비할 수 있다. 이 방식은 중복을 피하지만 HOK의 재생 목록·음량까지 자동 보존하지는 않으므로 화면·청취 검증이 필요하다.
 
 ## 6. donor 파일 분류
 
@@ -76,6 +93,8 @@ descriptor의 dependency 선언은 의도를 표현할 뿐 실제 물리적 로�
 | ASSET_COPY | 출처·사용권·참조를 기록한 HOK 자산 |
 
 같은 상대경로 충돌은 하한일 뿐이다. 다른 파일에 같은 event, focus, state, idea, character, sprite 또는 scripted ID가 정의될 수 있으므로 논리 ID 감사도 수행한다.
+
+donor의 Git/docs를 제외한 프로덕션/root 파일 1,014개는 모두 현재 원장에 분류됐다. ADR-0004 반영 후 결과는 `ADD 119`, `USE_RT56 63`, `THREE_WAY_MERGE 31`, `OVERRIDE 7`, `BINARY_MERGE 18`, `ASSET_COPY 776`이며, 행별 근거와 해시는 [분류 CSV](audits/2026-09-06-production-file-classification.csv)에 있다. 1차 구현 당시 `119/85/30/7/18/755` 집계는 [역사적 구현 기록](implementation/2026-09-06-first-port-batch.md)에 보존한다.
 
 의도적 whole-file shadowing에는 다음 ledger 정보가 필요하다.
 
@@ -122,13 +141,24 @@ bookmark, generic MIO, medal scripted trigger, on_action, generic advisor, diffi
 8. RT56은 history/states와 map/strategicregions를 replace_path한다. 관련 HOK 파일은 바닐라나 donor가 아니라 현재 RT56 정의에서 리베이스한다.
 9. 신규 모드에 위 디렉터리의 광범위한 replace_path를 다시 추가하지 않는다.
 
+### 1차 구현의 할당 결과
+
+- province `13414–13447` → `13535–13568`
+- state `1028→918`, `1029→1144`, `1030→920`, `1031→1145`
+- state `1082→919`, `1083→917`, `1084→1146`, `1085→1147`
+- RT56 bitmap을 기준으로 HOK-vs-바닐라 한국 지역 1,889개 픽셀 delta를 합성
+- RT56의 기존 전 세계 definition 행과 한국 외 bitmap을 유지
+- donor에 별도 adjacency delta가 없으므로 RT56/바닐라 adjacency를 상속
+
+states, strategic region, buildings, railway, supply node, unit stack, country/OOB와 검색 가능한 script 참조를 새 ID로 옮겼다. 이 산출물은 pinned source 기반 생성기로 재현한다. 후속 감사에서는 donor-vs-바닐라 2-way 차집합이 RT56에서 제거된 vanilla-identical 항구 spawn 7행을 누락한다는 결함을 찾아, 합성 bitmap 좌표와 pinned RT56 항구 coverage를 함께 보는 gate로 보정했다. 21:30까지 13,569 province 등록과 history 실행은 확인했지만 이 항구 보정 후 실행은 없으므로 실제 지도 화면의 adjacency·해안·보급 동작은 아직 미검증이다.
+
 지도 ID 마이그레이션은 신규 게임 전용 결과가 될 수 있다. 대표적인 변경 전 세이브의 load–advance–save–reload 시험 없이 기존 세이브 호환성을 주장하지 않는다.
 
 ## 9. localisation
 
-현재 descriptor는 Korean Language를 선언하지만 실패 플레이세트에는 The Road to 56 Korean Translation이 활성화되어 있었다. 후자는 localisation 전체를 replace_path한다.
+현재 저장소와 launcher descriptor는 RT56과 `Korean Language`를 의존성으로 선언한다. HOK donor는 dependency가 아니다. 19:20 실패 플레이세트는 `Korean Language` 대신 The Road to 56 Korean Translation을 활성화했고 이 모드는 localisation 전체를 `replace_path`한다. 21:28/21:30 C0는 localisation 모드를 모두 빼도 같은 crash가 발생했으므로 번역 계층은 그 재현의 필요조건이 아니지만, 최종 표시 계약은 별도 문제로 남는다.
 
-최종 구성은 아직 정하지 않았다. 결정 전에는 다음을 분리해서 확인한다.
+포트 자체에는 HOK의 `l_english`와 `l_korean` 파일을 유지했으며 BOM, header와 포트 내부 키 중복 정적 검사는 통과했다. 최종 권장 구성은 아직 정하지 않았다. ADR-0003에 따라 다음을 런타임에서 분리해 확인한다.
 
 - HOK 파일의 l_english/l_korean header와 실제 키
 - Korean Language가 제공하는 로더 계약
@@ -161,3 +191,5 @@ bookmark, generic MIO, medal scripted trigger, on_action, generic advisor, diffi
 - RT56-only 대조군 대비 새 fatal 오류나 심각한 반복 오류가 없다.
 - 새 게임에서 한국 로드, 지도 진입, unpause, focus, decision, event, OOB, supply와 핵심 경로를 검증했다.
 - 알려진 미검증 DLC·AI·멀티플레이·세이브 경로를 공개했다.
+
+21:28 비한국 국가와 21:30 KOR C0는 HOK 음성·항공기 자산 및 폐기 기술 보정 뒤에도 database, 13,569 province, history와 singleplayer launch까지 도달한 뒤 같은 접근 위반으로 종료됐다. 폐기 기술 오류와 한국 음성 duplicate/load 오류는 없어졌지만 paused map과 unpause는 통과하지 못했다. 그 뒤 한국 해안 항구 spawn 7행 누락을 정적 보정했으며, 이 새 산출물은 아직 실행하지 않았다. localisation 계약은 미결정이고 aggregate 정적 검사는 donor의 현행 song 목록에 등록되지 않은 `Minshu_ikki.ogg`의 pruning 오류 1건이 남았다. 따라서 아키텍처 전체 완료 조건은 충족하지 않았다. 다음 진단은 [한국 콘텐츠 우선 디버깅 플레이북](KOREAN_CONTENT_DEBUGGING.md)을 따른다.

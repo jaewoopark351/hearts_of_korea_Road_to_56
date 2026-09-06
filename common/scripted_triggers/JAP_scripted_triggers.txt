@@ -65,6 +65,7 @@ JAP_is_home_islands_state = {
 			state = 528 # Hokubu Kyushu
 			state = 1018 # Minami Kyushu
 			state = 526 # Okinawa
+			state = 1147 # HOK-RT56: Tsushima split from state 528
 			#state = 537 # Karafuto
 		}
 	}
@@ -74,14 +75,14 @@ JAP_is_home_islands_state = {
 is_korean_state = {
 	OR = {
 		state = 525
-		state = 1029
-		state = 1031
-		state = 1030
+		state = 919
+		state = 920
+		state = 1144
+		state = 1145
+		state = 1146
 		state = 527
-		state = 1028
-		state = 1082 # HoK: Jeolla, split from 1031
-		state = 1083 # HoK: Hwanghae, split from 527
-		state = 1084 # HoK: Jeju, split from 1031
+		state = 917
+		state = 918
 	}
 }
 
@@ -89,11 +90,11 @@ is_korean_state = {
 is_south_korean_state = {
 	OR = {
 		state = 525
-		state = 1029
-		state = 1031
-		state = 1030
-		state = 1082 # HoK: Jeolla
-		state = 1084 # HoK: Jeju
+		state = 919
+		state = 920
+		state = 1144
+		state = 1145
+		state = 1146
 	}
 }
 
@@ -101,8 +102,8 @@ is_south_korean_state = {
 is_north_korean_state = {
 	OR = {
 		state = 527
-		state = 1028
-		state = 1083 # HoK: Hwanghae
+		state = 917
+		state = 918
 	}
 }
 
@@ -440,3 +441,4 @@ JAP_civilian_government_faction_is_at_least_influential = {
 JAP_imperial_influence_demands_ready = {
 	NOT = { has_country_flag = JAP_faction_demands_cooldown_flag }
 }
+

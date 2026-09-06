@@ -54,7 +54,17 @@ KOR_hanjin_air_organization = {
 	include = generic_general_aircraft_organization
 	icon = GFX_idea_kor_hanjin
 	allowed = {
-		tag = KOR
+		owner = {
+			OR = {
+				original_tag = KOR
+				original_tag = NKR
+			}
+		}
+	}
+	available = {
+		owner = {
+			controls_state = 525
+		}
 	}
 }
 KOR_jinhae_naval_air_factory_organization = {

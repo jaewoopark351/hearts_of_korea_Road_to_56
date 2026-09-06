@@ -32,21 +32,7 @@ spriteTypes = {
 		name = "GFX_report_event_kor_kimttler"
 		texturefile = "gfx/event_pictures/report_event_kor_kimttler.dds"
 	}
-	spriteType = {
-		name = "GFX_report_event_jap_fuse_tatsuji"
-		texturefile = "gfx/event_pictures/report_event_jap_fuse_tatsuji.dds"
-	}
-	spriteType = {
-		name = "GFX_report_event_jap_rok_jpn_talks"
-		texturefile = "gfx/event_pictures/report_event_jap_rok_jpn_talks.dds"
-	}
-	spriteType = {
-		name = "GFX_report_event_japanese_people_protest"
-		texturefile = "gfx/event_pictures/report_event_japanese_people_protest.dds"
-	}
-	
-	
-	spriteType = {
+spriteType = {
 		name = "GFX_newsk_event_001"
 		texturefile = "gfx/event_pictures/newsk_event_001.dds"
 	}
@@ -129,26 +115,5 @@ spriteTypes = {
 	spriteType = {
 		name = "GFX_newsk_event_021"
 		texturefile = "gfx/event_pictures/newsk_event_021.dds"
-	}
-	spriteType = {
-		name = "GFX_newsk_event_022"
-		texturefile = "gfx/event_pictures/newsk_event_022.dds"
-	}
-	
-	spriteType = {
-		name = "GFX_newsj_event_001"
-		texturefile = "gfx/event_pictures/newsj_event_001.dds"
-	}
-	spriteType = {
-		name = "GFX_newsj_event_002"
-		texturefile = "gfx/event_pictures/newsj_event_002.dds"
-	}
-	spriteType = {
-		name = "GFX_newsj_event_003"
-		texturefile = "gfx/event_pictures/newsj_event_003.dds"
-	}
-	spriteType = {
-		name = "GFX_newsj_event_004"
-		texturefile = "gfx/event_pictures/newsj_event_004.dds"
 	}
 }

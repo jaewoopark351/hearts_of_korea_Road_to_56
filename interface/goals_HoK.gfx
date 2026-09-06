@@ -312,11 +312,7 @@ spriteTypes = {
 		name = "GFX_focus_KOR_korea_in_the_world"
 		texturefile = "gfx/interface/goals/focus_kor_korea_in_the_world.dds"
 	}
-	SpriteType = { 
-		name = "GFX_focus_KOR_japanese_trade"
-		texturefile = "gfx/interface/goals/focus_kor_japanese_trade.dds"
-	}
-	SpriteType = { 
+SpriteType = { 
 		name = "GFX_focus_KOR_invest_macarthur"
 		texturefile = "gfx/interface/goals/focus_kor_invest_macarthur.dds"
 	}
@@ -372,45 +368,4 @@ spriteTypes = {
 		name = "GFX_focus_generic_befriend_korea"
 		texturefile = "gfx/interface/goals/focus_generic_befriend_korea.dds"
 	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_proclaim_the_republic"
-		texturefile = "gfx/interface/goals/focus_JAP_proclaim_the_republic.dds"
-	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_oppose_peace_preservation_law"
-		texturefile = "gfx/interface/goals/focus_JAP_oppose_peace_preservation_law.dds"
-	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_integrate_nanyo_gunto"
-		texturefile = "gfx/interface/goals/focus_JAP_integrate_nanyo_gunto.dds"
-	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_joint_staff_office"
-		texturefile = "gfx/interface/goals/focus_JAP_joint_staff_office.dds"
-	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_demand_sagaren"
-		texturefile = "gfx/interface/goals/focus_JAP_demand_sagaren.dds"
-	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_free_election_in_taiwan"
-		texturefile = "gfx/interface/goals/focus_JAP_free_election_in_taiwan.dds"
-	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_memories_of_taisho_democracy"
-		texturefile = "gfx/interface/goals/focus_JAP_memories_of_taisho_democracy.dds"
-	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_purge_the_militarists"
-		texturefile = "gfx/interface/goals/focus_JAP_purge_the_militarists.dds"
-	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_rok_jpn_free_trade_agreement"
-		texturefile = "gfx/interface/goals/focus_JAP_rok_jpn_free_trade_agreement.dds"
-	}
-	SpriteType = { 
-		name = "GFX_focus_JAP_develop_home_island"
-		texturefile = "gfx/interface/goals/focus_JAP_develop_home_island.dds"
-	}
-	
 }

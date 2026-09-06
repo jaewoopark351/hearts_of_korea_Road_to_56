@@ -7,7 +7,7 @@
 		fighter_equipment_0 =  { owner = "KOR" amount = 30 }
 		CAS_equipment_1 =  { owner = "KOR" amount = 30 }
 	}
-	1082 = {
+	919 = {
 		CAS_equipment_1 =  { owner = "KOR" amount = 30 }
 	}
 }

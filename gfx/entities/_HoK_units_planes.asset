@@ -1,6 +1,8 @@
+# HOK basic aircraft use compatibility-local IDs; the medium entity keeps RT56's current supply-drop state.
+
 entity = {
-	name = "KOR_light_plane_entity"
-	pdxmesh = "KOR_plane_light_mesh"
+	name = "hok_rt56_KOR_light_plane_entity"
+	pdxmesh = "hok_rt56_KOR_plane_light_mesh"
 	state = { name = "fire" animation = "idle" 
 		event = { time = 0 node = "gun1"	particle = "plane_mg_muzzle_particle" keep_particle = yes sound = { soundeffect = "airplane_light_fire" } }
 		event = { time = 0 node = "gun2"	particle = "plane_mg_muzzle_particle" keep_particle = yes }
@@ -22,14 +24,17 @@ entity = {
 
 
 entity = {
-	name = "KOR_medium_plane_entity"
-	pdxmesh = "KOR_plane_medium_mesh"
+	name = "hok_rt56_KOR_medium_plane_entity"
+	pdxmesh = "hok_rt56_KOR_plane_medium_mesh"
 	locator = { name = "engine1"	position =	{ 5 0 -10	} }
 	locator = { name = "engine2"	position =	{ -5 0 -10	} }
 	locator = { name = "bomb"		position = 	{ 0 0 0		} }
 
 	state = { name = "bomb" animation = "idle" 
 		event = { time = 0 node = "bomb"	particle = "bomb_particle" keep_particle = yes sound = { soundeffect = "airplane_bomb" } }
+	}
+	state = { name = "supply" animation = "idle"
+		event = { time = 0 node = "bomb"	particle = "supply_drop_particle" keep_particle = yes }
 	}
 	state = { name = "idle" animation = "idle"
 		event = { trigger_once = yes sound = { soundeffect = "airplane_medium_idle_01" } }
@@ -43,8 +48,8 @@ entity = {
 
 
 entity = {
-	name = "KOR_heavy_plane_entity"
-	pdxmesh = "KOR_plane_heavy_mesh"
+	name = "hok_rt56_KOR_heavy_plane_entity"
+	pdxmesh = "hok_rt56_KOR_plane_heavy_mesh"
 	state = { name = "fire" animation = "idle" 
 		event = { time = 0 node = "gun1"	particle = "plane_mg_muzzle_particle" keep_particle = yes sound = { soundeffect = "airplane_light_fire" } }
 	}

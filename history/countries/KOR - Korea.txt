@@ -77,12 +77,11 @@ set_technology = {
 	basic_train = 1
 	tech_trucks = 1
 	fuel_silos = 1
-	
-	#doctrines#
-	superior_firepower = 1
-	trade_interdiction = 1
-	formation_flying = 1
 }
+
+set_grand_doctrine = superior_firepower
+set_grand_doctrine = new_convoy_raiding
+set_grand_doctrine = new_battlefield_support
 
 if = {
 	limit = { has_dlc = "No Step Back" }
@@ -128,6 +127,7 @@ if = {
 	}
 }
 
+# RT56 globally activates transport_plane_equipment_1; its former unlock technologies are not registered.
 if = {
 	limit = { has_dlc = "By Blood Alone" }
 		set_technology = {
@@ -137,14 +137,12 @@ if = {
 			iw_small_airframe = 1
 			iw_medium_airframe = 1
 			early_bombs = 1
-			bba_early_transport_plane = 1
 		}
 	else = {
 		set_technology = {
 			early_fighter = 1
 			early_bomber = 1
 			CAS1 = 1
-			early_transport_plane = 1
 		}
 	}
 }

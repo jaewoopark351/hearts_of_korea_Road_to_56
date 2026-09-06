@@ -7,7 +7,7 @@
 		small_plane_airframe_0 =  { owner = "KOR" amount = 30 version_name = "KP-33 Jebi" }
 		small_plane_cas_airframe_0 =  { owner = "KOR" amount = 30 version_name = "KA-30 Chamsae" }
 	}
-	1082 = {
+	919 = {
 		small_plane_cas_airframe_0 =  { owner = "KOR" amount = 30 version_name = "KA-30 Chamsae" }
 	}
 }

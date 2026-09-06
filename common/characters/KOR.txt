@@ -53,34 +53,82 @@ characters = {
 
 	# Yi Kang
 	KOR_yi_kang = {
-		name = KOR_yi_kang
+		name = "Yi Kang"
 		portraits = {
-			civilian = {
-				large = GFX_portrait_Yi_Kang
+			army = {
+				large = "gfx/leaders/KOR/kr_portrait_KOR_Yi_Kang.dds"
+				small = "gfx/interface/ideas/kor/kr_idea_KOR_advisor_yi_kang.dds"
 			}
 		}
-		country_leader = {
-			ideology = despotism
-			expire = "1965.1.1.1"
-			traits = {  }
-			id = -1
+		advisor={
+			slot = political_advisor
+			idea_token = KOR_yi_kang
+			allowed = {
+				original_tag  = KOR
+			}
+			available = {
+				has_completed_focus = KOR_constitutional_monarchy
+			}
+			traits = {
+				constitutional_monarch
+			}
+		}
+		corps_commander = {
+			traits = { cavalry_officer politically_connected }
+			skill = 2
+			attack_skill = 2
+			defense_skill = 2
+			planning_skill = 2
+			logistics_skill = 1
+			legacy_id = -1
+			visible = {
+				has_completed_focus = KOR_constitutional_monarchy
+				OR = {
+					has_government = democratic
+					has_government = neutrality
+				}
+			}
 		}
 	}
 
 	# Kim Il-sung
 	KOR_kim_il_sung = {
-		name = KOR_kim_il_sung
-		portraits = {
-			civilian = {
-				large = GFX_portrait_KOR_kim_il_sung
-				small = GFX_portrait_KOR_kim_il_sung_small
+		instance = {
+			allowed = {
+				has_dlc = "No Compromise, No Surrender"
+			}
+			name = KOR_kim_il_sung
+			portraits = {
+				civilian = {
+					large = GFX_portrait_KOR_kim_il_sung
+					small = GFX_portrait_KOR_kim_il_sung_small
+				}
+			}
+			country_leader = {
+				ideology = stalinism
+				traits = { KOR_suryong }
+				expire = "1965.1.1.1"
+				id = -1
 			}
 		}
-		country_leader = {
-			ideology = stalinism
-			traits = { KOR_suryong }
-			expire = "1965.1.1.1"
-			id = -1
+		instance = {
+			allowed = {
+				NOT = {
+					has_dlc = "No Compromise, No Surrender"
+				}
+			}
+			name = KOR_kim_il_sung
+			portraits = {
+				civilian = {
+					large = "gfx/leaders/NKR/r56_portrait_NKR_Kim_Il_Sung.dds"
+				}
+			}
+			country_leader = {
+				ideology = stalinism
+				traits = { KOR_suryong }
+				expire = "1965.1.1.1"
+				id = -1
+			}
 		}
 	}
 
@@ -105,22 +153,102 @@ characters = {
 	}
 
 	# Yi Un
-	KOR_yi_un = {
-		name = KOR_yi_un
-		portraits = {
-			civilian = {
-				large = GFX_portrait_KOR_yi_un
-				small = GFX_portrait_KOR_yi_un_civilian_small
+	KOR_yi_un={
+		name="Yi Eun"
+		portraits={
+			civilian={
+				large="gfx/leaders/KOR/r56_portrait_KOR_Yi_Un.dds"
 			}
 			army = {
-				small = GFX_portrait_KOR_yi_un_military_small
+				large = "gfx/leaders/KOR/r56_portrait_KOR_Yi_Un.dds"
+				small = "gfx/interface/ideas/kor/r56_idea_KOR_advisor_un.dds"
 			}
 		}
-		country_leader = {
-			ideology = fascism_ideology
-			traits = { KOR_highness_yi_of_changdeokgung }
-			expire = "1965.1.1.1"
-			id = -1
+		advisor={
+			slot = high_command
+			idea_token = yi_un_high_command
+			allowed = {
+				original_tag  = KOR
+			}
+			available = {
+				OR = {
+					is_subject_of = JAP
+					has_government = neutrality
+					has_government = fascism
+				}
+				NOT = {
+					has_idea = yi_un_army
+					has_idea = yi_un_air
+				}
+			}
+			traits = {
+				air_close_air_support_2
+			}
+		}
+		advisor={
+			slot = army_chief
+			idea_token = yi_un_army
+			allowed = {
+				original_tag  = KOR
+			}
+			available = {
+				OR = {
+					is_subject_of = JAP
+					has_government = neutrality
+					has_government = fascism
+				}
+				NOT = {
+					has_idea = yi_un_air
+					has_idea = yi_un_high_command
+				}
+			}
+			traits = {
+				army_chief_drill_2
+			}
+		}
+		advisor={
+			slot = air_chief
+			idea_token = yi_un_air
+			allowed = {
+				original_tag  = KOR
+			}
+			available = {
+				OR = {
+					is_subject_of = JAP
+					has_government = neutrality
+					has_government = fascism
+				}
+				NOT = {
+					has_idea = yi_un_army
+					has_idea = yi_un_high_command
+				}
+			}
+			traits = {
+				air_chief_ground_support_2
+			}
+			ai_will_do = {
+				factor  = 1
+			}
+		}
+		country_leader={
+			ideology= fascism_ideology
+			expire="1989.4.30.1"
+			traits = { eager_collaborator army_connections r56_trait_opposed_to_communism }
+			id=-1
+		}
+		field_marshal = {
+			traits = { air_force_ties }
+			skill = 3
+			attack_skill = 2
+			defense_skill = 3
+			planning_skill = 3
+			logistics_skill = 2
+			visible = {
+				has_country_leader = {
+					character = KOR_yi_un
+					ruling_only = yes
+				}
+			}
 		}
 	}
 

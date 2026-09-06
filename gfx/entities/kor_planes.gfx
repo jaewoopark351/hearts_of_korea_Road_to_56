@@ -1,19 +1,20 @@
 objectTypes = {
+	# Compatibility-local IDs keep HOK models without redefining RT56 KOR meshes.
 
 	pdxmesh = {
-		name = "KOR_plane_light_mesh"
+		name = "hok_rt56_KOR_plane_light_mesh"
 		file = "gfx/models/units/planes/KOR_plane_light.mesh"
 		animation = { id = "idle" type = "fighter_default_idle_animation" }
 	}
 	
 	pdxmesh = {
-		name = "KOR_plane_medium_mesh"
+		name = "hok_rt56_KOR_plane_medium_mesh"
 		file = "gfx/models/units/planes/KOR_plane_medium.mesh"
 		animation = { id = "idle" type = "bomber_default_idle_animation" }
 	}
 	
 	pdxmesh = {
-		name = "KOR_plane_heavy_mesh"
+		name = "hok_rt56_KOR_plane_heavy_mesh"
 		file = "gfx/models/units/planes/KOR_plane_heavy.mesh"
 		animation = { id = "idle" type = "bomber_default_idle_animation" }
 	}

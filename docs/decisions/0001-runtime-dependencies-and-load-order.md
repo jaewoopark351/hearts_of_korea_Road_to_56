@@ -6,13 +6,16 @@
 - RT56 호스트 결정: 채택
 - HOK donor 비활성 원칙: 채택
 - localisation 구성: 미결정
-- descriptor 반영: 미실행
+- 저장소 descriptor 반영: 완료
+- launcher `.mod` 반영: 미실행
+
+> 2026-09-06 19:20 후속 상태: 저장소와 launcher descriptor는 현재 모두 `The Road to 56`과 `Korean Language`를 선언하고 표시명·버전·물리 경로도 일치한다. 그러나 실제 플레이세트는 `Korean Language` 대신 `The Road to 56 Korean Translation`을 활성화했다. RT56 필수 host 및 donor 비활성 결정은 유지하지만, 아래의 “RT56만 dependency”와 launcher 미반영 설명은 1차 구현 당시 기록이다. localisation 계약은 ADR-0003에서 계속 Pending Runtime이다.
 
 ## 맥락
 
-사용자는 HOK를 RT56과 함께 동작시키는 “새로운 모드”를 만들고자 한다. 현재 작업 트리는 HOK donor의 production 파일 복제본이며 descriptor만 별도로 바뀌었다. RT56과 같은 상대경로 파일 73개, 전 세계 지도와 persistent ID 충돌이 확인됐다.
+사용자는 HOK를 RT56과 함께 동작시키는 “새로운 모드”를 만들고자 한다. 구현 전 작업 트리는 HOK donor의 production 파일 복제본이었고 RT56과 같은 상대경로 파일 73개, 전 세계 지도와 persistent ID 충돌이 확인됐다. 1차 구현은 이 충돌을 파일별로 분류하고 RT56 base에서 재구성했다.
 
-현재 compat descriptor는 Korean Language(Workshop `2743487021`)만 dependency로 선언하고 The Road to 56을 선언하지 않는다. 반면 2026-09-06 실패 실행에는 RT56과 RT56 Korean Translation(Workshop `2769576030`)이 활성화되었고 Korean Language는 설치되어 있었지만 활성화되지 않았다.
+구현 전 compat descriptor와 현재 외부 launcher `.mod`는 Korean Language(Workshop `2743487021`)만 dependency로 선언하고 The Road to 56을 선언하지 않았다. 반면 2026-09-06 실패 실행에는 RT56과 RT56 Korean Translation(Workshop `2769576030`)이 활성화되었고 Korean Language는 설치되어 있었지만 활성화되지 않았다.
 
 ## 결정
 
@@ -20,7 +23,7 @@
 
 목표 모드는 RT56 없이 standalone으로 동작하는 HOK 복원판이 아니라, 현재 RT56 위에 HOK 콘텐츠를 이식하는 별도 포트다. 따라서 release descriptor와 설명은 정확한 RT56 dependency를 표현해야 한다.
 
-실제 descriptor 변경은 이번 문서 작업 범위에 포함하지 않는다. 변경 시 현재 RT56 descriptor의 정확한 name과 launcher 동작을 다시 확인한다.
+저장소 `descriptor.mod`는 표시명 `The Road to 56`을 유일한 dependency로 선언하도록 반영했다. HOK donor와 localisation 모드는 필수 dependency로 선언하지 않았다.
 
 ### 2. HOK donor는 런타임 dependency가 아니다
 
@@ -80,4 +83,8 @@ compat descriptor에는 첫 게시 전 remote_file_id를 넣지 않고, 위 ID�
 
 최소 비교 조합은 RT56-only, RT56+선택 localisation, RT56+compat 및 RT56+선택 localisation+compat다. HOK donor는 목표 조합에서 비활성화한다.
 
-이 ADR은 구조 결정을 기록할 뿐, descriptor 수정이나 런타임 통과를 증명하지 않는다.
+이 ADR 자체와 저장소 descriptor의 정적 검사는 launcher나 런타임 통과를 증명하지 않는다.
+
+저장소 descriptor의 정적 계약은 검사했다. 그러나 사용자 데이터의 `mod/hearts_of_korea_Road_to_56.mod`는 여전히 `version="1.0.0"`, 과거 표시명, Korean Language-only dependency를 가지며 저장소 path를 가리킨다. launcher가 이 외부 메타데이터를 사용하므로 C0/C1 실행 전에 재가져오기 또는 명시적 갱신과 물리 경로 확인이 필요하다. 해당 외부 파일은 이 구현에서 수정하지 않았다.
+
+따라서 이 ADR의 dependency 설계와 저장소 반영은 완료됐지만 실제 launcher 계약과 런타임 통과는 아직 증명되지 않았다.

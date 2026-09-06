@@ -1,0 +1,70 @@
+# befriend
+# conquer
+# antagonize
+# build_ship
+# build_army
+# unit_ratio
+# build_building
+# research_tech
+# garrison
+# protect
+# influence
+
+KOR_kim_gu_support_china = { #They sheltered him and his government for years
+	allowed = {
+		original_tag = KOR
+	}
+
+	enable = {
+		#original_tag = KOR
+		has_country_leader = {
+			character = KOR_Gu_Kim
+			ruling_only = yes
+		}
+		OR = {
+			has_government = neutrality
+			has_government = democratic
+		}
+		CHI = {
+			has_government = neutrality
+			has_country_leader = {
+				character = CHI_chiang_kaishek
+				ruling_only = yes
+			}
+		}
+	}
+	abort = {
+		NOT = {
+			OR = {
+				KOR = {
+					has_country_leader = {
+						character = KOR_Gu_Kim
+						ruling_only = yes
+					}
+					OR = {
+						has_government = neutrality
+						has_government = democratic
+					}
+				}
+				CHI = {
+					has_country_leader = {
+						character = CHI_chiang_kaishek
+						ruling_only = yes
+					}
+					has_government = neutrality
+				}
+			}
+
+		}
+	}
+	ai_strategy = {
+		type = befriend
+		id = "CHI"
+		value = 100
+	}
+	ai_strategy = {
+		type = alliance
+		id = "CHI"
+		value = 100
+	}
+}

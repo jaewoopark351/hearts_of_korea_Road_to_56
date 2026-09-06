@@ -5,7 +5,7 @@ state={
 		aluminium=9.000
 	}
 	provinces={
-		7125 7221 12040 13414 13416 13417 13420 13421
+		7125 7221 12040 13535 13537 13538 13541 13542
 	}
 
 	history={
@@ -34,15 +34,19 @@ state={
 		victory_points = {
 			7125 30
 		}
+		add_to_array = { state_victory_points = 7125 }
 		victory_points = {
 			7221 10
 		}
+		add_to_array = { state_victory_points = 7221 }
 		victory_points = {
 			12040 3
 		}
+		add_to_array = { state_victory_points = 12040 }
 		victory_points = {
-			13414 3
+			13535 3
 		}
+		add_to_array = { state_victory_points = 13535 }
 		add_core_of = KOR
 		
 		1939.3.14 = {

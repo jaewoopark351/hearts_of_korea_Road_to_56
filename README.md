@@ -1,72 +1,116 @@
 # Hearts of Korea × The Road to 56 Compatibility
 
-> 상태: **개발 초기 / 호환성 미완료**
-> 2026-09-06 기준, HOI4 1.19.2 시작 크래시와 RT56 지도 충돌이 확인되었다. 현재 이름이나 `supported_version` 선언은 호환 완료를 뜻하지 않는다.
+> 상태: **한국 해안 항구 배치 closure 보정 완료 / 새 게임 진입 crash 재검증 대기**
+>
+> 2026-09-06 21:28 비한국 국가와 21:30 KOR 실행은 번역 모드 없이 RT56+compat만 로드했지만 같은 접근 위반 stack으로 종료됐다. 폐기 기술 오류는 사라진 상태였으므로 기술은 직접 원인이 아니다. 이후 HOK 해안 합성 뒤 누락된 항구 spawn 7개를 복원했지만, 이 새 산출물의 HOI4 cold test 전에는 플레이 가능이나 crash 해결을 주장하지 않는다.
 
-이 저장소는 Hearts of Korea(HOK)의 의도와 고유 콘텐츠를 **The Road to 56(RT56)을 런타임 기반으로 삼아 다시 이식하는 별도 신규 모드**다. HOK 원본 계보, 사용자 제공 HOK 기준 스냅샷, RT56 및 바닐라 중 어느 것도 이 저장소 자체의 업로드 정체성이 아니다.
+이 저장소는 Hearts of Korea(HOK)의 한국 콘텐츠를 **현재 The Road to 56(RT56)을 호스트로 삼아 다시 이식하는 별도 신규 모드**다. `C:\hoi\hearts_of_korea`는 읽기 전용 donor이며 플레이할 때 함께 켜는 모드가 아니다.
 
-## 통합 모델
+## 목표 실행 구성
 
 ```text
-HOI4 1.19.x
-  + The Road to 56                    # 호스트 데이터와 전 세계 기준
-  + 이 HOK–RT56 호환 포트             # 검토된 HOK 차이만 제공
-  + localisation 구성                 # 별도 결정 후 고정
+Hearts of Iron IV 1.19.x
+  + The Road to 56
+  + 이 HOK–RT56 호환 포트
+  + 선택한 localisation 구성
 ```
 
-- 사용자 제공 HOK 폴더는 콘텐츠 의도·자산·출처를 확인하는 **읽기 전용 donor**다. 기본 플레이세트에서 이 신규 포트와 함께 활성화하지 않는다.
-- RT56은 공유 시스템, 전 세계 지도, 비한국 콘텐츠의 **호스트 기준**이다.
-- 바닐라는 엔진 문법·스키마·동작을 판단하는 기준이다.
-- 충돌 파일은 donor 전체를 복사하지 않고, 현재 RT56 파일에 필요한 HOK 차이만 다시 적용한다.
+- RT56이 전 세계 지도, 공용 시스템과 비한국 콘텐츠를 소유한다.
+- 이 포트는 검토된 HOK 한국 콘텐츠와 필요한 접착 코드만 제공한다.
+- HOK donor는 런타임 의존성이 아니다.
+- 현재 `descriptor.mod`는 `The Road to 56`과 `Korean Language`를 의존성으로 선언한다. 19:20 실행은 대신 `The Road to 56 Korean Translation`을 사용했지만, 21:28/21:30에는 번역 계층을 모두 빼도 같은 crash가 재현됐다. 최종 localisation 계약 자체는 여전히 미결정이다.
+- broad `replace_path`, `remote_file_id`, launcher 전용 `path`는 넣지 않았다.
+- localisation의 최종 권장 조합은 런타임 대조군 시험 전까지 미결정이다.
+
+## 이번 구현
+
+- RT56 `definition.csv`와 `provinces.bmp`를 기준으로 HOK 한국 지형 delta를 합성했다.
+- 충돌하던 HOK province `13414–13447`을 새 범위 `13535–13568`로 이전했다.
+- 충돌하던 HOK state를 `917–920`, `1144–1147`로 이전하고 모든 추적 가능한 참조를 갱신했다.
+- donor-vs-vanilla 차집합만 사용하던 지도 생성기에서 RT56이 제거한 vanilla-identical HOK 항구 spawn 7개가 누락되는 결함을 고쳤다. 합성 후 새로 비던 province `1054`, `7121`, `11912`, `12060`, `13546`, `13556`, `13564`만 복원하고, RT56 기준보다 새 coastal-without-spawn이 없음을 생성 시 검사한다.
+- bookmark, MIO, 훈장 trigger, generic advisor, 일본·중국 이벤트/결정/history/OOB 등은 현재 RT56 또는 바닐라를 기준으로 필요한 한국 delta만 다시 적용했다.
+- 낡은 difficulty, MTG on_action과 비한국 FIN/MON/SIB 도전 모듈은 포트에서 제외했다. ADR-0004에 따라 한국 음성·DDS payload는 HOK 것을 우선하고, `.asset`·`.gfx` 논리 registry는 중복 없이 병합한다.
+- KOR 인물, AI 전략, MIO, 편제명과 함명을 HOK/RT56 양쪽 정의에서 병합했다.
+- 1차 포팅에서 HOK event namespace, 호출되지 않는 이벤트, 비한국 cosmetic, 일본 전용 고아 GFX·음악·trait와 영·한 localisation 참조를 정리했다. 현재 다시 나타난 `Minshu_ikki.ogg`의 최종 처리는 아래 정적 검증 상태처럼 보류했다.
+- KOR history의 `bba_early_transport_plane`·`early_transport_plane` 할당은 대체 기술을 주지 않고 제거했다. RT56은 해당 1933 수송기 장비를 전 국가에 이미 활성화한다.
+- HOK WAV 18개와 기본 항공기 mesh/texture를 donor bytes 그대로 관리한다. 음성은 RT56 category/compressor와 HOK 재생 목록·volume을 합친 `sound/r56_vo_Korean.asset` 하나만 등록하고, HOK 항공기 mesh/entity는 `hok_rt56_` 고유 ID로 소비한다.
+- donor 프로덕션/root 파일 1,014개 전부를 분류했다: `ADD 119`, `USE_RT56 63`, `THREE_WAY_MERGE 31`, `OVERRIDE 7`, `BINARY_MERGE 18`, `ASSET_COPY 776`.
+
+### 지도 ID 마이그레이션
+
+| donor state | compat state | 지역 |
+|---:|---:|---|
+| 1028 | 918 | 함경 |
+| 1029 | 1144 | 강원 |
+| 1030 | 920 | 경상 |
+| 1031 | 1145 | 충청 |
+| 1082 | 919 | 전라 |
+| 1083 | 917 | 황해 |
+| 1084 | 1146 | 제주 |
+| 1085 | 1147 | 쓰시마 |
+
+이 마이그레이션 때문에 현재 목표는 **신규 게임 전용**이다. 대표적인 기존 세이브의 load–advance–save–reload 시험 없이 기존 HOK 세이브 호환성을 주장하지 않는다.
+
+## 정적 검사 상태
+
+1차 포팅 정책의 역사적 결과는 `15 PASS / 0 WARNING / 0 ERROR`였다. 한국 우선 자산·기술 보정 뒤에도 같은 명령을 사용한다.
+
+```powershell
+python tools\validate_port.py
+```
+
+검사는 지도·공용 파일·동아시아 파일·한국 자산·삭제 목록·ID 이식·1,014개 분류표의 재현성, Paradox Script 괄호/따옴표, descriptor 계약, 폐기 ID, localisation BOM/header/key, 주요 event asset/loc, 핵심 논리 ID 중복과 KOR 병합 필수 항목을 확인한다.
+
+ADR-0004의 자산 정책은 도구와 원장에 반영됐고 한국 자산·기술 gate는 모두 통과했다. 다만 20:13:59에 작업 트리에 다시 나타난 일본 민주화 테마 `music/Minshu_ikki.ogg`는 donor의 현행 song 목록에 등록되지 않아 기존 Korea-only pruning 정책과 충돌한다. 같은 이름의 KOR focus는 있지만 음악 재생 연결은 없으므로, 사용자 변경과 HOK 보존 의도를 임의로 판단하지 않고 파일 처리를 보류했다. 현재 aggregate 결과는 `15 PASS / 0 WARNING / 1 ERROR`다.
+
+이 검사는 HOI4 엔진 파싱, launcher 발견/로드 순서, 새 게임, unpause, DLC 경로, 실제 UI localisation, AI, 세이브와 멀티플레이를 증명하지 않는다.
+
+## 고정 기준과 현재 제한
+
+| 항목 | 기준 |
+|---|---|
+| 작업 트리 | `main@70aaba43a98fd429378ec1a67d4398f16330e101`에서 시작한 미커밋 구현 |
+| HOK donor | `main@887930f6e88c80568d62dab9cfbe1ba8a498a252`, 읽기 전용 |
+| RT56 Workshop manifest | `3323396725579032799` |
+| RT56 descriptor SHA-256 | `5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61` |
+| HOI4 로그 기준 | 2026-09-06 21:30 실행, 1.19.2.0.a729 (18bf), DataChecksum `1b8bfef72bfa60a3735bc6782b2ca33b` |
+
+최신 두 실행은 HOK donor와 번역 모드 없이 RT56과 이 호환 포트만 활성화했다. 21:28 비한국 국가와 21:30 KOR 모두 같은 새 게임 접근 위반을 재현했고, KOR 폐기 기술 오류와 한국 음성 중복·로드 오류는 0건이었다. 이는 번역과 폐기 기술이 이번 crash의 필요조건이 아님을 보여 준다. 이번 항구 배치 보정은 그 실행 이후 산출물이므로 paused map, unpause와 gameplay는 아직 검증하지 못했다.
 
 ## 기준 경로
 
 | 별칭 | 경로 | 역할 |
 |---|---|---|
-| `<COMPAT_ROOT>` | `C:\hoi\hearts_of_korea_Road_to_56` | 유일한 기본 쓰기 대상, 신규 모드 소스 |
+| `<COMPAT_ROOT>` | `C:\hoi\hearts_of_korea_Road_to_56` | 유일한 구현 쓰기 대상 |
 | `<HOK_DONOR>` | `C:\hoi\hearts_of_korea` | 읽기 전용 HOK donor/provenance |
-| `<RT56_SOURCE>` | `C:\Program Files (x86)\Steam\steamapps\workshop\content\394360\820260968` | 읽기 전용 RT56 Workshop 스냅샷 |
-| `<VANILLA_SOURCE>` | `C:\Program Files (x86)\Steam\steamapps\common\Hearts of Iron IV` | 읽기 전용 HOI4 기준 |
+| `<RT56_SOURCE>` | `C:\Program Files (x86)\Steam\steamapps\workshop\content\394360\820260968` | 읽기 전용 RT56 host snapshot |
+| `<VANILLA_SOURCE>` | `C:\Program Files (x86)\Steam\steamapps\common\Hearts of Iron IV` | 읽기 전용 HOI4 문법·스키마 기준 |
 | `<HOI4_LOGS>` | `C:\Users\jaewo\OneDrive\문서\Paradox Interactive\Hearts of Iron IV\logs` | 읽기 전용 런타임 증거 |
 
-Steam은 RT56 소스를 자동 갱신할 수 있다. 비교·구현·검증을 시작할 때마다 RT56 descriptor와 핵심 파일의 시각·해시를 새 기준선에 고정한다.
-
-## 현재 확인된 상태
-
-- 문서 개편 전 프로덕션 트리의 비교 가능한 1,014개 파일 중 `descriptor.mod`를 제외한 파일은 `<HOK_DONOR>`와 동일했다. 즉 현재 트리는 아직 RT56 포트라기보다 donor 복제본에 가깝다.
-- 현재 프로젝트와 RT56 사이에 같은 상대경로 파일이 73개 있다. 전역 지도, state, 전략 지역, bookmark, 공용 MIO, medal trigger, on_action, 일본·중국 콘텐츠 등이 포함된다.
-- HOK donor의 추가 province ID `13414–13447` 34개는 RT56의 같은 ID 34개와 전부 다른 정의다. ID 보존만으로 합칠 수 없으며 명시적인 지도 ID 마이그레이션이 필요하다.
-- 현재 프로젝트의 `map/definition.csv`는 `13447`에서 끝나지만 RT56은 `13534`까지 사용한다. 실제 로그에는 RT56 state가 참조한 `13448–13534` 87개 province의 누락이 기록됐다.
-- 현재 `descriptor.mod`는 `Korean Language`만 의존성으로 선언하고 RT56을 선언하지 않는다. 2026-09-06 실패 플레이세트에는 대신 `The Road to 56 Korean Translation`이 활성화되어 있었다. 최종 localisation 계약은 아직 미결정이다.
-
-자세한 증거와 등급은 [2026-09-06 시작 크래시 조사](docs/incidents/2026-09-06-startup-crash.md)를 참조한다.
-
-## 작업 원칙
-
-1. 목표는 `RT56 + 검토된 HOK delta`이며 `HOK 전체 복사본 + RT56`이 아니다.
-2. HOK 고유 한국 콘텐츠와 정체성은 보존하고, RT56의 전 세계 데이터와 공유 시스템은 보존한다.
-3. 한국 관련 양쪽 변경이 충돌하면 자동 우선순위를 두지 않고 결정 기록을 남긴다.
-4. 같은 경로뿐 아니라 event, focus, state, character, idea 등 같은 논리 ID의 충돌도 검사한다.
-5. 전역 단일 파일이 필요하면 현재 RT56을 base로 합성한다. donor의 `definition.csv`나 `provinces.bmp`를 그대로 싣지 않는다.
-6. 호환성 수정, 원본 버그 수정, 리밸런스, 신규 콘텐츠는 별도 작업으로 관리한다.
-7. 신규 게임 검증이 끝나기 전에는 기존 HOK 세이브 호환성을 주장하지 않는다.
-8. 게임 실행, launcher 설정 변경, Git 작업, 외부 게시·업로드는 각각 별도 명시 요청이 있을 때만 한다.
+Steam이 RT56을 갱신하면 pinned source 검사에서 중단된다. 그때는 변경을 우회하지 말고 새 RT56 기준선에서 병합을 다시 검토한다.
 
 ## 문서
 
 - [문서 인덱스](docs/README.md)
 - [포팅 아키텍처](docs/PORTING_ARCHITECTURE.md)
 - [포팅·검증 워크플로](docs/PORTING_WORKFLOW.md)
-- [2026-09-06 프로젝트 기준선](docs/baselines/2026-09-06-project-baseline.md)
-- [2026-09-06 exact-path 충돌 인벤토리](docs/audits/2026-09-06-exact-path-collision-inventory.md)
-- [ADR-0001: 런타임 의존성과 로드 구성](docs/decisions/0001-runtime-dependencies-and-load-order.md)
-- [2026-09-06 시작 크래시 조사](docs/incidents/2026-09-06-startup-crash.md)
+- [HOK 한국 콘텐츠 우선 디버깅](docs/KOREAN_CONTENT_DEBUGGING.md)
+- [ADR-0004: HOK 한국 콘텐츠 우선 보존](docs/decisions/0004-hok-korean-content-priority.md)
+- [포팅 후 새 게임 접근 위반](docs/incidents/2026-09-06-post-port-new-game-crash.md)
+- [한국 우선 자산·KOR 기술 구현](docs/implementation/2026-09-06-korea-first-assets-and-kor-tech.md)
+- [한국 해안 항구 배치 closure 보정](docs/implementation/2026-09-06-map-building-closure-fix.md)
+- [1차 구현 기록](docs/implementation/2026-09-06-first-port-batch.md)
+- [통합 ledger](docs/audits/2026-09-06-integration-ledger.md)
+- [1,014개 파일 분류 CSV](docs/audits/2026-09-06-production-file-classification.csv)
+- [정적 검증 기록](docs/validation/2026-09-06-static-validation.md)
+- [한국 우선 후속 정적 검증](docs/validation/2026-09-06-korea-first-static-validation.md)
+- [시작 크래시 조사](docs/incidents/2026-09-06-startup-crash.md)
 
 ## 출처와 배포 정체성
 
 - `2898629778`: 역사적 HOK 원본 Workshop 항목 — provenance 전용
-- `3793992662`: 사용자 제공 HOK donor descriptor의 항목 — provenance 전용
-- `820260968`: The Road to 56 — 런타임 의존성/provenance 전용
+- `3793992662`: 사용자 제공 HOK donor revision — provenance 전용
+- `820260968`: The Road to 56 — 런타임 의존성과 provenance
 - 이 신규 호환 모드: 첫 신규 게시 전까지 Workshop ID 미할당
 
-새 모드는 위 세 ID 어느 것도 상속하거나 업로드 대상으로 사용하지 않는다. HOK 원작자, donor 개정 기여자, RT56 팀, localisation 및 제3자 기여자를 구분해 크레딧하며, 근거 없이 HOK 또는 RT56의 “공식” 버전으로 표현하지 않는다.
+새 모드는 기존 ID를 상속하거나 업로드 대상으로 사용하지 않는다. HOK 원작자, donor 개정 기여자, RT56 팀, localisation 및 제3자 기여자를 구분해 크레딧하고, 근거 없이 HOK 또는 RT56의 “공식” 버전으로 표현하지 않는다.

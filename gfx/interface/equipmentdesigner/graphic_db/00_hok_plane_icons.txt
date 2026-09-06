@@ -26,7 +26,7 @@ KOR = {
 				GFX_KOR_early_fighter_medium
 			}
 			models = {
-				KOR_light_plane_entity
+				hok_rt56_KOR_light_plane_entity
 			}
 		}
 	}
@@ -55,7 +55,7 @@ KOR = {
 				GFX_KOR_early_fighter_medium
 			}
 			models = {
-				KOR_light_plane_entity
+				hok_rt56_KOR_light_plane_entity
 			}
 		}
 	}
@@ -73,7 +73,7 @@ KOR = {
 				GFX_KOR_heavy_fighter0_medium
 			}
 			models = {
-				KOR_medium_plane_entity
+				hok_rt56_KOR_medium_plane_entity
 			}
 		}
 	}
@@ -88,7 +88,7 @@ KOR = {
 				GFX_KOR_iw_large_airframe_medium
 			}
 			models = {
-				KOR_heavy_plane_entity
+				hok_rt56_KOR_heavy_plane_entity
 			}
 		}
 	}
@@ -148,7 +148,7 @@ KOR = {
 	large_plane_maritime_patrol_plane_airframe_3 = { pool = { icons = { GFX_KOR_strategic_maritime_patrol_bomber_medium } } }
 	
 	small_plane_airframe_5 = { pool = { weight = 3 icons = { GFX_KOR_small_plane_airframe_5_medium } models = { KOR_supersonic_jet_plane_entity } } }
-	supersonic_fighter_equipment_1 = { pool = { weight = 3 icons = { GFX_KOR_small_plane_airframe_5_medium } models = { KOR_supersonic_jet_plane_entity } } }
+	jet_fighter_equipment_x = { pool = { weight = 3 icons = { GFX_KOR_small_plane_airframe_5_medium } models = { KOR_supersonic_jet_plane_entity } } }
 	
 	
 }

@@ -1,0 +1,124 @@
+# HOK-only Japan warning/ultimatum chain, extracted from the historical donor.
+# The shared JAP decision database is rebased separately from current RT56.
+
+JAP_war_on_korea_category = {
+	jap_warning_to_korea = {
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			is_subject = no
+			NOT = { has_government = democratic }
+			date > 1939.1.10
+			date < 1939.1.15
+			is_ai = yes
+		}
+
+		visible = {
+			original_tag = JAP
+			is_ai = yes
+			NOT = { has_global_flag = jap_warning_to_korea_flag }
+			country_exists = KOR
+			JAP = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
+			}
+			NOT = {
+				KOR = {
+					OR = {
+						is_in_faction_with = GER
+						is_in_faction_with = JAP
+						is_puppet_of = JAP
+						has_completed_focus = KOR_anticommunism_agreement_signed
+						has_completed_focus = KOR_urihwangsilsaranghoe
+						has_completed_focus = KOR_korea_in_the_world
+						has_global_flag = kor_defeat_japanese_army
+						has_global_flag = kor_triumph_for_the_manchuria_flag
+						has_government = communism
+					}
+				}
+			}
+		}
+
+		cost = 0
+		fire_only_once = yes
+
+		complete_effect = {
+			KOR = {
+				country_event = { id = kor_events.20 }
+			}
+			hidden_effect = {
+				set_global_flag = jap_warning_to_korea_flag
+			}
+		}
+
+		ai_will_do = {
+			factor = 20000
+		}
+	}
+
+	jap_ultimatum_to_korea = {
+		icon = generic_form_nation
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			is_subject = no
+			NOT = { has_government = democratic }
+			has_global_flag = jap_warning_to_korea_flag
+			date > 1939.6.25
+			is_ai = yes
+		}
+
+		visible = {
+			original_tag = JAP
+			is_ai = yes
+			NOT = { has_global_flag = jap_ultimatum_to_korea_flag }
+			country_exists = KOR
+			JAP = {
+				OR = {
+					has_government = fascism
+					has_government = neutrality
+				}
+			}
+			NOT = {
+				KOR = {
+					OR = {
+						is_in_faction_with = GER
+						is_in_faction_with = JAP
+						is_puppet_of = JAP
+						has_completed_focus = KOR_anticommunism_agreement_signed
+						has_completed_focus = KOR_urihwangsilsaranghoe
+						has_completed_focus = KOR_korea_in_the_world
+						has_global_flag = kor_defeat_japanese_army
+						has_global_flag = kor_triumph_for_the_manchuria_flag
+						has_government = communism
+					}
+				}
+			}
+		}
+
+		cost = 0
+		fire_only_once = yes
+
+		complete_effect = {
+			KOR = {
+				country_event = { id = kor_events.16 }
+			}
+			hidden_effect = {
+				set_global_flag = jap_ultimatum_to_korea_flag
+			}
+		}
+
+		ai_will_do = {
+			factor = 20000
+		}
+	}
+}

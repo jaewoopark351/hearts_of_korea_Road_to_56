@@ -354,6 +354,13 @@ JAP_intervene_in_china = {
 
 		icon = jap_conquer_china
 
+		available = {	
+			event_target:WTT_current_china_leader = {
+				has_capitulated = no
+				exists = yes
+			}
+		}
+
 		visible = {
 			has_completed_focus = JAP_strategic_offensives #JAP_secure_china
 			any_enemy_country = {
@@ -363,13 +370,6 @@ JAP_intervene_in_china = {
 				NOT = { is_puppet_of = JAP }
 			}
 		}
-
-		available = {	
-			event_target:WTT_current_china_leader = {
-				has_capitulated = no
-				exists = yes
-			}
-		} 
 
 		fire_only_once = yes
 
@@ -383,21 +383,9 @@ JAP_intervene_in_china = {
 			}
 		}
 
-		custom_cost_trigger = {
-			has_political_power > 74 
-			command_power > 99
-		}
-		custom_cost_text = decision_cost_CP_100_pp_75
-
-		ai_hint_pp_cost = 75 
+		cost = 50
 
 		complete_effect = {
-
-			hidden_effect = {
-				add_political_power = -75
-				add_command_power = -100
-			}
-
 			IF = {
 				limit = {
 					USA = {
@@ -405,9 +393,7 @@ JAP_intervene_in_china = {
 					}
 				}
 				USA = { add_war_support = 0.1 }
-				custom_effect_tooltip = generic_skip_one_line_tt
 			}
-
 			IF = {
 				limit = {
 					has_dlc = "No Compromise, No Surrender"
@@ -424,7 +410,6 @@ JAP_intervene_in_china = {
 				}
 			}
 				
-			custom_effect_tooltip = generic_skip_one_line_tt
 			activate_mission_tooltip = JAP_conquer_china
 			set_country_flag = JAP_conquer_china_activate
 		}
@@ -462,7 +447,7 @@ JAP_intervene_in_china = {
 		days_mission_timeout = 365
 		
 		timeout_effect = {
-			add_stability = -0.1 
+			add_stability = -0.05
 			add_war_support = -0.15
 		}
 
@@ -980,29 +965,29 @@ foreign_politics = {
 				525 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1029 = {
+				1144 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1031 = {
+				1145 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1030 = {
+				919 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1082 = { # HoK: Jeolla
+				1146 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1084 = { # HoK: Jeju
+				920 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
 				# North Korea
 				527 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1028 = {
+				918 = {	#56 - Hamgyong
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1083 = { # HoK: Hwanghae
+				917 = {	#56 - Hamgyong
 					is_controlled_by_ROOT_or_ally = no
 				}
 				NOT = {
@@ -1041,14 +1026,6 @@ foreign_politics = {
 
 		target_array = enemies
 
-		target_root_trigger = {
-			NOT = { has_country_flag = JAP_offered_china_white_peace_flag }
-			is_subject = no
-			any_enemy_country = {
-				is_literally_china = yes
-			}
-		}
-		
 		target_trigger = {
 			#Target is FROM
 			FROM = {
@@ -1062,6 +1039,10 @@ foreign_politics = {
 				exists = yes 
 				is_subject = no
 			}
+			is_subject = no
+			any_enemy_country = {
+				is_literally_china = yes
+			}
 		}
 
 		cost = 0
@@ -1073,7 +1054,6 @@ foreign_politics = {
 		}
 
 		complete_effect = {
-			set_country_flag = JAP_offered_china_white_peace_flag
 			event_target:WTT_current_china_leader = {
 				country_event = { 
 					id = wtt_japan.126 
@@ -1101,29 +1081,29 @@ foreign_politics = {
 				525 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1029 = {
+				1144 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1031 = {
+				1145 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1030 = {
+				919 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1082 = { # HoK: Jeolla
+				1146 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1084 = { # HoK: Jeju
+				920 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
 				# North Korea
 				527 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1028 = {
+				918 = {	#56 - Hamgyong
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1083 = { # HoK: Hwanghae
+				917 = {	#56 - Hamgyong
 					is_controlled_by_ROOT_or_ally = no
 				}
 				NOT = {
@@ -1238,29 +1218,29 @@ foreign_politics = {
 				525 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1029 = {
+				1144 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1031 = {
+				1145 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1030 = {
+				919 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1082 = { # HoK: Jeolla
+				1146 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1084 = { # HoK: Jeju
+				920 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
 				# North Korea
 				527 = {
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1028 = {
+				918 = {	#56 - Hamgyong
 					is_controlled_by_ROOT_or_ally = no
 				}
-				1083 = { # HoK: Hwanghae
+				917 = {	#56 - Hamgyong
 					is_controlled_by_ROOT_or_ally = no
 				}
 				factor = 10
@@ -1772,130 +1752,6 @@ foreign_politics = {
 
 }
 
-# HoK 1.19.2 bridge: keep the target Japan database and restore only the
-# historical AI warning/ultimatum chain for an independent Korea.
-JAP_war_on_korea_category = {
-	jap_warning_to_korea = {
-		icon = generic_form_nation
-
-		allowed = {
-			original_tag = JAP
-		}
-
-		available = {
-			is_subject = no
-			NOT = { has_government = democratic }
-			date > 1939.1.10
-			date < 1939.1.15
-			is_ai = yes
-		}
-
-		visible = {
-			original_tag = JAP
-			is_ai = yes
-			NOT = { has_global_flag = jap_warning_to_korea_flag }
-			country_exists = KOR
-			JAP = {
-				OR = {
-					has_government = fascism
-					has_government = neutrality
-				}
-			}
-			NOT = {
-				KOR = {
-					OR = {
-						is_in_faction_with = GER
-						is_in_faction_with = JAP
-						is_puppet_of = JAP
-						has_completed_focus = KOR_anticommunism_agreement_signed
-						has_completed_focus = KOR_urihwangsilsaranghoe
-						has_completed_focus = KOR_korea_in_the_world
-						has_global_flag = kor_defeat_japanese_army
-						has_global_flag = kor_triumph_for_the_manchuria_flag
-						has_government = communism
-					}
-				}
-			}
-		}
-
-		cost = 0
-		fire_only_once = yes
-
-		complete_effect = {
-			KOR = {
-				country_event = { id = kor_events.20 }
-			}
-			hidden_effect = {
-				set_global_flag = jap_warning_to_korea_flag
-			}
-		}
-
-		ai_will_do = {
-			factor = 20000
-		}
-	}
-
-	jap_ultimatum_to_korea = {
-		icon = generic_form_nation
-
-		allowed = {
-			original_tag = JAP
-		}
-
-		available = {
-			is_subject = no
-			NOT = { has_government = democratic }
-			has_global_flag = jap_warning_to_korea_flag
-			date > 1939.6.25
-			is_ai = yes
-		}
-
-		visible = {
-			original_tag = JAP
-			is_ai = yes
-			NOT = { has_global_flag = jap_ultimatum_to_korea_flag }
-			country_exists = KOR
-			JAP = {
-				OR = {
-					has_government = fascism
-					has_government = neutrality
-				}
-			}
-			NOT = {
-				KOR = {
-					OR = {
-						is_in_faction_with = GER
-						is_in_faction_with = JAP
-						is_puppet_of = JAP
-						has_completed_focus = KOR_anticommunism_agreement_signed
-						has_completed_focus = KOR_urihwangsilsaranghoe
-						has_completed_focus = KOR_korea_in_the_world
-						has_global_flag = kor_defeat_japanese_army
-						has_global_flag = kor_triumph_for_the_manchuria_flag
-						has_government = communism
-					}
-				}
-			}
-		}
-
-		cost = 0
-		fire_only_once = yes
-
-		complete_effect = {
-			KOR = {
-				country_event = { id = kor_events.16 }
-			}
-			hidden_effect = {
-				set_global_flag = jap_ultimatum_to_korea_flag
-			}
-		}
-
-		ai_will_do = {
-			factor = 20000
-		}
-	}
-}
-
 #Category allowed for JAP
 #Not visible if puppet
 JAP_southern_expansion = {
@@ -2070,7 +1926,14 @@ JAP_pacific_guardian = {
 		activation = {
 			has_completed_focus = JAP_the_korean_question
 			has_full_control_of_state = 525
+			has_full_control_of_state = 919
+			has_full_control_of_state = 920
+			has_full_control_of_state = 1144
+			has_full_control_of_state = 1145
+			has_full_control_of_state = 1146
 			has_full_control_of_state = 527
+			has_full_control_of_state = 917
+			has_full_control_of_state = 918
 			KOR = { exists = no }
 		}
 
@@ -2187,10 +2050,6 @@ JAP_pacific_guardian = {
 					has_full_control_of_state = 671
 					has_full_control_of_state = 286
 					has_full_control_of_state = 741
-					has_full_control_of_state = 1066 
-					has_full_control_of_state = 1067 
-					has_full_control_of_state = 1068 
-					has_full_control_of_state = 1069 
 				}
 			}
 		}
@@ -2344,19 +2203,8 @@ JAP_pacific_guardian = {
 		visible = {
 			has_completed_focus = JAP_create_greater_east_asian_treaty_organization
 		}
-
 		available = {
-			is_subject = no 
-			OR = {
-				is_faction_leader = yes
-				AND = {
-					is_faction_leader = no
-					any_allied_country = {
-						is_faction_leader = yes
-						has_government = democratic 
-					}
-				}
-			}
+			
 		}
 
 		target_array = global.asian_and_oceanian_countries
@@ -3125,9 +2973,10 @@ JAP_colonial_independence = {
 		}
 
 		visible = {
-		
-			has_completed_focus = JAP_liberate_manchuria
-			
+			OR = {
+				has_completed_focus = JAP_liberate_manchuria
+				has_completed_focus = JAP_democratic_war_with_manchukuo
+			}
 			609 = {
 				owner = {
 					OR = {
@@ -3301,6 +3150,13 @@ JAP_colonial_independence = {
 					transfer_state = 714
 					transfer_state = 761
 					transfer_state = 745
+					transfer_state = 946	#56 - West Xing'An
+					transfer_state = 947	#56 - Jingzhou
+					transfer_state = 945	#56 - Heihe
+					transfer_state = 944	#56 - Longjiang
+					transfer_state = 943	#56 - Binjiang
+					transfer_state = 941	#56 - Andong
+					transfer_state = 942	#56 - Jiangdao
 					country_event = { id = wtt_japan.101 days = 1 }
 					custom_effect_tooltip = JAP_liberate_manchuria_alliance_tt
 				}
@@ -3320,6 +3176,13 @@ JAP_colonial_independence = {
 					transfer_state = 714
 					transfer_state = 761
 					transfer_state = 745
+					transfer_state = 946	#56 - West Xing'An
+					transfer_state = 947	#56 - Jingzhou
+					transfer_state = 945	#56 - Heihe
+					transfer_state = 944	#56 - Longjiang
+					transfer_state = 943	#56 - Binjiang
+					transfer_state = 941	#56 - Andong
+					transfer_state = 942	#56 - Jiangdao
 					country_event = { id = wtt_japan.101 days = 1 }
 				}
 			}
@@ -3352,6 +3215,13 @@ JAP_colonial_independence = {
 					transfer_state = 714
 					transfer_state = 761
 					transfer_state = 745
+					transfer_state = 946	#56 - West Xing'An
+					transfer_state = 947	#56 - Jingzhou
+					transfer_state = 945	#56 - Heihe
+					transfer_state = 944	#56 - Longjiang
+					transfer_state = 943	#56 - Binjiang
+					transfer_state = 941	#56 - Andong
+					transfer_state = 942	#56 - Jiangdao
 					country_event = { id = wtt_japan.101 days = 1 }
 					custom_effect_tooltip = JAP_liberate_manchuria_alliance_tt
 				}
@@ -3523,7 +3393,7 @@ operations = {
 				has_non_aggression_pact_with = SOV
 				SOV = { is_puppet_of = JAP }
 			}
-			1028 = {
+			918 = {	#56 - Hamgyong
 				any_neighbor_state = {
 					is_controlled_by = SOV
 				}
@@ -3540,7 +3410,7 @@ operations = {
 		highlight_states = {
 	 		highlight_state_targets = {
 				state = 408
-				state = 1028
+				state = 918	#56 - Hamgyong
 			} 
 		}
 		
@@ -3569,7 +3439,7 @@ operations = {
 		war_with_on_remove = SOV
 
 		complete_effect = {
-			1028 = {
+			918 = {	#56 - Hamgyong
 				save_event_target_as = JAP_SOV_attacker_state
 				set_state_flag = border_incident_active
 			}
@@ -3695,19 +3565,12 @@ operations = {
 		allowed = { always = no } #Activated from effect
 
 		available = {
-			
-			hidden_trigger = {
-				OR = {
-					has_border_war_with = SOV # Japan shouldn't lose war support if they actually use the window of opportunity
-					has_country_flag = JAP_did_the_border_war_flag
-				}
-			}
-				
+			has_border_war_with = SOV # Japan shouldn't lose war support if they actually use the window of opportunity
 		}
 
 		highlight_states = {
 			highlight_state_targets = {
-				state = 1028
+				state = 918	#56 - Hamgyong
 				state = 408
 			} 
 		}
@@ -3732,7 +3595,7 @@ operations = {
 			hidden_effect = {
 				SOV = { remove_targeted_decision = { target = JAP decision = JAP_border_conflict_escalation_warning_SOV } }
 				SOV = {
-					1028 = {
+					918 = {	#56 - Hamgyong
 						clr_state_flag = border_incident_active
 					}
 					408 = {
@@ -3751,7 +3614,7 @@ operations = {
 		allowed = { always = no } #Activated from effect
 
 		available = {
-			1028 = {
+			918 = {	#56 - Hamgyong
 				OR = {
 					is_fully_controlled_by = ROOT
 					CONTROLLER = {
@@ -3763,7 +3626,7 @@ operations = {
 				}
 			}
 			divisions_in_border_state = {
-				state = 1028
+				state = 918	#56 - Hamgyong
 				border_state = 408
 				size > 0
 			}
@@ -3771,7 +3634,7 @@ operations = {
 
 		highlight_states = {
 			highlight_state_targets = {
-				state = 1028
+				state = 918	#56 - Hamgyong
 				state = 408	
 			} 
 		}
@@ -3791,7 +3654,7 @@ operations = {
 			start_border_war = {
 				change_state_after_war = no
 				attacker = {
-					state = 1028
+					state = 918	#56 - Hamgyong
 					num_provinces = 4
 					on_win = japan_border_conflict.2
 					on_lose = japan_border_conflict.3
@@ -3822,14 +3685,14 @@ operations = {
 		allowed = { always = no } #Activated from effect
 
 		available = {
-			1028 = { has_border_war = no }
+			918 = { has_border_war = no }	#56 - Hamgyong
 			408 = { has_border_war = no }
 		}
 		
 		highlight_states = {
 			highlight_state_targets = {
 				state = 408
-				state = 1028
+				state = 918		#56 - Hamgyong
 			} 
 		}
 
@@ -3852,7 +3715,7 @@ operations = {
 		timeout_effect = {
 			cancel_border_war = {
 				defender = 408
-				attacker = 1028
+				attacker = 918	#56 - Hamgyong
 			}
 			hidden_effect = {
 				remove_targeted_decision = { target = SOV decision = JAP_border_conflict_escalate_conflict }
@@ -3874,7 +3737,7 @@ operations = {
 
 		highlight_states = {
 			highlight_state_targets = {
-				state = 1028
+				state = 918	#56 - Hamgyong
 				state = 408
 			} 
 		}
@@ -3906,7 +3769,7 @@ operations = {
 			if = {
 				limit = { original_tag = SOV }
 				set_border_war_data = {
-					attacker = 1028
+					attacker = 918	#56 - Hamgyong
 					defender = 408
 					defender_modifier = 0.15
 					combat_width = 100
@@ -3929,7 +3792,7 @@ operations = {
 			}
 			else = {
 				set_border_war_data = {
-					attacker = 1028
+					attacker = 918	#56 - Hamgyong
 					defender = 408
 					attacker_modifier = 0.15
 					combat_width = 100
@@ -3972,7 +3835,7 @@ operations = {
 		highlight_states = {
  			highlight_state_targets = {
 				state = 408
-				state = 1028
+				state = 918	#56 - Hamgyong
 			} 
 		}
 
@@ -4007,7 +3870,7 @@ operations = {
 			if = {
 				limit = { original_tag = SOV }
 				408 = { save_event_target_as = their_state }
-				1028 = { save_event_target_as = our_state }
+				918 = { save_event_target_as = our_state }	#Hamgyong
 				JAP = {
 					country_event = { id = japan_border_conflict.6 hours = 1 }
 					hidden_effect = {
@@ -4016,7 +3879,7 @@ operations = {
 			 	}
 			}
 			else = {
-				1028 = { save_event_target_as = our_state }
+				918 = { save_event_target_as = our_state }	#56 - Hamgyong
 				408 = { save_event_target_as = their_state }
 				SOV = {
 					country_event = { id = japan_border_conflict.5 hours = 1 }
@@ -4032,12 +3895,12 @@ operations = {
 			cancel_border_war = {
 				dont_fire_events = yes
 				defender = 408
-				attacker = 1028
+				attacker = 918	#56 - Hamgyong
 			}
 			declare_war_on = { target = FROM type = annex_everything }
 			if = {
 				limit = { original_tag = SOV }
-				1028 = {
+				918 = {	#56 - Hamgyong
 					clr_state_flag = border_incident_active
 				}
 				408 = {
@@ -4047,7 +3910,7 @@ operations = {
 			}
 			else = {
 				FROM = {
-					1028 = {
+					918 = {	#56 - Hamgyong
 						clr_state_flag = border_incident_active
 					}
 					408 = {
@@ -4069,7 +3932,7 @@ operations = {
 
 		highlight_states = {
 			highlight_state_targets = {
-				state = 1028
+				state = 918	#56 - Hamgyong
 				state = 408
 			} 
 		}
@@ -4088,13 +3951,13 @@ operations = {
 				limit = { original_tag = SOV }
 				finalize_border_war = {
 					attacker_win = yes
-					attacker = 1028
+					attacker = 918	#56 - Hamgyong
 					defender = 408
 				}
 			}
 			else = {
 				finalize_border_war = {
-					attacker = 1028
+					attacker = 918	#56 - Hamgyong
 					defender = 408
 					defender_win = yes
 				}
@@ -4119,7 +3982,11 @@ operations = {
 			GER = { has_completed_focus = GER_molotov_ribbentrop_pact }
 			GER = { NOT = { has_war_with = SOV } }
 			NOT = { has_war_with = SOV }
-			has_completed_focus = JAP_preemptive_war
+			has_completed_focus = JAP_seek_alliances	#56
+			OR = {	#56
+				has_completed_focus = JAP_a_green_persimmon
+				has_completed_focus = JAP_the_persimmon_has_ripened
+			}
 		}
 
 		fire_only_once = yes
@@ -4143,454 +4010,6 @@ operations = {
 			GER = { country_event = { id = wtt_japan.115 hours = 6 } }
 		}		
 	}
-
-	### TAURAN INCIDENT ### 
-
-	# Mission for tauran owner to escalate or incident is automatically lost
-	JAP_tauran_border_incident_forgotten_1 = {
-
-		icon = border_war
-
-		allowed = { always = no } #Activated from effect
-
-		visible = {
-			has_global_flag = tauran_incident_has_begun_flag 
-			OR = {
-				AND = {
-					owns_state = 761
-					is_subject = no
-				}
-				AND = {
-					any_subject_country = {
-						owns_state = 761
-					}
-				}
-			}
-		}
-
-		available = {
-				
-			OR = {
-				has_border_war_with = MON # Japan/MAN shouldn't lose war support if they actually use the window of opportunity
-				has_global_flag = initial_tauran_decision_taken_flag
-			}
-				
-		}
-
-		highlight_states = {
-	 		highlight_state_targets = {
-				state = 819
-				state = 761
-			} 
-		}
-
-		ai_will_do = {
-			base = 0
-		}
-
-		days_mission_timeout = 30
-
-		fire_only_once = yes
-
-		is_good = no
-		
-		timeout_effect = {
-			add_political_power = -25 
-			add_war_support = -0.05 #Shameful Display
-			MON = {
-				country_event = {
-					id = SEA_border_incidents_events.8
-					days = 1
-				}	
-			}
-			hidden_effect = {
-				set_global_flag = failed_to_assault_in_time_flag
-			}
-		}
-	}
-
-	# First border incident
-	JAP_assault_tauran_decision = {
-		icon = border_war
-
-		allowed = {
-			OR = {
-				original_tag = JAP
-				original_tag = MAN
-			}
-		}
-
-		visible = {
-			OR = {
-				AND = {
-					761 = {
-						is_owned_and_controlled_by = ROOT
-					}
-					is_subject = no
-				}
-				AND = {
-					any_subject_country = {
-						761 = {
-							is_owned_and_controlled_by = PREV
-						}
-					}
-				}
-			}
-			819 = {
-				is_owned_and_controlled_by = MON
-			}
-			NOT = {
-				has_global_flag = failed_to_assault_in_time_flag 
-			}
-			has_global_flag = tauran_incident_has_begun_flag 
-		}
-
-		available = {
-			NOT = {
-				has_war_with = MON
-				is_in_faction_with = MON
-				has_non_aggression_pact_with = MON
-				MON = { is_puppet_of = ROOT }
-			}
-			761 = {
-				any_neighbor_state = {
-					is_controlled_by = MON
-				}
-			}
-		}
-
-		highlight_states = {
-	 		highlight_state_targets = {
-				state = 819
-				state = 761
-			} 
-		}
-		
-		fire_only_once = yes
-
-		ai_will_do = {
-			base = 250
-		}
-
-		cost = 5
-
-		days_remove = 30  
-
-		war_with_on_remove = MON
-
-		complete_effect = {
-			761 = {
-				save_event_target_as = MAN_MON_attacker_state
-				set_state_flag = border_incident_active
-			}
-			819 = {
-				save_event_target_as = MAN_MON_defender_state
-				set_state_flag = border_incident_active
-			}
-			MON = {
-				country_event = { id = SEA_border_incidents_events.4 days = 1 }
-				activate_targeted_decision = { target = ROOT decision = JAP_tauran_border_conflict_warning_MON }
-			}
-			hidden_effect = {
-				set_global_flag = initial_tauran_decision_taken_flag 
-			}
-		}
-		remove_effect = {
-			activate_targeted_decision = { target = MON decision = JAP_tauran_border_incident_forgotten }
-			activate_targeted_decision = { target = MON decision = JAP_escalate_incident_to_border_conflict_MON }
-		}
-	}
-
-	# Mission for defender warning that a conflict with FROM is coming
-	JAP_tauran_border_conflict_warning_MON = {
-
-		icon = border_war
-
-		allowed = { always = no } #Activated from effect
-
-		available = {
-			hidden_trigger = { always = no }
-		}
-
-		war_with_target_on_timeout = yes
-
-		ai_will_do = {
-			base = 0
-			modifier = {
-				
-			}
-		}
-
-		days_mission_timeout = 30 
-
-		fire_only_once = yes
-
-		is_good = no
-		
-		timeout_effect = {
-			custom_effect_tooltip = escalation_possible_tooltip_for_defender
-			custom_effect_tooltip = effects_if_border_conflict_is_lost
-			effect_tooltip = {
-				add_war_support = -0.05
-				add_political_power = -50
-			}
-			hidden_effect = {
-				IF = {
-					limit = {
-						761 = {
-							is_owned_and_controlled_by = MAN
-						}
-						MAN = {
-							is_subject = no
-						}
-					}
-					remove_targeted_decision = { target = MAN decision = JAP_tauran_border_conflict_warning_MON }
-					activate_targeted_decision = { target = MAN decision = JAP_border_conflict_escalation_warning_MON }
-				}
-				ELSE_IF = {
-					limit = {
-						761 = {
-							is_owned_and_controlled_by = MAN
-						}
-						MAN = {
-							is_subject_of = JAP
-						}
-					}
-					remove_targeted_decision = { target = JAP decision = JAP_tauran_border_conflict_warning_MON }
-					activate_targeted_decision = { target = JAP decision = JAP_border_conflict_escalation_warning_MON }
-				}
-				ELSE_IF = {
-					limit = {
-						761 = {
-							is_owned_and_controlled_by = JAP
-						}
-					}
-					remove_targeted_decision = { target = JAP decision = JAP_tauran_border_conflict_warning_MON }
-					activate_targeted_decision = { target = JAP decision = JAP_border_conflict_escalation_warning_MON }
-				}
-			}
-		}
-	}
-
-	# Mission for defender warning FROM can escalate to war at any point is coming
-	JAP_border_conflict_escalation_warning_MON = {
-
-		icon = border_war
-
-		allowed = { always = no } #Activated from effect
-		visible = { 
-			hidden_trigger = { 
-				NOT = { 
-					has_border_war_with = JAP 
-					has_border_war_with = MAN 
-				} 
-			} 
-		}
-		cancel_if_not_visible = yes 
-
-		available = {
-			#var:ROOT.defender_state_vs_@FROM = {
-			#	has_ROOT_at_least_1_div_in_current_state_scope = yes
-			#}
-			hidden_trigger = { always = no }
-		}
-
-		war_with_target_on_timeout = yes
-		ai_will_do = {
-			base = 0
-			modifier = {
-				
-			}
-		}
-
-		days_mission_timeout = 30
-
-		fire_only_once = yes
-
-		is_good = no
-
-		timeout_effect = {
-			custom_effect_tooltip = from_cannot_escalate
-			custom_effect_tooltip = effects_if_border_conflict_is_lost
-			effect_tooltip = {
-				add_war_support = -0.05
-				add_political_power = -50
-			}
-		}		
-	}
-
-	# Mission for attacker to escalate or incident is forgotten
-	JAP_tauran_border_incident_forgotten = {
-
-		icon = border_war
-
-		allowed = { always = no } #Activated from effect
-
-		available = {
-			
-			hidden_trigger = {
-				OR = {
-					has_border_war_with = MON # Japan shouldn't lose war support if they actually use the window of opportunity
-					has_global_flag = JAP_did_the_tauran_border_war_flag
-				}
-			}
-				
-		}
-
-		highlight_states = {
-			highlight_state_targets = {
-				state = 819 
-				state = 761
-			} 
-		}
-
-		ai_will_do = {
-			base = 0
-			modifier = {
-				
-			}
-		}
-
-		days_mission_timeout = 30
-
-		fire_only_once = yes
-
-		is_good = no
-		
-		timeout_effect = {
-			remove_targeted_decision = { target = MON decision = JAP_escalate_incident_to_border_conflict_MON }
-			add_political_power = -50
-			add_war_support = -0.05 #Shameful Display
-			MON = {
-				country_event = {
-					id = SEA_border_incidents_events.8
-					days = 1
-				}	
-			}
-			hidden_effect = {
-				MON = { remove_targeted_decision = { target = ROOT decision = JAP_border_conflict_escalation_warning_MON } }
-				MON = {
-					761 = {
-						clr_state_flag = border_incident_active
-					}
-					819 = {
-						clr_state_flag = border_incident_active
-					}
-				}
-			}
-		}
-	}
-
-	#Decision to escalate incident on border with MON to border conflict
-	JAP_escalate_incident_to_border_conflict_MON = {
-
-		icon = border_war
-
-		allowed = { always = no } #Activated from effect
-
-		available = {
-			761 = {
-				OR = {
-					is_fully_controlled_by = ROOT
-					CONTROLLER = {
-						is_subject_of = ROOT
-					}
-					CONTROLLER = {
-						is_in_faction_with = ROOT
-					}
-				}
-			}
-			divisions_in_border_state = {
-				state = 761
-				border_state = 819
-				size > 0
-			}
-		}
-
-		highlight_states = {
-			highlight_state_targets = {
-				state = 761
-				state = 819	
-			} 
-		}
-
-		ai_will_do = {
-			base = 25 
-			modifier = { 
-				has_war = no
-				factor = 10
-			}
-		}
-
-		fire_only_once = yes #Reactivation handled in effect
-
-		complete_effect = {
-			remove_targeted_decision = { target = MON decision = JAP_tauran_border_incident_forgotten }
-			activate_mission = JAP_tauran_border_conflict_time_until_cancelled
-			start_border_war = {
-				change_state_after_war = no
-				attacker = {
-					state = 761
-					num_provinces = 4
-					on_win = SEA_border_incidents_events.5
-					on_lose = SEA_border_incidents_events.6
-					on_cancel = SEA_border_incidents_events.7
-				}
-				
-				defender = {
-					state = 819
-					num_provinces = 4
-					on_win = SEA_border_incidents_events.6
-					on_lose = SEA_border_incidents_events.5
-					on_cancel = SEA_border_incidents_events.7
-				}
-			}
-		}
-	}
-
-	#Mission for attacker to win border war against FROM in X days
-	JAP_tauran_border_conflict_time_until_cancelled = {
-
-		icon = border_war
-
-		allowed = { always = no } #Activated from effect
-
-		available = {
-			819 = { has_border_war = no }
-			761 = { has_border_war = no }
-		}
-		
-		highlight_states = {
-			highlight_state_targets = {
-				state = 819
-				state = 761
-			} 
-		}
-
-		ai_will_do = {
-			base = 0
-			modifier = {
-				
-			}
-		}
-
-		days_mission_timeout = 90
-		is_good = no
-
-		fire_only_once = yes #Reactivation handled in effect
-
-		complete_effect = {
-
-		}
-
-		timeout_effect = {
-			cancel_border_war = {
-				defender = 819
-				attacker = 761
-			}
-		}
-	}
-
 }
 
 prospect_for_resources = {
@@ -4622,7 +4041,7 @@ prospect_for_resources = {
 
 		visible = {
 			OR = {
-				has_completed_focus = JAP_establish_the_northern_resource_area
+#				has_completed_focus = JAP_establish_the_northern_resource_area	#56 - Cut content due to inclusion of JAP_sea_establish_the_northern_resource_area as part of Kodoha faction branch
 				has_completed_focus = JAP_sea_establish_the_northern_resource_area
 				has_completed_focus = JAP_transformation_of_nature
 			}
@@ -4682,7 +4101,7 @@ prospect_for_resources = {
 
 		visible = {
 			OR = {
-				has_completed_focus = JAP_establish_the_northern_resource_area
+#				has_completed_focus = JAP_establish_the_northern_resource_area	#56 - Cut content due to inclusion of JAP_sea_establish_the_northern_resource_area as part of Kodoha faction branch
 				has_completed_focus = JAP_sea_establish_the_northern_resource_area
 				has_completed_focus = JAP_transformation_of_nature
 			}
@@ -4742,7 +4161,7 @@ prospect_for_resources = {
 
 		visible = {
 			OR = {
-				has_completed_focus = JAP_establish_the_northern_resource_area
+#				has_completed_focus = JAP_establish_the_northern_resource_area	#56 - Cut content due to inclusion of JAP_sea_establish_the_northern_resource_area as part of Kodoha faction branch
 				has_completed_focus = JAP_sea_establish_the_northern_resource_area
 				has_completed_focus = JAP_transformation_of_nature
 			}
@@ -5093,12 +4512,12 @@ prospect_for_resources = {
 
 		highlight_states = {
  			highlight_state_targets = {
-				state = 1021
+				state = 336	#56 - Singapore
 			} 
 		}
 
 		available = {
-			1021 = { is_controlled_by_ROOT_or_subject = yes }
+			336 = { is_controlled_by_ROOT_or_subject = yes }	#56 - Singapore
 			has_tech = excavation2
 		}
 
@@ -5107,7 +4526,7 @@ prospect_for_resources = {
 				has_completed_focus = JAP_transformation_of_nature
 				has_completed_focus = JAP_sea_exploit_southern_resource_area
 			}
-			1021 = {
+			336 = {	#56 - Singapore
 				NOT = {
 					has_state_flag = singapore_aluminium_developed
 				}
@@ -5117,7 +4536,7 @@ prospect_for_resources = {
 		fire_only_once = no
 
 		cancel_trigger = {
-			1021 = { is_controlled_by_ROOT_or_subject = no }
+			336 = { is_controlled_by_ROOT_or_subject = no }	#56 - Singapore
 		}
 
 		cost = 25
@@ -5132,7 +4551,7 @@ prospect_for_resources = {
 		}
 
 		remove_effect = {
-			1021 = {
+			336 = {	#56 - Singapore
 				add_resource = {
 					type = aluminium
 					amount = 12
@@ -5142,7 +4561,220 @@ prospect_for_resources = {
 		}
 	}
 
-	JAP_develop_riau_oil_deposits = { #672
+	JAP_develop_riau_oil_deposits = { #974
+		icon = oil
+
+		highlight_states = {
+ 			highlight_state_targets = {
+				state = 974
+			} 
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			974 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation3
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			974 = {
+				NOT = {
+					has_state_flag = riau_oil_developed
+				}
+			}
+		}
+
+		fire_only_once = no
+
+		cancel_trigger = {
+			672 = { is_controlled_by_ROOT_or_subject = no }
+		}
+
+		cost = 50
+		days_remove = 60
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		remove_effect = {
+			672 = {
+				add_resource = {
+					type = oil
+					amount = 26
+				}
+				set_state_flag = riau_oil_developed
+			}
+		}
+	}
+	
+	JAP_develop_central_sumatra_bauxite_deposits_wtt = { #Krasna: Too much at Bintan Islands lolololol
+		
+		icon = aluminium
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 909
+			} 
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			909 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation3
+			num_of_civilian_factories_available_for_projects > 3
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			909 = {
+				NOT = {
+					has_state_flag = {
+						flag = central_sumatran_bauxite_developed
+						value = 3
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = 60
+
+		modifier = {
+			civilian_factory_use = 4
+		}
+
+		complete_effect = {
+		}
+
+		ai_will_do = {
+			factor = 5
+		}
+
+		remove_effect = {
+			909 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = central_sumatran_bauxite_developed
+						}
+					}
+					set_state_flag = {
+						flag = central_sumatran_bauxite_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = central_sumatran_bauxite_developed
+						value = 1
+					}
+				}
+			} 
+			909 = {
+				add_resource = {
+					type = aluminium
+					amount = 8
+				}
+			}
+		}
+	}
+
+	JAP_develop_padang_iron_deposits = {
+
+		icon = steel
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 672
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			1128 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation5
+			num_of_civilian_factories_available_for_projects > 7
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			1128 = {
+				NOT = {
+					has_state_flag = {
+						flag = padang_steel_developed
+						value = 2
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = padang_steel_duration?30
+		modifier = {
+			civilian_factory_use = 8
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = padang_steel_duration value = 30 }
+			1128 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = padang_steel_developed
+						}
+					}
+					set_state_flag = {
+						flag = padang_steel_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = padang_steel_developed
+						value = 1
+					}
+				}
+			}
+			1128 = {
+				add_resource = {
+					type = steel
+					amount = 5
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					check_variable = { var = padang_steel_duration value = 30 compare = less_than }
+				}
+				set_variable = { var = padang_steel_duration value = 60 }
+			}
+		}
+	}
+
+	JAP_expand_palembang_oil_fields = { #672
+	
 		icon = oil
 
 		highlight_states = {
@@ -5161,10 +4793,7 @@ prospect_for_resources = {
 		}
 
 		visible = {
-			OR = {
-				has_completed_focus = JAP_transformation_of_nature
-				has_completed_focus = JAP_sea_exploit_southern_resource_area
-			}
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
 			672 = {
 				NOT = {
 					has_state_flag = riau_oil_developed
@@ -5200,7 +4829,499 @@ prospect_for_resources = {
 		}
 	}
 
+	JAP_develop_southern_sumatra_chromium_deposits = { #Belitong
+
+		icon = chromium
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 672
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			672 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation3
+			num_of_civilian_factories_available_for_projects > 4
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			672 = {
+				NOT = {
+					has_state_flag = {
+						flag = sumatran_chromium_developed
+						value = 3
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = sumatran_chromium_duration?30
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = sumatran_chromium_duration value = 30 }
+			672 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = sumatran_chromium_developed
+						}
+					}
+					set_state_flag = {
+						flag = sumatran_chromium_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = sumatran_chromium_developed
+						value = 1
+					}
+				}
+			}
+			672 = {
+				add_resource = {
+					type = chromium
+					amount = 5
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					check_variable = { var = sumatran_chromium_duration value = 30 compare = less_than }
+				}
+				set_variable = { var = sumatran_chromium_duration value = 60 }
+			}
+		}
+	}
+
+	JAP_develop_southern_sumatra_coal_mines = { #Lahat
+
+		icon = coal
+		
+		highlight_states = {
+			highlight_state_targets = {
+				state = 672
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			672 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation3
+			num_of_civilian_factories_available_for_projects > 4
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			672 = {
+				NOT = {
+					has_state_flag = muaraenim_coal_developed
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = muaraenim_coal_duration?30
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = muaraenim_coal_duration value = 30 }
+			672 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = muaraenim_coal_developed
+						}
+					}
+					set_state_flag = {
+						flag = muaraenim_coal_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = muaraenim_coal_developed
+						value = 1
+					}
+				}
+			}
+			672 = {
+				add_resource = {
+					type = coal
+					amount = 6
+				}
+			}
+		}
+	}
+
+	JAP_develop_southern_sumatra_coal_mines_2 = { #Muaraenim
+
+		icon = coal
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 672
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			672 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation_a
+			num_of_civilian_factories_available_for_projects > 8
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			672 = {
+				has_state_flag = {
+					flag = muaraenim_coal_developed
+					value = 2
+				}
+				NOT = {
+					has_state_flag = {
+						flag = muaraenim_coal_developed2
+						value = 3
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = muaraenim_coal_duration2?45
+
+		modifier = {
+			civilian_factory_use = 9
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = muaraenim_coal_duration2 value = 45 }
+			672 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = muaraenim_coal_developed2
+						}
+					}
+					set_state_flag = {
+						flag = muaraenim_coal_developed2
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = muaraenim_coal_developed2
+						value = 1
+					}
+				}
+			}
+			672 = {
+				add_resource = {
+					type = coal
+					amount = 9
+				}
+			}
+		}
+	}
+
+	JAP_develop_southern_sumatra_coal_mines_3 = { #Tanjungenim
+
+		icon = coal
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 672
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			672 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation_c
+			num_of_civilian_factories_available_for_projects > 11
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			672 = {
+				has_state_flag = {
+					flag = muaraenim_coal_developed2
+					value = 3
+				}
+				NOT = {
+					has_state_flag = {
+						flag = muaraenim_coal_developed3
+						value = 5
+					}
+				}
+			}
+		}
+
+		cost = 25
+		days_remove = muaraenim_coal_duration3?60
+
+		modifier = {
+			civilian_factory_use = 12
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = muaraenim_coal_duration3 value = 60 }
+			672 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = muaraenim_coal_developed3
+						}
+					}
+					set_state_flag = {
+						flag = muaraenim_coal_developed3
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = muaraenim_coal_developed3
+						value = 1
+					}
+				}
+			}
+			672 = {
+				add_resource = {
+					type = coal
+					amount = 12
+				}
+			}
+		}
+	}
+
+	JAP_develop_west_java_coal_mines = { #Krasna: The infamous Bayah Coal Mines
+
+		icon = coal
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 335
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			672 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation4
+			num_of_civilian_factories_available_for_projects > 4
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			335 = {
+				NOT = {
+					has_state_flag = {
+						flag = bayah_coal_developed
+						value = 2
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = javan_coal_duration?30
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = javan_coal_duration value = 30 }
+			335 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = bayah_coal_developed
+						}
+					}
+					set_state_flag = {
+						flag = bayah_coal_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = bayah_coal_developed
+						value = 1
+					}
+				}
+			}
+			335 = {
+				add_resource = {
+					type = coal
+					amount = 4
+				}
+			}
+		}
+	}
+
+	JAP_develop_central_java_steel_deposits = { #Yogyakarta
+
+		icon = steel
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 976
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			976 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation_a
+			num_of_civilian_factories_available_for_projects > 5
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			976 = {
+				NOT = {
+					has_state_flag = javan_steel_developed
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = 60
+
+		modifier = {
+			civilian_factory_use = 6
+		}
+
+		ai_will_do = {
+			factor = 10	
+		}
+
+		remove_effect = {
+			976 = {
+				set_state_flag = javan_steel_developed
+			}
+			976 = {
+				add_resource = {
+					type = steel
+					amount = 4
+				}
+			}
+		}
+	}
+
+	JAP_develop_tuban_oil_deposits = { #446
+
+		icon = oil
+
+		highlight_states = {
+ 			highlight_state_targets = {
+				state = 446
+			} 
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			446 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation5
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			446 = {
+				NOT = {
+					has_state_flag = tuban_oil_developed
+				}
+			}
+		}
+
+		fire_only_once = no
+
+		cancel_trigger = {
+			446 = { is_controlled_by_ROOT_or_subject = no }
+		}
+
+		cost = 30
+		days_remove = 60
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		ai_will_do = {
+			base = 10
+		}
+
+		remove_effect = {
+			446 = {
+				add_resource = {
+					type = oil
+					amount = 12
+				}
+				set_state_flag = tuban_oil_developed
+			}
+		}
+	}
+
 	JAP_develop_kalimantan_oil_deposits = { #334
+
 		icon = oil
 
 		highlight_states = {
@@ -5219,10 +5340,7 @@ prospect_for_resources = {
 		}
 
 		visible = {
-			OR = {
-				has_completed_focus = JAP_transformation_of_nature
-				has_completed_focus = JAP_sea_exploit_southern_resource_area
-			}
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
 			334 = {
 				NOT = {
 					has_state_flag = kalimantan_oil_developed
@@ -5258,7 +5376,575 @@ prospect_for_resources = {
 		}
 	}
 
-	JAP_develop_west_papuan_oil_deposits = { #669
+	JAP_develop_eastern_kalimantan_coal_mines_wtt = { #Banjarmasin
+
+		icon = coal
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 334
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			334 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation3
+			num_of_civilian_factories_available_for_projects > 4
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			334 = {
+				NOT = {
+					has_state_flag = {
+						flag = kalimantan_coal_developed
+						value = 2
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = kalimantan_coal_duration?30
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			334 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = kalimantan_coal_developed
+						}
+					}
+					set_state_flag = {
+						flag = kalimantan_coal_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = kalimantan_coal_developed
+						value = 1
+					}
+				}
+			}
+			334 = {
+				add_resource = {
+					type = coal
+					amount = 9
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					check_variable = { var = kalimantan_coal_duration value = 30 compare = less_than }
+				}
+				set_variable = { var = kalimantan_coal_duration value = 60 }
+			}
+		}
+	}
+
+	JAP_develop_eastern_kalimantan_coal_mines_2_wtt = { #Berau
+
+		icon = coal
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 334
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			334 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation_a
+			num_of_civilian_factories_available_for_projects > 7
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			334 = {
+				has_state_flag = {
+					flag = kalimantan_coal_developed
+					value = 2
+				}
+				NOT = {
+					has_state_flag = {
+						flag = kalimantan_coal_developed2
+						value = 3
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = kalimantan_coal_duration2?45
+
+		modifier = {
+			civilian_factory_use = 9
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = kalimantan_coal_duration2 value = 45 }
+			334 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = kalimantan_coal_developed2
+						}
+					}
+					set_state_flag = {
+						flag = kalimantan_coal_developed2
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = kalimantan_coal_developed2
+						value = 1
+					}
+				}
+			}
+			334 = {
+				add_resource = {
+					type = coal
+					amount = 9
+				}
+			}
+		}
+	}
+
+	JAP_develop_eastern_kalimantan_coal_mines_3_wtt = { #Kutai
+
+		icon = coal
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 334
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			334 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation_d
+			num_of_civilian_factories_available_for_projects > 11
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			334 = {
+				has_state_flag = {
+					flag = kalimantan_coal_developed2
+					value = 3
+				}
+				NOT = {
+					has_state_flag = {
+						flag = kalimantan_coal_developed3
+						value = 5
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = kalimantan_coal_duration3?60
+
+		modifier = {
+			civilian_factory_use = 12
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = kalimantan_coal_duration3 value = 60 }
+			334 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = kalimantan_coal_developed3
+						}
+					}
+					set_state_flag = {
+						flag = kalimantan_coal_developed3
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = kalimantan_coal_developed3
+						value = 1
+					}
+				}
+			}
+			334 = {
+				add_resource = {
+					type = coal
+					amount = 12
+				}
+			}
+		}
+	}
+
+	JAP_develop_southern_sulawesi_steel_deposits_wtt = { #Toraja
+
+		icon = steel
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			673 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation4
+			num_of_civilian_factories_available_for_projects > 7
+		}
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 673
+			}
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			673 = {
+				NOT = {
+					has_state_flag = {
+						flag = toraja_steel_developed
+						value = 2
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = toraja_steel_duration?30
+
+		modifier = {
+			civilian_factory_use = 8
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = toraja_steel_duration value = 30 }
+			673 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = toraja_steel_developed
+						}
+					}
+					set_state_flag = {
+						flag = toraja_steel_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = toraja_steel_developed
+						value = 1
+					}
+				}
+			}
+			673 = {
+				add_resource = {
+					type = steel
+					amount = 5
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					check_variable = { var = toraja_steel_duration value = 30 compare = less_than }
+				}
+				set_variable = { var = toraja_steel_duration value = 60 }
+			}
+		}
+	}
+
+	JAP_develop_northern_sulawesi_steel_deposits_wtt = { #Morowali
+
+		icon = steel
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 975
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			975 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation_d
+			num_of_civilian_factories_available_for_projects > 14
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			975 = {
+				NOT = {
+					has_state_flag = {
+						flag = morowali_steel_developed
+						value = 2
+					}
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = morowali_steel_duration?30
+
+		modifier = {
+			civilian_factory_use = 15
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = morowali_steel_duration value = 30 }
+			975 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = morowali_steel_developed
+						}
+					}
+					set_state_flag = {
+						flag = morowali_steel_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = morowali_steel_developed
+						value = 1
+					}
+				}
+			}
+			975 = {
+				add_resource = {
+					type = steel
+					amount = 5
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					check_variable = { var = morowali_steel_duration value = 30 compare = less_than }
+				}
+				set_variable = { var = morowali_steel_duration value = 60 }
+			}
+		}
+	}
+
+	JAP_develop_northern_sulawesi_chromium_deposits_wtt = { #Gorontalo
+
+		icon = chromium
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 975
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			975 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation5
+			num_of_civilian_factories_available_for_projects > 7
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			975 = {
+				NOT = {
+					has_state_flag = {
+						flag = sulawesi_chromium_developed
+						value = 2
+					}
+				}
+			}
+		}
+
+		cost = 50
+
+		days_remove = sulawesi_chromium_duration?30
+		modifier = {
+			civilian_factory_use = 8
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = sulawesi_chromium_duration value = 30 }
+			975 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = sulawesi_chromium_developed
+						}
+					}
+					set_state_flag = {
+						flag = sulawesi_chromium_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = sulawesi_chromium_developed
+						value = 1
+					}
+				}
+			}
+			975 = {
+				add_resource = {
+					type = chromium
+					amount = 5
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					check_variable = { var = sulawesi_chromium_duration value = 30 compare = less_than }
+				}
+				set_variable = { var = sulawesi_chromium_duration value = 60 }
+			}
+		}
+	}
+
+	JAP_develop_moluccas_oil_deposits_wtt = { #Bula
+
+		icon = oil
+
+		highlight_states = {
+			highlight_state_targets = {
+				state = 668
+			}
+		}
+
+		allowed = {
+			original_tag = JAP
+		}
+
+		available = {
+			668 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation4
+			num_of_civilian_factories_available_for_projects > 4
+		}
+
+		visible = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			668 = {
+				NOT = {
+					has_state_flag = {
+						flag = moluccan_oil_developed
+						value = 2
+					}
+				}
+			}
+		}
+
+		cost = 50
+		
+		days_remove = moluccan_oil_duration?30
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			factor = 10
+		}
+
+		remove_effect = {
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = moluccan_oil_duration value = 30 }
+			668 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = mollucan_oil_developed
+						}
+					}
+					set_state_flag = {
+						flag = mollucan_oil_developed
+						value = 1
+					}
+				}
+				else = {
+					modify_state_flag = {
+						flag = mollucan_oil_developed
+						value = 1
+					}
+				}
+			}
+			668 = {
+				add_resource = {
+					type = oil
+					amount = 3
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					check_variable = { var = moluccan_oil_duration value = 30 compare = less_than }
+				}
+				set_variable = { var = moluccan_oil_duration value = 60 }
+			}
+		}
+	}
+
+	JAP_develop_west_papuan_oil_deposits = { #Krasna: Teluk Bintuni, West Papua, explored in 1935 by BPM, got developed in the 1970s
 		icon = oil
 
 		highlight_states = {
@@ -5277,10 +5963,7 @@ prospect_for_resources = {
 		}
 
 		visible = {
-			OR = {
-				has_completed_focus = JAP_transformation_of_nature
-				has_completed_focus = JAP_sea_exploit_southern_resource_area
-			}
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
 			669 = {
 				NOT = {
 					has_state_flag = west_papuan_oil_developed
@@ -5316,13 +5999,14 @@ prospect_for_resources = {
 		}
 	}
 
-	JAP_develop_tuban_oil_deposits = { #335
-		icon = oil
+	JAP_develop_west_papuan_chromium_deposits_wtt = { #Timika
+
+		icon = chromium
 
 		highlight_states = {
- 			highlight_state_targets = {
-				state = 335
-			} 
+			highlight_state_targets = {
+				state = 669
+			}
 		}
 
 		allowed = {
@@ -5330,50 +6014,73 @@ prospect_for_resources = {
 		}
 
 		available = {
-			335 = { is_controlled_by_ROOT_or_subject = yes }
-			has_tech = excavation5
+			669 = { is_controlled_by_ROOT_or_subject = yes }
+			has_tech = excavation_c
+			num_of_civilian_factories_available_for_projects > 7
 		}
 
 		visible = {
-			OR = {
-				has_completed_focus = JAP_transformation_of_nature
-				has_completed_focus = JAP_sea_exploit_southern_resource_area
-			}
-			335 = {
+			has_completed_focus = JAP_sea_exploit_southern_resource_area
+			669 = {
 				NOT = {
-					has_state_flag = tuban_oil_developed
+					has_state_flag = {
+						flag = west_papua_chromium_developed
+						value = 3
+					}
 				}
 			}
 		}
 
-		fire_only_once = no
+		cost = 50
 
-		cancel_trigger = {
-			335 = { is_controlled_by_ROOT_or_subject = no }
-		}
-
-		cost = 30
-		days_remove = 60
-
+		days_remove = west_papua_chromium_duration?30
 		modifier = {
-			civilian_factory_use = 3
+			civilian_factory_use = 8
 		}
 
 		ai_will_do = {
-			base = 10
+			factor = 10
 		}
 
 		remove_effect = {
-			335 = {
-				add_resource = {
-					type = oil
-					amount = 12
+			custom_effect_tooltip = repeatable_decision_tt
+			add_to_variable = { var = west_papua_chromium_duration value = 30 }
+			975 = {
+				if = {
+					limit = {
+						NOT = {
+							has_state_flag = west_papua_chromium_developed
+						}
+					}
+					set_state_flag = {
+						flag = west_papua_chromium_developed
+						value = 1
+					}
 				}
-				set_state_flag = tuban_oil_developed
+				else = {
+					modify_state_flag = {
+						flag = west_papua_chromium_developed
+						value = 1
+					}
+				}
+			}
+			669 = {
+				add_resource = {
+					type = chromium
+					amount = 5
+				}
+			}
+		}
+
+		complete_effect = {
+			if = {
+				limit = {
+					check_variable = { var = west_papua_chromium_duration value = 30 compare = less_than }
+				}
+				set_variable = { var = west_papua_chromium_duration value = 60 }
 			}
 		}
 	}
-
 
 
 
@@ -5828,11 +6535,9 @@ JAP_kwantung_army_decisions = {
 		}
 
 		visible = {
-			hidden_trigger = {
-				original_tag = JAP
-				has_civil_war = no
-				is_subject = no 
-			}
+			original_tag = JAP
+			has_civil_war = no
+			is_subject = no 
 			NOT = { has_war_with = CHI }
 			NOT = {
 				has_completed_focus = JAP_subdue_the_kwantung_army
@@ -6107,7 +6812,12 @@ JAP_kwantung_army_decisions = {
 		target_trigger = {
 			#Target is FROM
 			FROM = {
-				is_literally_china = yes
+				#is_literally_china = yes r56 disabled for the sake of our white peaces 
+				OR = {
+					original_tag = GDC
+					original_tag = HBC 
+					original_tag = SND
+				}
 				NOT = {
 					is_ally_with = ROOT
 					has_war_with = ROOT
@@ -6135,6 +6845,7 @@ JAP_kwantung_army_decisions = {
 		}
 
 		visible = { 
+			can_declare_war_on = FROM
 			OR = {
 				has_subject = RNG
 				has_subject = CHI
@@ -10401,6 +11112,8 @@ JAP_the_co_prosperity_sphere_decisions = {
 					state = 563
 					state = 566
 					state = 616
+					state = 1122	#56 - Pailingmiao
+					state = 1119	#56 - Alxa
 				}
 			}
 		}
@@ -10426,6 +11139,8 @@ JAP_the_co_prosperity_sphere_decisions = {
 					state = 563
 					state = 566
 					state = 616
+					state = 1122	#56 - Pailingmiao
+					state = 1119	#56 - Alxa
 				}
 			}
 			has_completed_focus = JAP_mongol_autonomous_state # To Show people why they have it
@@ -10477,6 +11192,8 @@ JAP_the_co_prosperity_sphere_decisions = {
 							state = 563
 							state = 566
 							state = 616
+							state = 1122	#56 - Pailingmiao
+							state = 1119	#56 - Alxa
 						}
 					}
 					transfer_state_to = FROM
@@ -10636,46 +11353,33 @@ JAP_the_co_prosperity_sphere_decisions = {
 			}
 
 			custom_effect_tooltip = if_they_accept_tt
-			
-			FROM = {
-				effect_tooltip = {
+
+			effect_tooltip = {
+				FROM = {
 					add_tech_bonus = {
 						bonus = 0.5
 						uses = 2
 						category = industry
 					}
 				}
-				random_core_state = {
+				random_state = {
 					limit = {
 						is_owned_and_controlled_by = FROM
+						is_core_of = FROM
 						free_building_slots = {
 							building = industrial_complex
-							size > 1
+							size > 2
 							include_locked = yes
-						}
-					}
-					set_state_flag = JAP_state_development_target
-					effect_tooltip = {
-						add_extra_state_shared_building_slots = 2
-						add_building_construction = {
-							type = industrial_complex
-							level = 2
-							instant_build = yes
 						}	
-						IF = {
-							limit = {
-								infrastructure < 5
-							}
-							add_building_construction = {
-								type = infrastructure
-								level = 1
-								instant_build = yes
-							}	
-						}
 					}
-				}
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}	
+				}		 
 			}
-			
 		}
 	}
 
@@ -10796,7 +11500,7 @@ JAP_the_co_prosperity_sphere_decisions = {
 					state = 326 # Hong Kong
 					state = 743 # Qingdao
 					state = 524 # Taiwan
-					state = 1039 # Hebei-Chahar
+					state = 1118 #56 - Hebei-Chahar
 					state = 591 # Hainan
 				}
 			}
@@ -11014,15 +11718,15 @@ JAP_the_co_prosperity_sphere_decisions = {
 
 		highlight_states = {
 			highlight_state_targets = {
-				state = 993
-				state = 999
-				state = 998
+				state = 1018	#56 - Shanland
+				state = 1020	#56 - Bago
+				state = 1019	#56 - Sagaing
 				state = 288
 				state = 640
-				state = 997
-				state = 996
-				state = 995
-				state = 994
+#				state = 997	#56 - Not in RT56, no equivalent needed
+#				state = 996	#56 - Not in RT56, no equivalent needed
+#				state = 995	#56 - Not in RT56, no equivalent needed
+#				state = 994	#56 - Not in RT56, no equivalent needed
 			}
 		}
 	
@@ -11067,7 +11771,7 @@ JAP_the_co_prosperity_sphere_decisions = {
 				BRM = {
 					every_core_state = {
 						limit = {
-							is_controlled_by_ROOT_or_subject = yes
+							state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 						}
 						transfer_state_to = BRM
 					}
@@ -11086,21 +11790,6 @@ JAP_the_co_prosperity_sphere_decisions = {
 				}
 			}
 			ELSE = {
-				hidden_effect = {
-					BRM = {
-						every_core_state = {
-							limit = {
-								controller = {
-									OR = {
-										original_tag = ROOT
-										is_subject_of = ROOT
-									}
-								}
-							}
-							set_state_flag = is_state_that_should_go_to_japanese_burma_flag 
-						}
-					}
-				}
 				BRM = {
 					country_event = {
 						id = SEA_japan_foreign_policy.60
@@ -11168,7 +11857,7 @@ JAP_the_co_prosperity_sphere_decisions = {
 				RAJ = {
 					every_core_state = {
 						limit = {
-							is_controlled_by_ROOT_or_subject = yes
+							state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 						}
 						transfer_state_to = RAJ
 					}
@@ -11246,15 +11935,15 @@ JAP_the_co_prosperity_sphere_decisions = {
 		highlight_states = {
 			highlight_state_targets = {
 				state = 623
-				state = 1027
 				state = 327
 				state = 626
 				state = 624
 				state = 625
 				state = 628
-				state = 1026
+				state = 1109	#56 - Northern Mindanao
 				state = 627
-				state = 1025
+				state = 1108	#56 - Zamboanga
+				state = 1110	#56 - Bataan
 			}
 		}
 	
@@ -11299,7 +11988,7 @@ JAP_the_co_prosperity_sphere_decisions = {
 				PHI = {
 					every_core_state = {
 						limit = {
-							is_controlled_by_ROOT_or_subject = yes
+							state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 						}
 						transfer_state_to = PHI
 					}
@@ -11408,14 +12097,10 @@ JAP_the_co_prosperity_sphere_decisions = {
 		highlight_states = {
 			highlight_state_targets = {
 				state = 671
-				state = 1017
-				state = 670
+				state = 928	#56 - North Annam
+#				state = 670	#56 - Taking out as a requirement due to SIA being likely to own it. Will still be transferred identically if controlled by ROOT_or_subject.
 				state = 741
 				state = 286
-				state = 1066 
-				state = 1067 
-				state = 1068 
-				state = 1069 
 			}
 		}
 
@@ -11441,32 +12126,21 @@ JAP_the_co_prosperity_sphere_decisions = {
 		available = {
 			
 			671 = {
-				is_controlled_by_ROOT_or_subject = yes
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
-			1017 = {
-				is_controlled_by_ROOT_or_subject = yes
+			928 = {	#56 - North Annam
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
-			670 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
+#			670 = {	#56 - Taking out as a requirement due to SIA being likely to own it. Will still be transferred identically if controlled by ROOT_or_subject.
+#				is_controlled_by_ROOT_or_subject = yes
+#			}
 			741 = {
-				is_controlled_by_ROOT_or_subject = yes
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
 			286 = {
-				is_controlled_by_ROOT_or_subject = yes
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
-			1066 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-			1067 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-			1068 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-			1069 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
+			927 = { state_is_fully_controlled_by_ROOT_or_subject = yes }	#56 - South Annam
 		}
 
 		complete_effect = {
@@ -11478,11 +12152,11 @@ JAP_the_co_prosperity_sphere_decisions = {
 				# Vietnamese+ States
 				every_state = {
 					limit = {
+						state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 						OR = {
 							state = 671
-							state = 1017
+							state = 928	#North Annam
 							state = 670
-							state = 1069 
 						}
 					}
 					transfer_state_to = VIN
@@ -11492,12 +12166,13 @@ JAP_the_co_prosperity_sphere_decisions = {
 				# Cambodian States
 				every_state = {
 					limit = {
+						state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 						OR = {
 							state = 741
 							state = 286
-							state = 1066 
-							state = 1067 
-							state = 1068 
+							state = 927	#56 - South Annam
+							state = 925	#56 - Batambang
+							state = 924	#56 - Champasak
 						}
 					}
 					transfer_state_to = CAM
@@ -11521,14 +12196,35 @@ JAP_the_co_prosperity_sphere_decisions = {
 				VIN = {
 					set_cosmetic_tag = VIN_kingdom_of_annam_tag
 					JAP_setup_faction_wide_aoe_effects_root_this = yes
+					VIN_bao_dai={
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = emperor_fascism
+								traits = { emperor_of_the_purple_forbidden_city }
+								expire = "1960.1.1.1"
+								id = -1
+							}
+						}
+					}
 					set_capital = {
-						state = 1017
+						state = 928	#56 - North Annam
 						remember_old_capital = yes
 					}
 				}
 
 				CAM = {
 					set_cosmetic_tag = CAM_kingdom_of_cambodia_tag
+					CAM_norodom_sihanouk = {
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = emperor_fascism
+								expire = "1960.1.1.1"
+								traits = { popular_figurehead3 }
+							}
+						}
+					}
 					JAP_setup_faction_wide_aoe_effects_root_this = yes
 				}
 
@@ -11561,9 +12257,9 @@ JAP_the_co_prosperity_sphere_decisions = {
 		highlight_states = {
 			highlight_state_targets = {
 				state = 671
-				state = 1017
+				state = 928	#56 - North Annam
 				state = 286
-				state = 1066 
+				state = 927	#56 - South Annam
 			}
 		}
 
@@ -11583,17 +12279,15 @@ JAP_the_co_prosperity_sphere_decisions = {
 		available = {
 			
 			671 = {
-				is_controlled_by_ROOT_or_subject = yes
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
-			1017 = {
-				is_controlled_by_ROOT_or_subject = yes
+			928 = {	#56 - North Annam
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
 			286 = {
-				is_controlled_by_ROOT_or_subject = yes
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
-			1066 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
+			927 = { state_is_fully_controlled_by_ROOT_or_subject = yes }	#56 - South Annam
 
 		}
 
@@ -11608,9 +12302,9 @@ JAP_the_co_prosperity_sphere_decisions = {
 					limit = {
 						OR = {
 							state = 671
-							state = 1017
+							state = 928	#56 - North Annam
 							state = 286
-							state = 1066
+							state = 927	#56 - South Annam
 						}
 					}
 					transfer_state_to = VIN
@@ -11626,9 +12320,20 @@ JAP_the_co_prosperity_sphere_decisions = {
 
 				VIN = {
 					set_cosmetic_tag = VIN_empire_of_vietnam_tag
+					VIN_bao_dai={
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = emperor_fascism
+								traits = { emperor_of_the_purple_forbidden_city }
+								expire = "1960.1.1.1"
+								id = -1
+							}
+						}
+					}
 					JAP_setup_faction_wide_aoe_effects_root_this = yes
 					set_capital = {
-						state = 1017
+						state = 928	#56 - North Annam
 						remember_old_capital = yes
 					}
 				}
@@ -11666,7 +12371,6 @@ JAP_the_co_prosperity_sphere_decisions = {
 		highlight_states = {
 			highlight_state_targets = {
 				state = 741
-				state = 1067
 			}
 		}
 
@@ -11686,7 +12390,7 @@ JAP_the_co_prosperity_sphere_decisions = {
 		available = {
 			
 			741 = {
-				is_controlled_by_ROOT_or_subject = yes
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
 
 		}
@@ -11702,9 +12406,11 @@ JAP_the_co_prosperity_sphere_decisions = {
 					transfer_state_to = CAM
 					add_core_of = CAM
 				}
-				1067 = {
+				925 = {	#56 - Batambang
+					if = {
+						limit = { is_controlled_by = ROOT }
+					}
 					transfer_state_to = CAM
-					add_core_of = CAM
 				}
 
 				set_autonomy = {
@@ -11716,6 +12422,16 @@ JAP_the_co_prosperity_sphere_decisions = {
 
 				CAM = {
 					set_cosmetic_tag = CAM_kingdom_of_kampuchea_tag
+					CAM_norodom_sihanouk = {
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = emperor_fascism
+								expire = "1960.1.1.1"
+								traits = { king_father }
+							}
+						}
+					}
 					JAP_setup_faction_wide_aoe_effects_root_this = yes
 				}
 
@@ -11752,8 +12468,6 @@ JAP_the_co_prosperity_sphere_decisions = {
 		highlight_states = {
 			highlight_state_targets = {
 				state = 670
-				state = 1068 
-				state = 1069 
 			}
 		}
 
@@ -11776,15 +12490,7 @@ JAP_the_co_prosperity_sphere_decisions = {
 		available = {
 			
 			670 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-
-			1068 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-
-			1069 = {
-				is_controlled_by_ROOT_or_subject = yes
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
 
 		}
@@ -11800,13 +12506,17 @@ JAP_the_co_prosperity_sphere_decisions = {
 					transfer_state_to = LAO
 					add_core_of = LAO
 				}
-				1068 = {
-					transfer_state_to = LAO
-					add_core_of = LAO
+				926 = {	#56 - Luang Prabang
+					if = {
+						limit = { is_controlled_by = ROOT }
+						transfer_state_to = LAO
+					}
 				}
-				1069 = {
-					transfer_state_to = LAO
-					add_core_of = LAO
+				924 = {	#56 - Champasak
+					if = {
+						limit = { is_controlled_by = ROOT }
+						transfer_state_to = LAO
+					}
 				}
 
 				set_autonomy = {
@@ -11818,6 +12528,17 @@ JAP_the_co_prosperity_sphere_decisions = {
 
 				LAO = {
 					set_cosmetic_tag = LAO_kingdom_of_luang_prabang_tag
+					LAO_sisavang_vong = {
+						add_country_leader_role = {
+							promote_leader = yes
+							country_leader = {
+								ideology = emperor_fascism
+								traits = { king_of_luang_prabang }
+								expire = "1960.1.1.1"
+								id = -1
+							}
+						}
+					}
 					JAP_setup_faction_wide_aoe_effects_root_this = yes
 				}
 
@@ -11873,7 +12594,7 @@ JAP_the_co_prosperity_sphere_decisions = {
 		available = {
 			
 			422 = {
-				is_controlled_by_ROOT_or_subject = yes
+				state_is_fully_controlled_by_ROOT_or_subject = yes	#56 - Needed because it can mess with active frontlines due to controllership = biggest vp
 			}
 
 		}
@@ -11909,6 +12630,64 @@ JAP_the_co_prosperity_sphere_decisions = {
 			base = 500 
 		}
 
+	}
+
+	# Seize Timor Leste
+	JAP_seize_timor_leste_r56 = { #R56 added decision, replacing the Timor focus in the Japanese focus tree.
+		name = JAP_occupy_east_timor
+		icon = GFX_decision_infiltrate_state
+		fire_only_once = yes
+		priority = 25
+		cost = 10
+	
+		ai_will_do = { base = 800 }
+		highlight_states = { highlight_state_targets = { state = 721 } }
+		allowed = { original_tag = JAP }
+		visible = { has_completed_focus = JAP_strike_the_southern_road } 
+	
+		available = {
+			is_subject = no
+			1142 = { state_is_fully_controlled_by_ROOT_or_subject = yes }
+			721 = {
+				OWNER = {
+					has_war = no
+					controls_state = 721
+					NOT = { is_ally_with = ROOT }
+					OR = {
+						original_tag = POR
+						original_tag = TML
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			IF = {
+				limit = { 721 = { is_owned_by = TML } }
+				create_wargoal = {
+					type = puppet_wargoal_focus
+					target = TML
+					expire = 0
+				}
+			}
+
+			ELSE_IF = {
+				limit = { 721 = { is_owned_by = POR } }
+				custom_effect_tooltip = JAP_occupy_east_timor_tt
+				POR = {
+					country_event = { 
+						id = SEA_japan_foreign_policy.13
+						days = 1
+						random_days = 2
+					}	
+				} 
+
+				custom_effect_tooltip = generic_skip_one_line_tt
+
+				721 = { transfer_state_to = ROOT }
+			}
+		}
+	
 	}
 
 	# Organize the Timorese Black Columns
@@ -14444,7 +15223,7 @@ JAP_investing_in_foreign_industries_cat = {
 					}
 				}
 				OR = {
-					state = 1023 # Brunei
+					state = 1014 # 56 - Brunei
 					state = 288 # Magwe 
 				}
 			}
@@ -14675,7 +15454,7 @@ JAP_investing_in_foreign_industries_cat = {
 				}
 				OR = {
 					state = 724 # Northern Mandalay
-					state = 1024 # Sabah 
+					state = 916 #56 - North Borneo
 					state = 673 # Sulawesi
 					state = 333 # Sarawak 
 				}
@@ -15989,170 +16768,8 @@ war_measures = {
 	}
 
 
-}
 
-# The Burmah Oil Company's Oil Fields - for blowing up and repairing the Burmese oil fields 
-BRM_burmah_oils_oil_fields = {
-	
-	BRM_blow_up_the_oil_fields = {
 
-		icon = GFX_decision_generic_ignite_civil_war
 
-		highlight_states = {
-			highlight_state_targets = {
-				state = 288 
-			} 
-		}
-
-		allowed = { 
-			
-		}
-
-		visible = {
-				
-			288 = {
-				is_controlled_by_ROOT_or_subject = yes
-			}
-			
-			is_subject = no
-			has_capitulated = no
-
-			NOT = {
-				288 = {
-					has_dynamic_modifier = { modifier = BRM_blown_up_oil_fields }
-				}
-			}
-			
-		}
-
-		available = {
-			has_war = yes
-			288 = {
-				any_neighbor_state = {
-					controller = {
-						has_war_with = ROOT
-					}
-				}	
-			}	
-		}
-
-		cost = 25
-		
-		cancel_trigger = {
-			OR = {
-				has_war = no
-				288 = {
-					is_controlled_by_ROOT_or_subject = no
-				}
-			}
-		}
-
-		ai_will_do = {
-			base = 0
-			modifier = {
-				controls_state = 288
-				surrender_progress > 0.15
-				add = 150
-			}
-			modifier = {
-				any_subject_country = {
-					is_subject_of = ROOT
-					controls_state = 288
-					surrender_progress > 0.15
-				}
-				add = 150
-			}
-			modifier = {
-				288 = {
-					state_is_fully_controlled_by_ROOT_or_subject = no
-				}
-				add = 100
-			}
-		}
-
-		days_remove = 20
-
-		remove_effect = {
-
-			288 = {
-				add_dynamic_modifier = {
-					modifier = BRM_blown_up_oil_fields
-				}
-			}
-
-		}
-
-	}
-
-	BRM_repair_the_oil_fields = {
-
-		icon = GFX_decision_generic_construction
-
-		highlight_states = {
-			highlight_state_targets = {
-				state = 288 
-			} 
-		}
-
-		visible = {
-
-			288 = {
-				is_controlled_by_ROOT_or_subject = yes
-				has_dynamic_modifier = { modifier = BRM_blown_up_oil_fields }
-			}
-			
-			has_capitulated = no
-			is_subject = no 
-		}
-
-		modifier = {
-			civilian_factory_use = 10
-		}
-
-		available = {
-			num_of_civilian_factories_available_for_projects > 9
-		}
-
-		cost = 25
-
-		cancel_trigger = {
-			288 = {
-				is_controlled_by_ROOT_or_subject = no
-			}
-		}
-
-		ai_will_do = {
-			base = 0
-			modifier = {
-				controls_state = 288
-				has_war = no
-				add = 150
-			}
-			modifier = {
-				any_subject_country = {
-					is_subject_of = ROOT
-					controls_state = 288
-				}
-				has_war = no
-				add = 150
-			}
-			modifier = {
-				surrender_progress < 0.1
-				add = 50 
-			}
-		}
-
-		days_remove = 120
-
-		remove_effect = {
-
-			288 = {
-				remove_dynamic_modifier = {
-					modifier = BRM_blown_up_oil_fields
-				}
-			}
-
-		}
-	}
 
 }

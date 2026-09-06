@@ -1,4 +1,4 @@
-unique_id = HoK_achievements_2898629778
+unique_id = hok_rt56_achievements
 
 
 #################################################################
@@ -82,7 +82,7 @@ Ready_for_jamboree = {
     }
 
 	happened = {
-		1082 = { infrastructure > 4 }
+		919 = { infrastructure > 4 }
 	}
 }
 

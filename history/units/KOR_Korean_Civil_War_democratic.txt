@@ -2,7 +2,7 @@
 	name = "Daehan-jayu-gundan"
 	is_locked = yes
 
-	division_names_group = KOR_Inf_01
+	division_names_group = KOR_INF_01
 
 	regiments = {
 		militia = { x = 0 y = 0 }

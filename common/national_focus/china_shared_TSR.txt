@@ -113,8 +113,8 @@ shared_focus = {
 		OR = {
 			has_government = neutrality
 			GER = { has_government = ROOT }
+			GER_will_support = yes
 		}
-		GER_will_support = yes
 		NOT = {
 			has_war_with = GER
 		}
@@ -1074,9 +1074,9 @@ shared_focus = {
 		OR = {
 			has_government = neutrality
 			SOV = { has_government = ROOT }
+			SOV_will_support = yes
 		}
-		SOV_will_support = yes
-		NOT = {
+		not = {
 			has_War_with = SOV
 		}
 		SOV = {
@@ -1285,9 +1285,9 @@ shared_focus = {
 		OR = {
 			has_government = neutrality
 			FRA = { has_government = ROOT }
+			FRA_will_support = yes
 		}
-		FRA_will_support = yes
-		NOT = {
+		not = {
 			has_war_with = FRA
 		}
 		FRA = {
@@ -2147,12 +2147,8 @@ shared_focus = {
 	}
 
 	bypass = {
-		TIB = {
-			OR = {
-				exists = no
-				is_subject_of = ROOT
-			}
-		}
+		NOT = { country_exists = TIB }
+		TIB = { is_subject_of = ROOT }
 	}
 
 	cancel_if_invalid = yes
@@ -2198,9 +2194,7 @@ shared_focus = {
 
 	bypass = {
 		OR = {
-			TIB = {
-				exists = no
-			}
+			NOT = { country_exists = TIB }	
 			has_war_with = TIB
 			has_wargoal_against = TIB
 		}
@@ -2488,19 +2482,11 @@ shared_focus = {
 					owns_state = 286
 					owns_state = 741
 					owns_state = 1017
-					owns_state = 1066 
-					owns_state = 1067 
-					owns_state = 1069 
-					owns_state = 1068 
 					controls_state = 671
 					controls_state = 670
 					controls_state = 286
 					controls_state = 741
 					controls_state = 1017
-					controls_state = 1066 
-					controls_state = 1067 
-					controls_state = 1069 
-					controls_state = 1068 
 				}
 			}
 			custom_effect_tooltip = CHI_overlordship_over_indochina_tt
@@ -2510,7 +2496,7 @@ shared_focus = {
 						type = take_state_focus
 						target = PREV
 						expire = 0
-						generator = { 671 670 286 741 1017 1066 1067 1068 1069 } 
+						generator = { 671 670 286 741 1017 } #TODO_WTT_CODE - ignore states that are not owned or controlled by country
 					}
 				}
 			}
@@ -2552,55 +2538,55 @@ shared_focus = {
 			}
 			527 = {
 				CONTROLLER = {
-					NOT = { tag = ROOT }
+					#NOT = { tag = ROOT }				#r56: we have a Korea-releasing event
+					is_in_faction_with = ROOT
+				}
+			}
+			917 = {
+				CONTROLLER = {
+					#NOT = { tag = ROOT }				#r56: we have a Korea-releasing event
 					is_in_faction_with = ROOT
 				}
 			}
 			525 = {
 				CONTROLLER = {
-					NOT = { tag = ROOT }
+					#NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1028 = {
+			918 = {
 				CONTROLLER = {
-					NOT = { tag = ROOT }
+					#NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1029 = {
+			1144 = {
 				CONTROLLER = {
-					NOT = { tag = ROOT }
+					#NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1030 = {
+			920 = {
 				CONTROLLER = {
-					NOT = { tag = ROOT }
+					#NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1031 = {
+			1145 = {
 				CONTROLLER = {
-					NOT = { tag = ROOT }
+					#NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1082 = { # HoK: Jeolla, split from 1031
+			919 = {
 				CONTROLLER = {
-					NOT = { tag = ROOT }
+					#NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1083 = { # HoK: Hwanghae, split from 527
+			1146 = {
 				CONTROLLER = {
-					NOT = { tag = ROOT }
-					is_in_faction_with = ROOT
-				}
-			}
-			1084 = { # HoK: Jeju, split from 1031
-				CONTROLLER = {
-					NOT = { tag = ROOT }
+					#NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
@@ -2619,7 +2605,7 @@ shared_focus = {
 					525 = { is_owned_and_controlled_by = ROOT }
 				}
 			}
-			activate_mission_tooltip = CHI_release_korea
+			#activate_mission_tooltip = CHI_release_korea	#r56: we have a Korea-releasing event
 		}
 		else = {
 			527 = {
@@ -2805,10 +2791,6 @@ shared_focus = {
 		controls_state = 670
 		controls_state = 286
 		controls_state = 741
-		controls_state = 1066 
-		controls_state = 1067 
-		controls_state = 1068 
-		controls_state = 1069 
 	}
 
 	cancel_if_invalid = yes
@@ -2824,19 +2806,11 @@ shared_focus = {
 					owns_state = 286
 					owns_state = 741
 					owns_state = 1017
-					owns_state = 1066 
-					owns_state = 1067 
-					owns_state = 1068 
-					owns_state = 1069 
 					controls_state = 671
 					controls_state = 670
 					controls_state = 286
 					controls_state = 741
 					controls_state = 1017
-					controls_state = 1066 
-					controls_state = 1067 
-					controls_state = 1068 
-					controls_state = 1069 
 				}
 			}
 			custom_effect_tooltip = CHI_overlordship_over_indochina_tt
@@ -2846,7 +2820,7 @@ shared_focus = {
 						type = take_state_focus
 						target = PREV
 						expire = 0
-						generator = { 671 670 286 741 1017 1066 1067 1068 1069 } 
+						generator = { 671 670 286 741 1017 } #TODO_WTT_CODE - ignore states that are not owned or controlled by country
 					}
 				}
 			}
@@ -2917,49 +2891,49 @@ shared_focus = {
 					NOT = { is_in_faction_with = ROOT }
 				}
 			}
+			917 = {
+				CONTROLLER = {
+					NOT = { tag = ROOT }
+					NOT = { is_in_faction_with = ROOT }
+				}
+			}
 			525 = {
 				CONTROLLER = {
 					NOT = { tag = ROOT }
 					NOT = { is_in_faction_with = ROOT }
 				}
 			}
-			1028 = {
+			918 = {
 				CONTROLLER = {
 					NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1029 = {
+			1144 = {
 				CONTROLLER = {
 					NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1030 = {
+			920 = {
 				CONTROLLER = {
 					NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1031 = {
+			1145 = {
 				CONTROLLER = {
 					NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1082 = { # HoK: Jeolla, split from 1031
+			919 = {
 				CONTROLLER = {
 					NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
 				}
 			}
-			1083 = { # HoK: Hwanghae, split from 527
-				CONTROLLER = {
-					NOT = { tag = ROOT }
-					NOT = { is_in_faction_with = ROOT }
-				}
-			}
-			1084 = { # HoK: Jeju, split from 1031
+			1146 = {
 				CONTROLLER = {
 					NOT = { tag = ROOT }
 					is_in_faction_with = ROOT
@@ -2980,14 +2954,14 @@ shared_focus = {
 			}
 			AND = {
 				controls_state = 527
+				controls_state = 917
 				controls_state = 525
-				controls_state = 1028
-				controls_state = 1029
-				controls_state = 1030
-				controls_state = 1031
-				controls_state = 1082 # HoK: Jeolla
-				controls_state = 1083 # HoK: Hwanghae
-				controls_state = 1084 # HoK: Jeju
+				controls_state = 918
+				controls_state = 1144
+				controls_state = 920
+				controls_state = 1145
+				controls_state = 919
+				controls_state = 1146
 			}
 		}
 	}
@@ -3165,9 +3139,9 @@ shared_focus = {
 		OR = {
 			has_government = neutrality
 			ENG = { has_government = ROOT }
+			ENG_will_support = yes
 		}
-		ENG_will_support = yes
-		NOT = {
+		not = {
 			has_War_with = ENG
 		}
 		ENG = {
@@ -3619,22 +3593,22 @@ shared_focus = {
 
 	completion_reward = {
 		
-		IF = {
-			limit = {
-				has_dlc = "Arms Against Tyranny"
-			}
-			custom_effect_tooltip = available_mio_tt
-			show_mio_tooltip = CHI_camco_fighter_organization
-			mio:CHI_camco_fighter_organization = {
-				add_mio_size = 1
-				add_mio_funds = 500
-			}
-		}
+		#IF = {
+		#	limit = {
+		#		has_dlc = "Arms Against Tyranny"
+		#	}
+		#	custom_effect_tooltip = available_mio_tt
+		#	show_mio_tooltip = CHI_camco_fighter_organization
+		#	mio:CHI_camco_fighter_organization = {
+		#		add_mio_size = 1
+		#		add_mio_funds = 500
+		#	}
+		#}
 
-		ELSE = {
-			custom_effect_tooltip = available_designer
-			show_ideas_tooltip = CHI_camco_2
-		}
+		#ELSE = {
+		#	custom_effect_tooltip = available_designer
+		#	show_ideas_tooltip = CHI_camco_2
+		#}
 	}
 }
 
@@ -3653,17 +3627,17 @@ shared_focus = {
 	}
 
 	available = {
-		if = {
-			limit = {
-				has_dlc = "Arms Against Tyranny"
-			}
-			mio:CHI_camco_fighter_organization = {
-				has_mio_size > 3
-			}
-		}
-		else = {
-			has_idea = CHI_camco_2
-		}
+		#if = {
+		#	limit = {
+		#		has_dlc = "Arms Against Tyranny"
+		#	}
+		#	mio:CHI_camco_fighter_organization = {
+		#		has_mio_size > 3
+		#	}
+		#}
+		#else = {
+		#	has_idea = CHI_camco_2
+		#}
 	}
 
 	bypass = {
@@ -3676,22 +3650,22 @@ shared_focus = {
 
 	completion_reward = {
 
-		IF = {
-			limit = {
-				has_dlc = "Arms Against Tyranny"
-			}
-			custom_effect_tooltip = available_mio_tt
-			show_mio_tooltip = CHI_camco_bomber_organization
-			mio:CHI_camco_bomber_organization = {
-				add_mio_size = 1
-				add_mio_funds = 500
-			}
-		}
+		#IF = {
+		#	limit = {
+		#		has_dlc = "Arms Against Tyranny"
+		#	}
+		#	custom_effect_tooltip = available_mio_tt
+		#	show_mio_tooltip = CHI_camco_bomber_organization
+		#	mio:CHI_camco_bomber_organization = {
+		#		add_mio_size = 1
+		#		add_mio_funds = 500
+		#	}
+		#}
 
-		ELSE = {
-			custom_effect_tooltip = available_designer
-			show_ideas_tooltip = CHI_camco_3
-		}
+		#ELSE = {
+		#	custom_effect_tooltip = available_designer
+		#	show_ideas_tooltip = CHI_camco_3
+		#}
 	}
 }
 
@@ -3903,10 +3877,10 @@ shared_focus = {
 
 	available = {
 		OR = {
+			USA_will_support = yes
 			has_government = neutrality
 			USA = { has_government = ROOT }
 		}
-		USA_will_support = yes
 		USA = {
 			has_capitulated = no
 			NOT = {
@@ -4400,12 +4374,7 @@ shared_focus = {
 
 	available = {
 		OR = {
-			JAP = { 
-				AND = {
-					has_government = ROOT 
-					exists = yes 
-				}
-			}
+			JAP = { has_government = ROOT }
 			JAP_will_support = yes
 		}
 		NOT = { has_wargoal_against = JAP }

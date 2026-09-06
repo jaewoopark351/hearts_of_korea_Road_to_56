@@ -1,10 +1,35 @@
-﻿capital = 282 # Tokyo/Kanto
+﻿capital = 282
 
-# Starting Stats
-set_stability = 0.2 # Was one of the countries in roughest internal shape at this point in time, coup happens not even 2 months into the game
-set_war_support = 0.6 # Was 0.8, but will make you have to scale up with Militarism a bit
+if = {
+	limit = {
+		NOT = { has_dlc = "No Step Back" }
+	}
+	set_technology = {
+		gwtank = 1
+		basic_light_tank = 1
+	}
+	set_oob = "JAP_1936"
+}
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
+	set_technology = {
+		gwtank_chassis = 1
+		basic_light_tank_chassis = 1
+	}
+	set_oob = "JAP_1936_nsb"
+}
 
-set_research_slots = 3 # Was 4
+set_naval_oob = "JAP_1936_naval"
+
+set_stability = 0.2 #baseline, THE EMPEROR PROTECTS
+set_war_support = 0.6
+
+##https://military-history.fandom.com/wiki/Type_38_rifle
+add_equipment_to_stockpile = { type = infantry_equipment_0 amount = 20000 producer = JAP }
+
+set_research_slots = 4
 set_fuel_ratio = 1.0
 
 # This can't be used in a civil war duh
@@ -294,370 +319,8 @@ clamp_variable = {
 	max = JAP_economic_redistribtuion_max
 }
 
-### Starting Ideas ###
-add_ideas = {
 
-	# Laws
-	limited_exports
-	limited_conscription
-	partial_economic_mobilisation
-
-	# National Spirits
-	#JAP_zaibatsus
-	JAP_militarism
-
-	#Imperial Influence Ideas
-	JAP_army_faction_tier_2_equal_navy
-	JAP_naval_faction_tier_2_equal_army
-	JAP_zaibatsu_faction_tier_2
-	JAP_government_faction_tier_2
-
-	#Hidden Ideas
-	JAP_separate_air_services
-	JAP_japanese_armor_doctrine
-}
-
-IF = {
-	limit = {
-		has_dlc = "Man the Guns"
-	}
-	add_ideas = MTG_naval_treaty_adherent
-}
-
-
-
-#######################################
-### Setup Resistance and Compliance ###
-#######################################
-
-# East Hebei
-609 = {
-	start_resistance = yes
-	set_compliance = 15
-	set_resistance = 5
-	set_garrison_strength = 1.0
-}
-
-# Dalian
-745 = {
-	start_resistance = yes
-	set_compliance = 20
-	set_resistance = 5
-	set_garrison_strength = 1.0
-}
-
-# Taiwan
-524 = {
-	start_resistance = yes
-	set_compliance = 20
-	set_resistance = 5
-	set_garrison_strength = 1.0
-}
-
-# Palau
-647 = {
-	start_resistance = yes
-	set_compliance = 25
-	set_resistance = 0
-	set_garrison_strength = 1.0
-}
-
-# Caroline Islands
-684 = {
-	start_resistance = yes
-	set_compliance = 25
-	set_resistance = 0
-	set_garrison_strength = 1.0
-}
-
-# Marshall Islands
-633 = {
-	start_resistance = yes
-	set_compliance = 25
-	set_resistance = 0
-	set_garrison_strength = 1.0
-}
-
-# HoK starts with an independent Korea in 1936.  Apply vanilla-equivalent
-# resistance only after the Korean state histories transfer ownership to JAP.
-1939.3.14 = {
-	527 = {
-		start_resistance = yes
-		set_compliance = 5
-		set_resistance = 5
-		set_garrison_strength = 1.0
-	}
-	1028 = {
-		start_resistance = yes
-		set_compliance = 5
-		set_resistance = 5
-		set_garrison_strength = 1.0
-	}
-	525 = {
-		start_resistance = yes
-		set_compliance = 5
-		set_resistance = 5
-		set_garrison_strength = 1.0
-	}
-	1029 = {
-		start_resistance = yes
-		set_compliance = 5
-		set_resistance = 5
-		set_garrison_strength = 1.0
-	}
-	1030 = {
-		start_resistance = yes
-		set_compliance = 5
-		set_resistance = 5
-		set_garrison_strength = 1.0
-	}
-	1031 = {
-		start_resistance = yes
-		set_compliance = 5
-		set_resistance = 5
-		set_garrison_strength = 1.0
-	}
-	1082 = {
-		start_resistance = yes
-		set_compliance = 5
-		set_resistance = 5
-		set_garrison_strength = 1.0
-	}
-	1083 = {
-		start_resistance = yes
-		set_compliance = 5
-		set_resistance = 5
-		set_garrison_strength = 1.0
-	}
-	1084 = {
-		start_resistance = yes
-		set_compliance = 5
-		set_resistance = 5
-		set_garrison_strength = 1.0
-	}
-}
-
-store_core_states_on_game_start = yes
-
-###########################
-### Starting Technology ###
-###########################
-
-set_technology = {
-	
-	# Military Tech
-	infantry_weapons = 1
-	infantry_weapons1 = 1
-	tech_support = 1		
-	tech_recon = 1
-	tech_engineers = 1
-	tech_trucks = 1
-	motorised_infantry = 1
-	marines  = 1
-	paratroopers = 1
-	gw_artillery = 1
-	bicycle_infantry = 1 # They start with it now 
-	JAP_silver_wheels = 1 # Small bicycle terrain boost 
-	JAP_lighter_tanks = 1 # Small tank terrain boost 
-	tech_military_police = 1
-
-	# Civilian Tech
-	basic_train = 1
-	fuel_silos = 1
-	synth_oil_experiments = 1
-	fuel_refining = 1
-	
-}
-
-set_grand_doctrine = grand_battleplan
-set_grand_doctrine = new_base_strike
-
-# Cruiser Subs were already in production at the time
-complete_special_project = {
-	project = sp:sp_naval_cruiser_submarine
-	scientist = JAP_keiji_fukuda
-	state = 529
-}
-
-# SET UP STARTING BRAKTHROUGH PROGRESS
-add_breakthrough_progress = {
-	specialization = specialization_naval
-	value = 0.8
-}
-add_breakthrough_progress = {
-	specialization = specialization_air
-	value = 0.3
-}
-add_breakthrough_progress = {
-	specialization = specialization_land
-	value = 0.1
-}
-
-IF = {
-	limit = {
-		NOT = { has_dlc = "No Step Back" }
-	}
-	set_technology = {
-		gwtank = 1
-		basic_light_tank = 1
-		improved_light_tank = 1
-	}
-	set_oob = "JAP_1936"
-}
-IF = {
-	limit = {
-		has_dlc = "No Step Back"
-	}
-	set_technology = {
-		gwtank_chassis = 1
-		basic_light_tank_chassis = 1
-		improved_light_tank_chassis = 1
-	}
-	set_oob = "JAP_1936_nsb"
-}
-
-IF = {
-	limit = {
-		has_dlc = "Man the Guns"
-	}
-	set_technology = {
-		basic_naval_mines = 1
-		submarine_mine_laying = 1
-		basic_torpedo = 1
-		basic_battery = 1
-		basic_light_battery = 1
-		basic_heavy_battery = 1
-		#basic_medium_battery = 1
-		improved_ship_torpedo_launcher = 1
-		early_ship_hull_submarine = 1
-		basic_ship_hull_submarine = 1
-		early_ship_hull_light = 1
-		basic_ship_hull_light = 1
-		early_ship_hull_cruiser = 1
-		basic_ship_hull_cruiser = 1
-		early_ship_hull_heavy = 1
-		basic_ship_hull_heavy = 1
-		early_ship_hull_carrier = 1
-		basic_ship_hull_carrier = 1
-		mtg_transport = 1
-		coastal_defense_ships = 1
-		basic_depth_charges = 1
-		basic_cruiser_armor_scheme = 1
-		#cruiser_submarines = 1
-		basic_dp_light_battery = 1
-	}
-	set_naval_oob = "JAP_1936_naval"
-}
-IF = {
-	limit = { 
-		NOT = { 
-			has_dlc = "Man the Guns" 
-		} 
-	}
-	set_technology = {
-		early_submarine = 1
-		basic_submarine = 1
-		early_destroyer = 1
-		basic_destroyer = 1
-		early_light_cruiser = 1
-		basic_light_cruiser = 1
-		early_heavy_cruiser = 1
-		basic_heavy_cruiser = 1
-		early_battleship = 1
-		basic_battleship = 1
-		early_battlecruiser = 1
-		early_carrier = 1
-		basic_carrier = 1
-		transport = 1
-	}
-	set_naval_oob = "JAP_1936_naval_legacy"
-}
-
-IF = {
-	limit = { 
-		has_dlc = "By Blood Alone" 
-	}
-	set_air_oob = "JAP_1936_air_bba"
-	set_technology = {
-		aa_lmg = 1
-		engines_1 = 1
-		engines_2 = 1
-		early_bombs = 1
-		aircraft_construction = 1
-		iw_small_airframe = 1
-		iw_medium_airframe = 1
-		basic_small_airframe = 1
-		air_torpedoe_1 = 1
-		bba_early_transport_plane = 1
-	}
-	ELSE = {
-		set_air_oob = "JAP_1936_air_legacy"
-		set_technology = {
-			cv_early_fighter = 1
-			cv_CAS1 = 1
-			cv_naval_bomber1 = 1
-			early_fighter = 1
-			naval_bomber1 = 1
-			early_bomber = 1
-			CAS1 = 1
-			early_transport_plane = 1
-		}
-	}
-}
-
-
-
-IF = {
-	limit = {
-		has_dlc = "La Resistance"
-	}
-
-	set_technology = {
-		armored_car1 = 1
-	}
-
-	JAP_create_yoshiko_kawashima_operative = yes
-
-	JAP_create_takeo_yoshikawa_operative = yes
-
-}
-
-# Starting Resource Imports
-#create_import = {
-#	resource = oil
-#	factories = 2
-#	exporter = USA
-#}
-
-
-# We should start with a lot of convoys
-set_convoys = 400
-
-
-### SETUP PUPPETS ###
-
-set_autonomy = {
-	target = MAN
-	autonomous_state = autonomy_wtt_imperial_protectorate
-}
-
-
-# Setup Politics 
-set_politics = {
-	ruling_party = neutrality
-	last_election = "1936.1.1"
-	election_frequency = 48
-	elections_allowed = yes
-}
-set_popularities = {
-	fascism = 35
-	neutrality = 40
-	democratic = 23
-	communism = 2
-}
-
-
-### Recruiting Characters ### 
+recruit_character = JAP_fumimaro_konoe
 recruit_character = JAP_tetsu_katayama
 recruit_character = JAP_kyuichi_tokuda
 recruit_character = JAP_emperor_hirohito
@@ -717,7 +380,7 @@ recruit_character = JAP_hideki_tojo
 recruit_character = JAP_matome_ugaki
 recruit_character = JAP_nishizo_tsukahara
 recruit_character = JAP_hajime_sugiyama
-recruit_character = JAP_chuichi_nagumo
+recruit_character = JAP_chuuichi_nagumo
 recruit_character = JAP_hino_kumazo
 recruit_character = JAP_mitsumasa_yonai
 recruit_character = JAP_takuo_godo
@@ -726,20 +389,18 @@ recruit_character = JAP_kingoro_hashimoto
 recruit_character = JAP_sanzo_nosaka
 recruit_character = JAP_hiroshi_oshima
 recruit_character = JAP_kijuro_shidehara
-recruit_character = JAP_kijiro_nambu
-recruit_character = JAP_keiji_fukuda
-recruit_character = JAP_jiro_horikoshi
-recruit_character = JAP_hideki_yukawa
-recruit_character = JAP_yoji_ito
+###
+recruit_character = JAP_koyata_iwasaki
+recruit_character = JAP_minoru_takano
+recruit_character = JAP_kenji_miyamoto
+recruit_character = JAP_miyamoto_yuriko
 recruit_character = JAP_hideo_iwakuro
 recruit_character = JAP_yuzuru_hiraga
 recruit_character = JAP_keisuke_okada
 recruit_character = JAP_shun_akikusa
 recruit_character = JAP_koki_hirota
 recruit_character = JAP_kazushige_ugaki
-recruit_character = JAP_fumimaro_konoe
 recruit_character = JAP_senjuro_hayashi
-recruit_character = JAP_jinzaburo_masaki
 recruit_character = JAP_emperor_yasuhito
 recruit_character = JAP_tokugawa_iesato
 recruit_character = JAP_masafumi_arima
@@ -753,14 +414,11 @@ recruit_character = JAP_takahashi_korekiyo
 recruit_character = JAP_naoki_hoshino
 recruit_character = JAP_koichi_kido
 recruit_character = JAP_shigenori_togo
-recruit_character = JAP_heisuke_yanagawa
-recruit_character = JAP_yosuke_matsuoka
 recruit_character = JAP_genki_abe
 recruit_character = JAP_nobusuke_kishi
 recruit_character = JAP_masatoshi_okochi
 recruit_character = JAP_shumei_okawa
 recruit_character = JAP_okinori_kaya
-recruit_character = JAP_koyata_iwasaki
 recruit_character = JAP_chikuhei_nakajima
 recruit_character = JAP_yoshisuke_aikawa
 recruit_character = JAP_kenjiro_matsumoto
@@ -774,20 +432,33 @@ recruit_character = JAP_jotaro_watanabe
 recruit_character = JAP_masakazu_kawabe
 recruit_character = JAP_harukichi_shimoi
 recruit_character = JAP_teijiro_toyoda
-recruit_character = JAP_chuuichi_nagumo
 recruit_character = JAP_tamon_yamaguchi
 recruit_character = JAP_toyoaki_horiuchi
 recruit_character = JAP_tadaichi_wakamatsu
 recruit_character = JAP_masanobu_tsuji
 
+#scientists
+recruit_character = JAP_kijiro_nambu
+recruit_character = JAP_keiji_fukuda
+recruit_character = JAP_jiro_horikoshi
+recruit_character = JAP_hideki_yukawa
+recruit_character = JAP_yoji_ito
+
+#r56 additional characters
+recruit_character = JAP_machida_chuuji
+recruit_character = JAP_ichiro_hatoyama
+recruit_character = JAP_seigo_nakano
+recruit_character = JAP_jinzaburo_masaki
+recruit_character = JAP_heisuke_yanagawa
+recruit_character = JAP_yosuke_matsuoka
+recruit_character = JAP_takeo_yasuda #given reformer because it wasn't used.
+recruit_character = JAP_raizo_tanaka #Screens guy
 
 ### DLC-SPECIFIC CHARACTERS ###
 IF = {
 	limit = {
 		has_dlc = "No Compromise, No Surrender"
 	}
-	recruit_character = JAP_ichiro_hatoyama
-	recruit_character = JAP_machida_chuuji
 	recruit_character = JAP_abe_isoo
 	recruit_character = JAP_hitoshi_yamakawa
 	recruit_character = JAP_kanson_arahata
@@ -795,7 +466,6 @@ IF = {
 	recruit_character = JAP_empress_nagako
 	recruit_character = JAP_yoshio_kodama
 	recruit_character = JAP_adachi_kenzo
-	recruit_character = JAP_seigo_nakano
 	recruit_character = JAP_saburo_aizawa
 	recruit_character = JAP_yoshiyuki_kawashima
 	recruit_character = JAP_teruzo_ando
@@ -823,7 +493,6 @@ IF = {
 	recruit_character = JAP_tsuji_jun
 	recruit_character = JAP_hiratsuka_raicho
 	recruit_character = JAP_masamichi_royama
-	recruit_character = JAP_minoru_takano
 	recruit_character = JAP_kojiro_fukushi
 	recruit_character = JAP_hotsumi_ozaki
 	recruit_character = JAP_onisaburo_deguchi
@@ -871,305 +540,622 @@ JAP_isoroku_yamamoto = {
 	set_character_flag = JAP_do_not_align_me_flag
 }
 
+### Starting Ideas ###
+add_ideas = {
 
-# Setup 1939 Start Date
-1939.1.1 = {
+	# Laws
+	limited_exports
+	limited_conscription
+	partial_economic_mobilisation
 
-	set_country_flag = JAP_1939_start_date_initiated
+	# National Spirits
+	MTG_naval_treaty_adherent
+	#JAP_zaibatsus
+	JAP_militarism
 
-	IF = {
-		limit = {
-			has_dlc = "No Compromise, No Surrender"
-		}
-		add_country_leader_role = {
-			character = JAP_machida_chuuji
-			promote_leader = yes
-			country_leader = {
-				ideology = liberalism
-				expire = "1989.1.1.1"
-				traits = { HUN_popular_liberal } 
-			}
-		}	
+	#Imperial Influence Ideas
+	JAP_army_faction_tier_2_equal_navy
+	JAP_naval_faction_tier_2_equal_army
+	JAP_zaibatsu_faction_tier_2
+	JAP_government_faction_tier_2
+
+	#Hidden Ideas
+	JAP_separate_air_services
+	JAP_japanese_armor_doctrine
+}
+
+609 = {
+	start_resistance = yes
+	set_compliance = 15
+	set_resistance = 1
+	set_garrison_strength = 1.0
+}
+
+# HOK starts independent in 1936; initialize RT56-equivalent resistance on annexation.
+1939.3.14 = {
+	525 = {
+		start_resistance = yes
+		set_compliance = 15
+		set_resistance = 1
+		set_garrison_strength = 1.0
 	}
-
-	set_party_name = {
-		ideology = democratic
-		long_name = JAP_minseito_party_long
-		name = JAP_minseito_party
+	919 = {
+		start_resistance = yes
+		set_compliance = 15
+		set_resistance = 1
+		set_garrison_strength = 1.0
 	}
-
-	# Setup Politics 
-	set_politics = {
-		ruling_party = neutrality
-		last_election = "1938.1.1"
-		election_frequency = 48
-		elections_allowed = yes
+	920 = {
+		start_resistance = yes
+		set_compliance = 15
+		set_resistance = 1
+		set_garrison_strength = 1.0
 	}
-	set_popularities = {
-		fascism = 45
-		neutrality = 45
-		democratic = 10
-		communism = 0
+	1144 = {
+		start_resistance = yes
+		set_compliance = 15
+		set_resistance = 1
+		set_garrison_strength = 1.0
 	}
-
-	set_autonomy = {
-		target = MEN
-		autonomous_state = autonomy_wtt_imperial_protectorate
+	1145 = {
+		start_resistance = yes
+		set_compliance = 15
+		set_resistance = 1
+		set_garrison_strength = 1.0
 	}
+	1146 = {
+		start_resistance = yes
+		set_compliance = 15
+		set_resistance = 1
+		set_garrison_strength = 1.0
+	}
+	527 = {
+		start_resistance = yes
+		set_compliance = 15
+		set_resistance = 1
+		set_garrison_strength = 1.0
+	}
+	917 = {
+		start_resistance = yes
+		set_compliance = 15
+		set_resistance = 1
+		set_garrison_strength = 1.0
+	}
+	918 = {
+		start_resistance = yes
+		set_compliance = 15
+		set_resistance = 1
+		set_garrison_strength = 1.0
+	}
+}
 
-	# Kodoha coup has historical outcomes
-	retire_character = JAP_takahashi_korekiyo
-	retire_character = JAP_jotaro_watanabe
+745 = {
+	start_resistance = yes
+	set_compliance = 15
+	set_resistance = 1
+	set_garrison_strength = 1.0
+}
 
-	add_political_power = 1198
-	add_command_power = 100
+524 = {
+	start_resistance = yes
+	set_compliance = 15
+	set_resistance = 1
+	set_garrison_strength = 1.0
+}
+
+647 = {
+	start_resistance = yes
+	set_compliance = 65	#was 85 but that instantly allowed a collab gov
+	set_resistance = 0
+	set_garrison_strength = 1.0
+}
+
+684 = {
+	start_resistance = yes
+	set_compliance = 45
+	set_resistance = 0
+	set_garrison_strength = 1.0
+}
+
+633 = {
+	start_resistance = yes
+	set_compliance = 15
+	set_resistance = 0
+	set_garrison_strength = 1.0
+}
+
+648 = {
+	start_resistance = yes
+	set_compliance = 15
+	set_resistance = 0
+	set_garrison_strength = 1.0
+}
+
+store_core_states_on_game_start = yes
+
+add_opinion_modifier = { target = SOV modifier = JAP_SOV_sakhalin_oil_agreement }
+
+set_technology = {
+	# Extended Technologies
+	etax_doctrine = 1
+	camo = 1
 	
-	add_breakthrough_progress = {
-		specialization = specialization_naval
-		value = 2.0
-	}
+	steel_production_1 = 1
+	aluminum_production_1 = 1
 
-	add_breakthrough_progress = {
-		specialization = specialization_air 
-		value = 1.0
-	}
+	infantry_weapons = 1
+	infantry_weapons1 = 1
+	tech_support = 1		
+	tech_recon = 1
+	tech_engineers = 1
+	tech_trucks = 1
+	motorised_infantry = 1
+	marines  = 1
+	gw_artillery = 1
+	paratroopers = 1
+	JAP_silver_wheels = 1 # Small bicycle terrain boost 
+	JAP_lighter_tanks = 1 # Small tank terrain boost 
+	tech_military_police = 1
 
-	add_breakthrough_progress = {
-		specialization = specialization_land 
-		value = 0.5
-	}
+	synth_oil_experiments = 1
+	fuel_silos = 1
+	fuel_refining = 1
+	basic_train = 1
+	bicycle_infantry = 1
 
-	complete_special_project = {
-		project = sp:sp_naval_torpedo_cruiser
-		scientist = JAP_keiji_fukuda
-		state = 528
-	}
-
-	# Adding Ideas
-	add_ideas = {
-
-		# Adding Ministers
-
-		# Civilian Advisors
-		takuo_godo
-		JAP_chikuhei_nakajima
-		JAP_heisuke_yanagawa
-
-		# Military Advisors
-		minoru_genda
-		korechika_anami
-		hajime_sugiyama
-		soemu_toyoda
-		fushimi_hiroyasu
-		yasuji_okamura
-		hitoshi_imamura
-
-		# Companies
-		tetsudou_shou
-
-		# Laws
-		tot_economic_mobilisation
-		service_by_requirement
-		closed_economy
-	}
-
-	IF = {
-		limit = {
-			has_dlc = "Man the Guns"
-		}
-		remove_ideas = MTG_naval_treaty_adherent
-	}
-
-	complete_national_focus = JAP_sea_purge_the_kodoha_faction
-	complete_national_focus = JAP_ministry_of_commerce_and_industry
-	complete_national_focus = JAP_the_imperial_defense_plan
-	complete_national_focus = JAP_revisit_the_thirteen_demands
-	complete_national_focus = JAP_promulgate_the_military_ministers_system
-	unlock_national_focus = JAP_establish_mongol_military_government
-	complete_national_focus = JAP_expand_kawagoe_army_arsenal
-	complete_national_focus = JAP_increase_armament_spending
-	complete_national_focus = JAP_rely_on_supremacy_of_the_will
-	complete_national_focus = JAP_imperial_headquarters_liasion_conference
-	complete_national_focus = JAP_the_harakiri_debate
-	complete_national_focus = JAP_expand_hiratsuka_navy_arsenal
-	complete_national_focus = JAP_konoes_first_cabinet
-	complete_national_focus = JAP_reinforce_the_beijing_garrison
-	complete_national_focus = JAP_sea_national_spiritual_mobliization_movement
-	complete_national_focus = JAP_enact_the_national_conscription_law
-	complete_national_focus = JAP_ministry_of_colonial_affairs
-	complete_national_focus = JAP_establish_showa_aircraft_idnsutry
-	unlock_national_focus = JAP_reorganize_the_united_autonomous_government
-	complete_national_focus = JAP_form_the_central_economic_council
-	complete_national_focus = JAP_expand_the_showa_research_association
-	complete_national_focus = JAP_sea_state_general_mobilization_law
-	complete_national_focus = JAP_approach_mitsubishi
-	complete_national_focus = JAP_enact_religious_organizations_law
-	complete_national_focus = JAP_new_order_in_east_asia
-	complete_national_focus = JAP_form_cabinet_intelligence_bureau
-	complete_national_focus = JAP_mengjiang_united_autonomous_government
-	complete_national_focus = JAP_nanshin_ron
-	complete_national_focus = JAP_modern_bombers
-	complete_national_focus = JAP_expand_navy_technical_department
-	complete_national_focus = JAP_develop_new_fighters
-	complete_national_focus = JAP_prepare_the_southern_front
-	complete_national_focus = JAP_crackdown_on_foreign_agents
-	complete_national_focus = JAP_strategic_offensives
-
-	declare_war_on = {
-		target = CHI
-		type = puppet_wargoal_focus
-	}
-	
-	set_technology = {
-
-		#PLACEHOLDERS for vehicles
-	
-		### Doctrines ###
-
-		#air
-		#force_rotation = 1
-		#fighter_baiting = 1
-		#low_echelon_support = 1
-		#dispersed_fighting = 1
-
-		#electronics
-		electronic_mechanical_engineering = 1
-		radio = 1
-		mechanical_computing = 1
-		computing_machine = 1
-		basic_encryption = 1
-		basic_decryption = 1
-
-		#industry
-		basic_machine_tools = 1
-		improved_machine_tools = 1
-		advanced_machine_tools = 1
-		oil_processing = 1
-		fuel_refining2 = 1
-		construction1 = 1
-		construction2 = 1
-		construction3 = 1
-		concentrated_industry = 1
-		concentrated_industry2 = 1
-		concentrated_industry3 = 1
-	}
+	# Naval Technologies
+	basic_naval_mines = 1
+	submarine_mine_laying = 1
+	basic_torpedo = 1
+	basic_battery = 1
+	basic_light_battery = 1
+	basic_heavy_battery = 1
+	basic_medium_battery = 1
+	improved_ship_torpedo_launcher = 1
+	early_ship_hull_submarine = 1
+	basic_ship_hull_submarine = 1
+	early_ship_hull_light = 1
+	early_ship_hull_cruiser = 1
+	basic_ship_hull_cruiser = 1
+	early_ship_hull_heavy = 1
+	basic_ship_hull_heavy = 1
+	early_ship_hull_carrier = 1
+	basic_ship_hull_carrier = 1
+	mtg_transport = 1
+	coastal_defense_ships = 1
+	basic_depth_charges = 1
+	basic_cruiser_armor_scheme = 1
+	cruiser_submarines = 1
+}
 
 set_grand_doctrine = grand_battleplan
 set_grand_doctrine = new_base_strike
-set_sub_doctrine = massed_carrier_fleet
-add_mastery = {
-    amount = 200
-    sub_doctrine = massed_carrier_fleet
-}
-set_grand_doctrine = new_operational_integrity
 
-set_sub_doctrine = defensive_postures
-add_mastery = {
-    amount = 200
-    sub_doctrine = defensive_postures
-}
-set_sub_doctrine = infiltration_tactics
-add_mastery = {
-    amount = 200
-    sub_doctrine = infiltration_tactics
-}
-set_sub_doctrine = field_engineering
-add_mastery = {
-    amount = 150
-    sub_doctrine = field_engineering
+complete_special_project = {
+	project = sp:sp_naval_cruiser_submarine
+	scientist = JAP_keiji_fukuda
+	state = 529
 }
 
+add_breakthrough_progress = {
+	specialization = specialization_naval
+	value = 0.8
+}
+add_breakthrough_progress = {
+	specialization = specialization_air
+	value = 0.3
+}
+add_breakthrough_progress = {
+	specialization = specialization_land
+	value = 0.1
+}
 
-
-	complete_special_project = {
-		project = sp:sp_air_radar
-		scientist = JAP_yoji_ito
-		state = 532
-	}
-
-	IF = {
-		limit = {
-			has_dlc = "Man the Guns"
-		}
+if = {
+	limit = { has_dlc = "By Blood Alone" }
+		set_air_oob = "JAP_1936_air_bba"
 		set_technology = {
-			improved_ship_hull_submarine = 1
-			basic_ship_hull_light = 1
-			improved_ship_hull_light = 1
-			improved_ship_hull_cruiser = 1
-			improved_ship_hull_carrier = 1
-			#ship_hull_super_heavy = 1
+			aa_lmg = 1
+			engines_1 = 1
+			engines_2 = 1
+			early_bombs = 1
+			aircraft_construction = 1
+			iw_small_airframe = 1
+			iw_medium_airframe = 1
+			basic_small_airframe = 1
+			iw_large_airframe = 1
 		}
-
-		complete_special_project = {
-			project = sp:sp_naval_super_heavy_battleship
-			scientist = JAP_keiji_fukuda
-			state = 529
-		}
-		set_naval_oob = "JAP_1939_naval"
-
-	}
-	IF = {
-		limit = {
-			not = { has_dlc = "Man the Guns" }
-		}
+	else = {
+		set_air_oob = "JAP_1936_air_legacy"
 		set_technology = {
-			improved_submarine = 1
-			basic_destroyer = 1
-			improved_destroyer = 1
-			improved_heavy_cruiser = 1
-			improved_carrier = 1
-			#heavy_battleship = 1
-		}
-		complete_special_project = {
-			project = sp:sp_naval_super_heavy_battleship
-			scientist = JAP_keiji_fukuda
-			state = 529
-		}
-		set_naval_oob = "JAP_1939_naval_legacy"
-	}
-	IF = {
-		limit = {
-			has_dlc = "No Step Back"
-		}
-		set_technology = {
-			basic_medium_tank_chassis = 1
-		}
-		set_oob = "JAP_1939_nsb"
-		ELSE = {
-			set_technology = {
-				basic_medium_tank = 1
-			}
-			set_oob = "JAP_1939"
+				
+			cv_early_fighter = 1
+			cv_CAS1 = 1
+			cv_naval_bomber1 = 1
+			early_fighter = 1
+			naval_bomber1 = 1
+			early_bomber = 1
+			CAS1 = 1
 		}
 	}
-	IF = {
-		limit = { has_dlc = "By Blood Alone" }
-			set_air_oob = "JAP_1939_air_bba"
-			set_technology = {
-				basic_medium_airframe = 1
-				range_improvements = 1
-			}
-		ELSE = {
-			set_air_oob = "JAP_1939_air_legacy"
-			set_technology = {
-				cv_fighter1 = 1
-				fighter1 = 1
-				tactical_bomber1 = 1
-			}
-		}
-	}
-
 }
 
-
-
-
-
-IF = {
+if = {
+	limit = {
+		has_dlc = "La Resistance"
+		JAP = { is_ai = no }
+	}
+	set_technology = {
+		armored_car1 = 1
+	}
+}
+if = {
+	limit = {
+		NOT = { has_dlc = "No Step Back" }
+	}
+	set_technology = {
+		gwtank = 1
+		basic_light_tank = 1
+		basic_heavy_tank = 1
+	}
+}
+if = {
 	limit = {
 		has_dlc = "No Step Back"
 	}
+	set_technology = {
+		gwtank_chassis = 1
+		basic_light_tank_chassis = 1
+		basic_heavy_tank_chassis = 1
+		r56_gw_railway_gun = 1
+	}
+}
+create_import = {
+	resource = oil
+	factories = 2
+	exporter = USA
+}
 
+set_convoys = 400
+
+set_autonomy = {
+	target = MAN
+	autonomous_state = autonomy_integrated_puppet
+}
+
+# Setup Politics 
+set_politics = {
+	ruling_party = neutrality
+	last_election = "1932.2.20" #R56: historically 1931 but I wanted to skip the 1937 legislative elections for now, at least until we can make a new tree or something.
+	election_frequency = 72
+	elections_allowed = yes
+}
+set_popularities = {
+	fascism = 35
+	neutrality = 40
+	democratic = 23
+	communism = 2
+}
+#create_corps_commander = {
+#	name = "Masakazu Kawabe"
+#	picture = "Portrait_Japan_Generic_land_4.dds"
+#	traits = { infantry_officer }
+#	skill = 1
+#	attack_skill = 1
+#	defense_skill = 1
+#	planning_skill = 1
+#	logistics_skill = 1
+#}
+#
+#create_corps_commander = {
+#	name = "Tomitarō Horii"
+#	picture = "Portrait_Japan_Generic_land_3.dds"
+#	traits = { organizer }
+#	skill = 2
+#	attack_skill = 1
+#	defense_skill = 1
+#	planning_skill = 4
+#	logistics_skill = 1
+#}
+#
+#create_corps_commander = {
+#	name = "Aketo Nakamura"
+#	picture = "Portrait_Japan_Generic_land_5.dds"
+#	traits = { infantry_officer }
+#	skill = 1
+#	attack_skill = 1
+#	defense_skill = 1
+#	planning_skill = 1
+#	logistics_skill = 1
+#}
+#
+#
+#create_corps_commander = {
+#	name = "Yoshio Kozuki"
+#	picture = "Portrait_Japan_Generic_land_1.dds"
+#	traits = {  }
+#	skill = 1
+#	attack_skill = 1
+#	defense_skill = 1
+#	planning_skill = 1
+#	logistics_skill = 1
+#}
+#
+#create_corps_commander = {
+#	name = "Kazumoto Machijiri"
+#	portrait_path = "gfx/leaders/Asia/Portrait_Asia_Generic_land_5.dds"
+#	traits = {  }
+#	skill = 1
+#	attack_skill = 1
+#	defense_skill = 1
+#	planning_skill = 1
+#	logistics_skill = 1
+#}
+#create_navy_leader = {
+#	name = "Raizō Tanaka"
+#	portrait_path = "gfx/leaders/JAP/Portrait_Japan_Generic_navy_2.dds"
+#	traits = { caustic_personality bold fleet_protector }
+#	skill = 2
+#	attack_skill = 2
+#	defense_skill = 2
+#	maneuvering_skill = 1
+#	coordination_skill = 2
+#}
+
+add_ace = { # died in 1939, shot 58 Soviet aircraft in 3 months during the border conflicts against the USSR. One problem is that border wars don't engage planes IIRC.
+    name = "Hiromichi"
+    surname = "Shinohara"
+    callsign = "Richthofen of the Orient" #posthumous nickname
+    type = fighter_unique
+}
+
+if = {
+	limit = {
+		has_dlc = "La Resistance"
+	}
+	create_operative_leader = {
+		name = "Yoshiko Kawashima"
+		GFX = GFX_portrait_yoshiko_kawashima
+		traits = { operative_well_groomed }
+		bypass_recruitment = no
+		available_to_spy_master = no
+		female = yes
+		nationalities = { JAP MAN CHI } #not sure if chi is justified, maybe remove her as she is a Manchu commander anyway
+	}
+
+	create_operative_leader = {
+		name = "Takeo Yoshikawa"
+		GFX = GFX_portrait_takeo_yoshikawa
+		traits = { operative_infiltrator operative_escape_artist }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP }
+	}
+	create_operative_leader = {
+		name = "Yakichiro Suma"
+		GFX = GFX_portrait_asia_generic_operative_m_4
+		traits = { operative_well_groomed operative_tough }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP }
+	}
+	create_operative_leader = {
+		name = "Hiraya Amane"
+		gfx = GFX_portrait_asia_generic_operative_m_7
+		traits = { operative_tough }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP CHI }
+	}
+	create_operative_leader = {
+		name = "Tatsuki Fuji"
+		GFX = GFX_portrait_asia_generic_operative_m_8
+		traits = { operative_well_groomed }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP MAL }
+	}	
+	create_operative_leader = {
+		name = "Frederick Rutland"
+		GFX = GFX_portrait_europe_generic_operative_m_18
+		traits = { operative_safe_cracker }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { ENG }
+	}
+	create_operative_leader = {
+		name = "Hiroshi Tamura"
+		GFX = GFX_Portrait_Operative_JapanMale1
+		traits = { operative_master_interrogator }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP SIA }
+	}
+	create_operative_leader = {
+		name = "Patrick Heenan"
+		GFX = GFX_r56_portrait_europe_generic_operative_m_3
+		traits = { operative_double_agent }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { RAJ ENG }
+	}
+	create_operative_leader = {
+		name = "Velvalee Dickinson"
+		GFX = GFX_portrait_europe_generic_operative_f_1
+		traits = { operative_infiltrator }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		female = yes
+		nationalities = { USA }
+	}
+	create_operative_leader = {
+		name = "Inés López de Molinali"
+		GFX = GFX_portrait_europe_generic_operative_f_3
+		traits = { operative_linguist }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		female = yes
+		nationalities = { ARG }
+	}
+	create_operative_leader = {
+		name = "Yuchi Tonogawa"
+		GFX = GFX_portrait_asia_generic_operative_m_5
+		traits = { operative_infiltrator }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP BRA}
+	}
+
+	create_operative_leader = {
+		name = "Pince Su"
+		GFX = GFX_portrait_asia_generic_operative_m_2
+		traits = { operative_infiltrator }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { MON MEN BYA }
+	}		
+	create_operative_leader = {
+		name = "Policarpio Manansala"
+		GFX = GFX_portrait_india_generic_operative_m_2
+		traits = {  }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { PHI USA }
+	}
+	create_operative_leader = {
+		name = "Satokata Takahashi"
+		GFX = GFX_r56_portrait_asia_generic_operative_m_3
+		traits = {  }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP CAN USA }
+	}	
+	create_operative_leader = {
+		name = "William Forbes-Sempill"
+		GFX = GFX_r56_portrait_europe_generic_operative_m_5
+		traits = { operative_double_agent operative_safe_cracker operative_well_groomed }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { ENG SCO }
+	}
+
+	create_operative_leader = { # Japanese agent in Tibet - Sinkiang
+		name = "Jinzo Nomoto"
+		GFX = GFX_r56_portrait_asia_generic_operative_m_2
+		traits = { operative_linguist operative_infiltrator }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP TIB SIK KHM }
+	}	
+
+	create_operative_leader = { # Japanese agent in Panama, added Colombia, Costa Rica for gameplay
+		name = "Jakuji Ochi"
+		GFX = GFX_Portrait_Operative_JapanMale4
+		traits = { operative_infiltrator }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP PAN COS COL }
+	}
+
+	#New Vanilla Agents
+	JAP_create_john_farnsworth_operative = yes
+
+	create_operative_leader = {
+		name = JAP_takeo_yoshikawa
+		GFX = GFX_portrait_takeo_yoshikawa
+		traits = { operative_infiltrator }
+		bypass_recruitment = no
+		available_to_spy_master = yes
+		nationalities = { JAP HAW }
+	}
+}
+if = {
+	limit = {
+		has_dlc = "By Blood Alone"
+	}
+	create_equipment_variant = {
+		name = "Ki-10"
+		type = small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+	}
+	create_equipment_variant = {
+		name = "Ki-2"
+		type = small_plane_cas_airframe_0
+		modules = {
+			fixed_main_weapon_slot = small_bomb_bay
+			engine_type_slot = engine_1_2x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_JAP_CAS1_medium"
+	}
+	create_equipment_variant = {
+		name = "Ki-1"
+		type = medium_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = medium_bomb_bay
+			engine_type_slot = engine_1_2x
+			special_type_slot_1 = lmg_defense_turret
+		}
+	}
+	create_equipment_variant = {
+		name = "Ki-3"
+		type = small_plane_cas_airframe_0
+		modules = {
+			fixed_main_weapon_slot = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = lmg_defense_turret
+		}
+		icon = "GFX_JAP_CAS1_medium"
+	}
+	create_equipment_variant = {
+		name = "Aichi D1A2"
+		type = cv_small_plane_cas_airframe_0
+		modules = {
+			fixed_main_weapon_slot = bomb_locks
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = dive_brakes_small
+		}
+		icon = "GFX_JAP_CAS1_medium"
+	}
+	create_equipment_variant = {
+		name = "A4N"
+		type = cv_small_plane_airframe_0
+		modules = {
+			fixed_main_weapon_slot = light_mg_2x
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+	}
+	create_equipment_variant = {
+		name = "B2M"
+		type = cv_small_plane_naval_bomber_airframe_0
+		modules = {
+			fixed_main_weapon_slot = torpedo_mounting
+			engine_type_slot = engine_1_1x
+			special_type_slot_1 = empty
+		}
+		obsolete = yes
+		icon = "GFX_JAP_cv_naval_bomber1_medium"
+	}
+	create_equipment_variant = {
+		name = "B4Y"
+		type = cv_small_plane_naval_bomber_airframe_1
+		modules = {
+			fixed_main_weapon_slot = torpedo_mounting
+			fixed_auxiliary_weapon_slot_1 = bomb_locks
+			engine_type_slot = engine_2_1x
+			special_type_slot_1 = empty
+		}
+		icon = "GFX_JAP_cv_naval_bomber1_medium"
+	}
+}
+if = {
+	limit = {
+		has_dlc = "No Step Back"
+	}
 	create_equipment_variant = {
 		name = "Type 92 Tankette"
 		type = light_tank_chassis_0
@@ -1193,7 +1179,6 @@ IF = {
 		obsolete = yes
 		icon = "GFX_JAP_basic_light_tank_medium"
 	}
-
 	create_equipment_variant = {
 		name = "Type 94 Tankette"
 		type = light_tank_chassis_1
@@ -1204,20 +1189,15 @@ IF = {
 			turret_type_slot = tank_light_one_man_tank_turret
 			suspension_type_slot = tank_bogie_suspension
 			armor_type_slot = tank_riveted_armor
-			engine_type_slot = tank_gasoline_engine 
-			special_type_slot_1 = empty
-			special_type_slot_2 = empty
-			special_type_slot_3 = empty
-			special_type_slot_4 = empty
+			engine_type_slot = tank_gasoline_engine
 		}
 		upgrades = {
-			tank_nsb_engine_upgrade = 0
-			tank_nsb_armor_upgrade = 0
+			tank_nsb_engine_upgrade = 1
+			tank_nsb_armor_upgrade = 1
 		}
 		obsolete = yes
-		icon = "GFX_JAP_basic_light_tank_medium"
+		icon = "gfx/interface/technologies/JAP_basic_light_tank.dds"
 	}
-
 	create_equipment_variant = {
 		name = "Type 89 I-Go"
 		type = medium_tank_chassis_0
@@ -1225,23 +1205,18 @@ IF = {
 		parent_version = 0
 		modules = {
 			main_armament_slot = tank_close_support_gun
-			turret_type_slot = tank_medium_two_man_tank_turret 
+			turret_type_slot = tank_medium_one_man_tank_turret
 			suspension_type_slot = tank_bogie_suspension
 			armor_type_slot = tank_riveted_armor
 			engine_type_slot = tank_diesel_engine
-			special_type_slot_1 = additional_machine_guns
-			special_type_slot_2 = empty
-			special_type_slot_3 = empty
-			special_type_slot_4 = empty
 		}
 		upgrades = {
-			tank_nsb_engine_upgrade = 4
-			tank_nsb_armor_upgrade = 0
+			tank_nsb_engine_upgrade = 3
+			tank_nsb_armor_upgrade = 2
 		}
-		icon = "GFX_JAP_basic_medium_tank_medium"
+		icon = "gfx/interface/technologies/JAP_basic_main_tank.dds"
 	}
-
-	create_equipment_variant = { #Note: There is a copy of this variant in Finnish National Focus file (FIN_bring_foreign_armor_experts). Any changes here should also be applied there
+	create_equipment_variant = {
 		name = "Type 95 Ha-Go"
 		type = light_tank_chassis_2
 		design_team = mio:JAP_osaka_army_arsenal_organization
@@ -1251,160 +1226,15 @@ IF = {
 			turret_type_slot = tank_light_one_man_tank_turret
 			suspension_type_slot = tank_bogie_suspension
 			armor_type_slot = tank_riveted_armor
-			engine_type_slot = tank_gasoline_engine 
-			special_type_slot_1 = additional_machine_guns
-			special_type_slot_2 = empty
-			special_type_slot_3 = empty
-			special_type_slot_4 = empty
+			engine_type_slot = tank_diesel_engine
 		}
 		upgrades = {
-			tank_nsb_engine_upgrade = 4
+			tank_nsb_engine_upgrade = 2
 			tank_nsb_armor_upgrade = 2
 		}
-		icon = "GFX_JAP_improved_light_tank_medium"
-	}
-
-}
-
-create_equipment_variant = {
-	type = infantry_equipment_1
-	design_team = mio:JAP_kokura_arsenal_organization
-	show_position = no
-	mark_older_equipment_obsolete = yes
-}
-create_equipment_variant = {
-	type = support_equipment_1
-	design_team = mio:JAP_nagoya_arsenal_organization
-	show_position = no
-	mark_older_equipment_obsolete = yes
-}
-create_equipment_variant = {
-	type = artillery_equipment_1
-	design_team = mio:JAP_osaka_army_arsenal_artillery_organization
-	show_position = no
-	mark_older_equipment_obsolete = yes
-}
-create_equipment_variant = {
-	type = motorized_equipment_1
-	design_team = mio:JAP_nissan_organization
-	show_position = no
-	mark_older_equipment_obsolete = yes
-}
-create_equipment_variant = {
-	type = transport_plane_equipment_1
-	design_team = mio:JAP_kawasaki_aircraft_industries_organization
-	show_position = no
-	mark_older_equipment_obsolete = yes
-}
-IF = {
-	limit = {
-		has_dlc = "La Resistance"
-	}
-	create_equipment_variant = {
-		type = gw_armored_car_equipment
-		design_team = mio:JAP_tokyo_automobile_industries_organization
-		show_position = no
-		mark_older_equipment_obsolete = yes
+		icon = "gfx/interface/technologies/JAP_imp_light_tank.dds"
 	}
 }
-
-IF = {
-
-	limit = {
-		has_dlc = "By Blood Alone"
-	}
-
-	create_equipment_variant = {
-		name = "Ki-10"
-		type = small_plane_airframe_0
-		modules = {
-			fixed_main_weapon_slot = light_mg_2x
-			engine_type_slot = engine_1_1x
-			special_type_slot_1 = empty
-		}
-	}
-
-	create_equipment_variant = {
-		name = "Ki-2"
-		type = small_plane_cas_airframe_0
-		modules = {
-			fixed_main_weapon_slot = small_bomb_bay
-			engine_type_slot = engine_1_2x
-			special_type_slot_1 = lmg_defense_turret
-		}
-		icon = "GFX_JAP_CAS1_medium"
-	}
-
-	create_equipment_variant = {
-		name = "Ki-1"
-		type = medium_plane_airframe_0
-		modules = {
-			fixed_main_weapon_slot = medium_bomb_bay
-			engine_type_slot = engine_1_2x
-			special_type_slot_1 = lmg_defense_turret
-		}
-		icon = "GFX_JAP_early_bomber_medium"
-	}
-
-	create_equipment_variant = {
-		name = "Ki-3"
-		type = small_plane_cas_airframe_0
-		modules = {
-			fixed_main_weapon_slot = bomb_locks
-			engine_type_slot = engine_1_1x
-			special_type_slot_1 = lmg_defense_turret
-		}
-		icon = "GFX_JAP_early_fighter_medium"
-	}
-
-	create_equipment_variant = {
-		name = "Aichi D1A2"
-		type = cv_small_plane_cas_airframe_0
-		modules = {
-			fixed_main_weapon_slot = bomb_locks
-			engine_type_slot = engine_1_1x
-			special_type_slot_1 = dive_brakes_small
-			special_type_slot_2 = lmg_defense_turret
-		}
-		icon = "GFX_JAP_CAS1_medium"
-	}
-
-	create_equipment_variant = {
-		name = "A4N"
-		type = cv_small_plane_airframe_0
-		modules = {
-			fixed_main_weapon_slot = light_mg_2x
-			engine_type_slot = engine_1_1x
-			special_type_slot_1 = empty
-		}
-	}
-
-	create_equipment_variant = {
-		name = "B2M"
-		type = cv_small_plane_naval_bomber_airframe_0
-		modules = {
-			fixed_main_weapon_slot = torpedo_mounting
-			engine_type_slot = engine_1_1x
-			special_type_slot_1 = lmg_defense_turret
-		}
-		obsolete = yes
-		icon = "GFX_JAP_cv_naval_bomber1_medium"
-	}
-
-	create_equipment_variant = {
-		name = "B4Y"
-		type = cv_small_plane_naval_bomber_airframe_1
-		modules = {
-			fixed_main_weapon_slot = torpedo_mounting
-			fixed_auxiliary_weapon_slot_1 = bomb_locks
-			engine_type_slot = engine_2_1x
-			special_type_slot_1 = lmg_defense_turret
-		}
-		icon = "GFX_JAP_cv_naval_bomber1_medium"
-	}
-
-}
-
 
 ### VARIANTS ###
 # 1936 Start #
@@ -1414,17 +1244,15 @@ create_equipment_variant = {
 	name = "Akagi Class"
 	type = ship_hull_carrier_conversion_bb
 	name_group = JAP_CV_HISTORICAL
-	design_team = mio:JAP_yokosuka_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_deck_slot_1 = ship_deck_space
 		fixed_ship_deck_slot_2 = ship_deck_space
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = heavy_ship_engine_2
-		fixed_ship_secondaries_slot = ship_secondaries_2
+		fixed_ship_engine_slot = heavy_ship_engine_1
+		fixed_ship_secondaries_slot = empty
 		mid_1_custom_slot = ship_deck_space
-		fixed_ship_armor_slot = ship_armor_cruiser_1
 	}
 	obsolete = yes
 }
@@ -1432,17 +1260,15 @@ create_equipment_variant = {
 	name = "Kaga Class"
 	type = ship_hull_carrier_conversion_bb
 	name_group = JAP_CV_HISTORICAL
-	design_team = mio:JAP_yokosuka_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_deck_slot_1 = ship_deck_space
 		fixed_ship_deck_slot_2 = ship_deck_space
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = heavy_ship_engine_2
-		fixed_ship_secondaries_slot = ship_secondaries_2
+		fixed_ship_engine_slot = heavy_ship_engine_1
+		fixed_ship_secondaries_slot = ship_secondaries_1
 		mid_1_custom_slot = ship_deck_space
-		fixed_ship_armor_slot = ship_armor_cruiser_1
 	}
 	obsolete = yes
 }
@@ -1450,14 +1276,13 @@ create_equipment_variant = {
 	name = "Soryu Class"
 	type = ship_hull_carrier_1
 	name_group = JAP_CV_HISTORICAL
-	design_team = mio:JAP_yokosuka_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_deck_slot_1 = ship_deck_space
 		fixed_ship_deck_slot_2 = ship_deck_space
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = carrier_ship_engine_2
+		fixed_ship_engine_slot = carrier_ship_engine_1
 		fixed_ship_secondaries_slot = ship_secondaries_1
 		front_1_custom_slot = ship_deck_space
 	}
@@ -1466,21 +1291,19 @@ create_equipment_variant = {
 	name = "Zuiho Class"
 	type = ship_hull_carrier_conversion_ca
 	name_group = JAP_CVL_HISTORICAL
-	design_team = mio:JAP_yokosuka_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_deck_slot_1 = ship_deck_space
 		fixed_ship_deck_slot_2 = ship_deck_space
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = carrier_ship_engine_2
+		fixed_ship_engine_slot = carrier_ship_engine_1
 		fixed_ship_secondaries_slot = ship_secondaries_1
 	}
 }
 create_equipment_variant = {
 	name = "Hosho Class"
 	name_group = JAP_CVL_HISTORICAL
-	design_team = mio:JAP_yokosuka_naval_arsenal_organization
 	type = ship_hull_carrier_conversion_ca
 	parent_version = 0
 	modules = {
@@ -1489,21 +1312,13 @@ create_equipment_variant = {
 		fixed_ship_anti_air_slot = empty
 		fixed_ship_radar_slot = empty
 		fixed_ship_engine_slot = carrier_ship_engine_1
-		fixed_ship_secondaries_slot = ship_secondaries_1
-		fixed_ship_armor_slot = empty
-	}
-	optional_assets = {
-		{
-			icon = "GFX_JAP_carrier_hoso"
-			model = "JAP_carrier_entity"
-		}
+		fixed_ship_secondaries_slot = empty
 	}
 	obsolete = yes
 }
 create_equipment_variant = {
 	name = "Ryujo Class"
 	name_group = JAP_CVL_HISTORICAL
-	design_team = mio:JAP_yokosuka_naval_arsenal_organization
 	type = ship_hull_carrier_1
 	parent_version = 0
 	modules = {
@@ -1517,12 +1332,10 @@ create_equipment_variant = {
 	}
 	obsolete = yes
 }
-
 ### Battleship Variants	
 create_equipment_variant = {
 	name = "Nagato Class"
 	name_group = JAP_BB_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	type = ship_hull_heavy_1
 	parent_version = 0
 	modules = {
@@ -1533,22 +1346,15 @@ create_equipment_variant = {
 		fixed_ship_engine_slot = heavy_ship_engine_2
 		fixed_ship_secondaries_slot = ship_secondaries_1
 		fixed_ship_armor_slot = ship_armor_bb_1
-		front_1_custom_slot = ship_anti_air_1
+		front_1_custom_slot = empty
 		mid_1_custom_slot = ship_secondaries_1
 		mid_2_custom_slot = ship_airplane_launcher_1
 		rear_1_custom_slot = ship_heavy_battery_2
-	}
-	optional_assets = {
-		{
-			icon = "GFX_JAP_battleship_nagato"
-			model = "JAP_battleship_3_entity"
-		}
 	}
 }
 create_equipment_variant = {
 	name = "Kongo Class"
 	name_group = JAP_BB_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	type = ship_hull_heavy_1
 	parent_version = 0
 	modules = {
@@ -1564,44 +1370,10 @@ create_equipment_variant = {
 		mid_2_custom_slot = ship_airplane_launcher_1
 		rear_1_custom_slot = ship_heavy_battery_1
 	}
-	optional_assets = {
-		{
-			icon = "GFX_JAP_battleship_kongo"
-			model = "JAP_battleship_0_entity"
-		}
-	}
-}
-create_equipment_variant = {
-	name = "Fuso Class"
-	type = ship_hull_heavy_1
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
-	name_group = JAP_BB_HISTORICAL
-	parent_version = 0
-	modules = {
-		fixed_ship_battery_slot = ship_heavy_battery_1
-		fixed_ship_anti_air_slot = ship_anti_air_1
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = heavy_ship_engine_2
-		fixed_ship_secondaries_slot = ship_secondaries_1
-		fixed_ship_armor_slot = ship_armor_bb_1
-		front_1_custom_slot = ship_heavy_battery_1
-		mid_1_custom_slot = ship_secondaries_1
-		mid_2_custom_slot = ship_airplane_launcher_1
-		rear_1_custom_slot = ship_heavy_battery_1
-	}
-	optional_assets = {
-		{
-			icon = "GFX_JAP_battleship_fuso"
-			model = "JAP_battleship_1_entity"
-		}
-	}
-	obsolete = yes
 }
 create_equipment_variant = {
 	name = "Ise Class"
 	type = ship_hull_heavy_1
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	name_group = JAP_BB_HISTORICAL
 	parent_version = 0
 	modules = {
@@ -1609,29 +1381,42 @@ create_equipment_variant = {
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = heavy_ship_engine_2
+		fixed_ship_engine_slot = heavy_ship_engine_1
 		fixed_ship_secondaries_slot = ship_secondaries_1
 		fixed_ship_armor_slot = ship_armor_bb_1
 		front_1_custom_slot = ship_heavy_battery_1
 		mid_1_custom_slot = ship_secondaries_1
 		mid_2_custom_slot = ship_airplane_launcher_1
-		rear_1_custom_slot = ship_heavy_battery_1
+		rear_1_custom_slot = ship_anti_air_1
 	}
 	obsolete = yes
-	optional_assets = {
-		{
-			icon = "GFX_JAP_battleship_ise"
-			model = "JAP_battleship_2_entity"
-		}
+}
+create_equipment_variant = {
+	name = "Fuso Class"
+	type = ship_hull_heavy_1
+	name_group = JAP_BB_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_battery_slot = ship_heavy_battery_1
+		fixed_ship_anti_air_slot = ship_anti_air_1
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+		fixed_ship_radar_slot = empty
+		fixed_ship_engine_slot = heavy_ship_engine_1
+		fixed_ship_secondaries_slot = ship_secondaries_1
+		fixed_ship_armor_slot = ship_armor_bb_1
+		front_1_custom_slot = ship_heavy_battery_1
+		mid_1_custom_slot = ship_secondaries_1
+		mid_2_custom_slot = ship_airplane_launcher_1
+		rear_1_custom_slot = ship_anti_air_1
 	}
+	obsolete = yes
 }
 	
-### Cruiser Variants			
+### Heavy Cruiser Variants			
 create_equipment_variant = {
 	name = "Takao Class"
 	type = ship_hull_cruiser_2
 	name_group = JAP_CA_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_medium_battery_2
@@ -1652,7 +1437,6 @@ create_equipment_variant = {
 	name = "Myoko Class"
 	type = ship_hull_cruiser_2
 	name_group = JAP_CA_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_medium_battery_2
@@ -1664,17 +1448,33 @@ create_equipment_variant = {
 		fixed_ship_secondaries_slot = ship_secondaries_1
 		front_1_custom_slot = ship_medium_battery_2
 		mid_1_custom_slot = ship_torpedo_2
-		mid_2_custom_slot = ship_torpedo_2
 		rear_1_custom_slot = ship_airplane_launcher_1
 	}
 	obsolete = yes
 }
-
 create_equipment_variant = {
-	name = "Furutaka/Aoba Class"
+	name = "Furutaka Class"
+	type = ship_hull_cruiser_1
+	name_group = JAP_CA_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_battery_slot = ship_medium_battery_1
+		fixed_ship_anti_air_slot = empty
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+		fixed_ship_radar_slot = empty
+		fixed_ship_engine_slot = cruiser_ship_engine_1
+		fixed_ship_armor_slot = ship_armor_cruiser_1
+		fixed_ship_secondaries_slot = ship_secondaries_1
+		mid_1_custom_slot = empty
+		mid_2_custom_slot = ship_torpedo_2
+		rear_1_custom_slot = empty
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Aoba Class"
 	type = ship_hull_cruiser_2
 	name_group = JAP_CA_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_medium_battery_2
@@ -1684,18 +1484,16 @@ create_equipment_variant = {
 		fixed_ship_engine_slot = cruiser_ship_engine_1
 		fixed_ship_armor_slot = ship_armor_cruiser_1
 		fixed_ship_secondaries_slot = ship_secondaries_1
-		mid_1_custom_slot = ship_torpedo_2
+		mid_1_custom_slot = empty
 		mid_2_custom_slot = ship_torpedo_2
 		rear_1_custom_slot = empty
 	}
 	obsolete = yes
 }
-
 create_equipment_variant = {
 	name = "Chikuma Class"
 	type = ship_hull_cruiser_1
 	name_group = JAP_CA_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_medium_battery_1
@@ -1704,8 +1502,8 @@ create_equipment_variant = {
 		fixed_ship_radar_slot = empty
 		fixed_ship_engine_slot = cruiser_ship_engine_1
 		fixed_ship_armor_slot = ship_armor_cruiser_1
-		fixed_ship_secondaries_slot = ship_secondaries_1
-		mid_1_custom_slot = ship_torpedo_1
+		fixed_ship_secondaries_slot = empty
+		mid_1_custom_slot = empty
 		mid_2_custom_slot = empty
 		rear_1_custom_slot = empty
 	}
@@ -1715,7 +1513,6 @@ create_equipment_variant = {
 	name = "Izumo Class"
 	type = ship_hull_cruiser_coastal_defense_ship
 	name_group = JAP_CA_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_medium_battery_1
@@ -1726,20 +1523,18 @@ create_equipment_variant = {
 		fixed_ship_armor_slot = ship_armor_cruiser_2
 		mid_1_custom_slot = ship_secondaries_1
 		mid_2_custom_slot = ship_secondaries_1
-		rear_1_custom_slot = ship_torpedo_1
+		rear_1_custom_slot = empty
 	}
 	obsolete = yes
 }
-
 create_equipment_variant = {
 	name = "Tone Class"
 	type = ship_hull_cruiser_2
 	name_group = JAP_CA_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	parent_version = 0
 	modules = {
-		fixed_ship_battery_slot = ship_medium_battery_2
-		fixed_ship_anti_air_slot = ship_anti_air_1
+		fixed_ship_battery_slot = ship_medium_battery_1
+		fixed_ship_anti_air_slot = empty
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
 		fixed_ship_engine_slot = cruiser_ship_engine_2
@@ -1750,60 +1545,30 @@ create_equipment_variant = {
 		mid_2_custom_slot = ship_airplane_launcher_1
 		rear_1_custom_slot = ship_airplane_launcher_1
 	}
-	optional_assets = {
-		{
-			icon = "GFX_JAP_heavy_cruiser_tone"
-			model = "JAP_heavy_cruiser_1_entity"
-		}
-	}
 }
-
-create_equipment_variant = {
-	name = "Tokiwa Class"
-	type = ship_hull_cruiser_coastal_defense_ship
-	name_group = JAP_CA_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
-	parent_version = 0
-	modules = {
-		fixed_ship_battery_slot = ship_medium_battery_1
-		fixed_ship_anti_air_slot = empty
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = cruiser_ship_engine_1
-		fixed_ship_armor_slot = ship_armor_cruiser_2
-		mid_1_custom_slot = ship_secondaries_1
-		mid_2_custom_slot = ship_secondaries_1
-		rear_1_custom_slot = ship_mine_layer_1
-	}
-	obsolete = yes
-}
-
 create_equipment_variant = {
 	name = "Mogami Class"
 	type = ship_hull_cruiser_2
 	name_group = JAP_CL_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
-		fixed_ship_battery_slot = ship_light_medium_battery_2
+		fixed_ship_battery_slot = ship_medium_battery_2
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
 		fixed_ship_engine_slot = cruiser_ship_engine_2
 		fixed_ship_armor_slot = ship_armor_cruiser_2
 		fixed_ship_secondaries_slot = ship_secondaries_1
-		front_1_custom_slot = ship_light_medium_battery_2
+		front_1_custom_slot = ship_medium_battery_2
 		mid_1_custom_slot = ship_torpedo_2
 		mid_2_custom_slot = ship_torpedo_2
 		rear_1_custom_slot = ship_airplane_launcher_1
 	}
 }
-
 create_equipment_variant = {
 	name = "Yubari Class"
 	type = ship_hull_cruiser_2
 	name_group = JAP_CL_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_medium_battery_1
@@ -1818,16 +1583,14 @@ create_equipment_variant = {
 	}
 	obsolete = yes
 }
-
 create_equipment_variant = {
 	name = "Sendai Class"
 	type = ship_hull_cruiser_1
 	name_group = JAP_CL_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_medium_battery_1
-		fixed_ship_anti_air_slot = empty
+		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
 		fixed_ship_engine_slot = cruiser_ship_engine_2
@@ -1837,40 +1600,12 @@ create_equipment_variant = {
 		mid_2_custom_slot = ship_airplane_launcher_1
 		rear_1_custom_slot = ship_mine_layer_1
 	}
-	optional_assets = {
-		{
-			icon = "GFX_JAP_light_cruiser_sendai"
-			model = "JAP_light_cruiser_entity"
-		}
-	}
 	obsolete = yes
 }
-
 create_equipment_variant = {
 	name = "Tenryu Class"
 	type = ship_hull_cruiser_1
 	name_group = JAP_CL_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
-	parent_version = 0
-	modules = {
-		fixed_ship_battery_slot = ship_light_medium_battery_1
-		fixed_ship_anti_air_slot = empty
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = cruiser_ship_engine_2
-		fixed_ship_armor_slot = ship_armor_cruiser_1
-		mid_1_custom_slot = ship_torpedo_1
-		mid_2_custom_slot = empty
-		rear_1_custom_slot = empty
-	}
-	obsolete = yes
-}
-
-create_equipment_variant = {
-	name = "Kuma/Nagara Class"
-	type = ship_hull_cruiser_1
-	name_group = JAP_CL_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_medium_battery_1
@@ -1885,12 +1620,46 @@ create_equipment_variant = {
 	}
 	obsolete = yes
 }
-
+create_equipment_variant = {
+	name = "Nagara Class"
+	type = ship_hull_cruiser_1
+	name_group = JAP_CL_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_battery_slot = ship_light_medium_battery_1
+		fixed_ship_anti_air_slot = empty
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+		fixed_ship_radar_slot = empty
+		fixed_ship_engine_slot = cruiser_ship_engine_2
+		fixed_ship_armor_slot = ship_armor_cruiser_1
+		mid_1_custom_slot = ship_secondaries_1
+		mid_2_custom_slot = ship_torpedo_1
+		rear_1_custom_slot = ship_mine_layer_1
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Kuma Class"
+	type = ship_hull_cruiser_1
+	name_group = JAP_CL_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_battery_slot = ship_light_medium_battery_1
+		fixed_ship_anti_air_slot = empty
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+		fixed_ship_radar_slot = empty
+		fixed_ship_engine_slot = cruiser_ship_engine_2
+		fixed_ship_armor_slot = ship_armor_cruiser_1
+		mid_1_custom_slot = ship_secondaries_1
+		mid_2_custom_slot = ship_torpedo_1
+		rear_1_custom_slot = ship_mine_layer_1
+	}
+	obsolete = yes
+}
 create_equipment_variant = {
 	name = "Okinoshima Class"					# cruiser minelayer
 	type = ship_hull_cruiser_1
 	name_group = JAP_MINELAYERS_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_medium_battery_1
@@ -1904,51 +1673,45 @@ create_equipment_variant = {
 		rear_1_custom_slot = ship_mine_layer_1
 	}
 }
-
 create_equipment_variant = {
 	name = "Chitose/Mizuho Class"
 	type = ship_hull_cruiser_2
 	name_group = JAP_CL_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
-		fixed_ship_battery_slot = ship_light_battery_1
+		fixed_ship_battery_slot = ship_light_medium_battery_1
 		fixed_ship_anti_air_slot = ship_anti_air_1
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
 		fixed_ship_engine_slot = cruiser_ship_engine_1
-		fixed_ship_armor_slot = empty
 		mid_1_custom_slot = ship_airplane_launcher_1
 		mid_2_custom_slot = ship_airplane_launcher_1
-		rear_1_custom_slot = empty
+		rear_1_custom_slot = ship_airplane_launcher_1
 	}
+	obsolete = yes
 }
-
 ### Destroyer Variants
 create_equipment_variant = {
-	name = "Mutsuki Class" #collection of various WWI and early interwar ships with similiar capabilities
+	name = "Chidori/Otorii Class" 
 	type = ship_hull_light_1
 	name_group = JAP_DD_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_battery_1
 		fixed_ship_anti_air_slot = empty
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = light_ship_engine_2
+		fixed_ship_engine_slot = light_ship_engine_1
 		fixed_ship_torpedo_slot = ship_torpedo_1
-		mid_1_custom_slot = ship_torpedo_1
-		rear_1_custom_slot = ship_depth_charge_1
+		mid_1_custom_slot = ship_depth_charge_1
+		rear_1_custom_slot = empty
 	}
 	obsolete = yes
 }
-
 create_equipment_variant = {
-	name = "Minekaze Class" 
+	name = "Minekaze Class"
 	type = ship_hull_light_1
 	name_group = JAP_DD_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_battery_1
@@ -1962,13 +1725,62 @@ create_equipment_variant = {
 	}
 	obsolete = yes
 }
-
+create_equipment_variant = {
+	name = "Kamikaze Class"
+	type = ship_hull_light_1
+	name_group = JAP_DD_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_battery_slot = ship_light_battery_1
+		fixed_ship_anti_air_slot = empty
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+		fixed_ship_radar_slot = empty
+		fixed_ship_engine_slot = light_ship_engine_1
+		fixed_ship_torpedo_slot = ship_torpedo_1
+		mid_1_custom_slot = ship_torpedo_1
+		rear_1_custom_slot = ship_depth_charge_1
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Mutsuki Class" #collection of various WWI and early interwar ships with similiar capabilities
+	type = ship_hull_light_1
+	name_group = JAP_DD_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_battery_slot = ship_light_battery_1
+		fixed_ship_anti_air_slot = empty
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+		fixed_ship_radar_slot = empty
+		fixed_ship_engine_slot = light_ship_engine_1
+		fixed_ship_torpedo_slot = ship_torpedo_1
+		mid_1_custom_slot = ship_torpedo_1
+		rear_1_custom_slot = ship_depth_charge_1
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Wakatake Class" 
+	type = ship_hull_light_1
+	name_group = JAP_DD_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_battery_slot = ship_light_battery_1
+		fixed_ship_anti_air_slot = empty
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+		fixed_ship_radar_slot = empty
+		fixed_ship_engine_slot = light_ship_engine_1
+		fixed_ship_torpedo_slot = ship_torpedo_1
+		mid_1_custom_slot = empty
+		rear_1_custom_slot = empty
+	}
+	obsolete = yes
+}
 create_equipment_variant = {
 	name = "Momi Class" 
 	type = ship_hull_light_1
 	name_group = JAP_DD_HISTORICAL
 	parent_version = 0
-	design_team = mio:JAP_kawasaki_dockyards_organization
 	modules = {
 		fixed_ship_battery_slot = ship_light_battery_1
 		fixed_ship_anti_air_slot = empty
@@ -1981,53 +1793,64 @@ create_equipment_variant = {
 	}
 	obsolete = yes
 }
-
 create_equipment_variant = {
-	name = "Chidori/Otori Class"
+	name = "Fubuki Class"
 	type = ship_hull_light_1
 	name_group = JAP_DD_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
-		fixed_ship_battery_slot = ship_light_battery_1
+		fixed_ship_battery_slot = dp_light_battery_1
 		fixed_ship_anti_air_slot = empty
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
 		fixed_ship_engine_slot = light_ship_engine_1
-		fixed_ship_torpedo_slot = ship_torpedo_1
-		mid_1_custom_slot = empty
+		fixed_ship_torpedo_slot = ship_torpedo_2
+		mid_1_custom_slot = ship_torpedo_2
 		rear_1_custom_slot = ship_depth_charge_1
 	}
 }
-
 create_equipment_variant = {
-	name = "Fubuki Class"
-	type = ship_hull_light_2
+	name = "Hatsuharu Class"
+	type = ship_hull_light_1
 	name_group = JAP_DD_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_battery_2
 		fixed_ship_anti_air_slot = empty
 		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = light_ship_engine_2
+		fixed_ship_engine_slot = light_ship_engine_1
+		fixed_ship_torpedo_slot = ship_torpedo_2
+		mid_1_custom_slot = ship_torpedo_2
+		rear_1_custom_slot = ship_depth_charge_1
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Shiratsuyu Class"
+	type = ship_hull_light_1
+	name_group = JAP_DD_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_battery_slot = ship_light_battery_2
+		fixed_ship_anti_air_slot = empty
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
+		fixed_ship_radar_slot = empty
+		fixed_ship_engine_slot = light_ship_engine_1
 		fixed_ship_torpedo_slot = ship_torpedo_2
 		mid_1_custom_slot = ship_torpedo_2
 		rear_1_custom_slot = ship_depth_charge_1
 	}
 }
-
 create_equipment_variant = {
-	name = "Sokuten Class" 				# collection of interwar DD-sized minelayers
+	name = "Katsuriki Class" 				# collection of interwar DD-sized minelayers
 	type = ship_hull_light_1
 	name_group = JAP_MINELAYERS_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_battery_slot = ship_light_battery_1
 		fixed_ship_anti_air_slot = empty
-		fixed_ship_fire_control_system_slot = empty
+		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
 		fixed_ship_radar_slot = empty
 		fixed_ship_engine_slot = light_ship_engine_1
 		fixed_ship_torpedo_slot = empty
@@ -2035,393 +1858,140 @@ create_equipment_variant = {
 		rear_1_custom_slot = ship_mine_layer_1
 	}
 }	
-
-create_equipment_variant = {
-	name = "Momo Class" # Momo-class destroyers, successors to the Kaba's, one of which is transferred to Manchukuo in 1937
-	type = ship_hull_light_1
-	name_group = JAP_DD_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
-	parent_version = 0
-	modules = {
-		fixed_ship_battery_slot = ship_light_battery_1
-		fixed_ship_anti_air_slot = empty
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = light_ship_engine_1
-		fixed_ship_torpedo_slot = ship_torpedo_1
-		mid_1_custom_slot = ship_torpedo_1
-		rear_1_custom_slot = empty
-	}
-	obsolete = yes
-}
-
-create_equipment_variant = {
-	name = "Asashio Class"
-	type = ship_hull_light_2
-	name_group = JAP_DD_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
-	parent_version = 0
-	modules = {
-		fixed_ship_battery_slot = ship_light_battery_2
-		fixed_ship_anti_air_slot = ship_anti_air_1
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = light_ship_engine_2
-		fixed_ship_torpedo_slot = ship_torpedo_2
-		mid_1_custom_slot = ship_torpedo_2
-		rear_1_custom_slot = ship_depth_charge_1
-	}
-}
-
-create_equipment_variant = {
-	name = "Hatsuharu Class"
-	type = ship_hull_light_2
-	name_group = JAP_DD_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
-	parent_version = 0
-	modules = {
-		fixed_ship_battery_slot = ship_light_battery_2
-		fixed_ship_anti_air_slot = empty
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = light_ship_engine_2
-		fixed_ship_torpedo_slot = ship_torpedo_1
-		mid_1_custom_slot = empty
-		rear_1_custom_slot = ship_depth_charge_1
-	}
-	obsolete = yes
-}
-
-create_equipment_variant = {
-	name = "Shiratsuyu Class"
-	type = ship_hull_light_2
-	name_group = JAP_DD_HISTORICAL
-	design_team = mio:JAP_maizuru_naval_arsenal_organization
-	parent_version = 0
-	modules = {
-		fixed_ship_battery_slot = ship_light_battery_2
-		fixed_ship_anti_air_slot = empty
-		fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-		fixed_ship_radar_slot = empty
-		fixed_ship_engine_slot = light_ship_engine_2
-		fixed_ship_torpedo_slot = ship_torpedo_2
-		mid_1_custom_slot = ship_torpedo_1
-		rear_1_custom_slot = ship_depth_charge_1
-	}
-	obsolete = yes
-}
-
 ### Submarine Variants	
-create_equipment_variant = {
-	name = "Kaidai III Class"
-	type = ship_hull_submarine_2
-	name_group = JAP_SS_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
-	parent_version = 0
-	modules = {
-		fixed_ship_torpedo_slot = ship_torpedo_sub_1
-		fixed_ship_engine_slot = sub_ship_engine_1
-		rear_1_custom_slot = ship_torpedo_sub_1
-	}
-}	
-
-create_equipment_variant = {
-	name = "Kaichū IV Class"
-	type = ship_hull_submarine_1
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
-	parent_version = 0
-	modules = {
-		fixed_ship_torpedo_slot = ship_torpedo_sub_1
-		fixed_ship_engine_slot = sub_ship_engine_1
-		rear_1_custom_slot = empty
-	}
-}
-
 create_equipment_variant = {
 	name = "Kiraisen Class"
 	type = ship_hull_submarine_2
 	name_group = JAP_SS_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_torpedo_slot = ship_torpedo_sub_1
 		fixed_ship_engine_slot = sub_ship_engine_1
 		rear_1_custom_slot = ship_mine_layer_sub
 	}
-}	
-
+	obsolete = yes
+}
 create_equipment_variant = {
-	name = "I-1 Class"
-	type = ship_hull_cruiser_submarine
+	name = "Kaidai I Class"
+	type = ship_hull_submarine_1
 	name_group = JAP_SS_HISTORICAL
-	design_team = mio:JAP_sasebo_naval_arsenal_organization
 	parent_version = 0
 	modules = {
 		fixed_ship_torpedo_slot = ship_torpedo_sub_1
 		fixed_ship_engine_slot = sub_ship_engine_1
-		front_1_custom_slot = ship_light_battery_sub
-		mid_1_custom_slot = empty
 		rear_1_custom_slot = ship_torpedo_sub_1
 	}
+	obsolete = yes
 }
-
-
-
-# 1939 Start #			
-1939.1.1 = {
-
-	IF = {
-		limit = {
-			has_dlc = "By Blood Alone"
-		}
-		create_equipment_variant = {
-			name = "Ki-27"
-			type = small_plane_airframe_1
-			modules = {
-				fixed_main_weapon_slot = light_mg_2x
-				engine_type_slot = engine_2_1x
-				special_type_slot_1 = empty
-			}
-		}
-		create_equipment_variant = {
-			name = "A5M"
-			type = cv_small_plane_airframe_1
-			modules = {
-				fixed_main_weapon_slot = light_mg_2x
-				engine_type_slot = engine_2_1x
-				special_type_slot_1 = empty
-			}
-			icon = "GFX_JAP_cv_fighter1_medium"
-		}
-		create_equipment_variant = {
-			name = "B5N"
-			type = cv_small_plane_naval_bomber_airframe_1
-			modules = {
-				fixed_main_weapon_slot = torpedo_mounting
-				fixed_auxiliary_weapon_slot_1 = bomb_locks
-				engine_type_slot = engine_2_1x
-				special_type_slot_1 = fuel_tanks_small
-				special_type_slot_2 = lmg_defense_turret
-			}
-			icon = "GFX_JAP_cv_naval_bomber1_medium"
-		}
-		create_equipment_variant = {
-			name = "Ki-30/32"
-			type = small_plane_cas_airframe_1
-			modules = {
-				fixed_main_weapon_slot = small_bomb_bay
-				engine_type_slot = engine_2_1x
-				special_type_slot_1 = lmg_defense_turret
-			}
-		}
-		create_equipment_variant = {
-			name = "Ki-21"
-			type = medium_plane_airframe_1
-			modules = {
-				fixed_main_weapon_slot = medium_bomb_bay
-				engine_type_slot = engine_2_2x
-				special_type_slot_1 = lmg_defense_turret_2x
-			}
-		}
-		create_equipment_variant = {
-			name = "G3M2"
-			type = medium_plane_airframe_1
-			modules = {
-				fixed_main_weapon_slot = medium_bomb_bay
-				fixed_auxiliary_weapon_slot_1 = torpedo_mounting
-				engine_type_slot = engine_3_2x #Increased tier due to thrust/weight issues
-				special_type_slot_1 = lmg_defense_turret_2x
-				special_type_slot_2 = fuel_tanks_medium
-			}
-			icon = "GFX_JAP_early_bomber_medium"
-		}
+create_equipment_variant = {
+	name = "Kaidai II Class"
+	type = ship_hull_submarine_1
+	name_group = JAP_SS_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_torpedo_slot = ship_torpedo_sub_1
+		fixed_ship_engine_slot = sub_ship_engine_1
+		rear_1_custom_slot = ship_torpedo_sub_1
 	}
-	IF = {
-		limit = {
-			NOT = { has_dlc = "Man the Guns" }
-		}
-		### Carrier Variants
-		create_equipment_variant = {
-			name = "Hiryu Class"
-			type = carrier_2
-			parent_version = 0
-			upgrades = {
-				ship_deckspace_upgrade = 1
-				carrier_armor_upgrade = 0
-				ship_engine_upgrade = 0
-				ship_reliability_upgrade = 1
-			}
-		}
-		
-		create_equipment_variant = {
-			name = "Kagero Class"
-			type = destroyer_2
-			parent_version = 0
-			upgrades = {
-				ship_torpedo_upgrade = 2
-				destroyer_engine_upgrade = 3
-				ship_ASW_upgrade = 2
-				ship_anti_air_upgrade = 2
-			}
-		}
-	}
-	IF = {
-		limit = {
-			has_dlc = "Man the Guns"
-		}
-		create_equipment_variant = {
-			name = "Shokaku Class"
-			type = ship_hull_carrier_2
-			name_group = JAP_CV_HISTORICAL
-			parent_version = 0
-			modules = {
-				fixed_ship_deck_slot_1 = ship_deck_space
-				fixed_ship_deck_slot_2 = ship_deck_space
-				fixed_ship_anti_air_slot = ship_anti_air_2
-				fixed_ship_radar_slot = empty
-				fixed_ship_engine_slot = carrier_ship_engine_2
-				fixed_ship_secondaries_slot = dp_ship_secondaries_1
-				front_1_custom_slot = ship_deck_space
-				mid_1_custom_slot = ship_deck_space
-			}
-			optional_assets = {
-				{
-					icon = "GFX_JAP_carrier_shokaku"
-					model = "JAP_carrier_0_entity"
-				}
-			}
-		}
-		create_equipment_variant = {
-			name = "Yamato Class"
-			type = ship_hull_super_heavy_1
-			name_group = JAP_BB_HISTORICAL
-			parent_version = 0
-			modules = {
-				fixed_ship_battery_slot = ship_super_heavy_battery_1
-				fixed_ship_anti_air_slot = ship_anti_air_2
-				fixed_ship_fire_control_system_slot = ship_fire_control_system_1
-				fixed_ship_radar_slot = empty
-				fixed_ship_engine_slot = heavy_ship_engine_2
-				fixed_ship_secondaries_slot = ship_secondaries_2
-				fixed_ship_armor_slot = ship_armor_shbb
-				front_1_custom_slot = ship_anti_air_1
-				front_2_custom_slot = empty
-				mid_1_custom_slot = empty
-				mid_2_custom_slot = ship_secondaries_2
-				mid_3_custom_slot = dp_ship_secondaries_2
-				rear_1_custom_slot = ship_super_heavy_battery_1
-				rear_2_custom_slot = ship_airplane_launcher_1
-			}
-		}
-		create_equipment_variant = {
-			name = "Asashio Class"
-			type = ship_hull_light_2
-			name_group = JAP_DD_HISTORICAL
-			parent_version = 0
-			modules = {
-				fixed_ship_battery_slot = dp_light_battery_2
-				fixed_ship_anti_air_slot = ship_anti_air_2
-				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-				fixed_ship_radar_slot = empty
-				fixed_ship_engine_slot = light_ship_engine_2
-				fixed_ship_torpedo_slot = ship_torpedo_2
-				mid_1_custom_slot = ship_torpedo_2
-				rear_1_custom_slot = ship_depth_charge_1
-			}
-		}
-		create_equipment_variant = {
-			name = "Katori Class"
-			type = ship_hull_cruiser_2
-			name_group = JAP_CL_HISTORICAL
-			parent_version = 0
-			modules = {
-				fixed_ship_battery_slot = ship_light_medium_battery_1
-				fixed_ship_anti_air_slot = ship_anti_air_1
-				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-				fixed_ship_radar_slot = empty
-				fixed_ship_engine_slot = cruiser_ship_engine_1
-				fixed_ship_secondaries_slot = ship_secondaries_1
-				mid_1_custom_slot = ship_torpedo_1
-				mid_2_custom_slot = empty
-				rear_1_custom_slot = ship_airplane_launcher_1
-			}
-			obsolete = yes
-		}
-		create_equipment_variant = {
-			name = "Kagero Class"
-			type = ship_hull_light_2
-			name_group = JAP_DD_HISTORICAL
-			parent_version = 0
-			modules = {
-				fixed_ship_battery_slot = dp_light_battery_2
-				fixed_ship_anti_air_slot = ship_anti_air_1
-				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-				fixed_ship_radar_slot = empty
-				fixed_ship_engine_slot = light_ship_engine_2
-				fixed_ship_torpedo_slot = ship_torpedo_2
-				mid_1_custom_slot = ship_torpedo_2
-				rear_1_custom_slot = ship_depth_charge_1
-			}
-			optional_assets = {
-				{
-					icon = "GFX_JAP_destroyer_yukikaze"
-					model = "JAP_destroyer_1_entity"
-				}
-			}
-		}
-		create_equipment_variant = {
-			name = "Hatsutaka Class" 	# DD-sized minelayers
-			type = ship_hull_light_2
-			name_group = JAP_MINELAYERS_HISTORICAL
-			parent_version = 0
-			modules = {
-				fixed_ship_battery_slot = ship_light_battery_1
-				fixed_ship_anti_air_slot = empty
-				fixed_ship_fire_control_system_slot = ship_fire_control_system_0
-				fixed_ship_radar_slot = empty
-				fixed_ship_engine_slot = light_ship_engine_1
-				fixed_ship_torpedo_slot = empty
-				mid_1_custom_slot = ship_mine_layer_1
-				rear_1_custom_slot = ship_mine_layer_1
-			}
-		}
-		create_equipment_variant = {
-			name = "A1/B1 Class"
-			type = ship_hull_cruiser_submarine
-			name_group = JAP_SS_HISTORICAL
-			parent_version = 0
-			modules = {
-				fixed_ship_torpedo_slot = ship_torpedo_sub_1
-				fixed_ship_engine_slot = sub_ship_engine_1
-				front_1_custom_slot = ship_airplane_launcher_1
-				mid_1_custom_slot = empty
-				rear_1_custom_slot = empty
-			}
-		}
-	}
-	IF = {
-		limit = {
-			has_dlc = "No Step Back"
-		}
-		create_equipment_variant = {
-			name = "Type 97 Chi-Ha"
-			type = medium_tank_chassis_1
-			design_team = mio:JAP_sagami_army_arsenal_organization
-			parent_version = 0
-			modules = {
-				main_armament_slot = tank_close_support_gun
-				turret_type_slot = tank_medium_two_man_tank_turret
-				suspension_type_slot = tank_bogie_suspension
-				armor_type_slot = tank_riveted_armor
-				engine_type_slot = tank_diesel_engine
-				special_type_slot_1 = tank_radio_1
-			}
-			upgrades = {
-				tank_nsb_engine_upgrade = 4
-				tank_nsb_armor_upgrade = 2
-			}
-			icon = "GFX_JAP_basic_medium_tank_medium"
-		}
-	}	
+	obsolete = yes
 }
-	
+create_equipment_variant = {
+	name = "Kaidai III Class"
+	type = ship_hull_submarine_2
+	name_group = JAP_SS_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_torpedo_slot = ship_torpedo_sub_1
+		fixed_ship_engine_slot = sub_ship_engine_1
+		rear_1_custom_slot = ship_torpedo_sub_1
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Kaidai IV Class"
+	type = ship_hull_submarine_1
+	name_group = JAP_SS_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_torpedo_slot = ship_torpedo_sub_1
+		fixed_ship_engine_slot = sub_ship_engine_1
+		rear_1_custom_slot = ship_torpedo_sub_1
+	}
+	obsolete = yes
+}	
+create_equipment_variant = {
+	name = "Kaidai V Class"
+	type = ship_hull_submarine_1
+	name_group = JAP_SS_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_torpedo_slot = ship_torpedo_sub_1
+		fixed_ship_engine_slot = sub_ship_engine_1
+		rear_1_custom_slot = ship_torpedo_sub_1
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Kaidai VI Class"
+	type = ship_hull_submarine_1
+	name_group = JAP_SS_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_torpedo_slot = ship_torpedo_sub_1
+		fixed_ship_engine_slot = sub_ship_engine_1
+		rear_1_custom_slot = ship_torpedo_sub_1
+	}
+}	
+create_equipment_variant = {
+	name = "Ro-26 Class"
+	type = ship_hull_submarine_1
+	parent_version = 0
+	modules = {
+		fixed_ship_torpedo_slot = ship_torpedo_sub_1
+		fixed_ship_engine_slot = sub_ship_engine_1
+		rear_1_custom_slot = empty
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Junsen I Class"
+	type = ship_hull_cruiser_submarine
+	name_group = JAP_SS_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_torpedo_slot = ship_torpedo_sub_1
+		fixed_ship_engine_slot = sub_ship_engine_1
+		front_1_custom_slot = empty
+		mid_1_custom_slot = empty
+		rear_1_custom_slot = empty
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Junsen II Class"
+	type = ship_hull_cruiser_submarine
+	name_group = JAP_SS_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_torpedo_slot = ship_torpedo_sub_1
+		fixed_ship_engine_slot = sub_ship_engine_1
+		front_1_custom_slot = empty
+		mid_1_custom_slot = empty
+		rear_1_custom_slot = empty
+	}
+	obsolete = yes
+}
+create_equipment_variant = {
+	name = "Junsen III Class"
+	type = ship_hull_cruiser_submarine
+	name_group = JAP_SS_HISTORICAL
+	parent_version = 0
+	modules = {
+		fixed_ship_torpedo_slot = ship_torpedo_sub_1
+		fixed_ship_engine_slot = sub_ship_engine_1
+		front_1_custom_slot = empty
+		mid_1_custom_slot = empty
+		rear_1_custom_slot = empty
+	}
+	obsolete = yes
+}

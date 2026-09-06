@@ -40,22 +40,41 @@ country_event = {
 		}
 
 		if = {
-			limit = { ROOT = { tag = FRA } }
+			limit = { 
+				ROOT = { 
+					tag = FRA 
+				}
+				FRI = {
+					NOT = {
+						exists = yes
+					}
+				} 
+			}
 			if = {
 				limit = {
 					670 = {
 						is_fully_controlled_by = FRA
 					}
 				}
-				FROM = { transfer_state = 670 }
-			}
-			if = {
-				limit = {
-					1017 = {
-						is_fully_controlled_by = FRA
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						SIA = {
+							OR = {
+								has_country_flag = SIA_is_claiming_small_border_states_and_laos
+								has_country_flag = SIA_is_claiming_all_of_laos_and_cambodia
+							}
+						}
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
 					}
+					SIA = { transfer_state = 670 }	#Laos
 				}
-				FROM = { transfer_state = 1017 }
+				else = {
+					FROM = { transfer_state = 670 }	#Laos
+				}
 			}
 			if = {
 				limit = {
@@ -79,41 +98,254 @@ country_event = {
 						is_fully_controlled_by = FRA
 					}
 				}
-				FROM = { transfer_state = 741 }
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						SIA = { has_country_flag = SIA_is_claiming_all_of_laos_and_cambodia }
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
+					}
+					SIA = { transfer_state = 741 }	#Cambodia
+				}
+				else = {
+					FROM = { transfer_state = 741 }	#Cambodia
+				}
 			}
 			if = {
 				limit = {
-					1066 = {
+					924 = {
 						is_fully_controlled_by = FRA
 					}
 				}
-				FROM = { transfer_state = 1066 }
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
+					}
+					SIA = { transfer_state = 924 }	#Champasak
+				}
+				else = {
+					FROM = { transfer_state = 924 }	#Champasak
+				}
 			}
 			if = {
 				limit = {
-					1067 = {
+					925 = {
 						is_fully_controlled_by = FRA
 					}
 				}
-				FROM = { transfer_state = 1067 }
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
+					}
+					SIA = { transfer_state = 925 }	#Batambang
+				}
+				else = {
+					FROM = { transfer_state = 925 }	#Batambang
+				}
 			}
 			if = {
 				limit = {
-					1068 = {
+					926 = {
 						is_fully_controlled_by = FRA
 					}
 				}
-				FROM = { transfer_state = 1068 }
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
+					}
+					SIA = { transfer_state = 926 }	#Luang Prabang
+				}
+				else = {
+					FROM = { transfer_state = 926 }	#Luang Prabang
+				}
 			}
 			if = {
 				limit = {
-					1069 = {
+					927 = {
 						is_fully_controlled_by = FRA
 					}
 				}
-				FROM = { transfer_state = 1069 }
+				FROM = { transfer_state = 927 }
+			}
+			if = {
+				limit = {
+					928 = {
+						is_fully_controlled_by = FRA
+					}
+				}
+				FROM = { transfer_state = 928 }
 			}
 		}
+		if = {
+			limit = { 
+				OR = {
+					ROOT = {
+						tag = FRI	 
+					}
+					AND = {
+						ROOT = {
+							tag = FRA
+							FRI = {
+								is_puppet_of = FRA
+							}
+						}
+					}
+				}
+			}
+			if = {
+				limit = {
+					670 = {
+						is_fully_controlled_by = FRI
+					}
+				}
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						SIA = {
+							OR = {
+								has_country_flag = SIA_is_claiming_small_border_states_and_laos
+								has_country_flag = SIA_is_claiming_all_of_laos_and_cambodia
+							}
+						}
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
+					}
+					SIA = { transfer_state = 670 }	#Laos
+				}
+				else = {
+					FROM = { transfer_state = 670 }	#Laos
+				}
+			}
+			if = {
+				limit = {
+					671 = {
+						is_fully_controlled_by = FRI
+					}
+				}
+				FROM = { transfer_state = 671 }
+			}
+			if = {
+				limit = {
+					286 = {
+						is_fully_controlled_by = FRI
+					}
+				}
+				FROM = { transfer_state = 286 }
+			}
+			if = {
+				limit = {
+					741 = {
+						is_fully_controlled_by = FRI
+					}
+				}
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						SIA = { has_country_flag = SIA_is_claiming_all_of_laos_and_cambodia }
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
+					}
+					SIA = { transfer_state = 741 }	#Cambodia
+				}
+				else = {
+					FROM = { transfer_state = 741 }	#Cambodia
+				}
+			}
+			if = {
+				limit = {
+					924 = {
+						is_fully_controlled_by = FRI
+					}
+				}
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
+					}
+					SIA = { transfer_state = 924 }	#Champasak
+				}
+				else = {
+					FROM = { transfer_state = 924 }	#Champasak
+				}
+			}
+			if = {
+				limit = {
+					925 = {
+						is_fully_controlled_by = FRI
+					}
+				}
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
+					}
+					SIA = { transfer_state = 925 }	#Batambang
+				}
+				else = {
+					FROM = { transfer_state = 925 }	#Batambang
+				}
+			}
+			if = {
+				limit = {
+					926 = {
+						is_fully_controlled_by = FRI
+					}
+				}
+				if = {	#56 - Support for the Siam Rework
+					limit = {
+						NOT = { has_war_with = SIA }
+						FROM = {
+							NOT = { has_war_with = SIA }
+							has_country_flag = JAP_is_supporting_siams_territorial_aspirations_r56
+						}
+					}
+					SIA = { transfer_state = 926 }	#Luang Prabang
+				}
+				else = {
+					FROM = { transfer_state = 926 }	#Luang Prabang
+				}
+			}
+			if = {
+				limit = {
+					927 = {
+						is_fully_controlled_by = FRI
+					}
+				}
+				FROM = { transfer_state = 927 }
+			}
+			if = {
+				limit = {
+					928 = {
+						is_fully_controlled_by = FRI
+					}
+				}
+				FROM = { transfer_state = 928 }
+			}
+		}		
 		FROM = { country_event = { id = wtt_japan.2 days = 1 } }
 	}
 
@@ -176,29 +408,99 @@ country_event = {
 					transfer_state = 741
 				}
 				if = {
-					limit = { 1017 = { is_fully_controlled_by = ROOT }
+					limit = { 924 = { is_fully_controlled_by = ROOT }
 					}
-					transfer_state = 1017
+					transfer_state = 924
 				}
 				if = {
-					limit = { 1066 = { is_fully_controlled_by = ROOT }
+					limit = { 925 = { is_fully_controlled_by = ROOT }
 					}
-					transfer_state = 1066
+					transfer_state = 925
 				}
 				if = {
-					limit = { 1067 = { is_fully_controlled_by = ROOT }
+					limit = { 926 = { is_fully_controlled_by = ROOT }
 					}
-					transfer_state = 1067
+					transfer_state = 926
 				}
 				if = {
-					limit = { 1068 = { is_fully_controlled_by = ROOT }
+					limit = { 927 = { is_fully_controlled_by = ROOT }
 					}
-					transfer_state = 1068
+					transfer_state = 927
 				}
 				if = {
-					limit = { 1069 = { is_fully_controlled_by = ROOT }
+					limit = { 928 = { is_fully_controlled_by = ROOT }
 					}
-					transfer_state = 1069
+					transfer_state = 928
+				}
+			}
+
+			if = {
+				limit = {
+					FRI = {
+						OR = {
+							is_puppet_of = FROM
+							is_subject_of = FROM
+						}
+						controls_state = 671
+						controls_state = 286
+						controls_state = 927
+						controls_state = 928
+						VIN = {
+							exists = no
+						}												
+					}
+				}
+				VIN = {
+					transfer_state = 671
+					transfer_state = 286
+					transfer_state = 927
+					transfer_state = 928
+				}
+				ROOT = {
+					puppet = VIN
+				}
+			}
+			if = {
+				limit = {
+					FRI = {
+						OR = {
+							is_puppet_of = FROM
+							is_subject_of = FROM
+						}
+						OR = {
+							controls_state = 670
+							controls_state = 924
+							controls_state = 926
+						}
+						LAO = {
+							exists = no
+						}
+					}
+				}
+				release = LAO
+				ROOT = {
+					puppet = LAO
+				}
+			}			
+			if = {
+				limit = {
+					FRI = {
+						OR = {
+							is_puppet_of = FROM
+							is_subject_of = FROM
+						}
+						OR = {
+							controls_state = 741
+							controls_state = 925
+						}
+						CAM = {
+							exists = no
+						}
+					}
+				}
+				release = CAM
+				ROOT = {
+					puppet = CAM
 				}
 			}
 			hidden_effect = {
@@ -254,87 +556,7 @@ country_event = {
 			relation = non_aggression_pact
 			active = yes
 		}
-
-		IF = {
-			limit = {
-				original_tag = CHI
-			}
-			add_opinion_modifier = {
-				target = FROM
-				modifier = trautmann_agreement_opm
-			}
-
-			FROM = {
-				add_opinion_modifier = {
-					target = ROOT
-					modifier = trautmann_agreement_opm
-				}	
-			}
-		}
-		ELSE_IF = {
-			limit = {
-				original_tag = SOV
-				655 = {
-					is_owned_and_controlled_by = ROOT
-				}
-			}
-			655 = {
-				add_resource = {
-					type = oil
-					amount = 8
-				}	
-				add_resource = {
-					type = coal
-					amount = 2
-				}	
-				IF = {
-					limit = {
-						infrastructure < 5
-					}
-					add_building_construction = {
-						type = infrastructure
-						level = 1
-						instant_build = yes
-					}	
-				}
-				IF = {
-					limit = {
-						free_building_slots = {
-							building = industrial_complex
-							size > 0
-							include_locked = yes
-						}	
-					}
-					add_extra_state_shared_building_slots = 1
-					add_building_construction = {
-						type = industrial_complex
-						level = 1
-						instant_build = yes
-					}	
-				}
-			}
-		}
-
-		FROM = { 
-			country_event = { 
-				id = wtt_japan.12 
-				days = 1 
-			}
-			if = {
-				limit = {
-					original_tag = SOV
-				}
-				hidden_effect = {
-					PRC = {
-						country_event = { 
-							id = SEA_PRC_misc_events.12
-							days = 2
-						}
-					}
-				}
-			}
-		}
-
+		FROM = { country_event = { id = wtt_japan.12 days = 1 } }
 	}
 
 
@@ -344,14 +566,7 @@ country_event = {
 		ai_chance = {
 			base = 0
 		}
-
-		FROM = { 
-			country_event = { 
-				id = wtt_japan.13 
-				days = 1 
-			} 
-		}	
-
+		FROM = { country_event = { id = wtt_japan.13 days = 1 } }	
 	}
 }
 
@@ -375,69 +590,6 @@ country_event = {
 				country = FROM
 				relation = non_aggression_pact
 				active = yes
-			}
-			custom_effect_tooltip = generic_skip_one_line_tt
-			IF = {
-				limit = {
-					FROM = {
-						original_tag = CHI
-					}
-				}
-				add_opinion_modifier = {
-					target = FROM
-					modifier = trautmann_agreement_opm
-				}
-				FROM = {
-					add_opinion_modifier = {
-						target = ROOT
-						modifier = trautmann_agreement_opm
-					}	
-				}
-			}
-			ELSE_IF = {
-				limit = {
-					FROM = {
-						original_tag = SOV
-					}
-					655 = {
-						is_owned_and_controlled_by = FROM
-					}
-				}
-				655 = {
-					add_resource = {
-						type = oil
-						amount = 8
-					}	
-					add_resource = {
-						type = coal
-						amount = 2
-					}	
-					IF = {
-						limit = {
-							infrastructure < 5
-						}
-						add_building_construction = {
-							type = infrastructure
-							level = 1
-							instant_build = yes
-						}	
-					}
-					IF = {
-						limit = {
-							free_building_slots = {
-								building = industrial_complex
-								size > 0
-								include_locked = yes
-							}	
-						}
-						add_extra_state_shared_building_slots = 1
-						add_building_construction = {
-							type = industrial_complex
-							level = 1
-							instant_build = yes
-						}
-					}	
-				}
 			}
 		}
 
@@ -693,6 +845,62 @@ country_event = {
 				transfer_state = 612
 			}
 		}
+		if = {
+			limit = {
+				controls_state = 941
+			}
+			FROM = {
+				transfer_state = 941
+			}
+		}
+		if = {
+			limit = {
+				controls_state = 942
+			}
+			FROM = {
+				transfer_state = 942
+			}
+		}
+		if = {
+			limit = {
+				controls_state = 943
+			}
+			FROM = {
+				transfer_state = 943
+			}
+		}
+		if = {
+			limit = {
+				controls_state = 944
+			}
+			FROM = {
+				transfer_state = 944
+			}
+		}
+		if = {
+			limit = {
+				controls_state = 945
+			}
+			FROM = {
+				transfer_state = 945
+			}
+		}
+		if = {
+			limit = {
+				controls_state = 946
+			}
+			FROM = {
+				transfer_state = 946
+			}
+		}
+		if = {
+			limit = {
+				controls_state = 947
+			}
+			FROM = {
+				transfer_state = 947
+			}
+		}
 	}
 	option = {
 		name = wtt_japan.40.b
@@ -710,8 +918,8 @@ country_event = {
 	id = wtt_japan.41
 	title = wtt_japan.41.t
 	desc = wtt_japan.41.desc
-	picture = GFX_report_event_
-
+	picture = GFX_report_event_bul_artillery
+	
 	is_triggered_only = yes
 	
 	option = {
@@ -816,8 +1024,7 @@ country_event = {
 		}
 
 		JAP = { country_event = { id = wtt_japan.105 days = 1 } }
-		PHI = { country_event = { id = wtt_japan.107 days = 1 } }
-
+		"PHI" = { country_event = { id = wtt_japan.107 days = 1 } }
 	}
 
 	# Never!
@@ -941,11 +1148,12 @@ country_event = {
 		add_country_leader_role = {
 			character = JAP_emperor_hirohito
 			country_leader = {
+				ideology = absolute_monarchism
 				expire = "1989.1.1"
-				ideology = despotism
 				traits = {
 					warrior_code
 					emperor_showa
+					r56_trait_opposed_to_communism
 				}
 				id = 700 #Hirohito
 			}
@@ -1192,6 +1400,67 @@ country_event = {
 		name = wtt_japan.114.a
 		if = {
 			limit = {
+				MAN = { 
+					is_subject_of = ROOT
+					has_idea = MAN_kwantung_veto
+				}
+			}
+			MAN = { remove_ideas = MAN_kwantung_veto }
+		}
+		if = {
+			limit = {
+				controls_state = 609
+				controls_state = 745
+				MAN = {
+					is_subject_of = ROOT
+				}
+			}
+			MAN = {
+				transfer_state = 609
+				transfer_state = 745
+				hidden_effect = {	#no cores, but rather a governmental transition
+					745 = {
+						add_compliance = 35
+					}
+					609 = {
+						add_compliance = 30
+					}
+					
+				}
+				add_stability = 0.05
+			}
+		}
+		else_if = {
+			limit = {
+				controls_state = 609
+				controls_state = 745
+				CHI = {
+					exists = yes
+				}
+			}
+			CHI = {
+				transfer_state = 609
+				transfer_state = 745
+			}
+		}
+		else_if = {
+			limit = {
+				controls_state = 609
+				controls_state = 745
+				CHI = {
+					exists = no
+				}
+				PRC = {
+					exists = yes
+				}
+			}
+			PRC = {
+				transfer_state = 609
+				transfer_state = 745
+			}
+		}
+		if = {	#they will get the puppet first, then become independent
+			limit = {
 				MAN = { is_subject_of = ROOT }
 			}
 			set_autonomy = { target = MAN autonomy_state = autonomy_free }
@@ -1216,27 +1485,52 @@ country_event = {
 		}
 		if = {
 			limit = {
-				KOR = { is_subject_of = ROOT }
-			}
-			set_autonomy = { target = KOR autonomy_state = autonomy_free }
-			KOR = {
-				retire_character = KOR_jiro_minami
-			}
-
-		}
-		add_popularity = { ideology = democratic popularity = 0.1 }
-		start_civil_war = {
-			ruling_party = democratic
-			ideology = fascism
-			size = 0.5
-		}
-		if = {
-			limit = {
-				any_controlled_state = {
+				any_state = {
+					is_controlled_by = ROOT
 					is_core_of = KOR
 				}
 			}
 			release = KOR
+			KOR = {
+				transfer_state = 525
+				transfer_state = 527
+				transfer_state = 917
+				transfer_state = 918
+				transfer_state = 919
+				transfer_state = 920
+				transfer_state = 1144
+				transfer_state = 1145
+				transfer_state = 1146
+			}			
+			set_autonomy = { target = KOR autonomy_state = autonomy_free }			
+		}
+		add_popularity = { ideology = democratic popularity = 0.1 }
+		set_politics = { ruling_party = democratic elections_allowed = yes }
+		add_stability = 0.25
+		start_civil_war = {
+			ruling_party = democratic
+			ideology = fascism
+			size = 0.35
+		}
+		random_other_country = {
+			limit = {
+				original_tag = JAP
+				has_government = fascism
+			}
+			create_country_leader = {
+				name = "Hideki Tojo"
+				picture = "gfx/leaders/JAP/Portrait_Japan_Generic_land_2.dds"
+				expire = "1965.1.1"
+				ideology = fascism_ideology
+				traits = {
+					army_connections
+				}
+			}
+			add_war_support = 0.8
+			add_stability = 0.15
+			add_ideas = war_economy
+			add_ideas = extensive_conscription
+			set_cosmetic_tag = JAP2
 		}
 	}
 }
@@ -1259,7 +1553,7 @@ country_event = {
 	# Join the war
 	option = {
 		name = wtt_japan.115.a
-		add_to_war = { targeted_alliance = JAP enemy = SOV hostility_reason = ally }
+		add_to_war = { targeted_alliance = JAP enemy = SOV hostility_reason = asked_to_join }
 		JAP = { country_event = { id = wtt_japan.116 hours = 6 } }
 	}
 
@@ -1332,10 +1626,14 @@ country_event = {
 		hidden_effect = { set_country_flag = sent_volunteers_to_JAP }
 
 		add_manpower = -105000
-
-		effect_tooltip = {
-			transfer_state = 537
-			JAP = { remove_resource_rights = 655 }
+		custom_effect_tooltip = wtt_japan_118_TT
+		if = {
+			limit = {
+				owns_state = 655	#if North Sakhalin has been ceded, dont take the south
+			}
+			effect_tooltip = {
+				transfer_state = 537
+			}
 		}
 
 	}
@@ -1369,9 +1667,13 @@ country_event = {
 	
 	option = {
 		name = wtt_japan.119.a
-
-		FROM = { 
-			transfer_state = 537 
+		if = {
+			limit = {
+				NOT = {
+					owns_state = 655
+				}
+			}
+			FROM = { transfer_state = 537 }
 		}
 
 		remove_resource_rights = 655
@@ -1485,12 +1787,17 @@ country_event = {
 			transfer_state = 529
 			transfer_state = 530
 			transfer_state = 528
+			transfer_state = 1147
 			transfer_state = 282
+			transfer_state = 531
 			transfer_state = 533
 			transfer_state = 536
 			transfer_state = 555
-			transfer_state = 1018
+			#transfer_state = 1018	#56 - Shanland which is in Myanmar
 			transfer_state = 526
+			transfer_state = 1107
+			transfer_state = 1105
+			transfer_state = 537
 			country_event = { id = wtt_japan.122 }
 		}
 		if = {
@@ -1547,12 +1854,17 @@ country_event = {
 			transfer_state = 529
 			transfer_state = 530
 			transfer_state = 528
+			transfer_state = 1147
 			transfer_state = 282
 			transfer_state = 533
 			transfer_state = 536
 			transfer_state = 555
-			transfer_state = 1018
+			#transfer_state = 1018	#56 - Shanland which is in Myanmar
 			transfer_state = 526
+			transfer_state = 1107
+			transfer_state = 1105
+			transfer_state = 531
+			transfer_state = 537
 			FROM = { annex_country = { target = event_target:jap_civ_loser transfer_troops = yes } }
 		}
 	}
@@ -1609,13 +1921,21 @@ country_event = {
 	option = {
 		name = excellent
 		effect_tooltip = {
+			transfer_state = 328
 			transfer_state = 609
 			transfer_state = 610
-			transfer_state = 716
-			transfer_state = 715
-			transfer_state = 328
-			transfer_state = 717
 			transfer_state = 714
+			transfer_state = 715
+			transfer_state = 716
+			transfer_state = 717
+			transfer_state = 761
+			transfer_state = 941
+			transfer_state = 942
+			transfer_state = 943
+			transfer_state = 944
+			transfer_state = 945
+			transfer_state = 946
+			transfer_state = 947
 		}
 	}
 }
@@ -1645,30 +1965,37 @@ country_event = {
 						MAN = {
 							controls_state = 525
 							controls_state = 527
-							controls_state = 1029
-							controls_state = 1031
-							controls_state = 1082 # HoK: Jeolla
-							controls_state = 1083 # HoK: Hwanghae
-							controls_state = 1084 # HoK: Jeju
-							controls_state = 1030
-							controls_state = 1028
+							controls_state = 917
+							controls_state = 918
+							controls_state = 919
+							controls_state = 920
+							controls_state = 1144
+							controls_state = 1145
+							controls_state = 1146
 						}
 					}
 				}
 				FROM = { release = KOR }
+				KOR = {
+					transfer_state = 525
+					transfer_state = 527
+					transfer_state = 917
+					transfer_state = 918
+					transfer_state = 919
+					transfer_state = 920
+					transfer_state = 1144
+					transfer_state = 1145
+					transfer_state = 1146
+				}				
 			}
 			if = {
 				limit = {
 					524 = {
-						controller = {
-							OR = {
-								original_tag = JAP
-								is_ally_with = JAP
-							}
-						}
+						is_controlled_by = JAP
 					}
 				}
 				event_target:WTT_current_china_leader = {
+					set_country_flag = r56_we_won_lol
 					transfer_state = 524
 				}
 			}
@@ -1712,6 +2039,17 @@ country_event = {
 						is_in_faction_with = event_target:WTT_current_china_leader
 					}
 					white_peace = ROOT
+				
+					add_ai_strategy = {
+						type = support
+						id = ROOT
+						value = -200
+					}
+					add_ai_strategy = {
+						type = alliance
+						id = ROOT
+						value = -200
+					}						
 				}
 			}
 			else = {
@@ -1785,8 +2123,71 @@ country_event = {
 			country_event = { id = wtt_japan.128 }
 		}
 		
-		ai_chance = { # AI never says no
-			base = 0
+		ai_chance = { # If Japan has lots of major enemies, the AI will not make a separate peace
+			base = 10
+			modifier = {
+				add = 50
+				USA = {
+					has_war_with = JAP
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+			}
+			modifier = {
+				add = 40
+				ENG = {
+					has_war_with = JAP
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+			}
+			modifier = {
+				add = 30
+				SOV = {
+					has_war_with = JAP
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+			}
+			modifier = {
+				add = 20
+				FRA = {
+					has_war_with = JAP
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+			}
+			modifier = {
+				add = 10
+				GER = {
+					has_war_with = JAP
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+			}
+			modifier = {
+				add = 10
+				HOL = {
+					has_war_with = JAP
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+			}
+			modifier = {
+				add = 10
+				ITA = {
+					has_war_with = JAP
+					NOT = {
+						has_war_with = ROOT
+					}
+				}
+			}
 		}
 	}
 }
@@ -1809,135 +2210,29 @@ country_event = {
 					MAN = {
 						controls_state = 525
 						controls_state = 527
-						controls_state = 1029
-						controls_state = 1031
-						controls_state = 1082 # HoK: Jeolla
-						controls_state = 1083 # HoK: Hwanghae
-						controls_state = 1084 # HoK: Jeju
-						controls_state = 1030
-						controls_state = 1028
+						controls_state = 917
+						controls_state = 918
+						controls_state = 919
+						controls_state = 920
+						controls_state = 1144
+						controls_state = 1145
+						controls_state = 1146
 					}
 				}
-				JAP = {
-					owns_state = 525
-					owns_state = 527
-					owns_state = 1029
-					owns_state = 1031
-					owns_state = 1082 # HoK: Jeolla
-					owns_state = 1083 # HoK: Hwanghae
-					owns_state = 1084 # HoK: Jeju
-					owns_state = 1030
-					owns_state = 1028
-				}
 			}
+			release = KOR
 			KOR = {
 				transfer_state = 525
 				transfer_state = 527
-				transfer_state = 1029
-				transfer_state = 1031
-				transfer_state = 1082 # HoK: Jeolla
-				transfer_state = 1083 # HoK: Hwanghae
-				transfer_state = 1084 # HoK: Jeju
-				transfer_state = 1030
-				transfer_state = 1028
+				transfer_state = 917
+				transfer_state = 918
+				transfer_state = 919
+				transfer_state = 920
+				transfer_state = 1144
+				transfer_state = 1145
+				transfer_state = 1146
 			}
-		}
-		else_if = {
-			limit = {
-				KOR = {
-					exists = yes
-					is_subject_of = JAP
-				}
-				MAN = {
-					controls_state = 525
-					controls_state = 527
-					controls_state = 1029
-					controls_state = 1031
-					controls_state = 1082 # HoK: Jeolla
-					controls_state = 1083 # HoK: Hwanghae
-					controls_state = 1084 # HoK: Jeju
-					controls_state = 1030
-					controls_state = 1028
-				}
-			}
-			JAP = {
-				set_autonomy = {
-					target = KOR
-					autonomy_state = autonomy_free
-					end_wars  = yes 
-					end_civil_wars = yes
-				}	
-			}
-			every_other_country = {
-				limit = {
-					is_literally_china = yes
-					has_war_with = KOR
-				}
-				white_peace = KOR
-			}
-			MAN = {
-				puppet = KOR
-			}
-			KOR = {	
-				set_party_name = {
-					ideology = neutrality
-					long_name = KOR_neutrality_party
-					name = KOR_neutrality_party
-				}
-				set_party_name = {
-					ideology = democratic
-					long_name = KOR_democratic_party
-					name = KOR_democratic_party
-				}
-				retire_character = KOR_jiro_minami
-			}
-		}
-		else_if = {
-			limit = {
-				KOR = {
-					exists = yes
-					is_subject_of = JAP
-				}
-			}
-			JAP = {
-				set_autonomy = {
-					target = KOR
-					autonomy_state = autonomy_free
-					end_wars  = yes 
-					end_civil_wars = yes
-				}	
-			}
-			every_other_country = {
-				limit = {
-					OR = {
-						AND = {
-							tag = MAN
-							is_in_faction_with = event_target:WTT_current_china_leader
-						}
-						is_literally_china = yes
-					}
-					has_war_with = KOR
-				}
-				white_peace = KOR
-			}
-			KOR = {	
-				set_politics = {
-					ruling_party = democratic
-					elections_allowed = yes
-				}
-				set_party_name = {
-					ideology = neutrality
-					long_name = KOR_neutrality_party
-					name = KOR_neutrality_party
-				}
-				set_party_name = {
-					ideology = democratic
-					long_name = KOR_democratic_party
-					name = KOR_democratic_party
-				}
-				retire_character = KOR_jiro_minami
-			}
-
+			#KMT victory grants power to Korean government in exile in China
 		}
 		if = {
 			limit = {
@@ -2062,225 +2357,57 @@ country_event = {
 				target = PRC
 				days = 730
 			}
-			add_ai_strategy = {
-				type = antagonize
-				id = PRC
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = PRC
-			    value = -100
-			}
 			set_truce = {
 				target = CHI
 				days = 730
-			}
-			add_ai_strategy = {
-				type = antagonize
-				id = CHI
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = CHI
-			    value = -100
 			}
 			set_truce = {
 				target = XSM
 				days = 730
 			}
-			add_ai_strategy = {
-				type = antagonize
-				id = XSM
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = XSM
-			    value = -100
-			}
 			set_truce = {
 				target = SHX
 				days = 730
-			}
-			add_ai_strategy = {
-				type = antagonize
-				id = SHX
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = SHX
-			    value = -100
 			}
 			set_truce = {
 				target = GXC
 				days = 730
 			}
-			add_ai_strategy = {
-				type = antagonize
-				id = GXC
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = GXC
-			    value = -100
-			}
 			set_truce = {
 				target = YUN
 				days = 730
-			}
-			add_ai_strategy = {
-				type = antagonize
-				id = YUN
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = YUN
-			    value = -100
 			}
 			set_truce = {
 				target = SIK
 				days = 730
 			}
-			add_ai_strategy = {
-				type = antagonize
-				id = SIK
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = SIK
-			    value = -100
-			}
 			set_truce = {
 				target = XIC
 				days = 730
-			}
-			add_ai_strategy = {
-				type = antagonize
-				id = XIC
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = XIC
-			    value = -100
 			}
 			set_truce = {
 				target = SND
 				days = 730
 			}
-			add_ai_strategy = {
-				type = antagonize
-				id = SND
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = SND
-			    value = -100
-			}
 			set_truce = {
 				target = GDC
 				days = 730
-			}
-			add_ai_strategy = {
-				type = antagonize
-				id = GDC
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = GDC
-			    value = -100
 			}
 			set_truce = {
 				target = SIC
 				days = 730
 			}
-			add_ai_strategy = {
-				type = antagonize
-				id = SIC
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = SIC
-			    value = -100
-			}
 			set_truce = {
 				target = KHM
 				days = 730
-			}
-			add_ai_strategy = {
-				type = antagonize
-				id = KHM
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = KHM
-			    value = -100
 			}
 			set_truce = {
 				target = NXM
 				days = 730
 			}
-			add_ai_strategy = {
-				type = antagonize
-				id = NXM
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = NXM
-			    value = -100
-			}
 			set_truce = {
 				target = GSM
 				days = 730
-			}
-			add_ai_strategy = {
-				type = antagonize
-				id = GSM
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = GSM
-			    value = -100
-			}
-			set_truce = {
-				target = HBC
-				days = 730
-			}
-			add_ai_strategy = {
-				type = antagonize
-				id = HBC
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = HBC
-			    value = -100
-			}
-			set_truce = {
-				target = KUM
-				days = 730
-			}
-			add_ai_strategy = {
-				type = antagonize
-				id = KUM
-				value = -100
-			}
-			add_ai_strategy = {
-			    type = conquer
-			    id = KUM
-			    value = -100
 			}
 		}
 	}
@@ -2324,61 +2451,28 @@ country_event = {
 							is_literally_china = yes
 							controls_state = 525
 							controls_state = 527
-							controls_state = 1029
-							controls_state = 1031
-							controls_state = 1082 # HoK: Jeolla
-							controls_state = 1083 # HoK: Hwanghae
-							controls_state = 1084 # HoK: Jeju
-							controls_state = 1030
-							controls_state = 1028
+							controls_state = 917
+							controls_state = 918
+							controls_state = 919
+							controls_state = 920
+							controls_state = 1144
+							controls_state = 1145
+							controls_state = 1146
 						}
-					}
-					JAP = {
-						owns_state = 525
-						owns_state = 527
-						owns_state = 1029
-						owns_state = 1031
-						owns_state = 1082 # HoK: Jeolla
-						owns_state = 1083 # HoK: Hwanghae
-						owns_state = 1084 # HoK: Jeju
-						owns_state = 1030
-						owns_state = 1028
 					}
 				}
 				FROM = { release = KOR }
 				KOR = {
 					transfer_state = 525
 					transfer_state = 527
-					transfer_state = 1029
-					transfer_state = 1031
-					transfer_state = 1082 # HoK: Jeolla
-					transfer_state = 1083 # HoK: Hwanghae
-					transfer_state = 1084 # HoK: Jeju
-					transfer_state = 1030
-					transfer_state = 1028
-				}
-				MAN = {
-					puppet = KOR
-				}
-			}
-			else_if = {
-				limit = {
-					KOR = {
-						exists = yes
-						is_subject_of = JAP
-					}
-				}
-				JAP = {
-					set_autonomy = {
-						target = KOR
-						autonomy_state = autonomy_free
-						end_wars  = yes 
-						end_civil_wars = yes
-					}	
-				}
-				MAN = {
-					puppet = KOR
-				}
+					transfer_state = 917
+					transfer_state = 918
+					transfer_state = 919
+					transfer_state = 920
+					transfer_state = 1144
+					transfer_state = 1145
+					transfer_state = 1146
+				}				
 			}
 			if = {
 				limit = {
@@ -2401,13 +2495,13 @@ country_event = {
 						NOT = {
 							state = 525
 							state = 527
-							state = 1029
-							state = 1031
-							state = 1082 # HoK: Jeolla
-							state = 1083 # HoK: Hwanghae
-							state = 1084 # HoK: Jeju
-							state = 1030
-							state = 1028
+							state = 917
+							state = 918
+							state = 919
+							state = 920
+							state = 1144
+							state = 1145
+							state = 1146
 						}
 					}
 					every_country = {
@@ -2457,86 +2551,30 @@ country_event = {
 						is_literally_china = yes
 						controls_state = 525
 						controls_state = 527
-						controls_state = 1029
-						controls_state = 1031
-						controls_state = 1082 # HoK: Jeolla
-						controls_state = 1083 # HoK: Hwanghae
-						controls_state = 1084 # HoK: Jeju
-						controls_state = 1030
-						controls_state = 1028
+						controls_state = 917
+						controls_state = 918
+						controls_state = 919
+						controls_state = 920
+						controls_state = 1144
+						controls_state = 1145
+						controls_state = 1146
 					}
 				}
-				JAP = {
-					owns_state = 525
-					owns_state = 527
-					owns_state = 1029
-					owns_state = 1031
-					owns_state = 1082 # HoK: Jeolla
-					owns_state = 1083 # HoK: Hwanghae
-					owns_state = 1084 # HoK: Jeju
-					owns_state = 1030
-					owns_state = 1028
-				}
 			}
-			FROM = { release = KOR }
+			release = KOR
 			KOR = {
 				transfer_state = 525
 				transfer_state = 527
-				transfer_state = 1029
-				transfer_state = 1031
-				transfer_state = 1082 # HoK: Jeolla
-				transfer_state = 1083 # HoK: Hwanghae
-				transfer_state = 1084 # HoK: Jeju
-				transfer_state = 1030
-				transfer_state = 1028
-			}
-			MAN = {
-				puppet = KOR
-			}
-			KOR = {	
-				set_party_name = {
-					ideology = neutrality
-					long_name = KOR_neutrality_party
-					name = KOR_neutrality_party
-				}
-				set_party_name = {
-					ideology = democratic
-					long_name = KOR_democratic_party
-					name = KOR_democratic_party
-				}
-			}
-		}
-		else_if = {
-			limit = {
-				KOR = {
-					exists = yes
-					is_subject_of = JAP
-				}
-			}
-			JAP = {
-				set_autonomy = {
-					target = KOR
-					autonomy_state = autonomy_free
-					end_wars  = yes 
-					end_civil_wars = yes
-				}	
-			}
-			MAN = {
-				puppet = KOR
-			}
-			KOR = {	
-				set_party_name = {
-					ideology = neutrality
-					long_name = KOR_neutrality_party
-					name = KOR_neutrality_party
-				}
-				set_party_name = {
-					ideology = democratic
-					long_name = KOR_democratic_party
-					name = KOR_democratic_party
-				}
-				retire_character = KOR_jiro_minami
-			}
+				transfer_state = 917
+				transfer_state = 918
+				transfer_state = 919
+				transfer_state = 920
+				transfer_state = 1144
+				transfer_state = 1145
+				transfer_state = 1146
+			}			
+			#KMT victory grants power to Korean government in exile in China
+			
 		}
 		if = {
 			limit = {
@@ -2563,6 +2601,13 @@ country_event = {
 			}
 			white_peace = ROOT
 		}
+		every_other_country = {
+			limit = {
+				is_in_faction_with = JAP
+			}
+			white_peace = MAN
+		}
+
 	}
 }
 
@@ -2601,16 +2646,16 @@ country_event = {
 		trigger = {
 			original_tag = JAP
 		}
+		add_tech_bonus = {
+			name = sov_jap_border_conflict_won
+			category = armor
+			bonus = 1.0
+		}
 		add_doctrine_cost_reduction = {
 			name = sov_jap_border_conflict_won
 			cost_reduction = 0.35
 			uses = 1
 			category = land_doctrine
-		}
-		add_tech_bonus = {
-			name = sov_jap_border_conflict_won
-			category = armor
-			bonus = 1.0
 		}
 		hidden_effect = {
 			set_country_flag = JAP_did_the_border_war_flag

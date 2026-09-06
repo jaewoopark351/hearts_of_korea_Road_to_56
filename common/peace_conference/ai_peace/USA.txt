@@ -40,11 +40,11 @@ peace_ai_desires = {
             FROM.FROM.FROM = {
                 OR = {
                     state = 525
-                    state = 1029
-                    state = 1031
-                    state = 1030
-					state = 1082 # HoK: Jeolla
-					state = 1084 # HoK: Jeju
+                    state = 1144
+                    state = 1145
+                    state = 920
+					state = 919 # HoK: Jeolla
+					state = 1146 # HoK: Jeju
                 }
             }
             FROM = {
@@ -72,11 +72,11 @@ peace_ai_desires = {
             FROM.FROM.FROM = {
                 OR = {
                     state = 525
-                    state = 1029
-                    state = 1031
-                    state = 1030
-					state = 1082 # HoK: Jeolla
-					state = 1084 # HoK: Jeju
+                    state = 1144
+                    state = 1145
+                    state = 920
+					state = 919 # HoK: Jeolla
+					state = 1146 # HoK: Jeju
                 }
             }
             FROM = {
@@ -106,8 +106,8 @@ peace_ai_desires = {
             FROM.FROM.FROM = {
                 OR = {
                     state = 527
-                    state = 1028
-					state = 1083 # HoK: Hwanghae
+                    state = 918
+					state = 917 # HoK: Hwanghae
                 }
             }
             FROM = {

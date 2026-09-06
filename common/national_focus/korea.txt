@@ -127,7 +127,7 @@ focus_tree = {
 			527 = {
 					add_extra_state_shared_building_slots = 3
 			}
-			1028 = {
+			918 = {
 					add_extra_state_shared_building_slots = 3
 			}
 		}
@@ -152,13 +152,13 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			1082 = {
+			919 = {
 					add_extra_state_shared_building_slots = 2
 			}
-			1030 = {
+			920 = {
 					add_extra_state_shared_building_slots = 2
 			}
-			1031 = {
+			1145 = {
 					add_extra_state_shared_building_slots = 2
 			}
 		}
@@ -186,10 +186,10 @@ focus_tree = {
 			525 = {
 					add_extra_state_shared_building_slots = 2
 			}
-			1029 = {
+			1144 = {
 					add_extra_state_shared_building_slots = 2
 			}
-			1083 = {
+			917 = {
 					add_extra_state_shared_building_slots = 2
 			}
 		}
@@ -236,10 +236,10 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1028 = { is_controlled_by = ROOT }
+			918 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
-			1028 = {
+			918 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
@@ -269,10 +269,10 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1082 = { is_controlled_by = ROOT }
+			919 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
-			1082 = {
+			919 = {
 					add_extra_state_shared_building_slots = 2
 					add_building_construction = {
 						type = industrial_complex
@@ -296,10 +296,10 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1031 = { is_controlled_by = ROOT }
+			1145 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
-			1031 = {
+			1145 = {
 					add_extra_state_shared_building_slots = 2
 					add_building_construction = {
 						type = industrial_complex
@@ -328,10 +328,10 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1030 = { is_controlled_by = ROOT }
+			920 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
-			1030 = {
+			920 = {
 				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = industrial_complex
@@ -361,11 +361,11 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1083 = { is_controlled_by = ROOT }
+			917 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
 			add_ideas = KOR_jaeryeong_plain_agricultural_products
-			1083 = {
+			917 = {
 					add_extra_state_shared_building_slots = 1
 					add_building_construction = {
 						type = industrial_complex
@@ -389,10 +389,10 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1029 = { is_controlled_by = ROOT }
+			1144 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
-			1029 = {
+			1144 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = industrial_complex
@@ -409,7 +409,7 @@ focus_tree = {
 					level = 1
 					instant_build = yes
 					province = {
-						id = 13418	#chuncheon
+						id = 13539	#chuncheon
 					}
 				}
 			}
@@ -471,10 +471,10 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1028 = { is_controlled_by = ROOT }
+			918 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
-			1028 = {
+			918 = {
 				add_resource = { 
 					type = steel
 					amount = 15
@@ -500,10 +500,10 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1029 = { is_controlled_by = ROOT }
+			1144 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
-			1029 = {
+			1144 = {
 				add_resource = { 
 					type = steel
 					amount = 12
@@ -562,14 +562,14 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			1031 = {
+			1145 = {
 				add_building_construction = {
 					type = infrastructure
 					level = 2
 					instant_build = yes
 				}
 			}
-			1030 = {
+			920 = {
 				add_building_construction = {
 					type = infrastructure
 					level = 2
@@ -606,7 +606,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			1083 = {
+			917 = {
 				add_building_construction = {
 					type = infrastructure
 					level = 2
@@ -642,25 +642,25 @@ focus_tree = {
 				add_manpower = 2000000
 				set_state_category = metropolis
 			}
-			1082 = {
+			919 = {
 				add_manpower = -800000
 			}
-			1031 = {
+			1145 = {
 				add_manpower = -300000
 			}
-			1030 = {
+			920 = {
 				add_manpower = -450000
 			}
-			1028 = {
+			918 = {
 				add_manpower = -450000
 			}
 			525 = {
 				add_victory_points = {
-					province = 13421
+					province = 13542
 					value = 3
 				}
 				add_victory_points = {
-					province = 13416
+					province = 13537
 					value = 3
 				}
 			}
@@ -742,10 +742,10 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1030 = { is_controlled_by = ROOT }
+			920 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
-			1030 = {
+			920 = {
 				add_resource = { 
 					type = steel
 					amount = 25
@@ -766,10 +766,10 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1030 = { is_controlled_by = ROOT }
+			920 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
-			1030 = {
+			920 = {
 				add_extra_state_shared_building_slots = 3
 				add_building_construction = {
 					type = arms_factory
@@ -906,12 +906,12 @@ focus_tree = {
 			factor = 1
 		}
 		available = {
-			1028 = { is_controlled_by = ROOT }
-			1029 = { is_controlled_by = ROOT }
+			918 = { is_controlled_by = ROOT }
+			1144 = { is_controlled_by = ROOT }
 		}
 		completion_reward = {
 			set_technology = { synth_oil_experiments = 1 }
-			1028 = {
+			918 = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = synthetic_refinery
@@ -919,7 +919,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			1029 = {
+			1144 = {
 				add_extra_state_shared_building_slots = 2
 				add_building_construction = {
 					type = synthetic_refinery
@@ -2601,7 +2601,7 @@ focus_tree = {
 		y = 7
 		cost = 5
 		available_if_capitulated = no
-		available = { controls_state = 1084 }
+		available = { controls_state = 1146 }
 		prerequisite = { 
 			focus = KOR_vision_1950 
 		}
@@ -2609,7 +2609,7 @@ focus_tree = {
 			factor = 1
 		}
 		completion_reward = {
-			1084 = {
+			1146 = {
 				if = {
 					limit = { is_controlled_by = ROOT }
 					add_building_construction = {
@@ -2659,9 +2659,9 @@ focus_tree = {
 		available = { 
 			KOR = { has_global_flag = kor_triumph_for_the_manchuria_flag }
 			527 = { is_controlled_by = ROOT }
-			1083 = { is_controlled_by = ROOT }
-			1031 = { is_controlled_by = ROOT }
-			1082 = { is_controlled_by = ROOT }
+			917 = { is_controlled_by = ROOT }
+			1145 = { is_controlled_by = ROOT }
+			919 = { is_controlled_by = ROOT }
 		}
 		prerequisite = { 
 			focus = KOR_vision_1950
@@ -2678,7 +2678,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			1083 = {
+			917 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = dockyard
@@ -2686,7 +2686,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			1031 = {
+			1145 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = dockyard
@@ -2694,7 +2694,7 @@ focus_tree = {
 					instant_build = yes
 				}
 			}
-			1082 = {
+			919 = {
 				add_extra_state_shared_building_slots = 1
 				add_building_construction = {
 					type = dockyard
@@ -2846,12 +2846,12 @@ focus_tree = {
 			# Gyeongsang
 			if = {
 				limit = {
-					controls_state = 1030
-					1030 = {
+					controls_state = 920
+					920 = {
 						air_base < 9
 					}
 				}
-				1030 = {
+				920 = {
 					add_building_construction = {
 						type = air_base
 						level = 2
@@ -2863,15 +2863,15 @@ focus_tree = {
 			# Hamgyeong
 			if = {
 				limit = {
-					controls_state = 1028
+					controls_state = 918
 				}
 				if = {
 					limit = {
-						1028 = {
+						918 = {
 							air_base < 10
 						}
 					}
-					1028 = {
+					918 = {
 						add_building_construction = {
 							type = air_base
 							level = 1
@@ -2924,9 +2924,9 @@ focus_tree = {
 			
 			if = {
 				limit = {
-					controls_state = 1030
+					controls_state = 920
 				}
-				1030 = { # Gyeongsang
+				920 = { # Gyeongsang
 					add_building_construction = {
 						type = anti_air_building
 						level = 2
@@ -3405,10 +3405,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			set_victory_points = {
-				province = 13436
+				province = 13557
 				value = 30
 			}
-			set_capital = { state = 1030 }
+			set_capital = { state = 920 }
 			custom_effect_tooltip = KOR_commie_civil_war
 			country_event = { id = kor_events.2 }
 			
@@ -3438,7 +3438,7 @@ focus_tree = {
 			hidden_effect = {
 				set_capital = { state = 525 remember_old_capital = no }
 				set_victory_points = {
-					province = 13436
+					province = 13557
 					value = 15
 				}
 				news_event = { id = newsk.9 hours = 6 }
@@ -4886,7 +4886,7 @@ focus_tree = {
 		available_if_capitulated = no
 		available = {
 			527 = { is_controlled_by = ROOT }
-			1028 = { is_controlled_by = ROOT }
+			918 = { is_controlled_by = ROOT }
 		}
 		prerequisite = { focus = KOR_prepare_for_the_next_war }
 		ai_will_do = {
@@ -4915,7 +4915,7 @@ focus_tree = {
 					add_building_construction = { type = bunker province = 11828 level = 2 instant_build = yes }
 					add_building_construction = { type = bunker province = 6963 level = 2 instant_build = yes }
 				}
-				1028 = {
+				918 = {
 					add_building_construction = { type = bunker province = 906 level = 2 instant_build = yes }
 					add_building_construction = { type = bunker province = 9899 level = 2 instant_build = yes }
 					add_building_construction = { type = bunker province = 3803 level = 2 instant_build = yes }
@@ -4936,7 +4936,7 @@ focus_tree = {
 		available_if_capitulated = no
 		available = {
 			527 = { is_controlled_by = ROOT }
-			1028 = { is_controlled_by = ROOT }
+			918 = { is_controlled_by = ROOT }
 		}
 		prerequisite = { focus = KOR_construction_syngman_rhee_line }
 		ai_will_do = {
@@ -4965,7 +4965,7 @@ focus_tree = {
 					add_building_construction = { type = bunker province = 11828 level = 2 instant_build = yes }
 					add_building_construction = { type = bunker province = 6963 level = 2 instant_build = yes }
 				}
-				1028 = {
+				918 = {
 					add_building_construction = { type = bunker province = 906 level = 2 instant_build = yes }
 					add_building_construction = { type = bunker province = 9899 level = 2 instant_build = yes }
 					add_building_construction = { type = bunker province = 3803 level = 2 instant_build = yes }
@@ -4986,11 +4986,11 @@ focus_tree = {
 		available_if_capitulated = no
 		available = {
 			527 = { is_controlled_by = ROOT }
-			1028 = { is_controlled_by = ROOT }
+			918 = { is_controlled_by = ROOT }
 			525 = { is_controlled_by = ROOT }
-			1082 = { is_controlled_by = ROOT }
-			1030 = { is_controlled_by = ROOT }
-			1083 = { is_controlled_by = ROOT }
+			919 = { is_controlled_by = ROOT }
+			920 = { is_controlled_by = ROOT }
+			917 = { is_controlled_by = ROOT }
 		}
 		prerequisite = { focus = KOR_syngman_rhee_line_final_fortifications }
 		ai_will_do = {
@@ -5013,23 +5013,23 @@ focus_tree = {
 			custom_effect_tooltip = KOR_port_fortification_tt
 			hidden_effect = {
 				527 = {
-					add_building_construction = { type = coastal_bunker province = 13415 level = 3 instant_build = yes }
+					add_building_construction = { type = coastal_bunker province = 13536 level = 3 instant_build = yes }
 				}
-				1028 = {
+				918 = {
 					add_building_construction = { type = coastal_bunker province = 848 level = 3 instant_build = yes }
 				}
 				525 = {
 					add_building_construction = { type = coastal_bunker province = 7221 level = 3 instant_build = yes }
 				}
-				1082 = {
+				919 = {
 					add_building_construction = { type = coastal_bunker province = 10110 level = 3 instant_build = yes }
-					add_building_construction = { type = coastal_bunker province = 13419 level = 3 instant_build = yes }
+					add_building_construction = { type = coastal_bunker province = 13540 level = 3 instant_build = yes }
 				}
-				1030 = {
+				920 = {
 					add_building_construction = { type = coastal_bunker province = 4056 level = 3 instant_build = yes }
 				}
-				1083 = {
-					add_building_construction = { type = coastal_bunker province = 13429 level = 3 instant_build = yes }
+				917 = {
+					add_building_construction = { type = coastal_bunker province = 13550 level = 3 instant_build = yes }
 				}
 			}
 		}

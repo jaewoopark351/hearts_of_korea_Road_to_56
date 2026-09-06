@@ -961,3 +961,53 @@ KOR_INF_02 =
 		12 = { "Je 4%d Jiphangyuyae-Jeontudan" }
 	}
 }
+
+# RT56-only manoeuvre naming group retained alongside the HOK Korean name lists.
+KOR_MOT_01 = {
+	name = "Maneuver Divisions"
+
+	for_countries = { KOR }
+
+	can_use = { always = yes }
+
+	division_types = { "motorized" "mechanized" }
+
+	fallback_name = "%dth Maneuver Division"
+
+	# Names with numbers (only one number per entry).
+	# It's okay to have gaps in numbering.
+	ordered =
+	{
+		1 = { "%dst Maneuver Division" }
+		2 = { "%dnd Maneuver Division" }
+		3 = { "%drd Maneuver Division" }
+		4 = { "%dth Maneuver Division" }
+		5 = { "%dth Maneuver Division" }
+		8 = { "%dth Maneuver Division 'Tumbler'" }
+		11 = { "%dth Maneuver Division 'Hwarang'" }
+		21 = { "%dst Maneuver Division" }
+		22 = { "%dnd Maneuver Division" }
+		23 = { "%drd Maneuver Division" }
+		31 = { "%dst Maneuver Division" }
+		32 = { "%dnd Maneuver Division" }
+		33 = { "%drd Maneuver Division" }
+		41 = { "%dst Maneuver Division" }
+		42 = { "%dnd Maneuver Division" }
+		43 = { "%drd Maneuver Division" }
+		51 = { "%dst Maneuver Division" }
+		52 = { "%dnd Maneuver Division" }
+		53 = { "%drd Maneuver Division" }
+		61 = { "%dst Maneuver Division" }
+		62 = { "%dnd Maneuver Division" }
+		63 = { "%drd Maneuver Division" }
+		71 = { "%dst Maneuver Division" }
+		72 = { "%dnd Maneuver Division" }
+		73 = { "%drd Maneuver Division" }
+		81 = { "%dst Maneuver Division" }
+		82 = { "%dnd Maneuver Division" }
+		83 = { "%drd Maneuver Division" }
+		91 = { "%dst Maneuver Division" }
+		92 = { "%dnd Maneuver Division" }
+		93 = { "%drd Maneuver Division" }
+	}
+}

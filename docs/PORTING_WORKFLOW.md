@@ -4,6 +4,21 @@
 
 이 절차는 HOK donor 복제본을 RT56 기반의 검증 가능한 신규 포트로 전환하는 작업 순서와 게이트를 정의한다. 빠르게 로그 줄 수를 줄이는 것이 아니라, RT56의 현재 동작을 보존하면서 HOK의 의도된 차이를 재구성하는 것이 목표다.
 
+### 2026-09-06 진행 상태
+
+| 단계 | 상태 | 근거/남은 게이트 |
+|---|---|---|
+| Phase 0 기준선 | 부분 런타임 갱신 | 21:28 비한국 국가·21:30 KOR C0 확보. 둘 다 RT56+compat만 활성; R0/R1 로그 대조군은 미기록 |
+| Phase 1 분류 | 정적 완료 | donor 1,014개 분류 CSV 및 exact-path 73개 명시 분류 |
+| Phase 2 descriptor | 재결정 필요 | descriptor는 RT56 + Korean Language, 실제 실행은 RT56 Korean Translation 사용 |
+| Phase 3 지도 | 후속 정적 보정 / 런타임 대기 | 13,569 province와 history 로드 뒤 crash. 한국 해안 항구 spawn 7행 누락을 수정하고 RT56 대비 coverage gate 추가; paused map/unpause 미도달 |
+| Phase 4 공용 파일 | 정적 구현 완료 | shared/East Asia 생성기와 RT56-owned pruning 검사 통과. R0 대비 런타임 미실행 |
+| Phase 5 HOK 콘텐츠 | 정적 보정 완료 / 런타임 미검증 | KOR 폐기 기술 정리, HOK WAV·기본 항공기 payload와 단일 registry/고유 모델 ID 구현 |
+| Phase 6 통합 검증 | G2 재검증 대기 | 21:28 GER·21:30 KOR가 같은 stack으로 crash. 기술 오류는 소멸했고 항구 배치 보정 뒤 새 cold start가 필요; 미등록 `Minshu_ikki.ogg` pruning 오류 1건 잔존 |
+| Phase 7 release | 미착수 | staging, credit/notice 최종 감사, 게시 모두 미실행 |
+
+“정적 완료”는 생성 산출물과 저장소 수준 참조 검사를 뜻하며 HOI4 엔진의 gameplay 성공을 뜻하지 않는다. 최신 21:28/21:30 실행은 번역 모드와 국가 선택에 무관하게 singleplayer launch 직후 같은 stack으로 crash했다. 폐기 기술 오류는 이미 없어 직접 원인에서 제외됐고, 이후 확인된 한국 해안 항구 spawn 7행 누락을 보정했다. 다음 실행은 이 새 지도 산출물의 첫 검증이다. 현재 사건과 다음 구분 실험은 [후속 crash 기록](incidents/2026-09-06-post-port-new-game-crash.md) 및 [한국 콘텐츠 우선 디버깅 플레이북](KOREAN_CONTENT_DEBUGGING.md)을 따른다.
+
 ## 2. 작업 전 고정할 것
 
 각 구현 묶음을 시작하기 전에 다음을 기록한다.
@@ -28,8 +43,11 @@ RT56 Workshop 폴더가 작업 도중 바뀌면 해당 묶음의 비교를 중�
 | R1 | RT56 + 선택 localisation | 번역 계층의 영향 |
 | C0 | RT56 + compat port | 포트 자체의 영향 |
 | C1 | RT56 + 선택 localisation + compat port | 목표 사용자 구성 |
+| H0 | HOK donor + donor의 원래 localisation 의존성 | 선택적 HOK 보존 기준 캡처; 목표 구성 아님 |
 
 HOK donor는 C0/C1에서 활성화하지 않는다. 모드 순서 표시는 실제 로드 우선순위의 증거가 아니므로 launcher 파일과 로그로 확인한다.
+
+C0/C1은 각각 KOR 시작과 비한국 국가 시작을 나눠 기록한다. 비한국 국가도 실패하면 compat의 전역 map/shared/on_action을 먼저 보고, KOR만 실패하면 KOR history/OOB부터 좁힌다. 정상 JAP/CHI 시작은 RT56 동아시아 콘텐츠가 보존됐는지 확인하는 별도 회귀 시험이다.
 
 게임 실행은 별도 허가가 있을 때만 한다. 실행이 허가되지 않은 단계에서는 정적 결론을 런타임 완료로 표현하지 않는다.
 
@@ -65,7 +83,7 @@ HOK donor는 C0/C1에서 활성화하지 않는다. 모드 순서 표시는 실�
 
 ### Phase 3 — 지도 리베이스
 
-지도는 현재 시작 크래시의 선행 blocker이므로 다른 콘텐츠의 런타임 판정보다 먼저 닫는다.
+지도는 14:06 시작 크래시의 선행 blocker였다. 19:20 실행에서 초기 등록은 통과했지만 paused map과 unpause가 남아 있으므로, 정적 완료로 닫지 않고 후속 새 게임 crash 조사와 함께 검증한다.
 
 1. 현재 RT56 definition.csv와 provinces.bmp를 base로 고정한다.
 2. HOK의 의도된 한국 지리 delta와 모든 참조 closure를 작성한다.
@@ -73,12 +91,14 @@ HOK donor는 C0/C1에서 활성화하지 않는다. 모드 순서 표시는 실�
 4. ID·RGB 전역 유일성, bitmap 색상 집합, definition 행, state/region membership를 함께 검증한다.
 5. buildings, railways, supply nodes, unit stacks/positions, adjacencies, naval bases, victory points, history와 OOB를 새 ID에 맞춰 추적한다.
 6. RT56의 비한국 province/state/region이 보존되는지 전 세계 집합 비교를 한다.
+7. `buildings.txt`의 `naval_base_spawn` 좌표를 합성 bitmap에서 다시 샘플하고, pinned RT56보다 새로 생긴 coastal land province-without-spawn이 없는지 비교한다. donor-vs-바닐라 차집합만으로 항구 행을 선택하지 않는다.
 
 게이트:
 
 - RT56의 기존 전 세계 ID/RGB/지리 데이터가 의도 없이 사라지지 않는다.
 - 모든 HOK 신규·이동 province가 정확히 한 state와 한 strategic region에 속한다.
 - 참조되지 않는 ID와 정의되지 않은 ID가 없다.
+- RT56 기준보다 새로 항구 spawn이 누락된 coastal province가 없다.
 - 허가된 런타임 시험에서 map load, 한국 선택, unpause, supply/railway/adjacency가 통과한다.
 
 ### Phase 4 — 전역·공유 파일 제거 또는 병합
@@ -100,6 +120,8 @@ HOK donor는 C0/C1에서 활성화하지 않는다. 모드 순서 표시는 실�
 
 ### Phase 5 — HOK 고유 콘텐츠 이식
 
+이 단계의 소유권은 [ADR-0004](decisions/0004-hok-korean-content-priority.md)를 따른다. KOR의 최종 gameplay·시청각 결과는 HOK 우선이고, 일반 중국·일본은 RT56 우선이다. 중국·일본 파일에 필요한 한국 연결점은 current RT56 base에 최소 병합한다.
+
 권장 순서:
 
 1. 국가·state·history·OOB 기반
@@ -114,6 +136,10 @@ HOK donor는 C0/C1에서 활성화하지 않는다. 모드 순서 표시는 실�
 10. AI와 밸런스
 
 각 묶음에서 entry scope, 모든 참조 ID, DLC gate와 RT56 연결점을 추적한다. restoration과 의도적 리밸런스는 같은 변경에 섞지 않는다.
+
+음성·DDS는 binary payload와 logical registry를 분리한다. 한국 payload는 HOK를 우선하되 `.asset`, `.gfx`, entity, sprite와 soundeffect ID는 한 번만 등록한다. 격리 시험에서 HOK 묶음을 잠시 제외해도 그 결과만으로 RT56 대체나 영구 삭제를 결정하지 않는다.
+
+현재 구현은 `tools/build_korean_assets.py`가 HOK WAV 18개와 기본 항공기 mesh/texture를 donor와 byte-identical하게 유지한다. 음성은 RT56 category/compressor와 HOK 동작을 같은 가상경로의 단일 registry로 병합하고, 기본 항공기 mesh/entity는 `hok_rt56_` 고유 ID로 HOK graphic DB에 연결한다. 이 정적 상태의 duplicate/load 오류와 실제 청취·렌더링은 아직 런타임 미검증이다.
 
 게이트: 긍정 경로 하나와 중요한 차단/부정 경로 하나를 검증하고 R0 대비 회귀를 기록한다.
 
@@ -132,6 +158,7 @@ HOK donor는 C0/C1에서 활성화하지 않는다. 모드 순서 표시는 실�
 
 - launcher가 정확한 compat copy를 로드
 - main menu와 새 게임
+- KOR 시작과 비한국 국가 시작의 결과 비교
 - 한국 지도·정부·법·idea·research·resource
 - focus 연결, bypass/cancel/mutual exclusion/reward
 - decision visibility/availability/cost/remove
@@ -139,9 +166,10 @@ HOK donor는 C0/C1에서 활성화하지 않는다. 모드 순서 표시는 실�
 - OOB, 장비, character와 portrait
 - supply, railway, adjacency와 unpause
 - R0/R1 대비 로그 delta
+- 정상 JAP/CHI 시작에서 RT56 focus·event·OOB 보존
 - 필요 시 AI, save round trip, multiplayer sync
 
-게이트: 성공한 항목과 미실행 항목을 구분해 기록한다. 메인 메뉴 진입만으로 통과시키지 않는다.
+게이트: 성공한 항목과 미실행 항목을 구분해 기록한다. 메인 메뉴 진입만으로 통과시키지 않는다. 세부 gate, 원인 귀속표, sound/DDS 확인과 실행 기록 양식은 [한국 콘텐츠 우선 디버깅 플레이북](KOREAN_CONTENT_DEBUGGING.md)을 사용한다.
 
 ### Phase 7 — release 준비
 

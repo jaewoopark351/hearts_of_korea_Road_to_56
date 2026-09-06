@@ -6,7 +6,7 @@ state={
 		coal=5.000#20260903_kpopmodder
 	}
 	provinces={
-		912 978 3912 4052 6963 7171 9790 9795 9918 11775 11828 11835 11896 13415
+		912 978 3912 4052 6963 7171 9790 9795 9918 11775 11828 11835 11896 13536
 	}
 
 	history={
@@ -16,7 +16,7 @@ state={
 			industrial_complex = 2
 			arms_factory = 1
 			air_base = 1
-			13415 = {
+			13536 = {
 				naval_base = 2
 				coastal_bunker = 1
 			}
@@ -24,15 +24,19 @@ state={
 		victory_points = {
 			4052 20
 		}
+		add_to_array = { state_victory_points = 4052 }
 		victory_points = {
 			11835 3
 		}
+		add_to_array = { state_victory_points = 11835 }
 		victory_points = {
 			6963 3
 		}
+		add_to_array = { state_victory_points = 6963 }
 		victory_points = {
-			13415 1
+			13536 1
 		}
+		add_to_array = { state_victory_points = 13536 }
 		add_core_of = KOR
 		
 		1939.3.14 = {

@@ -17,20 +17,7 @@ spriteTypes = {
 		name = "GFX_decision_cat_kor_decision_expend_federation_of_balhae"
 		texturefile = "gfx/interface/decisions/decision_cat_kor_decision_expend_federation_of_balhae.dds"
 	}
-	spriteType = {
-		name = "GFX_decision_cat_jap_unite_karafuto"
-		texturefile = "gfx/interface/decisions/decision_cat_jap_unite_karafuto.dds"
-	}
-	spriteType = {
-		name = "GFX_decision_cat_generic_greater_mongolia"
-		texturefile = "gfx/interface/decisions/decision_cat_generic_greater_mongolia.dds"
-	}
-	spriteType = {
-		name = "GFX_decision_cat_generic_unite_mongolia"
-		texturefile = "gfx/interface/decisions/decision_cat_generic_unite_mongolia.dds"
-	}
-	
-	## dynamic modifiers
+## dynamic modifiers
 	spriteType = {
 		name = "GFX_modifiers_KOR_jewish_community"
 		texturefile = "gfx/interface/modifiers_KOR_jewish_community.dds"

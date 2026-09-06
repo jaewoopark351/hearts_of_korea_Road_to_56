@@ -40,8 +40,3 @@ music = {
 	volume = 0.6
 }
 
-music = {
-	name = "Minshu_ikki"
-	file = "Minshu_ikki.ogg"
-	volume = 0.55
-}

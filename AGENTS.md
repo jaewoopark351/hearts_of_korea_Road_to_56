@@ -108,12 +108,17 @@ Current confirmed baseline on 2026-09-06:
 
 - Target run: HOI4 `1.19.2.0.a729`; the exact supported target must be re-recorded for later work.
 - Observed RT56 Workshop manifest: `3323396725579032799`; treat it as a point-in-time value and recheck it before every implementation or validation batch.
-- The compatibility root has no `.git` directory.
-- Before this documentation update, 1,013 of 1,014 shared production/root files were byte-identical to the supplied HOK donor; only `descriptor.mod` differed.
-- There are 73 same-relative-path files between the compatibility root and RT56, before logical-ID collision scanning.
-- The current compatibility descriptor names RT56 but does not declare it as a dependency.
-- The 2026-09-06 failed playset used RT56 Korean Translation (`2769576030`) instead of the descriptor-declared `Korean Language` (`2743487021`); the final localisation contract is unresolved.
-- HOK province IDs `13414-13447` and at least eight HOK state IDs collide semantically with current RT56 entities.
+- The compatibility root is Git repository `main@70aaba43a98fd429378ec1a67d4398f16330e101`; the 1차 port implementation is an uncommitted working-tree change set based on that commit.
+- Before implementation, 1,013 of 1,014 shared production/root files were byte-identical to the supplied HOK donor; only `descriptor.mod` differed. This is a historical pre-port snapshot, not the current tree.
+- The pre-port tree had 73 same-relative-path files against RT56. All 73 and every donor production/root file are now explicitly classified in the generated 1,014-row ledger; this does not replace runtime collision testing.
+- The repository `descriptor.mod` and external launcher `.mod` currently declare both `The Road to 56` and `Korean Language`; the repository descriptor has no `replace_path`, `remote_file_id`, or launcher-only `path`, while the external launcher descriptor points to this compatibility root.
+- The 2026-09-06 19:20 target run used RT56 Korean Translation (`2769576030`) rather than the declared Korean Language (`2743487021`). The later 21:28 and 21:30 C0 runs loaded only RT56 and the compatibility port and still crashed, so a localisation layer is not required to reproduce this incident; the final release localisation contract nevertheless remains unresolved.
+- HOK province IDs `13414-13447` were migrated to `13535-13568`. Conflicting HOK state IDs were migrated to `917-920` and `1144-1147` under ADR-0002. Treat the result as new-game-only until save migration is separately proven.
+- The latest 2026-09-06 21:28 non-KOR and 21:30 KOR C0 runs load 13,569 provinces, execute history, and request a 1936 singleplayer launch, then crash with the same `C0000005` stack before paused-map entry. The earlier malformed province/state errors and Korean sound duplicate/load errors are absent; unpause, localisation UI, gameplay, save, AI, and multiplayer remain unproven.
+- The invalid KOR history assignments to `bba_early_transport_plane` and `early_transport_plane` were removed without a replacement technology because pinned RT56 globally activates `transport_plane_equipment_1`. The five related log records are absent from the 21:28/21:30 runs but the crash persists, disproving those stale references as the direct cause; production access remains unproven.
+- ADR-0004 now uses donor-identical HOK WAVs and basic-aircraft mesh/textures. `sound/r56_vo_Korean.asset` is the single merged voice registry, and HOK basic-aircraft mesh/entity definitions use collision-free `hok_rt56_` IDs consumed only by the HOK KOR graphic database. The 21:28/21:30 logs contain no Korean sound duplicate/load error, but actual sound/GFX behavior remains unproven.
+- A confirmed map-generator defect skipped seven vanilla-identical HOK `naval_base_spawn` rows that RT56 had removed even though the restored HOK coastline needs them. `tools/build_rt56_map.py` now restores only those seven audited rows and asserts that the generated map introduces no coastal province without a port spawn beyond the pinned RT56 baseline. The defect-to-crash link is strongly supported by an identical 14-frame stack in older runs with explicit `map.cpp:1679` likely-crash port warnings, but remains unconfirmed until new GER and KOR cold runs pass.
+- Deterministic build/audit scripts live under `tools/`. ADR-0004 is implemented in the Korean-asset builder, pruning policy, integration manifest, and aggregate validator. The 2026-09-06 follow-up static run passed all Korean asset/technology gates but ended at `15 PASS / 0 WARNING / 1 ERROR` because the concurrently restored Japan-democracy-themed `music/Minshu_ikki.ogg` is not registered by the donor's current song list and violates the existing Korea-only pruning rule. A KOR focus shares its name but does not play the song; preserve the possible user change until the intended asset ownership is confirmed. A clean future static result still will not be engine/runtime proof.
 
 Treat the continuation mandate and the new compatibility-port request as established project context. Do not block routine work by demanding approval from the unavailable original maintainer; escalate only concrete contradictory evidence, a specific third-party restriction, or a required user decision.
 
@@ -309,6 +314,9 @@ Compatibility repair, refactoring, rebalance, and new port content are separate 
 
 ### Editing discipline
 
+- Files owned by a deterministic script under `tools/` must be changed through that script and regenerated; do not hand-edit a generated output into a state its `--check` mode cannot reproduce.
+- Treat a pinned donor/RT56/vanilla hash mismatch as source drift requiring a new baseline and merge review, not as a reason to weaken or silently update the assertion.
+- Run `python tools\validate_port.py` after implementation changes that touch runtime files, generators, pruning rules, the descriptor, or the integration manifest. Keep its static result distinct from HOI4 runtime proof.
 - Do not apply broad search-and-replace without reviewing every affected context.
 - Do not reformat an entire file for a local fix.
 - Preserve comments explaining historical intent or engine quirks.
@@ -326,7 +334,7 @@ Compatibility repair, refactoring, rebalance, and new port content are separate 
 For `descriptor.mod` and launcher `.mod` files:
 
 - Changing `supported_version` is not a compatibility fix.
-- The release architecture requires RT56 as the host dependency. The current compatibility descriptor does not yet declare it; do not call the package ready until the descriptor, launcher playset, and documentation agree.
+- The release architecture requires RT56 as the host dependency. The repository descriptor declares it, but the external launcher `.mod` does not yet match; do not call the package ready until descriptor, launcher playset, physical path, and documentation agree.
 - The HOK donor is not a default runtime dependency and must not be enabled alongside the compatibility port in target tests.
 - Treat `Korean Language` versus `The Road to 56 Korean Translation` as unresolved until the localisation contract is tested. Do not silently preserve, replace, or combine those dependencies.
 - Audit every `replace_path`; it can unload broad vanilla databases and cause distant failures.
@@ -419,6 +427,7 @@ Required rules:
 - Verify province-to-state and province-to-strategic-region membership.
 - Verify land/sea/lake/coastal classification and adjacency consistency.
 - Verify supply, railway, naval-base, victory-point, building, unit-stack, and position references after topology changes.
+- Do not infer `buildings.txt` solely from a donor-versus-vanilla two-way delta. Verify each required placement against the actual RT56 row set and the synthesized bitmap, and require that the compatibility map adds no coastal land province without a sampled `naval_base_spawn` relative to the pinned RT56 baseline.
 - Compare global ID/RGB/reference sets against the pinned RT56 baseline so a Korea change cannot silently remove distant RT56 content.
 - Nudger output may be written to the HOI4 user-data directory, not the repository. Do not run Nudger without authorization; inspect output and copy only intended files into the compatibility root.
 - Never copy a whole vanilla, donor, or RT56 map folder or add broad `replace_path` as a bandage.
@@ -676,6 +685,11 @@ For review-only work:
 
 - Preserve the original HOK vanilla-friendly, multiplayer-conscious balance during restoration unless rebalance is explicitly requested, while documenting where RT56's systems necessarily change the context.
 - Preserve the Korean identity, alternate-history premise, ideological routes, formables, leaders, names, custom assets, comments, credits, and design history.
+- Follow `docs/decisions/0004-hok-korean-content-priority.md`: final KOR gameplay and Korean presentation are HOK-first; ordinary Chinese/Japanese gameplay and global/shared systems are RT56-first; cross-border Korean hooks are minimal reviewed merges.
+- Determine Korean ownership by entry point and consumer, not filename alone. HOK downstream tags such as KCH/KJP remain Korean-owned when produced by a KOR route, while a normal JAP/CHI definition remains RT56-owned.
+- Separate binary presentation payload from logical registry ownership. Prefer HOK Korean `.wav`, `.dds`, and `.tga` payloads after format/reference checks, but keep `.asset`, `.gfx`, soundeffect, sprite, entity, attachment, and animation IDs under one effective merged definition.
+- Do not restore donor `sound/voice_korea.asset` unchanged alongside the generated `sound/r56_vo_Korean.asset`. The latter is the single effective registry: it retains the pinned RT56 category/compressor and merges HOK sound definitions, playback lists, weights, volume, and all 18 HOK WAV payloads.
+- `tools/build_korean_assets.py` owns the HOK Korean WAVs, the basic-aircraft mesh/texture set, compatibility-local mesh/entity IDs, their graphic-database consumers, and the merged sound registry. The pruning and manifest rules must continue to preserve the 18 WAVs and three KOR diffuse textures.
 - Treat the custom Korean map/state layout as a high-risk migration onto the RT56 world map, not as a standalone file copy.
 - Preserve localisation keys used by translation and compatibility submods whenever possible.
 - Do not assume the old Korean-language-mod contract survives RT56 localisation replacement; preserve or migrate it only after the supported configuration is designed and tested.
@@ -700,7 +714,7 @@ Stop modifying and report the evidence instead of guessing when:
 - the RT56 Workshop snapshot changes during comparison or implementation
 - a production file has no integration classification or an unexplained same-path/logical-ID collision remains
 - multiple root causes remain equally plausible
-- a fix requires renumbering persistent map IDs
+- a fix requires additional unrecorded persistent map-ID renumbering, or the approved migration's reference closure cannot be demonstrated
 - the proposed map merge cannot preserve the current RT56 global ID/RGB/reference set
 - a `replace_path` migration would unload broad vanilla or RT56 content
 - required binary source/format information is unavailable

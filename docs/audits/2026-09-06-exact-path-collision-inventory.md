@@ -1,5 +1,7 @@
 # 2026-09-06 exact-path 충돌 인벤토리
 
+> 역사적 pre-port 인벤토리: 아래 73개 수치는 구현 전 exact-path 교집합이다. 현재 파일별 결정과 해시는 [1,014개 분류 CSV](2026-09-06-production-file-classification.csv), 병합 결과 요약은 [통합 ledger](2026-09-06-integration-ledger.md)를 참조한다.
+
 ## 상태
 
 - 유형: 읽기 전용 정적 inventory

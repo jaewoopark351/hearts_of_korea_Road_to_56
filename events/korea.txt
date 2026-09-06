@@ -1,4 +1,4 @@
-﻿add_namespace = KOR_events
+﻿add_namespace = kor_events
 
 #HoK_intro
 country_event = {
@@ -19,7 +19,7 @@ country_event = {
 
 # Korea asks Japan for peace
 country_event = {
-	id = KOR_events.1
+	id = kor_events.1
 	title = KOR_events.1.t
 	desc = KOR_events.1.d
 	picture = GFX_report_event_gre_city_siege
@@ -101,14 +101,14 @@ country_event = {
 			base = 0
 		}
 		FROM = {
-			country_event = { id = KOR_events.101 days = 1 }
+			country_event = { id = kor_events.101 days = 1 }
 		}
 	}
 }
 
 # Japan says no
 country_event = {
-	id = KOR_events.101
+	id = kor_events.101
 	title = KOR_events.101.t
 	desc = KOR_events.101.d
 	picture = GFX_report_event_gre_city_siege
@@ -142,7 +142,7 @@ country_event = {
 				size = 0.5
 				navy_ratio = 0.01
 				capital = 525
-				states = { 525 1082 1028 1029 1031 527 1083 716 745 328 717 714 761 715 }
+				states = { 525 919 918 1144 1145 527 917 716 745 328 717 714 761 715 }
 			}
 			division_template = {
 				name = "Nonong-jeokwi-Sadan"
@@ -171,7 +171,7 @@ country_event = {
 			
 			random_owned_controlled_state = {
 				limit = { ROOT = { has_full_control_of_state = PREV } }
-				prioritize = { 1030 }
+				prioritize = { 920 }
 				create_unit = {
 					division = "name = \"Je 1 Nonong-jeokwi-Sadan 'Jeok-gi'\" division_template = \"Nonong-jeokwi-Sadan\" start_experience_factor = 0.2" 
 					owner = KOR
@@ -278,14 +278,14 @@ country_event = {
 		name = kor_events.3.a
 		hidden_effect = {
 
-			set_capital = { state = 1030 }
+			set_capital = { state = 920 }
 			start_civil_war = {
 				ruling_party = fascism
 				ideology = democratic
 				size = 0.5
 				navy_ratio = 0.01
-				capital = 1030
-				states = { 1082 1028 1029 1031 1030 527 1083 716 745 328 717 714 761 715 }
+				capital = 920
+				states = { 919 918 1144 1145 920 527 917 716 745 328 717 714 761 715 }
 			}
 			
 			division_template = {
@@ -494,7 +494,7 @@ country_event = {
 			give_guarantee = KOR
 		}
 		KOR = {
-			country_event = { id = KOR_events.9 days = 1 }
+			country_event = { id = kor_events.9 days = 1 }
 		}
 	}
 	option = {	#nope.
@@ -503,7 +503,7 @@ country_event = {
 			base = 0
 		}
 		KOR = {
-			country_event = { id = KOR_events.10 days = 1 }
+			country_event = { id = kor_events.10 days = 1 }
 		}
 	}
 }
@@ -557,7 +557,7 @@ country_event = {
 			base = 99
 		}
 		KOR = {
-			country_event = { id = KOR_events.12 days = 1 }
+			country_event = { id = kor_events.12 days = 1 }
 		}
 	}
 	option = {	#nope.
@@ -679,7 +679,7 @@ country_event = {
 			}
 		}
 		KOR = {
-			country_event = { id = KOR_events.14 days = 1 }
+			country_event = { id = kor_events.14 days = 1 }
 		}
 	}
 	
@@ -716,7 +716,7 @@ country_event = {
 			}
 		}
 		KOR = {
-			country_event = { id = KOR_events.15 days = 1 }
+			country_event = { id = kor_events.15 days = 1 }
 		}
 	}
 }
@@ -970,7 +970,7 @@ country_event = {
 			factor = 1
 		}
 		KOR = {
-			country_event = { id = KOR_events.23 days = 1 }
+			country_event = { id = kor_events.23 days = 1 }
 		}
 	}
 	option = {	#ignore their demand
@@ -979,7 +979,7 @@ country_event = {
 			factor = 9
 		}
 		KOR = {
-			country_event = { id = KOR_events.24 days = 1 }
+			country_event = { id = kor_events.24 days = 1 }
 		}
 	}
 }
@@ -1042,7 +1042,7 @@ country_event = {
 			factor = 9
 		}
 		KOR = {
-			country_event = { id = KOR_events.26 days = 1 }
+			country_event = { id = kor_events.26 days = 1 }
 		}
 	}
 	option = {	#ignore their demand
@@ -1051,7 +1051,7 @@ country_event = {
 			factor = 1
 		}
 		KOR = {
-			country_event = { id = KOR_events.27 days = 1 }
+			country_event = { id = kor_events.27 days = 1 }
 		}
 	}
 }
@@ -1115,7 +1115,7 @@ country_event = {
 			factor = 9
 		}
 		KOR = {
-			country_event = { id = KOR_events.29 days = 1 }
+			country_event = { id = kor_events.29 days = 1 }
 		}
 	}
 	option = {	#ignore their demand
@@ -1124,7 +1124,7 @@ country_event = {
 			factor = 1
 		}
 		KOR = {
-			country_event = { id = KOR_events.30 days = 1 }
+			country_event = { id = kor_events.30 days = 1 }
 		}
 	}
 }
@@ -1192,7 +1192,7 @@ country_event = {
 			factor = 10
 		}
 		KOR = {
-			country_event = { id = KOR_events.32 days = 1 }
+			country_event = { id = kor_events.32 days = 1 }
 		}
 	}
 	option = {	#ignore their demand
@@ -1201,7 +1201,7 @@ country_event = {
 			factor = 10
 		}
 		KOR = {
-			country_event = { id = KOR_events.33 days = 1 }
+			country_event = { id = kor_events.33 days = 1 }
 		}
 	}
 }
@@ -1267,7 +1267,7 @@ country_event = {
 			create_faction = "HoK_faction_name_organization_of_free_nations"
 		}
 		KOR = {
-			country_event = { id = KOR_events.35 days = 1 }
+			country_event = { id = kor_events.35 days = 1 }
 		}
 	}
 	option = {	#ignore their demand
@@ -1276,7 +1276,7 @@ country_event = {
 			factor = 1
 		}
 		KOR = {
-			country_event = { id = KOR_events.36 days = 1 }
+			country_event = { id = kor_events.36 days = 1 }
 		}
 	}
 }
@@ -1340,7 +1340,7 @@ country_event = {
 			factor = 10
 		}
 		KOR = {
-			country_event = { id = KOR_events.38 days = 1 }
+			country_event = { id = kor_events.38 days = 1 }
 		}
 	}
 	option = {	#ignore their demand
@@ -1349,7 +1349,7 @@ country_event = {
 			factor = 0
 		}
 		KOR = {
-			country_event = { id = KOR_events.39 days = 1 }
+			country_event = { id = kor_events.39 days = 1 }
 		}
 	}
 }
@@ -1412,7 +1412,7 @@ country_event = {
 			factor = 10
 		}
 		KOR = {
-			country_event = { id = KOR_events.41 days = 1 }
+			country_event = { id = kor_events.41 days = 1 }
 		}
 	}
 	option = {	#nope.
@@ -1511,22 +1511,6 @@ country_event = {
 }
 
 #savotage of koreans
-country_event = {
-	id = kor_events.44
-	title = kor_events.44.t
-	desc = kor_events.44.d
-	picture = GFX_
-	
-	is_triggered_only = yes
-	
-	option = {
-		name = kor_events.44.a
-		ai_chance = {
-			base = 10
-		}
-	}
-}
-
 #korea want to rok-us alliance(USA)
 country_event = {
 	id = kor_events.45
@@ -1544,7 +1528,7 @@ country_event = {
 		
 		KOR = {
 			set_global_flag = rok_us_alliance_formed_flag
-			country_event = { id = KOR_events.46 days = 1 }
+			country_event = { id = kor_events.46 days = 1 }
 		}
 	}
 	
@@ -1555,7 +1539,7 @@ country_event = {
 		}
 		
 		KOR = {
-			country_event = { id = KOR_events.47 days = 1 }
+			country_event = { id = kor_events.47 days = 1 }
 		}
 	}
 }
@@ -1619,7 +1603,7 @@ country_event = {
 		}
 		
 		KOR = {
-			country_event = { id = KOR_events.49 days = 1 }
+			country_event = { id = kor_events.49 days = 1 }
 		}
 	}
 	
@@ -1630,7 +1614,7 @@ country_event = {
 		}
 		
 		KOR = {
-			country_event = { id = KOR_events.50 days = 1 }
+			country_event = { id = kor_events.50 days = 1 }
 		}
 	}
 }
@@ -1651,7 +1635,7 @@ country_event = {
 		}
 		
 		KOR = {
-			country_event = { id = KOR_events.51 days = 30 }
+			country_event = { id = kor_events.51 days = 30 }
 		}
 	}
 }
@@ -1678,7 +1662,7 @@ country_event = {
 	id = kor_events.51
 	title = kor_events.51.t
 	desc = kor_events.51.d
-	picture = GFX_
+	picture = GFX_report_event_usa_destroyers
 	
 	is_triggered_only = yes
 	
@@ -1791,7 +1775,7 @@ country_event = {
 		}
 		
 		KOR = {
-			country_event = { id = KOR_events.53 days = 1 }
+			country_event = { id = kor_events.53 days = 1 }
 			set_global_flag = KOR_macarthur_send_to_korea
 		}
 	}
@@ -1803,7 +1787,7 @@ country_event = {
 		}
 		
 		KOR = {
-			country_event = { id = KOR_events.54 days = 1 }
+			country_event = { id = kor_events.54 days = 1 }
 		}
 	}
 }
@@ -1847,7 +1831,7 @@ country_event = {
 	id = kor_events.55
 	title = kor_events.55.t
 	desc = kor_events.55.d
-	picture = GFX_
+	picture = GFX_report_event_merchant_ship_01
 	
 	is_triggered_only = yes
 	

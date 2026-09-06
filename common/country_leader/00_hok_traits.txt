@@ -240,27 +240,4 @@ leader_traits = {
 	
 	
 	
-	JAP_japanese_national_liberation_committee_trait = {
-		random = no
-		
-		army_core_attack_factor = 0.2
-		army_core_defence_factor = 0.2
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	
-	JAP_champion = {
-		random = no
-		
-		drift_defence_factor = 0.15
-		resistance_growth_on_our_occupied_states = 0.15
-		surrender_limit = 0.25
-		
-		ai_will_do = {
-			factor = 1
-		}
-	}
-	
 }

@@ -46,7 +46,9 @@
  MAL_free_democratic:0 "말라야 민주 공화국"
  AST_pamanyungan_democratic:0 "파마늉안 자유부족 연방"
  NZL_aotearoa_democratic:0 "아오테아로아 공화국"
- RAJ_bharat_democratic:0 "바라트 연방 공화국"
+ PHI_free_democratic:0 "Free Republic of the Philippines"
+ PHI_free_democratic_DEF:0 "the Free Republic of the Philippines"
+ PHI_free_democratic_ADJ:0 "Philippine"
  #Korean puppet regime in China
  KCH_democratic:0 "산둥 자유 공화국"
  KCH_democratic_DEF:0 "산둥 자유 공화국"
@@ -117,22 +119,3 @@
  KOR_reichskommissariat_fascism:0 "코레아니셰 국가판무관부"
  #SOV puppet regime in Korea
  KOR_SOV_communism:0 "까레이스카야 소비에트 공화국"
- #JAP Republican Japan
- JAP_yamato_kyowakoku:0 "야마토 공화국"
- JAP_yamato_kyowakoku_DEF:0 "야마토 공화국"
- JAP_yamato_kyowakoku_ADJ:0 "야마토"
- JAP_daiwa_mingoku:0 "대화민국"
- JAP_daiwa_mingoku_DEF:0 "대화민국"
- JAP_daiwa_mingoku_ADJ:0 "대화"
- JAP_fuso_gasshukoku:0 "후소 합중국"
- JAP_fuso_gasshukoku_DEF:0 "후소 합중국"
- JAP_fuso_gasshukoku_ADJ:0 "후소"
- #MON countrie name
- MON_fascism:0 "대몽골제국"
- MON_fascism_DEF:0 "몽골"
- MON_democratic:0 "몽골 공화국"
- MON_democratic_DEF:0 "몽골"
- MON_neutrality:0 "대몽골국"
- MON_neutrality_DEF:0 "몽골"
- MON_communism:0 "몽골"
- MON_communism_DEF:0 "몽골"
