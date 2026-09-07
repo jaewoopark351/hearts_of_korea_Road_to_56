@@ -94,7 +94,7 @@ descriptor의 dependency 선언은 의도를 표현할 뿐 실제 물리적 로�
 
 같은 상대경로 충돌은 하한일 뿐이다. 다른 파일에 같은 event, focus, state, idea, character, sprite 또는 scripted ID가 정의될 수 있으므로 논리 ID 감사도 수행한다.
 
-donor의 Git/docs를 제외한 프로덕션/root 파일 1,014개는 모두 현재 원장에 분류됐다. ADR-0004 반영 후 결과는 `ADD 119`, `USE_RT56 63`, `THREE_WAY_MERGE 31`, `OVERRIDE 7`, `BINARY_MERGE 18`, `ASSET_COPY 776`이며, 행별 근거와 해시는 [분류 CSV](audits/2026-09-06-production-file-classification.csv)에 있다. 1차 구현 당시 `119/85/30/7/18/755` 집계는 [역사적 구현 기록](implementation/2026-09-06-first-port-batch.md)에 보존한다.
+donor의 Git/docs를 제외한 프로덕션/root 파일 1,014개는 모두 현재 원장에 분류됐다. ADR-0004 반영 후 호환판 전용 썸네일 두 개를 donor byte copy가 아닌 명시적 override로 바로잡은 현재 결과는 `ADD 119`, `USE_RT56 63`, `THREE_WAY_MERGE 31`, `OVERRIDE 9`, `BINARY_MERGE 18`, `ASSET_COPY 774`이며, 행별 근거와 해시는 [분류 CSV](audits/2026-09-06-production-file-classification.csv)에 있다. 1차 구현 당시 `119/85/30/7/18/755` 집계는 [역사적 구현 기록](implementation/2026-09-06-first-port-batch.md)에 보존한다.
 
 의도적 whole-file shadowing에는 다음 ledger 정보가 필요하다.
 
@@ -175,9 +175,9 @@ states, strategic region, buildings, railway, supply node, unit stack, country/O
 | 2898629778 | 역사적 HOK 원본 Workshop 항목 | provenance만 |
 | 3793992662 | 현재 HOK donor descriptor의 항목 | provenance만 |
 | 820260968 | The Road to 56 | 의존성/provenance |
-| 미할당 | 이 신규 호환 모드 | 첫 신규 게시에서만 할당 |
+| 3796816200 | 이 신규 호환 모드 | 이미 별도로 배정된 호환판 ID; 후속 갱신 전 대상 재검증 |
 
-새 descriptor는 첫 게시 전 remote_file_id를 갖지 않는다. 위 세 ID를 복사하거나 게시 대상으로 사용하지 않는다. HOK 원작, donor 개정, RT56, localisation, 제3자 자산과 신규 호환 기여분을 구분한다.
+첫 게시 전에 새 descriptor에 임의의 remote_file_id를 만들지 않는 원칙은 유지한다. 현재 기록된 `3796816200`은 이미 배정된 호환판 ID이며, 위 세 출처 ID를 복사하거나 게시 대상으로 사용하지 않는다. HOK 원작, donor 개정, RT56, localisation, 제3자 자산과 신규 호환 기여분을 구분한다.
 
 ## 11. 아키텍처 완료 조건
 
@@ -192,4 +192,4 @@ states, strategic region, buildings, railway, supply node, unit stack, country/O
 - 새 게임에서 한국 로드, 지도 진입, unpause, focus, decision, event, OOB, supply와 핵심 경로를 검증했다.
 - 알려진 미검증 DLC·AI·멀티플레이·세이브 경로를 공개했다.
 
-21:28 비한국 국가와 21:30 KOR C0는 HOK 음성·항공기 자산 및 폐기 기술 보정 뒤에도 database, 13,569 province, history와 singleplayer launch까지 도달한 뒤 같은 접근 위반으로 종료됐다. 폐기 기술 오류와 한국 음성 duplicate/load 오류는 없어졌지만 paused map과 unpause는 통과하지 못했다. 그 뒤 한국 해안 항구 spawn 7행 누락을 정적 보정했으며, 이 새 산출물은 아직 실행하지 않았다. localisation 계약은 미결정이고 aggregate 정적 검사는 donor의 현행 song 목록에 등록되지 않은 `Minshu_ikki.ogg`의 pruning 오류 1건이 남았다. 따라서 아키텍처 전체 완료 조건은 충족하지 않았다. 다음 진단은 [한국 콘텐츠 우선 디버깅 플레이북](KOREAN_CONTENT_DEBUGGING.md)을 따른다.
+21:28 비한국 국가와 21:30 KOR C0는 HOK 음성·항공기 자산 및 폐기 기술 보정 뒤에도 database, 13,569 province, history와 singleplayer launch까지 도달한 뒤 같은 접근 위반으로 종료됐다. 폐기 기술 오류와 한국 음성 duplicate/load 오류는 없어졌지만 paused map과 unpause는 통과하지 못했다. 그 뒤 한국 해안 항구 spawn 7행 누락과 만주 15개 주 획득 경로를 정적 보정했으며, 이 새 산출물은 아직 실행하지 않았다. localisation 계약은 미결정이고 aggregate 정적 검사는 `17 PASS / 0 WARNING / 0 ERROR`다. 따라서 아키텍처 전체 완료 조건은 아직 충족하지 않았다. 다음 진단은 [한국 콘텐츠 우선 디버깅 플레이북](KOREAN_CONTENT_DEBUGGING.md)을 따른다.

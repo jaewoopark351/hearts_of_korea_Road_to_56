@@ -96,7 +96,7 @@ HOK의 중국·일본 whole file을 다시 적재해 RT56 정의를 가리지 �
 - `tools/build_korean_assets.py`가 HOK WAV 18개, 기본 항공기 mesh/texture, 고유 registry ID와 소비자, 단일 병합 음성 registry를 재현한다.
 - `tools/prune_rt56_owned_files.py`는 위 WAV와 diffuse 3개를 삭제하지 않고 donor `sound/voice_korea.asset`만 중복 방지를 위해 제외한다.
 - 생성 manifest는 WAV·diffuse를 `ASSET_COPY`, donor 음성 registry를 `THREE_WAY_MERGE`로 기록하며 모든 `ASSET_COPY`가 donor bytes와 같은지 강제한다.
-- aggregate validator의 한국 자산·폐기 기술 gate는 통과했다. 전체 run은 동시 복구된 일본 민주화 테마 `music/Minshu_ikki.ogg` 때문에 Korea-only pruning 오류 1건이 남아 있다. donor의 현행 song 목록은 이 곡을 등록하지 않고 같은 이름의 KOR focus도 음악을 재생하지 않으므로, 사용자 변경과 HOK 보존 의도를 임의로 판단하지 않고 파일 처리를 보류했다.
+- aggregate validator의 한국 자산·폐기 기술 gate와 Korea-only pruning을 포함한 현재 전체 run은 `17 PASS / 0 WARNING / 0 ERROR`다. `music/Minshu_ikki.ogg`가 일시적으로 복구됐던 당시 판단과 오류는 날짜가 붙은 검증 문서에 역사적 기록으로 보존한다.
 
 ## 결과
 

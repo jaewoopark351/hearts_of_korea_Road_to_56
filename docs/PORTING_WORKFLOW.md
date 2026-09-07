@@ -14,7 +14,7 @@
 | Phase 3 지도 | 후속 정적 보정 / 런타임 대기 | 13,569 province와 history 로드 뒤 crash. 한국 해안 항구 spawn 7행 누락을 수정하고 RT56 대비 coverage gate 추가; paused map/unpause 미도달 |
 | Phase 4 공용 파일 | 정적 구현 완료 | shared/East Asia 생성기와 RT56-owned pruning 검사 통과. R0 대비 런타임 미실행 |
 | Phase 5 HOK 콘텐츠 | 정적 보정 완료 / 런타임 미검증 | KOR 폐기 기술 정리, HOK WAV·기본 항공기 payload와 단일 registry/고유 모델 ID 구현 |
-| Phase 6 통합 검증 | G2 재검증 대기 | 21:28 GER·21:30 KOR가 같은 stack으로 crash. 기술 오류는 소멸했고 항구 배치 보정 뒤 새 cold start가 필요; 미등록 `Minshu_ikki.ogg` pruning 오류 1건 잔존 |
+| Phase 6 통합 검증 | G2 재검증 대기 | 21:28 GER·21:30 KOR가 같은 stack으로 crash. 기술 오류는 소멸했고 항구 배치 및 만주 획득 경로 보정 뒤 새 cold start가 필요; 현재 static gate `17 PASS / 0 WARNING / 0 ERROR` |
 | Phase 7 release | 미착수 | staging, credit/notice 최종 감사, 게시 모두 미실행 |
 
 “정적 완료”는 생성 산출물과 저장소 수준 참조 검사를 뜻하며 HOI4 엔진의 gameplay 성공을 뜻하지 않는다. 최신 21:28/21:30 실행은 번역 모드와 국가 선택에 무관하게 singleplayer launch 직후 같은 stack으로 crash했다. 폐기 기술 오류는 이미 없어 직접 원인에서 제외됐고, 이후 확인된 한국 해안 항구 spawn 7행 누락을 보정했다. 다음 실행은 이 새 지도 산출물의 첫 검증이다. 현재 사건과 다음 구분 실험은 [후속 crash 기록](incidents/2026-09-06-post-port-new-game-crash.md) 및 [한국 콘텐츠 우선 디버깅 플레이북](KOREAN_CONTENT_DEBUGGING.md)을 따른다.

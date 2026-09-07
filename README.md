@@ -19,7 +19,7 @@ Hearts of Iron IV 1.19.x
 - 이 포트는 검토된 HOK 한국 콘텐츠와 필요한 접착 코드만 제공한다.
 - HOK donor는 런타임 의존성이 아니다.
 - 현재 `descriptor.mod`는 `The Road to 56`과 `Korean Language`를 의존성으로 선언한다. 19:20 실행은 대신 `The Road to 56 Korean Translation`을 사용했지만, 21:28/21:30에는 번역 계층을 모두 빼도 같은 crash가 재현됐다. 최종 localisation 계약 자체는 여전히 미결정이다.
-- broad `replace_path`, `remote_file_id`, launcher 전용 `path`는 넣지 않았다.
+- broad `replace_path`와 launcher 전용 `path`는 넣지 않았다. `remote_file_id=3796816200`은 이미 별도로 배정된 이 호환판 항목 ID이며 donor·RT56 ID를 재사용하지 않는다.
 - localisation의 최종 권장 조합은 런타임 대조군 시험 전까지 미결정이다.
 
 ## 이번 구현
@@ -28,13 +28,14 @@ Hearts of Iron IV 1.19.x
 - 충돌하던 HOK province `13414–13447`을 새 범위 `13535–13568`로 이전했다.
 - 충돌하던 HOK state를 `917–920`, `1144–1147`로 이전하고 모든 추적 가능한 참조를 갱신했다.
 - donor-vs-vanilla 차집합만 사용하던 지도 생성기에서 RT56이 제거한 vanilla-identical HOK 항구 spawn 7개가 누락되는 결함을 고쳤다. 합성 후 새로 비던 province `1054`, `7121`, `11912`, `12060`, `13546`, `13556`, `13564`만 복원하고, RT56 기준보다 새 coastal-without-spawn이 없음을 생성 시 검사한다.
+- 한국의 네 만주 획득 경로에서 구 8개 주와 RT56 분할주 `941–947`의 통제 조건, 이전, 한국 코어, 분리주의와 경로별 기존 중국계 코어·주둔군 처리를 같은 15개 주 집합으로 맞췄다. 전쟁 점령 뒤 휴전 결정은 RT56 전쟁 처리로 `MAN`의 일본 종속 관계가 먼저 사라져도 계속 표시되고, 살아 있는 `MAN`과의 별도 전쟁도 조건부로 끝내며, 분할주 지명은 RT56 정의를 그대로 사용한다.
 - bookmark, MIO, 훈장 trigger, generic advisor, 일본·중국 이벤트/결정/history/OOB 등은 현재 RT56 또는 바닐라를 기준으로 필요한 한국 delta만 다시 적용했다.
 - 낡은 difficulty, MTG on_action과 비한국 FIN/MON/SIB 도전 모듈은 포트에서 제외했다. ADR-0004에 따라 한국 음성·DDS payload는 HOK 것을 우선하고, `.asset`·`.gfx` 논리 registry는 중복 없이 병합한다.
 - KOR 인물, AI 전략, MIO, 편제명과 함명을 HOK/RT56 양쪽 정의에서 병합했다.
-- 1차 포팅에서 HOK event namespace, 호출되지 않는 이벤트, 비한국 cosmetic, 일본 전용 고아 GFX·음악·trait와 영·한 localisation 참조를 정리했다. 현재 다시 나타난 `Minshu_ikki.ogg`의 최종 처리는 아래 정적 검증 상태처럼 보류했다.
+- 1차 포팅에서 HOK event namespace, 호출되지 않는 이벤트, 비한국 cosmetic, 일본 전용 고아 GFX·음악·trait와 영·한 localisation 참조를 정리했다. 이후 `Minshu_ikki.ogg`가 일시적으로 다시 나타났던 보류 이력은 날짜가 붙은 검증 문서에 보존하며, 현재 pruning gate는 통과한다.
 - KOR history의 `bba_early_transport_plane`·`early_transport_plane` 할당은 대체 기술을 주지 않고 제거했다. RT56은 해당 1933 수송기 장비를 전 국가에 이미 활성화한다.
 - HOK WAV 18개와 기본 항공기 mesh/texture를 donor bytes 그대로 관리한다. 음성은 RT56 category/compressor와 HOK 재생 목록·volume을 합친 `sound/r56_vo_Korean.asset` 하나만 등록하고, HOK 항공기 mesh/entity는 `hok_rt56_` 고유 ID로 소비한다.
-- donor 프로덕션/root 파일 1,014개 전부를 분류했다: `ADD 119`, `USE_RT56 63`, `THREE_WAY_MERGE 31`, `OVERRIDE 7`, `BINARY_MERGE 18`, `ASSET_COPY 776`.
+- donor 프로덕션/root 파일 1,014개 전부를 분류했다: `ADD 119`, `USE_RT56 63`, `THREE_WAY_MERGE 31`, `OVERRIDE 9`, `BINARY_MERGE 18`, `ASSET_COPY 774`.
 
 ### 지도 ID 마이그레이션
 
@@ -53,15 +54,15 @@ Hearts of Iron IV 1.19.x
 
 ## 정적 검사 상태
 
-1차 포팅 정책의 역사적 결과는 `15 PASS / 0 WARNING / 0 ERROR`였다. 한국 우선 자산·기술 보정 뒤에도 같은 명령을 사용한다.
+1차 포팅 정책의 역사적 결과는 `15 PASS / 0 WARNING / 0 ERROR`였다. 현재도 같은 명령을 사용하며, 만주 획득 경로 회귀 검사를 포함한 결과는 `17 PASS / 0 WARNING / 0 ERROR`다.
 
 ```powershell
 python tools\validate_port.py
 ```
 
-검사는 지도·공용 파일·동아시아 파일·한국 자산·삭제 목록·ID 이식·1,014개 분류표의 재현성, Paradox Script 괄호/따옴표, descriptor 계약, 폐기 ID, localisation BOM/header/key, 주요 event asset/loc, 핵심 논리 ID 중복과 KOR 병합 필수 항목을 확인한다.
+검사는 지도·공용 파일·동아시아 파일·한국 자산·삭제 목록·ID 이식·1,014개 분류표의 재현성, Paradox Script 괄호/따옴표, descriptor 계약, 폐기 ID, localisation BOM/header/key, 주요 event asset/loc, 핵심 논리 ID 중복, 만주 15개 주의 경로별 scope·처리와 KOR 병합 필수 항목을 확인한다.
 
-ADR-0004의 자산 정책은 도구와 원장에 반영됐고 한국 자산·기술 gate는 모두 통과했다. 다만 20:13:59에 작업 트리에 다시 나타난 일본 민주화 테마 `music/Minshu_ikki.ogg`는 donor의 현행 song 목록에 등록되지 않아 기존 Korea-only pruning 정책과 충돌한다. 같은 이름의 KOR focus는 있지만 음악 재생 연결은 없으므로, 사용자 변경과 HOK 보존 의도를 임의로 판단하지 않고 파일 처리를 보류했다. 현재 aggregate 결과는 `15 PASS / 0 WARNING / 1 ERROR`다.
+ADR-0004의 자산 정책과 만주 획득 경로 보정은 도구·원장·회귀 검사에 반영됐으며 현재 aggregate 정적 gate에는 잔존 오류가 없다. 과거 `Minshu_ikki.ogg` 보류 상태와 당시 결과는 날짜가 붙은 후속 검증 문서에 역사적 기록으로 남긴다.
 
 이 검사는 HOI4 엔진 파싱, launcher 발견/로드 순서, 새 게임, unpause, DLC 경로, 실제 UI localisation, AI, 세이브와 멀티플레이를 증명하지 않는다.
 
@@ -69,7 +70,7 @@ ADR-0004의 자산 정책은 도구와 원장에 반영됐고 한국 자산·기
 
 | 항목 | 기준 |
 |---|---|
-| 작업 트리 | `main@70aaba43a98fd429378ec1a67d4398f16330e101`에서 시작한 미커밋 구현 |
+| 작업 트리 | `main@d4e3891ad7c0e050aabe856036011622af37017a` 위의 미커밋 만주 획득 경로 보정 |
 | HOK donor | `main@887930f6e88c80568d62dab9cfbe1ba8a498a252`, 읽기 전용 |
 | RT56 Workshop manifest | `3323396725579032799` |
 | RT56 descriptor SHA-256 | `5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61` |

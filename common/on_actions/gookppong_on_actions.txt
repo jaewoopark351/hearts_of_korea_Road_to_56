@@ -19,6 +19,13 @@ on_actions = {
 					transfer_state = 761
 					transfer_state = 715
 					transfer_state = 610
+					transfer_state = 941
+					transfer_state = 942
+					transfer_state = 943
+					transfer_state = 944
+					transfer_state = 945
+					transfer_state = 946
+					transfer_state = 947
 					
 					716 = { add_core_of = KOR }
 					745 = { add_core_of = KOR }
@@ -28,6 +35,13 @@ on_actions = {
 					761 = { add_core_of = KOR }
 					715 = { add_core_of = KOR }
 					610 = { add_core_of = KOR }
+					941 = { add_core_of = KOR }
+					942 = { add_core_of = KOR }
+					943 = { add_core_of = KOR }
+					944 = { add_core_of = KOR }
+					945 = { add_core_of = KOR }
+					946 = { add_core_of = KOR }
+					947 = { add_core_of = KOR }
 			
 					716 = { add_dynamic_modifier = { modifier = chinese_separatism } }
 					745 = { add_dynamic_modifier = { modifier = chinese_separatism } }
@@ -37,6 +51,13 @@ on_actions = {
 					761 = { add_dynamic_modifier = { modifier = chinese_separatism } }
 					715 = { add_dynamic_modifier = { modifier = chinese_separatism } }
 					610 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+					941 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+					942 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+					943 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+					944 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+					945 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+					946 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+					947 = { add_dynamic_modifier = { modifier = chinese_separatism } }
 					
 					set_global_flag = kor_triumph_for_the_manchuria_flag
 					
@@ -119,6 +140,41 @@ on_actions = {
 						remove_core_of = CHI
 						remove_core_of = PRC
 					}			
+					941 = {
+						remove_core_of = MAN
+						remove_core_of = CHI
+						remove_core_of = PRC
+					}
+					942 = {
+						remove_core_of = MAN
+						remove_core_of = CHI
+						remove_core_of = PRC
+					}
+					943 = {
+						remove_core_of = MAN
+						remove_core_of = CHI
+						remove_core_of = PRC
+					}
+					944 = {
+						remove_core_of = MAN
+						remove_core_of = CHI
+						remove_core_of = PRC
+					}
+					945 = {
+						remove_core_of = MAN
+						remove_core_of = CHI
+						remove_core_of = PRC
+					}
+					946 = {
+						remove_core_of = MAN
+						remove_core_of = CHI
+						remove_core_of = PRC
+					}
+					947 = {
+						remove_core_of = MAN
+						remove_core_of = CHI
+						remove_core_of = PRC
+					}
 				}
 				
 				JAP = {
@@ -130,6 +186,13 @@ on_actions = {
 					delete_unit = { state = 761 }
 					delete_unit = { state = 715 }
 					delete_unit = { state = 610 }
+					delete_unit = { state = 941 }
+					delete_unit = { state = 942 }
+					delete_unit = { state = 943 }
+					delete_unit = { state = 944 }
+					delete_unit = { state = 945 }
+					delete_unit = { state = 946 }
+					delete_unit = { state = 947 }
 				}
 				MAN = {
 					delete_unit = { state = 716 }
@@ -140,6 +203,13 @@ on_actions = {
 					delete_unit = { state = 761 }
 					delete_unit = { state = 715 }
 					delete_unit = { state = 610 }
+					delete_unit = { state = 941 }
+					delete_unit = { state = 942 }
+					delete_unit = { state = 943 }
+					delete_unit = { state = 944 }
+					delete_unit = { state = 945 }
+					delete_unit = { state = 946 }
+					delete_unit = { state = 947 }
 				}
 				
 				KOR = {

@@ -24,6 +24,13 @@ from build_rt56_map import (
 TEXT_ROOTS = ("common", "events", "history", "localisation")
 TEXT_SUFFIXES = {".txt", ".yml", ".gui", ".gfx", ".asset", ".csv"}
 
+HOK_MANCHURIA_STATE_IDS = (716, 745, 328, 717, 714, 761, 715, 610)
+RT56_MANCHURIA_SPLIT_STATE_IDS = tuple(range(941, 948))
+MANCHURIA_STATE_IDS = (
+    *HOK_MANCHURIA_STATE_IDS,
+    *RT56_MANCHURIA_SPLIT_STATE_IDS,
+)
+
 # These are rebased from RT56 in a separate integration step.  Migrating the
 # donor whole-file copy would reintroduce the exact stale overrides this port
 # is designed to remove.
@@ -87,6 +94,13 @@ def apply_post_migration_fixes(relative: str, data: bytes) -> bytes:
         "localisation/korean/replace/HoK_countries_l_korean.yml",
     }:
         data = repair_country_localisation(relative, data)
+    if relative in {
+        "common/decisions/KOR_decision.txt",
+        "common/national_focus/korea.txt",
+        "common/on_actions/gookppong_on_actions.txt",
+        "events/korea.txt",
+    }:
+        data = repair_manchuria_state_coverage(relative, data)
     return data
 
 
@@ -238,6 +252,653 @@ def matching_brace(text: str, opening: int) -> int:
     raise ValueError(f"unclosed event block at offset {opening}")
 
 
+def stripped_line(line: str) -> str:
+    return line.rstrip("\r\n").strip()
+
+
+def replace_unique_line(
+    block: str, old: str, new: str, label: str
+) -> str:
+    lines = block.splitlines(keepends=True)
+    old_indexes = [index for index, line in enumerate(lines) if stripped_line(line) == old]
+    new_indexes = [index for index, line in enumerate(lines) if stripped_line(line) == new]
+    if not old_indexes and len(new_indexes) == 1:
+        return block
+    if len(old_indexes) != 1 or new_indexes:
+        raise ValueError(
+            f"{label}: expected one old line and no new line; "
+            f"old={len(old_indexes)} new={len(new_indexes)}"
+        )
+    index = old_indexes[0]
+    line = lines[index]
+    body = line.rstrip("\r\n")
+    ending = line[len(body):]
+    indentation = body[: len(body) - len(body.lstrip(" \t"))]
+    lines[index] = indentation + new + ending
+    return "".join(lines)
+
+
+def insert_lines_after_unique(
+    block: str, anchor: str, additions: tuple[str, ...], label: str
+) -> str:
+    lines = block.splitlines(keepends=True)
+    anchors = [index for index, line in enumerate(lines) if stripped_line(line) == anchor]
+    if len(anchors) != 1:
+        raise ValueError(f"{label}: expected one anchor, got {len(anchors)}")
+    index = anchors[0]
+    following = tuple(
+        stripped_line(line) for line in lines[index + 1:index + 1 + len(additions)]
+    )
+    if following == additions:
+        return block
+    present = {
+        addition: sum(stripped_line(line) == addition for line in lines)
+        for addition in additions
+    }
+    if any(present.values()):
+        raise ValueError(f"{label}: partial or displaced additions: {present}")
+    anchor_line = lines[index]
+    body = anchor_line.rstrip("\r\n")
+    ending = anchor_line[len(body):]
+    if not ending:
+        ending = "\r\n" if "\r\n" in block else "\n"
+    indentation = body[: len(body) - len(body.lstrip(" \t"))]
+    inserted = [indentation + addition + ending for addition in additions]
+    lines[index + 1:index + 1] = inserted
+    return "".join(lines)
+
+
+def assignment_block_span(text: str, key: str) -> tuple[int, int]:
+    pattern = re.compile(rf"(?m)^[ \t]*{re.escape(key)}[ \t]*=[ \t]*\{{")
+    matches = list(pattern.finditer(text))
+    if len(matches) != 1:
+        raise ValueError(f"{key}: expected one assignment block, got {len(matches)}")
+    match = matches[0]
+    opening = text.find("{", match.start(), match.end())
+    return match.start(), matching_brace(text, opening)
+
+
+def assignment_block_spans_with_lines(
+    text: str, key: str, required_lines: tuple[str, ...]
+) -> list[tuple[int, int]]:
+    pattern = re.compile(rf"(?m)^[ \t]*{re.escape(key)}[ \t]*=[ \t]*\{{")
+    spans: list[tuple[int, int]] = []
+    for match in pattern.finditer(text):
+        opening = text.find("{", match.start(), match.end())
+        end = matching_brace(text, opening)
+        candidate = text[match.start():end]
+        candidate_lines = {stripped_line(line) for line in candidate.splitlines()}
+        if all(required in candidate_lines for required in required_lines):
+            spans.append((match.start(), end))
+    return spans
+
+
+def identified_block_span(text: str, kind: str, identifier: str) -> tuple[int, int]:
+    pattern = re.compile(rf"(?m)^[ \t]*{re.escape(kind)}[ \t]*=[ \t]*\{{")
+    identifier_pattern = re.compile(
+        rf"(?m)^[ \t]*id[ \t]*=[ \t]*{re.escape(identifier)}[ \t]*(?:#.*)?\r?$"
+    )
+    spans: list[tuple[int, int]] = []
+    for match in pattern.finditer(text):
+        opening = text.find("{", match.start(), match.end())
+        end = matching_brace(text, opening)
+        if identifier_pattern.search(text[match.start():end]):
+            spans.append((match.start(), end))
+    if len(spans) != 1:
+        raise ValueError(
+            f"{kind} {identifier}: expected one identified block, got {len(spans)}"
+        )
+    return spans[0]
+
+
+def update_block(
+    text: str,
+    span: tuple[int, int],
+    transform,
+) -> str:
+    start, end = span
+    return text[:start] + transform(text[start:end]) + text[end:]
+
+
+def state_block_spans(
+    text: str, state_id: int, required_lines: tuple[str, ...]
+) -> list[tuple[int, int]]:
+    pattern = re.compile(rf"(?m)^[ \t]*{state_id}[ \t]*=[ \t]*\{{")
+    spans: list[tuple[int, int]] = []
+    for match in pattern.finditer(text):
+        opening = text.find("{", match.start(), match.end())
+        end = matching_brace(text, opening)
+        candidate = text[match.start():end]
+        candidate_lines = {stripped_line(line) for line in candidate.splitlines()}
+        if all(required in candidate_lines for required in required_lines):
+            spans.append((match.start(), end))
+    return spans
+
+
+def insert_state_blocks_after(
+    text: str,
+    anchor_state: int,
+    additions: tuple[int, ...],
+    required_lines: tuple[str, ...],
+    label: str,
+) -> str:
+    anchor_spans = state_block_spans(text, anchor_state, required_lines)
+    if len(anchor_spans) != 1:
+        raise ValueError(f"{label}: expected one anchor state block, got {len(anchor_spans)}")
+    present = {
+        state_id: len(state_block_spans(text, state_id, required_lines))
+        for state_id in additions
+    }
+    if all(count == 1 for count in present.values()):
+        return text
+    if any(present.values()):
+        raise ValueError(f"{label}: partial added state blocks: {present}")
+
+    start, end = anchor_spans[0]
+    while end < len(text) and text[end] in " \t":
+        end += 1
+    if text[end:end + 2] == "\r\n":
+        end += 2
+    elif text[end:end + 1] in {"\r", "\n"}:
+        end += 1
+    template = text[start:end]
+    header = re.search(rf"(?m)^([ \t]*){anchor_state}([ \t]*=[ \t]*\{{)", template)
+    if header is None:
+        raise ValueError(f"{label}: cannot identify anchor block header")
+    generated: list[str] = []
+    for state_id in additions:
+        generated_block = (
+            template[:header.start()]
+            + header.group(1)
+            + str(state_id)
+            + header.group(2)
+            + template[header.end():]
+        )
+        generated.append(re.sub(r"[ \t]+(?=\r?$)", "", generated_block, flags=re.MULTILINE))
+    return text[:end] + "".join(generated) + text[end:]
+
+
+def repair_manchuria_state_coverage(relative: str, data: bytes) -> bytes:
+    """Rebase HOK's Manchuria acquisition paths onto RT56's state model."""
+    bom = data.startswith(b"\xef\xbb\xbf")
+    text = (data[3:] if bom else data).decode("utf-8")
+    split_controls = tuple(
+        f"controls_state = {state_id}" for state_id in RT56_MANCHURIA_SPLIT_STATE_IDS
+    )
+    split_full_controls = tuple(
+        f"has_full_control_of_state = {state_id}"
+        for state_id in RT56_MANCHURIA_SPLIT_STATE_IDS
+    )
+    split_transfers = tuple(
+        f"transfer_state = {state_id}" for state_id in RT56_MANCHURIA_SPLIT_STATE_IDS
+    )
+    split_core_scopes = tuple(
+        f"{state_id} = {{ add_core_of = ROOT }}"
+        for state_id in RT56_MANCHURIA_SPLIT_STATE_IDS
+    )
+    split_separatism_scopes = tuple(
+        f"{state_id} = {{ add_dynamic_modifier = {{ modifier = chinese_separatism }} }}"
+        for state_id in RT56_MANCHURIA_SPLIT_STATE_IDS
+    )
+
+    if relative == "common/decisions/KOR_decision.txt":
+        def repair_triumph(block: str) -> str:
+            block = replace_unique_line(
+                block,
+                "#controls_state = 745 #dalian",
+                "controls_state = 745 #dalian",
+                "Manchuria triumph Dalian control",
+            )
+            block = insert_lines_after_unique(
+                block,
+                "controls_state = 715 #liaoning",
+                ("controls_state = 610", *split_controls),
+                "Manchuria triumph control set",
+            )
+            block = insert_lines_after_unique(
+                block,
+                "610 = { add_core_of = ROOT }",
+                split_core_scopes,
+                "Manchuria triumph core set",
+            )
+            block = insert_lines_after_unique(
+                block,
+                "610 = { add_dynamic_modifier = { modifier = chinese_separatism } }",
+                split_separatism_scopes,
+                "Manchuria triumph separatism set",
+            )
+            block = replace_unique_line(
+                block,
+                "#transfer_state = 610",
+                "transfer_state = 610",
+                "Manchuria triumph Jehol transfer",
+            )
+            block = insert_lines_after_unique(
+                block,
+                "transfer_state = 716",
+                ("transfer_state = 745",),
+                "Manchuria triumph Dalian transfer",
+            )
+            return insert_lines_after_unique(
+                block,
+                "transfer_state = 610",
+                split_transfers,
+                "Manchuria triumph split-state transfers",
+            )
+
+        text = update_block(
+            text,
+            assignment_block_span(text, "kor_triumph_for_the_manchuria"),
+            repair_triumph,
+        )
+
+        def repair_defeat_japan(block: str) -> str:
+            subject_gate_comment = (
+                "# Keep the peace decision available if RT56 ends MAN's Japanese "
+                "subject relationship first."
+            )
+            for section_name in ("available", "visible"):
+                block = update_block(
+                    block,
+                    assignment_block_span(block, section_name),
+                    lambda section, section_name=section_name: replace_unique_line(
+                        section,
+                        "MAN = { is_subject_of = JAP }",
+                        subject_gate_comment,
+                        f"Defeat Japan {section_name} Manchukuo subject gate",
+                    ),
+                )
+            block = replace_unique_line(
+                block,
+                "#has_full_control_of_state = 610",
+                "has_full_control_of_state = 610",
+                "Defeat Japan Jehol control",
+            )
+            block = insert_lines_after_unique(
+                block,
+                "has_full_control_of_state = 610",
+                split_full_controls,
+                "Defeat Japan control set",
+            )
+            return insert_lines_after_unique(
+                block,
+                "transfer_state = 610",
+                split_transfers,
+                "Defeat Japan transfer tooltip",
+            )
+
+        text = update_block(
+            text,
+            assignment_block_span(text, "KOR_defeat_japan"),
+            repair_defeat_japan,
+        )
+
+    elif relative == "events/korea.txt":
+        def repair_peace(block: str) -> str:
+            block = insert_lines_after_unique(
+                block,
+                "transfer_state = 610",
+                split_transfers,
+                "Japan peace split-state transfers",
+            )
+
+            state_core_line = "remove_core_of = MAN"
+            state_core_counts = {
+                state_id: sum(
+                    stripped_line(candidate_line)
+                    == f"{state_id} = {{ {state_core_line} }}"
+                    for candidate_line in block.splitlines()
+                )
+                for state_id in MANCHURIA_STATE_IDS
+            }
+            legacy_core_lines = tuple(
+                f"remove_state_core = {state_id}"
+                for state_id in MANCHURIA_STATE_IDS
+            )
+            legacy_core_counts = {
+                line: sum(
+                    stripped_line(candidate_line) == line
+                    for candidate_line in block.splitlines()
+                )
+                for line in legacy_core_lines
+            }
+            if all(count == 1 for count in state_core_counts.values()):
+                if any(legacy_core_counts.values()):
+                    raise ValueError(
+                        "Japan peace Manchukuo core removal: legacy country-scope "
+                        "effects remain beside state-scope effects"
+                    )
+            elif any(state_core_counts.values()):
+                raise ValueError(
+                    "Japan peace Manchukuo core removal: partial state-scope "
+                    f"conversion: {state_core_counts}"
+                )
+            else:
+                block = insert_lines_after_unique(
+                    block,
+                    "remove_state_core = 610",
+                    tuple(
+                        f"remove_state_core = {state_id}"
+                        for state_id in RT56_MANCHURIA_SPLIT_STATE_IDS
+                    ),
+                    "Japan peace Manchukuo core removal",
+                )
+                legacy_core_counts = {
+                    line: sum(
+                        stripped_line(candidate_line) == line
+                        for candidate_line in block.splitlines()
+                    )
+                    for line in legacy_core_lines
+                }
+                if any(count != 1 for count in legacy_core_counts.values()):
+                    raise ValueError(
+                        "Japan peace Manchukuo core removal: unexpected legacy "
+                        f"effect counts: {legacy_core_counts}"
+                    )
+                man_core_spans = assignment_block_spans_with_lines(
+                    block, "MAN", legacy_core_lines
+                )
+                if len(man_core_spans) != 1:
+                    raise ValueError(
+                        "Japan peace Manchukuo core removal: expected one legacy "
+                        f"MAN block, got {len(man_core_spans)}"
+                    )
+                start, end = man_core_spans[0]
+                header = re.match(r"([ \t]*)MAN[ \t]*=[ \t]*\{", block[start:end])
+                if header is None:
+                    raise ValueError(
+                        "Japan peace Manchukuo core removal: cannot identify "
+                        "legacy MAN block indentation"
+                    )
+                newline = "\r\n" if "\r\n" in block else "\n"
+                indentation = header.group(1)
+                replacement = newline.join(
+                    f"{indentation}{state_id} = {{ {state_core_line} }}"
+                    for state_id in MANCHURIA_STATE_IDS
+                )
+                block = block[:start] + replacement + block[end:]
+
+            annex_lines = (
+                "annex_country = {",
+                "target = MAN",
+                "transfer_troops = yes",
+            )
+            annex_spans = assignment_block_spans_with_lines(
+                block, "JAP", annex_lines
+            )
+            if len(annex_spans) != 1:
+                raise ValueError(
+                    "Japan peace Manchukuo annex: expected one JAP annex block, "
+                    f"got {len(annex_spans)}"
+                )
+            guard_lines = (
+                "limit = {",
+                "MAN = {",
+                "exists = yes",
+                "is_subject_of = JAP",
+                "JAP = {",
+                *annex_lines,
+            )
+            guard_spans = assignment_block_spans_with_lines(
+                block, "if", guard_lines
+            )
+            annex_start, annex_end = annex_spans[0]
+            if len(guard_spans) == 1:
+                guard_start, guard_end = guard_spans[0]
+                if not (guard_start < annex_start and annex_end < guard_end):
+                    raise ValueError(
+                        "Japan peace Manchukuo annex: annex block is outside its guard"
+                    )
+            elif guard_spans:
+                raise ValueError(
+                    "Japan peace Manchukuo annex: expected at most one guard, "
+                    f"got {len(guard_spans)}"
+                )
+            else:
+                containing_if_blocks = [
+                    span
+                    for span in assignment_block_spans_with_lines(block, "if", ())
+                    if span[0] < annex_start and annex_end < span[1]
+                ]
+                if containing_if_blocks:
+                    raise ValueError(
+                        "Japan peace Manchukuo annex: refusing to wrap an "
+                        "unexpected nested annex block"
+                    )
+
+                annex_block = block[annex_start:annex_end]
+                header = re.match(r"([ \t]*)JAP[ \t]*=[ \t]*\{", annex_block)
+                if header is None:
+                    raise ValueError(
+                        "Japan peace Manchukuo annex: cannot identify JAP indentation"
+                    )
+                newline = "\r\n" if "\r\n" in block else "\n"
+                indentation = header.group(1)
+                indented_annex = newline.join(
+                    "\t" + line for line in annex_block.splitlines()
+                )
+                guarded_annex = newline.join(
+                    (
+                        f"{indentation}# Safely handle a surviving MAN if RT56 changes its Japanese subject status.",
+                        f"{indentation}if = {{",
+                        f"{indentation}\tlimit = {{",
+                        f"{indentation}\t\tMAN = {{",
+                        f"{indentation}\t\t\texists = yes",
+                        f"{indentation}\t\t\tis_subject_of = JAP",
+                        f"{indentation}\t\t}}",
+                        f"{indentation}\t}}",
+                        indented_annex,
+                        f"{indentation}}}",
+                    )
+                )
+                block = (
+                    block[:annex_start] + guarded_annex + block[annex_end:]
+                )
+
+            block = replace_unique_line(
+                block,
+                "# RT56 can end MAN's Japanese subject relationship first.",
+                "# Safely handle a surviving MAN if RT56 changes its Japanese subject status.",
+                "Japan peace Manchukuo survival comment",
+            )
+            guard_spans = assignment_block_spans_with_lines(
+                block, "if", guard_lines
+            )
+            if len(guard_spans) != 1:
+                raise ValueError(
+                    "Japan peace Manchukuo annex: guarded output is not unique"
+                )
+            guard_start, guard_end = guard_spans[0]
+
+            man_peace_guard_lines = (
+                "limit = {",
+                "MAN = {",
+                "exists = yes",
+                "has_war_with = KOR",
+                "white_peace = KOR",
+            )
+            man_peace_guard_spans = assignment_block_spans_with_lines(
+                block, "if", man_peace_guard_lines
+            )
+            if len(man_peace_guard_spans) == 1:
+                peace_start, peace_end = man_peace_guard_spans[0]
+                if not (peace_start < peace_end < guard_start):
+                    raise ValueError(
+                        "Japan peace Manchukuo war cleanup: guard must precede annex"
+                    )
+                return block
+            if man_peace_guard_spans:
+                raise ValueError(
+                    "Japan peace Manchukuo war cleanup: expected at most one guard, "
+                    f"got {len(man_peace_guard_spans)}"
+                )
+            partial_man_peace = assignment_block_spans_with_lines(
+                block, "MAN", ("white_peace = KOR",)
+            ) + assignment_block_spans_with_lines(
+                block, "MAN", ("exists = yes", "has_war_with = KOR")
+            )
+            if partial_man_peace:
+                raise ValueError(
+                    "Japan peace Manchukuo war cleanup: partial or displaced guard"
+                )
+
+            guard_block = block[guard_start:guard_end]
+            header = re.match(r"([ \t]*)if[ \t]*=[ \t]*\{", guard_block)
+            if header is None:
+                raise ValueError(
+                    "Japan peace Manchukuo war cleanup: cannot identify indentation"
+                )
+            newline = "\r\n" if "\r\n" in block else "\n"
+            indentation = header.group(1)
+            guarded_man_peace = newline.join(
+                (
+                    f"{indentation}# A surviving MAN may still be at war with Korea.",
+                    f"{indentation}if = {{",
+                    f"{indentation}\tlimit = {{",
+                    f"{indentation}\t\tMAN = {{",
+                    f"{indentation}\t\t\texists = yes",
+                    f"{indentation}\t\t\thas_war_with = KOR",
+                    f"{indentation}\t\t}}",
+                    f"{indentation}\t}}",
+                    f"{indentation}\tMAN = {{",
+                    f"{indentation}\t\twhite_peace = KOR",
+                    f"{indentation}\t}}",
+                    f"{indentation}}}",
+                )
+            )
+            return (
+                block[:guard_start]
+                + guarded_man_peace
+                + newline
+                + block[guard_start:]
+            )
+
+        text = update_block(
+            text,
+            identified_block_span(text, "country_event", "kor_events.1"),
+            repair_peace,
+        )
+
+        def repair_manschluss_accept(block: str) -> str:
+            block = insert_lines_after_unique(
+                block,
+                "transfer_state = 716",
+                ("transfer_state = 745",),
+                "Manschluss Dalian transfer",
+            )
+            return insert_lines_after_unique(
+                block,
+                "transfer_state = 610",
+                split_transfers,
+                "Manschluss split-state transfers",
+            )
+
+        text = update_block(
+            text,
+            identified_block_span(text, "country_event", "kor_events.14"),
+            repair_manschluss_accept,
+        )
+
+    elif relative == "common/on_actions/gookppong_on_actions.txt":
+        text = insert_lines_after_unique(
+            text,
+            "transfer_state = 610",
+            split_transfers,
+            "Gookppong split-state transfers",
+        )
+        text = insert_lines_after_unique(
+            text,
+            "610 = { add_core_of = KOR }",
+            tuple(
+                f"{state_id} = {{ add_core_of = KOR }}"
+                for state_id in RT56_MANCHURIA_SPLIT_STATE_IDS
+            ),
+            "Gookppong split-state Korean cores",
+        )
+        text = insert_lines_after_unique(
+            text,
+            "610 = { add_dynamic_modifier = { modifier = chinese_separatism } }",
+            split_separatism_scopes,
+            "Gookppong split-state separatism",
+        )
+        text = insert_state_blocks_after(
+            text,
+            610,
+            RT56_MANCHURIA_SPLIT_STATE_IDS,
+            ("remove_core_of = MAN", "remove_core_of = CHI", "remove_core_of = PRC"),
+            "Gookppong split-state Chinese core removal",
+        )
+        split_unit_cleanup = tuple(
+            f"delete_unit = {{ state = {state_id} }}"
+            for state_id in RT56_MANCHURIA_SPLIT_STATE_IDS
+        )
+        for country in ("JAP", "MAN"):
+            text = update_block(
+                text,
+                assignment_block_span(text, country),
+                lambda block, country=country: insert_lines_after_unique(
+                    block,
+                    "delete_unit = { state = 610 }",
+                    split_unit_cleanup,
+                    f"Gookppong {country} split-state unit cleanup",
+                ),
+            )
+
+    elif relative == "common/national_focus/korea.txt":
+        def extend_modifier_set(
+            block: str, action: str, modifier: str, label: str
+        ) -> str:
+            return insert_lines_after_unique(
+                block,
+                f"610 = {{ {action} = {{ modifier = {modifier} }} }}",
+                tuple(
+                    f"{state_id} = {{ {action} = {{ modifier = {modifier} }} }}"
+                    for state_id in RT56_MANCHURIA_SPLIT_STATE_IDS
+                ),
+                label,
+            )
+
+        def repair_multiethnic(block: str) -> str:
+            block = extend_modifier_set(
+                block,
+                "remove_dynamic_modifier",
+                "chinese_separatism",
+                "Multiethnic embrace strong separatism removal",
+            )
+            return extend_modifier_set(
+                block,
+                "add_dynamic_modifier",
+                "weakened_chinese_separatism",
+                "Multiethnic embrace weakened separatism",
+            )
+
+        text = update_block(
+            text,
+            identified_block_span(text, "focus", "KOR_multiethnic_embrace"),
+            repair_multiethnic,
+        )
+        text = update_block(
+            text,
+            identified_block_span(text, "focus", "KOR_korean_dream"),
+            lambda block: extend_modifier_set(
+                block,
+                "remove_dynamic_modifier",
+                "weakened_chinese_separatism",
+                "Korean dream weakened separatism removal",
+            ),
+        )
+        text = update_block(
+            text,
+            identified_block_span(
+                text, "focus", "KOR_teaching_korean_to_manchurians"
+            ),
+            repair_multiethnic,
+        )
+
+    payload = text.encode("utf-8")
+    return (b"\xef\xbb\xbf" if bom else b"") + payload
+
+
 def repair_korea_events(data: bytes) -> bytes:
     bom = data.startswith(b"\xef\xbb\xbf")
     text = (data[3:] if bom else data).decode("utf-8")
@@ -268,16 +929,17 @@ def repair_korea_events(data: bytes) -> bytes:
         if id_match:
             identified[id_match.group(1)] = (match.start(), end)
 
-    required = {"kor_events.44", "kor_events.51", "kor_events.55"}
+    required = {"kor_events.51", "kor_events.55"}
     if required - set(identified):
         raise ValueError(
             f"missing reviewed Korea event blocks: {sorted(required - set(identified))}"
         )
 
-    start, end = identified["kor_events.44"]
-    while end < len(text) and text[end] in " \t\r\n":
-        end += 1
-    text = text[:start] + text[end:]
+    if "kor_events.44" in identified:
+        start, end = identified["kor_events.44"]
+        while end < len(text) and text[end] in " \t\r\n":
+            end += 1
+        text = text[:start] + text[end:]
 
     for identifier, picture in (
         ("kor_events.51", "GFX_report_event_usa_destroyers"),
@@ -289,9 +951,27 @@ def repair_korea_events(data: bytes) -> bytes:
             raise ValueError(f"cannot re-find event {identifier}")
         block_start, block_end = span
         block = text[block_start:block_end]
-        if block.count("picture = GFX_") != 1:
+        placeholder = re.compile(
+            r"(?m)^([ \t]*picture[ \t]*=[ \t]*)GFX_[ \t]*\r?$"
+        )
+        resolved = re.compile(
+            rf"(?m)^[ \t]*picture[ \t]*=[ \t]*{re.escape(picture)}[ \t]*\r?$"
+        )
+        placeholder_count = len(placeholder.findall(block))
+        resolved_count = len(resolved.findall(block))
+        if placeholder_count == 0 and resolved_count == 1:
+            continue
+        if placeholder_count != 1 or resolved_count:
             raise ValueError(f"unexpected picture placeholder count in {identifier}")
-        block = block.replace("picture = GFX_", f"picture = {picture}")
+        placeholder_match = placeholder.search(block)
+        if placeholder_match is None:
+            raise ValueError(f"cannot locate picture placeholder in {identifier}")
+        replacement = placeholder_match.group(0).replace("GFX_", picture, 1)
+        block = (
+            block[:placeholder_match.start()]
+            + replacement
+            + block[placeholder_match.end():]
+        )
         text = text[:block_start] + block + text[block_end:]
 
     if "picture = GFX_\r" in text or "picture = GFX_\n" in text:

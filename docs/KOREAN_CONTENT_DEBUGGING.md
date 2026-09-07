@@ -227,7 +227,7 @@ JAP/CHI 회귀 관찰:
 - `tools/build_korean_assets.py`가 HOK WAV·기본 항공기 payload와 병합 registry를 pinned source에서 재현한다.
 - RT56-owned pruning은 HOK WAV 18개와 KOR diffuse 3개를 더 이상 삭제하지 않으며 donor `sound/voice_korea.asset`만 중복 방지 대상으로 유지한다.
 - manifest builder는 위 payload를 `ASSET_COPY`, 음성 registry를 `THREE_WAY_MERGE`로 분류하고 donor byte 동일성을 검사한다. 생성 CSV를 직접 수정하지 않는다.
-- aggregate validator의 한국 자산·기술 검사는 통과했다. 전체 검증은 donor 현행 song 목록에 등록되지 않은 일본 민주화 테마 `Minshu_ikki.ogg`의 Korea-only pruning 오류 1건 때문에 아직 clean이 아니다. 같은 이름의 KOR focus에는 음악 재생 효과가 없어 최종 자산 소유권을 별도로 결정해야 한다.
+- aggregate validator의 한국 자산·기술 검사와 Korea-only pruning을 포함한 현재 전체 검증은 `17 PASS / 0 WARNING / 0 ERROR`다. 과거 `Minshu_ikki.ogg` 보류와 pruning 오류는 날짜가 붙은 검증 문서에 당시 기록으로 보존한다.
 - HOK 음성이나 모델은 새 게임 crash 이분 탐색을 위해 영구 삭제하지 않는다. 격리가 필요하면 임시 진단 slice로만 제외하고 결과 뒤 복원한다.
 
 ## 13. 완료 기준

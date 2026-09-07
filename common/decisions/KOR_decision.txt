@@ -21,12 +21,20 @@ KOR_triumph_for_the_manchuria_category = {
 			
 			# manchuria
 			controls_state = 716 #liaotung
-			#controls_state = 745 #dalian
+			controls_state = 745 #dalian
 			controls_state = 328 #kirin
 			controls_state = 717 #sungkiang
 			controls_state = 714 #heilungkiang
 			controls_state = 761 #hulunbuir
 			controls_state = 715 #liaoning
+			controls_state = 610
+			controls_state = 941
+			controls_state = 942
+			controls_state = 943
+			controls_state = 944
+			controls_state = 945
+			controls_state = 946
+			controls_state = 947
 		}
 
 		visible = {
@@ -44,6 +52,13 @@ KOR_triumph_for_the_manchuria_category = {
 			761 = { add_core_of = ROOT }
 			715 = { add_core_of = ROOT }
 			610 = { add_core_of = ROOT }
+			941 = { add_core_of = ROOT }
+			942 = { add_core_of = ROOT }
+			943 = { add_core_of = ROOT }
+			944 = { add_core_of = ROOT }
+			945 = { add_core_of = ROOT }
+			946 = { add_core_of = ROOT }
+			947 = { add_core_of = ROOT }
 			
 			716 = { add_dynamic_modifier = { modifier = chinese_separatism } }
 			745 = { add_dynamic_modifier = { modifier = chinese_separatism } }
@@ -53,16 +68,31 @@ KOR_triumph_for_the_manchuria_category = {
 			761 = { add_dynamic_modifier = { modifier = chinese_separatism } }
 			715 = { add_dynamic_modifier = { modifier = chinese_separatism } }
 			610 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+			941 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+			942 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+			943 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+			944 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+			945 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+			946 = { add_dynamic_modifier = { modifier = chinese_separatism } }
+			947 = { add_dynamic_modifier = { modifier = chinese_separatism } }
 
 			hidden_effect = {
 				set_global_flag = kor_triumph_for_the_manchuria_flag
 				transfer_state = 716
+				transfer_state = 745
 				transfer_state = 328
 				transfer_state = 717
 				transfer_state = 714
 				transfer_state = 761
 				transfer_state = 715
-				#transfer_state = 610
+				transfer_state = 610
+				transfer_state = 941
+				transfer_state = 942
+				transfer_state = 943
+				transfer_state = 944
+				transfer_state = 945
+				transfer_state = 946
+				transfer_state = 947
 			}
 		}
 		
@@ -164,17 +194,24 @@ KOR_defeat_japan_category = {
 			has_full_control_of_state = 714 #heilungkiang
 			has_full_control_of_state = 761 #hulunbuir
 			has_full_control_of_state = 715 #liaoning
-			#has_full_control_of_state = 610
+			has_full_control_of_state = 610
+			has_full_control_of_state = 941
+			has_full_control_of_state = 942
+			has_full_control_of_state = 943
+			has_full_control_of_state = 944
+			has_full_control_of_state = 945
+			has_full_control_of_state = 946
+			has_full_control_of_state = 947
 			has_war_with = JAP
 			KOR = { is_in_faction = no }
-			MAN = { is_subject_of = JAP }
+			# Keep the peace decision available if RT56 ends MAN's Japanese subject relationship first.
 		}
 		is_good = yes
 		fire_only_once = yes
 
 		visible = {
 			has_war_with = JAP
-			MAN = { is_subject_of = JAP }
+			# Keep the peace decision available if RT56 ends MAN's Japanese subject relationship first.
 			NOT =  { has_global_flag = kor_defeat_japanese_army }
 		}
 		
@@ -194,6 +231,13 @@ KOR_defeat_japan_category = {
 				transfer_state = 761
 				transfer_state = 715
 				transfer_state = 610
+				transfer_state = 941
+				transfer_state = 942
+				transfer_state = 943
+				transfer_state = 944
+				transfer_state = 945
+				transfer_state = 946
+				transfer_state = 947
 				white_peace = JAP
 			}
 		}

@@ -1120,6 +1120,13 @@ focus_tree = {
 			761 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
 			715 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
 			610 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			941 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			942 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			943 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			944 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			945 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			946 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			947 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
 			
 			716 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 			745 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
@@ -1129,6 +1136,13 @@ focus_tree = {
 			761 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 			715 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 			610 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			941 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			942 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			943 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			944 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			945 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			946 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			947 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 		}
 	}
 	#Focus for invitation jewish
@@ -1212,6 +1226,13 @@ focus_tree = {
 			761 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 			715 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 			610 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			941 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			942 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			943 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			944 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			945 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			946 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			947 = { remove_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 		}
 	}
 	#Focus for proclaim federation of balhae
@@ -1301,6 +1322,13 @@ focus_tree = {
 			761 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
 			715 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
 			610 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			941 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			942 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			943 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			944 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			945 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			946 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
+			947 = { remove_dynamic_modifier = { modifier = chinese_separatism } }
 			
 			716 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 			745 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
@@ -1310,6 +1338,13 @@ focus_tree = {
 			761 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 			715 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 			610 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			941 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			942 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			943 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			944 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			945 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			946 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
+			947 = { add_dynamic_modifier = { modifier = weakened_chinese_separatism } }
 		}
 	}
 	#Focus for rebuild guknaeseong as new city

@@ -6,13 +6,13 @@
 
 - 1차 정적 포팅 구현: 완료
 - 한국 콘텐츠 소유권: HOK 우선으로 확정, 중국·일본 자체 콘텐츠는 RT56 우선
-- aggregate static gate: 한국 자산·기술 gate는 통과, 현재 `15 PASS / 0 WARNING / 1 ERROR`; donor 현행 song 목록에 미등록된 `Minshu_ikki.ogg`의 pruning 판정 1건 잔존
+- aggregate static gate: 만주 획득 경로 회귀 검사를 포함해 현재 `17 PASS / 0 WARNING / 0 ERROR`
 - 게임/launcher 런타임 검증: 21:28 비한국 국가와 21:30 KOR의 `RT56 + compat` C0에서 동일 접근 위반 재현; 항구 배치 보정 뒤 재검증 대기
 - 최신 HOI4 로그: 2026-09-06 21:30 실행 — 번역 모드 없이 13,569 province와 history 로드 후 singleplayer launch에서 접근 위반
 - 현재 crash 후보: 합성 한국 해안의 `naval_base_spawn` 7행 누락은 확인·정적 수정됨; 동일 과거 stack과 항구 likely-crash 로그 때문에 인과는 `STRONGLY_SUPPORTED`, 런타임 확인 전 사건은 Open
 - HOK 한국 음성: WAV 18개와 단일 병합 registry 정적 관리 완료; 새 registry의 실제 청취·duplicate/load 결과는 미검증
 - 기존 HOK 세이브 지원: 주장하지 않음, 신규 게임 전용
-- 게시/업로드: 미실행
+- 게시/업로드: 기존 호환판 ID `3796816200`; 이번 만주 보정 작업에서는 미실행
 
 ## 현재 기준 문서
 
@@ -27,7 +27,7 @@
 | 감사 | [통합 ledger](audits/2026-09-06-integration-ledger.md) | ADR-0004를 반영한 현재 ownership·merge 요약 |
 | 감사 | [1,014개 파일 분류 CSV](audits/2026-09-06-production-file-classification.csv) | 생성기가 관리하는 현재 행별 분류·해시 원장 |
 | 검증 | [정적 검증 기록](validation/2026-09-06-static-validation.md) | 1차 정책 당시 역사적 결과 |
-| 검증 | [한국 우선 후속 정적 검증](validation/2026-09-06-korea-first-static-validation.md) | 현재 15 PASS와 미등록 `Minshu_ikki.ogg` pruning 오류 1건 |
+| 검증 | [한국 우선 후속 정적 검증](validation/2026-09-06-korea-first-static-validation.md) | 당시 15 PASS와 미등록 `Minshu_ikki.ogg` pruning 오류 1건의 역사적 기록 |
 | 결정 | [ADR-0001: 런타임 의존성과 로드 구성](decisions/0001-runtime-dependencies-and-load-order.md) | RT56 host 채택, 실제 localisation 구성 불일치 잔존 |
 | 결정 | [ADR-0002: 지도 ID 마이그레이션](decisions/0002-map-id-migration.md) | 채택·정적 구현 완료 |
 | 결정 | [ADR-0003: localisation 계약](decisions/0003-localisation-contract.md) | Pending Runtime |

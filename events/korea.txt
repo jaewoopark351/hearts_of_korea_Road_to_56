@@ -40,18 +40,30 @@ country_event = {
 			transfer_state = 761
 			transfer_state = 715
 			transfer_state = 610
+			transfer_state = 941
+			transfer_state = 942
+			transfer_state = 943
+			transfer_state = 944
+			transfer_state = 945
+			transfer_state = 946
+			transfer_state = 947
 			white_peace = JAP
 		}
-		MAN = {
-			remove_state_core = 716
-			remove_state_core = 745
-			remove_state_core = 328
-			remove_state_core = 717
-			remove_state_core = 714
-			remove_state_core = 761
-			remove_state_core = 715
-			remove_state_core = 610
-		}
+		716 = { remove_core_of = MAN }
+		745 = { remove_core_of = MAN }
+		328 = { remove_core_of = MAN }
+		717 = { remove_core_of = MAN }
+		714 = { remove_core_of = MAN }
+		761 = { remove_core_of = MAN }
+		715 = { remove_core_of = MAN }
+		610 = { remove_core_of = MAN }
+		941 = { remove_core_of = MAN }
+		942 = { remove_core_of = MAN }
+		943 = { remove_core_of = MAN }
+		944 = { remove_core_of = MAN }
+		945 = { remove_core_of = MAN }
+		946 = { remove_core_of = MAN }
+		947 = { remove_core_of = MAN }
 		every_other_country = {
 			limit = {
 				is_in_faction_with = JAP
@@ -75,10 +87,31 @@ country_event = {
 				white_peace = KOR
 			}
 		}
-		JAP = {
-			annex_country = {
-				target = MAN
-				transfer_troops = yes
+		# Safely handle a surviving MAN if RT56 changes its Japanese subject status.
+		# A surviving MAN may still be at war with Korea.
+		if = {
+			limit = {
+				MAN = {
+					exists = yes
+					has_war_with = KOR
+				}
+			}
+			MAN = {
+				white_peace = KOR
+			}
+		}
+		if = {
+			limit = {
+				MAN = {
+					exists = yes
+					is_subject_of = JAP
+				}
+			}
+			JAP = {
+				annex_country = {
+					target = MAN
+					transfer_troops = yes
+				}
 			}
 		}
 		add_popularity = {
@@ -737,12 +770,20 @@ country_event = {
 		}
 		KOR = {
 			transfer_state = 716
+			transfer_state = 745
 			transfer_state = 328
 			transfer_state = 717
 			transfer_state = 714
 			transfer_state = 761
 			transfer_state = 715
 			transfer_state = 610
+			transfer_state = 941
+			transfer_state = 942
+			transfer_state = 943
+			transfer_state = 944
+			transfer_state = 945
+			transfer_state = 946
+			transfer_state = 947
 		}
 		add_war_support = 0.1
 		add_stability = 0.05

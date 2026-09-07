@@ -23,9 +23,9 @@
 | 분류 | 수 | 의미 |
 |---|---:|---|
 | `ADD` | 119 | RT56과 같은 경로가 없는 HOK 고유 text/metadata를 호환 모드에 유지 |
-| `ASSET_COPY` | 776 | 출처를 유지해야 하는 HOK 고유 binary asset 또는 의도적인 HOK 한국 자산 |
+| `ASSET_COPY` | 774 | 출처를 유지해야 하는 HOK 고유 binary asset 또는 의도적인 HOK 한국 자산 |
 | `BINARY_MERGE` | 18 | RT56 전역 지도 기반에 검토한 HOK 한국 delta를 합성 |
-| `OVERRIDE` | 7 | 호환 모드가 명시적으로 소유하는 한국 정의 또는 프로젝트 metadata |
+| `OVERRIDE` | 9 | 호환 모드가 명시적으로 소유하는 한국 정의, 프로젝트 metadata 또는 호환판 전용 썸네일 |
 | `THREE_WAY_MERGE` | 31 | current host base와 HOK donor 의도를 정의/ID 단위로 병합 |
 | `USE_RT56` | 63 | donor 파일을 싣지 않고 RT56/vanilla 소유를 유지하거나 범위 밖 콘텐츠를 제외 |
 | **합계** | **1,014** | 모든 donor production/root 파일에 정확히 한 분류 적용 |
@@ -44,9 +44,9 @@
 
 | 처리 | 수 | 설명 |
 |---|---:|---|
-| `ASSET_COPY / SHIPPED` | 31 | HOK 한국 국기, 음성 WAV, 항공기 diffuse와 thumbnail을 명시적으로 선택 |
+| `ASSET_COPY / SHIPPED` | 30 | HOK 한국 국기, 음성 WAV와 항공기 diffuse를 명시적으로 선택 |
 | `BINARY_MERGE / GENERATED` | 10 | 7개 전역 지도 파일과 같은 경로 state 525/527/528 재생성 |
-| `OVERRIDE / SHIPPED` | 6 | HOK 한국 idea/focus/history, branding 및 프로젝트 metadata의 명시 소유 |
+| `OVERRIDE / SHIPPED` | 7 | HOK 한국 idea/focus/history, 호환판 썸네일, branding 및 프로젝트 metadata의 명시 소유 |
 | `THREE_WAY_MERGE / GENERATED` | 19 | 공용·KOR·동아시아 파일을 host base와 병합 |
 | `USE_RT56 / OMITTED_HOST_OWNED` | 7 | 난이도, on_action, OOB, loading screen과 비한국 MON history/name을 RT56에 위임 |
 | **합계** | **73** | default 규칙 미사용 |
@@ -129,7 +129,7 @@ Exact-path 73개는 물리 파일명 충돌만 센 값이다. 서로 다른 파�
 
 CSV는 donor 파일 한 행이 호환 산출물에서 어떤 운명을 갖는지 설명한다. 다음 작업은 해당 행의 output hash에는 반영되지만 분류 이름만으로는 의미가 충분히 드러나지 않으므로 별도로 기록한다.
 
-- `tools/migrate_hok_ids.py`: 숫자 state/province 참조, `kor_events` casing, achievement 그룹, event picture, PHI cosmetic localisation
+- `tools/migrate_hok_ids.py`: 숫자 state/province 참조, 만주 15개 주 획득 경로, 전쟁 중 `MAN` 종속 관계 소멸 뒤에도 유지되는 대일 휴전 결정과 잔존 `MAN` 조건부 휴전, `kor_events` casing, achievement 그룹, event picture, PHI cosmetic localisation
 - `tools/migrate_doctrines.py`: KOR/KCH/KJP/RKY/TWN history의 현재 grand/sub-doctrine migration과 KOR 폐기 수송기 기술 할당 제거
 - `tools/build_korean_assets.py`: HOK WAV·기본 항공기 payload, 단일 음성 registry와 고유 mesh/entity 소비 경로 생성
 - `tools/prune_non_korean_content.py`: 범위 외 정의와 orphan 참조의 폐쇄
@@ -139,7 +139,7 @@ CSV는 donor 파일 한 행이 호환 산출물에서 어떤 운명을 갖는지
 
 ## 8. 검증 결과와 한계
 
-`python tools\validate_port.py`의 후속 결과는 `15 PASS / 0 WARNING / 1 ERROR`다. 한국 자산, manifest, source pin, 지도 closure, script 구조, descriptor 정책, 폐기 token, localisation, event picture와 주요 논리 ID 검사는 통과했다. 유일한 오류는 위 `music/Minshu_ikki.ogg`의 Korea-only pruning 위반이다.
+`python tools\validate_port.py`의 현재 결과는 `17 PASS / 0 WARNING / 0 ERROR`다. 한국 자산, manifest, source pin, 지도 closure, script 구조, descriptor 정책, 폐기 token, localisation, event picture, 주요 논리 ID와 만주 획득 경로 검사가 모두 통과했다. 과거 `music/Minshu_ikki.ogg` 오류는 날짜가 붙은 검증 문서에 당시 기록으로 보존한다.
 
 최신 로그는 2026-09-06 21:30 C0 실행이며, 번역 없이도 21:28 비한국 국가와 21:30 KOR가 같은 접근 위반 stack으로 실패했다. 이 실행들은 한국 자산·기술 보정 뒤지만 항구 배치 closure 보정 전 산출물이다. 다음은 원장 또는 정적 validator가 증명하지 않는다.
 
@@ -151,10 +151,10 @@ CSV는 donor 파일 한 행이 호환 산출물에서 어떤 운명을 갖는지
 - DLC 분기, AI, save, multiplayer checksum
 - RT56 단독 대비 신규 fatal·반복 오류가 없는지
 
-외부 launcher `.mod`와 저장소 descriptor는 현재 모두 RT56과 `Korean Language`를 선언하지만, 19:20 실제 플레이세트는 대신 RT56 Korean Translation을 사용했다. 이를 해결하고 donor를 비활성화한 playset에서 런타임 대조군을 확보하기 전에는 이 원장을 “RT56 호환 완료”의 근거로 사용해서는 안 된다.
+현재 사용자 데이터에는 저장소를 직접 가리키는 launcher `.mod`가 없고, 조사 시점의 활성 플레이세트는 donor만 포함해 RT56+compat 런타임 검증에 사용할 수 없다. donor를 비활성화한 올바른 playset에서 대조군을 확보하기 전에는 이 원장을 “RT56 호환 완료”의 근거로 사용해서는 안 된다.
 
 ## 9. Git 및 외부 상태
 
-- 원장과 구현은 `main@70aaba43a98fd429378ec1a67d4398f16330e101` 위의 미커밋 변경 집합이다.
+- 원장과 현재 만주 보정은 `main@d4e3891ad7c0e050aabe856036011622af37017a` 위의 미커밋 변경 집합이다.
 - donor, RT56, vanilla, 로그, launcher 파일은 수정하지 않았다.
-- 게임 실행, 로그 갱신, commit, push, tag, 배포와 Workshop 작업은 수행하지 않았다.
+- 이번 만주 보정에서는 게임 실행, 로그 갱신, commit, push, tag, 배포와 Workshop 작업을 수행하지 않았다.

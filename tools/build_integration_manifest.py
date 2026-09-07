@@ -304,12 +304,17 @@ HOK_ASSET_OVERRIDES = {
     "gfx/flags/small/KOR_communism.tga",
     "gfx/flags/small/KOR_fascism.tga",
     "gfx/flags/small/KOR_neutrality.tga",
-    "thumbnail.png",
 }
 for _path in HOK_ASSET_OVERRIDES:
     EXPLICIT[_path] = same_path(
         "ASSET_COPY", "HOK 고유 한국 시각 정체성 자산; 출처를 유지해 의도적으로 선적"
     )
+EXPLICIT["thumbnail.png"] = same_path(
+    "OVERRIDE", "별도 호환판 Workshop 항목을 위해 제작한 호환판 전용 썸네일"
+)
+EXPLICIT["thumbnail_full.png"] = same_path(
+    "OVERRIDE", "별도 호환판 식별을 위해 제작한 호환판 전용 원본 크기 썸네일"
+)
 
 for _index in range(1, 6):
     EXPLICIT[f"sound/kor/kor_Idle_{_index:03d}.wav"] = same_path(
