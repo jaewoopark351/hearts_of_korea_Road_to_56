@@ -321,6 +321,7 @@ Compatibility repair, refactoring, rebalance, and new port content are separate 
 - Do not reformat an entire file for a local fix.
 - Preserve comments explaining historical intent or engine quirks.
 - Add comments only for non-obvious compatibility constraints.
+- When modifying code, add a concise nearby comment using the file's valid comment syntax in the form `[YYYY-MM-DD]_kpopmodder: <brief description of the change>`. Use the modification date and keep the description brief.
 - Do not delete an unknown key merely to quiet `error.log`; determine whether it was renamed, moved, DLC-gated, or replaced.
 - Preserve exact filename and path casing, including on Windows.
 - Check braces, quotes, list structure, and block placement after edits.
