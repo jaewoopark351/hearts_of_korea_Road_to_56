@@ -16,7 +16,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-HOK_ROOT = Path(r"C:\hoi\hearts_of_korea")
+# [2026-09-22]_kpopmodder: Use the reviewed donor snapshot, excluding unrelated updates.
+from source_snapshot import HOK_ROOT
 RT56_ROOT = Path(
     r"C:\Program Files (x86)\Steam\steamapps\workshop\content\394360\820260968"
 )

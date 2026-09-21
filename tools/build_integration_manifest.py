@@ -17,10 +17,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from build_rt56_map import HOK_ROOT, REPO_ROOT, RT56_ROOT
+from source_snapshot import source_record
 
 
+# [2026-09-22]_kpopmodder: Keep the canonical ledger path and identify the historical base plus Korean update per row.
 OUTPUT = REPO_ROOT / "docs/audits/2026-09-06-production-file-classification.csv"
-EXPECTED_DONOR_FILES = 1014
+EXPECTED_DONOR_FILES = 1031
 EXPECTED_RT56_COLLISIONS = 73
 
 BINARY_SUFFIXES = {
@@ -128,8 +130,15 @@ EXPLICIT: dict[str, Rule] = {
     "common/bookmarks/the_gathering_storm.txt": same_path(
         "THREE_WAY_MERGE", "RT56 bookmark base에 HOK 한국 시작 블록만 병합"
     ),
-    "common/characters/KOR.txt": same_path(
-        "THREE_WAY_MERGE", "HOK와 RT56의 한국 인물 정의를 논리 ID별 병합"
+    # [2026-09-22]_kpopmodder: MAN has no donor row; attribute this RT56-host-only merge to its KOR integration cause.
+    "common/characters/KOR.txt": Rule(
+        "THREE_WAY_MERGE",
+        (
+            "common/characters/KOR.txt",
+            "common/characters/zz_hok_rt56_kor_host_references.txt",
+            "common/characters/MAN.txt",
+        ),
+        "HOK 한국 인물·미모집 정책 유지; RT56 김창룡 정의 원본 복원 및 donor에 없는 RT56 MAN의 KOR 고문 고용 검사 두 곳만 조건부 character trigger로 병합",
     ),
     "common/countries/colors.txt": Rule(
         "THREE_WAY_MERGE",
@@ -387,6 +396,30 @@ EXPLICIT["music/Minshu_ikki.ogg"] = Rule(
 )
 
 
+# [2026-09-22]_kpopmodder: Classify the seventeen approved Korean additions explicitly; preserve all prior ownership decisions.
+KOREAN_UPDATE_ADDITIONS = {
+    "common/decisions/HOK_KOR_democratic_expansion.txt": "한국 민주 원조·협정·공동개발 결정",
+    "common/decisions/HOK_KOR_industry_expansion.txt": "이전된 한국 주 ID를 사용하는 지역 산업 결정",
+    "common/decisions/categories/HOK_KOR_democratic_expansion.txt": "한국 민주 결정 분류",
+    "common/decisions/categories/HOK_KOR_industry_expansion.txt": "한국 지역 산업 결정 분류",
+    "common/ideas/HOK_KOR_democratic_expansion.txt": "한국 민주 내정·원조·외교 협정 국민정신",
+    "common/ideas/HOK_KOR_industry_expansion.txt": "한국 산업·교육·생산 방식 국민정신",
+    "common/ideas/HOK_KOR_military_expansion.txt": "한국 육해공군 확장 국민정신",
+    "common/modifiers/HOK_KOR_democratic_expansion.txt": "한국과 수락국의 쌍방 면허생산 관계 보정",
+    "events/HOK_KOR_democratic_expansion.txt": "한국 협정 수락·거절·통보 이벤트",
+    "localisation/english/HOK_KOR_democratic_expansion_l_english.yml": "한국 민주·외교 확장 현지화의 english 채널",
+    "localisation/english/HOK_KOR_expansion_navigation_l_english.yml": "한국 중점 바로가기 현지화의 english 채널",
+    "localisation/english/HOK_KOR_industry_expansion_l_english.yml": "한국 산업 확장 현지화의 english 채널",
+    "localisation/english/HOK_KOR_military_expansion_l_english.yml": "한국 군사 확장 현지화의 english 채널",
+    "localisation/korean/HOK_KOR_democratic_expansion_l_korean.yml": "한국 민주·외교 확장 현지화의 korean 채널",
+    "localisation/korean/HOK_KOR_expansion_navigation_l_korean.yml": "한국 중점 바로가기 현지화의 korean 채널",
+    "localisation/korean/HOK_KOR_industry_expansion_l_korean.yml": "한국 산업 확장 현지화의 korean 채널",
+    "localisation/korean/HOK_KOR_military_expansion_l_korean.yml": "한국 군사 확장 현지화의 korean 채널",
+}
+for _path, _reason in KOREAN_UPDATE_ADDITIONS.items():
+    EXPLICIT[_path] = same_path("ADD", f"HOK 한국 후속 업데이트: {_reason}")
+
+
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest().upper()
 
@@ -404,6 +437,9 @@ def donor_files() -> list[Path]:
 
 
 def resolve_rule(relative: str, suffix: str, rt_collision: bool) -> Rule:
+    # [2026-09-22]_kpopmodder: An ADD decision cannot silently become a new host override after RT56 drift.
+    if relative in KOREAN_UPDATE_ADDITIONS and rt_collision:
+        raise RuntimeError(f"new Korean ADD path now collides with RT56: {relative}")
     rule = EXPLICIT.get(relative)
     if rule is not None:
         return rule
@@ -461,6 +497,14 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         collision_count += int(rt_collision)
         rule = resolve_rule(relative, source.suffix, rt_collision)
         output_path, output_hash, status = output_description(relative, rule)
+        # [2026-09-22]_kpopmodder: Tie every ledger row to the pinned Git object and its verified materialized bytes.
+        donor_hash = sha256(source)
+        provenance = source_record(relative)
+        if str(provenance["sha256"]).upper() != donor_hash:
+            raise RuntimeError(
+                f"snapshot provenance hash mismatch: {relative}\n"
+                f"  recorded {provenance['sha256']}\n  actual   {donor_hash}"
+            )
         counts[rule.integration_class] += 1
         rows.append(
             {
@@ -470,8 +514,12 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
                 "exact_path_rt56_collision": "yes" if rt_collision else "no",
                 "output_path": output_path,
                 "reason": rule.reason,
-                "donor_sha256": sha256(source),
+                "donor_sha256": donor_hash,
                 "output_sha256": output_hash,
+                "donor_source_commit": provenance["commit"],
+                "donor_source_blob": provenance["blob"],
+                "donor_source_sha256": provenance["sha256"],
+                "donor_source_checkout": provenance["checkout"],
             }
         )
 
@@ -495,6 +543,10 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "reason",
             "donor_sha256",
             "output_sha256",
+            "donor_source_commit",
+            "donor_source_blob",
+            "donor_source_sha256",
+            "donor_source_checkout",
         ),
         lineterminator="\n",
     )

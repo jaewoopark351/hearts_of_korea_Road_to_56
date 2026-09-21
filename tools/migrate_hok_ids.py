@@ -12,6 +12,7 @@ import argparse
 import re
 import sys
 from pathlib import Path
+from source_snapshot import FOCUS_UPDATE_PATHS
 
 from build_rt56_map import (
     HOK_ROOT,
@@ -989,6 +990,9 @@ def source_targets() -> list[tuple[str, bytes, bytes]]:
             if not source.is_file() or source.suffix.lower() not in TEXT_SUFFIXES:
                 continue
             relative = source.relative_to(HOK_ROOT).as_posix()
+            # [2026-09-22]_kpopmodder: The Korean update builder owns all 20 selected files.
+            if relative in FOCUS_UPDATE_PATHS:
+                continue
             if relative.startswith("history/states/") or relative in SHARED_MERGE_PATHS:
                 continue
             destination = REPO_ROOT / Path(relative)

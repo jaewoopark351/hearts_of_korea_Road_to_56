@@ -20,7 +20,8 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-HOK_ROOT = Path(r"C:\hoi\hearts_of_korea")
+# [2026-09-22]_kpopmodder: Use the reviewed donor snapshot, excluding unrelated updates.
+from source_snapshot import HOK_ROOT
 RT56_ROOT = Path(
     r"C:\Program Files (x86)\Steam\steamapps\workshop\content\394360\820260968"
 )
@@ -47,10 +48,11 @@ EXPECTED_SHA256 = {
     HOK_ROOT / "history/states/1085 - Tsushima.txt": "CE45376BB74D5AE944BCEBD7F964DE87AF9D025618FD863D385B2ED73836752F",
     RT56_ROOT / "map/definition.csv": "005BB6052AEDBAA85FFE4607B21398A33055624A78C2F822F116AE895B58393E",
     RT56_ROOT / "map/provinces.bmp": "B41B67B844407C70EB393E6979DCB8EE718BA76596ECEB2A9CCD38171156580F",
-    RT56_ROOT / "map/buildings.txt": "5622673138F7269FA433E80CA19B49F5C48B52E7AA386568F4E6C3E96B0F99BB",
-    RT56_ROOT / "map/railways.txt": "ECBDBFE17B5463019A3952F0B17887552F2AF6301D99F6BD5E22FEAA39566ECE",
-    RT56_ROOT / "map/supply_nodes.txt": "45595220BDE8C7B7FC9CEAD07A0EB4C5F48370548B51C0950520AB58EF83716F",
-    RT56_ROOT / "map/unitstacks.txt": "82C382B0D0BBF8944199A45A459BCB90B3A612E9D29996C1FC8BCE3C935998F4",
+    # [2026-09-22]_kpopmodder: Pin audited host placements and networks; Korean delta remains unchanged.
+    RT56_ROOT / "map/buildings.txt": "807C419FEB4CB107BFE73EBFE82FEA01B895977751F01D604A3C8ACE1FB3B42E",
+    RT56_ROOT / "map/railways.txt": "0CFEF6244DF5A04A8EBE0C1027C27287C375F31CBDA94F265FC549DF6CC61547",
+    RT56_ROOT / "map/supply_nodes.txt": "3C5D4998860ECFEBE8EF234D7756E450B0051D3D6C031C308855A84D3A41B1AD",
+    RT56_ROOT / "map/unitstacks.txt": "CF3B8BB6736F61F216D5BB789024795135A62E49BD669BD94721091CE177018C",
     RT56_ROOT / "map/strategicregions/186-Korea.txt": "7DE709723F219D435693D3C37641D724F1CBB1FB67C4CC99A4940F10533D2DCC",
     RT56_ROOT / "history/states/525-South Korea.txt": "2973C57539CF1FA9A8E09430C02AE76D0E27EB3F189E169C68A8F95B035B8772",
     RT56_ROOT / "history/states/527-North Korea.txt": "93B7536CDADDC263EF73E7A93DBD7E4233CF7E69FA46DAF9685A251A1B9E2E77",
@@ -670,8 +672,9 @@ def build_buildings(
     if len(set(additions + restored_rows)) != len(additions) + len(restored_rows):
         raise BuildError("duplicate HOK building rows in merged additions")
     merged = rebased + additions + restored_rows
-    if len(merged) != 71905:
-        raise BuildError(f"expected 71905 merged building rows, found {len(merged)}")
+    # [2026-09-22]_kpopmodder: Reviewed RT56 has 71863 rows; retain 21 HOK and 10 restored sites.
+    if len(merged) != 71894:
+        raise BuildError(f"expected 71894 merged building rows, found {len(merged)}")
 
     rt_missing = coastal_without_naval_base_spawn(
         rt_lines,

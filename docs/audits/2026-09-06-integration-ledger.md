@@ -1,44 +1,45 @@
 # 2026-09-06 통합 원장 요약
 
-> 상태: donor 1,014개 전수 분류 및 정적 산출물 확인 완료 / 런타임 충돌 감사 미완료
+> 2026-09-22 갱신: 고정 donor 기준 + 한국 업데이트의 유효 입력1,031개 전수 분류 / 런타임 충돌 감사 미완료
 
 이 문서는 HOK donor production/root 파일을 새 RT56 호환 포트에서 누가 소유하고 어떻게 처리했는지 요약한다. 행별 근거는 [production 파일 분류 CSV](2026-09-06-production-file-classification.csv)가 정본이며, 이 요약만으로 게임 호환을 증명하지 않는다.
 
 ## 1. 원장 범위와 재현 조건
 
-- donor root: `C:\hoi\hearts_of_korea`
-- donor Git: `main@887930f6e88c80568d62dab9cfbe1ba8a498a252`
+- donor Git object source: `C:\hoi\hearts_of_korea` (읽기 전용)
+- donor 기준: `887930f6e88c80568d62dab9cfbe1ba8a498a252` + 한국 콘텐츠 `da81530` 19개 및 AI `118d7b5` 1개
+- 생성기 입력: `.local-artifacts/sources/hok-887930f-korea-118d7b5`; `tools/source_snapshot.py`가 고정 커밋·경로·blob·체크아웃 해시를 검증
 - 제외한 donor 영역: `.git/`, `docs/`
-- 분류한 production/root 파일: 1,014개
+- 분류한 production/root 파일: 1,031개 (기존1,014개 + 신규17개)
 - RT56 root: `C:\Program Files (x86)\Steam\steamapps\workshop\content\394360\820260968`
-- RT56 Workshop item/manifest: `820260968` / `3323396725579032799`
+- RT56 Workshop item/manifest: `820260968` / `7475007536894105204`; [재기준 감사](2026-09-22-source-rebaseline.md)
 - RT56 descriptor SHA-256: `5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61`
 - exact-relative-path RT56 충돌: 73개
 - 생성기: `tools/build_integration_manifest.py`
 
-생성기는 donor 파일 수가 1,014개가 아니거나 exact-path 충돌 수가 73개가 아니면 실패한다. 또한 73개 충돌 모두에 명시 규칙을 요구하므로, 충돌 파일이 binary/text 기본 규칙으로 조용히 분류될 수 없다. 각 CSV 행은 `source_path`, 통합 분류, 상태, exact-path 충돌 여부, 산출 경로, 이유, donor SHA-256과 output/host SHA-256을 기록한다.
+생성기는 유효 donor 파일 수가 1,031개가 아니거나 exact-path 충돌 수가 73개가 아니면 실패한다. 73개 충돌 모두와 한국 신규17개에 명시 규칙을 요구한다. CSV의 기존 경로·분류·상태·충돌·산출경로·근거·입력/출력 해시 뒤에 원본 커밋·blob·SHA-256·checkout 방식을 추가했다. 신규17개가 RT56과 같은 경로에서 충돌하거나 source-lock 해시와 다르면 중단한다.
 
 ## 2. 분류 집계
 
 | 분류 | 수 | 의미 |
 |---|---:|---|
-| `ADD` | 119 | RT56과 같은 경로가 없는 HOK 고유 text/metadata를 호환 모드에 유지 |
+| `ADD` | 136 | RT56과 같은 경로가 없는 HOK 고유 text/metadata와 한국 신규17개를 유지 |
 | `ASSET_COPY` | 774 | 출처를 유지해야 하는 HOK 고유 binary asset 또는 의도적인 HOK 한국 자산 |
 | `BINARY_MERGE` | 18 | RT56 전역 지도 기반에 검토한 HOK 한국 delta를 합성 |
 | `OVERRIDE` | 9 | 호환 모드가 명시적으로 소유하는 한국 정의, 프로젝트 metadata 또는 호환판 전용 썸네일 |
 | `THREE_WAY_MERGE` | 31 | current host base와 HOK donor 의도를 정의/ID 단위로 병합 |
 | `USE_RT56` | 63 | donor 파일을 싣지 않고 RT56/vanilla 소유를 유지하거나 범위 밖 콘텐츠를 제외 |
-| **합계** | **1,014** | 모든 donor production/root 파일에 정확히 한 분류 적용 |
+| **합계** | **1,031** | 모든 유효 donor production/root 파일에 정확히 한 분류 적용 |
 
 산출 상태는 분류 의도와 별도로 다음처럼 집계된다.
 
 | 상태 | 수 | 의미 |
 |---|---:|---|
-| `SHIPPED` | 902 | 같은 경로 또는 명시한 포트 경로에 포함 |
+| `SHIPPED` | 919 | 같은 경로 또는 명시한 포트 경로에 포함 |
 | `GENERATED` | 49 | `BINARY_MERGE` 또는 `THREE_WAY_MERGE` 산출물로 포함 |
 | `OMITTED_HOST_OWNED` | 7 | 호환 모드에서는 제외하고 실제 RT56 파일의 hash를 원장에 기록 |
 | `OMITTED_OUT_OF_SCOPE` | 56 | RT56 파일이 따로 없더라도 한국 전용 포트 범위에서 제외 |
-| **합계** | **1,014** | donor 행 전체 |
+| **합계** | **1,031** | donor 행 전체 |
 
 ## 3. 73개 exact-path 충돌 처리
 

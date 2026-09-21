@@ -16,7 +16,8 @@ from pathlib import Path
 
 
 COMPAT_ROOT = Path(__file__).resolve().parents[1]
-HOK_ROOT = Path(r"C:\hoi\hearts_of_korea")
+# [2026-09-22]_kpopmodder: Use the reviewed donor snapshot, excluding unrelated updates.
+from source_snapshot import HOK_ROOT
 RT56_ROOT = Path(
     r"C:\Program Files (x86)\Steam\steamapps\workshop\content\394360\820260968"
 )
@@ -49,8 +50,9 @@ EXPECTED_SHA256 = {
         "563BBCD053E90E193DD30A9D1BF515609E2E260451E911AA81D3A1012F074101",
     VANILLA_ROOT / "common/doctrines/grand_doctrines/land_grand_doctrines.txt":
         "CD81A877366C582F096422320CD7FCF9FB259AFCC8D45D3DBB887B37792B329D",
+    # [2026-09-22]_kpopmodder: Re-pin 1.19.3 reference; active new_convoy_raiding ID remains valid.
     VANILLA_ROOT / "common/doctrines/grand_doctrines/sea_grand_doctrines.txt":
-        "CBDF40318B122C9CB54558348D7FC689787800A0CF9E14E16690EB3C5E738D88",
+        "110FDEAD1B621C4C54B54E58D9A78EF40A1EF4113A976FD3F6680E7A5BE0B5CF",
     VANILLA_ROOT / "common/doctrines/grand_doctrines/air_grand_doctrines.txt":
         "C06B6B1AD7C9B67D9F55B70FA9A26A9BA5830956D50EC94F33817755BAACE5A2",
     RT56_ROOT / "common/doctrines/subdoctrines/land/infantry_subdoctrines.txt":

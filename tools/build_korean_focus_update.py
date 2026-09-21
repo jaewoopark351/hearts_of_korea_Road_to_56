@@ -1,0 +1,222 @@
+#!/usr/bin/env python3
+"""Build only the pinned September 2026 HOK Korean focus update.
+
+The twenty inputs are selected from HOK commits da81530 and 118d7b5, not
+from the donor's unrelated Japanese update.  The source snapshot is prepared
+separately; this builder never writes to the donor or prepares its own inputs.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import sys
+from pathlib import Path
+
+from build_rt56_map import HOK_ROOT, PROVINCE_ID_MAP, REPO_ROOT, STATE_ID_MAP
+from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
+
+
+# [2026-09-22]_kpopmodder: Pin the approved Korean update separately from the historical donor base.
+FOCUS_COMMIT = "da815305e3ce00186a487b3a378bf8536ff59146"
+AI_COMMIT = "118d7b53dfdbc120fcfe4b9d6792e66b2b519be7"
+SOURCE_HASHES = {
+    Path("common/decisions/HOK_KOR_democratic_expansion.txt"):
+        "C798B0EB016CB22DA409C66E54FFDB65FE1860DA78C2B41C5889D334AC2AAD2B",
+    Path("common/decisions/HOK_KOR_industry_expansion.txt"):
+        "2872F4781FF6828E74902CAA10B107DF1B15EE3877717CEEAEED66B58D98E1C0",
+    Path("common/decisions/categories/HOK_KOR_democratic_expansion.txt"):
+        "0BD424CFADD58693EB6083F7CEF1E7F916E64EEFFD792CF762AAEF40FEB7C06E",
+    Path("common/decisions/categories/HOK_KOR_industry_expansion.txt"):
+        "140234E91FC12703F5263A80583EF5452B3D1B96E0B8C09931D4037B6225894D",
+    Path("common/ideas/HOK_KOR_democratic_expansion.txt"):
+        "B9AFBF64FFC29C83DDECE0B251A8C862190CDCD85E24435E42C65BB8ACDE3AFC",
+    Path("common/ideas/HOK_KOR_industry_expansion.txt"):
+        "067B1CB40D071A2962090C621F63A7E8DA12B9AB66043CF7AB0B79E7928E1828",
+    Path("common/ideas/HOK_KOR_military_expansion.txt"):
+        "FB2C18AC3BE0DEAAD30714B8F4624324B646F294D9094D35871DAC0E441D7578",
+    Path("common/ideas/korea.txt"):
+        "DE22B2B0F7733AE5BC5A1564D9BBA8F47AE439456F893E6238903AC8BE953254",
+    Path("common/modifiers/HOK_KOR_democratic_expansion.txt"):
+        "E91E6E987B2AE60597C805180B657112E3ADF2A4DB1C41BAF09275681B40A64B",
+    Path("common/national_focus/korea.txt"):
+        "49EC715410B6931E51A6ABB297F7BE17E85D75A1AF72F4A70155E7824A54F903",
+    Path("events/HOK_KOR_democratic_expansion.txt"):
+        "62264F2E2AAEC8A2826427BB3C5D64D04194DA840616C1E4A0DD6CBD489999DF",
+    Path("localisation/english/HOK_KOR_democratic_expansion_l_english.yml"):
+        "472FD3CF3D03C2F3A4B50146EB0BA751EB372E049D29715573B1F7E065C6E442",
+    Path("localisation/english/HOK_KOR_expansion_navigation_l_english.yml"):
+        "EBAEB4761AB88B5549F8892EA32B5A991C00B7F11E6306ED517174113E5A43B7",
+    Path("localisation/english/HOK_KOR_industry_expansion_l_english.yml"):
+        "0D88A0FB1B87A16AE4F16463929D7FA2A049E1237A18D02B716CE644FC94CB0B",
+    Path("localisation/english/HOK_KOR_military_expansion_l_english.yml"):
+        "F685247B25DD78F4A001B7277E22807D2A2719032D58E73EFEFE671BD49B2725",
+    Path("localisation/korean/HOK_KOR_democratic_expansion_l_korean.yml"):
+        "E409D69E52AA702A6A80CFE31BD23C354AA062B609492441FBD2B6F211F089F5",
+    Path("localisation/korean/HOK_KOR_expansion_navigation_l_korean.yml"):
+        "3385ECE1AA8169FFA6B44CAEDFAAD70E6DE5DDAEF3804847EED920404CD353BE",
+    Path("localisation/korean/HOK_KOR_industry_expansion_l_korean.yml"):
+        "9FABB9B080EAD1E6C7C35B6459A488360C9192EBBDFDF1135C9D9C03D1123F9E",
+    Path("localisation/korean/HOK_KOR_military_expansion_l_korean.yml"):
+        "73C8678935B6D09DBE6C82A306B790CB4CDB31656AD43BF243F26D33C66AA4E2",
+    Path("common/ai_strategy_plans/KOR_historical_strategy_plan.txt"):
+        "18C56A24FF5C93A944E58D71BB81AFFADC332601861D980EF243ACF028D2A3E8",
+}
+OUTPUT_PATHS = tuple(SOURCE_HASHES)
+SOURCE_COMMITS = {
+    relative: AI_COMMIT if relative.parts[1] == "ai_strategy_plans" else FOCUS_COMMIT
+    for relative in OUTPUT_PATHS
+}
+
+# [2026-09-22]_kpopmodder: Refuse to overwrite any work beyond the three reviewed pre-update outputs.
+ACCEPTED_PRIOR_OUTPUT_HASHES = {
+    Path("common/national_focus/korea.txt"):
+        "AB0CDBC51CD8052EF9C7C9FA957AF00619360EAA3EFFBF03EA06F6470AA661DE",
+    Path("common/ideas/korea.txt"):
+        "BB53994155D4800B86AD260E32572D54A4FD8D21DEDBE97A8F05B6B8B40F0927",
+    Path("common/ai_strategy_plans/KOR_historical_strategy_plan.txt"):
+        "09AED7585E784FC4C87FA938862AF7DC053D7A2064C244F77AC2006E6561AC6D",
+}
+PORT_NOTES = {
+    Path("common/national_focus/korea.txt"):
+        "# [2026-09-22]_kpopmodder: Preserve the approved RT56 map IDs and fifteen-state Manchurian integration in the updated HOK tree.",
+    Path("common/decisions/HOK_KOR_industry_expansion.txt"):
+        "# [2026-09-22]_kpopmodder: Use the approved RT56 Korean state IDs for project conditions, rewards, cancellation and highlighting.",
+}
+
+
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest().upper()
+
+
+def verify_inputs() -> dict[Path, bytes]:
+    """Read all approved inputs once and reject missing or drifted bytes."""
+    inputs = {}
+    errors = []
+    for relative, expected in SOURCE_HASHES.items():
+        source = HOK_ROOT / relative
+        if not source.is_file():
+            errors.append(f"missing pinned source: {source}")
+            continue
+        data = source.read_bytes()
+        actual = sha256_bytes(data)
+        if actual != expected:
+            errors.append(
+                f"source drift: {source}\n  expected {expected}\n  actual   {actual}"
+            )
+            continue
+        if relative.suffix == ".yml":
+            language = relative.parts[1]
+            if not data.startswith(b"\xef\xbb\xbf" + f"l_{language}:".encode()):
+                errors.append(f"unexpected localisation BOM/header: {relative}")
+                continue
+        inputs[relative] = data
+    if errors:
+        raise RuntimeError("\n".join(errors))
+    return inputs
+
+
+def add_port_note(data: bytes, note: str) -> bytes:
+    """Add the migration note while preserving the source BOM and line ends."""
+    bom = b"\xef\xbb\xbf" if data.startswith(b"\xef\xbb\xbf") else b""
+    payload = data[len(bom):]
+    newline = b"\r\n" if b"\r\n" in payload else b"\n"
+    return bom + note.encode("utf-8") + newline + payload
+
+
+def build_all() -> dict[Path, bytes]:
+    """Return deterministic relative-path outputs without writing any files."""
+    inputs = verify_inputs()
+    mapping = {**PROVINCE_ID_MAP, **STATE_ID_MAP}
+    outputs = {}
+    changed = set()
+    for relative, original in inputs.items():
+        migrated = replace_tokens(original, mapping)
+        migrated = apply_post_migration_fixes(relative.as_posix(), migrated)
+        if migrated != original:
+            changed.add(relative)
+        if relative in PORT_NOTES:
+            migrated = add_port_note(migrated, PORT_NOTES[relative])
+        outputs[relative] = migrated
+    # [2026-09-22]_kpopmodder: The other eighteen files are approved byte-for-byte additions or updates.
+    if changed != set(PORT_NOTES):
+        unexpected = sorted(path.as_posix() for path in changed ^ set(PORT_NOTES))
+        raise ValueError(f"unexpected Korean update transformation coverage: {unexpected}")
+    verify_inputs()
+    return outputs
+
+
+def preflight(outputs: dict[Path, bytes]) -> None:
+    if set(outputs) != set(OUTPUT_PATHS):
+        raise ValueError("Korean update output set must match the twenty approved paths")
+    errors = []
+    for relative, expected in outputs.items():
+        destination = (REPO_ROOT / relative).resolve()
+        destination.relative_to(REPO_ROOT)
+        temporary = destination.with_name(destination.name + ".hok-focus.tmp")
+        if temporary.exists():
+            errors.append(f"refusing to overwrite existing temporary file: {temporary}")
+        if not destination.exists():
+            continue
+        if not destination.is_file():
+            errors.append(f"output is not a regular file: {relative}")
+            continue
+        current = destination.read_bytes()
+        if current == expected:
+            continue
+        accepted = ACCEPTED_PRIOR_OUTPUT_HASHES.get(relative)
+        if accepted is None or sha256_bytes(current) != accepted:
+            errors.append(f"refusing to overwrite independently changed file: {relative}")
+    if errors:
+        raise RuntimeError("\n".join(errors))
+
+
+def apply(outputs: dict[Path, bytes]) -> None:
+    preflight(outputs)
+    verify_inputs()
+    for relative, expected in outputs.items():
+        destination = (REPO_ROOT / relative).resolve()
+        destination.relative_to(REPO_ROOT)
+        if destination.is_file() and destination.read_bytes() == expected:
+            print(f"unchanged: {relative.as_posix()}")
+            continue
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        temporary = destination.with_name(destination.name + ".hok-focus.tmp")
+        with temporary.open("xb") as handle:
+            handle.write(expected)
+        temporary.replace(destination)
+        print(f"wrote: {relative.as_posix()}")
+
+
+def check(outputs: dict[Path, bytes]) -> bool:
+    ok = True
+    for relative, expected in outputs.items():
+        destination = REPO_ROOT / relative
+        if not destination.is_file():
+            print(f"MISSING: {relative.as_posix()}")
+            ok = False
+        elif destination.read_bytes() != expected:
+            print(f"MISMATCH: {relative.as_posix()}")
+            ok = False
+        else:
+            print(f"OK: {relative.as_posix()}")
+    return ok
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true", help="compare without writing outputs")
+    args = parser.parse_args()
+    try:
+        outputs = build_all()
+        if args.check:
+            return 0 if check(outputs) else 1
+        apply(outputs)
+        return 0
+    except (OSError, RuntimeError, ValueError) as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

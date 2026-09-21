@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_COMPAT_REMOTE_FILE_ID = "3796816200"
 
 GENERATOR_CHECKS = (
+    # [2026-09-22]_kpopmodder: Audit the immutable donor overlay before any derived output gate.
+    ("audited HOK source snapshot", "source_snapshot.py", "--check"),
     ("map synthesis", "build_rt56_map.py", "--check"),
     ("shared overrides", "build_shared_overrides.py", "--check"),
     ("East Asia overrides", "build_east_asia_overrides.py", "--check"),
@@ -26,7 +28,9 @@ GENERATOR_CHECKS = (
     ("Korea-only pruning", "prune_non_korean_content.py", "--check"),
     ("HOK ID migration", "migrate_hok_ids.py", "--list"),
     ("doctrine migration", "migrate_doctrines.py", "--check"),
-    ("1,014-file integration manifest", "build_integration_manifest.py", "--check"),
+    ("Korean focus update", "build_korean_focus_update.py", "--check"),
+    ("Korean expansion contracts", "check_korean_focus_update.py", "--check"),
+    ("1,031-file integration manifest", "build_integration_manifest.py", "--check"),
 )
 
 SCRIPT_SUFFIXES = {".txt", ".gfx", ".asset", ".gui"}
@@ -138,6 +142,8 @@ HOK_EVENT_FILES = (
     "events/korea.txt",
     "events/NewsEvents_KOR.txt",
     "events/HoK_ragnarok.txt",
+    # [2026-09-22]_kpopmodder: Include the six consent-based expansion events in asset/localisation closure.
+    "events/HOK_KOR_democratic_expansion.txt",
 )
 
 RT56_ROOT = Path(
@@ -437,7 +443,8 @@ def check_hok_event_assets_and_localisation(result: Validation) -> None:
     }
     loc_reference = re.compile(
         r"(?m)^[ \t]*(?:title|desc|name)[ \t]*=[ \t]*"
-        r"((?:kor_events|KOR_events|newsk|hokRagnarok)\.[A-Za-z0-9_.-]+)"
+        # [2026-09-22]_kpopmodder: Check the new namespace as well as inherited HOK event strings.
+        r"((?:kor_events|KOR_events|newsk|hokRagnarok|HOK_KOR_democratic_expansion)\.[A-Za-z0-9_.-]+)"
     )
     picture_reference = re.compile(
         r"(?m)^[ \t]*picture[ \t]*=[ \t]*([A-Za-z0-9_.-]+)"
@@ -1503,6 +1510,85 @@ def check_logical_ids(result: Validation) -> None:
         )
 
 
+# [2026-09-22]_kpopmodder: Check the effective registry and MAN consumers, not an isolated token string.
+def require_kor_host_character_reference() -> None:
+    relative_name = "common/characters/zz_hok_rt56_kor_host_references.txt"
+    output = ROOT / relative_name
+    identifier = "KOR_kim_chang_ryong"
+    token = "kim_chang_ryong"
+    host_text = read_utf8(RT56_ROOT / "common/characters/KOR.txt")
+    current_text = read_utf8(output)
+    host_block = unique_nested_block(host_text, identifier, 1, "RT56 KOR characters")
+    current_block = unique_nested_block(current_text, identifier, 1, relative_name)
+    if current_block != host_block:
+        raise ValueError("restored KOR_kim_chang_ryong must retain the complete unchanged RT56 block")
+    if [key for key, _ in top_level_block_keys(output)] != ["characters"] or [
+        key for key, _ in direct_block_keys(output, "characters", 1)
+    ] != [identifier]:
+        raise ValueError("KOR host-reference output must contain only the restored character")
+    advisor = unique_nested_block(current_block, "advisor", 1, identifier)
+    if scalar_values_at_depth(advisor, "idea_token", 1) != [token] or (
+        scalar_values_at_depth(advisor, "slot", 1) != ["political_advisor"]
+    ):
+        raise ValueError("KOR host-reference advisor must register idea_token kim_chang_ryong")
+
+    # Project exact-path shadowing for the intended host+compat stack; runtime loading is separate.
+    effective: dict[str, Path] = {}
+    for source_root in (VANILLA_ROOT, RT56_ROOT, ROOT):
+        for path in (source_root / "common/characters").glob("*.txt"):
+            effective[path.relative_to(source_root).as_posix().casefold()] = path
+    character_sources: list[Path] = []
+    token_sources: list[Path] = []
+    for path in effective.values():
+        text = read_utf8(path)
+        if token not in text:
+            continue
+        character_sources.extend(
+            path for _ in assignment_blocks_at_depth(text, identifier, 1)
+        )
+        token_sources.extend(
+            path for value in scalar_values_at_depth(text, "idea_token", 3) if value == token
+        )
+    if character_sources != [output] or token_sources != [output]:
+        raise ValueError(
+            "effective character/advisor declarations must resolve once to the restored KOR file: "
+            f"characters={character_sources}, tokens={token_sources}"
+        )
+
+    # [2026-09-22]_kpopmodder: Declaration alone did not fix runtime has_idea errors; verify the guarded native trigger.
+    man_path = ROOT / "common/characters/MAN.txt"
+    if effective.get("common/characters/man.txt") != man_path:
+        raise ValueError("MAN characters must load the reviewed RT56-based merge")
+    man_text = read_utf8(man_path)
+    host_man_text = read_utf8(RT56_ROOT / "common/characters/MAN.txt")
+    man = unique_nested_block(man_text, "MAN_kim_chang_ryong", 1, "merged MAN")
+    host_man = unique_nested_block(host_man_text, "MAN_kim_chang_ryong", 1, "RT56 MAN")
+    man_advisor = unique_nested_block(man, "advisor", 1, "merged MAN Kim")
+    if scalar_values_at_depth(man_advisor, "idea_token", 1) != ["MAN_kim_chang_ryong"]:
+        raise ValueError("MAN must retain its distinct advisor token")
+    restored_host_text = man_text
+    for role, condition in (("advisor", "available"), ("corps_commander", "visible")):
+        role_block = unique_nested_block(man, role, 1, "merged MAN Kim")
+        condition_block = unique_nested_block(role_block, condition, 1, role)
+        korean_scope = unique_nested_block(condition_block, "KOR", 1, role)
+        guarded = unique_nested_block(korean_scope, "if", 1, role)
+        limit = unique_nested_block(guarded, "limit", 1, role)
+        if scalar_values_at_depth(limit, "has_character", 1) != [identifier]:
+            raise ValueError(f"MAN {role} must guard the character scope with KOR ownership")
+        exclusion = unique_nested_block(guarded, "NOT", 1, role)
+        character = unique_nested_block(exclusion, identifier, 1, role)
+        if scalar_values_at_depth(character, "is_hired_as_advisor", 1) != ["yes"]:
+            raise ValueError(f"MAN {role} must exclude the hired Korean advisor")
+        if re.search(r"\bhas_idea\s*=\s*kim_chang_ryong\b", mask_comments(korean_scope)):
+            raise ValueError(f"MAN {role} still queries the unrecruited dynamic idea")
+        original_role = unique_nested_block(host_man, role, 1, "RT56 MAN Kim")
+        original_condition = unique_nested_block(original_role, condition, 1, role)
+        original_scope = unique_nested_block(original_condition, "KOR", 1, role)
+        restored_host_text = restored_host_text.replace(korean_scope, original_scope, 1)
+    if restored_host_text != host_man_text:
+        raise ValueError("MAN content outside the two KOR conditions must remain byte-identical to RT56")
+
+
 def check_required_content(result: Validation) -> None:
     assertions = {
         "common/achievements/HoK_achievements.txt": ("unique_id = hok_rt56_achievements",),
@@ -1566,8 +1652,12 @@ def check_required_content(result: Validation) -> None:
         for needle in needles:
             if needle not in text:
                 result.error(f"{relative_name}: required merged content missing: {needle!r}")
+    try:
+        require_kor_host_character_reference()
+    except (OSError, UnicodeDecodeError, ValueError) as exc:
+        result.error(f"KOR host-character reference closure: {exc}")
     if len(result.errors) == before:
-        result.passed("required KOR merge assertions: present")
+        result.passed("required KOR merge assertions: present; MAN uses guarded native KOR advisor checks")
 
 
 def main() -> int:
