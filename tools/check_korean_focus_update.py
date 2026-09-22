@@ -10,11 +10,15 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
+import json
 import re
+import struct
 from dataclasses import dataclass
 from pathlib import Path
 
 from build_rt56_map import PROVINCE_ID_MAP, STATE_ID_MAP
+from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
 from source_snapshot import FOCUS_UPDATE_PATHS, read_source_file
 from validate_port import ROOT, RT56_ROOT, VANILLA_ROOT, localisation_keys, mask_comments, matching_brace
 
@@ -35,6 +39,15 @@ AI_PATH = "common/ai_strategy_plans/KOR_historical_strategy_plan.txt"
 IDEA_PATHS = tuple(f"common/ideas/HOK_KOR_{part}_expansion.txt" for part in ("industry", "military", "democratic"))
 DECISION_PATHS = tuple(f"common/decisions/HOK_KOR_{part}_expansion.txt" for part in ("industry", "democratic"))
 EVENT_PATH = "events/HOK_KOR_democratic_expansion.txt"
+# [2026-09-22]_kpopmodder: Audit the precise visual delta independently of the production builder.
+ICON_MANIFEST = ROOT / "docs/data/HOK_KOREAN_FOCUS_ICON_MANIFEST.json"
+ICON_GFX_PATHS = (
+    "interface/HOK_KOR_focus_icons.gfx",
+    "interface/HOK_KOR_focus_icons_shine.gfx",
+    "interface/HOK_KOR_spirit_icons.gfx",
+)
+SHINE_OVERLAY = "gfx/interface/goals/shine_overlay.dds"
+SHINE_EFFECT = "gfx/FX/buttonstate.lua"
 
 
 def require(condition: bool, message: str) -> None:
@@ -181,6 +194,23 @@ def check_focus_contract(current: dict[str, Block], baseline: dict[str, Block], 
 
         for identifier in current:
             visit(identifier)
+    # [2026-09-22]_kpopmodder: Preserve this inherited reward and allow only the approved guarded economy-law follow-up.
+    identifier = "KOR_independent_party_in_power"
+    original_reward = mapped(one(source[identifier], "completion_reward"))
+    reward = one(current[identifier], "completion_reward")
+    require(reward[:len(original_reward)] == original_reward, "independent-party original reward changed or reordered")
+    follow_up = reward[len(original_reward):]
+    require(follow_up == parse("""
+        if = {
+            limit = { OR = { has_idea = civilian_economy has_idea = low_economic_mobilisation } }
+            add_ideas = partial_economic_mobilisation
+        }
+    """), "independent-party reward must append exactly one guarded partial-mobilization effect")
+    guard = one(one(follow_up, "if"), "limit")
+    eligible = ("civilian_economy", "low_economic_mobilisation")
+    unchanged = ("partial_economic_mobilisation", "war_economy", "tot_economic_mobilisation", "other_economy_law")
+    for law in eligible + unchanged:
+        require(evaluate(guard, {"has_idea": law}) == (law in eligible), f"independent-party economy guard changed: {law}")
     return added
 
 
@@ -403,6 +433,126 @@ def check_new_id_collisions(groups: dict[str, tuple[set[str], str]], expected_pa
                     continue
                 clashes = identifiers & definition_ids(path, kind)
                 require(not clashes, f"new {kind} IDs collide in {path}: {sorted(clashes)}")
+
+
+def source_equivalence(manifest: dict) -> None:
+    """Allow only the manifest's exact icon substitutions and earlier port edits."""
+    # [2026-09-22]_kpopmodder: Compare complete ordered blocks; never discard all icon/picture fields.
+    for relative in (FOCUS_PATH, *IDEA_PATHS):
+        data = read_source_file(relative, updated=True)
+        data = replace_tokens(data, {**PROVINCE_ID_MAP, **STATE_ID_MAP})
+        expected = parse(apply_post_migration_fixes(relative, data).decode("utf-8-sig"))
+        if relative == FOCUS_PATH:
+            focuses = focus_blocks(expected)
+            entries = {row["id"]: row for row in manifest["focuses"]}
+            tree = one(expected, "focus_tree")
+            updated = []
+            for entry in tree:
+                if entry.key != "focus" or not isinstance(entry.value, tuple):
+                    updated.append(entry)
+                    continue
+                block = entry.value
+                identifier = scalar(block, "id")
+                if identifier in entries:
+                    row = entries[identifier]
+                    require(scalar(block, "icon") == row["previous_reference"], f"unreviewed prior focus icon: {identifier}")
+                    block = replace_entry(block, ("icon",), row["new_reference"])
+                if identifier == "KOR_independent_party_in_power":
+                    reward = one(block, "completion_reward") + parse("""
+                        if = {
+                            limit = { OR = { has_idea = civilian_economy has_idea = low_economic_mobilisation } }
+                            add_ideas = partial_economic_mobilisation
+                        }
+                    """)
+                    block = replace_entry(block, ("completion_reward",), reward)
+                updated.append(Entry(entry.key, entry.op, block))
+            require(set(entries) <= set(focuses), "manifest refers to an unknown source focus")
+            expected = replace_entry(expected, ("focus_tree",), tuple(updated))
+        else:
+            ideas = named(one(one(expected, "ideas"), "country"))
+            for row in (item for item in manifest["ideas"] if item["source_file"] == relative):
+                identifier = row["id"]
+                require(scalar(ideas[identifier], "picture") == row["previous_reference"], f"unreviewed prior idea picture: {identifier}")
+                expected = replace_entry(expected, ("ideas", "country", identifier, "picture"), row["new_reference"])
+        require(read(ROOT / relative) == expected, f"script differs beyond approved icon/map/MAN/economy edits: {relative}")
+
+
+def check_icon_assets(focuses: dict[str, Block], added: set[str], ideas: dict[str, Block]) -> None:
+    # [2026-09-22]_kpopmodder: Require full consumer, DDS, registry and animation-reference closure.
+    manifest = json.loads(ICON_MANIFEST.read_text(encoding="utf-8-sig"))
+    textures: set[str] = set()
+    expected_sprites: dict[str, str] = {}
+    for kind, definitions, field, count, dimensions in (
+        ("focuses", {identifier: focuses[identifier] for identifier in added}, "icon", 60, (100, 88)),
+        ("ideas", ideas, "picture", 29, (60, 68)),
+    ):
+        rows = manifest[kind]
+        require(len(rows) == count and {row["id"] for row in rows} == set(definitions), f"icon manifest {kind} coverage differs")
+        for row in rows:
+            identifier, reference, texture = row["id"], row["new_reference"], row["texture"]
+            require(row["source_file"] == FOCUS_PATH if kind == "focuses" else row["source_file"] in IDEA_PATHS,
+                    f"unexpected icon consumer source: {identifier}")
+            require(scalar(definitions[identifier], field) == reference, f"wrong {field} mapping: {identifier}")
+            directory = "goals" if kind == "focuses" else "ideas"
+            require(texture.startswith(f"gfx/interface/{directory}/HOK_KOR/") and texture.endswith(".dds")
+                    and ".." not in Path(texture).parts and "\\" not in texture, f"unsafe icon texture path: {texture}")
+            require(texture not in textures, f"icon texture reused unexpectedly: {texture}")
+            textures.add(texture)
+            data = (ROOT / texture).read_bytes()
+            require(hashlib.sha256(data).hexdigest() == row["sha256"].lower(), f"icon DDS hash differs: {texture}")
+            require(len(data) >= 128 and data[:4] == b"DDS ", f"invalid DDS header: {texture}")
+            header = struct.unpack("<31I", data[4:128])
+            width, height = dimensions
+            require(header[0] == 124 and (header[3], header[2]) == dimensions
+                    and header[18:26] == (32, 65, 0, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000)
+                    and header[6] in (0, 1) and len(data) == 128 + width * height * 4,
+                    f"expected {width}x{height} BGRA32 alpha DDS: {texture}")
+            sprite = reference if kind == "focuses" else "GFX_idea_" + reference
+            require(sprite not in expected_sprites, f"icon sprite reused: {sprite}")
+            expected_sprites[sprite] = texture
+            if kind == "focuses":
+                expected_sprites[sprite + "_shine"] = texture
+    require(len(textures) == 89 and len(expected_sprites) == 149, "expected 89 textures and 149 icon sprites")
+    sprites: dict[str, Block] = {}
+    for relative, expected_count in zip(ICON_GFX_PATHS, (60, 60, 29)):
+        registry = one(read(ROOT / relative), "spriteTypes")
+        require(len(registry) == expected_count, f"unexpected sprite count: {relative}")
+        for entry in registry:
+            require(entry.key.lower() == "spritetype" and isinstance(entry.value, tuple), f"unexpected sprite registry entry: {relative}")
+            identifier = scalar(entry.value, "name")
+            require(identifier in expected_sprites and identifier not in sprites, f"unknown/duplicate imported sprite: {identifier}")
+            sprites[identifier] = entry.value
+    require(set(sprites) == set(expected_sprites), "imported sprite registry coverage differs")
+    vanilla_shine = (VANILLA_ROOT / "interface/goals_shine.gfx").read_text(encoding="utf-8-sig")
+    template_start = re.search(r'(?mi)^[ \t]*spriteType\s*=\s*\{\s*name\s*=\s*"GFX_focus_generic_electrification_shine"', vanilla_shine)
+    require(template_start is not None, "missing target-version electrification shine template")
+    opening = vanilla_shine.index("{", template_start.start(), template_start.end())
+    template = parse(vanilla_shine[template_start.start():matching_brace(vanilla_shine, opening)])[0].value
+    require(isinstance(template, tuple) and scalar(template, "effectFile") == SHINE_EFFECT, "target-version shared shine effect differs")
+    for identifier, block in sprites.items():
+        texture = expected_sprites[identifier]
+        require(scalar(block, "texturefile") == texture, f"sprite texture mapping differs: {identifier}")
+        if identifier.endswith("_shine"):
+            # [2026-09-22]_kpopmodder: Vanilla registers buttonstate.lua as an effect ID, not a literal installed file.
+            require(scalar(block, "effectFile") == SHINE_EFFECT, f"unreviewed shared shine effect: {identifier}")
+            animations = children(block, "animation")
+            require(len(animations) == 2, f"expected two shine animations: {identifier}")
+            for animation in animations:
+                require(scalar(animation, "animationmaskfile") == texture, f"shine mask is not the local icon DDS: {identifier}")
+                require(scalar(animation, "animationtexturefile") == SHINE_OVERLAY
+                        and (VANILLA_ROOT / SHINE_OVERLAY).is_file(), f"missing shared vanilla shine overlay: {identifier}")
+        for entry in walk(block):
+            if entry.key.lower() in ("texturefile", "animationmaskfile", "animationtexturefile", "effectfile"):
+                allowed = {texture, SHINE_OVERLAY, SHINE_EFFECT} if identifier.endswith("_shine") else {texture}
+                require(entry.value in allowed, f"unreviewed sprite dependency: {identifier}/{entry.value}")
+    declarations = re.compile(r'\bname\s*=\s*"?([A-Za-z0-9_]+)"?')
+    for root in (ROOT, RT56_ROOT, VANILLA_ROOT):
+        for path in (root / "interface").rglob("*.gfx"):
+            if root == ROOT and path.relative_to(root).as_posix() in ICON_GFX_PATHS:
+                continue
+            found = set(declarations.findall(mask_comments(path.read_bytes().decode("utf-8-sig"))))
+            require(not found & sprites.keys(), f"imported sprite ID collides in {path}: {sorted(found & sprites.keys())}")
+    source_equivalence(manifest)
 
 
 def check_reference_closure(focuses: dict[str, Block], added: set[str], ideas: dict[str, Block], decisions: dict[str, Block], categories: dict[str, Block], events: dict[str, Block], relation: dict[str, Block], blocks: list[Block]) -> None:
@@ -640,6 +790,7 @@ def run_checks() -> None:
         require(not ideas.keys() & definitions.keys(), "duplicate new idea")
         ideas.update(definitions)
     require(counts == [11, 12, 6], "expected industrial/military/democratic ideas 11/12/6")
+    check_icon_assets(focuses, added, ideas)
     decisions, category_definitions, category_consumers = {}, {}, set()
     for relative in DECISION_PATHS:
         for category, body in named(read(ROOT / relative)).items():
@@ -669,7 +820,8 @@ def run_checks() -> None:
     check_reference_closure(focuses, added, ideas, decisions, category_definitions, events, relation, blocks)
     print("PASS Korean update: 266+60 focuses / 2 earlier + 152 expansion durations / 106+3 AI plans; reference and new-ID closure")
     print("PASS Korean contracts: 29 ideas / 10 decisions / 3 categories / 6 events; regional, civic-school, aid and bilateral guards")
-    print("STATIC ONLY: Boolean cases do not prove engine evaluation, decision repetition, AI timing, or gameplay.")
+    print("PASS Korean icons: exact 60 focus / 29 idea mappings; 89 BGRA32 DDS hashes; 149 unique sprites and local mask/shared shine closure")
+    print("STATIC ONLY: These checks do not prove engine evaluation, decision repetition, AI timing, icon rendering, or gameplay.")
 
 
 def main() -> int:

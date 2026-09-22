@@ -30,7 +30,8 @@ GENERATOR_CHECKS = (
     ("doctrine migration", "migrate_doctrines.py", "--check"),
     ("Korean focus update", "build_korean_focus_update.py", "--check"),
     ("Korean expansion contracts", "check_korean_focus_update.py", "--check"),
-    ("1,031-file integration manifest", "build_integration_manifest.py", "--check"),
+    # [2026-09-22]_kpopmodder: Include the 92 newly imported Korean artwork assets in the provenance gate.
+    ("1,123-file integration manifest", "build_integration_manifest.py", "--check"),
 )
 
 SCRIPT_SUFFIXES = {".txt", ".gfx", ".asset", ".gui"}

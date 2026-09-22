@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from build_rt56_map import HOK_ROOT, REPO_ROOT, RT56_ROOT
-from source_snapshot import source_record
+from source_snapshot import icon_lock, read_icon_source, source_record
 
 
 # [2026-09-22]_kpopmodder: Keep the canonical ledger path and identify the historical base plus Korean update per row.
@@ -245,7 +245,8 @@ EXPLICIT: dict[str, Rule] = {
         "OVERRIDE", "HOK 한국 아이디어 설계가 이 포트의 의도적 소유 영역"
     ),
     "common/national_focus/korea.txt": same_path(
-        "OVERRIDE", "HOK 한국 중점 트리를 ID 마이그레이션 후 의도적으로 제공"
+        # [2026-09-22]_kpopmodder: Record the isolated donor follow-up without changing the pinned tree provenance.
+        "OVERRIDE", "HOK 한국 중점 트리를 ID 마이그레이션 후 제공; donor 698b6eb의 독립당 부분 동원 보상만 후속 반영 (docs/implementation/2026-09-22-independent-party-reward.md)"
     ),
     "history/countries/KOR - Korea.txt": same_path(
         "OVERRIDE", "독립 HOK 한국의 1936 시작 국가사를 의도적으로 제공"
@@ -522,6 +523,16 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
                 "donor_source_checkout": provenance["checkout"],
             }
         )
+        # [2026-09-22]_kpopmodder: Keep artwork's uncommitted source distinct from the pinned gameplay commit.
+        artwork = icon_lock()["reference_inputs"].get(relative)
+        if artwork is not None:
+            read_icon_source(relative)
+            rows[-1].update({
+                "artwork_source_kind": icon_lock()["source_kind"],
+                "artwork_source_base_commit": icon_lock()["base_commit"],
+                "artwork_source_sha256": artwork["sha256"],
+            })
+            rows[-1]["reason"] += "; 2026-09-22 HOK icon/picture만 선택 이식 (tools/hok_icon_lock.json)"
 
     unknown_rules = sorted(set(EXPLICIT) - donor_relatives)
     if unknown_rules:
@@ -530,6 +541,33 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         raise RuntimeError(
             f"RT56 collision baseline changed: expected {EXPECTED_RT56_COLLISIONS}, got {collision_count}"
         )
+
+    # [2026-09-22]_kpopmodder: Classify the additional 89 textures and three registries with honest working-tree provenance.
+    for relative, record in icon_lock()["runtime_assets"].items():
+        if relative in donor_relatives or (RT56_ROOT / relative).exists():
+            raise RuntimeError(f"unreviewed artwork path collision: {relative}")
+        payload = read_icon_source(relative)
+        if (REPO_ROOT / relative).read_bytes() != payload:
+            raise RuntimeError(f"artwork bytes differ from reviewed source: {relative}")
+        classification = "ASSET_COPY" if relative.endswith(".dds") else "ADD"
+        counts[classification] += 1
+        rows.append({
+            "source_path": relative,
+            "integration_class": classification,
+            "status": "SHIPPED",
+            "exact_path_rt56_collision": "no",
+            "output_path": relative,
+            "reason": "HOK 한국 중점·국민정신 전용 이미지/registry; 원본 소재·가공 크레딧 보존",
+            "donor_sha256": record["sha256"],
+            "output_sha256": sha256(REPO_ROOT / relative),
+            "donor_source_commit": "",
+            "donor_source_blob": "",
+            "donor_source_sha256": record["sha256"],
+            "donor_source_checkout": "raw-working-tree",
+            "artwork_source_kind": icon_lock()["source_kind"],
+            "artwork_source_base_commit": icon_lock()["base_commit"],
+            "artwork_source_sha256": record["sha256"],
+        })
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(
@@ -547,6 +585,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "donor_source_blob",
             "donor_source_sha256",
             "donor_source_checkout",
+            "artwork_source_kind",
+            "artwork_source_base_commit",
+            "artwork_source_sha256",
         ),
         lineterminator="\n",
     )

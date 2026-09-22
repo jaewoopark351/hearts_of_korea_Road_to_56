@@ -1,0 +1,551 @@
+{
+  "format": 1,
+  "date": "2026-09-22",
+  "source_kind": "uncommitted-working-tree",
+  "base_commit": "698b6eb160efbaa04a4d43846330ba002f5e8cc7",
+  "source_root": "C:\\hoi\\hearts_of_korea",
+  "runtime_assets": {
+    "gfx/interface/goals/HOK_KOR/air_maintenance_school.dds": {
+      "sha256": "BD4F35AECFEC33A0B6C8336ACDFD86FC7A99085E2CB5712F4A3036321093A7B8",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/ammunition_standards.dds": {
+      "sha256": "BEF881E22FBD9B29CCB9416520F6BFD8AFF7B07C4C1AF09DDED7C99D72613BA4",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/amphibious_rehearsals.dds": {
+      "sha256": "0B05CF60003776DFCECD3435FB103E8E2DF2A9A66C467495F6CECFF677275AF7",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/anti_submarine_school.dds": {
+      "sha256": "139A962F09A948E93EFC761665D92206AB79C0C30E39A9EF0FBE0AFCF6877481",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/archipelago_training.dds": {
+      "sha256": "9F47E78C2CABF6087A419764FF4D2D5FABEA4B12BA21AEF860B0E3145110C43D",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/asian_armaments_commission.dds": {
+      "sha256": "549C98860DE100B95AAAFAEF60EAC324742A2F4CC1EC4D8581F0A1D113E501B1",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/asian_customs_convention.dds": {
+      "sha256": "0094A83785422E1F7D72419B097A3F3AEFDCE488C77C59BE14BF20831B6F2776",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/asian_development_fund.dds": {
+      "sha256": "EB7316C8EF1A87B1D44B0CC241A5F47ED0787C5075DDDB8358B7DE0FCCD88548",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/asian_license_agreement.dds": {
+      "sha256": "DEE63FD4CC243B96953BC3384C4918C0E56719FD4035A3675CD10BAC6E3311C7",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/asian_trade_secretariat.dds": {
+      "sha256": "D7A0711339A5F5824043CE528851134FCD45B69A8C33C15B897814AB7F220A0C",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/chungcheong_supplier_network.dds": {
+      "sha256": "726D2055E12F162B79DB352DDCF57B933A0B83E9ED4FD6D391497B65A0B32A8D",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/civil_service_audit.dds": {
+      "sha256": "97546D609297ADA1EBC0593E76BFC963643348D4F8DA5662C592FF331F93D1E4",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/coastal_fire_control.dds": {
+      "sha256": "0B490A4495141EE5E04CCF351CF2D22BA2A8122748BCB05C8CA6DC45EE936B67",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/combat_lessons_center.dds": {
+      "sha256": "E8749FEB6CB0FCE6F4ED8CA37B5515840495B4B038F353B794598A1DD272308F",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/deck_training.dds": {
+      "sha256": "DD4214D44289266A4D0EEE1DE46FF95FB8A46415019F7EA036B20B484ED8BD5C",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/distributed_ordnance_depots.dds": {
+      "sha256": "8F0215EC8539415FEFB15FF35F98A086428CAE043EDC6B9673D545AAFEC89685",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/domestic_aircraft_designs.dds": {
+      "sha256": "875EB54D57ADFA9E59FF10FE696FEDCABB2A314A944DB316913C499BE4B2E7BC",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/escort_school.dds": {
+      "sha256": "131A4212E853CBBC1AB1E1D16287BC2299F3C1C6A200232E6CF0BD8E4966CE57",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/expeditionary_lessons.dds": {
+      "sha256": "C5C0B170B9E88CDAB758369006AF3EA3BD5EE750A69127A9E0448F19C1B3FA1F",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/factory_safety_inspections.dds": {
+      "sha256": "583DACA4E5BAF8E8E0CC72D33136C0D9D313AD6D1215D10A2849A4225D7339F4",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/field_maintenance.dds": {
+      "sha256": "9560EB642ED73C2CD20AABB99368F22DBBA5170FF33F9B839070BF6480A88E26",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fleet_staff_college.dds": {
+      "sha256": "ADCB2818816172AEF7EF85802E4429F7A155AF427184D5865C8385923640F221",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/flexible_production_lines.dds": {
+      "sha256": "56A85E098899001C021933C7ACFF5FA4FAA63F81E43E66FD8CE2D795AFC9C506",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/foreign_aircraft_designs.dds": {
+      "sha256": "24652FB5E1434D9E7F041EB458EFDF315D427DA03E1F7C7AD3325E2E5D3FEE30",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/formation_flying.dds": {
+      "sha256": "2B49FC98E850391124A8F2C4127C6F1D6B6B61F96C7CD6CF0DD3BAF0C7555EB3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/gangwon_electrical_workshops.dds": {
+      "sha256": "7AE9FDC02E1BF6E5EFD3472335E0251D8E9ED75D2B55DED26FCB1D088EF90855",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/gyeongsang_export_workshops.dds": {
+      "sha256": "AD74149CF73873C3B460565FBEB02E5D04657A6D9DFA0A9A0BC097D71EA9680B",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/industrial_measurement_standards.dds": {
+      "sha256": "A890F0C898E88F68F180F3518ED5631A40090B685D9E6667E3D8946EC23FB7B4",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/industrial_power_allocation.dds": {
+      "sha256": "203B015C15FBDA591B0734A0D27BDB82C6812FB0ECDDD2EAC6278A5955A8802B",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/integrated_production_planning.dds": {
+      "sha256": "EE1A60D7ED29492E34E34DF405682727B0F1D916400FA2F21972AE5734780BC8",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/joint_arms_exercises.dds": {
+      "sha256": "CDA4E962AFB8FB09ADF3FFEFFF0AD9A58D98D6F1A213746A93BED50F49C9FE33",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/link_power_grids.dds": {
+      "sha256": "3B15D13A40CA10E4C89168A7E59FDB26834AE551BEBC4F1B22BC95B454659734",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/mountain_reconnaissance.dds": {
+      "sha256": "3667A9A459BADAA51908E548853A176FE49244AFAA0739291470A37A7A925327",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/national_power_coordination.dds": {
+      "sha256": "A022F176A395AE377BA2BE21C61C32143B1A45CC892BE60B3D93D3333525A48E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/naval_air_coordination.dds": {
+      "sha256": "400EC05BD888C9570AD823418598FC77FE44D4D3911F235C9AC4B0927DBBDE49",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/ordnance_inspection.dds": {
+      "sha256": "BD9A04EE4082F3AC15EDA12AAAABBF611473CABAF2EFF02787B1C79254D8B6E6",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/overseas_medical_detachments.dds": {
+      "sha256": "090EA1EE07E5B73B14868A1B16CE5BE4C81F5BB80C689816665D072FE7CC957D",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/overseas_relief_network.dds": {
+      "sha256": "756EA532321DC305CBB08235841149773C3523A994A40E398B0A366FDD2FD86D",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/parliamentary_committee.dds": {
+      "sha256": "2E774310D255F16FFE2E5AF68E7F00606CF017B4CA2DAE8B59F89059BF5E957E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/procurement_contracts.dds": {
+      "sha256": "EA95BCF587974DEFA835C6475063321D6086694504C08BAADA8ECE32BA765AF3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/production_quality_assurance.dds": {
+      "sha256": "0B374793F6EBE5E1F58DC741A7E7CC31B699D92050D50121BEF20545188057D7",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/production_review.dds": {
+      "sha256": "9E7648A26CA474F67363D887E8C7057E5015B1F8A26F3A696D7895EF31CD23FE",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/public_accounts_committee.dds": {
+      "sha256": "4807461D8DA15C8771A97DFC9356FC33596CE3BF7A69CD1EAFC2D23629EAC0B2",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/pyeongan_machine_workshops.dds": {
+      "sha256": "5C0A055D6B75743CE147E54FC3758E7B97D87838F999E5AE0654347F2A0C35FE",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/radio_coordination.dds": {
+      "sha256": "F59392DC8E4C719C23CC45770342EA000F2056E1BD386AE1CA5FAB5580AA04F6",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/rapid_repairs.dds": {
+      "sha256": "7D554DE5767F3B33E306B64D2254975D5734A6C67609A69355AEA0370737DC08",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/regional_industry_fund.dds": {
+      "sha256": "66DD1E6D90404B3CAA71660A17AA463272D0D9CB48BCD598D3D6AD63065E8B7C",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/rural_education_missions.dds": {
+      "sha256": "55FE8591DFDB0FE6FFEC34B056B8841E8A772D5B7D0E6CC6FAD422415B559BB2",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/skilled_workforce.dds": {
+      "sha256": "42751AF6998C03F900A26E7104FF183E2C8A09D40A6E328AC7F5F6B8DF3B64FC",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/staff_exercises.dds": {
+      "sha256": "399D91C2324275BF855851691D7F04D4FF9C9551D301DD73BC47EE1A1F5431C2",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/standardized_mass_production.dds": {
+      "sha256": "ABAE4922E1C162E6E862AB072320C082F357F4D2EDD873E532ED9F285FAC32F7",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/technical_civic_schools.dds": {
+      "sha256": "DD80E85F371B30B4C4B45A7D16E973E420A4979B9418FA209B6C7433F3F59004",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/technical_colleges.dds": {
+      "sha256": "4E0BC00E844DB6276334FB48063265CEC3CA2F4F7E890BE3E3AD8D88BFABB680",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/underway_replenishment.dds": {
+      "sha256": "32B7B0C1F91CE08C19418D95576F0E8CBC43C9F85DAB69D85046151F1A42408E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/university_industry_labs.dds": {
+      "sha256": "B8F1822EF28FA76ADC3E1999F5453E0055272FF0CC5171FD32F12399514835D2",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/volunteer_liaison_bureau.dds": {
+      "sha256": "574DF0A5610BAE1205F45A85F0E01A5898979ED40CE1D250A608172CACA9061F",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/volunteer_supply_depots.dds": {
+      "sha256": "9B0FCDBDEB3C57FA03B1AA78EC34801E1AFF4BB16187A1581C0DA1E698806005",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/winter_training.dds": {
+      "sha256": "B528F3BAD2D835ABE06A8ECC1709BCD72424CA26E88FCBA71F2A10FD802B0C86",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/workers_night_schools.dds": {
+      "sha256": "88AB6E85CBBDBF049A36C0B9FE846A79110D21215C1EF002D7C3DC509C9B1D72",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/workshop_apprenticeships.dds": {
+      "sha256": "EB69A2625614FC8A375A8FBAFFA434396495B518BE496BED96D870DCA1C30DC4",
+      "size": 35328
+    },
+    "gfx/interface/ideas/HOK_KOR/accountable_administration_idea.dds": {
+      "sha256": "CBD411E49643C33D592DFCDAC874EE3CC1831871789F6681E8390705FC181A76",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/air_maintenance_spirit.dds": {
+      "sha256": "528E2C3F82EA8CC133EA867BB43CBE0850409095F0296588C33A1329F174AF71",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/coastal_fire_control_spirit.dds": {
+      "sha256": "5FBAE86D036F54DEE9FECA28E8B9C6AF136778A4FE97E9A5FA29F3F4525013ED",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/customs_participant_idea.dds": {
+      "sha256": "76FF52E646F756051D1FEFB4041E08D75457232C1CD38DEF1A22903B3C6F5362",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/energy_coordination_1.dds": {
+      "sha256": "D873DD0D220A9C9AB8B690D1BE9E70DD29AB61FAEF9C545B5833E1E7788B88BD",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/energy_coordination_2.dds": {
+      "sha256": "48141ED8A94D6B727754F0E68321E4F5733DFE506FA34DC0E248D72C6F6C2AB0",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/energy_coordination_3.dds": {
+      "sha256": "3713B8F14FC1CC85F2F34741CB1D65E9484E69A953759E94D909AF3EBEE62889",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/escort_spirit.dds": {
+      "sha256": "65AF6E0F03F650EBC55DC4E64BCF263F5400D0A216E5F0D75E9491DEEABFD085",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/flexible_production_1.dds": {
+      "sha256": "24284420AA5AA06265FAE5E2DBC32C646BD8E4BD608EB3004ED6D84ED18BE05B",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/flexible_production_2.dds": {
+      "sha256": "515745EF070A8B14041FE3E7ED928A9F6ACA774E46846803F3F8B9EEB366175F",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/formation_spirit_1.dds": {
+      "sha256": "0D1721D9DDD1D9A6095688E5AE0B37A58F29116071205DCB4A18525302CC2531",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/formation_spirit_2.dds": {
+      "sha256": "0CCDCF32CE0D3598E496BB70FE3CC3DDBB227D695796781D9BA3B4E85B7BAF9B",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/license_participant_idea.dds": {
+      "sha256": "8E6654A5D1AF954A466CBE5DA951118FEE6A06CA2003F444F221CFBBD3669059",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/mass_production_1.dds": {
+      "sha256": "0451796CA5E538317FA337C70606262144112B5061B36B4A1EF75DCF7663311C",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/mass_production_2.dds": {
+      "sha256": "18597A2E94741A611092F9F8277A204B9544C94DE03C21037832B65ED0D40B08",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/naval_logistics_spirit.dds": {
+      "sha256": "A991D78A5CFA1BDB060429CC23443A588A68DA9F5DF7941915C1D2E9B8A59176",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/night_school_spirit.dds": {
+      "sha256": "FA52EC44C6770C8BBDC8E1338BFE610AE6C7C356071E6DEED9B5477CFB94A10C",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/procurement_spirit_1.dds": {
+      "sha256": "953673A4C1E0CAB68ACAFDC1DA685A8884987FE2EAAE8E88E220AFAB0EFCB5C0",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/procurement_spirit_2.dds": {
+      "sha256": "33AB9497AC08506503CDE8C873DCA296D3970E1F8228D368D519706BC23264F3",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/public_accounts_idea.dds": {
+      "sha256": "006DC72FEF874722BD2AB821414C73E34EFD49BE386F5F8B691A18B69D3B90F4",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/quality_control.dds": {
+      "sha256": "64E4734B246BCA9FDEB30BA96A86372A4929A5BE10E4BC03BFC43ADF22FF8505",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/rapid_repairs_spirit.dds": {
+      "sha256": "56AF85FBA9A993488AC733EB847D73ABD443A95E6B5C06060E1ABEB6B9F00E0E",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/rural_education_idea.dds": {
+      "sha256": "5EFCA6BFF033C318E09F64CB8693AD3665566271A796ADBA0DA4A1E46C3631E5",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/staff_spirit_1.dds": {
+      "sha256": "CBB9B1C48A3A8D07945483F0F094759E279E371AA1581FF30CC9A9393B4034CB",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/staff_spirit_2.dds": {
+      "sha256": "0CE22835ABE89C846B81AB89373B48E2EC288AE0F0EF1FCC49B1AEF4868FE0A4",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/volunteer_supply_idea.dds": {
+      "sha256": "3B988EFED8941A60EA5AB53CFB8E3A33EAA10899BDDA07A94A613D26B72655CC",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/winter_training_spirit.dds": {
+      "sha256": "03457BC49841CC0003D349B0D42BBD86CB1EE885A1A6F8134C04F304897304F9",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/workforce_1.dds": {
+      "sha256": "20BA8C432954CDD3A285631EB6B3A09C67A1C6F6111B97683F7D6D01B8E8F7E3",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/workforce_2.dds": {
+      "sha256": "ED046114A046127308AF6FF3B4865AED92CFFD8A3D97698ED9D85ADB3450CF31",
+      "size": 16448
+    },
+    "interface/HOK_KOR_focus_icons.gfx": {
+      "sha256": "9AFFC632E198FAA0F59CC828ACCF5FACE3C3B3D3AE1076DBE1D5B5201D4F9370",
+      "size": 9128
+    },
+    "interface/HOK_KOR_focus_icons_shine.gfx": {
+      "sha256": "BABBC6DA242A0D5DEDAD1D447833DE98039AF849C29316405B064486719F2AB1",
+      "size": 87942
+    },
+    "interface/HOK_KOR_spirit_icons.gfx": {
+      "sha256": "370C376A54D639A5A433D1C96364B08D58A763BC5AC787F0FBCF62468E6E1E9D",
+      "size": 4431
+    }
+  },
+  "reference_inputs": {
+    "common/ideas/HOK_KOR_democratic_expansion.txt": {
+      "sha256": "62A096E8559FA05A0946A5A0BE0AA46A30CFC002DF3271C9D478087018F5C12D",
+      "size": 4150
+    },
+    "common/ideas/HOK_KOR_industry_expansion.txt": {
+      "sha256": "0ECBDC1089066381D7CEDE3917EDADB1247342E840EE98CA7BF462F4C3D15CA2",
+      "size": 6048
+    },
+    "common/ideas/HOK_KOR_military_expansion.txt": {
+      "sha256": "0A9FB065938768D1066D731C7B32D67045C551490AFEBD3F3CE3021076150380",
+      "size": 5903
+    },
+    "common/national_focus/korea.txt": {
+      "sha256": "830C58121C359CD48D9343F312EB8B05C5CCEEE37E308E86F0CC74EED98EC579",
+      "size": 342473
+    }
+  },
+  "documentation": {
+    "docs/HOK_KOREAN_FOCUS_ICON_COLOR_PLAN.md": {
+      "sha256": "AC58B3102018F2C4D6C5E041541E8A37E9A7DA87D72085457D32434479B0EDC3",
+      "size": 16068
+    },
+    "docs/HOK_KOREAN_FOCUS_ICON_CREDITS.md": {
+      "sha256": "8D6031CD28FFEF133C77F558EAE01907F9FAEF44F76C56337D7B5495CE6A2CAD",
+      "size": 22305
+    },
+    "docs/HOK_KOREAN_FOCUS_SPIRIT_ICON_PLAN.md": {
+      "sha256": "48B7AB8484E910B3FED5B6E0F568C676EDD08C3DC296C3BD699E9666456DF6F0",
+      "size": 21750
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-air-mask.png": {
+      "sha256": "396E2460EAB7F0BD3978535A8DB68B2967233B72B7DAD23D201E944CEB273F58",
+      "size": 576
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-air.png": {
+      "sha256": "5052F5FB9AEC23A368CA221FBDB8222B2F2C9F691B7A01B940DC7FD48199F34C",
+      "size": 18944
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-army-mask.png": {
+      "sha256": "396E2460EAB7F0BD3978535A8DB68B2967233B72B7DAD23D201E944CEB273F58",
+      "size": 576
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-army.png": {
+      "sha256": "1024C1C654ECACBDC37EC669408756E38C2DF24E51D4B6BF07210D1D495A777A",
+      "size": 17884
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-democracy-mask.png": {
+      "sha256": "396E2460EAB7F0BD3978535A8DB68B2967233B72B7DAD23D201E944CEB273F58",
+      "size": 576
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-democracy.png": {
+      "sha256": "947552DB7D1AD540C56B2465C57D6375A0864006966D88A4A271ADF23035A3D5",
+      "size": 18333
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-education-mask.png": {
+      "sha256": "396E2460EAB7F0BD3978535A8DB68B2967233B72B7DAD23D201E944CEB273F58",
+      "size": 576
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-education.png": {
+      "sha256": "0AB12B0502763AB7E8ABF77EC7B09F31A8DFCDE384FB603CAE4FAB65BEE6C1A5",
+      "size": 19077
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-industry-mask.png": {
+      "sha256": "396E2460EAB7F0BD3978535A8DB68B2967233B72B7DAD23D201E944CEB273F58",
+      "size": 576
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-industry.png": {
+      "sha256": "1527E2EB26346EDCEDAF1531C597A86B894565E772FF1A42008AA72A86340296",
+      "size": 17906
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-navy-mask.png": {
+      "sha256": "396E2460EAB7F0BD3978535A8DB68B2967233B72B7DAD23D201E944CEB273F58",
+      "size": 576
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/focuses-navy.png": {
+      "sha256": "38268FE463F4EEA2138721680B54081D67A3CC8F813C35B5EFDDF2EE0BDBB1B6",
+      "size": 17805
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/ideas-army-mask.png": {
+      "sha256": "019F778D3D457D60CCAC75C19AB6233AE884598761D7E10B312181556D3680AC",
+      "size": 401
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/ideas-army.png": {
+      "sha256": "2964AF1D00D42D9557D4A30278FCBC78CAE74F7A482F76244695242977B47ECC",
+      "size": 8035
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/ideas-democracy-mask.png": {
+      "sha256": "019F778D3D457D60CCAC75C19AB6233AE884598761D7E10B312181556D3680AC",
+      "size": 401
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/ideas-democracy.png": {
+      "sha256": "81C501A1B3D643F9F8FF3AFCF0C143C4E444A657B4226411471E3ACB4056AAFC",
+      "size": 8320
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/ideas-education-mask.png": {
+      "sha256": "C2A39F32716B08DD1EDACE34401105F5EBFDE6D6635CB7AB77DD408968C0706C",
+      "size": 420
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/ideas-education.png": {
+      "sha256": "563385B50700F5E02D832F08103C8C413589AC6CABB3FCAB06008DCF8372137D",
+      "size": 9291
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/ideas-industry-mask.png": {
+      "sha256": "C2A39F32716B08DD1EDACE34401105F5EBFDE6D6635CB7AB77DD408968C0706C",
+      "size": 420
+    },
+    "docs/assets/korean-focus-icon-colors/backgrounds/ideas-industry.png": {
+      "sha256": "01DB9B69FCC90752004E48FCE5E9269932D3D7A405C73D20AFE911484FAC6595",
+      "size": 8722
+    },
+    "docs/assets/korean-focus-icon-colors/focus-democratic.png": {
+      "sha256": "FD42AF1A25C5EBF55BC40B48D4E6200661305ECD8B5D14778859BD8EBFCF1433",
+      "size": 250804
+    },
+    "docs/assets/korean-focus-icon-colors/focus-industry.png": {
+      "sha256": "2417A04AB4E55883E37CFDDA35EACCDEA0BBCE1967EAFE8BC9E153ED22257A93",
+      "size": 355369
+    },
+    "docs/assets/korean-focus-icon-colors/focus-military.png": {
+      "sha256": "0365260DA3F98104623A2BB97A133AB93D8A15D4DF265627C29902B92BB07100",
+      "size": 419681
+    },
+    "docs/assets/korean-focus-icon-colors/index.html": {
+      "sha256": "9AFA1FD707126AB1F4EAFE45447237B69803E2E5EE0077A252B201C5541F8488",
+      "size": 3637868
+    },
+    "docs/assets/korean-focus-icon-colors/national-spirits.png": {
+      "sha256": "7EFF397F7B0AE3BD941D8DB0A69058E46CDD5993814CEDDA0E608AFE37CF1E91",
+      "size": 249161
+    },
+    "docs/assets/korean-focus-icons/UPSTREAM_CREDITS.txt": {
+      "sha256": "CF220DC66463D75163F7690AD77B02B662D0C05CA5D53DC62D33ED504512A7F5",
+      "size": 1029
+    },
+    "docs/assets/korean-focus-icons/focus-democratic.png": {
+      "sha256": "0E6C663A848D8C5312DBF51FF320333AC5F9E7B28689ABCDF66DA2822EE6DD5D",
+      "size": 394195
+    },
+    "docs/assets/korean-focus-icons/focus-industry.png": {
+      "sha256": "3AF665AC28BE082C50FC5964EF4A1F5E0BEFF6369FCE8B98F5B7651FD3965A4F",
+      "size": 468484
+    },
+    "docs/assets/korean-focus-icons/focus-military.png": {
+      "sha256": "2D2961B93DD04FD1AC8551ED510EFAA3F16D5668E57D889F80A703B4A31BE02C",
+      "size": 612627
+    },
+    "docs/assets/korean-focus-icons/index.html": {
+      "sha256": "2D77A0F5F39C2557C298C08998044EAD12AC0A445B2FD7308903469A5B6C2810",
+      "size": 3466087
+    },
+    "docs/assets/korean-focus-icons/national-spirits.png": {
+      "sha256": "8659DA84321663E1862803C4CB4F43286F6BEBA2695F032974ECFA6F9F86A895",
+      "size": 312975
+    },
+    "docs/data/HOK_KOREAN_FOCUS_ICON_MANIFEST.json": {
+      "sha256": "F2A3861583EB540E872B1D722A0B620E6F5B2D570003A2D9FCF0F87EB60FCDE9",
+      "size": 377765
+    },
+    "docs/incidents/2026-09-22-korean-focus-icon-colors.md": {
+      "sha256": "59453FFC936F0E15514E69AD30A7009B1DA6FE99E4C71CE11A19FD515CA40AFF",
+      "size": 10086
+    },
+    "docs/incidents/2026-09-22-korean-focus-icons.md": {
+      "sha256": "8C07D072102FAF887D07D3A504192421A772FEE2DBB91A1FE14D573E78A42BFA",
+      "size": 11182
+    }
+  },
+  "prior_output_sha256": {
+    "common/ideas/HOK_KOR_democratic_expansion.txt": "B9AFBF64FFC29C83DDECE0B251A8C862190CDCD85E24435E42C65BB8ACDE3AFC",
+    "common/ideas/HOK_KOR_industry_expansion.txt": "067B1CB40D071A2962090C621F63A7E8DA12B9AB66043CF7AB0B79E7928E1828",
+    "common/ideas/HOK_KOR_military_expansion.txt": "FB2C18AC3BE0DEAAD30714B8F4624324B646F294D9094D35871DAC0E441D7578",
+    "common/national_focus/korea.txt": "8585302A3BE4E66371A22FEC34602951AA2AF8EC171EAE38F193C9DFC48DFC49"
+  }
+}

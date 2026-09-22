@@ -4747,6 +4747,17 @@ focus_tree = {
 			}
 			set_party_name = { ideology = democratic long_name = KOR_independence_party_long name = KOR_independence_party }
 			set_party_name = { ideology = neutrality long_name = KOR_liberal_party_long name = KOR_liberal_party }
+
+			# [2026-09-22]_kpopmodder: Grant partial mobilization without downgrading higher economy laws.
+			if = {
+				limit = {
+					OR = {
+						has_idea = civilian_economy
+						has_idea = low_economic_mobilisation
+					}
+				}
+				add_ideas = partial_economic_mobilisation
+			}
 		}
 	}
 	#Focus for cooperation with the jaebeol
@@ -9977,7 +9988,8 @@ focus_tree = {
 	#20260921_kpopmodder: Japan JAP_establish_nippon_hassoden; Czech Skoda direct energy modifiers.
 	focus = {
 		id = HOK_KOR_link_power_grids
-		icon = GFX_focus_generic_electrification
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_link_power_grids
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_comprehensive_national_development_plan
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -9997,7 +10009,8 @@ focus_tree = {
 	#20260921_kpopmodder: Japan industrial energy program; Korean staged energy spirit.
 	focus = {
 		id = HOK_KOR_industrial_power_allocation
-		icon = GFX_focus_generic_electrification
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_industrial_power_allocation
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_link_power_grids
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10020,7 +10033,8 @@ focus_tree = {
 	#20260921_kpopmodder: Sweden SWE_standardize_equipment and industrial research bonus pattern.
 	focus = {
 		id = HOK_KOR_industrial_measurement_standards
-		icon = GFX_goal_generic_production
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_industrial_measurement_standards
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_industrial_power_allocation
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10046,7 +10060,8 @@ focus_tree = {
 	#20260921_kpopmodder: China rural education stability reward; Korean safety adaptation.
 	focus = {
 		id = HOK_KOR_factory_safety_inspections
-		icon = GFX_goal_generic_production
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_factory_safety_inspections
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_industrial_measurement_standards
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10067,7 +10082,8 @@ focus_tree = {
 	#20260921_kpopmodder: Japan JAP_establish_nippon_hassoden; capped Korean energy progression.
 	focus = {
 		id = HOK_KOR_national_power_coordination
-		icon = GFX_focus_generic_electrification
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_national_power_coordination
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_factory_safety_inspections
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10090,7 +10106,8 @@ focus_tree = {
 	#20260921_kpopmodder: China CHI_extend_compulsory_education electronics bonus; no Chinese globals.
 	focus = {
 		id = HOK_KOR_technical_colleges
-		icon = GFX_focus_generic_education
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_technical_colleges
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_seoul_national_university_expansion
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10116,7 +10133,8 @@ focus_tree = {
 	#20260921_kpopmodder: Vanilla Bulgarian and Canadian direct production-efficiency ideas.
 	focus = {
 		id = HOK_KOR_workshop_apprenticeships
-		icon = GFX_focus_generic_education
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_workshop_apprenticeships
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_technical_colleges
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10136,7 +10154,8 @@ focus_tree = {
 	#20260921_kpopmodder: China CHI_send_the_urban_students_to_the_countryside stability structure.
 	focus = {
 		id = HOK_KOR_workers_night_schools
-		icon = GFX_focus_generic_education
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_workers_night_schools
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_workshop_apprenticeships
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10158,7 +10177,8 @@ focus_tree = {
 	#20260921_kpopmodder: Vanilla industrial research bonuses; preserve existing Korean universities and ADD.
 	focus = {
 		id = HOK_KOR_university_industry_labs
-		icon = GFX_goal_generic_scientific_exchange
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_university_industry_labs
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_workers_night_schools
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10184,7 +10204,8 @@ focus_tree = {
 	#20260921_kpopmodder: Vanilla direct production-efficiency gain spirits; Korean two-stage progression.
 	focus = {
 		id = HOK_KOR_skilled_workforce
-		icon = GFX_focus_generic_education
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_skilled_workforce
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_university_industry_labs
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10207,7 +10228,8 @@ focus_tree = {
 	#20260921_kpopmodder: German production targets and Finnish mutually-exclusive production policy structure.
 	focus = {
 		id = HOK_KOR_production_review
-		icon = GFX_goal_generic_production
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_production_review
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_development_of_heavy_industry
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10229,7 +10251,8 @@ focus_tree = {
 	#20260921_kpopmodder: Finnish production choice; German and Swedish efficiency modifiers with Korean tradeoff.
 	focus = {
 		id = HOK_KOR_standardized_mass_production
-		icon = GFX_goal_generic_construct_mil_factory
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_standardized_mass_production
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_production_review
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10250,7 +10273,8 @@ focus_tree = {
 	#20260921_kpopmodder: Finnish production choice; Swedish line-change modifier with Korean tradeoff.
 	focus = {
 		id = HOK_KOR_flexible_production_lines
-		icon = GFX_focus_generic_modernize_industry
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_flexible_production_lines
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_production_review
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10271,7 +10295,8 @@ focus_tree = {
 	#20260921_kpopmodder: Finnish direct base-production-efficiency idea at reduced Korean value.
 	focus = {
 		id = HOK_KOR_production_quality_assurance
-		icon = GFX_goal_generic_production
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_production_quality_assurance
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_production_review
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10291,7 +10316,8 @@ focus_tree = {
 	#20260921_kpopmodder: German production improvement and Finnish chosen-path idea upgrade; preserve tradeoffs.
 	focus = {
 		id = HOK_KOR_integrated_production_planning
-		icon = GFX_goal_generic_production
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_integrated_production_planning
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_production_quality_assurance
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10326,7 +10352,8 @@ focus_tree = {
 	#20260921_kpopmodder: Swedish paid regional development and existing Korean eight-province project costs.
 	focus = {
 		id = HOK_KOR_regional_industry_fund
-		icon = GFX_goal_generic_construct_civ_factory
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_regional_industry_fund
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_first_new_city_plan
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10348,7 +10375,8 @@ focus_tree = {
 	#20260921_kpopmodder: Swedish paid development; HoK state 527 and bounded factory contract.
 	focus = {
 		id = HOK_KOR_pyeongan_machine_workshops
-		icon = GFX_goal_generic_construct_mil_factory
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_pyeongan_machine_workshops
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_regional_industry_fund
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10368,7 +10396,8 @@ focus_tree = {
 	#20260921_kpopmodder: Swedish paid development; HoK state 1144 and bounded factory contract.
 	focus = {
 		id = HOK_KOR_gangwon_electrical_workshops
-		icon = GFX_goal_generic_construct_civ_factory
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_gangwon_electrical_workshops
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_pyeongan_machine_workshops
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10388,7 +10417,8 @@ focus_tree = {
 	#20260921_kpopmodder: Swedish paid development; HoK state 1145 and bounded factory contract.
 	focus = {
 		id = HOK_KOR_chungcheong_supplier_network
-		icon = GFX_goal_generic_construct_civ_factory
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_chungcheong_supplier_network
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_gangwon_electrical_workshops
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10408,7 +10438,8 @@ focus_tree = {
 	#20260921_kpopmodder: Swedish paid development; coastal HoK state 920 and bounded dockyard contract.
 	focus = {
 		id = HOK_KOR_gyeongsang_export_workshops
-		icon = GFX_goal_generic_construct_naval_dockyard
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_gyeongsang_export_workshops
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_chungcheong_supplier_network
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10428,7 +10459,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add procurement contracts as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_procurement_contracts
-		icon = GFX_goal_generic_military_deal
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_procurement_contracts
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_army_augmentation
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10459,7 +10491,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add ammunition standards as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_ammunition_standards
-		icon = GFX_goal_generic_small_arms
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_ammunition_standards
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_procurement_contracts
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10479,7 +10512,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add ordnance inspection as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_ordnance_inspection
-		icon = GFX_goal_generic_army_artillery2
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_ordnance_inspection
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_ammunition_standards
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10510,7 +10544,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add field maintenance as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_field_maintenance
-		icon = GFX_goal_generic_small_arms
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_field_maintenance
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_ammunition_standards
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10539,7 +10574,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add distributed ordnance depots as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_distributed_ordnance_depots
-		icon = GFX_goal_generic_military_deal
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_distributed_ordnance_depots
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_ordnance_inspection
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10570,7 +10606,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add staff exercises as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_staff_exercises
-		icon = GFX_goal_generic_army_doctrines
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_staff_exercises
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_research_army_doctrine
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10592,7 +10629,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add winter training as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_winter_training
-		icon = GFX_goal_generic_special_forces
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_winter_training
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_staff_exercises
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10612,7 +10650,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add mountain reconnaissance as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_mountain_reconnaissance
-		icon = GFX_goal_generic_special_forces
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_mountain_reconnaissance
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_staff_exercises
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10640,7 +10679,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add radio coordination as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_radio_coordination
-		icon = GFX_focus_generic_radio_communication
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_radio_coordination
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_staff_exercises
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10668,7 +10708,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add joint arms exercises as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_joint_arms_exercises
-		icon = GFX_focus_generic_tank_air_support
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_joint_arms_exercises
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_radio_coordination
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10689,7 +10730,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add rapid repairs as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_rapid_repairs
-		icon = GFX_focus_generic_refit_civilian_ships
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_rapid_repairs
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_daehanminguk_haegun
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10709,7 +10751,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add archipelago training as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_archipelago_training
-		icon = GFX_focus_generic_torpedo_production
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_archipelago_training
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_rapid_repairs
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10735,7 +10778,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add escort school as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_escort_school
-		icon = GFX_goal_generic_navy_battleship
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_escort_school
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_rapid_repairs
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10762,7 +10806,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add anti submarine school as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_anti_submarine_school
-		icon = GFX_focus_generic_torpedo_production
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_anti_submarine_school
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_rapid_repairs
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10803,7 +10848,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add coastal fire control as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_coastal_fire_control
-		icon = GFX_goal_generic_navy_battleship
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_coastal_fire_control
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_anti_submarine_school
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10823,7 +10869,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add fleet staff college as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_fleet_staff_college
-		icon = GFX_goal_generic_navy_battleship
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_fleet_staff_college
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_invitation_of_foreign_naval_designers
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10844,7 +10891,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add underway replenishment as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_underway_replenishment
-		icon = GFX_goal_generic_military_deal
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_underway_replenishment
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_fleet_staff_college
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10864,7 +10912,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add deck training as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_deck_training
-		icon = GFX_goal_generic_navy_carrier
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_deck_training
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_fleet_staff_college
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10892,7 +10941,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add naval air coordination as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_naval_air_coordination
-		icon = GFX_focus_generic_multi_role_aircraft
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_naval_air_coordination
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_fleet_staff_college
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10919,7 +10969,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add amphibious rehearsals as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_amphibious_rehearsals
-		icon = GFX_goal_generic_special_forces
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_amphibious_rehearsals
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_naval_air_coordination
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10948,7 +10999,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add domestic aircraft designs as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_domestic_aircraft_designs
-		icon = GFX_goal_generic_air_fighter2
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_domestic_aircraft_designs
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_korea_aerospace_industry
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -10991,7 +11043,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add foreign aircraft designs as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_foreign_aircraft_designs
-		icon = GFX_focus_generic_copy_plane_designs
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_foreign_aircraft_designs
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_korea_aerospace_industry
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11020,7 +11073,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add formation flying as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_formation_flying
-		icon = GFX_focus_generic_multi_role_aircraft
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_formation_flying
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_korea_aerospace_industry
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11040,7 +11094,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add air maintenance school as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_air_maintenance_school
-		icon = GFX_focus_generic_multi_role_aircraft
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_air_maintenance_school
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_formation_flying
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11062,7 +11117,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add combat lessons center as an optional Korean military extension.
 	focus = {
 		id = HOK_KOR_combat_lessons_center
-		icon = GFX_goal_generic_air_fighter2
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_combat_lessons_center
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_air_maintenance_school
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11083,7 +11139,8 @@ focus_tree = {
 	#20260921_kpopmodder: Add optional democratic administration and education using Chinese civil-rights and education patterns.
 	focus = {
 		id = HOK_KOR_parliamentary_committee
-		icon = GFX_focus_generic_treaty
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_parliamentary_committee
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_strengthen_government_support
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11105,7 +11162,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_civil_service_audit
-		icon = GFX_focus_generic_improve_the_administration
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_civil_service_audit
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_parliamentary_committee
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11123,7 +11181,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_technical_civic_schools
-		icon = GFX_focus_generic_education
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_technical_civic_schools
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_parliamentary_committee
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11169,7 +11228,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_rural_education_missions
-		icon = GFX_focus_generic_education
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_rural_education_missions
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_technical_civic_schools
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11188,7 +11248,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_public_accounts_committee
-		icon = GFX_focus_generic_court
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_public_accounts_committee
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_parliamentary_committee
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11212,7 +11273,8 @@ focus_tree = {
 	#20260921_kpopmodder: Extend the existing volunteer corps through French aid decisions and American training rewards without changing deployment rules.
 	focus = {
 		id = HOK_KOR_volunteer_liaison_bureau
-		icon = GFX_focus_generic_military_mission
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_volunteer_liaison_bureau
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_korean_volunteer_corps
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11235,7 +11297,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_overseas_medical_detachments
-		icon = GFX_goal_generic_special_forces
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_overseas_medical_detachments
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_volunteer_liaison_bureau
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11257,7 +11320,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_volunteer_supply_depots
-		icon = GFX_goal_generic_position_armies
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_volunteer_supply_depots
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_volunteer_liaison_bureau
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11276,7 +11340,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_expeditionary_lessons
-		icon = GFX_goal_generic_army_doctrines
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_expeditionary_lessons
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_volunteer_liaison_bureau
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11299,7 +11364,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_overseas_relief_network
-		icon = GFX_focus_generic_welfare
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_overseas_relief_network
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_expeditionary_lessons
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11323,7 +11389,8 @@ focus_tree = {
 	#20260921_kpopmodder: Extend the existing Asian Union with Japanese consent events and French cooperation patterns under Korean IDs.
 	focus = {
 		id = HOK_KOR_asian_trade_secretariat
-		icon = GFX_focus_generic_treaty
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_asian_trade_secretariat
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = KOR_founding_of_the_asian_union
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11345,7 +11412,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_asian_customs_convention
-		icon = GFX_focus_generic_treaty
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_asian_customs_convention
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_asian_trade_secretariat
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11371,7 +11439,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_asian_development_fund
-		icon = GFX_goal_generic_construct_civ_factory
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_asian_development_fund
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_asian_customs_convention
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11392,7 +11461,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_asian_armaments_commission
-		icon = GFX_goal_generic_position_armies
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_asian_armaments_commission
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_asian_trade_secretariat
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
@@ -11414,7 +11484,8 @@ focus_tree = {
 	}
 	focus = {
 		id = HOK_KOR_asian_license_agreement
-		icon = GFX_goal_generic_build_tank
+		# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon.
+		icon = GFX_HOK_KOR_focus_asian_license_agreement
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
 		relative_position_id = HOK_KOR_asian_armaments_commission
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.

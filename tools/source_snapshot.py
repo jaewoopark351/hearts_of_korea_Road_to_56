@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Materialize the reviewed HOK base plus the selected Korean update.
 
-Only immutable Git objects are read from the donor. The donor working tree and
-Git state are never changed; generated inputs live in the ignored local cache.
+Gameplay inputs use immutable Git objects. The separately reviewed artwork
+uses an explicit hash-pinned working-tree snapshot; neither source is modified.
 """
 from __future__ import annotations
 
@@ -22,6 +22,68 @@ BASE_COMMIT = "887930f6e88c80568d62dab9cfbe1ba8a498a252"
 CONTENT_COMMIT = "da815305e3ce00186a487b3a378bf8536ff59146"
 UPDATE_COMMIT = "118d7b53dfdbc120fcfe4b9d6792e66b2b519be7"
 AI_PATH = "common/ai_strategy_plans/KOR_historical_strategy_plan.txt"
+
+# [2026-09-22]_kpopmodder: Keep uncommitted artwork provenance separate from the immutable gameplay base.
+ICON_LOCK_PATH = Path(__file__).with_name("hok_icon_lock.json")
+ICON_ROOT = REPO_ROOT / ".local-artifacts/sources/hok-icons-20260922"
+ICON_MANIFEST = "docs/data/HOK_KOREAN_FOCUS_ICON_MANIFEST.json"
+
+
+@lru_cache(maxsize=1)
+def icon_lock() -> dict:
+    lock = json.loads(ICON_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["base_commit"]) != (
+        1, "uncommitted-working-tree", "698b6eb160efbaa04a4d43846330ba002f5e8cc7"
+    ):
+        raise ValueError("unreviewed artwork source-lock revision")
+    if len(lock["runtime_assets"]) != 92 or len(lock["reference_inputs"]) != 4:
+        raise ValueError("expected 89 textures, three registries and four reference inputs")
+    for relative in icon_records(lock):
+        path = Path(relative)
+        if path.is_absolute() or ".." in path.parts or "\\" in relative:
+            raise ValueError(f"unsafe artwork source path: {relative}")
+    return lock
+
+
+def icon_records(lock: dict | None = None) -> dict:
+    lock = icon_lock() if lock is None else lock
+    return {relative: record for group in ("runtime_assets", "reference_inputs", "documentation")
+            for relative, record in lock[group].items()}
+
+
+def read_icon_source(relative: str | Path) -> bytes:
+    relative = Path(relative).as_posix()
+    record = icon_records()[relative]
+    data = (ICON_ROOT / relative).read_bytes()
+    if len(data) != record["size"] or sha256(data) != record["sha256"]:
+        raise ValueError(f"artwork source drift: {relative}")
+    return data
+
+
+def ensure_icon_snapshot(check_only: bool = False) -> int:
+    records = icon_records()
+    existing = {path.relative_to(ICON_ROOT).as_posix() for path in ICON_ROOT.rglob("*") if path.is_file()}
+    if existing - set(records):
+        raise ValueError(f"unexpected artwork cache files: {sorted(existing - set(records))}")
+    pending = {}
+    for relative, record in records.items():
+        target = ICON_ROOT / relative
+        if target.exists():
+            read_icon_source(relative)
+            continue
+        if check_only:
+            raise ValueError(f"artwork cache missing: {relative}; run source_snapshot.py --import-icons")
+        data = (DONOR_ROOT / relative).read_bytes()
+        if len(data) != record["size"] or sha256(data) != record["sha256"]:
+            raise ValueError(f"donor artwork differs from reviewed snapshot: {relative}")
+        pending[relative] = data
+    # Preflight every source before materializing any new cache file.
+    for relative, data in pending.items():
+        target = ICON_ROOT / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with target.open("xb") as handle:
+            handle.write(data)
+    return len(pending)
 
 
 def sha256(data: bytes) -> str:
@@ -138,9 +200,12 @@ def ensure_source_snapshot(check_only: bool = False) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--import-icons", action="store_true", help="materialize the reviewed artwork bytes without changing donor files")
     args = parser.parse_args()
     changed = ensure_source_snapshot(check_only=args.check)
     print(f"HOK source snapshot: 1014 base + 20 selected overlay = 1031 files; created {changed}")
+    icon_changes = ensure_icon_snapshot(check_only=not args.import_icons or args.check)
+    print(f"HOK artwork snapshot: 92 assets + 4 reference inputs + documentation; created {icon_changes}")
     return 0
 
 

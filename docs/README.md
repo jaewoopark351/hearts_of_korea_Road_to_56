@@ -30,10 +30,11 @@
 | 절차 | [포팅·검증 워크플로](PORTING_WORKFLOW.md) | 단계별 현재 진행 상태 포함 |
 | 절차 | [HOK 한국 콘텐츠 우선 디버깅](KOREAN_CONTENT_DEBUGGING.md) | 현재 crash 격리와 보존 검증의 기준 절차 |
 | 구현 | [2026-09-06 1차 포팅 구현](implementation/2026-09-06-first-port-batch.md) | 1차 구현 당시 스냅샷; 후속 음성 정책 전 |
+| 구현 | [2026-09-22 한국 아이콘 이식](implementation/2026-09-22-korean-icon-port.md) | 중점60·국민정신29 그림·GFX·AGENTS; 정적19 PASS와 기존 history 불일치1건 |
 | 구현 | [2026-09-06 한국 우선 자산·KOR 기술 보정](implementation/2026-09-06-korea-first-assets-and-kor-tech.md) | HOK 음성·기본 항공기 복원과 폐기 수송기 기술 정리 |
 | 구현 | [2026-09-06 한국 해안 항구 배치 closure 보정](implementation/2026-09-06-map-building-closure-fix.md) | 누락 항구 spawn 7행과 RT56 대비 회귀 gate 추가 |
 | 감사 | [통합 ledger](audits/2026-09-06-integration-ledger.md) | ADR-0004를 반영한 현재 ownership·merge 요약 |
-| 감사 | [1,031개 파일 분류 CSV](audits/2026-09-06-production-file-classification.csv) | 생성기가 관리하는 현재 행별 분류·커밋·blob·해시 원장 |
+| 감사 | [1,123개 파일 분류 CSV](audits/2026-09-06-production-file-classification.csv) | 생성기가 관리하는 현재 행별 분류·Git/미커밋 출처·해시 원장 |
 | 검증 | [정적 검증 기록](validation/2026-09-06-static-validation.md) | 1차 정책 당시 역사적 결과 |
 | 검증 | [한국 우선 후속 정적 검증](validation/2026-09-06-korea-first-static-validation.md) | 당시 15 PASS와 미등록 `Minshu_ikki.ogg` pruning 오류 1건의 역사적 기록 |
 | 결정 | [ADR-0001: 런타임 의존성과 로드 구성](decisions/0001-runtime-dependencies-and-load-order.md) | RT56 host 채택, 실제 localisation 구성 불일치 잔존 |

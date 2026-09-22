@@ -120,7 +120,13 @@ Current confirmed baseline on 2026-09-06:
 - A confirmed map-generator defect skipped seven vanilla-identical HOK `naval_base_spawn` rows that RT56 had removed even though the restored HOK coastline needs them. `tools/build_rt56_map.py` now restores only those seven audited rows and asserts that the generated map introduces no coastal province without a port spawn beyond the pinned RT56 baseline. The defect-to-crash link is strongly supported by an identical 14-frame stack in older runs with explicit `map.cpp:1679` likely-crash port warnings, but remains unconfirmed until new GER and KOR cold runs pass.
 - Deterministic build/audit scripts live under `tools/`. ADR-0004 is implemented in the Korean-asset builder, pruning policy, integration manifest, and aggregate validator. The 2026-09-06 follow-up static run passed all Korean asset/technology gates but ended at `15 PASS / 0 WARNING / 1 ERROR` because the concurrently restored Japan-democracy-themed `music/Minshu_ikki.ogg` is not registered by the donor's current song list and violates the existing Korea-only pruning rule. A KOR focus shares its name but does not play the song; preserve the possible user change until the intended asset ownership is confirmed. A clean future static result still will not be engine/runtime proof.
 
-Treat the continuation mandate and the new compatibility-port request as established project context. Do not block routine work by demanding approval from the unavailable original maintainer; escalate only concrete contradictory evidence, a specific third-party restriction, or a required user decision.
+Additional project context recorded on 2026-09-22:
+
+- The user identifies themself as the original HOK creator and has authorized bringing the updated HOK artwork and applicable image guidelines into this compatibility port. Treat that authorship and task authorization as established context; do not carry forward earlier assumptions that the creator is deceased or unavailable.
+- This artwork update concerns the new 60-focus/29-national-spirit icon set and its HOK-specific sprite mappings, source records, and palette rules. It does not authorize copying the donor's entire runtime tree, changing gameplay, recoloring legacy artwork, or replacing RT56's shared image systems.
+- The 2026-09-06 baseline above remains a historical record. The artwork update does not establish a new runtime result or supersede the requirement to fingerprint current sources before implementation and validation.
+
+Treat the continuation mandate and the compatibility-port request as established project context. Do not require another original-author approval for work the user has already authorized; escalate only concrete contradictory evidence, a specific third-party restriction, or a required user decision.
 
 Do not infer the current target version from memory or from `supported_version` alone. Before compatibility work, record when available:
 
@@ -385,6 +391,51 @@ For `descriptor.mod` and launcher `.mod` files:
 - Do not replace missing art with placeholders unless requested.
 - Keep asset compatibility changes separate from gameplay changes unless evidence connects them.
 
+#### HOK artwork copies, sprite ownership, and relative paths
+
+- Newly imported or created HOK focus and national-spirit image payloads, together with any HOK-specific masks and overlays, must exist inside this compatibility repository's runtime asset directories. Copy only the selected assets required for the authorized task, preserving the read-only donor, Workshop, and game sources.
+- Use mod-root-relative paths such as `gfx/interface/goals/HOK_KOR/example.dds` and `gfx/interface/ideas/HOK_KOR/example.dds` for `texturefile`, `animationmaskfile`, `animationtexturefile`, and equivalent references. Do not use absolute paths, external URLs, `..` escapes, or links to files outside the repository.
+- New HOK focus `icon = GFX_...` and idea `picture = ...` references must resolve through HOK-specific sprite definitions to the local HOK image payload. Preserve the established `HOK_KOR_` naming convention, check same-path and logical-ID collisions against the pinned RT56 and relevant vanilla sources, and do not override a shared global sprite merely to redirect one HOK icon. Keep gameplay IDs and behavior unchanged in an artwork-only task.
+- This local-copy requirement does not extend to all vanilla or RT56 shared UI assets. The existing `gfx/interface/goals/shine_overlay.dds` reference may continue to use the vanilla host fallback. Other existing shared focus-shine masks, animation textures, and host UI helpers may remain external when their provider is recorded and checked. Require a separate scoped review before localizing or replacing them. Do not claim the image chain is wholly self-contained while a shared host reference remains.
+- Preserve format, dimensions, alpha, frame layout, and exact filename casing unless conversion is explicitly within scope. Record the donor/source revision and path, applicable reuse basis, original credits, input/output hashes, and any edits. User authorship of HOK does not erase existing third-party artwork credits or artwork-specific terms.
+- Trace the complete content-to-sprite-to-image chain, including masks and overlays. Every HOK-owned payload must resolve locally with exact casing; every retained shared host reference must have a recorded provider. Apply the existing deterministic-generator, integration-classification, pruning, and pinned-source rules to imported assets and registries.
+
+#### Create and integrate artwork with new HOK content
+
+When an authorized implementation adds HOK focuses, national spirits, decisions, or other content that needs an image, include appropriate artwork creation and integration. Routine source research, permitted downloads, composition, and integration within that scope do not require a separate artwork request. Review-only tasks remain read-only, and shared RT56 content remains under the host-preservation rules.
+
+1. Identify the content's meaning, political branch or policy field, central motif, linked focus/spirit relationship, and genuine upgrade stages. Use distinct motifs for unrelated policies and follow the color rules below.
+2. Prefer the existing documented, reusable components and approved donor artwork. Consult [the icon credits](docs/HOK_KOREAN_FOCUS_ICON_CREDITS.md), including the recorded Ultimate HOI4 GFX sources, before searching additional public packs or creators' repositories. Avoid unnecessary duplicate downloads.
+3. Preserve the actual licence or explicit permission evidence for any third-party material's reuse, modification, and distribution. Public availability or a repository's code licence alone does not establish artwork rights. Keep permission tied to the identified files or pack, retain third-party exceptions, and use a permitted alternative when needed.
+4. Compose new artwork using separate background, frame, central illustration, and stage-mark layers. Source-based composition is the established default for the 60-focus/29-spirit set. Distinguish original artwork from selection, composition, recoloring, and added marks; do not invent individual artist credits.
+5. Export to the compatibility repository's runtime directories using target-UI dimensions, alpha, frame layout, and DDS format. Keep source downloads and temporary work separate from runtime outputs. Integrate HOK-specific sprites and local image references, retaining only the documented shared host exceptions above.
+6. Update the credits and [icon manifest](docs/data/HOK_KOREAN_FOCUS_ICON_MANIFEST.json) with content IDs, source URL/path and fixed revision when available, reuse evidence, contributors, original hashes, composition details, final paths, sprite references, and output hashes. Preserve earlier attribution and record the compatibility-port selection separately from the donor artwork provenance.
+7. Inspect artwork at actual display size for background contrast, central motifs, stage readability, transparency, paths, format, and sprite collisions. When runtime execution is authorized, validate in-game states and distinguish those results from static inspection. Keep gameplay logic, legacy artwork, and unrelated assets outside an artwork-only change.
+
+#### HOK focus and national-spirit background colors
+
+Color represents the focus's political branch or policy field, not the country's current government. Shared industry and military artwork must not change color with the ruling ideology.
+
+| Political branch or policy field | Background and ornament direction |
+|---|---|
+| Democracy | Muted deep blue |
+| Communism | Deep red rather than vivid primary red |
+| Fascism | Brown with black ornaments, or charcoal with bronze ornaments |
+| Non-aligned | Light gray and silver rather than pure white |
+| Industry and production | Neutral gray with bronze or gold ornaments |
+| Education and research | Light gray and silver |
+| Army, ordnance, logistics, and staff | Dark green and olive |
+| Navy | Navy blue and slate blue-gray |
+| Air force | Silver and pale blue |
+
+- Apply political-branch color first for route-specific content. Democratic education, medical aid, volunteer support, and economic or armaments agreements remain blue. Foreign agreement participant spirits retain their originating branch's color regardless of the recipient's ideology; do not introduce gameplay conditions for artwork choices.
+- For shared HOK content, use its policy field. Service-specific schools, research, and maintenance retain the service color. Resolve overlaps from the actual branch, policy, and linked spirit, not a recipe's `family` or `category` alone. The regional Gyeongsang shipbuilding-industry focus uses industry colors.
+- Keep linked focuses and spirits in the same color family with a shared central motif. Preserve `I`, `II`, and `III` marks for genuine upgrade chains and intentional badge omissions; do not invent stages for unrelated content.
+- Edit background layers separately, preserving central illustrations, metal borders, ornaments, stage marks, alpha, and recognizable symbols. Do not recolor the whole finished icon with a hue filter. Color must complement the motif and shape rather than act as the only identifier.
+- Preserve dark outlines against the UI and metallic shading in light gray/silver backgrounds so icons do not resemble disabled content. Distinguish democracy from navy and education from air force through motifs and frames as well as color.
+- Record exact palettes, per-ID assignments, sources, color processing, and output hashes in [the color plan](docs/HOK_KOREAN_FOCUS_ICON_COLOR_PLAN.md) and icon manifest. Inspect actual-size previews and report locked, available, active, completed, shine, and spirit-display runtime checks separately.
+- The current applied scope is the new 60 focuses and 29 national-spirit definitions. Existing communist, fascist, non-aligned, and other legacy artwork is outside this update. Palette entries for those branches guide future explicitly scoped artwork; they do not authorize recoloring legacy HOK or RT56 content.
+
 ---
 
 ## 8. Localisation and encoding
@@ -636,7 +687,7 @@ Not sufficient by itself:
 - Do not impersonate the original HOK creator, donor-revision maintainers, or RT56 team, or present inherited work as newly authored.
 - Preserve original names, credits, notices, licences, and third-party attributions; do not invent or remove a licence.
 - Prefer depending on RT56 rather than redistributing its files. If an engine-required merged monolithic file contains RT56 content, record the exact source version/hash, applied delta, notice/licence status, and why redistribution is necessary.
-- Mention the creator's death publicly only with user-approved wording, respectfully and never as marketing copy.
+- Attribute the user's original HOK work accurately and preserve separate donor-revision, RT56, localisation, and third-party contributions; do not repeat unsupported personal-history claims about contributors.
 - Never expose credentials or perform an upload, update, visibility change, deletion, or metadata mutation without an explicit instruction for that exact target and action.
 
 ---
@@ -726,6 +777,6 @@ Stop modifying and report the evidence instead of guessing when:
 - donor/RT56-derived redistribution permission is required but cannot be established
 - the staged package contains credentials, personal data, or files whose publication status cannot be determined safely
 
-Do not stop merely because this is a compatibility continuation, a new Workshop item is required, or the original maintainer is unavailable; those are established project conditions.
+Do not stop merely because this is a compatibility continuation or a new Workshop item is required; those are established project conditions. The user's original HOK authorship and authorization for this task are recorded above.
 
 When blocked, make the safest non-destructive progress possible: inventory the subsystem, identify missing evidence, and provide the next concrete diagnostic or release-preparation step. Do not manufacture certainty to keep moving.

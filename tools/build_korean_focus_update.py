@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Build only the pinned September 2026 HOK Korean focus update.
 
-The twenty inputs are selected from HOK commits da81530 and 118d7b5, not
-from the donor's unrelated Japanese update.  The source snapshot is prepared
+The twenty gameplay inputs are selected from HOK commits da81530 and 118d7b5.
+The later artwork is a separate hash-pinned delta. Sources are prepared
 separately; this builder never writes to the donor or prepares its own inputs.
 """
 
@@ -10,11 +10,14 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
+import re
 import sys
 from pathlib import Path
 
 from build_rt56_map import HOK_ROOT, PROVINCE_ID_MAP, REPO_ROOT, STATE_ID_MAP
 from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
+from source_snapshot import ICON_MANIFEST, icon_lock, read_icon_source
 
 
 # [2026-09-22]_kpopmodder: Pin the approved Korean update separately from the historical donor base.
@@ -62,21 +65,28 @@ SOURCE_HASHES = {
     Path("common/ai_strategy_plans/KOR_historical_strategy_plan.txt"):
         "18C56A24FF5C93A944E58D71BB81AFFADC332601861D980EF243ACF028D2A3E8",
 }
-OUTPUT_PATHS = tuple(SOURCE_HASHES)
+GAMEPLAY_PATHS = tuple(SOURCE_HASHES)
+ICON_ASSET_PATHS = tuple(Path(relative) for relative in icon_lock()["runtime_assets"])
+OUTPUT_PATHS = GAMEPLAY_PATHS + ICON_ASSET_PATHS
 SOURCE_COMMITS = {
     relative: AI_COMMIT if relative.parts[1] == "ai_strategy_plans" else FOCUS_COMMIT
-    for relative in OUTPUT_PATHS
+    for relative in GAMEPLAY_PATHS
 }
 
 # [2026-09-22]_kpopmodder: Refuse to overwrite any work beyond the three reviewed pre-update outputs.
 ACCEPTED_PRIOR_OUTPUT_HASHES = {
+    # [2026-09-22]_kpopmodder: Accept the reviewed generated tree before the independent-party reward update.
     Path("common/national_focus/korea.txt"):
-        "AB0CDBC51CD8052EF9C7C9FA957AF00619360EAA3EFFBF03EA06F6470AA661DE",
+        "1E14EBB08B466214967FEA0463A23D981716CE376A8A562172C979D299182F30",
     Path("common/ideas/korea.txt"):
         "BB53994155D4800B86AD260E32572D54A4FD8D21DEDBE97A8F05B6B8B40F0927",
     Path("common/ai_strategy_plans/KOR_historical_strategy_plan.txt"):
         "09AED7585E784FC4C87FA938862AF7DC053D7A2064C244F77AC2006E6561AC6D",
 }
+# [2026-09-22]_kpopmodder: Accept only the reviewed pre-artwork outputs, including the user's existing reward change.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): digest for relative, digest in icon_lock()["prior_output_sha256"].items()
+})
 PORT_NOTES = {
     Path("common/national_focus/korea.txt"):
         "# [2026-09-22]_kpopmodder: Preserve the approved RT56 map IDs and fifteen-state Manchurian integration in the updated HOK tree.",
@@ -124,6 +134,60 @@ def add_port_note(data: bytes, note: str) -> bytes:
     return bom + note.encode("utf-8") + newline + payload
 
 
+def add_independent_party_reward(data: bytes) -> bytes:
+    # [2026-09-22]_kpopmodder: Port only the reviewed reward from donor 698b6eb, retaining the pinned tree.
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    start = b"\tfocus = {" + newline + b"\t\tid = KOR_independent_party_in_power" + newline
+    if data.count(start) != 1:
+        raise ValueError("expected one independent-party focus")
+    offset = data.index(start)
+    end = data.index(newline + b"\t}" + newline, offset) + len(newline + b"\t}")
+    focus = data[offset:end]
+    tail = newline + b"\t\t}" + newline + b"\t}"
+    if not focus.endswith(tail) or b"partial_economic_mobilisation" in focus:
+        raise ValueError("independent-party reward no longer matches the reviewed source")
+    reward = newline.join((
+        b"",
+        b"",
+        b"\t\t\t# [2026-09-22]_kpopmodder: Grant partial mobilization without downgrading higher economy laws.",
+        b"\t\t\tif = {",
+        b"\t\t\t\tlimit = {",
+        b"\t\t\t\t\tOR = {",
+        b"\t\t\t\t\t\thas_idea = civilian_economy",
+        b"\t\t\t\t\t\thas_idea = low_economic_mobilisation",
+        b"\t\t\t\t\t}",
+        b"\t\t\t\t}",
+        b"\t\t\t\tadd_ideas = partial_economic_mobilisation",
+        b"\t\t\t}",
+    ))
+    return data[:offset] + focus[:-len(tail)] + reward + tail + data[end:]
+
+
+def apply_icon_references(relative: Path, data: bytes) -> bytes:
+    # [2026-09-22]_kpopmodder: Apply only the reviewed artwork fields after all existing gameplay migrations.
+    manifest = json.loads(read_icon_source(ICON_MANIFEST).decode("utf-8-sig"))
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    for group, field in (("focuses", "icon"), ("ideas", "picture")):
+        for entry in manifest[group]:
+            if entry["source_file"] != relative.as_posix():
+                continue
+            identifier = re.escape(entry["id"].encode())
+            head = rb"id[ \t]*=[ \t]*" + identifier if group == "focuses" else identifier + rb"[ \t]*=[ \t]*\{"
+            prefix_lines = rb"(?:[ \t]{3,}[^\r\n]*\r?\n)*?" if group == "ideas" else rb""
+            pattern = rb"(?m)(^[ \t]*" + head + rb"[ \t]*\r?\n" + prefix_lines + rb")([ \t]*)" + field.encode() + rb"[ \t]*=[ \t]*" + re.escape(entry["previous_reference"].encode()) + rb"(?=[ \t]*\r?$)"
+            match = re.search(pattern, data)
+            if match is None or len(list(re.finditer(pattern, data))) != 1:
+                raise ValueError(f"expected one original artwork field: {relative}/{entry['id']}")
+            source = read_icon_source(relative)
+            donor_pattern = rb"(?m)^[ \t]*" + head + rb"[ \t]*\r?\n" + prefix_lines + rb"(?:[ \t]*#[^\r\n]*\r?\n)*[ \t]*" + field.encode() + rb"[ \t]*=[ \t]*" + re.escape(entry["new_reference"].encode()) + rb"[ \t]*\r?$"
+            if len(list(re.finditer(donor_pattern, source))) != 1:
+                raise ValueError(f"reviewed donor reference missing: {relative}/{entry['id']}")
+            replacement = (match[1] + match[2] + b"# [2026-09-22]_kpopmodder: Import the reviewed HOK policy icon." + newline
+                           + match[2] + field.encode() + b" = " + entry["new_reference"].encode())
+            data = data[:match.start()] + replacement + data[match.end():]
+    return data
+
+
 def build_all() -> dict[Path, bytes]:
     """Return deterministic relative-path outputs without writing any files."""
     inputs = verify_inputs()
@@ -133,22 +197,26 @@ def build_all() -> dict[Path, bytes]:
     for relative, original in inputs.items():
         migrated = replace_tokens(original, mapping)
         migrated = apply_post_migration_fixes(relative.as_posix(), migrated)
+        if relative == Path("common/national_focus/korea.txt"):
+            migrated = add_independent_party_reward(migrated)
         if migrated != original:
             changed.add(relative)
         if relative in PORT_NOTES:
             migrated = add_port_note(migrated, PORT_NOTES[relative])
-        outputs[relative] = migrated
-    # [2026-09-22]_kpopmodder: The other eighteen files are approved byte-for-byte additions or updates.
+        outputs[relative] = apply_icon_references(relative, migrated)
+    # [2026-09-22]_kpopmodder: Gameplay migrations remain confined to these two files; artwork is checked separately.
     if changed != set(PORT_NOTES):
         unexpected = sorted(path.as_posix() for path in changed ^ set(PORT_NOTES))
         raise ValueError(f"unexpected Korean update transformation coverage: {unexpected}")
+    for relative in ICON_ASSET_PATHS:
+        outputs[relative] = read_icon_source(relative)
     verify_inputs()
     return outputs
 
 
 def preflight(outputs: dict[Path, bytes]) -> None:
     if set(outputs) != set(OUTPUT_PATHS):
-        raise ValueError("Korean update output set must match the twenty approved paths")
+        raise ValueError("Korean update outputs must match the twenty gameplay paths and 92 artwork assets")
     errors = []
     for relative, expected in outputs.items():
         destination = (REPO_ROOT / relative).resolve()

@@ -108,7 +108,7 @@ C1 로그에서 RT56 MAN 캐릭터의 `has_idea = kim_chang_ryong` 참조 오류
 |---|---|
 | 입력 캐시 | `source_snapshot.py --check` 통과; 고정 입력과 cache bytes 대조 |
 | 한국 출력 생성 | builder preflight 통과, 20개 runtime 파일 생성 |
-| 독립 원본 대조 | 18개 SHA-256 동일; 중점·산업 결정 차이는 승인된 ID 이전·만주 행·포트 주석으로 한정 |
+| 독립 원본 대조 | 최초 이식 시 18개 SHA-256 동일; 당시 중점·산업 결정 차이는 승인된 ID 이전·만주 행·포트 주석으로 한정. 이후 독립당 부분 동원 보상은 [별도 후속 기록](2026-09-22-independent-party-reward.md) 참조 |
 | 신규 참조 조사 | 현재 RT56 common/events/localisation에서 `HOK_KOR_` 충돌 발견 없음; 신규 군사 기술 참조·KOR MIO 3개 존재 확인 |
 | 통합 원장 | 1,031개 행, 출처 commit/blob/hash/checkout 기록 |
 | aggregate 정적 검사 | 첫 정의 복원·후속 MAN 생성·최종 임시 파일 제거 및 README 확정 뒤 각각 `20 PASS / 0 WARNING / 0 ERROR`. 최종 결과는 `static-validation-final.txt`, exit 0 |
