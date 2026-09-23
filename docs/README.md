@@ -4,13 +4,14 @@
 
 ## 현재 상태
 
+- 2026-09-23 후속 한국 업데이트: **콘텐츠·이미지 병합 완료, 460개 중점. 실제 엔진 9개 시나리오 909 PASS / 0 FAIL / 0 SKIP; 신규 134개 중점·63개 국민정신 확인. 정적 20 PASS / 0 WARNING / 1 기존 ERROR**. 18개 사업·12개 주 효과·231개 그림을 선택 이식했다. 강제 효과와 기간 경과 검사의 범위·한계·초기 계측 실패는 [실행 감사](audits/2026-09-23-second-wave-runtime.md)에 구분했다. [구현 기록](implementation/2026-09-23-korean-second-wave-port.md), [지역 대응 ADR-0005](decisions/0005-korean-second-wave-regional-integration.md), [출처·충돌 감사](audits/2026-09-23-second-wave-source-audit.md). 정적 잔여 오류는 작업 전 KOR history 전쟁 지지도와 생성기의 불일치다. 아래 9월 22일 수치는 이전 326개 이식의 역사적 기록이다.
 - 1차 정적 포팅 구현: 완료
 - 한국 콘텐츠 소유권: HOK 우선으로 확정, 중국·일본 자체 콘텐츠는 RT56 우선
-- 한국 중점 업데이트: 한국 runtime20개 파일 반영 완료; 326개 중점과 보상·결정·이벤트·현지화·AI, 기존 지도·만주·대일 강화 보존. [구현 기록](implementation/2026-09-22-korean-focus-update-port.md)
-- aggregate static gate: 최종 임시 파일 제거·README 확정·원장 재생성 뒤 `20 PASS / 0 WARNING / 0 ERROR`, exit 0. 이전 fixture 전 두 스냅샷과 별도 기록; 의미 검사 통과·회귀 변형 13개 거부
-- 게임/launcher 런타임 검증: **범위를 한정한 부분 검증**. 초기 대조·첫 수선 실패 보존. 기본 fixture 118 PASS·1 FAIL·7 SKIP, NEP alternate 134 PASS·0 FAIL·0 SKIP; 두 실행의 MAN 오류 0건
-- 최신 포트 실행 기록: [2026-09-22 C1·R0·C0 및 기본 fixture 증거](audits/2026-09-22-korean-update-runtime.md) — R0 저장·PRC 오류 재현, 기본 fixture의 네 지역 사업 두 회차·중점 보상 부분 검증; 전체 오류 0건이나 정상 저장 완료는 아님
-- 현재 환경 관찰: donor `81d39fa`, RT56 manifest `7475007536894105204`, C1 HOI4 `1.19.3.0.c01a (940d)`·DLC 36개. 9월 21일 donor 단독 로그와 구분
+- 9월 22일 한국 중점 업데이트: 한국 runtime20개 파일 반영 완료; 당시 326개 중점과 보상·결정·이벤트·현지화·AI, 기존 지도·만주·대일 강화 보존. [구현 기록](implementation/2026-09-22-korean-focus-update-port.md)
+- 9월 22일 aggregate static gate: 당시 최종 임시 파일 제거·README 확정·원장 재생성 뒤 `20 PASS / 0 WARNING / 0 ERROR`, exit 0. 이후 history 불일치가 있는 현재 결과와 구분; 의미 검사 통과·회귀 변형 13개 거부
+- 9월 22일 게임/launcher 런타임 검증: **당시 범위를 한정한 부분 검증**. 초기 대조·첫 수선 실패 보존. 기본 fixture 118 PASS·1 FAIL·7 SKIP, NEP alternate 134 PASS·0 FAIL·0 SKIP; 두 실행의 MAN 오류 0건
+- 이전 포트 실행 기록: [2026-09-22 C1·R0·C0 및 기본 fixture 증거](audits/2026-09-22-korean-update-runtime.md) — R0 저장·PRC 오류 재현, 기본 fixture의 네 지역 사업 두 회차·중점 보상 부분 검증; 전체 오류 0건이나 정상 저장 완료는 아님
+- 9월 22일 구현 기록의 환경 관찰: donor `81d39fa`, RT56 manifest `7475007536894105204`, C1 HOI4 `1.19.3.0.c01a (940d)`·DLC 36개. 9월 21일 donor 단독 로그와 구분; 새 계획의 조사 기준선은 해당 문서에 별도 기록
 - 과거 crash 사건: C1·C0는 9월 6일 실패 지점을 넘어 진행했으나 엔진·호스트도 바뀌어 항구 spawn 보정만으로 원인을 확정하지 않음; 사건은 Open
 - 별도 MAN 참조 수선: 첫 정의 복원은 C0에서 실패. 후속으로 두 KOR 조건을 보호한 native advisor 검사 생성·정적 검증 완료, 기본 C1 진행에서 반복 오류 미재현; 모집·history·균형 유지
 - 임시 파일 없는 한국 시험: 중점 3개 정상 UI 진행·완료와 원화평가절하 국민정신·한국어 표시 확인, 최종 UI 1936.04.28.22. 정확35일 경과·수동 저장은 미검증. 별도 새 프로세스가 로그를 덮어써 후반 오류 집계 불가; 초기 보존본과 UI 보고를 구분
@@ -22,6 +23,14 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 구현 | [2026-09-23 한국 2차 업데이트 이식](implementation/2026-09-23-korean-second-wave-port.md) | 460중점·288개 신규 파일·정적20 PASS와 기존 오류1건; 후속 실행 감사 연결 |
+| 감사 | [2026-09-23 선택 원본·호스트 충돌](audits/2026-09-23-second-wave-source-audit.md) | 288경로·신규 ID 충돌0, 원본·호스트 재확인 |
+| 원본 기록 | [be5fb40 명세·그림 출처](upstream/hok-second-wave-be5fb40/README.md) | 37개 바이트 보존 사본; 원본 실행 기록과 포트 결과 구분 |
+| 계획 | [2026-09-23 한국 2차 업데이트 전체 이식](plans/2026-09-23-korean-second-wave-port-plan.md) | 구현 전 계획 보존; 실제 결과는 위 구현 기록 |
+| 대상 목록 | [2026-09-23 한국 업데이트 파일별 이식](plans/2026-09-23-korean-update-file-inventory.md) | 최신 원본과 현재 포트의 파일·자산 차이 및 잠정 분류 |
+| 검증 계획 | [2026-09-23 한국 업데이트 검증](plans/2026-09-23-korean-update-validation-plan.md) | 작성 당시 검증 계약; 실제 결과는 아래 실행 감사 |
+| 실행 범위 | [2026-09-23 실행 검증 범위](validation/2026-09-23-second-wave-runtime-request.md) | 후속 실제 실행 승인과 임시 설정 전환·원본 복원 범위 |
+| 실행 감사 | [2026-09-23 한국 2차 확장 실제 실행](audits/2026-09-23-second-wave-runtime.md) | 9개 시나리오 909 PASS, 고유134중점·63정신; 계측 실패·잔여 오류·한계 별도 |
 | 계획 | [2026-09-22 한국 중점 업데이트 이식](plans/2026-09-22-korean-focus-update-port-plan.md) | 조사 당시 계획; 실제 결과는 구현 기록으로 분리 |
 | 구현 | [2026-09-22 한국 중점 업데이트 이식](implementation/2026-09-22-korean-focus-update-port.md) | 한국20개 파일·현재 RT56 재병합·재현 도구·검증 상태 |
 | 감사 | [2026-09-22 RT56·HOI4 기준선 재검토](audits/2026-09-22-source-rebaseline.md) | 변경된 host/vanilla10개 입력의 근거와 해시 |
@@ -34,13 +43,14 @@
 | 구현 | [2026-09-06 한국 우선 자산·KOR 기술 보정](implementation/2026-09-06-korea-first-assets-and-kor-tech.md) | HOK 음성·기본 항공기 복원과 폐기 수송기 기술 정리 |
 | 구현 | [2026-09-06 한국 해안 항구 배치 closure 보정](implementation/2026-09-06-map-building-closure-fix.md) | 누락 항구 spawn 7행과 RT56 대비 회귀 gate 추가 |
 | 감사 | [통합 ledger](audits/2026-09-06-integration-ledger.md) | ADR-0004를 반영한 현재 ownership·merge 요약 |
-| 감사 | [1,123개 파일 분류 CSV](audits/2026-09-06-production-file-classification.csv) | 생성기가 관리하는 현재 행별 분류·Git/미커밋 출처·해시 원장 |
+| 감사 | [1,411개 파일 분류 CSV](audits/2026-09-06-production-file-classification.csv) | 생성기가 관리하는 현재 행별 분류·Git/미커밋 출처·호스트/출력 해시 원장 |
 | 검증 | [정적 검증 기록](validation/2026-09-06-static-validation.md) | 1차 정책 당시 역사적 결과 |
 | 검증 | [한국 우선 후속 정적 검증](validation/2026-09-06-korea-first-static-validation.md) | 당시 15 PASS와 미등록 `Minshu_ikki.ogg` pruning 오류 1건의 역사적 기록 |
 | 결정 | [ADR-0001: 런타임 의존성과 로드 구성](decisions/0001-runtime-dependencies-and-load-order.md) | RT56 host 채택, 실제 localisation 구성 불일치 잔존 |
 | 결정 | [ADR-0002: 지도 ID 마이그레이션](decisions/0002-map-id-migration.md) | 채택·정적 구현 완료 |
 | 결정 | [ADR-0003: localisation 계약](decisions/0003-localisation-contract.md) | Pending Runtime |
 | 결정 | [ADR-0004: HOK 한국 콘텐츠 우선 보존](decisions/0004-hok-korean-content-priority.md) | Accepted; 과거 음성·KOR DDS 소유권 결정을 대체 |
+| 결정 | [ADR-0005: 2차 만주 정책·환제국 거점](decisions/0005-korean-second-wave-regional-integration.md) | 채택; 지리 대응·범위 차이 유지, 대표 거점과 지역 사업 엔진 검사는 실행 감사 참조 |
 | 사건 | [2026-09-06 포팅 후 새 게임 접근 위반](incidents/2026-09-06-post-port-new-game-crash.md) | Open; 과거 재현 기록. 현재 C1·C0는 해당 지점을 넘었으나 과거 원인 판정은 남음 |
 
 ## 역사적 증거

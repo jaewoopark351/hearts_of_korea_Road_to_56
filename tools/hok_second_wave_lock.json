@@ -1,0 +1,2965 @@
+{
+  "format": 1,
+  "date": "2026-09-23",
+  "source_kind": "immutable-git-objects",
+  "source_root": "C:\\hoi\\hearts_of_korea",
+  "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+  "scope": "134 new focuses, 63 national spirits, 18 timed projects, 12 state dynamic modifiers; selected Korean delta only",
+  "review_plan": "docs/plans/2026-09-23-korean-second-wave-port-plan.md",
+  "paths_sha256": "08CCAD1FD3C67200B3E4C63EE3FF33EE6CB570240B095DECC8E083A0FD64C18E",
+  "preserved_historical_locks": {
+    "tools/hok_source_lock.json": "436B730E92D58A33FBBBB913E064C3A0D6A904D069F61D8CDBE38DCCB28FC94B",
+    "tools/hok_icon_lock.json": "DBB2A37CAE0DB55171C393CDFDA3F24E9B09B65CEF224E81593310A9620C59A3"
+  },
+  "accepted_previous_outputs": {
+    "common/national_focus/korea.txt": "D33DC929878F3CBB2750164086D9B0120C2DAC2ED45B994C5384A720E8D15C22"
+  },
+  "absent_before_import": [
+    "common/decisions/HOK_KOR_communist_governance.txt",
+    "common/decisions/HOK_KOR_communist_policy.txt",
+    "common/decisions/HOK_KOR_fascist_procurement.txt",
+    "common/decisions/HOK_KOR_manchurian_followup.txt",
+    "common/decisions/categories/HOK_KOR_communist_governance.txt",
+    "common/decisions/categories/HOK_KOR_communist_policy.txt",
+    "common/decisions/categories/HOK_KOR_fascist_procurement.txt",
+    "common/decisions/categories/HOK_KOR_manchurian_followup.txt",
+    "common/dynamic_modifiers/HOK_KOR_manchurian_followup.txt",
+    "common/ideas/HOK_KOR_common_followup.txt",
+    "common/ideas/HOK_KOR_communist_development.txt",
+    "common/ideas/HOK_KOR_communist_governance.txt",
+    "common/ideas/HOK_KOR_communist_policy.txt",
+    "common/ideas/HOK_KOR_constitutional_followup.txt",
+    "common/ideas/HOK_KOR_fascist_followup.txt",
+    "common/ideas/HOK_KOR_fascist_mobilization.txt",
+    "common/ideas/HOK_KOR_fascist_procurement.txt",
+    "common/ideas/HOK_KOR_fascist_staff.txt",
+    "common/ideas/HOK_KOR_royal_followup.txt",
+    "gfx/interface/decisions/HOK_KOR/communist_development/pak_new_production_lines.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_development/pak_process_conversion.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_development/yeo_mobile_technical_training.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_development/yeo_rural_infrastructure.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_governance/category.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_governance/pak_material_reallocation.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_governance/pak_production_retooling.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_governance/yeo_community_welfare.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_governance/yeo_labor_compact.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_policy/category.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_policy/pak_current_output.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_policy/pak_plant_expansion.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_policy/yeo_joint_purchasing.dds",
+    "gfx/interface/decisions/HOK_KOR/communist_policy/yeo_rural_credit.dds",
+    "gfx/interface/decisions/HOK_KOR/fascist_procurement/category.dds",
+    "gfx/interface/decisions/HOK_KOR/fascist_procurement/nrsc_emergency_deliveries.dds",
+    "gfx/interface/decisions/HOK_KOR/fascist_procurement/nrsc_material_contracts.dds",
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/manchurian_followup_programs.dds",
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/mc_community_services_project.dds",
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/mc_local_services_project.dds",
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/mc_material_recovery_project.dds",
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/mc_municipal_routine_project.dds",
+    "gfx/interface/goals/HOK_KOR/communist_development/pak_plan_review_sessions.dds",
+    "gfx/interface/goals/HOK_KOR/communist_development/pak_planning_secretariat.dds",
+    "gfx/interface/goals/HOK_KOR/communist_development/pak_provincial_plan_offices.dds",
+    "gfx/interface/goals/HOK_KOR/communist_development/pak_technical_delegates.dds",
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_cooperative_advisers.dds",
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_joint_service_accounts.dds",
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_rural_service_survey.dds",
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_technical_extension.dds",
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_workshop_bulletins.dds",
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_annual_output_targets.dds",
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_capacity_reviews.dds",
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_integrated_output_plan.dds",
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_material_balance.dds",
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_national_asset_survey.dds",
+    "gfx/interface/goals/HOK_KOR/communist_governance/yeo_local_councils.dds",
+    "gfx/interface/goals/HOK_KOR/communist_governance/yeo_social_compact.dds",
+    "gfx/interface/goals/HOK_KOR/communist_governance/yeo_worker_peasant_congress.dds",
+    "gfx/interface/goals/HOK_KOR/communist_governance/yeo_workplace_arbitration.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_civil_administration_rules.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_civil_supply_offices.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_claims_accounts.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_construction_practice.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_interservice_liaison.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_joint_dispatch_records.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_joint_logistics_board.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_military_administration.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_public_accounts.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_reconstruction_budget.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_reconstruction_secretariat.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_service_supply_rules.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_mobilization/nrsc_manpower_coordination.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_mobilization/nrsc_manpower_register.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_mobilization/nrsc_reserve_rotations.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_mobilization/nrsc_skilled_worker_exemptions.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_procurement/nrsc_contract_audits.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_procurement/nrsc_delivery_schedules.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_procurement/nrsc_procurement_board.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_procurement/nrsc_supply_contracts.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_staff/nrsc_field_report_system.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_staff/nrsc_operations_directorate.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_staff/nrsc_staff_registry.dds",
+    "gfx/interface/goals/HOK_KOR/fascist_staff/nrsc_staff_regulations.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_bibyeonsa_dockets.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_civil_service_practicum.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_execution_registers.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_granary_ledgers.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_inspector_itineraries.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_merit_registers.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_mobilization_review.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_nco_examinations.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_petition_calendar.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_provincial_returns.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_regimental_returns.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_relief_dispatches.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_reserve_cadre.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_technical_memorials.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_allied_observers.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_appeal_docket.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_bilingual_manuals.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_cabinet_confidence.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_countersigned_orders.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_court_clerks.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_liaison_rotation.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_ministerial_reports.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_municipal_clinics.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_parliamentary_questions.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_public_legal_notices.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_public_patronage.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_rural_legal_aid.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_welfare_accounts.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_adverse_weather_flying.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_closed_material_cycle.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_coke_testing.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_commercial_arbitration.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_emergency_turn_drills.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_export_invoices.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_export_settlement.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_flight_weather_logs.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_foundry_exchange.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_instrument_approaches.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_march_discipline.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_market_sampling.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_mechanized_loading.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_mobile_unit_recovery.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_motor_driver_courses.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_ore_classification.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_rescue_station_drills.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_scrap_collection.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_shipping_documents.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_smoke_screen_procedures.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_civil_accountability.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_courier_relays.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_demobilization_schedule.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_dispatch_codes.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_inspection_circuits.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_peacetime_training.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_postwar_dockets.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_provincial_inventory.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_provision_accounts.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_reconstruction_priorities.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_relay_exercises.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_signal_logs.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_supply_returns.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_veteran_rolls.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_community_mediation.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_county_dossiers.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_dispute_records.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_foundry_batches.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_housing_repairs.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_integrated_recovery.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_interpreter_desks.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_market_inspections.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_material_recovery.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_metallurgical_trials.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_municipal_consultation.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_payroll_registers.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_residence_certificates.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_sanitation_rounds.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_service_calendar.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_service_counters.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_settled_municipality.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_shared_service_manuals.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_tenancy_records.dds",
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_workshop_inventory.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_capital_goods_board.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_heavy_industry_dispatch.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_industrial_reporting.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_machine_tool_allocation.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_steel_delivery_schedules.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_cooperative_federation.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_cooperative_registry.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_cooperative_workshops.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_joint_purchasing.dds",
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_rural_credit.dds",
+    "gfx/interface/ideas/HOK_KOR/communist_development/pak_planning_administration_1.dds",
+    "gfx/interface/ideas/HOK_KOR/communist_development/pak_planning_administration_2.dds",
+    "gfx/interface/ideas/HOK_KOR/communist_development/yeo_technical_extension_1.dds",
+    "gfx/interface/ideas/HOK_KOR/communist_development/yeo_technical_extension_2.dds",
+    "gfx/interface/ideas/HOK_KOR/communist_governance/pak_output_plan_1.dds",
+    "gfx/interface/ideas/HOK_KOR/communist_governance/pak_output_plan_2.dds",
+    "gfx/interface/ideas/HOK_KOR/communist_governance/yeo_social_compact_1.dds",
+    "gfx/interface/ideas/HOK_KOR/communist_governance/yeo_social_compact_2.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_administrative_budget_1.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_administrative_budget_2.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_construction_budget_1.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_construction_budget_2.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_occupation_administration_1.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_occupation_administration_2.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_service_coordination_1.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_service_coordination_2.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_mobilization/nrsc_essential_workforce.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_mobilization/nrsc_manpower_administration_1.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_mobilization/nrsc_manpower_administration_2.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_procurement/nrsc_procurement_oversight_1.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_procurement/nrsc_procurement_oversight_2.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_staff/nrsc_staff_administration_1.dds",
+    "gfx/interface/ideas/HOK_KOR/fascist_staff/nrsc_staff_administration_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_ordered_administration_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_ordered_administration_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_practical_bureaucracy.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_relief_protocol_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_relief_protocol_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_reserve_cadre_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_reserve_cadre_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_accessible_justice_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_accessible_justice_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_allied_liaison.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_public_welfare_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_public_welfare_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_responsible_cabinet_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_responsible_cabinet_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_export_practice_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_export_practice_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_instrument_flying.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_maritime_rescue.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_material_cycle_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_material_cycle_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_mobile_operations_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_mobile_operations_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_smoke_withdrawal.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_weather_flying.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_civil_recovery_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_civil_recovery_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_courier_service_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_courier_service_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_provision_accounts_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_provision_accounts_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_reserve_training_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_reserve_training_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_community_services_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_community_services_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_community_services_concentrated.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_local_services_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_local_services_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_local_services_concentrated.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_material_recovery_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_material_recovery_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_material_recovery_concentrated.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_municipal_routine_1.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_municipal_routine_2.dds",
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_municipal_routine_concentrated.dds",
+    "gfx/interface/ideas/HOK_KOR/second_wave/pak_current_output_1.dds",
+    "gfx/interface/ideas/HOK_KOR/second_wave/pak_current_output_2.dds",
+    "gfx/interface/ideas/HOK_KOR/second_wave/pak_plant_expansion_1.dds",
+    "gfx/interface/ideas/HOK_KOR/second_wave/pak_plant_expansion_2.dds",
+    "gfx/interface/ideas/HOK_KOR/second_wave/yeo_joint_purchasing_1.dds",
+    "gfx/interface/ideas/HOK_KOR/second_wave/yeo_joint_purchasing_2.dds",
+    "gfx/interface/ideas/HOK_KOR/second_wave/yeo_local_credit_1.dds",
+    "gfx/interface/ideas/HOK_KOR/second_wave/yeo_local_credit_2.dds",
+    "interface/HOK_KOR_communist_development_icons.gfx",
+    "interface/HOK_KOR_communist_development_icons_shine.gfx",
+    "interface/HOK_KOR_communist_governance_icons.gfx",
+    "interface/HOK_KOR_communist_governance_icons_shine.gfx",
+    "interface/HOK_KOR_fascist_followup_icons.gfx",
+    "interface/HOK_KOR_fascist_followup_icons_shine.gfx",
+    "interface/HOK_KOR_fascist_mobilization_icons.gfx",
+    "interface/HOK_KOR_fascist_mobilization_icons_shine.gfx",
+    "interface/HOK_KOR_fascist_procurement_icons.gfx",
+    "interface/HOK_KOR_fascist_procurement_icons_shine.gfx",
+    "interface/HOK_KOR_fascist_staff_icons.gfx",
+    "interface/HOK_KOR_fascist_staff_icons_shine.gfx",
+    "interface/HOK_KOR_remaining_followup_icons.gfx",
+    "interface/HOK_KOR_remaining_followup_icons_shine.gfx",
+    "interface/HOK_KOR_second_wave_icons.gfx",
+    "interface/HOK_KOR_second_wave_icons_shine.gfx",
+    "localisation/english/HOK_KOR_common_followup_l_english.yml",
+    "localisation/english/HOK_KOR_communist_development_l_english.yml",
+    "localisation/english/HOK_KOR_communist_governance_l_english.yml",
+    "localisation/english/HOK_KOR_communist_policy_l_english.yml",
+    "localisation/english/HOK_KOR_constitutional_followup_l_english.yml",
+    "localisation/english/HOK_KOR_fascist_followup_l_english.yml",
+    "localisation/english/HOK_KOR_fascist_mobilization_l_english.yml",
+    "localisation/english/HOK_KOR_fascist_procurement_l_english.yml",
+    "localisation/english/HOK_KOR_fascist_staff_l_english.yml",
+    "localisation/english/HOK_KOR_manchurian_followup_l_english.yml",
+    "localisation/english/HOK_KOR_royal_followup_l_english.yml",
+    "localisation/korean/HOK_KOR_common_followup_l_korean.yml",
+    "localisation/korean/HOK_KOR_communist_development_l_korean.yml",
+    "localisation/korean/HOK_KOR_communist_governance_l_korean.yml",
+    "localisation/korean/HOK_KOR_communist_policy_l_korean.yml",
+    "localisation/korean/HOK_KOR_constitutional_followup_l_korean.yml",
+    "localisation/korean/HOK_KOR_fascist_followup_l_korean.yml",
+    "localisation/korean/HOK_KOR_fascist_mobilization_l_korean.yml",
+    "localisation/korean/HOK_KOR_fascist_procurement_l_korean.yml",
+    "localisation/korean/HOK_KOR_fascist_staff_l_korean.yml",
+    "localisation/korean/HOK_KOR_manchurian_followup_l_korean.yml",
+    "localisation/korean/HOK_KOR_royal_followup_l_korean.yml"
+  ],
+  "excluded_shared_asset": {
+    "donor_path": "gfx/interface/goals/HOK_KOR/shine_overlay.dds",
+    "runtime_path": "gfx/interface/goals/shine_overlay.dds",
+    "provider": "VANILLA",
+    "sha256": "BB416649358C73D34AACD46BAD61BC44211FAC8111627B56E25F385AD98F4448"
+  },
+  "runtime_text": {
+    "common/decisions/HOK_KOR_communist_governance.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "0527391739794488042f5adbec0337a445946616",
+      "object_sha256": "31684079B445F3D7CE3264F5F6120147B397CF4C10BC69C38583E5328A8F8CED",
+      "checkout": "crlf",
+      "sha256": "7B7BB13464EBBF86FA63BA570F68CD47B48A66EB5816A9830AEED1FE731FA797",
+      "size": 17799
+    },
+    "common/decisions/HOK_KOR_communist_policy.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "07e7b89461549e7d08dd76cfe3a298fe17d50b50",
+      "object_sha256": "117178895EA9EC49BAC7F12D3340146A6885F548EBCD140087C1ABA03CCB5DD5",
+      "checkout": "crlf",
+      "sha256": "E19DEE0ACDC93185FB73E4E47B9F87D509193ACCF46267CABD487BEA3F859B11",
+      "size": 9504
+    },
+    "common/decisions/HOK_KOR_fascist_procurement.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e9181cf4e1a059962cda5cc0d373eab73c75aaa8",
+      "object_sha256": "1E435301243683DA15DE3E5E6722409039C840238A9702CF334BFC5FE5AA4FB7",
+      "checkout": "crlf",
+      "sha256": "9396146271B29F1930E9663DEE30E7BEDADDE4FA1395E496991278BE40D81636",
+      "size": 4545
+    },
+    "common/decisions/HOK_KOR_manchurian_followup.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6f42dfc66ecf6b1d1a6890e575cedb6464acdbab",
+      "object_sha256": "784D74F3D08F794351FD6E0FF9F7B8AD621EBAB591DA1B73E3DAAE4EBA3F2A54",
+      "checkout": "crlf",
+      "sha256": "5B9E162E175E9FC1EB5D1B1A29AD12911AF73DF340D01F82CD9D5D3F52974E1D",
+      "size": 11617
+    },
+    "common/decisions/categories/HOK_KOR_communist_governance.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7ff74789822d3ca55cd4713f885b7a1b77bd71c7",
+      "object_sha256": "1C06D58401D578CD1E19EE34C4C50B2092AE8FB8824C0652D9FED8F0D34ED16B",
+      "checkout": "crlf",
+      "sha256": "7C3DC406746B89DB99C1DFB6B690AF0144EC9F7EB4B25FA81E6F936D8156BCF9",
+      "size": 702
+    },
+    "common/decisions/categories/HOK_KOR_communist_policy.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "dc7f3ea3d823f2576432763e5f2aea6e43d9a16e",
+      "object_sha256": "ABE80B7DCDF3DCA07ACF48A6FA08FC05970610E4BE07A6E7D0B10D6CCF5DD258",
+      "checkout": "crlf",
+      "sha256": "28D1E56BBFDD8EC5DE4E9B506A6B25A91AF2DE9BA6D07E2E7A1B873C43A25883",
+      "size": 391
+    },
+    "common/decisions/categories/HOK_KOR_fascist_procurement.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b1a297faf562d8529f70bb8f27dd9efee0c45157",
+      "object_sha256": "0F6553AC243E9A901E8EE941CBE73409C53E29A1A646D4AB0AF929C5A816CEC7",
+      "checkout": "crlf",
+      "sha256": "812F5251E9F5935ACD7070402391E3D62AC6292DBDFDD8FF22A19EDBE9B6B0AA",
+      "size": 403
+    },
+    "common/decisions/categories/HOK_KOR_manchurian_followup.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c9f7cb0f0cf6db52af01dba7b7b159733b85c116",
+      "object_sha256": "238E745262FCCE70FC5C023FA3530335EC4B8F76ED768C51B71FAB56E79C4422",
+      "checkout": "crlf",
+      "sha256": "F50812D36E60BE8AA1FF263412999BB653E7D1AADEBC2BBABD85E1E1CDECD1BC",
+      "size": 460
+    },
+    "common/dynamic_modifiers/HOK_KOR_manchurian_followup.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "2eac44d3ab94e9dd1bea05d97fcbb351fcbe764e",
+      "object_sha256": "F6DB81B18B2662D5905B374640332DCF1F8CFB9467FA290E36B2744F2887D81F",
+      "checkout": "crlf",
+      "sha256": "650FB00A2AD75FE0CB485DF4A9CC9C2A46C5342E32DC623F832BFD2B8EF41A7E",
+      "size": 6558
+    },
+    "common/ideas/HOK_KOR_common_followup.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7ec3a611fc8e957dd8086022c7107af58613a99c",
+      "object_sha256": "0EAA988B0E18A151D9EFB9A10447DF492B17ACAFBF16A263B3052403DB1A149C",
+      "checkout": "crlf",
+      "sha256": "D49D791A028EBABF878F580623C257BB93CC6E05706A043488ECA72228AF87F6",
+      "size": 3699
+    },
+    "common/ideas/HOK_KOR_communist_development.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4df1d7407d1c7628e4e6f083673c89973b29dde5",
+      "object_sha256": "6F32139091BED2EBAE9C915CA0348F68A9C41D22070618548CC72FC2474A616D",
+      "checkout": "crlf",
+      "sha256": "374F532AD247CF2AA0ABB3BE262767ABC244F4A21BDB6BBE26C0061E89B13D7A",
+      "size": 1918
+    },
+    "common/ideas/HOK_KOR_communist_governance.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "42d774fcd71de2824ea1784995aaae82ffb2fdd2",
+      "object_sha256": "B9203CEBC6F534E7D7328A3B1AB6C546AE38F19AFDB0FBD2F79DC9144596586A",
+      "checkout": "crlf",
+      "sha256": "89074BC5E59698417B1BB5262E79B549246D4D7FDFB3EF3C98718583D6F49844",
+      "size": 1843
+    },
+    "common/ideas/HOK_KOR_communist_policy.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a10f3a6728149b9304ba056fff44c928744f6519",
+      "object_sha256": "361946E0567368EA4FCEBB894EAB94916731A5F6543F4AABA66ECEDE577E512E",
+      "checkout": "crlf",
+      "sha256": "9102231D89AB02C558C8DE95DD225B728CB0A40F2D4DC6290DAF99DCC8BB1BC6",
+      "size": 4239
+    },
+    "common/ideas/HOK_KOR_constitutional_followup.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d793caaa400a08f637c399d33c8476a6c39b9973",
+      "object_sha256": "BDB3200E3AD4884473278258FC9D4FBA51FB0B7FEF33353363EE4234B631B631",
+      "checkout": "crlf",
+      "sha256": "B37329349BDA16070DAA0A478C634BFF66F7F0F5511A2D4E766D6CFB7E050CAB",
+      "size": 3299
+    },
+    "common/ideas/HOK_KOR_fascist_followup.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "245261290c960f3295b0ac42beca30f53458e67d",
+      "object_sha256": "42791943D50C16784B20406C49A4912FCA46F17701CD87318C60403CAFCFF19F",
+      "checkout": "raw",
+      "sha256": "42791943D50C16784B20406C49A4912FCA46F17701CD87318C60403CAFCFF19F",
+      "size": 3795
+    },
+    "common/ideas/HOK_KOR_fascist_mobilization.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d1376ad75a01cb8df4b0f11163139aebbbafa3af",
+      "object_sha256": "618F01D42E248F8877987A8F5F49880E1151224015D36A79797175E8D6C953DE",
+      "checkout": "crlf",
+      "sha256": "2E7623E79FC47470C88E385BAF96EF5D2EF92BBD927DF81C9089AAD62D43BA50",
+      "size": 1397
+    },
+    "common/ideas/HOK_KOR_fascist_procurement.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d45b1342c0b7b034c26e2b99c57485330b3fe88d",
+      "object_sha256": "D2E0F12C5C8BA78C4532EC5D89723693BB915729972271F78C29881592AA9B59",
+      "checkout": "crlf",
+      "sha256": "3136023954EC7B9072D4DEB82BD6CBBE75934E153D16CCF9A905EFFC682F5F41",
+      "size": 919
+    },
+    "common/ideas/HOK_KOR_fascist_staff.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "042ac8f7e53f5f3d47888f03be4b9edb577636d0",
+      "object_sha256": "7155F3B1D9593C23304979EA495F5CC56107CA6324C14BFDAD4A684472281CD0",
+      "checkout": "crlf",
+      "sha256": "A2646C716CB359429109729DA5F81C71B3375DD1193E6E709C0668ED59B9A71B",
+      "size": 918
+    },
+    "common/ideas/HOK_KOR_royal_followup.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "68d409912c882bf3d2cd530ea07cd299f516b1ea",
+      "object_sha256": "FB60EAAA5B562B5E87C79FE926D41A5170E1DD7F9AE69D2EDC9D8B042C4D7585",
+      "checkout": "crlf",
+      "sha256": "985B07C6D64F3039AE398B83764DB9312B328D23285AC23967CE0F5FBD62E2F0",
+      "size": 7060
+    },
+    "common/national_focus/korea.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "681bb7ad3ded0c5801e909ea3e52177409c38b4f",
+      "object_sha256": "7265ED370C672B49A10B6B177205F178D32073150C68DCCFC07B415AD48B2C8A",
+      "checkout": "crlf",
+      "sha256": "1CEDAF78903DB31D15E3837E20069B71BCA8FC674212B1D033F0D721B2B6735C",
+      "size": 469944
+    },
+    "interface/HOK_KOR_communist_development_icons.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "11715178f6a1168d435510b2aae037ad90a04ff7",
+      "object_sha256": "19D51CE1D4CEFC3238BB4EA106260FD7D05E5571B2934D58104E48F032248E1A",
+      "checkout": "crlf",
+      "sha256": "404A2EF0E90773F1C6CEA177E8E2D9A57C9B2C7818470BF8DBB4F4991186E794",
+      "size": 3459
+    },
+    "interface/HOK_KOR_communist_development_icons_shine.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7674b56f651bb62879f49ceca03dc80b325b22ee",
+      "object_sha256": "1920D8ACB881BE0E167A47999DC8F016E7390D1E5CFE1598E2A80755D894A96C",
+      "checkout": "crlf",
+      "sha256": "673A69D7909580D27F684A6CF14C0931FE4108D6FDC493DCC4E3C2627930B404",
+      "size": 12837
+    },
+    "interface/HOK_KOR_communist_governance_icons.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "67108b036c9643acde975e2b352a8985bcf437ab",
+      "object_sha256": "BA04C8679DC0888DBA7F0CB3D1322B21589831E4B9B032958A5829F277E236DF",
+      "checkout": "crlf",
+      "sha256": "5312D227CCB286274D86C460B11F1C9E4A460D93475374017F1B70947392FBB4",
+      "size": 3618
+    },
+    "interface/HOK_KOR_communist_governance_icons_shine.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "466aaceea15541c9850832dcc05308a148ce7898",
+      "object_sha256": "AC9E0CC9DDEDF9D283ED7421AA9BBA676029B3882F0927CB7D5A103F22302C97",
+      "checkout": "crlf",
+      "sha256": "EC3173DA01AE64EC482045E9A510228C159268A8A292C107986A4140E2C1CBD5",
+      "size": 12777
+    },
+    "interface/HOK_KOR_fascist_followup_icons.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4eaea1700aa31e98a93989fa5c680a1884d71228",
+      "object_sha256": "D81F96537ED09C558659C9E9EAAC92707AF87DD0EDD77A56DCE82855D7148124",
+      "checkout": "crlf",
+      "sha256": "18077A30F9434AD06DE205C489C4A31F42C25850F9886AE96318FED28F197E82",
+      "size": 4017
+    },
+    "interface/HOK_KOR_fascist_followup_icons_shine.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a7f6387b64e263ca63ab32a6fe0e5ef6e0aa7695",
+      "object_sha256": "14E6C19221A8682FCF074634B104D69256165E44389B743AF9218065A9E8112C",
+      "checkout": "crlf",
+      "sha256": "C5A46A2B3D9297D7CF0B97654A05EE99BA59D320139863AD6DCF5AFD61BB8DB7",
+      "size": 16980
+    },
+    "interface/HOK_KOR_fascist_mobilization_icons.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b6b6d28a8da3c48a417a53efe57bfd8228b4fecc",
+      "object_sha256": "6A47FE0CDA3E5284C05EA83F69864B311D808C041C0D4A9E976FFF99B13C96D6",
+      "checkout": "crlf",
+      "sha256": "EA19BEAC52F1B8E3C4FB3883AED7B8ADE3E1B9E99845D18F1FF4F4467198972D",
+      "size": 1507
+    },
+    "interface/HOK_KOR_fascist_mobilization_icons_shine.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5ab1cba9950941db90aec9d8982e6dde26255012",
+      "object_sha256": "EFC573340A78816AA659A8307DCF4F6D7F05858D9414216B8F434850DD55BACB",
+      "checkout": "crlf",
+      "sha256": "FC54054371E9C17E94B5F9D6E74DBD249B3007556B212A5E9AD31F9CB7AE6170",
+      "size": 5773
+    },
+    "interface/HOK_KOR_fascist_procurement_icons.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4fdc397f146cb1d8d9edb2f26a87a1c7f0f10d55",
+      "object_sha256": "2A5F51B5ADB44A5281A086ED19FECB2EA42CF637B697F62F359B0D049B788557",
+      "checkout": "crlf",
+      "sha256": "55452C7E38017E0DD464375FAC61539166A8B195720C921C6348BE6795A234EF",
+      "size": 1848
+    },
+    "interface/HOK_KOR_fascist_procurement_icons_shine.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "39c611f4c2882709274cbd467b83fe9a0f089958",
+      "object_sha256": "11581E106946A5E4A4428C71040FC7C12ACECCC00440BA859DC2990FB61FCD28",
+      "checkout": "crlf",
+      "sha256": "1D3166D331BE9B045C91B4144DE238299EB89B8D6FFB29322EA6C6B1183A164A",
+      "size": 5704
+    },
+    "interface/HOK_KOR_fascist_staff_icons.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "553cf2cc8099e36f71e9885988e67a09c98360ce",
+      "object_sha256": "8C18BD58E98ADE135114855CD9D8F6CBDB04A46B279715E08FA610B79D9A3ED9",
+      "checkout": "crlf",
+      "sha256": "A3FD177701C1E428F3699DF89E2B145BBDC3384071613292C2DEBAC541C3E83F",
+      "size": 1225
+    },
+    "interface/HOK_KOR_fascist_staff_icons_shine.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "1551ae639f9c8e68bb9ac3f5cd583115735da989",
+      "object_sha256": "BADA37F27FB3178C59482CEB12535D525A615FBFFF5856DE378448FD1A6E0982",
+      "checkout": "crlf",
+      "sha256": "A92660525C33D8C6345A5E37FC99AE4B0F25F53BC0EB4F6AF7908F6258F84F70",
+      "size": 5650
+    },
+    "interface/HOK_KOR_remaining_followup_icons.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "916f9c3446657b22ac36f26263db4d4fb7a6966b",
+      "object_sha256": "A4B7372368946CBE113ABFCB702EAE3AB5D140B63D3F1777749D25FDEC5193FC",
+      "checkout": "crlf",
+      "sha256": "F7D90FD4E3356F9D7F9457BAC11ECDE5EF81F258B5D6618A77E4D0FA47FECE2D",
+      "size": 24496
+    },
+    "interface/HOK_KOR_remaining_followup_icons_shine.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "8f150c549490d87e10933faf79311944bab82ae9",
+      "object_sha256": "DAC9A64370977C428716AB48F798B58F69D37150B3DF232D4258165B7090FA20",
+      "checkout": "crlf",
+      "sha256": "2EECF7695D63737084FB59BE347CCD0AE65435B065283090BAAAF4364980390C",
+      "size": 114265
+    },
+    "interface/HOK_KOR_second_wave_icons.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "1fa713c006d248423fc5bdec90f65d7fbd987c1c",
+      "object_sha256": "D2B9188D3C0D0A2C0B020030AA9EE9BB6F9528C423260965E42AC9B649549F06",
+      "checkout": "crlf",
+      "sha256": "7458A5D403980AE1C6C6E726C5B6E88062F9C2E5F23CBAC61F1534844E26DF85",
+      "size": 4244
+    },
+    "interface/HOK_KOR_second_wave_icons_shine.gfx": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "3e31c75adb26dc3fa364b4467dfd034184c8520b",
+      "object_sha256": "9B9B34C35E9E8451D4479BBA5C4E3B5BC874252D5C3E12B5C8B2CAEFE68D1222",
+      "checkout": "crlf",
+      "sha256": "945749EF60CA456F7B816FDC4D267B484669B1915A405497D0ABF3EF0A2EF0AC",
+      "size": 13961
+    },
+    "localisation/english/HOK_KOR_common_followup_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "98933ab045992b2fa5e73035d618ae0097437abd",
+      "object_sha256": "1D6495205C39343DEB30D05B350599715BC0244D2B70F35CADD5B2016C381FA9",
+      "checkout": "crlf",
+      "sha256": "8CBC228B278E5084E86963F75F3F8279C548A70ACD7AB8265F796E42830F84C7",
+      "size": 6867
+    },
+    "localisation/english/HOK_KOR_communist_development_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a77c801b34e1bd1a67ed86410b772303421f25fe",
+      "object_sha256": "005BD6379D4FB942C036E55DBBB0F4F943B9829EA0CFC7A9E25475DCBB0F5979",
+      "checkout": "crlf",
+      "sha256": "FA8AAF1DF6EEF940BEB48D7E18A9912B813E8246B76877711858AA63776875DD",
+      "size": 7461
+    },
+    "localisation/english/HOK_KOR_communist_governance_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4258bf8e8298eef85f938c7388ab9de3ac09e88d",
+      "object_sha256": "97C124ACAF0747301530CDC22F36848E4AF5AB7AAFA8F975771EDBA9F90896DF",
+      "checkout": "crlf",
+      "sha256": "A7BDC62182C902B5FB3327602C4E335B6F75BEB37C331C5738EA51F83F6A9A7D",
+      "size": 8899
+    },
+    "localisation/english/HOK_KOR_communist_policy_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "34b0adc56825e64518ddcfeee51e4f9b7274c870",
+      "object_sha256": "95EBD8186D693B01A43BD16976F936BFE06324A489287BBE2B7FA11294388C51",
+      "checkout": "crlf",
+      "sha256": "412D11CA40148F951F4DDCB60C91FEE60A64864900094DE3AC694BFDFB6DDD43",
+      "size": 10160
+    },
+    "localisation/english/HOK_KOR_constitutional_followup_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "eb7fc3cddef5ccad1041cfe4aedd3bd0c55334e3",
+      "object_sha256": "CC991258827314F427FD81CFB8C32EFCA1C9EE471F3F384099FC74B315574251",
+      "checkout": "crlf",
+      "sha256": "F6D55838B564AF27326B9BC79AB3E679FABD58F872A8C30122D2768A7F7794A0",
+      "size": 5455
+    },
+    "localisation/english/HOK_KOR_fascist_followup_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "812262d4376a4fdb0ad83ce16f847fcebd5e646a",
+      "object_sha256": "8C06CCB22540B45851DE3FA0C40095B3458493C588FE009F27664BE98613EB3C",
+      "checkout": "raw",
+      "sha256": "8C06CCB22540B45851DE3FA0C40095B3458493C588FE009F27664BE98613EB3C",
+      "size": 6969
+    },
+    "localisation/english/HOK_KOR_fascist_mobilization_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a1242456c229a0f38a9d429b6a6d64fcd2e126e0",
+      "object_sha256": "8716F25F8EA707625D8F55DE3B8C20CC6862AABB8587F246E1F04337A8E7AD87",
+      "checkout": "crlf",
+      "sha256": "E3EEB8433E86EFE5BDD5FEB164078DAC5036D6E0BABDF34631EC41AC7467AC8E",
+      "size": 2543
+    },
+    "localisation/english/HOK_KOR_fascist_procurement_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "fbc2c7738cd8d8e825b5d14f382e4ff554f8f4ee",
+      "object_sha256": "FB6DA871B89A75673915096E7B8E81D4D35C430A058EE0E193C7AD1270F914B9",
+      "checkout": "crlf",
+      "sha256": "1F2E1496762F5C26467B48901F2BFC9EF1C9FC75D11735A5CE6FEB446ADB5687",
+      "size": 5033
+    },
+    "localisation/english/HOK_KOR_fascist_staff_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4ec6ebd7d71d67894a7b43da1b03a503383e1464",
+      "object_sha256": "122A1ECC35787BCCDAE9BD443D6A224198F694ED5DD9183B34E87051A8928104",
+      "checkout": "crlf",
+      "sha256": "8F4B312D4CE3E8E801D62016597D8B4672CE302B9DF562BFDD0A8F60542756F9",
+      "size": 2141
+    },
+    "localisation/english/HOK_KOR_manchurian_followup_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6dec65b9054387321a15c39b8233ac2edb5a28d0",
+      "object_sha256": "157CC61118468B6901253E3133072A5FE4AE6BC88F3E24AC71FCECECB2FE8309",
+      "checkout": "crlf",
+      "sha256": "79E3EE1EBC951DE86FB4A6008DBAFC13D73C7CE1183E9C8F6D967B325BFB8AEB",
+      "size": 12308
+    },
+    "localisation/english/HOK_KOR_royal_followup_l_english.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "9f27d41f10bf11962931c7612a420f205f328aba",
+      "object_sha256": "D5F06332C659863BF074E8F964255F7E99F65B33262EE1B01454620785CA6882",
+      "checkout": "crlf",
+      "sha256": "86DC7D7146121E24432F213A3A8598F08A8BA00941D32C4A95F03DDC4C3D8459",
+      "size": 10300
+    },
+    "localisation/korean/HOK_KOR_common_followup_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d39572690b96740bc87975c8adc5d335cea3ad6a",
+      "object_sha256": "AA09690E5576846F0850CF4C1CB235C46E38DF774B26049D71D650E0F865B6AE",
+      "checkout": "crlf",
+      "sha256": "E9AB9D72C2AD53B3B7D625B500170AE57E67353C5C72C49AB7C56C7EF536D6A7",
+      "size": 6866
+    },
+    "localisation/korean/HOK_KOR_communist_development_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f7f2fbe26862573802da7051320226e32b26a6fb",
+      "object_sha256": "03BA5A9C7A77D9BD38E544480DB981C23624D651935EF3FFCAAEBE60310661DF",
+      "checkout": "crlf",
+      "sha256": "8AEED98A7D2953EC7B17D6702A172EC718E7F2F8EE4781594F06F8794655768D",
+      "size": 7460
+    },
+    "localisation/korean/HOK_KOR_communist_governance_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b4cf3e017960a2eb4cb67650dac52859f540749a",
+      "object_sha256": "6448FFC4856D27AE3295468895F7381C771C46CC783236BA08DDD655828DD189",
+      "checkout": "crlf",
+      "sha256": "6870E809F580AE64CF22AB71755CF4362441E460F893F5EDAAFE522FCACFA694",
+      "size": 8898
+    },
+    "localisation/korean/HOK_KOR_communist_policy_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "1d9ac477ec510fe54b04ee5b66a5828799a5ac5e",
+      "object_sha256": "E4C48F31EF079CFF03AE042841F622509C51DA3566C63A86D9AAC0C812A77D3D",
+      "checkout": "crlf",
+      "sha256": "E4CF1141F3725D88165EE00D5312644D6BE60491B2890928BDAD8D61E2B05B4F",
+      "size": 10159
+    },
+    "localisation/korean/HOK_KOR_constitutional_followup_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "eb11446d0efd4f5852d99d263ed93003dbebcb4a",
+      "object_sha256": "35C133054F38EE66F4B65BA1B65507A908F45D5DAA48B6EB0D0A1B8F1D60303F",
+      "checkout": "crlf",
+      "sha256": "EF0B8AD7913A91AEDC3F7BA0AB82494EE6EE888FDD9E984B3E7BA21FA6B4D57B",
+      "size": 5454
+    },
+    "localisation/korean/HOK_KOR_fascist_followup_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f49e5cb27ee378eac70ce1f76d03ebe38b182b8d",
+      "object_sha256": "0D04917C3E0A0A4B5A270F59D10334270F6CEE65EF2A5655A95AF534A9EB2245",
+      "checkout": "raw",
+      "sha256": "0D04917C3E0A0A4B5A270F59D10334270F6CEE65EF2A5655A95AF534A9EB2245",
+      "size": 6968
+    },
+    "localisation/korean/HOK_KOR_fascist_mobilization_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "2b98d5a0f5b1dc2eca639187158f94edcdcdee4e",
+      "object_sha256": "673A0EA765ABCFC5A12B1C740DCCC3B94C4C20B4649CFFC6D5B2B85C2554961A",
+      "checkout": "crlf",
+      "sha256": "3CEEA93C6E6327BBEED55D17A25E1F158B89A786D4A74A77861396A73DA87E2A",
+      "size": 2542
+    },
+    "localisation/korean/HOK_KOR_fascist_procurement_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "ea46bb2f8e46026676cd340f1739e96b10833464",
+      "object_sha256": "05B58F6D4621090C6503C97E5DFC1561AA17286A1ED2EE99CAB88E1BA04FEE5B",
+      "checkout": "crlf",
+      "sha256": "C55DA06C540D86004544D5763DA2D4A025932FF8CE16046BC3011418A102BAAE",
+      "size": 5032
+    },
+    "localisation/korean/HOK_KOR_fascist_staff_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4eafe6ce4a722f8b609ef63c1ce7f2b2b3592795",
+      "object_sha256": "D7EEB51C748E50DE276FBFAE84CFDA46A95E7ADCC25CE457D28A4D297558A85C",
+      "checkout": "crlf",
+      "sha256": "9294DF334F924B62A42196D4A8C0C83AF27829FA60252924554FB873E50C7403",
+      "size": 2140
+    },
+    "localisation/korean/HOK_KOR_manchurian_followup_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a2e6adf67582f29e07f606dbb6da46e806038e55",
+      "object_sha256": "D77482CE1F7B410BF03CBDFC2E83E5F8AAE30FAE27C7F29EAE2F092DEE84418C",
+      "checkout": "crlf",
+      "sha256": "CEE15F7A209F4474C87C9135DCD0E3B58B7EA7B8F8CC380317B0F8F4D8F44397",
+      "size": 12307
+    },
+    "localisation/korean/HOK_KOR_royal_followup_l_korean.yml": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a0a8cd799734be3f9ae6d57dadee4ff0ffbbc5b2",
+      "object_sha256": "2BD91C1F87673C573667D4C0ED8C8101CA7419236E73846FFFDF97801DEFE761",
+      "checkout": "crlf",
+      "sha256": "035D022365D579A5D0B05D125AEC22F60A77106DE3AB37AE1C683A56570A0482",
+      "size": 10299
+    }
+  },
+  "runtime_assets": {
+    "gfx/interface/decisions/HOK_KOR/communist_development/pak_new_production_lines.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "449bed1c81bd6238b8239df43659745641802748",
+      "object_sha256": "D85579D0FB97E42B319C4B3B79CDC586A2FFBDB8DCF34FDEE49E631D562081A2",
+      "checkout": "raw",
+      "sha256": "D85579D0FB97E42B319C4B3B79CDC586A2FFBDB8DCF34FDEE49E631D562081A2",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_development/pak_process_conversion.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c801ed6ccb28341659869c02275bb8f1328f8886",
+      "object_sha256": "00B0DA0698B32DD3901BA3EBF91DBDAC2BF2F836D6791A4B11B982D26097D14C",
+      "checkout": "raw",
+      "sha256": "00B0DA0698B32DD3901BA3EBF91DBDAC2BF2F836D6791A4B11B982D26097D14C",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_development/yeo_mobile_technical_training.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "21bd242da375ccc5383e0f61c80653e1c6cc815a",
+      "object_sha256": "F602271A51F3FAE27928A4461D449EB5C4F08E99B820417F0C536176FED8B553",
+      "checkout": "raw",
+      "sha256": "F602271A51F3FAE27928A4461D449EB5C4F08E99B820417F0C536176FED8B553",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_development/yeo_rural_infrastructure.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "aa1ece91dc9b6010e45c2ccbe5141a3c94889a41",
+      "object_sha256": "553C2654D6E7C46CB2669E880157BA18BF95BAFF81D7E7ADC137043B2F4A2392",
+      "checkout": "raw",
+      "sha256": "553C2654D6E7C46CB2669E880157BA18BF95BAFF81D7E7ADC137043B2F4A2392",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_governance/category.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "8b7cd6c697b050e4a030f1fcfe63d5cfa535c000",
+      "object_sha256": "03DC0FEA9D56A8AA1E930B41F4F7EB6387BD5F695053F27A89D0DEB3D036375B",
+      "checkout": "raw",
+      "sha256": "03DC0FEA9D56A8AA1E930B41F4F7EB6387BD5F695053F27A89D0DEB3D036375B",
+      "size": 8288
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_governance/pak_material_reallocation.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d028ac1ab40a5c95043f354293b1851455129614",
+      "object_sha256": "3104ADD4A002B2EA9F324CB051F579A29A479E52EDD46C10C8ED05AEAB10953B",
+      "checkout": "raw",
+      "sha256": "3104ADD4A002B2EA9F324CB051F579A29A479E52EDD46C10C8ED05AEAB10953B",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_governance/pak_production_retooling.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4bf7dac8ffab621a98afcb07c52daafaee35da7a",
+      "object_sha256": "35D6DBC380364ADE36B40E442EBE256CFCE23BF3DD1C89D39020DCFE036AB057",
+      "checkout": "raw",
+      "sha256": "35D6DBC380364ADE36B40E442EBE256CFCE23BF3DD1C89D39020DCFE036AB057",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_governance/yeo_community_welfare.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "0a277ab09645b53e7702246c188bdc0f9dff940f",
+      "object_sha256": "C2DC401ED282145F5A503C5B6C8D75BAD4ECD4F97C3AB2C16FE014C496379041",
+      "checkout": "raw",
+      "sha256": "C2DC401ED282145F5A503C5B6C8D75BAD4ECD4F97C3AB2C16FE014C496379041",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_governance/yeo_labor_compact.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b7112fa469412fcade496d0f40e098b0b580b4d6",
+      "object_sha256": "57DACAA69F260A889E9A751EC65302303AC22700FE01B1DDC5579E1F3FDFB58A",
+      "checkout": "raw",
+      "sha256": "57DACAA69F260A889E9A751EC65302303AC22700FE01B1DDC5579E1F3FDFB58A",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_policy/category.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "2edf6dbd3fa705ccd867c32f82bb27e94563b3f0",
+      "object_sha256": "DF05E53F20B3B58304C46CEBA458B362E22803EE95F4D2C2EE0897A47E67D499",
+      "checkout": "raw",
+      "sha256": "DF05E53F20B3B58304C46CEBA458B362E22803EE95F4D2C2EE0897A47E67D499",
+      "size": 8288
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_policy/pak_current_output.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "0df82d0d02344962e68dd9a148d6b00e619bc25a",
+      "object_sha256": "CBCC6F9085E990B780A7AA4FEBEF789908575C573AD421DF0D329AF237B7B02F",
+      "checkout": "raw",
+      "sha256": "CBCC6F9085E990B780A7AA4FEBEF789908575C573AD421DF0D329AF237B7B02F",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_policy/pak_plant_expansion.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c37b142a270000268013466af331bdf83ea7fa4c",
+      "object_sha256": "E37CBA7668435119E1A66441AE832613FC267CF220B18D4319E6C26274C2B3B4",
+      "checkout": "raw",
+      "sha256": "E37CBA7668435119E1A66441AE832613FC267CF220B18D4319E6C26274C2B3B4",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_policy/yeo_joint_purchasing.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "31afb6e990140bbed09cca05e3d2e0e29ed9927a",
+      "object_sha256": "91979B5D669FF04FBAEAE081DADBA66A9EAB2F194749957163FFBA7E8B0B44B8",
+      "checkout": "raw",
+      "sha256": "91979B5D669FF04FBAEAE081DADBA66A9EAB2F194749957163FFBA7E8B0B44B8",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/communist_policy/yeo_rural_credit.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4883aec3430f82748b04c4a32f0b2075a53baa89",
+      "object_sha256": "0B7ADAA284774E8A2A1D4C09C96DFFC1B79F6F6829B069C8D25EB986A7123A1A",
+      "checkout": "raw",
+      "sha256": "0B7ADAA284774E8A2A1D4C09C96DFFC1B79F6F6829B069C8D25EB986A7123A1A",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/fascist_procurement/category.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d02f0c0d62591ba24a5d0b25835e1f56c52f8a0f",
+      "object_sha256": "BA072735A97396CE1772CD9FA84419C2609A4BE4AD7EBCED84689349143F5799",
+      "checkout": "raw",
+      "sha256": "BA072735A97396CE1772CD9FA84419C2609A4BE4AD7EBCED84689349143F5799",
+      "size": 8288
+    },
+    "gfx/interface/decisions/HOK_KOR/fascist_procurement/nrsc_emergency_deliveries.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5bc568bf13d6ae6db54047754465f2426c0384e8",
+      "object_sha256": "ED3078236E853D5867A2DFE0FB6555D8F764CEC2EDA37AA7BD9E101334DF89F0",
+      "checkout": "raw",
+      "sha256": "ED3078236E853D5867A2DFE0FB6555D8F764CEC2EDA37AA7BD9E101334DF89F0",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/fascist_procurement/nrsc_material_contracts.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4079793d6d94c2d4afab8b441e23b70035fd598b",
+      "object_sha256": "B1884485D74F096F029931C9E33BDD65A5AF90CCA7EA5AACF3CF156FD9E78754",
+      "checkout": "raw",
+      "sha256": "B1884485D74F096F029931C9E33BDD65A5AF90CCA7EA5AACF3CF156FD9E78754",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/manchurian_followup_programs.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "261d2896d657347ac3f7f46aac1ebcaabed9c4b6",
+      "object_sha256": "4859BA146B697135D74E032FC69D192B2BB1A733A75DC815F7E1A7FE9342B0F1",
+      "checkout": "raw",
+      "sha256": "4859BA146B697135D74E032FC69D192B2BB1A733A75DC815F7E1A7FE9342B0F1",
+      "size": 8288
+    },
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/mc_community_services_project.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c94b75cf3d96d7008ee1cf6d3ba228c4ded3f979",
+      "object_sha256": "B8A31B5500AD587874136128F1C676B0EC6376C2D9E953A96FD05A064C08D620",
+      "checkout": "raw",
+      "sha256": "B8A31B5500AD587874136128F1C676B0EC6376C2D9E953A96FD05A064C08D620",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/mc_local_services_project.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "8de35ce1466d5c90fb318fddbe8fd3efbbd5f024",
+      "object_sha256": "AC60130CAB544C59DC6B37A2FB555003DEDB4C1300D830113993B17A4A94179A",
+      "checkout": "raw",
+      "sha256": "AC60130CAB544C59DC6B37A2FB555003DEDB4C1300D830113993B17A4A94179A",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/mc_material_recovery_project.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f0d46d549587fa30bdde705fabf36ae5ae8b5c08",
+      "object_sha256": "1F53958C94DF21A0BE8DA855056311A642E791B271760EB3A2705858FCF4AEA8",
+      "checkout": "raw",
+      "sha256": "1F53958C94DF21A0BE8DA855056311A642E791B271760EB3A2705858FCF4AEA8",
+      "size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/remaining_followup/mc_municipal_routine_project.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "edbfbe88af349def7a8e1892d513f189cfec70a3",
+      "object_sha256": "39D1A66A74E6A672A6B4A03AD9F43822D79E6F93BFFCC5AC3BC2D5E292DF6DFF",
+      "checkout": "raw",
+      "sha256": "39D1A66A74E6A672A6B4A03AD9F43822D79E6F93BFFCC5AC3BC2D5E292DF6DFF",
+      "size": 4224
+    },
+    "gfx/interface/goals/HOK_KOR/communist_development/pak_plan_review_sessions.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "698e0019fb4322bde4074cf1332322b1c60fab3e",
+      "object_sha256": "7F1B7AB68B29225BF6C882BF680B0CB7B6D29A96809CE795D9A7CA00A7BEA923",
+      "checkout": "raw",
+      "sha256": "7F1B7AB68B29225BF6C882BF680B0CB7B6D29A96809CE795D9A7CA00A7BEA923",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_development/pak_planning_secretariat.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "0e4f4f8d5a6c1c62c1eac0f03286ed3f91079fa6",
+      "object_sha256": "33B31F6DDA1662FE5769D3F56B68211CC8361CCD276750461B76113527CF5ED4",
+      "checkout": "raw",
+      "sha256": "33B31F6DDA1662FE5769D3F56B68211CC8361CCD276750461B76113527CF5ED4",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_development/pak_provincial_plan_offices.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "262c47a5d430f131d42b4abf894d19d0c0981ae9",
+      "object_sha256": "64FD8C9D9658D53A0A9D86C7B65369CDD3BA81F04C436B2D864EEA4A4710EA29",
+      "checkout": "raw",
+      "sha256": "64FD8C9D9658D53A0A9D86C7B65369CDD3BA81F04C436B2D864EEA4A4710EA29",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_development/pak_technical_delegates.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "dde7b1bbd6b3097633a9865bf5566d09f27b65ad",
+      "object_sha256": "88924E758A1C3F6D890F6FC1D44CF5F57800D6744E8D9BA2A40C8E9425C3E749",
+      "checkout": "raw",
+      "sha256": "88924E758A1C3F6D890F6FC1D44CF5F57800D6744E8D9BA2A40C8E9425C3E749",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_cooperative_advisers.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c0ad5120e0f98531fc05d0471da6fc23463a6d10",
+      "object_sha256": "0401D02950A44C4BB364308F7DB26B59A73FE8B3555A362C32EB33188CB08CFC",
+      "checkout": "raw",
+      "sha256": "0401D02950A44C4BB364308F7DB26B59A73FE8B3555A362C32EB33188CB08CFC",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_joint_service_accounts.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "54ecad32f3a1845f47fab5882b3434b43c3806ce",
+      "object_sha256": "C0BE3CACCDD2A86933FFDABE7612059AF1AB43FE657917F3F677BB9EF96DDA06",
+      "checkout": "raw",
+      "sha256": "C0BE3CACCDD2A86933FFDABE7612059AF1AB43FE657917F3F677BB9EF96DDA06",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_rural_service_survey.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "ca9b5b43db3ef5906f806e504662523b9d02d4fa",
+      "object_sha256": "8B5DCF95EABB7FC901ADE622F1BCCAF43988DB1BCC83E0106EAAEB41F275AE75",
+      "checkout": "raw",
+      "sha256": "8B5DCF95EABB7FC901ADE622F1BCCAF43988DB1BCC83E0106EAAEB41F275AE75",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_technical_extension.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "79273a26a8233c14a58c1f9350d7aeca49c85417",
+      "object_sha256": "EDE044EE9034E2C1E74D7C6295EDD0030C927F1576E9EC74DDE2B69C01A25306",
+      "checkout": "raw",
+      "sha256": "EDE044EE9034E2C1E74D7C6295EDD0030C927F1576E9EC74DDE2B69C01A25306",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_development/yeo_workshop_bulletins.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "81679f904004ed0234d31afc578140691a181e92",
+      "object_sha256": "31A143B45F86EF5BBD9CE7DA69058BB1DB2134B4DE7E867DA9C1A92B29842995",
+      "checkout": "raw",
+      "sha256": "31A143B45F86EF5BBD9CE7DA69058BB1DB2134B4DE7E867DA9C1A92B29842995",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_annual_output_targets.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b74454975d86ca90ccb831c754e3df46809744e3",
+      "object_sha256": "5E518AF44038B687CEEF6F7C7549A8ECE969684A29D801B74778F52655756C73",
+      "checkout": "raw",
+      "sha256": "5E518AF44038B687CEEF6F7C7549A8ECE969684A29D801B74778F52655756C73",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_capacity_reviews.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "eb29fd9bad4d098f952a94b12b54a8d8d8d378b1",
+      "object_sha256": "FC1E8A07D6CAC140BE2F847EA65C583969C838654F644FDF28B2C1D4C7B8A2CD",
+      "checkout": "raw",
+      "sha256": "FC1E8A07D6CAC140BE2F847EA65C583969C838654F644FDF28B2C1D4C7B8A2CD",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_integrated_output_plan.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6c89d6a752a5fefd0d02f5e582d5fe5176226269",
+      "object_sha256": "AD0946459E08715A0C576656994F50EB8253A84E65ADC4C0D6F9D24D3701817B",
+      "checkout": "raw",
+      "sha256": "AD0946459E08715A0C576656994F50EB8253A84E65ADC4C0D6F9D24D3701817B",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_material_balance.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b36bc5baa227672cacb8991955e6e65478ebba16",
+      "object_sha256": "4D12D901FA3A1C2E4C12E7E31FB0D45AFEC43C96F162B98C1EE6E2777CC91F54",
+      "checkout": "raw",
+      "sha256": "4D12D901FA3A1C2E4C12E7E31FB0D45AFEC43C96F162B98C1EE6E2777CC91F54",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_governance/pak_national_asset_survey.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b99cf759f3451647325bfd34b514aa9baba19136",
+      "object_sha256": "FEE317FDB3F49DAD8EAE78BE61213998A5943C9E01DA52364EAEFA74F7D93C7B",
+      "checkout": "raw",
+      "sha256": "FEE317FDB3F49DAD8EAE78BE61213998A5943C9E01DA52364EAEFA74F7D93C7B",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_governance/yeo_local_councils.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "af9bee947139dfb69f629bcc8afae7e6b30c6a76",
+      "object_sha256": "4743896B7E0620DA2BA1122C0C78C1F55F7EF65B1C9972D4A32677956B937B13",
+      "checkout": "raw",
+      "sha256": "4743896B7E0620DA2BA1122C0C78C1F55F7EF65B1C9972D4A32677956B937B13",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_governance/yeo_social_compact.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b9f5dfd593d5fb74949e6e124c89e3916906f1c4",
+      "object_sha256": "8FA536C1827D9DDB03B641F6D2003134734D80518459A728BA4FB4017C890AE6",
+      "checkout": "raw",
+      "sha256": "8FA536C1827D9DDB03B641F6D2003134734D80518459A728BA4FB4017C890AE6",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_governance/yeo_worker_peasant_congress.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "717ceaae3a340a0a8e50f4c75c806dd6fb261a89",
+      "object_sha256": "4C1A049B5B7269D7D8C22B0ED76B00692554CDC181753F0A1C92B436AEF7E314",
+      "checkout": "raw",
+      "sha256": "4C1A049B5B7269D7D8C22B0ED76B00692554CDC181753F0A1C92B436AEF7E314",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/communist_governance/yeo_workplace_arbitration.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "94c25f886fb069a4f7ba6032fa69034c1eb28589",
+      "object_sha256": "9D4D51BB20E68F0F708E698D79542570D62A7870C4176D935CDA7124D87C3E17",
+      "checkout": "raw",
+      "sha256": "9D4D51BB20E68F0F708E698D79542570D62A7870C4176D935CDA7124D87C3E17",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_civil_administration_rules.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "ea70d5a451ca34ae0a135876f23421062a0ca0b3",
+      "object_sha256": "A7F48657F965E7B25F52A1FE1EB2EB8319FB9B7A18F6C9515B788BA98DB6A054",
+      "checkout": "raw",
+      "sha256": "A7F48657F965E7B25F52A1FE1EB2EB8319FB9B7A18F6C9515B788BA98DB6A054",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_civil_supply_offices.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f21e00b066c82c56228f5a6390d04c6892e4e677",
+      "object_sha256": "B452671660A48FA1F3FE4FEF7F45598ACD8D7C8B853537A673E8C8DF69221B03",
+      "checkout": "raw",
+      "sha256": "B452671660A48FA1F3FE4FEF7F45598ACD8D7C8B853537A673E8C8DF69221B03",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_claims_accounts.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d9203b443d8646eba2ca63150a7390124ba1b83f",
+      "object_sha256": "CE9AFB4F60041947A9E38B52E573DFD8E8353EF3E8DE29F99B4B75D2B276BC4A",
+      "checkout": "raw",
+      "sha256": "CE9AFB4F60041947A9E38B52E573DFD8E8353EF3E8DE29F99B4B75D2B276BC4A",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_construction_practice.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "ecafd1680eef6fd06d50252c70b5183bb9e154fc",
+      "object_sha256": "E7C19BEB25238A9B9157352CD0F7C5529056D36A4AB491F66B8DF8F8AE912774",
+      "checkout": "raw",
+      "sha256": "E7C19BEB25238A9B9157352CD0F7C5529056D36A4AB491F66B8DF8F8AE912774",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_interservice_liaison.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a955d56ef673caad6c5725bfdb7733b4febe5adf",
+      "object_sha256": "4C136CEDA4680BDAC7FB0E6EA0C43364954DF62CE384A30F07D06C7019DA180B",
+      "checkout": "raw",
+      "sha256": "4C136CEDA4680BDAC7FB0E6EA0C43364954DF62CE384A30F07D06C7019DA180B",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_joint_dispatch_records.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "603913d7ef0ce8c8ad049044861c0c41acc0c618",
+      "object_sha256": "029F54FA7DA93D5F6537CA1E86A81931A2F2E12E9863E83BD861587EEA32BEC8",
+      "checkout": "raw",
+      "sha256": "029F54FA7DA93D5F6537CA1E86A81931A2F2E12E9863E83BD861587EEA32BEC8",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_joint_logistics_board.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6f594ea4a87bd1d36cecd5f4dbb4c053def60abe",
+      "object_sha256": "6D8D99C10D62FB7106F05F2C6E94B7C272259394FA1B2486C8A402B6D1DE0F53",
+      "checkout": "raw",
+      "sha256": "6D8D99C10D62FB7106F05F2C6E94B7C272259394FA1B2486C8A402B6D1DE0F53",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_military_administration.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e87d5699c88c8f3e210870fe0d9ce1910d7c3bc9",
+      "object_sha256": "103D7BDC75C3652A217B549BC5756CF2BDC1105101AE40D656A7E352006BA84E",
+      "checkout": "raw",
+      "sha256": "103D7BDC75C3652A217B549BC5756CF2BDC1105101AE40D656A7E352006BA84E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_public_accounts.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "17a5478afe25d5d93e6739db94abb5e0c9a0c721",
+      "object_sha256": "77D46482B6CF98BFB02BA9281B1B2B7EA52D4B414E14F814FD64BFDD4014FAC4",
+      "checkout": "raw",
+      "sha256": "77D46482B6CF98BFB02BA9281B1B2B7EA52D4B414E14F814FD64BFDD4014FAC4",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_reconstruction_budget.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "8671af319982947a76be4db92537199e7a820a32",
+      "object_sha256": "D48F27E76CA0F442875808CF44C15FC8D614022EC1DDDC1A1CFD353AC4A90FEA",
+      "checkout": "raw",
+      "sha256": "D48F27E76CA0F442875808CF44C15FC8D614022EC1DDDC1A1CFD353AC4A90FEA",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_reconstruction_secretariat.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "958faf9a9610caf9da99057268d394cbb5003c11",
+      "object_sha256": "AB3690CC4F3749262857CD9DFDDD7694698C40CC40A17E5BA4D7CE62BE8B6598",
+      "checkout": "raw",
+      "sha256": "AB3690CC4F3749262857CD9DFDDD7694698C40CC40A17E5BA4D7CE62BE8B6598",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_followup/nrsc_service_supply_rules.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a8fd88293f4c1e9d4aa7ad6b2fa1f174e4f20582",
+      "object_sha256": "4035255261CCE80FE795DEAFAC949486535C8AA9D5DDE7CA305D352B7DD02E41",
+      "checkout": "raw",
+      "sha256": "4035255261CCE80FE795DEAFAC949486535C8AA9D5DDE7CA305D352B7DD02E41",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_mobilization/nrsc_manpower_coordination.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5165e37d30a93818bb89a7faf205052df0bc0e9b",
+      "object_sha256": "80E912C901971A634EDEA6F4F75FDC9DD332CB86CC6240DE9BBE5783D1274AA3",
+      "checkout": "raw",
+      "sha256": "80E912C901971A634EDEA6F4F75FDC9DD332CB86CC6240DE9BBE5783D1274AA3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_mobilization/nrsc_manpower_register.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6f5c39aced3270c2f0cd78ae1f7cc6f1ad1a8229",
+      "object_sha256": "ADD693C290AEC232397AFACAA423C4968FE2655D58A24E22E501E6A57BEF64CB",
+      "checkout": "raw",
+      "sha256": "ADD693C290AEC232397AFACAA423C4968FE2655D58A24E22E501E6A57BEF64CB",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_mobilization/nrsc_reserve_rotations.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "2cc33f78fc38041407e6fcc4d840d1998025578d",
+      "object_sha256": "5FAC0515A2828A370E15B0A19576D8AF72CDDB574B3D96E8D8A594EA820475A3",
+      "checkout": "raw",
+      "sha256": "5FAC0515A2828A370E15B0A19576D8AF72CDDB574B3D96E8D8A594EA820475A3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_mobilization/nrsc_skilled_worker_exemptions.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c238ce2812fe84be4f2ff4940ff22ca6be46bc93",
+      "object_sha256": "67A141D95DF31F45B107C86C804BA33164117B96800ADBA922C54FF837EDFE3E",
+      "checkout": "raw",
+      "sha256": "67A141D95DF31F45B107C86C804BA33164117B96800ADBA922C54FF837EDFE3E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_procurement/nrsc_contract_audits.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "8f936f178b296e2698a4b3d17c8acfab1017509f",
+      "object_sha256": "9B15252D622258DB1869DAC18AD33487E4A35A3B1E5737217E97EB5DEB5F08D2",
+      "checkout": "raw",
+      "sha256": "9B15252D622258DB1869DAC18AD33487E4A35A3B1E5737217E97EB5DEB5F08D2",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_procurement/nrsc_delivery_schedules.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "51531cf83ca90a8c8ad5f77f321e245318c02e1a",
+      "object_sha256": "9DB7B3127489CEF257FBB71142D7CE2C75312AABDDD9BAD11C9337E18864EBB2",
+      "checkout": "raw",
+      "sha256": "9DB7B3127489CEF257FBB71142D7CE2C75312AABDDD9BAD11C9337E18864EBB2",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_procurement/nrsc_procurement_board.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7f3875867d5ef0ba85c8140c177dae244c4acb28",
+      "object_sha256": "31369D3F68021173F44D0EEA1359077F55ECDC7AEDA6721EDADCD37C673CBF96",
+      "checkout": "raw",
+      "sha256": "31369D3F68021173F44D0EEA1359077F55ECDC7AEDA6721EDADCD37C673CBF96",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_procurement/nrsc_supply_contracts.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c5cd91285cbf0c7842f6ea8413036cf7a44cbd76",
+      "object_sha256": "E43D77B01CFF4DAC780624BA91C1F10DF373BB564A4E806E0A345F9E2F028D77",
+      "checkout": "raw",
+      "sha256": "E43D77B01CFF4DAC780624BA91C1F10DF373BB564A4E806E0A345F9E2F028D77",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_staff/nrsc_field_report_system.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "58871e79f1895d0b5ebb59f4a3b25de727a52624",
+      "object_sha256": "8791D59017BF11E86A52B9A0917FB367EC007BF10906CC15154050CD7347DA95",
+      "checkout": "raw",
+      "sha256": "8791D59017BF11E86A52B9A0917FB367EC007BF10906CC15154050CD7347DA95",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_staff/nrsc_operations_directorate.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "387feecf44af2b8842aa8c5a858d1bad9e0d548a",
+      "object_sha256": "61455754C2C5B7EA74AD5528029091E2E80F56BF4CE84D3EF32DC3C3C8EAEA8F",
+      "checkout": "raw",
+      "sha256": "61455754C2C5B7EA74AD5528029091E2E80F56BF4CE84D3EF32DC3C3C8EAEA8F",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_staff/nrsc_staff_registry.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "bc583f6a7ee4e47e2a91e1b2d9ee61e4fa5e7dbc",
+      "object_sha256": "8AE2DE8E272E229D54837A9306A23463E5ED13B9105A7BD3D36E27CD3D953207",
+      "checkout": "raw",
+      "sha256": "8AE2DE8E272E229D54837A9306A23463E5ED13B9105A7BD3D36E27CD3D953207",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/fascist_staff/nrsc_staff_regulations.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "835e41ea28e6f46629208619445fbf3354d04390",
+      "object_sha256": "29878F698119D180439BEEBD29004C004E9CC5CEC4A60AFCE7766EE2664420E9",
+      "checkout": "raw",
+      "sha256": "29878F698119D180439BEEBD29004C004E9CC5CEC4A60AFCE7766EE2664420E9",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_bibyeonsa_dockets.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a02a3d1de1673c0a0c86f81f12d4562e0c70bdc3",
+      "object_sha256": "E182BEA5409969AD6181136BDA1AC0FC3F1DFF10EDFAFCCFA5101AF23A385A4C",
+      "checkout": "raw",
+      "sha256": "E182BEA5409969AD6181136BDA1AC0FC3F1DFF10EDFAFCCFA5101AF23A385A4C",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_civil_service_practicum.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e1536e318761c67458bdd35e73845971308c68ac",
+      "object_sha256": "A8E44229E1A1C7FA0D2F0B96A8E917CD88EAE61E3E9CF792A04DF9080342C492",
+      "checkout": "raw",
+      "sha256": "A8E44229E1A1C7FA0D2F0B96A8E917CD88EAE61E3E9CF792A04DF9080342C492",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_execution_registers.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "44442e73316894869b8b9aa6e5a2df9797caa808",
+      "object_sha256": "6EFB5326C9748AFCE05380E069F3B6B0948BE64537F99D3F429E7B26FC22BAC7",
+      "checkout": "raw",
+      "sha256": "6EFB5326C9748AFCE05380E069F3B6B0948BE64537F99D3F429E7B26FC22BAC7",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_granary_ledgers.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "bbfbb5dea6483fd89ab876c5214cf6af743c0120",
+      "object_sha256": "63DB0071371BFFC43BD2B33ADAF89D9836A402435A2426F6E7AD802DF6C41D7B",
+      "checkout": "raw",
+      "sha256": "63DB0071371BFFC43BD2B33ADAF89D9836A402435A2426F6E7AD802DF6C41D7B",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_inspector_itineraries.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "3eb4efcf0c72c092353c2c98433ee0f5f5f298c2",
+      "object_sha256": "714E7EB61E08C0A4DA051C8B9E986BA2084E5A5F1D7E13D65707792DF90EBF52",
+      "checkout": "raw",
+      "sha256": "714E7EB61E08C0A4DA051C8B9E986BA2084E5A5F1D7E13D65707792DF90EBF52",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_merit_registers.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b3b32057e93b771f6a94442f2349d4a83402ca3f",
+      "object_sha256": "A735DAA97864425877BA205A772AAEBBFFB857FCE592D58D9691E9F413C5DD15",
+      "checkout": "raw",
+      "sha256": "A735DAA97864425877BA205A772AAEBBFFB857FCE592D58D9691E9F413C5DD15",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_mobilization_review.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "845abbfa6e698a7b3d07acd56715cf15d087c4b1",
+      "object_sha256": "281A279A04F9FF0F1885A988CEF1FC61B0FB96C95DB8B52ECC57D64337D8DD8F",
+      "checkout": "raw",
+      "sha256": "281A279A04F9FF0F1885A988CEF1FC61B0FB96C95DB8B52ECC57D64337D8DD8F",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_nco_examinations.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "44b58dfd8be3b800bab82ecdb123427c5d7119bb",
+      "object_sha256": "3F0DE160BA98D85CCD4B907C66AAE6321BC7E59DC8B8949135690FD98AAE932F",
+      "checkout": "raw",
+      "sha256": "3F0DE160BA98D85CCD4B907C66AAE6321BC7E59DC8B8949135690FD98AAE932F",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_petition_calendar.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a52d4f3c6ef3b471447070bb092609ee6e5e4b9c",
+      "object_sha256": "4B43D79BBF172552879F444C352D246853195D76641B84947E5F5B86EEB89CC3",
+      "checkout": "raw",
+      "sha256": "4B43D79BBF172552879F444C352D246853195D76641B84947E5F5B86EEB89CC3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_provincial_returns.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "44442e73316894869b8b9aa6e5a2df9797caa808",
+      "object_sha256": "6EFB5326C9748AFCE05380E069F3B6B0948BE64537F99D3F429E7B26FC22BAC7",
+      "checkout": "raw",
+      "sha256": "6EFB5326C9748AFCE05380E069F3B6B0948BE64537F99D3F429E7B26FC22BAC7",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_regimental_returns.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "df211ee81658aeda98c2c7a64263c099286ad066",
+      "object_sha256": "20084B519EEBB3A2E39F90DE41C8FC38BA85F474898F762458EEE5E3848FB08E",
+      "checkout": "raw",
+      "sha256": "20084B519EEBB3A2E39F90DE41C8FC38BA85F474898F762458EEE5E3848FB08E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_relief_dispatches.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "bbfbb5dea6483fd89ab876c5214cf6af743c0120",
+      "object_sha256": "63DB0071371BFFC43BD2B33ADAF89D9836A402435A2426F6E7AD802DF6C41D7B",
+      "checkout": "raw",
+      "sha256": "63DB0071371BFFC43BD2B33ADAF89D9836A402435A2426F6E7AD802DF6C41D7B",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_reserve_cadre.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f712b4bdde10893a5b5db19da127b4c844f3b64a",
+      "object_sha256": "B092E3BA2D205B823839A1B30A8B7702CACA0B47F8595B5D3B07E7FE740001BA",
+      "checkout": "raw",
+      "sha256": "B092E3BA2D205B823839A1B30A8B7702CACA0B47F8595B5D3B07E7FE740001BA",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/am_technical_memorials.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "91813cea10272c3ad6d3187c4fae5ff9c6a96185",
+      "object_sha256": "2FF16F518744728F3E31D4BFC64511C3D786CB9A425248C4B7D9DF6EF6B0D62E",
+      "checkout": "raw",
+      "sha256": "2FF16F518744728F3E31D4BFC64511C3D786CB9A425248C4B7D9DF6EF6B0D62E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_allied_observers.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "51642bcabaea77dd4df62dc06f740f7bc7a5ccc7",
+      "object_sha256": "0165869F03574BACD971603C27F6D37DED27678DA168971DA8D137A06F61D762",
+      "checkout": "raw",
+      "sha256": "0165869F03574BACD971603C27F6D37DED27678DA168971DA8D137A06F61D762",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_appeal_docket.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "547942803e615877117d2af89cb1edb5f2ac354a",
+      "object_sha256": "619F76C883C4539E7DB76D3C4A43DF65B30E14FF65BA7DEFD5EFE354C4936C10",
+      "checkout": "raw",
+      "sha256": "619F76C883C4539E7DB76D3C4A43DF65B30E14FF65BA7DEFD5EFE354C4936C10",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_bilingual_manuals.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "94b8bbc6f6ad31a8eb57b7e8be8186e934c63d35",
+      "object_sha256": "BCE7105D74A8A2962B4C19B4D3477D445A6756F3262C63C1802AA79F07BAE7C5",
+      "checkout": "raw",
+      "sha256": "BCE7105D74A8A2962B4C19B4D3477D445A6756F3262C63C1802AA79F07BAE7C5",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_cabinet_confidence.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a4cbc7a9e920e1d7a538f4f0d59245181bf3c690",
+      "object_sha256": "04BF3C9AB98CB019EAE944753BD710499B2D9DB3D8032DE1B394C26B3609C5A3",
+      "checkout": "raw",
+      "sha256": "04BF3C9AB98CB019EAE944753BD710499B2D9DB3D8032DE1B394C26B3609C5A3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_countersigned_orders.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a4cbc7a9e920e1d7a538f4f0d59245181bf3c690",
+      "object_sha256": "04BF3C9AB98CB019EAE944753BD710499B2D9DB3D8032DE1B394C26B3609C5A3",
+      "checkout": "raw",
+      "sha256": "04BF3C9AB98CB019EAE944753BD710499B2D9DB3D8032DE1B394C26B3609C5A3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_court_clerks.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "547942803e615877117d2af89cb1edb5f2ac354a",
+      "object_sha256": "619F76C883C4539E7DB76D3C4A43DF65B30E14FF65BA7DEFD5EFE354C4936C10",
+      "checkout": "raw",
+      "sha256": "619F76C883C4539E7DB76D3C4A43DF65B30E14FF65BA7DEFD5EFE354C4936C10",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_liaison_rotation.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "85102022093fcb419439c4a9eafee7eac7143514",
+      "object_sha256": "943B1346B691176B417582380068C86FE104CDB5B8F3DF216BC7FAF4104584D6",
+      "checkout": "raw",
+      "sha256": "943B1346B691176B417582380068C86FE104CDB5B8F3DF216BC7FAF4104584D6",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_ministerial_reports.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7a78f2b31821b9e9d271958eca03b0e175621b1b",
+      "object_sha256": "7255E2E5DD49A49649896E8C1F93719FAFD917BCDDE3873090C66905B8274B3E",
+      "checkout": "raw",
+      "sha256": "7255E2E5DD49A49649896E8C1F93719FAFD917BCDDE3873090C66905B8274B3E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_municipal_clinics.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "9761e7b99ba51dca7f4c473a35e3e19e0bd9950e",
+      "object_sha256": "1CDAEDBCCCBC5475164E50D71C3609A4051755AD836E190DE9DCBACFC88981E3",
+      "checkout": "raw",
+      "sha256": "1CDAEDBCCCBC5475164E50D71C3609A4051755AD836E190DE9DCBACFC88981E3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_parliamentary_questions.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "02125ca535df23055c3dc6c3f4c06e8db61c22d5",
+      "object_sha256": "0C847646131781E5E00AF4A7B5A793BD7FFD89D1CDE23D666F96AE815EBFEC47",
+      "checkout": "raw",
+      "sha256": "0C847646131781E5E00AF4A7B5A793BD7FFD89D1CDE23D666F96AE815EBFEC47",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_public_legal_notices.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "03b5092e168b4fd1f975c1785e7740e29db71437",
+      "object_sha256": "6CD57701EEC88E2788FFB60719D9E3A1F0370AC53721E3FFFF9D4F2BB5AE94A5",
+      "checkout": "raw",
+      "sha256": "6CD57701EEC88E2788FFB60719D9E3A1F0370AC53721E3FFFF9D4F2BB5AE94A5",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_public_patronage.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "3982f9935c799dec9ee085ae38e3bfcc6686c981",
+      "object_sha256": "9B99510D7F8FBB9C311B974E5774A06AC93EA7C9F623656A71A83EA5ACA069EA",
+      "checkout": "raw",
+      "sha256": "9B99510D7F8FBB9C311B974E5774A06AC93EA7C9F623656A71A83EA5ACA069EA",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_rural_legal_aid.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b9cc3a57adf18a9db9294ebf706ff94392165644",
+      "object_sha256": "351485512E4D230B975A8D0CC311E0C738B130A6C47B0B72B37E7B7640FEFD86",
+      "checkout": "raw",
+      "sha256": "351485512E4D230B975A8D0CC311E0C738B130A6C47B0B72B37E7B7640FEFD86",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cm_welfare_accounts.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "137c70ba558c91eba681c75e81aaca89eb9e15f3",
+      "object_sha256": "A85AB660348392F99F17954B4A543311569EDE86B673BBDADB1D3924ECA38101",
+      "checkout": "raw",
+      "sha256": "A85AB660348392F99F17954B4A543311569EDE86B673BBDADB1D3924ECA38101",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_adverse_weather_flying.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c71b3b5dc54ef388b6f0f64e19e25b129adc777a",
+      "object_sha256": "8DF512914558A2AA5C317CA275CABAC646CE4C0C94FDF4D0AE41A877FCED74A6",
+      "checkout": "raw",
+      "sha256": "8DF512914558A2AA5C317CA275CABAC646CE4C0C94FDF4D0AE41A877FCED74A6",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_closed_material_cycle.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e5bb1deca128a8fb4d4322b6c779675c2f59aa44",
+      "object_sha256": "E561ABFB7D91212B754703E486B02C772551E9B69855E98AB0615A3461923481",
+      "checkout": "raw",
+      "sha256": "E561ABFB7D91212B754703E486B02C772551E9B69855E98AB0615A3461923481",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_coke_testing.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "85e86aaec92b475c18bac1dbbf7aa7e55cb0696e",
+      "object_sha256": "5E1294165C9D95368DBED1E6F47145F438468FE5DC12A12CBECB7F41514870A9",
+      "checkout": "raw",
+      "sha256": "5E1294165C9D95368DBED1E6F47145F438468FE5DC12A12CBECB7F41514870A9",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_commercial_arbitration.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "cd9c56a887c0deca9961a452d5a229caba9d91fc",
+      "object_sha256": "85DAA6B840DA828A713D2CADECE58659038C4A3C110A7F77E9A9604B1706E601",
+      "checkout": "raw",
+      "sha256": "85DAA6B840DA828A713D2CADECE58659038C4A3C110A7F77E9A9604B1706E601",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_emergency_turn_drills.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "188b380d041fa307a9cd51b7da2efa731961f188",
+      "object_sha256": "DA271867B4A66BA8A2137246A045C5ADE5F3FAAAE793FD0C36FE4A4EF5B09720",
+      "checkout": "raw",
+      "sha256": "DA271867B4A66BA8A2137246A045C5ADE5F3FAAAE793FD0C36FE4A4EF5B09720",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_export_invoices.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4b66cdc63ed69e6ab83fecb19198e2cc18b8cc9f",
+      "object_sha256": "2404B001E4D91C722F16B3A06146710F4CF9DE59B5F6703D08BB3C395F94C53C",
+      "checkout": "raw",
+      "sha256": "2404B001E4D91C722F16B3A06146710F4CF9DE59B5F6703D08BB3C395F94C53C",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_export_settlement.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "20922a7ce2a1be34056e09dfb671f6fc015d4c9f",
+      "object_sha256": "EE95BAEEF325384A6DFA44925A86FB28919821C00C29F7798AE3F9887D2B828B",
+      "checkout": "raw",
+      "sha256": "EE95BAEEF325384A6DFA44925A86FB28919821C00C29F7798AE3F9887D2B828B",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_flight_weather_logs.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "bd37df700770536bf73a237aeb0e07c5254e1309",
+      "object_sha256": "0B84505384A395B408107F90535AC699616C53D69614327B189989EF834BEEE4",
+      "checkout": "raw",
+      "sha256": "0B84505384A395B408107F90535AC699616C53D69614327B189989EF834BEEE4",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_foundry_exchange.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "414fd86fa1fba056a7dcaf952da9be2da76de992",
+      "object_sha256": "25A67301A20AB7534052C090A310BBD4FCA74CC00CF41D52078E397E8B8AA642",
+      "checkout": "raw",
+      "sha256": "25A67301A20AB7534052C090A310BBD4FCA74CC00CF41D52078E397E8B8AA642",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_instrument_approaches.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f46b5eec81b9f0beee20103a9e9498e640053b3c",
+      "object_sha256": "34DEA67418EFB539116AAA4BD2258A439F6A60E6833E43572B63803A23AFBCF2",
+      "checkout": "raw",
+      "sha256": "34DEA67418EFB539116AAA4BD2258A439F6A60E6833E43572B63803A23AFBCF2",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_march_discipline.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "940745054dc83133db4e0d6e099d25b5362b977a",
+      "object_sha256": "81A3755F73D1A098CA7A53D0C7DD9B045EE405721503BD6B45EE3821DD59299C",
+      "checkout": "raw",
+      "sha256": "81A3755F73D1A098CA7A53D0C7DD9B045EE405721503BD6B45EE3821DD59299C",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_market_sampling.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4d26fde8ab9b3b2b48852b5ab3695425f8d4790a",
+      "object_sha256": "DE15A8DACE11C9941BF8EACE4F263F28192E920D86A5A9AC613FE2054B2A57F3",
+      "checkout": "raw",
+      "sha256": "DE15A8DACE11C9941BF8EACE4F263F28192E920D86A5A9AC613FE2054B2A57F3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_mechanized_loading.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "03dbc3f368ccaa82b53397dee5d90dc9a56a06bc",
+      "object_sha256": "EBBE9E1170095F80BE0479FF260B83199B9C087B91843A90E9EB41E0E3CFC243",
+      "checkout": "raw",
+      "sha256": "EBBE9E1170095F80BE0479FF260B83199B9C087B91843A90E9EB41E0E3CFC243",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_mobile_unit_recovery.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "73123b6319975edcf55201137a1aad852ecfcfb8",
+      "object_sha256": "913217EF3741DE519107EA96BEE6186FC97DAA38B9DB2C7D2CFECCB17ED8D736",
+      "checkout": "raw",
+      "sha256": "913217EF3741DE519107EA96BEE6186FC97DAA38B9DB2C7D2CFECCB17ED8D736",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_motor_driver_courses.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "ab3f13ce82761d0d149e42c1cacb524764d9c0c5",
+      "object_sha256": "BC7AC338EACBA65DA19DF9131F262BDF69E2967E80B7A4661B449BD32C3CCBE8",
+      "checkout": "raw",
+      "sha256": "BC7AC338EACBA65DA19DF9131F262BDF69E2967E80B7A4661B449BD32C3CCBE8",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_ore_classification.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "96009a88f95b2750128231e043cd15fb77543809",
+      "object_sha256": "87A088A0C5B224288C80FF27A2439ED5BDCDBE01F7D3C9219B06834FBCE91F6C",
+      "checkout": "raw",
+      "sha256": "87A088A0C5B224288C80FF27A2439ED5BDCDBE01F7D3C9219B06834FBCE91F6C",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_rescue_station_drills.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "0c71243ee0593391ea4b4975e7f3c0f4d7813e6b",
+      "object_sha256": "C9289B58382FB8FCEE6574926BDA60537D1735E32EB13545C5240363810555A3",
+      "checkout": "raw",
+      "sha256": "C9289B58382FB8FCEE6574926BDA60537D1735E32EB13545C5240363810555A3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_scrap_collection.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e5bb1deca128a8fb4d4322b6c779675c2f59aa44",
+      "object_sha256": "E561ABFB7D91212B754703E486B02C772551E9B69855E98AB0615A3461923481",
+      "checkout": "raw",
+      "sha256": "E561ABFB7D91212B754703E486B02C772551E9B69855E98AB0615A3461923481",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_shipping_documents.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6ad02277b4ac8dbcab8267e9c59fe993789917c6",
+      "object_sha256": "34944A8D4F155924952BA48CA9DD5AB861538AC4E7F8AE046369575F7850F44E",
+      "checkout": "raw",
+      "sha256": "34944A8D4F155924952BA48CA9DD5AB861538AC4E7F8AE046369575F7850F44E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/cmn_smoke_screen_procedures.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "8df2bdabad32af94bdf32f81ddbfa9180a8cef7b",
+      "object_sha256": "B879D9391D1EA00B6D8A4C47C1FC72AE0F9C7FD19B2568B573A56781CB2B13B9",
+      "checkout": "raw",
+      "sha256": "B879D9391D1EA00B6D8A4C47C1FC72AE0F9C7FD19B2568B573A56781CB2B13B9",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_civil_accountability.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "ef9df4680d560b1bcba536f7b595301047e308c1",
+      "object_sha256": "1C737342D6A25C648AC89E550F4208177D0EDCB6A2AA71298C6D389D54A14852",
+      "checkout": "raw",
+      "sha256": "1C737342D6A25C648AC89E550F4208177D0EDCB6A2AA71298C6D389D54A14852",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_courier_relays.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "9068f57b89d34d0decde7b732a53274861bb204f",
+      "object_sha256": "F931EFA98EC8CE7C24E8E4FDB3B1ECC10506422D2AEAE4E83DBA49B4ED065C18",
+      "checkout": "raw",
+      "sha256": "F931EFA98EC8CE7C24E8E4FDB3B1ECC10506422D2AEAE4E83DBA49B4ED065C18",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_demobilization_schedule.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "1591c60b7484d55f391d8edb0753a58a89018efa",
+      "object_sha256": "470AEE9CF6FCB06A1281630E13FDE1763E624E7C97C249796AD5B9C2DE67CF74",
+      "checkout": "raw",
+      "sha256": "470AEE9CF6FCB06A1281630E13FDE1763E624E7C97C249796AD5B9C2DE67CF74",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_dispatch_codes.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a86ee56c9572694ba52e5b9a157ec926e911f796",
+      "object_sha256": "38109FCC0862E7D248B87896446A6A371C8F45678A4265A2D7F1ECC3854CAB51",
+      "checkout": "raw",
+      "sha256": "38109FCC0862E7D248B87896446A6A371C8F45678A4265A2D7F1ECC3854CAB51",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_inspection_circuits.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "451b93dacda97fbc4edbaf562b21a137f6d02da4",
+      "object_sha256": "C3185D5A8DB3CCB71F6810ADAA262C09DBEE2228637A0DEFBE83913C388EADB1",
+      "checkout": "raw",
+      "sha256": "C3185D5A8DB3CCB71F6810ADAA262C09DBEE2228637A0DEFBE83913C388EADB1",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_peacetime_training.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "039022e22daab8e40df048073779c4f8c8396f89",
+      "object_sha256": "4D904DC8173F1D7F0AEEE305A7FEEE41FE9DD7872308C5F148127F837EF26E9D",
+      "checkout": "raw",
+      "sha256": "4D904DC8173F1D7F0AEEE305A7FEEE41FE9DD7872308C5F148127F837EF26E9D",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_postwar_dockets.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f83f86141991e9786d612fa2849525209bc19458",
+      "object_sha256": "F811BF6A427723C6ED541DDDFB36D22821EE4E9B53D56D15061EEB0EDA929A54",
+      "checkout": "raw",
+      "sha256": "F811BF6A427723C6ED541DDDFB36D22821EE4E9B53D56D15061EEB0EDA929A54",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_provincial_inventory.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "ef63ff4532e5cbbd0447f3bd42006ff9ab8261ed",
+      "object_sha256": "254FBEC7FEBF77FD162792C5B345FEFE6E64FB82F0D145C7FDC8690680BDF8CF",
+      "checkout": "raw",
+      "sha256": "254FBEC7FEBF77FD162792C5B345FEFE6E64FB82F0D145C7FDC8690680BDF8CF",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_provision_accounts.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "87f684575dd8869aeead42057faa4c4be33b1610",
+      "object_sha256": "03CF92501D2A49D7D15EA225CD88F08E27509AE4F9EC082467B574F54BBE8C15",
+      "checkout": "raw",
+      "sha256": "03CF92501D2A49D7D15EA225CD88F08E27509AE4F9EC082467B574F54BBE8C15",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_reconstruction_priorities.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "610876868f45d52ede9bb7ffef0eec2fc5905bc7",
+      "object_sha256": "A8F2E240E6EE49CC46F5BFD91BD6D5DDCA34E38DBF9A4F4406789E5C285F9C19",
+      "checkout": "raw",
+      "sha256": "A8F2E240E6EE49CC46F5BFD91BD6D5DDCA34E38DBF9A4F4406789E5C285F9C19",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_relay_exercises.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "9068f57b89d34d0decde7b732a53274861bb204f",
+      "object_sha256": "F931EFA98EC8CE7C24E8E4FDB3B1ECC10506422D2AEAE4E83DBA49B4ED065C18",
+      "checkout": "raw",
+      "sha256": "F931EFA98EC8CE7C24E8E4FDB3B1ECC10506422D2AEAE4E83DBA49B4ED065C18",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_signal_logs.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e4a59736c8cb4c8ab736dc890224297c67962886",
+      "object_sha256": "4A35F68EB2DF7F88EB52B7F9C7CBA5F39418B9B89BAEDFAB57B45360C80F088D",
+      "checkout": "raw",
+      "sha256": "4A35F68EB2DF7F88EB52B7F9C7CBA5F39418B9B89BAEDFAB57B45360C80F088D",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_supply_returns.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "87f684575dd8869aeead42057faa4c4be33b1610",
+      "object_sha256": "03CF92501D2A49D7D15EA225CD88F08E27509AE4F9EC082467B574F54BBE8C15",
+      "checkout": "raw",
+      "sha256": "03CF92501D2A49D7D15EA225CD88F08E27509AE4F9EC082467B574F54BBE8C15",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/hw_veteran_rolls.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c640c95c1d13bc0fe7df8509a648dac21a587b07",
+      "object_sha256": "7738CF20CF3E14F58C0026DA1153A6926ABF854BF73139C1497FFF7F89D9B857",
+      "checkout": "raw",
+      "sha256": "7738CF20CF3E14F58C0026DA1153A6926ABF854BF73139C1497FFF7F89D9B857",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_community_mediation.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7606ab638ba7480ee55486fcf1a45c94f32d0fe7",
+      "object_sha256": "F4A02C62DD1B6F39D6EA050BF8CA29286263164AA763028D6CBBBED3BC045C62",
+      "checkout": "raw",
+      "sha256": "F4A02C62DD1B6F39D6EA050BF8CA29286263164AA763028D6CBBBED3BC045C62",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_county_dossiers.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e90dd8a95bab36dae2e8ae8ce8f0d8d94ddf14d1",
+      "object_sha256": "7FCCD37D845CFA5B25C46D60D3045F5EA150332CDCEECA18278F9121AEEFF922",
+      "checkout": "raw",
+      "sha256": "7FCCD37D845CFA5B25C46D60D3045F5EA150332CDCEECA18278F9121AEEFF922",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_dispute_records.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "77ab118cbec31b2bcc97548260cfdbcc7d4fdef9",
+      "object_sha256": "8036385DF6E21A2DE5874AA9D5269494C383761FB407AE61F8D096DA7FD3F803",
+      "checkout": "raw",
+      "sha256": "8036385DF6E21A2DE5874AA9D5269494C383761FB407AE61F8D096DA7FD3F803",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_foundry_batches.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "936b59da4c6847ffa03ff9e357b527986189b356",
+      "object_sha256": "89098CA82E5AD2CDC57C49C36A03E9F8B59183E281F8B7D96E7B4DE441852C84",
+      "checkout": "raw",
+      "sha256": "89098CA82E5AD2CDC57C49C36A03E9F8B59183E281F8B7D96E7B4DE441852C84",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_housing_repairs.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d82f7a6f986cad71dddd6e33e5676622a2ab12b2",
+      "object_sha256": "D5BB444A63872A3EF6133D3BD0FA19F99DBA60C3DF8DD15D6C94D426D7FF61C2",
+      "checkout": "raw",
+      "sha256": "D5BB444A63872A3EF6133D3BD0FA19F99DBA60C3DF8DD15D6C94D426D7FF61C2",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_integrated_recovery.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e5bb1deca128a8fb4d4322b6c779675c2f59aa44",
+      "object_sha256": "E561ABFB7D91212B754703E486B02C772551E9B69855E98AB0615A3461923481",
+      "checkout": "raw",
+      "sha256": "E561ABFB7D91212B754703E486B02C772551E9B69855E98AB0615A3461923481",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_interpreter_desks.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7606ab638ba7480ee55486fcf1a45c94f32d0fe7",
+      "object_sha256": "F4A02C62DD1B6F39D6EA050BF8CA29286263164AA763028D6CBBBED3BC045C62",
+      "checkout": "raw",
+      "sha256": "F4A02C62DD1B6F39D6EA050BF8CA29286263164AA763028D6CBBBED3BC045C62",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_market_inspections.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "55486f1b864b2554fa752ee4495adbf7711ee9f8",
+      "object_sha256": "89BE25829E68A71659FE523B356626C3C8A42FFD5F928D6B1AC87B474D57B02C",
+      "checkout": "raw",
+      "sha256": "89BE25829E68A71659FE523B356626C3C8A42FFD5F928D6B1AC87B474D57B02C",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_material_recovery.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "db8edd5344c874d30f3becbbc96db9a0303957ac",
+      "object_sha256": "03B2DD532596A2755E9A218D5D3B8179B4C9418C8260AF154721DEE16D39D9CC",
+      "checkout": "raw",
+      "sha256": "03B2DD532596A2755E9A218D5D3B8179B4C9418C8260AF154721DEE16D39D9CC",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_metallurgical_trials.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e5bb1deca128a8fb4d4322b6c779675c2f59aa44",
+      "object_sha256": "E561ABFB7D91212B754703E486B02C772551E9B69855E98AB0615A3461923481",
+      "checkout": "raw",
+      "sha256": "E561ABFB7D91212B754703E486B02C772551E9B69855E98AB0615A3461923481",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_municipal_consultation.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5171070ca5e2a781e9846a6d3576b9956a836ba3",
+      "object_sha256": "C01CC2943F52913A7CADA496C620F166032885E3AA33ECF0121155336795BCB0",
+      "checkout": "raw",
+      "sha256": "C01CC2943F52913A7CADA496C620F166032885E3AA33ECF0121155336795BCB0",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_payroll_registers.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "11bccde7a05ceb3d71a35c987b38534d95fa5f0c",
+      "object_sha256": "39110CA975C63F8A967870EC8EEF73A989BC180886B948DF79C370D98F7A067E",
+      "checkout": "raw",
+      "sha256": "39110CA975C63F8A967870EC8EEF73A989BC180886B948DF79C370D98F7A067E",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_residence_certificates.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "67c6831e4cd4ab092cfff5368104952aff39bee4",
+      "object_sha256": "054F778108462D317C9FAB0EB543F7F65AB27B9196B608EAF3B1BD4CF6AE37D2",
+      "checkout": "raw",
+      "sha256": "054F778108462D317C9FAB0EB543F7F65AB27B9196B608EAF3B1BD4CF6AE37D2",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_sanitation_rounds.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "51316e509aba07c4b82535ab844a727fa0002580",
+      "object_sha256": "69C9E9CD3D8C0DF39B94C251183A797B05D5CBDFE7428FA3E61941485A65237D",
+      "checkout": "raw",
+      "sha256": "69C9E9CD3D8C0DF39B94C251183A797B05D5CBDFE7428FA3E61941485A65237D",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_service_calendar.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e90dd8a95bab36dae2e8ae8ce8f0d8d94ddf14d1",
+      "object_sha256": "7FCCD37D845CFA5B25C46D60D3045F5EA150332CDCEECA18278F9121AEEFF922",
+      "checkout": "raw",
+      "sha256": "7FCCD37D845CFA5B25C46D60D3045F5EA150332CDCEECA18278F9121AEEFF922",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_service_counters.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4eda6a57904db0a55bc0b89785a8f3cfd6197a34",
+      "object_sha256": "0B686ED94004DE9B7AC9C23BD2FDA9BC870A792AC6BF5421FE1DDF26C1D59FEF",
+      "checkout": "raw",
+      "sha256": "0B686ED94004DE9B7AC9C23BD2FDA9BC870A792AC6BF5421FE1DDF26C1D59FEF",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_settled_municipality.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "df0f763c8f4e9155f3a60faa7a13ed05c751f63b",
+      "object_sha256": "552DFA828057FC148D5A63CADC5FAFABD23613FE76FD723031AD9166A3589DE1",
+      "checkout": "raw",
+      "sha256": "552DFA828057FC148D5A63CADC5FAFABD23613FE76FD723031AD9166A3589DE1",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_shared_service_manuals.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "831cbefc673b30dc5d851a97f6255faa06a3c219",
+      "object_sha256": "8DC6F7CF9AD0CA68221008D6B91AB3C01BCA54DA9859FD7577967695CF2FD981",
+      "checkout": "raw",
+      "sha256": "8DC6F7CF9AD0CA68221008D6B91AB3C01BCA54DA9859FD7577967695CF2FD981",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_tenancy_records.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "df0f763c8f4e9155f3a60faa7a13ed05c751f63b",
+      "object_sha256": "552DFA828057FC148D5A63CADC5FAFABD23613FE76FD723031AD9166A3589DE1",
+      "checkout": "raw",
+      "sha256": "552DFA828057FC148D5A63CADC5FAFABD23613FE76FD723031AD9166A3589DE1",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/remaining_followup/mc_workshop_inventory.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "cbdb1bdcbff46eb3c0f0f5cfca5c4d21af2faf98",
+      "object_sha256": "5A8643F38A4B4394F874F81BF45D8DBDF023009C9F9C41EFDF78BCD121377A5D",
+      "checkout": "raw",
+      "sha256": "5A8643F38A4B4394F874F81BF45D8DBDF023009C9F9C41EFDF78BCD121377A5D",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_capital_goods_board.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "8fa1b9521bc33099b73440ffb7ff189c25a4056e",
+      "object_sha256": "CE877C52163D0B8A8742B485B8AEE7AC7C38CA1947961E5E8818E33DE12857F1",
+      "checkout": "raw",
+      "sha256": "CE877C52163D0B8A8742B485B8AEE7AC7C38CA1947961E5E8818E33DE12857F1",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_heavy_industry_dispatch.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "855aaa37b977f14e501e8219ac0fc0affe2b6e64",
+      "object_sha256": "137DC2A6F414B4CD22CB10AC4641776927860EE360F5A72963768125FE494E20",
+      "checkout": "raw",
+      "sha256": "137DC2A6F414B4CD22CB10AC4641776927860EE360F5A72963768125FE494E20",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_industrial_reporting.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "868805cf541cbd6bee994486a34da61d9377240e",
+      "object_sha256": "6505F3F55152425CE0312AB76FD492257421AAB0C949E418D9EF538BD0578131",
+      "checkout": "raw",
+      "sha256": "6505F3F55152425CE0312AB76FD492257421AAB0C949E418D9EF538BD0578131",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_machine_tool_allocation.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6013e8aed1c9da4edd978cafa3e644a8dff2954b",
+      "object_sha256": "94DDF271F879C123A71328BC17C88E327F1687D9D4F1A09D19E5C1F199802060",
+      "checkout": "raw",
+      "sha256": "94DDF271F879C123A71328BC17C88E327F1687D9D4F1A09D19E5C1F199802060",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/pak_steel_delivery_schedules.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c07e5620eecb5500262c321d5f3768da4e5fd463",
+      "object_sha256": "4435DD10240B8C74CCC7A2ADC2396D7CEC132EF191E7AAD89010F0F944681D46",
+      "checkout": "raw",
+      "sha256": "4435DD10240B8C74CCC7A2ADC2396D7CEC132EF191E7AAD89010F0F944681D46",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_cooperative_federation.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d77981569de05796f6ea555d394f88bd3afbfdb1",
+      "object_sha256": "5FB0C438294571C559B68A3B61795B152ABD6AA3B7B229EEEC5D2E28EC47A3CA",
+      "checkout": "raw",
+      "sha256": "5FB0C438294571C559B68A3B61795B152ABD6AA3B7B229EEEC5D2E28EC47A3CA",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_cooperative_registry.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "8ef8b5d3122705fd4d1171f8d2c2669f30198a65",
+      "object_sha256": "9443C5A49D0E5927C211DF8FF94F52BEC4CA56119752FA2F7C148E88A29995FC",
+      "checkout": "raw",
+      "sha256": "9443C5A49D0E5927C211DF8FF94F52BEC4CA56119752FA2F7C148E88A29995FC",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_cooperative_workshops.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d59e031dd74e5e926f5704cfd8ef75f6d381d1e0",
+      "object_sha256": "89DC9428298AF11945DE7421E9F554490ADDC7A276D4F7E116781410BD4A57D6",
+      "checkout": "raw",
+      "sha256": "89DC9428298AF11945DE7421E9F554490ADDC7A276D4F7E116781410BD4A57D6",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_joint_purchasing.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "80b8e215250703da03b5ab5d090566094c258e4b",
+      "object_sha256": "2B3C9F54A80FC1FF2D0F8F6A8315DE2465663157D7B7FC60D3BD2EBC727C0CF3",
+      "checkout": "raw",
+      "sha256": "2B3C9F54A80FC1FF2D0F8F6A8315DE2465663157D7B7FC60D3BD2EBC727C0CF3",
+      "size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/second_wave/yeo_rural_credit.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "3f1a063580e988233143bc6c7e7c0fded90e59a0",
+      "object_sha256": "A9496ED6A32CAD2EE574B0BA1F345ACFF565B8F3FC5D37006DEBF859DBD37999",
+      "checkout": "raw",
+      "sha256": "A9496ED6A32CAD2EE574B0BA1F345ACFF565B8F3FC5D37006DEBF859DBD37999",
+      "size": 35328
+    },
+    "gfx/interface/ideas/HOK_KOR/communist_development/pak_planning_administration_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "0420f3c5e2f64d5fb8f95b6b013c2bb1a7690798",
+      "object_sha256": "57CC9B9D6DE8822A1FF1091B6A421B85B6D5EE149C93628302F7107D0335BD00",
+      "checkout": "raw",
+      "sha256": "57CC9B9D6DE8822A1FF1091B6A421B85B6D5EE149C93628302F7107D0335BD00",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/communist_development/pak_planning_administration_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "654394459e12f1a97327ea1683823b5f94932e26",
+      "object_sha256": "CB61D677F100925F915B9673A9964CF9F9C0FD6E09739F032F3B3657758A7A29",
+      "checkout": "raw",
+      "sha256": "CB61D677F100925F915B9673A9964CF9F9C0FD6E09739F032F3B3657758A7A29",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/communist_development/yeo_technical_extension_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f58d6c288740952be10580223436d74ba2639746",
+      "object_sha256": "6F04B64A968350068C76BD6E3C5670DDAAEF354FA463E4977184EB991255D63B",
+      "checkout": "raw",
+      "sha256": "6F04B64A968350068C76BD6E3C5670DDAAEF354FA463E4977184EB991255D63B",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/communist_development/yeo_technical_extension_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "83533fc15c33f93637753e8706aa32cb9261efc5",
+      "object_sha256": "E6B74F9697804551B0B69F56764F17C72545F3E06759CA4D17D165AA7571B053",
+      "checkout": "raw",
+      "sha256": "E6B74F9697804551B0B69F56764F17C72545F3E06759CA4D17D165AA7571B053",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/communist_governance/pak_output_plan_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7bcb094ae9e2baad39dbd52ede91f93aaf62576b",
+      "object_sha256": "D683936FC0CC0E0EACE28E59BB5BFAE4F3828E61B4C9EBB124CBF9DEFCCA94C5",
+      "checkout": "raw",
+      "sha256": "D683936FC0CC0E0EACE28E59BB5BFAE4F3828E61B4C9EBB124CBF9DEFCCA94C5",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/communist_governance/pak_output_plan_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "3cd215b604b9ff7d423dda7d85cf76b1233b52ac",
+      "object_sha256": "68024EAFAD07C761DEC0145925047E0D0193D34AABF3BB0FDBECE14E37E711EC",
+      "checkout": "raw",
+      "sha256": "68024EAFAD07C761DEC0145925047E0D0193D34AABF3BB0FDBECE14E37E711EC",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/communist_governance/yeo_social_compact_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "3dbcf83df1c4ad60132cf328e58634c7b598aa1b",
+      "object_sha256": "5A6383C6053F35FAD713064A8EFA1F7560E24AA44CCE1BEAB1155F6AEF17B86B",
+      "checkout": "raw",
+      "sha256": "5A6383C6053F35FAD713064A8EFA1F7560E24AA44CCE1BEAB1155F6AEF17B86B",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/communist_governance/yeo_social_compact_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "13c5278b198807655d9b93973adc0be2f7147512",
+      "object_sha256": "97F75C98F5A0AFC1087E11239D5172BDBAE47B7F87EFA3CB676E89E82AB95CD8",
+      "checkout": "raw",
+      "sha256": "97F75C98F5A0AFC1087E11239D5172BDBAE47B7F87EFA3CB676E89E82AB95CD8",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_administrative_budget_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "be71b5bd78ef0f7a6599b4697e754d8cc598d01d",
+      "object_sha256": "A11CC3C6679C9CBCBB3FEB5D4F25D6DCDA76EE3336BF75B30F07418BF0310677",
+      "checkout": "raw",
+      "sha256": "A11CC3C6679C9CBCBB3FEB5D4F25D6DCDA76EE3336BF75B30F07418BF0310677",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_administrative_budget_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "9b47c8e8393a7022e5e49fc8cb88f039ad6be0b7",
+      "object_sha256": "46A6B75B257C344DA38B51D01FA9769F70C3667DDE43FFAA5B5A24F780EE947C",
+      "checkout": "raw",
+      "sha256": "46A6B75B257C344DA38B51D01FA9769F70C3667DDE43FFAA5B5A24F780EE947C",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_construction_budget_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "33fcc1ca8d4ceff12b6bc406b069a0bc5a1aa0f7",
+      "object_sha256": "8711F9A6887F424BFC6BF651AEF7A3154583851089A5F05FB179FBD115D1CAEC",
+      "checkout": "raw",
+      "sha256": "8711F9A6887F424BFC6BF651AEF7A3154583851089A5F05FB179FBD115D1CAEC",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_construction_budget_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "9c091e54dc80808402ffe2a28be1e61f753ee4e4",
+      "object_sha256": "AF600CAB7090AF6B7BB4ABFC26AA5143AEA98272376C2E37FC724E2E62FCDE0B",
+      "checkout": "raw",
+      "sha256": "AF600CAB7090AF6B7BB4ABFC26AA5143AEA98272376C2E37FC724E2E62FCDE0B",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_occupation_administration_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a12fb20977678c0b5b56cdbab75bc794c08edc01",
+      "object_sha256": "881B43284513C7386EA8FFDB3A40A4333BEB50003B7FB5106412F8BCF55485D1",
+      "checkout": "raw",
+      "sha256": "881B43284513C7386EA8FFDB3A40A4333BEB50003B7FB5106412F8BCF55485D1",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_occupation_administration_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5667bc1be9301d63d5353eb3e1ddc39c3c94fa70",
+      "object_sha256": "D458D75A07B68C1D6550DF700A905CA4FBF2307B9F0AC90EFC49AB3C4044ED1D",
+      "checkout": "raw",
+      "sha256": "D458D75A07B68C1D6550DF700A905CA4FBF2307B9F0AC90EFC49AB3C4044ED1D",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_service_coordination_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5c7a48997b84ca9f52164b3683223c5a2673cb8b",
+      "object_sha256": "696FF8AC35895EBAF2C597F98500A381A781863B4DF87DC991CE6826B66AE823",
+      "checkout": "raw",
+      "sha256": "696FF8AC35895EBAF2C597F98500A381A781863B4DF87DC991CE6826B66AE823",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_followup/nrsc_service_coordination_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "63730737fcfecaf51d896be1b1c91fc06584b96e",
+      "object_sha256": "5C8231DDD2B8964AC633C2F870EA4ED5898D8418AFA63BBF1CCF0BBC83DB1DE8",
+      "checkout": "raw",
+      "sha256": "5C8231DDD2B8964AC633C2F870EA4ED5898D8418AFA63BBF1CCF0BBC83DB1DE8",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_mobilization/nrsc_essential_workforce.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "92612e7b30b720318a9aa5e40a4ab3d1e8aa6916",
+      "object_sha256": "2502FF54FC9E5976273C97136B2253E8A7F9B16886EBC5FBFCF6E7C99C2FAB32",
+      "checkout": "raw",
+      "sha256": "2502FF54FC9E5976273C97136B2253E8A7F9B16886EBC5FBFCF6E7C99C2FAB32",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_mobilization/nrsc_manpower_administration_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "227850f562f8f2f77fe1b2561b010bd754924fa3",
+      "object_sha256": "4D4C7A53D4A1794C1AAF89BF5C55E151851E331CA13FF404A1DEAC5794553B11",
+      "checkout": "raw",
+      "sha256": "4D4C7A53D4A1794C1AAF89BF5C55E151851E331CA13FF404A1DEAC5794553B11",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_mobilization/nrsc_manpower_administration_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "65c364277f8f700a670e7287d91fbf977f161cc6",
+      "object_sha256": "67A00C5B2C051082033576302810F2070D0AA1B3BFDD87EEE7A3C0ACE592F73C",
+      "checkout": "raw",
+      "sha256": "67A00C5B2C051082033576302810F2070D0AA1B3BFDD87EEE7A3C0ACE592F73C",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_procurement/nrsc_procurement_oversight_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "fc841440aa50601a174a1e85ba922d547e4c7ecf",
+      "object_sha256": "14EB63AC77B624B9111C50D6BDAFC839B5B3CCC499C4D1606BE87486C5FFB6C9",
+      "checkout": "raw",
+      "sha256": "14EB63AC77B624B9111C50D6BDAFC839B5B3CCC499C4D1606BE87486C5FFB6C9",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_procurement/nrsc_procurement_oversight_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "77cfd4cc04049ff02a2dc11bc40ed407298604f9",
+      "object_sha256": "5353DB4EED7329A452E4004606498024305540B251D0B566827381E90C0E7978",
+      "checkout": "raw",
+      "sha256": "5353DB4EED7329A452E4004606498024305540B251D0B566827381E90C0E7978",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_staff/nrsc_staff_administration_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "17690b93c1832134b8198923a6d35ecfbf0defda",
+      "object_sha256": "9D0B1E96176FF371FD0A56BBA29BF4779C6A2E91938D52D569FEDCE888689EAE",
+      "checkout": "raw",
+      "sha256": "9D0B1E96176FF371FD0A56BBA29BF4779C6A2E91938D52D569FEDCE888689EAE",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/fascist_staff/nrsc_staff_administration_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "450a6b1164cdb6308b04d3261dd0108a2aa01c7a",
+      "object_sha256": "52FC9F70234A6C95206FC1D2A3AD8F0B44DA774A833BED120B66618406233351",
+      "checkout": "raw",
+      "sha256": "52FC9F70234A6C95206FC1D2A3AD8F0B44DA774A833BED120B66618406233351",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_ordered_administration_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "bea0422b04d90364baca89a8432386f2d81db464",
+      "object_sha256": "3ECBDE9BF05FB0937DBBBE4EE9E7B56FABF24C6560D0D631D7002725507BF737",
+      "checkout": "raw",
+      "sha256": "3ECBDE9BF05FB0937DBBBE4EE9E7B56FABF24C6560D0D631D7002725507BF737",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_ordered_administration_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "65af2ced863138f6545c21c6cafd8d95d49a3c48",
+      "object_sha256": "72E49439AEF79A7F651B43D08DEBE12EC9200329A5B65A31AA3BEC5D464F3596",
+      "checkout": "raw",
+      "sha256": "72E49439AEF79A7F651B43D08DEBE12EC9200329A5B65A31AA3BEC5D464F3596",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_practical_bureaucracy.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "978f1456946b044a7c576e2bb0b5207ab32844e6",
+      "object_sha256": "9261033A4847F2456CECA4E49DA1EC2184F39CD3ED2CEC43E356780CA89A11C3",
+      "checkout": "raw",
+      "sha256": "9261033A4847F2456CECA4E49DA1EC2184F39CD3ED2CEC43E356780CA89A11C3",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_relief_protocol_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "ca96f2c70dae37fadd8144d82eb1cbe5ecee2b0f",
+      "object_sha256": "BD036FEDB36F6ED55FDE00362BF4AC326D3CD81FD1B2D07CDCBBE9B996C26959",
+      "checkout": "raw",
+      "sha256": "BD036FEDB36F6ED55FDE00362BF4AC326D3CD81FD1B2D07CDCBBE9B996C26959",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_relief_protocol_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c2a21052c6bea6c4ea3f75e12594b25a9ee087e3",
+      "object_sha256": "7115E7AEAE5C41B756FCF5E201495C16A76AB34C5C7B344663FA3EBED4560EE4",
+      "checkout": "raw",
+      "sha256": "7115E7AEAE5C41B756FCF5E201495C16A76AB34C5C7B344663FA3EBED4560EE4",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_reserve_cadre_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c98024aea0e147798cdebaddb7efb361f77580de",
+      "object_sha256": "FE9F641568828568F0CFC96188F910204307E53B0C84E75ABACF2E6EE4074336",
+      "checkout": "raw",
+      "sha256": "FE9F641568828568F0CFC96188F910204307E53B0C84E75ABACF2E6EE4074336",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/am_reserve_cadre_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "88fb47382136dc7e51ff21b385c1723ba48b78f7",
+      "object_sha256": "08418EB0204CE9D3586FD6C0799E57F0D2EC2D33529ABEE3CF26991F33E16DA8",
+      "checkout": "raw",
+      "sha256": "08418EB0204CE9D3586FD6C0799E57F0D2EC2D33529ABEE3CF26991F33E16DA8",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_accessible_justice_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "14cfc033b3ea4b65432c6dedd9f667b7a0e53db6",
+      "object_sha256": "0982C43BFAA399FCFF7BB68E16AF673D8423839F0F8281E93A7D94EB3593957A",
+      "checkout": "raw",
+      "sha256": "0982C43BFAA399FCFF7BB68E16AF673D8423839F0F8281E93A7D94EB3593957A",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_accessible_justice_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6f1bbb71a890230172440070685b5d0acc962fd5",
+      "object_sha256": "1BCD513408532152A7D068A18E367B42AB97AC4D42909A644F143ABD47F9C9BC",
+      "checkout": "raw",
+      "sha256": "1BCD513408532152A7D068A18E367B42AB97AC4D42909A644F143ABD47F9C9BC",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_allied_liaison.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "785a4e8a15b17d1e0c83fe3484b44096e796cbd2",
+      "object_sha256": "A22E4C15E3A5E911E207CA304AB2499FFE7055704051D116C8CEFFE4C5B73702",
+      "checkout": "raw",
+      "sha256": "A22E4C15E3A5E911E207CA304AB2499FFE7055704051D116C8CEFFE4C5B73702",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_public_welfare_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "61a865647b227a14df9a19e08476f75624556538",
+      "object_sha256": "B33DDACA9459E4786D557E1162C44B59FDD61F51C1E054B7E009A52927BCEDC7",
+      "checkout": "raw",
+      "sha256": "B33DDACA9459E4786D557E1162C44B59FDD61F51C1E054B7E009A52927BCEDC7",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_public_welfare_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "690d8211952fb2f30872cfafc4dcaa7990416a83",
+      "object_sha256": "87E2521DD27B4DF4ACD4EBA71812B5F618D3F0047D1E0A37A11588CDBB54A4CA",
+      "checkout": "raw",
+      "sha256": "87E2521DD27B4DF4ACD4EBA71812B5F618D3F0047D1E0A37A11588CDBB54A4CA",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_responsible_cabinet_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "41aefe9a3d505f7d928eee67c40c3e52a5436cf9",
+      "object_sha256": "09E165F5E93E3D8DA88828662111301A4C763DE77A3191E92A88EFD0DB3DD176",
+      "checkout": "raw",
+      "sha256": "09E165F5E93E3D8DA88828662111301A4C763DE77A3191E92A88EFD0DB3DD176",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cm_responsible_cabinet_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5364559205225d40276dbef8bdb515ef027c1059",
+      "object_sha256": "A7785B2D8C2124376DCAE3272EC8DA8F938E9294B725561175B51A1313C26703",
+      "checkout": "raw",
+      "sha256": "A7785B2D8C2124376DCAE3272EC8DA8F938E9294B725561175B51A1313C26703",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_export_practice_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "373a1ad83a1ae1bb771e5bfab08ca1b6beda74d3",
+      "object_sha256": "905B4C2BFAAFFFA92FF68C4693CEFF4831B3452B05C4DC2A162F5C07F7F1E497",
+      "checkout": "raw",
+      "sha256": "905B4C2BFAAFFFA92FF68C4693CEFF4831B3452B05C4DC2A162F5C07F7F1E497",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_export_practice_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "74d8b55fbd2fe61f459c4b1a0da503a88564c892",
+      "object_sha256": "1CB99793FF16737FA20CABD4C283D79E4E6C167CCB993972CF43CB2E40B0838E",
+      "checkout": "raw",
+      "sha256": "1CB99793FF16737FA20CABD4C283D79E4E6C167CCB993972CF43CB2E40B0838E",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_instrument_flying.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e57cbf867373024e52f251edc5cb4cce1ea74e81",
+      "object_sha256": "2AFCC92378ECEA928FC7C749AD0E0EACB2A359C781C35B6499D0470C0CDBB212",
+      "checkout": "raw",
+      "sha256": "2AFCC92378ECEA928FC7C749AD0E0EACB2A359C781C35B6499D0470C0CDBB212",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_maritime_rescue.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a6ee70dcfd4f8e952f889a4a2fcd15a43c587866",
+      "object_sha256": "52E9FAABB88D5F4264869D50F2348BD099024A91E639EEE50FD72ED87F993DC5",
+      "checkout": "raw",
+      "sha256": "52E9FAABB88D5F4264869D50F2348BD099024A91E639EEE50FD72ED87F993DC5",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_material_cycle_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "43c2fae21995ecbef7016abb618e185f1be8bd7b",
+      "object_sha256": "081C55005130F952F8E325D51F5A8877FD4DA40CE66C790077696AF2E4FD51E0",
+      "checkout": "raw",
+      "sha256": "081C55005130F952F8E325D51F5A8877FD4DA40CE66C790077696AF2E4FD51E0",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_material_cycle_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7a0142025520a21be6230cca19bb92ae946dcee4",
+      "object_sha256": "414F668FE9A1F54A436FC181BEF9A69F64A1797499B59B57B293A2BF47BF551B",
+      "checkout": "raw",
+      "sha256": "414F668FE9A1F54A436FC181BEF9A69F64A1797499B59B57B293A2BF47BF551B",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_mobile_operations_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e1d9ddbddbf25ae860eaec1ade1aaed97daeff8b",
+      "object_sha256": "E9518EF055CEC5ACAECEF6C0A2785339AF39F722D2E8C47154132E7164D9BE19",
+      "checkout": "raw",
+      "sha256": "E9518EF055CEC5ACAECEF6C0A2785339AF39F722D2E8C47154132E7164D9BE19",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_mobile_operations_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b8b41dfb875c5e4074a39cf2c2ecafd5815937de",
+      "object_sha256": "B21ED0CD4ABE908898870B6C6CE462A8A45FBC3F27772202BB4C3DE5AAF5A313",
+      "checkout": "raw",
+      "sha256": "B21ED0CD4ABE908898870B6C6CE462A8A45FBC3F27772202BB4C3DE5AAF5A313",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_smoke_withdrawal.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7d65080dabfbf01e948a81192f917f4674b80c65",
+      "object_sha256": "1308726339645E506E4501205B21668BA7801996DBA6B64CCFC5AEE13BEC0C52",
+      "checkout": "raw",
+      "sha256": "1308726339645E506E4501205B21668BA7801996DBA6B64CCFC5AEE13BEC0C52",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/cmn_weather_flying.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c910d67ce2d19003ed0308af780201c07478f27c",
+      "object_sha256": "9E1AF63CD38302FC4B85FFEA1AC3A8289802A865B9E09B835FD6238732F0CD03",
+      "checkout": "raw",
+      "sha256": "9E1AF63CD38302FC4B85FFEA1AC3A8289802A865B9E09B835FD6238732F0CD03",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_civil_recovery_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "4a7ac64248ec9a633b2cb94e43be4c26fb5be580",
+      "object_sha256": "AF10A1EFAEFDC4C0741F030AB6917C3FC556D7C6C3598FA121F71DE4178BA7F3",
+      "checkout": "raw",
+      "sha256": "AF10A1EFAEFDC4C0741F030AB6917C3FC556D7C6C3598FA121F71DE4178BA7F3",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_civil_recovery_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "51886231e7218470f6868844da630cf14206a03c",
+      "object_sha256": "84B647DE2CAB78F438EDFDE0B8DE36EDE6542CEBC934C8654E0021D95F449FEE",
+      "checkout": "raw",
+      "sha256": "84B647DE2CAB78F438EDFDE0B8DE36EDE6542CEBC934C8654E0021D95F449FEE",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_courier_service_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "0ce46b6c00cc495dbbe465ad9b5eb954b82beb0f",
+      "object_sha256": "4A98A991E1BBB29A545C0C1005963A24A0D1007A8C8F615D69A18515680E7BEA",
+      "checkout": "raw",
+      "sha256": "4A98A991E1BBB29A545C0C1005963A24A0D1007A8C8F615D69A18515680E7BEA",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_courier_service_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6c687f424405202b3c8ce1d3f1c7d9a2c2b93859",
+      "object_sha256": "DC599429F8BA9C46354022B9019F226FF4D50A30ED74B0FA71ABC67A541F0E3F",
+      "checkout": "raw",
+      "sha256": "DC599429F8BA9C46354022B9019F226FF4D50A30ED74B0FA71ABC67A541F0E3F",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_provision_accounts_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "83deceef55bc52629af16f15c0e1901f64b9cc22",
+      "object_sha256": "7DDD436069C29201CA1B5C56D733C94CB39D31DB174AF3855CF70DDDA85A01F8",
+      "checkout": "raw",
+      "sha256": "7DDD436069C29201CA1B5C56D733C94CB39D31DB174AF3855CF70DDDA85A01F8",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_provision_accounts_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6d1ad164e42df290f33824f5a7dff3a064922d85",
+      "object_sha256": "7CE5F9857D0B85AC9ABCECD4417AE39D5FBC85D23D6E66AF42680EC27F8310B5",
+      "checkout": "raw",
+      "sha256": "7CE5F9857D0B85AC9ABCECD4417AE39D5FBC85D23D6E66AF42680EC27F8310B5",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_reserve_training_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f432717a94dde43cd4f39cd892847c85b7c2f0e4",
+      "object_sha256": "4F2D09CA87F0C6A47218D95620D6741CAFAD29150E6E14E1796D5199C89C66BB",
+      "checkout": "raw",
+      "sha256": "4F2D09CA87F0C6A47218D95620D6741CAFAD29150E6E14E1796D5199C89C66BB",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/hw_reserve_training_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "fba7bf0fd8ab72042417a46db09af25abe05ff92",
+      "object_sha256": "CA497604DF8A53D63D64903DD19009690902527B1998ACC828EAEB2AB24097D1",
+      "checkout": "raw",
+      "sha256": "CA497604DF8A53D63D64903DD19009690902527B1998ACC828EAEB2AB24097D1",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_community_services_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "13d8c1367943d072ca9bfd35dffec354fbc0bfd2",
+      "object_sha256": "FA958BDFEF1149EDC3FB0367CA57ED56BB07918CABAC2729C1FB710E4D30D961",
+      "checkout": "raw",
+      "sha256": "FA958BDFEF1149EDC3FB0367CA57ED56BB07918CABAC2729C1FB710E4D30D961",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_community_services_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d9b9d5157d52d91be98b3878ca01a4e0212b9f42",
+      "object_sha256": "9574C751BB280C406E1D9CF3534A139032CBB7B324ED8AFCE4B749D821B9F719",
+      "checkout": "raw",
+      "sha256": "9574C751BB280C406E1D9CF3534A139032CBB7B324ED8AFCE4B749D821B9F719",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_community_services_concentrated.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "0c7d6514fb5c1baa1d8eb9b7b9abe1d6c433ed51",
+      "object_sha256": "B2ABC307F7B7FE7C1E6F393746638571799F1547486D27F75D536E4571BE0C30",
+      "checkout": "raw",
+      "sha256": "B2ABC307F7B7FE7C1E6F393746638571799F1547486D27F75D536E4571BE0C30",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_local_services_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e9178637aade601d45b0d8fbed4d53d84aa75af9",
+      "object_sha256": "73C980FB545C3F435F968B5D7107061488BBABAFEDAD09ACB9F7387D81D18299",
+      "checkout": "raw",
+      "sha256": "73C980FB545C3F435F968B5D7107061488BBABAFEDAD09ACB9F7387D81D18299",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_local_services_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "82dfdeb6e817582be12a45bf93a8d2d883989c0d",
+      "object_sha256": "AD746C3897E13648B9B895CF7205C01D85DD60507A59B73F7E951341477AA84D",
+      "checkout": "raw",
+      "sha256": "AD746C3897E13648B9B895CF7205C01D85DD60507A59B73F7E951341477AA84D",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_local_services_concentrated.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "2337cd5cf2275ea320f46276b680495837ec9b03",
+      "object_sha256": "D53B8CECE3A187DF9AA6FDA9C0294358443D90F4817ED2C94459E64201381DAB",
+      "checkout": "raw",
+      "sha256": "D53B8CECE3A187DF9AA6FDA9C0294358443D90F4817ED2C94459E64201381DAB",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_material_recovery_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "43c2fae21995ecbef7016abb618e185f1be8bd7b",
+      "object_sha256": "081C55005130F952F8E325D51F5A8877FD4DA40CE66C790077696AF2E4FD51E0",
+      "checkout": "raw",
+      "sha256": "081C55005130F952F8E325D51F5A8877FD4DA40CE66C790077696AF2E4FD51E0",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_material_recovery_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7a0142025520a21be6230cca19bb92ae946dcee4",
+      "object_sha256": "414F668FE9A1F54A436FC181BEF9A69F64A1797499B59B57B293A2BF47BF551B",
+      "checkout": "raw",
+      "sha256": "414F668FE9A1F54A436FC181BEF9A69F64A1797499B59B57B293A2BF47BF551B",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_material_recovery_concentrated.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "c61393a972342c13a5deb71d9eb92e06137adf16",
+      "object_sha256": "C3045BEA6F12A0BCCD55F22F46B47166EF98A181DD3329991B01499BEA79A265",
+      "checkout": "raw",
+      "sha256": "C3045BEA6F12A0BCCD55F22F46B47166EF98A181DD3329991B01499BEA79A265",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_municipal_routine_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "8f3ad895310104499d3635bbdf1b0cb2e4655200",
+      "object_sha256": "FADBCDFAC20C95A664711ACCE5A0EA10420D585CFEC7134E026AB7D1C62A89D2",
+      "checkout": "raw",
+      "sha256": "FADBCDFAC20C95A664711ACCE5A0EA10420D585CFEC7134E026AB7D1C62A89D2",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_municipal_routine_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7ab8e74abcce2324e8266b860f1bd01f0394938a",
+      "object_sha256": "01F211473DF3D96943B485E474C24DC67E96055991E645C1CF845DD43DF21744",
+      "checkout": "raw",
+      "sha256": "01F211473DF3D96943B485E474C24DC67E96055991E645C1CF845DD43DF21744",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/remaining_followup/mc_municipal_routine_concentrated.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "7894521c474f2b7dbe5408b2742d224f47363971",
+      "object_sha256": "4DD637C8542ECC37736A137B0CB38FDFD75B56A347E0CF7680F77CDCAEA0535B",
+      "checkout": "raw",
+      "sha256": "4DD637C8542ECC37736A137B0CB38FDFD75B56A347E0CF7680F77CDCAEA0535B",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/second_wave/pak_current_output_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "74600d5daeb23a6df778c4068e5751431d214637",
+      "object_sha256": "54C2BF7F70389F91EE233B2F8805D1BD7B070480524563D764A47193E731FF84",
+      "checkout": "raw",
+      "sha256": "54C2BF7F70389F91EE233B2F8805D1BD7B070480524563D764A47193E731FF84",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/second_wave/pak_current_output_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b45f51de72e767dadb122a5bbe3a7fd91bc66802",
+      "object_sha256": "B1EA99A722BBB5A5B094CB6DCBD04CF1034916682A6119FE1D6ACA64FAAD24CB",
+      "checkout": "raw",
+      "sha256": "B1EA99A722BBB5A5B094CB6DCBD04CF1034916682A6119FE1D6ACA64FAAD24CB",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/second_wave/pak_plant_expansion_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5af88047aa4bfa1c17b12ef24f2d236d94810811",
+      "object_sha256": "51EBDE236EF984DB94394A64B0A1B01C0F79F00D3CFE706D66FE1C098E5CA5A6",
+      "checkout": "raw",
+      "sha256": "51EBDE236EF984DB94394A64B0A1B01C0F79F00D3CFE706D66FE1C098E5CA5A6",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/second_wave/pak_plant_expansion_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "922db938d687e410c2387e19c6341bc4841d0cf7",
+      "object_sha256": "C0F1B7E173AC47D0376EABE0B6FAF6EB30D047E3E21AD7FD49B97924BDF6D84D",
+      "checkout": "raw",
+      "sha256": "C0F1B7E173AC47D0376EABE0B6FAF6EB30D047E3E21AD7FD49B97924BDF6D84D",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/second_wave/yeo_joint_purchasing_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "13f184dfe26ecc56381a38214c31bed65c2cecbb",
+      "object_sha256": "8E70D15788C367B9CD4F0E84DCAE8429691F034E47B41F15706DEBC564BF38A1",
+      "checkout": "raw",
+      "sha256": "8E70D15788C367B9CD4F0E84DCAE8429691F034E47B41F15706DEBC564BF38A1",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/second_wave/yeo_joint_purchasing_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "265f348cb85b1e1967d4dd1df9c6c05c32f65be4",
+      "object_sha256": "7EB2899850AD398AB0C3F96BECFCFF5E8A2C79B92E5D3440C7140A24F2ACE8BF",
+      "checkout": "raw",
+      "sha256": "7EB2899850AD398AB0C3F96BECFCFF5E8A2C79B92E5D3440C7140A24F2ACE8BF",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/second_wave/yeo_local_credit_1.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b7a41fec2e153c51816395a5165be4a99ccec872",
+      "object_sha256": "A6B14F45565F3BDDD26855318411B037C08D6DFC0C0D50ECA63A1F312932FDA0",
+      "checkout": "raw",
+      "sha256": "A6B14F45565F3BDDD26855318411B037C08D6DFC0C0D50ECA63A1F312932FDA0",
+      "size": 16448
+    },
+    "gfx/interface/ideas/HOK_KOR/second_wave/yeo_local_credit_2.dds": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "64dee516dd93eab75722c5678ecdaf661a7983c5",
+      "object_sha256": "F7D41CB73871411A3CDD38BE68BCEC573643056EEDA5CAFFBAE45304B3141AE4",
+      "checkout": "raw",
+      "sha256": "F7D41CB73871411A3CDD38BE68BCEC573643056EEDA5CAFFBAE45304B3141AE4",
+      "size": 16448
+    }
+  },
+  "documentation": {
+    "docs/HOK_KOREAN_COMMUNIST_DEVELOPMENT_ICON_CREDITS.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "d487ce1e6dcf684820e7cd178cef92cf6c903e19",
+      "object_sha256": "54FD9C3B27DA5FFE0B6C3324D440C0117F4E1433157B8C3A5157CFAA68F72D35",
+      "checkout": "raw",
+      "sha256": "54FD9C3B27DA5FFE0B6C3324D440C0117F4E1433157B8C3A5157CFAA68F72D35",
+      "size": 8784
+    },
+    "docs/HOK_KOREAN_COMMUNIST_DEVELOPMENT_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "1a98447aa6ee6ad098a1c73453ffcd67f64d3e69",
+      "object_sha256": "1F0D80EB5E1605C2622A231BB9355B103BF0E528FCFAB9412D4027FA50B4DFC5",
+      "checkout": "crlf",
+      "sha256": "C77B9349A97B24EBC9991367E45EB586303BECBF030412E5C6F390C51F05ED88",
+      "size": 18647
+    },
+    "docs/HOK_KOREAN_COMMUNIST_GOVERNANCE_ICON_CREDITS.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "df29897a365aa454b1567bec6b23b2fa610a265f",
+      "object_sha256": "24E17C25B73113B91BCD0155522300140149211FFDD0D38FC52884DA39967078",
+      "checkout": "raw",
+      "sha256": "24E17C25B73113B91BCD0155522300140149211FFDD0D38FC52884DA39967078",
+      "size": 9160
+    },
+    "docs/HOK_KOREAN_COMMUNIST_GOVERNANCE_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "488a94f6defcfed465dc8caaf4948a2cc33b25e2",
+      "object_sha256": "FD20427A43EF5CAA3480711093234222C7ED868A9572A8D87F0AFEE6EA6A8803",
+      "checkout": "crlf",
+      "sha256": "77E9AEA5D9B35F0F273F050195CC4E45CF8C0F9F7D3EC959F3AF456E1AF2D5AB",
+      "size": 9227
+    },
+    "docs/HOK_KOREAN_CONSTITUTIONAL_FOLLOWUP_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a8ecb486bc6789409c7abd5f0715a5dce34f494e",
+      "object_sha256": "D6007C60A5BE7A6B9B13B508F9532AE80F986C0EF4795A6EC0B26BE45CE47CD3",
+      "checkout": "crlf",
+      "sha256": "3B86F8AB15EE1AEFBBFD81CC9AD681DC36D04990E72EFDB30B523798F7E6E887",
+      "size": 14168
+    },
+    "docs/HOK_KOREAN_FASCIST_FOLLOWUP_ICON_CREDITS.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "34ca3732538870197107a022e889554eadece3ee",
+      "object_sha256": "9467826F7F247178D7367D53BFADEF445CC086D3AFA21C6CF8427192A4077A34",
+      "checkout": "raw",
+      "sha256": "9467826F7F247178D7367D53BFADEF445CC086D3AFA21C6CF8427192A4077A34",
+      "size": 8505
+    },
+    "docs/HOK_KOREAN_FASCIST_FOLLOWUP_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "064bff71e37a568a3e334304e5a697df43b774b3",
+      "object_sha256": "8C3D3BABD24DC9899402CD12A967A7A17DD3C532B1682D15D966B86AB5185914",
+      "checkout": "raw",
+      "sha256": "8C3D3BABD24DC9899402CD12A967A7A17DD3C532B1682D15D966B86AB5185914",
+      "size": 17338
+    },
+    "docs/HOK_KOREAN_FASCIST_MOBILIZATION_ICON_CREDITS.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "2da18dd35fe6b2930ac86e1250ded20866e7b808",
+      "object_sha256": "3F9BCF7E3F58695F351B655DD48914C9FF3680C58CEEA6B24611A9902981D513",
+      "checkout": "raw",
+      "sha256": "3F9BCF7E3F58695F351B655DD48914C9FF3680C58CEEA6B24611A9902981D513",
+      "size": 6961
+    },
+    "docs/HOK_KOREAN_FASCIST_MOBILIZATION_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b0c4c966aa3b645640370d89a1e2526fac727051",
+      "object_sha256": "8F2CC38AA9D7DF44C076A6A9340860C9FEE2C1774B6E7911ED40CC1AD72B1B12",
+      "checkout": "crlf",
+      "sha256": "213201B2DAF663FDFDDFC665D59621C2F86E3B9BC32255CB83C1A47277696BF5",
+      "size": 18246
+    },
+    "docs/HOK_KOREAN_FASCIST_PROCUREMENT_ICON_CREDITS.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "01ea3c3db77ab1298128de0c143c50aa5e7331c4",
+      "object_sha256": "D8FA2C79C5A341208AACD816D8EE4D76B9616BB69E3DB1DECCD2E244061A8D90",
+      "checkout": "raw",
+      "sha256": "D8FA2C79C5A341208AACD816D8EE4D76B9616BB69E3DB1DECCD2E244061A8D90",
+      "size": 7065
+    },
+    "docs/HOK_KOREAN_FASCIST_PROCUREMENT_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "72191577afbe0eb8aa72f98e6582622b97091943",
+      "object_sha256": "FD19854CBC0E7BA9B0329EA6DE01029B311176C0C0D1D9C1D66CC60FE68455C6",
+      "checkout": "crlf",
+      "sha256": "72496C221854EC54155330575EEFA34FD89A0AEA5E92CFF3A013E92480212335",
+      "size": 10231
+    },
+    "docs/HOK_KOREAN_FASCIST_STAFF_ICON_CREDITS.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "563c4f575eb0a51643f203229d8fa07dae2f3f71",
+      "object_sha256": "E9EFA9FB854F8458E41B358E94DAC56B228D9ED03BDBE8274CEFC947AADFE1DA",
+      "checkout": "raw",
+      "sha256": "E9EFA9FB854F8458E41B358E94DAC56B228D9ED03BDBE8274CEFC947AADFE1DA",
+      "size": 6419
+    },
+    "docs/HOK_KOREAN_FASCIST_STAFF_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f6321d69988fd4261ebba5d813defb936cc710e9",
+      "object_sha256": "3E8F49F79FB2E4AA15AD7C559EF2DA3414D13DA88750FA23DCFE9B073F98EECD",
+      "checkout": "crlf",
+      "sha256": "31E95EB80DE9AFC9AAA84374D74473D4B17398EFF641C5FD8BC9B37F60C37719",
+      "size": 11977
+    },
+    "docs/HOK_KOREAN_FOCUS_ICON_COLOR_PLAN.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "ee848687d29786ddd2fea00ba7697b61a2cd1c32",
+      "object_sha256": "4FEF8A4AA77AC3A4AF37CD86811B51BC2F8D01221930C4A0C0D9432BFD6C5420",
+      "checkout": "raw",
+      "sha256": "4FEF8A4AA77AC3A4AF37CD86811B51BC2F8D01221930C4A0C0D9432BFD6C5420",
+      "size": 16722
+    },
+    "docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f5db6be776b168c85dc9d4e17c219b5cdfe3f61d",
+      "object_sha256": "43DD629FBC7DF091000D8414AA7F8EA70E7A48BCC6A3AD4366F53D7D19A2133C",
+      "checkout": "crlf",
+      "sha256": "A162BF191FE825247FCBF6380E762A6C50F3C02FB26117D10F8A16EB7F54BE77",
+      "size": 79382
+    },
+    "docs/HOK_KOREAN_FOCUS_LAYOUT_PLAN.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "1a5cdd9d3aa1587ccfe790ae2fea015722ee8bb9",
+      "object_sha256": "7A8141D972255B5C2045847C877DAB31B3F490873163A6369AD314DF68791A1A",
+      "checkout": "crlf_except",
+      "lf_lines": [
+        8,
+        9,
+        10,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154
+      ],
+      "sha256": "710A8BB5388D2DFE3F78DF3C7FB4052EB5E333F59BD396E1B74094E19E45A5E5",
+      "size": 36528
+    },
+    "docs/HOK_KOREAN_FOCUS_REWARD_GUIDELINES.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5811e64563bd1e2a7417fe46cca064801ee6f770",
+      "object_sha256": "D46C384E7D21F333834FB520E3FB03FACFA55133B2F71D8D9AEA9ACB3EC34C54",
+      "checkout": "raw",
+      "sha256": "D46C384E7D21F333834FB520E3FB03FACFA55133B2F71D8D9AEA9ACB3EC34C54",
+      "size": 6768
+    },
+    "docs/HOK_KOREAN_POLITICAL_COMPACTION_PLAN.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "32e813f556e0ad6e2e0ef25c2b950abe92347dd0",
+      "object_sha256": "9F7ADF6017AA2C924F44C3B2A458635F426ACCD1BB4C37780ADF966D595E56E5",
+      "checkout": "raw",
+      "sha256": "9F7ADF6017AA2C924F44C3B2A458635F426ACCD1BB4C37780ADF966D595E56E5",
+      "size": 9414
+    },
+    "docs/HOK_KOREAN_REGIONAL_COMMON_FOLLOWUP_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "11d3ab4a3c2d4bbd21c6b8ee8cc81b9760b07e0c",
+      "object_sha256": "7027D236D123E98686EB3DD419A5668A55D4C6D3710FF278276DA1298878EE0A",
+      "checkout": "crlf",
+      "sha256": "0CBBBFC7087B1F6CE3AF2CACF7ACF1ACF44D44F242B303A1AE8D46B9B1A69D41",
+      "size": 12834
+    },
+    "docs/HOK_KOREAN_REMAINING_FOLLOWUP_ICON_CREDITS.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6addc1787715cb64fb6ee354580fb6be312725c8",
+      "object_sha256": "E78F2D1B529657D20D3D1AC7BDFCFE0FF1D28143388C702CC8C8ADB0C26A7E4A",
+      "checkout": "raw",
+      "sha256": "E78F2D1B529657D20D3D1AC7BDFCFE0FF1D28143388C702CC8C8ADB0C26A7E4A",
+      "size": 9440
+    },
+    "docs/HOK_KOREAN_ROYAL_FOLLOWUP_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f9c8e2f7d6b71e9bb709f9e09577a6fa897c68dd",
+      "object_sha256": "026276A767A174741BCAECA7F7752F481E2C5CC770E5D5AA19C4F35F89B908CA",
+      "checkout": "crlf",
+      "sha256": "F712D8D868C579EEA74F4CCE2E9F90CC72BA74DA1363CCAE9224045519FD6DDE",
+      "size": 22919
+    },
+    "docs/HOK_KOREAN_SECOND_WAVE_FIRST_10_SPEC.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e0312b0d38434bb472a017691fe58769bf292bd1",
+      "object_sha256": "873E342D2EA6B64180B4F97578EDFABB91DF4BF838105953081028ED888CFE90",
+      "checkout": "crlf",
+      "sha256": "81F41311A87FD9D81E355BF8738A0F9417D6EDA9B4E748D2F6E77EA893031E47",
+      "size": 9432
+    },
+    "docs/HOK_KOREAN_SECOND_WAVE_ICON_CREDITS.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "1a443eef5f912b7e0682b2e9a11810edc34cbf0f",
+      "object_sha256": "091CBD3964E86D1ADCFC5B697344F942E7C657D509B5404B14C1003827354A71",
+      "checkout": "crlf",
+      "sha256": "164F6C885F522C3D7F7AC94D5572958391262DD9EE9C24E850107DEC8AAA9AF2",
+      "size": 7942
+    },
+    "docs/HOK_KOREAN_SECOND_WAVE_PLAN.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "e5b6d8538b640b0eaf7affea869f91a9226d6540",
+      "object_sha256": "FC7CFB5BEE0E0068E9CC441C74137DF804E60E4BA04691DFFE41C309424EE0C9",
+      "checkout": "crlf",
+      "sha256": "C4F5599322AF8AC19ADD503C47E614194FF087B785C9AFDB0FC63A5D580FD308",
+      "size": 39835
+    },
+    "docs/assets/korean-focus-icons/UPSTREAM_CREDITS.txt": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "83efbe5261113f933a16698783d6803dfd593152",
+      "object_sha256": "CF220DC66463D75163F7690AD77B02B662D0C05CA5D53DC62D33ED504512A7F5",
+      "checkout": "raw",
+      "sha256": "CF220DC66463D75163F7690AD77B02B662D0C05CA5D53DC62D33ED504512A7F5",
+      "size": 1029
+    },
+    "docs/data/HOK_KOREAN_COMMUNIST_DEVELOPMENT_ICON_MANIFEST.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "f1cd8db86fae76dff9e3a87a52ad1ba9ea083347",
+      "object_sha256": "BCD74E0B16BBB973115C7D367B8323FFFDEF37021F7AF43EF355F5841EF886A6",
+      "checkout": "crlf_except",
+      "lf_lines": [
+        1501
+      ],
+      "sha256": "1900E3CBECFC193139708B352EE5C4FF1F254FFA82AA6282D1B5F5F16ACC6C7E",
+      "size": 94807
+    },
+    "docs/data/HOK_KOREAN_COMMUNIST_GOVERNANCE_ICON_MANIFEST.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "b5bba547a4d9139a4e1b6814a82c1f4eca72959a",
+      "object_sha256": "EBDDCF8102E58D8D5D567CF54811F15E448E230084FA63D2DFAD7A603E6503E5",
+      "checkout": "crlf_except",
+      "lf_lines": [
+        1123
+      ],
+      "sha256": "64667264F04185CB2446B6AB31B50525D452E8FBEFB4E19300D272D65B4B4712",
+      "size": 73884
+    },
+    "docs/data/HOK_KOREAN_FASCIST_FOLLOWUP_ICON_MANIFEST.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "09ddba4e2a8186c0f2cd2ead50efefc1f29220b2",
+      "object_sha256": "A40DA9DA48CF0F8E59BB5F17FFCDFCD5735F0E3AD9E91013C13896FD5B5B8870",
+      "checkout": "raw",
+      "sha256": "A40DA9DA48CF0F8E59BB5F17FFCDFCD5735F0E3AD9E91013C13896FD5B5B8870",
+      "size": 109250
+    },
+    "docs/data/HOK_KOREAN_FASCIST_MOBILIZATION_ICON_MANIFEST.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6b7f1728b83bf6d00c24377d0d73b13452a944b3",
+      "object_sha256": "1F38DEE8265F3625BAC60CEF6C2B3981135EE9DC61C6FDC7E8CDB9FD39560A8A",
+      "checkout": "raw",
+      "sha256": "1F38DEE8265F3625BAC60CEF6C2B3981135EE9DC61C6FDC7E8CDB9FD39560A8A",
+      "size": 22694
+    },
+    "docs/data/HOK_KOREAN_FASCIST_PROCUREMENT_ICON_MANIFEST.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "5100adbd3edcb5866b60cedc0c4e2694b4cb4671",
+      "object_sha256": "01E31A5E30D10ED11842664651A08DC55DCA728046974F31B4EF81279D240432",
+      "checkout": "crlf_except",
+      "lf_lines": [
+        915
+      ],
+      "sha256": "C9A46EBD37A44ED33F07728AAD8A814956511ED8DF7FBEE8F1C1ACB8E5FED917",
+      "size": 58152
+    },
+    "docs/data/HOK_KOREAN_FASCIST_STAFF_ICON_MANIFEST.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "6c8203d45ff3a1365ad3abe01aaa694b6999a3cb",
+      "object_sha256": "074F71D5F3A706CB0FC5D3839AA8130513ED39A55D1F086C20C1EA15C741FD39",
+      "checkout": "crlf_except",
+      "lf_lines": [
+        567
+      ],
+      "sha256": "8F8E00E5672E0907F812A4E603B470C26801CC53C1C8098AE3DB07A630246205",
+      "size": 37132
+    },
+    "docs/data/HOK_KOREAN_REMAINING_FOLLOWUP_ICON_MANIFEST.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "a4175eb7ab3f81afb56963a8aeaec8c3f92d1f1f",
+      "object_sha256": "048F614180846E1337DC0007030B658C6CE8D277F244BF1A1B5669558BB4BA88",
+      "checkout": "crlf_except",
+      "lf_lines": [
+        8385
+      ],
+      "sha256": "B4BC596D93CAA69AC3DBBD0BE07776546F972ED31D573544D75467F2E68844DC",
+      "size": 513420
+    },
+    "docs/data/HOK_KOREAN_SECOND_WAVE_CANDIDATES.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "885c20328454e2109b659b3e03ef178ec58f16fe",
+      "object_sha256": "AA9ABC19DF61D9AC34C70D4A0CA4FC4E85AEC9BB32542D1ED5FB52FA85F0F46B",
+      "checkout": "crlf",
+      "sha256": "6F5D16FB7226E4CC108CDFE43A9D6EA8D847DEB01C6F550B72FC580C551D119E",
+      "size": 247164
+    },
+    "docs/data/HOK_KOREAN_SECOND_WAVE_COORDINATES.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "beaa4be644e0e57cf2aa331b89571d3552ccb62d",
+      "object_sha256": "6F34EC3E3C45C99E313AF5BCC5E7E145EA3AC3CFC24ADC1B43DF180149C0F51D",
+      "checkout": "crlf",
+      "sha256": "C62C14FE7F55F6524E99853C4D5BDBF5ADEE76918F6E95EC4EE38EECC8B28147",
+      "size": 508424
+    },
+    "docs/data/HOK_KOREAN_SECOND_WAVE_ICON_MANIFEST.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "fd971c11e397aa0c1ac5251873182e43ccd7c02c",
+      "object_sha256": "93230209ADB18AE875E719D83F517EDC2EEC81E8662FB30D6CDAAA46C374B4AB",
+      "checkout": "crlf_except",
+      "lf_lines": [
+        1353
+      ],
+      "sha256": "AB6A0FFF6B9F3F1B3343A0FD0EB2BC8D2ABED99D6DEDE3EC5652F445B2E4A073",
+      "size": 87307
+    },
+    "docs/data/HOK_KOREAN_SMALL_DECISION_ICON_MANIFEST.json": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "0f98caa55d4ae6ce037584be13131f3f90748f15",
+      "object_sha256": "198648F3661C31C5E75080ECB8B22403D8360268ABBA4DEC5BE2A089EF1D0DA3",
+      "checkout": "crlf_except",
+      "lf_lines": [
+        1098
+      ],
+      "sha256": "9771D81EC0D9D578B91592DF4401D15D0C3D08D7052ED9BEC85FCB0532DAD20C",
+      "size": 68357
+    },
+    "docs/incidents/2026-09-22-korean-decision-icon-size.md": {
+      "commit": "be5fb40dbd8de33e5adbf65e808bcb0e8c283560",
+      "blob": "beb410c71617aa6d059e17d55aec4fbdb7a614b0",
+      "object_sha256": "021F43120C6357D648608ADFACC9226FF7DF7EB498304A1C0145C3D54765329B",
+      "checkout": "raw",
+      "sha256": "021F43120C6357D648608ADFACC9226FF7DF7EB498304A1C0145C3D54765329B",
+      "size": 5107
+    }
+  }
+}

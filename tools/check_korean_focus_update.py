@@ -48,6 +48,16 @@ ICON_GFX_PATHS = (
 )
 SHINE_OVERLAY = "gfx/interface/goals/shine_overlay.dds"
 SHINE_EFFECT = "gfx/FX/buttonstate.lua"
+# [2026-09-23]_kpopmodder: Only these seven legacy focuses adopt the reviewed second-wave layout fields.
+LEGACY_LAYOUT_DELTA = {
+    "KOR_support_gaema_plateau": {"relative_position_id", "x", "y"},
+    "KOR_build_soyanggang_dam": {"relative_position_id", "x", "y"},
+    "KOR_future_of_the_republic": {"offset", "x"},
+    "KOR_long_live_the_dictatorship_of_the_proletariat": {"offset"},
+    "KOR_democracy_advance_forward": {"offset", "x"},
+    "KOR_empowering_the_nrsc": {"offset", "x"},
+    "KOR_urihwangsilsaranghoe": {"offset", "x"},
+}
 
 
 def require(condition: bool, message: str) -> None:
@@ -144,9 +154,11 @@ def mapped(block: Block) -> Block:
 
 
 def check_focus_contract(current: dict[str, Block], baseline: dict[str, Block], source: dict[str, Block]) -> set[str]:
-    require(len(baseline) == 266 and len(current) == 326, "expected original 266 and updated 326 focuses")
-    require(set(current) == set(source) and set(baseline) <= set(current), "inherited or updated focus IDs changed")
-    added = set(current) - set(baseline)
+    # [2026-09-23]_kpopmodder: Keep the original 266+60 contracts separate from the independently checked 134 additions.
+    require(len(baseline) == 266 and len(source) == 326 and len(current) == 460, "expected original 266, first-wave 326 and second-wave 460 focuses")
+    require(set(baseline) <= set(source) <= set(current), "inherited or first-wave focus IDs changed")
+    require(len(set(current) - set(source)) == 134, "expected 134 second-wave focus additions")
+    added = set(source) - set(baseline)
     require(len(added) == 60 and all(identifier.startswith(PREFIX) for identifier in added), "expected exactly 60 namespaced additions")
     shortened: set[str] = set()
     for identifier, old in baseline.items():
@@ -474,7 +486,23 @@ def source_equivalence(manifest: dict) -> None:
                 identifier = row["id"]
                 require(scalar(ideas[identifier], "picture") == row["previous_reference"], f"unreviewed prior idea picture: {identifier}")
                 expected = replace_entry(expected, ("ideas", "country", identifier, "picture"), row["new_reference"])
-        require(read(ROOT / relative) == expected, f"script differs beyond approved icon/map/MAN/economy edits: {relative}")
+        if relative == FOCUS_PATH:
+            # [2026-09-23]_kpopmodder: Admit exact pinned layout changes without weakening any legacy gameplay field.
+            from source_snapshot import read_second_wave_source
+            latest = focus_blocks(parse(read_second_wave_source(FOCUS_PATH).decode("utf-8-sig")))
+            current = focus_blocks(read(ROOT / relative))
+            for identifier, old in focus_blocks(expected).items():
+                approved = LEGACY_LAYOUT_DELTA.get(identifier, set())
+                actual = current[identifier]
+                require(tuple(entry for entry in actual if entry.key not in approved)
+                        == tuple(entry for entry in old if entry.key not in approved),
+                        f"legacy focus changed beyond approved layout: {identifier}")
+                for key in approved:
+                    require(tuple(entry for entry in actual if entry.key == key)
+                            == tuple(entry for entry in latest[identifier] if entry.key == key),
+                            f"legacy layout differs from pinned donor: {identifier}/{key}")
+        else:
+            require(read(ROOT / relative) == expected, f"script differs beyond approved icon/map/MAN/economy edits: {relative}")
 
 
 def check_icon_assets(focuses: dict[str, Block], added: set[str], ideas: dict[str, Block]) -> None:

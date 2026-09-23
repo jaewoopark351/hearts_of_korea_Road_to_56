@@ -30,8 +30,10 @@ GENERATOR_CHECKS = (
     ("doctrine migration", "migrate_doctrines.py", "--check"),
     ("Korean focus update", "build_korean_focus_update.py", "--check"),
     ("Korean expansion contracts", "check_korean_focus_update.py", "--check"),
-    # [2026-09-22]_kpopmodder: Include the 92 newly imported Korean artwork assets in the provenance gate.
-    ("1,123-file integration manifest", "build_integration_manifest.py", "--check"),
+    # [2026-09-23]_kpopmodder: Keep new policies, images, regions and mutation detection under a separate gate.
+    ("Korean second-wave contracts", "check_korean_second_wave.py", "--check"),
+    # [2026-09-23]_kpopmodder: Include the selected second-wave files and their immutable provenance.
+    ("1,411-file integration manifest", "build_integration_manifest.py", "--check"),
 )
 
 SCRIPT_SUFFIXES = {".txt", ".gfx", ".asset", ".gui"}

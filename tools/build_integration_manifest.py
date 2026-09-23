@@ -17,7 +17,10 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from build_rt56_map import HOK_ROOT, REPO_ROOT, RT56_ROOT
-from source_snapshot import icon_lock, read_icon_source, source_record
+from source_snapshot import (
+    icon_lock, read_icon_source, source_record, SECOND_WAVE_FOCUS_PATH,
+    SECOND_WAVE_RUNTIME_PATHS, second_wave_records, read_second_wave_source,
+)
 
 
 # [2026-09-22]_kpopmodder: Keep the canonical ledger path and identify the historical base plus Korean update per row.
@@ -521,11 +524,26 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
                 "donor_source_blob": provenance["blob"],
                 "donor_source_sha256": provenance["sha256"],
                 "donor_source_checkout": provenance["checkout"],
+                "rt56_base_sha256": sha256(RT56_ROOT / relative) if rt_collision else "",
             }
         )
+        # [2026-09-23]_kpopmodder: Keep the merge ancestor while identifying the new tree's actual source.
+        if relative == SECOND_WAVE_FOCUS_PATH:
+            updated = second_wave_records()[relative]
+            read_second_wave_source(relative)
+            rows[-1].update({
+                "previous_source_commit": provenance["commit"],
+                "previous_source_sha256": donor_hash,
+                "donor_sha256": updated["sha256"],
+                "donor_source_commit": updated["commit"],
+                "donor_source_blob": updated["blob"],
+                "donor_source_sha256": updated["sha256"],
+                "donor_source_checkout": updated["checkout"],
+                "reason": "HOK be5fb40 한국 460중점; 기존 ID·15주 만주·부분동원 보존, 7개 기존 배치와 신규134 병합, ADR-0005 지역 대응",
+            })
         # [2026-09-22]_kpopmodder: Keep artwork's uncommitted source distinct from the pinned gameplay commit.
         artwork = icon_lock()["reference_inputs"].get(relative)
-        if artwork is not None:
+        if artwork is not None and relative != SECOND_WAVE_FOCUS_PATH:
             read_icon_source(relative)
             rows[-1].update({
                 "artwork_source_kind": icon_lock()["source_kind"],
@@ -569,6 +587,39 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "artwork_source_sha256": record["sha256"],
         })
 
+    # [2026-09-23]_kpopmodder: Verify and attribute the selected 288 additions independently of the historical donor tree.
+    from build_korean_focus_update import build_all
+    expected_outputs = build_all()
+    if (REPO_ROOT / SECOND_WAVE_FOCUS_PATH).read_bytes() != expected_outputs[Path(SECOND_WAVE_FOCUS_PATH)]:
+        raise RuntimeError("second-wave focus output differs from the reviewed merge")
+    for relative in SECOND_WAVE_RUNTIME_PATHS:
+        if relative == SECOND_WAVE_FOCUS_PATH:
+            continue
+        if relative in donor_relatives or (RT56_ROOT / relative).exists():
+            raise RuntimeError(f"unreviewed second-wave path collision: {relative}")
+        record = second_wave_records()[relative]
+        read_second_wave_source(relative)
+        if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+            raise RuntimeError(f"second-wave output differs from the reviewed merge: {relative}")
+        classification = "ASSET_COPY" if relative.endswith(".dds") else "ADD"
+        counts[classification] += 1
+        rows.append({
+            "source_path": relative,
+            "integration_class": classification,
+            "status": "SHIPPED",
+            "exact_path_rt56_collision": "no",
+            "output_path": relative,
+            "reason": "HOK 한국 2차 확장 선택 이식; 지역 변환 ADR-0005, 공용 광택 vanilla, 원본 소재·가공 크레딧 보존",
+            "donor_sha256": record["sha256"],
+            "output_sha256": sha256(REPO_ROOT / relative),
+            "donor_source_commit": record["commit"],
+            "donor_source_blob": record["blob"],
+            "donor_source_sha256": record["sha256"],
+            "donor_source_checkout": record["checkout"],
+        })
+    if len(rows) != 1411:
+        raise RuntimeError(f"unexpected combined integration inventory: {len(rows)}")
+
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(
         stream,
@@ -588,6 +639,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "artwork_source_kind",
             "artwork_source_base_commit",
             "artwork_source_sha256",
+            "rt56_base_sha256",
+            "previous_source_commit",
+            "previous_source_sha256",
         ),
         lineterminator="\n",
     )

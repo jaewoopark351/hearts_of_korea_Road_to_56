@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Build only the pinned September 2026 HOK Korean focus update.
 
-The twenty gameplay inputs are selected from HOK commits da81530 and 118d7b5.
-The later artwork is a separate hash-pinned delta. Sources are prepared
-separately; this builder never writes to the donor or prepares its own inputs.
+Keep the historical inputs intact and layer only the pinned be5fb40 Korean
+second wave over their generated outputs. This builder never writes to the
+donor or prepares its own inputs.
 """
 
 from __future__ import annotations
@@ -17,7 +17,11 @@ from pathlib import Path
 
 from build_rt56_map import HOK_ROOT, PROVINCE_ID_MAP, REPO_ROOT, STATE_ID_MAP
 from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
-from source_snapshot import ICON_MANIFEST, icon_lock, read_icon_source
+from source_snapshot import (
+    ICON_MANIFEST, icon_lock, read_icon_source, SECOND_WAVE_RUNTIME_PATHS,
+    SECOND_WAVE_FOCUS_PATH, read_second_wave_source, second_wave_lock,
+)
+from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
 
 # [2026-09-22]_kpopmodder: Pin the approved Korean update separately from the historical donor base.
@@ -67,7 +71,8 @@ SOURCE_HASHES = {
 }
 GAMEPLAY_PATHS = tuple(SOURCE_HASHES)
 ICON_ASSET_PATHS = tuple(Path(relative) for relative in icon_lock()["runtime_assets"])
-OUTPUT_PATHS = GAMEPLAY_PATHS + ICON_ASSET_PATHS
+# [2026-09-23]_kpopmodder: Extend the reviewed allowlist without repinning unrelated historical generators.
+OUTPUT_PATHS = tuple(dict.fromkeys(GAMEPLAY_PATHS + ICON_ASSET_PATHS + tuple(Path(p) for p in SECOND_WAVE_RUNTIME_PATHS)))
 SOURCE_COMMITS = {
     relative: AI_COMMIT if relative.parts[1] == "ai_strategy_plans" else FOCUS_COMMIT
     for relative in GAMEPLAY_PATHS
@@ -86,6 +91,13 @@ ACCEPTED_PRIOR_OUTPUT_HASHES = {
 # [2026-09-22]_kpopmodder: Accept only the reviewed pre-artwork outputs, including the user's existing reward change.
 ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     Path(relative): digest for relative, digest in icon_lock()["prior_output_sha256"].items()
+})
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): digest for relative, digest in second_wave_lock()["accepted_previous_outputs"].items()
+})
+# [2026-09-23]_kpopmodder: Permit only byte-identical imported regional text before adding the reviewed RT56 descriptions.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): second_wave_lock()["runtime_text"][relative]["sha256"] for relative in LOCALISATION_PATHS
 })
 PORT_NOTES = {
     Path("common/national_focus/korea.txt"):
@@ -210,13 +222,32 @@ def build_all() -> dict[Path, bytes]:
         raise ValueError(f"unexpected Korean update transformation coverage: {unexpected}")
     for relative in ICON_ASSET_PATHS:
         outputs[relative] = read_icon_source(relative)
+    # [2026-09-23]_kpopmodder: The latest tree already contains its icons and guarded partial-mobilisation reward.
+    verify_geography_inputs()
+    for name in SECOND_WAVE_RUNTIME_PATHS:
+        relative = Path(name)
+        original = read_second_wave_source(relative)
+        migrated = original
+        if relative.suffix == ".txt":
+            migrated = replace_tokens(original, mapping)
+            migrated = apply_post_migration_fixes(name, migrated)
+        migrated = apply_second_wave_geography(name, migrated)
+        if name == SECOND_WAVE_FOCUS_PATH:
+            migrated = add_port_note(migrated, "# [2026-09-23]_kpopmodder: Merge pinned HOK second-wave content with RT56 IDs, legacy Manchuria integration and ADR-0005 regional conditions.")
+        if relative.suffix == ".gfx":
+            # Shared shine remains supplied by vanilla; all HOK-owned masks/payloads stay local.
+            migrated = migrated.replace(b"gfx/interface/goals/HOK_KOR/shine_overlay.dds", b"gfx/interface/goals/shine_overlay.dds")
+        if relative.suffix == ".yml" and not migrated.startswith(b"\xef\xbb\xbf" + f"l_{relative.parts[1]}:".encode()):
+            raise ValueError(f"unexpected second-wave localisation BOM/header: {relative}")
+        outputs[relative] = migrated
+    verify_geography_inputs()
     verify_inputs()
     return outputs
 
 
 def preflight(outputs: dict[Path, bytes]) -> None:
     if set(outputs) != set(OUTPUT_PATHS):
-        raise ValueError("Korean update outputs must match the twenty gameplay paths and 92 artwork assets")
+        raise ValueError("Korean update outputs must match the 400 reviewed historical and second-wave paths")
     errors = []
     for relative, expected in outputs.items():
         destination = (REPO_ROOT / relative).resolve()
