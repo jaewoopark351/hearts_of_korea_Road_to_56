@@ -35,6 +35,89 @@ SECOND_WAVE_ROOT = REPO_ROOT / ".local-artifacts/sources/hok-second-wave-be5fb40
 SECOND_WAVE_FOCUS_PATH = "common/national_focus/korea.txt"
 SECOND_WAVE_DOCUMENTATION_ROOT = REPO_ROOT / "docs/upstream/hok-second-wave-be5fb40"
 
+#20260923_kpopmodder: Reconstruct the reviewed 17-file policy delta without trusting the donor's later working tree.
+POLICY_UPDATE_LOCK_PATH = Path(__file__).with_name("hok_policy_update_lock.json")
+POLICY_UPDATE_DOCUMENTATION_ROOT = REPO_ROOT / "docs/upstream/hok-policy-update-20260923"
+
+
+@lru_cache(maxsize=1)
+def policy_update_lock() -> dict:
+    lock = json.loads(POLICY_UPDATE_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["base_commit"]) != (
+        1, "reviewed-working-tree-delta", SECOND_WAVE_COMMIT
+    ):
+        raise ValueError("unreviewed policy update source revision")
+    records = {**lock["runtime_text"], **lock["documentation"]}
+    if len(lock["runtime_text"]) != 10 or len(lock["documentation"]) != 7 or len(records) != 17:
+        raise ValueError("unexpected policy update inventory")
+    digest = sha256("\n".join(sorted(records)).encode("utf-8"))
+    if digest != lock["paths_sha256"] or digest != "4625FFACADB78451D9105BB25BC7B14558D6CA01B6D597AC13E91D7EEDB20E3F":
+        raise ValueError("policy update allowlist mismatch")
+    for relative in records:
+        path = Path(relative)
+        if path.is_absolute() or any(part in (".", "..") for part in relative.split("/")) or any(c in relative for c in "\\:"):
+            raise ValueError(f"unsafe policy update source path: {relative}")
+    for relative, expected in lock["preserved_historical_locks"].items():
+        if sha256((REPO_ROOT / relative).read_bytes()) != expected:
+            raise ValueError(f"historical source lock changed during policy update: {relative}")
+    return lock
+
+
+@lru_cache(maxsize=17)
+def read_policy_source(relative: str | Path) -> bytes:
+    relative = Path(relative).as_posix()
+    lock = policy_update_lock()
+    record = {**lock["runtime_text"], **lock["documentation"]}[relative]
+    # Verify the base path as well as its blob; a new document must be absent in the base tree.
+    rows = subprocess.check_output(git_command() + ["ls-tree", lock["base_commit"], "--", relative])
+    blob = rows.split()[2].decode() if rows else ""
+    if blob != record["base_blob"]:
+        raise ValueError(f"policy update base provenance mismatch: {relative}")
+    base = subprocess.check_output(git_command() + ["cat-file", "blob", blob]) if blob else b""
+    if sha256(base) != record["base_object_sha256"]:
+        raise ValueError(f"policy update base hash mismatch: {relative}")
+    lines = base.decode("utf-8").replace("\r\n", "\n").splitlines(keepends=True)
+    result, cursor = [], 0
+    for start, end, replacement in record["edits"]:
+        if not 0 <= cursor <= start <= end <= len(lines) or any("\r" in line for line in replacement):
+            raise ValueError(f"invalid policy update line edit: {relative}")
+        result.extend(lines[cursor:start])
+        result.extend(replacement)
+        cursor = end
+    result.extend(lines[cursor:])
+    mode = record["newline"]
+    if mode not in ("lf", "crlf", "mixed"):
+        raise ValueError(f"invalid policy update newline mode: {relative}")
+    crlf_lines = set(record.get("crlf_lines", []))
+    data = "".join(line.replace("\n", "\r\n") if mode == "crlf" or index in crlf_lines else line
+                   for index, line in enumerate(result)).encode("utf-8")
+    if len(data) != record["size"] or sha256(data) != record["sha256"]:
+        raise ValueError(f"policy update reconstructed source mismatch: {relative}")
+    return data
+
+
+def export_policy_documents(check_only: bool = False) -> int:
+    pending = {}
+    lock = policy_update_lock()
+    # Preflight all source bytes, including gameplay, before exporting any document.
+    for relative in (*lock["runtime_text"], *lock["documentation"]):
+        data = read_policy_source(relative)
+        if relative not in lock["documentation"]:
+            continue
+        target = POLICY_UPDATE_DOCUMENTATION_ROOT / relative.removeprefix("docs/")
+        if target.exists():
+            if target.read_bytes() != data:
+                raise ValueError(f"modified policy source document: {relative}")
+        elif check_only:
+            raise ValueError(f"policy source document missing: {relative}")
+        else:
+            pending[target] = data
+    for target, data in pending.items():
+        target.parent.mkdir(parents=True, exist_ok=True)
+        with target.open("xb") as handle:
+            handle.write(data)
+    return len(pending)
+
 
 @lru_cache(maxsize=1)
 def icon_lock() -> dict:
@@ -338,6 +421,7 @@ def main() -> int:
     parser.add_argument("--import-icons", action="store_true", help="materialize the reviewed artwork bytes without changing donor files")
     parser.add_argument("--import-second-wave", action="store_true", help="materialize only the reviewed second-wave Git inputs in a separate cache")
     parser.add_argument("--export-second-wave-docs", action="store_true", help="preserve the selected upstream specifications, icon manifests and credits byte-for-byte")
+    parser.add_argument("--export-policy-docs", action="store_true", help="export the seven reviewed September 23 policy documents")
     args = parser.parse_args()
     changed = ensure_source_snapshot(check_only=args.check)
     print(f"HOK source snapshot: 1014 base + 20 selected overlay = 1031 files; created {changed}")
@@ -348,6 +432,8 @@ def main() -> int:
     if args.export_second_wave_docs or args.check or SECOND_WAVE_DOCUMENTATION_ROOT.exists():
         exported = export_second_wave_documents(check_only=not args.export_second_wave_docs or args.check)
         print(f"HOK second-wave upstream documents: 37 preserved; created {exported}")
+    policy_documents = export_policy_documents(check_only=not args.export_policy_docs or args.check)
+    print(f"HOK policy delta: 10 runtime inputs + 7 source documents verified; exported {policy_documents}")
     return 0
 
 

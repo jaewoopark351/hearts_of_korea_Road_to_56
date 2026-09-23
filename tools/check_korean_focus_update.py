@@ -19,7 +19,7 @@ from pathlib import Path
 
 from build_rt56_map import PROVINCE_ID_MAP, STATE_ID_MAP
 from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
-from source_snapshot import FOCUS_UPDATE_PATHS, read_source_file
+from source_snapshot import FOCUS_UPDATE_PATHS, policy_update_lock, read_policy_source, read_source_file
 from validate_port import ROOT, RT56_ROOT, VANILLA_ROOT, localisation_keys, mask_comments, matching_brace
 
 
@@ -325,6 +325,13 @@ def state_context(building: str, slots: int = 2) -> dict:
     return {"is_owned_by": "ROOT", "is_fully_controlled_by": "ROOT", "is_coastal": "yes", "slots": {building: slots}}
 
 
+#20260923_kpopmodder: Require the reviewed political-power-only cost without retaining human or AI factory gates.
+def check_pp_only_project(identifier: str, block: Block) -> None:
+    require(scalar(block, "cost") == "150", f"PP-only project cost changed: {identifier}")
+    require(not any(entry.key in ("civilian_factory_use", "num_of_civilian_factories_available_for_projects")
+                    for entry in walk(block)), f"PP-only project retains a factory charge or gate: {identifier}")
+
+
 def check_regional_projects(decisions: dict[str, Block]) -> None:
     contracts = {
         "HOK_KOR_pyeongan_industry_project": (527, "arms_factory"),
@@ -336,7 +343,7 @@ def check_regional_projects(decisions: dict[str, Block]) -> None:
         block = decisions[identifier]
         for key, expected in (("cost", "150"), ("days_remove", "90"), ("fire_only_once", "no")):
             require(scalar(block, key) == expected, f"regional contract changed: {identifier}/{key}")
-        require(scalar(one(block, "modifier"), "civilian_factory_use") == "5", f"regional factory cost: {identifier}")
+        check_pp_only_project(identifier, block)
         require(not one(block, "cancel_effect"), f"cancellation grants a reward: {identifier}")
         require(scalar(one(one(block, "highlight_states"), "highlight_state_targets"), "state") == str(state_id), f"incorrect highlighted state: {identifier}")
         available, cancel = one(block, "available"), one(block, "cancel_trigger")
@@ -353,7 +360,7 @@ def check_regional_projects(decisions: dict[str, Block]) -> None:
             negative = copy.deepcopy(context)
             negative["states"][state_id][property_name] = value
             require(not evaluate(available, negative) and not evaluate(completion, negative) and evaluate(cancel, negative), f"regional loss/space guard missing: {identifier}/{property_name}")
-        require(not evaluate(available, {**context, "civilian_factories": 4}), f"regional cost precondition missing: {identifier}")
+        require(evaluate(available, {**context, "civilian_factories": 0}), f"regional project still needs free civilian factories: {identifier}")
         defeated = {**context, "has_capitulated": "yes"}
         require(not evaluate(available, defeated) and not evaluate(completion, defeated) and evaluate(cancel, defeated), f"regional capitulation guard missing: {identifier}")
 
@@ -379,9 +386,9 @@ def check_school(focus: Block) -> None:
 
 def check_allied_projects(decisions: dict[str, Block]) -> None:
     block = decisions["HOK_KOR_finance_allied_industry"]
-    for key, expected in (("cost", "75"), ("days_remove", "180"), ("fire_only_once", "no")):
+    for key, expected in (("cost", "150"), ("days_remove", "180"), ("fire_only_once", "no")):
         require(scalar(block, key) == expected, f"allied investment contract changed: {key}")
-    require(scalar(one(block, "modifier"), "civilian_factory_use") == "2", "allied investment factory cost changed")
+    check_pp_only_project("HOK_KOR_finance_allied_industry", block)
     require(not one(block, "cancel_effect"), "allied cancellation grants a reward")
     for key in ("available", "visible", "target_trigger", "cancel_trigger"):
         require(not any(entry.key in ("has_country_flag", "check_variable") for entry in walk(one(block, key))), f"allied historical flags/counter lock repeats in {key}")
@@ -451,7 +458,9 @@ def source_equivalence(manifest: dict) -> None:
     """Allow only the manifest's exact icon substitutions and earlier port edits."""
     # [2026-09-22]_kpopmodder: Compare complete ordered blocks; never discard all icon/picture fields.
     for relative in (FOCUS_PATH, *IDEA_PATHS):
-        data = read_source_file(relative, updated=True)
+        #20260923_kpopmodder: Use the separately pinned policy revision only for its reviewed runtime paths.
+        policy_source = relative in policy_update_lock()["runtime_text"]
+        data = read_policy_source(relative) if policy_source else read_source_file(relative, updated=True)
         data = replace_tokens(data, {**PROVINCE_ID_MAP, **STATE_ID_MAP})
         expected = parse(apply_post_migration_fixes(relative, data).decode("utf-8-sig"))
         if relative == FOCUS_PATH:
@@ -484,8 +493,10 @@ def source_equivalence(manifest: dict) -> None:
             ideas = named(one(one(expected, "ideas"), "country"))
             for row in (item for item in manifest["ideas"] if item["source_file"] == relative):
                 identifier = row["id"]
-                require(scalar(ideas[identifier], "picture") == row["previous_reference"], f"unreviewed prior idea picture: {identifier}")
-                expected = replace_entry(expected, ("ideas", "country", identifier, "picture"), row["new_reference"])
+                expected_reference = row["new_reference"] if policy_source else row["previous_reference"]
+                require(scalar(ideas[identifier], "picture") == expected_reference, f"unreviewed source idea picture: {identifier}")
+                if not policy_source:
+                    expected = replace_entry(expected, ("ideas", "country", identifier, "picture"), row["new_reference"])
         if relative == FOCUS_PATH:
             # [2026-09-23]_kpopmodder: Admit exact pinned layout changes without weakening any legacy gameplay field.
             from source_snapshot import read_second_wave_source
@@ -684,8 +695,8 @@ def check_ideas(ideas: dict[str, Block]) -> None:
         "flexible_production_2": ("line_change_production_efficiency_factor", "0.40"),
         "quality_control": ("production_factory_start_efficiency_factor", "0.10"),
         "procurement_spirit_2": ("production_factory_max_efficiency_factor", "0.10"),
-        "accountable_administration_idea": ("political_power_gain", "0.25"),
-        "public_accounts_idea": ("political_power_gain", "0.25"),
+        "accountable_administration_idea": ("political_power_gain", "1.0"),
+        "public_accounts_idea": ("political_power_gain", "1.0"),
         "rural_education_idea": ("research_speed_factor", "0.10"),
         "volunteer_supply_idea": ("supply_consumption_factor", "-0.10"),
         "formation_spirit_1": ("air_mission_efficiency", "0.10"),
@@ -694,6 +705,11 @@ def check_ideas(ideas: dict[str, Block]) -> None:
     require(len(ideas) == 29, "expected 29 expansion ideas")
     for suffix, (modifier, value) in expected.items():
         require(scalar(one(ideas[PREFIX + suffix], "modifier"), modifier) == value, f"latest idea reward changed: {suffix}/{modifier}")
+    #20260923_kpopmodder: Carry the final flat PP reward into the upgrade while retaining its stability and government gates.
+    require(one(ideas[PREFIX + "accountable_administration_idea"], "modifier") == parse("political_power_gain = 1.0"), "civil-service flat reward changed")
+    require(one(ideas[PREFIX + "public_accounts_idea"], "modifier") == parse("political_power_gain = 1.0 stability_factor = 0.02"), "public-accounts upgraded rewards changed")
+    for suffix in ("accountable_administration_idea", "public_accounts_idea"):
+        require(one(ideas[PREFIX + suffix], "cancel") == parse("NOT = { has_government = democratic }"), f"democratic administration cancellation changed: {suffix}")
     for stage in (1, 2):
         require(scalar(one(ideas[f"HOK_KOR_mass_production_{stage}"], "modifier"), "line_change_production_efficiency_factor") == "-0.05", "mass-production tradeoff removed")
         require(scalar(one(ideas[f"HOK_KOR_flexible_production_{stage}"], "modifier"), "production_factory_max_efficiency_factor") == "-0.025", "flexible-production tradeoff removed")
@@ -777,13 +793,23 @@ def run_self_tests() -> None:
         ("regional repeatability", ("fire_only_once",), "yes"),
         ("regional cancellation reward", ("cancel_effect",), parse("add_political_power = 150")),
         ("regional duplicate construction reward", ("remove_effect", "if", "1144", "add_building_construction", "level"), "2"),
+        ("regional political-power cost", ("cost",), "75"),
+        ("regional factory availability gate", ("available",), one(decisions[regional], "available") + parse("num_of_civilian_factories_available_for_projects > 4")),
     )
     for label, path, value in mutations:
         changed = {**decisions, regional: replace_entry(decisions[regional], path, value)}
         rejects(label, lambda changed=changed: check_regional_projects(changed))
+    charged = decisions[regional] + parse("modifier = { civilian_factory_use = 5 }")
+    rejects("regional factory charge", lambda: check_regional_projects({**decisions, regional: charged}))
     ally = "HOK_KOR_finance_allied_industry"
     locked = replace_entry(decisions[ally], ("available",), one(decisions[ally], "available") + parse("NOT = { has_country_flag = HOK_KOR_industrial_project_completed }"))
     rejects("allied historical flag lock", lambda: check_allied_projects({**decisions, ally: locked}))
+    charged_ally = decisions[ally] + parse("modifier = { civilian_factory_use = 2 }")
+    rejects("allied factory charge", lambda: check_allied_projects({**decisions, ally: charged_ally}))
+    gated_ally = replace_entry(decisions[ally], ("available",), one(decisions[ally], "available") + parse("num_of_civilian_factories_available_for_projects > 1"))
+    rejects("allied factory availability gate", lambda: check_allied_projects({**decisions, ally: gated_ally}))
+    cheap_ally = replace_entry(decisions[ally], ("cost",), "75")
+    rejects("allied stale political-power cost", lambda: check_allied_projects({**decisions, ally: cheap_ally}))
     school = replace_entry(focuses["HOK_KOR_technical_civic_schools"], ("completion_reward", "if", "limit", "919", "is_fully_controlled_by"), None)
     rejects("school completion ownership loss", lambda: check_school(school))
     first = sorted(added)[0]
@@ -795,6 +821,13 @@ def run_self_tests() -> None:
     workforce = "HOK_KOR_workforce_2"
     bad_reward = {**ideas, workforce: replace_entry(ideas[workforce], ("modifier", "production_factory_efficiency_gain_factor"), "0.20")}
     rejects("stale workforce reward", lambda: check_ideas(bad_reward))
+    for suffix in ("accountable_administration_idea", "public_accounts_idea"):
+        identifier = PREFIX + suffix
+        stale = {**ideas, identifier: replace_entry(ideas[identifier], ("modifier", "political_power_gain"), "0.25")}
+        rejects(f"stale flat political-power reward {suffix}", lambda stale=stale: check_ideas(stale))
+    upgraded = PREFIX + "public_accounts_idea"
+    lost_stability = {**ideas, upgraded: replace_entry(ideas[upgraded], ("modifier", "stability_factor"), None)}
+    rejects("upgraded administration loses stability", lambda: check_ideas(lost_stability))
     customs = "HOK_KOR_democratic_expansion.1"
     options = children(events[customs], "option")
     changed_option = replace_entry(options[0], ("if", "add_timed_idea", "days"), "7300")

@@ -20,6 +20,7 @@ from build_rt56_map import HOK_ROOT, REPO_ROOT, RT56_ROOT
 from source_snapshot import (
     icon_lock, read_icon_source, source_record, SECOND_WAVE_FOCUS_PATH,
     SECOND_WAVE_RUNTIME_PATHS, second_wave_records, read_second_wave_source,
+    policy_update_lock, read_policy_source,
 )
 
 
@@ -619,6 +620,27 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         })
     if len(rows) != 1411:
         raise RuntimeError(f"unexpected combined integration inventory: {len(rows)}")
+
+    #20260923_kpopmodder: Attribute the reviewed working-tree delta without mislabelling it as committed donor content.
+    policy = policy_update_lock()
+    for relative, record in policy["runtime_text"].items():
+        matching = [row for row in rows if row["source_path"] == relative]
+        if len(matching) != 1 or (RT56_ROOT / relative).exists():
+            raise RuntimeError(f"unreviewed policy integration collision: {relative}")
+        read_policy_source(relative)
+        if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+            raise RuntimeError(f"policy output differs from reviewed source merge: {relative}")
+        row = matching[0]
+        row.update({
+            "previous_source_commit": row["donor_source_commit"],
+            "previous_source_sha256": row["donor_source_sha256"],
+            "donor_sha256": record["sha256"],
+            "donor_source_commit": "",
+            "donor_source_blob": "",
+            "donor_source_sha256": record["sha256"],
+            "donor_source_checkout": "reviewed-working-tree-delta",
+        })
+        row["reason"] += "; 2026-09-23 정책 변경: tools/hok_policy_update_lock.json, be5fb40 + 검토된 미커밋 변경; RT56 주 변환 유지"
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(

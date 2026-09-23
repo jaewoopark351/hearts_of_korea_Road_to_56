@@ -20,6 +20,7 @@ from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
 from source_snapshot import (
     ICON_MANIFEST, icon_lock, read_icon_source, SECOND_WAVE_RUNTIME_PATHS,
     SECOND_WAVE_FOCUS_PATH, read_second_wave_source, second_wave_lock,
+    policy_update_lock, read_policy_source,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -98,6 +99,11 @@ ACCEPTED_PRIOR_OUTPUT_HASHES.update({
 # [2026-09-23]_kpopmodder: Permit only byte-identical imported regional text before adding the reviewed RT56 descriptions.
 ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     Path(relative): second_wave_lock()["runtime_text"][relative]["sha256"] for relative in LOCALISATION_PATHS
+})
+#20260923_kpopmodder: Accept only the ten reviewed pre-policy outputs, preserving unrelated user changes.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): record["previous_output_sha256"]
+    for relative, record in policy_update_lock()["runtime_text"].items()
 })
 PORT_NOTES = {
     Path("common/national_focus/korea.txt"):
@@ -239,6 +245,24 @@ def build_all() -> dict[Path, bytes]:
             migrated = migrated.replace(b"gfx/interface/goals/HOK_KOR/shine_overlay.dds", b"gfx/interface/goals/shine_overlay.dds")
         if relative.suffix == ".yml" and not migrated.startswith(b"\xef\xbb\xbf" + f"l_{relative.parts[1]}:".encode()):
             raise ValueError(f"unexpected second-wave localisation BOM/header: {relative}")
+        outputs[relative] = migrated
+    #20260923_kpopmodder: Apply the PP-only projects and daily-PP reward after historical layers, retaining RT56 state migration.
+    for name in policy_update_lock()["runtime_text"]:
+        relative = Path(name)
+        if relative not in outputs:
+            raise ValueError(f"policy update cannot introduce an unreviewed output: {name}")
+        migrated = read_policy_source(name)
+        if relative.suffix == ".txt":
+            migrated = apply_post_migration_fixes(name, replace_tokens(migrated, mapping))
+        if relative in PORT_NOTES:
+            migrated = add_port_note(migrated, PORT_NOTES[relative])
+        if name == "common/ideas/HOK_KOR_democratic_expansion.txt":
+            #20260923_kpopmodder: Retain the existing port's six icon contributor notes while updating only policy rewards.
+            pattern = rb"(?m)^[ \t]*#[^\r\n]*\r?\n([ \t]*picture = HOK_KOR_[^\r\n]+)"
+            prior_notes = {match[1]: match[0] for match in re.finditer(pattern, outputs[relative])}
+            if len(prior_notes) != 6 or set(prior_notes) != {match[1] for match in re.finditer(pattern, migrated)}:
+                raise ValueError("democratic policy icon comments no longer match the reviewed six references")
+            migrated = re.sub(pattern, lambda match: prior_notes[match[1]], migrated)
         outputs[relative] = migrated
     verify_geography_inputs()
     verify_inputs()

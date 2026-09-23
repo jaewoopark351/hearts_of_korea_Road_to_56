@@ -11,7 +11,7 @@ from pathlib import Path
 from check_korean_focus_update import (
     Block, Entry, FOCUS_PATH, PREFIX, SHINE_EFFECT, SHINE_OVERLAY,
     ROOT, RT56_ROOT, VANILLA_ROOT, children, effective_files, focus_blocks,
-    check_new_id_collisions, named, one, parse, read, replace_entry,
+    check_new_id_collisions, check_pp_only_project, named, one, parse, read, replace_entry,
     require, scalar, walk,
 )
 from validate_port import localisation_keys, mask_comments
@@ -20,7 +20,7 @@ from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
 from source_snapshot import (
     SECOND_WAVE_ASSET_PATHS, SECOND_WAVE_RUNTIME_PATHS,
     SECOND_WAVE_SPRITE_PATHS, read_second_wave_source, read_source_file,
-    second_wave_lock,
+    policy_update_lock, read_policy_source, second_wave_lock,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -30,7 +30,7 @@ OVERLAY_HASH = "BB416649358C73D34AACD46BAD61BC44211FAC8111627B56E25F385AD98F4448
 
 def expected_payload(relative: str) -> bytes:
     from korean_second_wave_geography import apply_second_wave_geography
-    data = read_second_wave_source(relative)
+    data = read_policy_source(relative) if relative in policy_update_lock()["runtime_text"] else read_second_wave_source(relative)
     if relative == FOCUS_PATH:
         data = apply_post_migration_fixes(relative, replace_tokens(data, {**PROVINCE_ID_MAP, **STATE_ID_MAP}))
     if relative.endswith(".gfx"):
@@ -45,7 +45,8 @@ def expected_script(relative: str) -> Block:
     require(STRONGHOLD_GROUPS == {716: (716,), 745: (745,), 328: (328, 941), 717: (717, 942, 943),
                                  714: (714, 944, 945), 761: (761,), 715: (715, 946), 610: (610, 947)},
             "unreviewed H whole-region stronghold contract")
-    data = read_second_wave_source(relative)
+    #20260923_kpopmodder: Layer only the immutable reviewed cost update over the unchanged second-wave source contracts.
+    data = read_policy_source(relative) if relative in policy_update_lock()["runtime_text"] else read_second_wave_source(relative)
     if relative == FOCUS_PATH:
         data = apply_post_migration_fixes(relative, replace_tokens(data, {**PROVINCE_ID_MAP, **STATE_ID_MAP}))
     if relative.endswith(".gfx"):
@@ -179,6 +180,14 @@ def check_projects(groups: dict[str, dict[str, Block]]) -> None:
             require(not any(entry.key == "add_political_power" for entry in walk(one(block, key))), f"unreviewed project refund: {identifier}")
             cooldowns = [entry.value for entry in walk(one(block, key)) if entry.key == "set_country_flag" and isinstance(entry.value, tuple)]
             require(len(cooldowns) == 1 and scalar(cooldowns[0], "days") == "90", f"project cooldown changed: {identifier}/{key}")
+    #20260923_kpopmodder: Preserve the two policy effects and PP-aware AI while removing every factory charge and gate.
+    for identifier, modifier in (("HOK_KOR_yeo_rural_credit_project", "production_speed_buildings_factor"),
+                                 ("HOK_KOR_pak_current_output_project", "industrial_capacity_factory")):
+        block = groups["decision"][identifier]
+        check_pp_only_project(identifier, block)
+        require(one(block, "modifier") == parse(f"{modifier} = 0.10"), f"PP-only project effect changed: {identifier}")
+        require(one(block, "ai_will_do") == parse("factor = 0.5 modifier = { factor = 0 NOT = { has_political_power > 149 } }"),
+                f"PP-only project AI cost guard or weight changed: {identifier}")
     for identifier, block in groups["dynamic"].items():
         require(bool(one(block, "enable")) and bool(one(block, "remove_trigger")), f"state modifier lifetime missing: {identifier}")
         require(any(entry.key == "is_owned_by" and entry.value == "KOR" for entry in walk(one(block, "enable"))), f"state modifier owner gate missing: {identifier}")
@@ -291,7 +300,8 @@ def check_localisation(payloads: dict[str, bytes], groups: dict[str, dict[str, B
     keys = {language: set() for language in ("english", "korean")}
     for relative, data in payloads.items():
         language = Path(relative).parts[1]
-        require(data == expected_payload(relative), f"localisation differs from immutable source/geography contract: {relative}")
+        expected = expected_payload(relative)
+        require(data == expected, f"localisation differs from immutable source/geography contract: {relative}")
         require(data.startswith(b"\xef\xbb\xbf" + f"l_{language}:".encode()), f"localisation BOM/header changed: {relative}")
         found = re.findall(r"(?m)^\s+([A-Za-z0-9_.-]+):\d*\s", data.decode("utf-8-sig"))
         require(len(found) == len(set(found)) and not keys[language] & set(found), f"duplicate new localisation: {relative}")
@@ -383,6 +393,7 @@ def run_self_tests() -> None:
     compare_documents(current, expected)
     groups = collect(current)
     added = check_inventory(groups)
+    check_projects(groups)
     caught = []
 
     def rejects(label, action):
@@ -420,6 +431,18 @@ def run_self_tests() -> None:
     rejects("M3 remaining regional temporary effects", lambda: check_regional_gates(collect({**current, path: dropped_cleanup})))
     wrong_flag = replace_entry(current[path], (category, project, "remove_effect"), parse("set_country_flag = wrong_cooldown"))
     rejects("shared cooldown typo", lambda: compare_documents({**current, path: wrong_flag}, expected))
+    for identifier in ("HOK_KOR_yeo_rural_credit_project", "HOK_KOR_pak_current_output_project"):
+        body = groups["decision"][identifier]
+        mutations = (
+            ("factory charge", ("modifier",), one(body, "modifier") + parse("civilian_factory_use = 2")),
+            ("factory availability gate", ("available",), one(body, "available") + parse("num_of_civilian_factories_available_for_projects > 1")),
+            ("AI factory gate", ("ai_will_do",), one(body, "ai_will_do") + parse("modifier = { factor = 0 NOT = { num_of_civilian_factories_available_for_projects > 5 } }")),
+            ("stale political-power cost", ("cost",), "75"),
+            ("lost PP AI guard", ("ai_will_do",), parse("factor = 0.5")),
+        )
+        for label, location, value in mutations:
+            changed = {**groups, "decision": {**groups["decision"], identifier: replace_entry(body, location, value)}}
+            rejects(f"communist {label}: {identifier}", lambda changed=changed: check_projects(changed))
     stale_state = focus_mutation(and_focus, lambda block: replace_entry(block, ("available",), parse("1031 = { is_owned_by = ROOT }")))
     rejects("obsolete Korean state ID", lambda: compare_documents(stale_state, expected))
     law = focus_mutation("KOR_independent_party_in_power", lambda block: replace_entry(block, ("completion_reward",), one(block, "completion_reward") + parse("add_ideas = partial_economic_mobilisation")))
