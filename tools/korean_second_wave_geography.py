@@ -194,7 +194,8 @@ def _transform_localisation(text: str) -> str:
         keys = ["HOK_KOR_mc_" + suffix + "_desc" for suffix in group]
         keys.append("HOK_KOR_mc_" + POLICY_NAMES[index] + "_project_desc")
         for key in keys:
-            pattern = re.compile(rf'(?m)^([ \t]*{key}:0 "[^"\r\n]*)("[ \t]*\r?$)')
+            #20260926_kpopmodder: Preserve escaped dialogue quotes in the revised donor descriptions.
+            pattern = re.compile(rf'(?m)^([ \t]*{key}:0 "(?:[^"\\\r\n]|\\[^\r\n])*)("[ \t]*\r?$)')
             matches = list(pattern.finditer(text))
             if len(matches) != 1 or "$STATE_" in matches[0][1]:
                 raise ValueError(f"unexpected regional localisation source: {key}")

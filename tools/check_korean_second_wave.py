@@ -21,6 +21,7 @@ from source_snapshot import (
     SECOND_WAVE_ASSET_PATHS, SECOND_WAVE_RUNTIME_PATHS,
     SECOND_WAVE_SPRITE_PATHS, read_second_wave_source, read_source_file,
     policy_update_lock, read_policy_source, second_wave_lock,
+    localisation_update_lock, read_localisation_source,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -31,6 +32,9 @@ OVERLAY_HASH = "BB416649358C73D34AACD46BAD61BC44211FAC8111627B56E25F385AD98F4448
 def expected_payload(relative: str) -> bytes:
     from korean_second_wave_geography import apply_second_wave_geography
     data = read_policy_source(relative) if relative in policy_update_lock()["runtime_text"] else read_second_wave_source(relative)
+    #20260926_kpopmodder: Compare the revised prose against its own immutable source before regional adaptation.
+    if relative in localisation_update_lock()["runtime_text"]:
+        data = read_localisation_source(relative)
     if relative == FOCUS_PATH:
         data = apply_post_migration_fixes(relative, replace_tokens(data, {**PROVINCE_ID_MAP, **STATE_ID_MAP}))
     if relative.endswith(".gfx"):

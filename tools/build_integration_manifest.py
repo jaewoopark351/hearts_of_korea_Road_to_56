@@ -21,6 +21,7 @@ from source_snapshot import (
     icon_lock, read_icon_source, source_record, SECOND_WAVE_FOCUS_PATH,
     SECOND_WAVE_RUNTIME_PATHS, second_wave_records, read_second_wave_source,
     policy_update_lock, read_policy_source,
+    localisation_update_lock, read_localisation_source,
 )
 
 
@@ -641,6 +642,31 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "donor_source_checkout": "reviewed-working-tree-delta",
         })
         row["reason"] += "; 2026-09-23 정책 변경: tools/hok_policy_update_lock.json, be5fb40 + 검토된 미커밋 변경; RT56 주 변환 유지"
+
+    #20260926_kpopmodder: Attribute the committed localisation overlay while retaining its immediate source provenance.
+    localisation = localisation_update_lock()
+    if len(localisation["runtime_text"]) != 28:
+        raise RuntimeError("unexpected localisation integration inventory")
+    for relative, record in localisation["runtime_text"].items():
+        matching = [row for row in rows if row["source_path"] == relative]
+        if len(matching) != 1 or (RT56_ROOT / relative).exists():
+            raise RuntimeError(f"unreviewed localisation integration collision: {relative}")
+        row = matching[0]
+        if row["integration_class"] != "ADD" or row["output_path"] != relative:
+            raise RuntimeError(f"localisation overlay requires an existing ADD row: {relative}")
+        read_localisation_source(relative)
+        if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+            raise RuntimeError(f"localisation output differs from reviewed source merge: {relative}")
+        row.update({
+            "previous_source_commit": row["donor_source_commit"],
+            "previous_source_sha256": row["donor_source_sha256"],
+            "donor_sha256": record["sha256"],
+            "donor_source_commit": localisation["commit"],
+            "donor_source_blob": record["blob"],
+            "donor_source_sha256": record["sha256"],
+            "donor_source_checkout": record["checkout"],
+        })
+        row["reason"] += "; 2026-09-26 HOK 8609d0b 현지화 갱신: tools/hok_localisation_update_lock.json; ADR-0005 지역 대응 유지"
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(

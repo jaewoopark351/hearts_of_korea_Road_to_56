@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import subprocess
 from functools import lru_cache
 from pathlib import Path
@@ -38,6 +39,57 @@ SECOND_WAVE_DOCUMENTATION_ROOT = REPO_ROOT / "docs/upstream/hok-second-wave-be5f
 #20260923_kpopmodder: Reconstruct the reviewed 17-file policy delta without trusting the donor's later working tree.
 POLICY_UPDATE_LOCK_PATH = Path(__file__).with_name("hok_policy_update_lock.json")
 POLICY_UPDATE_DOCUMENTATION_ROOT = REPO_ROOT / "docs/upstream/hok-policy-update-20260923"
+
+
+#20260926_kpopmodder: Pin only the reviewed localisation commit, preserving every historical gameplay/artwork input.
+LOCALISATION_UPDATE_COMMIT = "8609d0b61e4c00e6be6c204dcf31cfa41150664e"
+LOCALISATION_UPDATE_LOCK_PATH = Path(__file__).with_name("hok_localisation_update_lock.json")
+
+
+@lru_cache(maxsize=1)
+def localisation_update_lock() -> dict:
+    lock = json.loads(LOCALISATION_UPDATE_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["commit"]) != (
+        1, "immutable-git-objects", LOCALISATION_UPDATE_COMMIT
+    ):
+        raise ValueError("unreviewed localisation source revision")
+    records = lock["runtime_text"]
+    paths = sorted(records)
+    changed = subprocess.check_output(git_command() + [
+        "diff-tree", "--no-commit-id", "--name-only", "-r", LOCALISATION_UPDATE_COMMIT
+    ]).decode().splitlines()
+    if len(paths) != 28 or paths != changed or sha256("\n".join(paths).encode()) != lock["paths_sha256"]:
+        raise ValueError("localisation update allowlist mismatch")
+    for relative, record in records.items():
+        if not re.fullmatch(r"localisation/(english|korean)/HOK_KOR_[a-z_]+_l_\1\.yml", relative):
+            raise ValueError(f"unsafe localisation update path: {relative}")
+        blob = subprocess.check_output(git_command() + [
+            "rev-parse", f"{LOCALISATION_UPDATE_COMMIT}:{relative}"
+        ]).decode().strip()
+        if blob != record["blob"] or record["checkout"] != "raw":
+            raise ValueError(f"localisation update provenance mismatch: {relative}")
+    for relative, expected in lock["preserved_historical_locks"].items():
+        if sha256((REPO_ROOT / relative).read_bytes()) != expected:
+            raise ValueError(f"historical source lock changed during localisation update: {relative}")
+    return lock
+
+
+@lru_cache(maxsize=28)
+def read_localisation_source(relative: str | Path) -> bytes:
+    relative = Path(relative).as_posix()
+    record = localisation_update_lock()["runtime_text"][relative]
+    data = subprocess.check_output(git_command() + ["cat-file", "blob", record["blob"]])
+    if len(data) != record["size"] or sha256(data) != record["sha256"] or sha256(data) != record["object_sha256"]:
+        raise ValueError(f"localisation source hash mismatch: {relative}")
+    language = Path(relative).parts[1]
+    if not data.startswith(b"\xef\xbb\xbf" + f"l_{language}:\n".encode()):
+        raise ValueError(f"localisation source BOM/header mismatch: {relative}")
+    for number, line in enumerate(data.decode("utf-8-sig").splitlines()[1:], 2):
+        if line.strip() and not line.lstrip().startswith("#") and not re.fullmatch(
+            r'\s+[A-Za-z0-9_.-]+:\d+ "(?:[^"\\]|\\.)*"\s*', line
+        ):
+            raise ValueError(f"malformed localisation source: {relative}:{number}")
+    return data
 
 
 @lru_cache(maxsize=1)
@@ -434,6 +486,9 @@ def main() -> int:
         print(f"HOK second-wave upstream documents: 37 preserved; created {exported}")
     policy_documents = export_policy_documents(check_only=not args.export_policy_docs or args.check)
     print(f"HOK policy delta: 10 runtime inputs + 7 source documents verified; exported {policy_documents}")
+    for relative in localisation_update_lock()["runtime_text"]:
+        read_localisation_source(relative)
+    print("HOK localisation update: 28 immutable Git inputs verified")
     return 0
 
 

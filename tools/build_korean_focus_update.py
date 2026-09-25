@@ -20,7 +20,7 @@ from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
 from source_snapshot import (
     ICON_MANIFEST, icon_lock, read_icon_source, SECOND_WAVE_RUNTIME_PATHS,
     SECOND_WAVE_FOCUS_PATH, read_second_wave_source, second_wave_lock,
-    policy_update_lock, read_policy_source,
+    policy_update_lock, read_policy_source, localisation_update_lock, read_localisation_source,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -104,6 +104,11 @@ ACCEPTED_PRIOR_OUTPUT_HASHES.update({
 ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     Path(relative): record["previous_output_sha256"]
     for relative, record in policy_update_lock()["runtime_text"].items()
+})
+#20260926_kpopmodder: Accept only the reviewed pre-localisation outputs for this text-only sync.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): record["previous_output_sha256"]
+    for relative, record in localisation_update_lock()["runtime_text"].items()
 })
 PORT_NOTES = {
     Path("common/national_focus/korea.txt"):
@@ -264,6 +269,16 @@ def build_all() -> dict[Path, bytes]:
                 raise ValueError("democratic policy icon comments no longer match the reviewed six references")
             migrated = re.sub(pattern, lambda match: prior_notes[match[1]], migrated)
         outputs[relative] = migrated
+    #20260926_kpopmodder: Overlay the author's revised prose while retaining the complete RT56 regional guidance.
+    for name, record in localisation_update_lock()["runtime_text"].items():
+        relative = Path(name)
+        if relative not in outputs or sha256_bytes(outputs[relative]) != record["previous_output_sha256"]:
+            raise ValueError(f"unreviewed pre-localisation output: {name}")
+        source = read_localisation_source(name)
+        keys = lambda data: re.findall(rb"(?m)^[ \t]+([A-Za-z0-9_.-]+):\d+ ", data)
+        if keys(source) != keys(outputs[relative]):
+            raise ValueError(f"localisation update changed keys or order: {name}")
+        outputs[relative] = apply_second_wave_geography(name, source)
     verify_geography_inputs()
     verify_inputs()
     return outputs
