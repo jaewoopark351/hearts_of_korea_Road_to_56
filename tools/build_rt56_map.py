@@ -144,6 +144,20 @@ REQUIRED_KOREAN_STATE_SITE_ROWS = (
 )
 REQUIRED_STATE_SITE_TYPES = (b"air_base", b"rocket_site_spawn")
 
+#20261001_kpopmodder: Select the HOK airbase site where the RT56 merge retained a second site in the same Korean state.
+KOREAN_AIR_BASE_SITE_OVERRIDES = (
+    (
+        b"527;air_base;4784.00;14.15;1336.00;2.38;0",
+        b"527;air_base;4770.21;10.70;1308.47;2.17;0",
+        527,
+    ),
+    (
+        b"919;air_base;4787.00;9.62;1254.00;1.47;0",
+        b"1031;air_base;4782.00;9.68;1257.00;2.43;0",
+        1145,
+    ),
+)
+
 EXPECTED_STATE_VICTORY_POINTS = {
     525: {7125, 7221, 12040, 13535},
     527: {4052, 11835, 6963, 13536},
@@ -473,6 +487,20 @@ def states_without_building_site(
     return state_ids - covered
 
 
+#20261001_kpopmodder: Reject both missing and duplicate airbase sites in the ten Korean target states.
+def validate_korean_air_base_sites(lines: list[bytes]) -> None:
+    counts: Counter[int] = Counter()
+    for line in lines:
+        fields = line.split(b";")
+        if len(fields) != 7:
+            raise BuildError(f"malformed building-position row: {line!r}")
+        if fields[1] == b"air_base":
+            counts[int(fields[0])] += 1
+    invalid = {state: counts[state] for state in sorted(BUILDING_TARGET_STATES) if counts[state] != 1}
+    if invalid:
+        raise BuildError(f"expected exactly one air_base site per Korean target state: {invalid}")
+
+
 def effective_province_states(state_outputs: dict[str, bytes]) -> dict[int, int]:
     states: dict[int, set[int]] = {}
     for path in (RT56_ROOT / "history/states").glob("*.txt"):
@@ -560,6 +588,28 @@ def build_buildings(
         raise BuildError(f"expected 21 HOK-only building rows, found {len(additions)}")
 
     donor_counts = Counter(donor_lines)
+    #20261001_kpopmodder: Remove only the two audited RT56 sites after verifying their unique HOK replacements and target states.
+    rt_counts = Counter(rt_lines)
+    for rt_source, donor_source, target_state in KOREAN_AIR_BASE_SITE_OVERRIDES:
+        if rt_counts[rt_source] != 1 or donor_counts[donor_source] != 1:
+            raise BuildError(f"airbase override source rows are no longer unique: {rt_source!r}, {donor_source!r}")
+        donor_state, donor_remainder = donor_source.split(b";", 1)
+        if STATE_ID_MAP.get(int(donor_state), int(donor_state)) != target_state:
+            raise BuildError(f"airbase override target migration changed: {donor_source!r}")
+        rt_rebased = str(target_state).encode() + b";" + rt_source.split(b";", 1)[1]
+        donor_rebased = replace_numeric_tokens(
+            str(target_state).encode() + b";" + donor_remainder, PROVINCE_ID_MAP
+        )
+        if rebased.count(rt_rebased) != 1 or additions.count(donor_rebased) != 1:
+            raise BuildError(f"airbase override merge rows are no longer unique: {rt_rebased!r}, {donor_rebased!r}")
+        for site in (rt_rebased, donor_rebased):
+            _, sampled_province = sample_building_province(
+                site, provinces_bmp, rgb_to_province, bmp_meta
+            )
+            if province_state.get(sampled_province) != target_state or definition_rows[sampled_province][3][4] != b"land":
+                raise BuildError(f"airbase override does not lie in target state {target_state}: {site!r}")
+        rebased.remove(rt_rebased)
+
     vanilla_rest_counts = Counter(line.split(b";", 1)[1] for line in vanilla_lines)
     rt_rest_counts = Counter(line.split(b";", 1)[1] for line in rt_lines)
     topology_restorations: list[bytes] = []
@@ -673,8 +723,10 @@ def build_buildings(
         raise BuildError("duplicate HOK building rows in merged additions")
     merged = rebased + additions + restored_rows
     # [2026-09-22]_kpopmodder: Reviewed RT56 has 71863 rows; retain 21 HOK and 10 restored sites.
-    if len(merged) != 71894:
-        raise BuildError(f"expected 71894 merged building rows, found {len(merged)}")
+    #20261001_kpopmodder: Two superseded RT56 airbase sites are replaced by the retained HOK additions.
+    if len(merged) != 71892:
+        raise BuildError(f"expected 71892 merged building rows, found {len(merged)}")
+    validate_korean_air_base_sites(merged)
 
     rt_missing = coastal_without_naval_base_spawn(
         rt_lines,

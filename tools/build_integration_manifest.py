@@ -261,7 +261,8 @@ EXPLICIT: dict[str, Rule] = {
     ),
 
     # The global Korean map is synthesized from RT56 plus the pixel/reference delta.
-    "map/buildings.txt": same_path("BINARY_MERGE", "RT56 전역 buildings에 이식된 한국 참조 합성"),
+    #20261001_kpopmodder: Record the audited HOK airbase-site selection within the existing map merge.
+    "map/buildings.txt": same_path("BINARY_MERGE", "RT56 전역 buildings에 이식된 한국 참조 합성; 평안·충청의 중복 RT56 공군기지 좌표 2개를 HOK 좌표로 대체 (docs/implementation/2026-10-01-korean-airbase-site-fix.md)"),
     "map/definition.csv": same_path("BINARY_MERGE", "RT56 definition base에 새 province 34개 합성"),
     "map/provinces.bmp": same_path("BINARY_MERGE", "RT56 bitmap base에 HOK 한국 픽셀 delta 합성"),
     "map/railways.txt": same_path("BINARY_MERGE", "RT56 전역 railway에 이식된 한국 연결 합성"),
