@@ -21,6 +21,7 @@ from source_snapshot import (
     ICON_MANIFEST, icon_lock, read_icon_source, SECOND_WAVE_RUNTIME_PATHS,
     SECOND_WAVE_FOCUS_PATH, read_second_wave_source, second_wave_lock,
     policy_update_lock, read_policy_source, localisation_update_lock, read_localisation_source,
+    MATERIAL_CYCLE_RUNTIME_PATHS, material_cycle_lock, read_material_cycle_source,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -73,7 +74,9 @@ SOURCE_HASHES = {
 GAMEPLAY_PATHS = tuple(SOURCE_HASHES)
 ICON_ASSET_PATHS = tuple(Path(relative) for relative in icon_lock()["runtime_assets"])
 # [2026-09-23]_kpopmodder: Extend the reviewed allowlist without repinning unrelated historical generators.
-OUTPUT_PATHS = tuple(dict.fromkeys(GAMEPLAY_PATHS + ICON_ASSET_PATHS + tuple(Path(p) for p in SECOND_WAVE_RUNTIME_PATHS)))
+#20261003_kpopmodder: Add only the reviewed material-cycle module to the existing generated allowlist.
+OUTPUT_PATHS = tuple(dict.fromkeys(GAMEPLAY_PATHS + ICON_ASSET_PATHS + tuple(Path(p) for p in SECOND_WAVE_RUNTIME_PATHS)
+                                 + tuple(Path(p) for p in MATERIAL_CYCLE_RUNTIME_PATHS)))
 SOURCE_COMMITS = {
     relative: AI_COMMIT if relative.parts[1] == "ai_strategy_plans" else FOCUS_COMMIT
     for relative in GAMEPLAY_PATHS
@@ -110,6 +113,16 @@ ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     Path(relative): record["previous_output_sha256"]
     for relative, record in localisation_update_lock()["runtime_text"].items()
 })
+#20261003_kpopmodder: Accept the exact pre-update outputs and separately proved Windows checkout variants.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): record["previous_output_sha256"]
+    for relative, record in material_cycle_lock()["runtime_text"].items()
+    if "previous_output_sha256" in record
+})
+CHECKOUT_RESTORATION_HASHES = {
+    Path(relative): record["previous_output_sha256"]
+    for relative, record in material_cycle_lock()["checkout_restoration"].items()
+}
 PORT_NOTES = {
     Path("common/national_focus/korea.txt"):
         "# [2026-09-22]_kpopmodder: Preserve the approved RT56 map IDs and fifteen-state Manchurian integration in the updated HOK tree.",
@@ -279,6 +292,23 @@ def build_all() -> dict[Path, bytes]:
         if keys(source) != keys(outputs[relative]):
             raise ValueError(f"localisation update changed keys or order: {name}")
         outputs[relative] = apply_second_wave_geography(name, source)
+    #20261003_kpopmodder: Preserve the historical layers while overlaying the approved country-scope module.
+    material = material_cycle_lock()
+    for name, record in material["checkout_restoration"].items():
+        relative = Path(name)
+        if relative not in outputs or sha256_bytes(outputs[relative]) != record["restored_output_sha256"]:
+            raise ValueError(f"unreviewed checkout restoration output: {name}")
+    if sha256_bytes(outputs[Path(SECOND_WAVE_FOCUS_PATH)]) != material["preserved_runtime"][SECOND_WAVE_FOCUS_PATH]:
+        raise ValueError("material-cycle update must preserve the complete prior focus tree")
+    for group in ("runtime_text", "runtime_assets"):
+        for name, record in material[group].items():
+            relative = Path(name)
+            if "previous_output_sha256" in record:
+                if relative not in outputs or sha256_bytes(outputs[relative]) != record["previous_output_sha256"]:
+                    raise ValueError(f"unreviewed pre-material-cycle output: {name}")
+            elif relative in outputs:
+                raise ValueError(f"material-cycle addition duplicates a generated output: {name}")
+            outputs[relative] = read_material_cycle_source(name)
     verify_geography_inputs()
     verify_inputs()
     return outputs
@@ -286,7 +316,7 @@ def build_all() -> dict[Path, bytes]:
 
 def preflight(outputs: dict[Path, bytes]) -> None:
     if set(outputs) != set(OUTPUT_PATHS):
-        raise ValueError("Korean update outputs must match the 400 reviewed historical and second-wave paths")
+        raise ValueError("Korean update outputs must match the 406 reviewed historical, second-wave and material-cycle paths")
     errors = []
     for relative, expected in outputs.items():
         destination = (REPO_ROOT / relative).resolve()
@@ -303,7 +333,7 @@ def preflight(outputs: dict[Path, bytes]) -> None:
         if current == expected:
             continue
         accepted = ACCEPTED_PRIOR_OUTPUT_HASHES.get(relative)
-        if accepted is None or sha256_bytes(current) != accepted:
+        if sha256_bytes(current) not in {accepted, CHECKOUT_RESTORATION_HASHES.get(relative)}:
             errors.append(f"refusing to overwrite independently changed file: {relative}")
     if errors:
         raise RuntimeError("\n".join(errors))

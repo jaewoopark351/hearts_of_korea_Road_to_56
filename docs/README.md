@@ -4,6 +4,7 @@
 
 ## 현재 상태
 
+- 2026-10-03 원료 순환체계 업데이트: **선택 이식·해당 module 정적 검사 완료, aggregate 20 PASS / 0 WARNING / 1 기존 ERROR. 이번 호환판 실행 검증 미실행**. 영구 I·II 보상 강화와 정치력 150의 별도 90일 긴급 지원, 전용 그림·현지화를 반영했다. 원장 1,417개·관리 output 406개, 의도적 회귀 35개 거부. [구현 기록](implementation/2026-10-03-korean-material-cycle-port.md)에 현재 source/playset, 작업 전 `9 PASS / 12 ERROR`와 별도 checkout 바이트 복구, 잔여 history 오류·whitespace 검사 제한을 기록한다.
 - 2026-09-23 후속 한국 업데이트: **콘텐츠·이미지 병합 완료, 460개 중점. 실제 엔진 9개 시나리오 909 PASS / 0 FAIL / 0 SKIP; 신규 134개 중점·63개 국민정신 확인. 정적 20 PASS / 0 WARNING / 1 기존 ERROR**. 18개 사업·12개 주 효과·231개 그림을 선택 이식했다. 강제 효과와 기간 경과 검사의 범위·한계·초기 계측 실패는 [실행 감사](audits/2026-09-23-second-wave-runtime.md)에 구분했다. [구현 기록](implementation/2026-09-23-korean-second-wave-port.md), [지역 대응 ADR-0005](decisions/0005-korean-second-wave-regional-integration.md), [출처·충돌 감사](audits/2026-09-23-second-wave-source-audit.md). 정적 잔여 오류는 작업 전 KOR history 전쟁 지지도와 생성기의 불일치다. 아래 9월 22일 수치는 이전 326개 이식의 역사적 기록이다.
 - 1차 정적 포팅 구현: 완료
 - 한국 콘텐츠 소유권: HOK 우선으로 확정, 중국·일본 자체 콘텐츠는 RT56 우선
@@ -23,6 +24,7 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 구현 | [2026-10-03 원료 순환체계 업데이트 이식](implementation/2026-10-03-korean-material-cycle-port.md) | runtime 9개·관리 406개·원장 1,417개, 20 PASS / 1 기존 ERROR; 실행 미검증 |
 | 구현 | [2026-09-23 한국 2차 업데이트 이식](implementation/2026-09-23-korean-second-wave-port.md) | 460중점·288개 신규 파일·정적20 PASS와 기존 오류1건; 후속 실행 감사 연결 |
 | 감사 | [2026-09-23 선택 원본·호스트 충돌](audits/2026-09-23-second-wave-source-audit.md) | 288경로·신규 ID 충돌0, 원본·호스트 재확인 |
 | 원본 기록 | [be5fb40 명세·그림 출처](upstream/hok-second-wave-be5fb40/README.md) | 37개 바이트 보존 사본; 원본 실행 기록과 포트 결과 구분 |

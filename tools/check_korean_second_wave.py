@@ -22,6 +22,7 @@ from source_snapshot import (
     SECOND_WAVE_SPRITE_PATHS, read_second_wave_source, read_source_file,
     policy_update_lock, read_policy_source, second_wave_lock,
     localisation_update_lock, read_localisation_source,
+    material_cycle_lock, read_material_cycle_source,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -29,12 +30,44 @@ DONOR_OVERLAY = "gfx/interface/goals/HOK_KOR/shine_overlay.dds"
 OVERLAY_HASH = "BB416649358C73D34AACD46BAD61BC44211FAC8111627B56E25F385AD98F4448"
 
 
-def expected_payload(relative: str) -> bytes:
-    from korean_second_wave_geography import apply_second_wave_geography
-    data = read_policy_source(relative) if relative in policy_update_lock()["runtime_text"] else read_second_wave_source(relative)
+#20261003_kpopmodder: Audit the frozen material-cycle delta without relaxing earlier focus, geography or source contracts.
+MATERIAL_IDEA_PATH = "common/ideas/HOK_KOR_common_followup.txt"
+MATERIAL_DECISION_PATH = "common/decisions/HOK_KOR_common_followup.txt"
+MATERIAL_CATEGORY_PATH = "common/decisions/categories/HOK_KOR_common_followup.txt"
+MATERIAL_GFX_PATH = "interface/HOK_KOR_material_cycle_icons.gfx"
+MATERIAL_LOCALES = tuple(f"localisation/{language}/HOK_KOR_common_followup_l_{language}.yml"
+                        for language in ("english", "korean"))
+MATERIAL_TIERS = ("HOK_KOR_cmn_material_cycle_1", "HOK_KOR_cmn_material_cycle_2")
+MATERIAL_BOOST = "HOK_KOR_cmn_emergency_material_cycle_boost"
+MATERIAL_DECISION = "HOK_KOR_cmn_emergency_material_cycle"
+MATERIAL_CATEGORY = "HOK_KOR_cmn_material_cycle_projects"
+MATERIAL_FOCUS = "HOK_KOR_cmn_closed_material_cycle"
+MATERIAL_SPRITES = {
+    "GFX_idea_HOK_KOR_icon_cmn_emergency_material_cycle_boost":
+        "gfx/interface/ideas/HOK_KOR/material_cycle/cmn_emergency_material_cycle_boost.dds",
+    "GFX_HOK_KOR_decision_cmn_emergency_material_cycle":
+        "gfx/interface/decisions/HOK_KOR/material_cycle/cmn_emergency_material_cycle.dds",
+    "GFX_HOK_KOR_decision_category_cmn_material_cycle_projects":
+        "gfx/interface/decisions/HOK_KOR/material_cycle/cmn_material_cycle_projects.dds",
+}
+
+
+def runtime_paths() -> tuple[str, ...]:
+    return tuple(dict.fromkeys((*SECOND_WAVE_RUNTIME_PATHS, *material_cycle_lock()["runtime_text"])))
+
+
+def selected_source(relative: str) -> bytes:
+    if relative in material_cycle_lock()["runtime_text"]:
+        return read_material_cycle_source(relative)
     #20260926_kpopmodder: Compare the revised prose against its own immutable source before regional adaptation.
     if relative in localisation_update_lock()["runtime_text"]:
-        data = read_localisation_source(relative)
+        return read_localisation_source(relative)
+    return read_policy_source(relative) if relative in policy_update_lock()["runtime_text"] else read_second_wave_source(relative)
+
+
+def expected_payload(relative: str) -> bytes:
+    from korean_second_wave_geography import apply_second_wave_geography
+    data = selected_source(relative)
     if relative == FOCUS_PATH:
         data = apply_post_migration_fixes(relative, replace_tokens(data, {**PROVINCE_ID_MAP, **STATE_ID_MAP}))
     if relative.endswith(".gfx"):
@@ -50,7 +83,7 @@ def expected_script(relative: str) -> Block:
                                  714: (714, 944, 945), 761: (761,), 715: (715, 946), 610: (610, 947)},
             "unreviewed H whole-region stronghold contract")
     #20260923_kpopmodder: Layer only the immutable reviewed cost update over the unchanged second-wave source contracts.
-    data = read_policy_source(relative) if relative in policy_update_lock()["runtime_text"] else read_second_wave_source(relative)
+    data = selected_source(relative)
     if relative == FOCUS_PATH:
         data = apply_post_migration_fixes(relative, replace_tokens(data, {**PROVINCE_ID_MAP, **STATE_ID_MAP}))
     if relative.endswith(".gfx"):
@@ -95,7 +128,7 @@ def expected_script(relative: str) -> Block:
 
 def documents() -> tuple[dict[str, Block], dict[str, Block]]:
     expected, current = {}, {}
-    for path in SECOND_WAVE_RUNTIME_PATHS:
+    for path in runtime_paths():
         relative = Path(path).as_posix()
         if Path(relative).suffix not in (".txt", ".gfx"):
             continue
@@ -146,7 +179,7 @@ def check_inventory(groups: dict[str, dict[str, Block]]) -> set[str]:
     added = focuses.keys() - legacy.keys()
     require(len(focuses) == 460 and len(added) == 134 and legacy.keys() <= focuses.keys(), "460-focus/134-addition identity contract")
     require(all(identifier.startswith(PREFIX) for identifier in added), "unprefixed second-wave focus")
-    for kind, count in (("idea", 63), ("decision", 18), ("category", 4), ("dynamic", 12), ("sprite", 365)):
+    for kind, count in (("idea", 64), ("decision", 19), ("category", 5), ("dynamic", 12), ("sprite", 368)):
         require(len(groups[kind]) == count, f"expected {count} second-wave {kind} definitions")
     for identifier in added:
         block = focuses[identifier]
@@ -177,6 +210,9 @@ def check_layout(focuses: dict[str, Block], added: set[str]) -> None:
 
 def check_projects(groups: dict[str, dict[str, Block]]) -> None:
     for identifier, block in groups["decision"].items():
+        #20261003_kpopmodder: Keep the independent emergency program out of the older shared-cooldown contract.
+        if identifier == MATERIAL_DECISION:
+            continue
         require(scalar(block, "days_remove") == "90" and scalar(block, "fire_only_once") == "no", f"project lifetime changed: {identifier}")
         for key in ("available", "complete_effect", "cancel_trigger", "cancel_effect", "remove_effect"):
             require(bool(one(block, key)), f"project lacks {key}: {identifier}")
@@ -244,13 +280,16 @@ def exact_case(relative: str, inventory: set[str]) -> None:
 
 
 def check_assets(groups: dict[str, dict[str, Block]], added: set[str], payloads: dict[str, bytes] | None = None) -> None:
-    assets = {Path(path).as_posix() for path in SECOND_WAVE_ASSET_PATHS}
-    require(len(assets) == 231, "expected 231 selected HOK DDS payloads")
+    historical_assets = {Path(path).as_posix() for path in SECOND_WAVE_ASSET_PATHS}
+    material_assets = set(material_cycle_lock()["runtime_assets"])
+    require(len(historical_assets) == 231 and material_assets == set(MATERIAL_SPRITES.values())
+            and not historical_assets & material_assets, "expected 231 historical and three material-cycle DDS payloads")
+    assets = historical_assets | material_assets
     disk_paths = {path.relative_to(ROOT).as_posix() for base in ("goals", "ideas", "decisions")
                   for path in (ROOT / "gfx/interface" / base / "HOK_KOR").rglob("*.dds")}
     supplied = {relative: (ROOT / relative).read_bytes() for relative in assets} if payloads is None else payloads
     require(set(supplied) == assets, "missing or extra second-wave DDS payload")
-    records = second_wave_lock()["runtime_assets"]
+    records = {**second_wave_lock()["runtime_assets"], **material_cycle_lock()["runtime_assets"]}
     category_textures = {scalar(groups["sprite"][scalar(block, "icon")], "texturefile") for block in groups["category"].values()}
     for relative, data in supplied.items():
         exact_case(relative, disk_paths)
@@ -284,7 +323,7 @@ def check_assets(groups: dict[str, dict[str, Block]], added: set[str], payloads:
             require(len(children(block, "animation")) == 2, f"shine animation count changed: {identifier}")
     # [2026-09-23]_kpopmodder: Check physical registries independently of the selected source allowlist.
     declarations = re.compile(r'\bname\s*=\s*"?([A-Za-z0-9_]+)"?')
-    selected = {Path(path).as_posix() for path in SECOND_WAVE_SPRITE_PATHS}
+    selected = {Path(path).as_posix() for path in SECOND_WAVE_SPRITE_PATHS} | {MATERIAL_GFX_PATH}
     for root in (ROOT, RT56_ROOT, VANILLA_ROOT):
         for path in (root / "interface").rglob("*.gfx"):
             if root == ROOT and path.relative_to(root).as_posix() in selected:
@@ -317,6 +356,112 @@ def check_localisation(payloads: dict[str, bytes], groups: dict[str, dict[str, B
     required |= {identifier + "_desc" for identifier in required}
     for language in keys:
         require(required <= keys[language], f"missing {language} new definition keys: {sorted(required - keys[language])}")
+
+
+#20261003_kpopmodder: Require the intended permanent rewards and bounded PP-only timed effect independently of frozen-source equality.
+def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str, bytes] | None = None) -> None:
+    lock = material_cycle_lock()
+    require(set(lock["runtime_text"]) == {MATERIAL_IDEA_PATH, MATERIAL_DECISION_PATH, MATERIAL_CATEGORY_PATH,
+                                          MATERIAL_GFX_PATH, *MATERIAL_LOCALES},
+            "material-cycle runtime allowlist must remain six text files without map or on_action changes")
+    require(set(lock["runtime_assets"]) == set(MATERIAL_SPRITES.values()), "material-cycle artwork allowlist changed")
+    require(FOCUS_PATH in lock["preserved_runtime"], "material-cycle update must pin the unchanged focus tree")
+    for relative, digest in lock["preserved_runtime"].items():
+        require(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest().upper() == digest.upper(),
+                f"material-cycle update changed preserved runtime: {relative}")
+
+    original = named(one(one(parse(read_second_wave_source(MATERIAL_IDEA_PATH).decode("utf-8-sig")), "ideas"), "country"))
+    ideas = groups["idea"]
+    selected_ideas = named(one(one(read(ROOT / MATERIAL_IDEA_PATH), "ideas"), "country"))
+    require(selected_ideas.keys() == original.keys() | {MATERIAL_BOOST}, "material-cycle update changed inherited idea IDs")
+    for identifier, baseline in original.items():
+        if identifier in MATERIAL_TIERS:
+            amount = "0.3" if identifier == MATERIAL_TIERS[0] else "0.6"
+            baseline = replace_entry(baseline, ("modifier",), parse(
+                f"local_resources_factor = {amount} production_lack_of_resource_penalty_factor = -{amount}"))
+        require(ideas[identifier] == baseline, f"material-cycle update changed an unrelated idea or tier field: {identifier}")
+    boost = ideas[MATERIAL_BOOST]
+    require(one(boost, "allowed") == parse("original_tag = KOR")
+            and one(boost, "allowed_civil_war") == parse("always = no")
+            and scalar(boost, "removal_cost") == "-1", "temporary material-cycle idea ownership/civil-war contract changed")
+    require(one(boost, "modifier") == parse("local_resources_factor = 0.3 production_lack_of_resource_penalty_factor = -0.3"),
+            "temporary material-cycle reward must remain +30%/-30%")
+    require(one(boost, "cancel") == parse(
+        f"OR = {{ has_civil_war = yes has_capitulated = yes NOT = {{ has_idea = {MATERIAL_TIERS[1]} }} }}"),
+        "temporary material-cycle idea must expire on civil war, capitulation or base-II loss")
+
+    focuses = groups["focus"]
+    require(one(focuses["HOK_KOR_cmn_scrap_collection"], "completion_reward") == parse(f"add_ideas = {MATERIAL_TIERS[0]}"),
+            "scrap collection no longer grants only material-cycle I")
+    require(one(focuses[MATERIAL_FOCUS], "completion_reward") == parse(
+        f"if = {{ limit = {{ has_idea = {MATERIAL_TIERS[0]} }} swap_ideas = {{ remove_idea = {MATERIAL_TIERS[0]} add_idea = {MATERIAL_TIERS[1]} }} }} "
+        f"else = {{ add_ideas = {MATERIAL_TIERS[1]} }}"), "material-cycle II must replace I without stacking the lower tier")
+    require(one(focuses[MATERIAL_FOCUS], "prerequisite") == parse("focus = HOK_KOR_cmn_foundry_exchange"),
+            "closed material-cycle prerequisite changed")
+    for identifier, reward in (
+        ("HOK_KOR_cmn_ore_classification", "add_tech_bonus = { name = HOK_KOR_cmn_ore_classification bonus = 1.5 uses = 1 category = industry }"),
+        ("HOK_KOR_cmn_coke_testing", "add_tech_bonus = { name = HOK_KOR_cmn_coke_testing bonus = 1.0 uses = 1 category = excavation_tech }"),
+        ("HOK_KOR_cmn_foundry_exchange", "add_political_power = 150"),
+    ):
+        require(one(focuses[identifier], "completion_reward") == parse(reward), f"material-cycle update lost an existing secondary reward: {identifier}")
+
+    decision = groups["decision"][MATERIAL_DECISION]
+    category = groups["category"][MATERIAL_CATEGORY]
+    require(one(decision, "allowed") == one(category, "allowed") == parse("original_tag = KOR"),
+            "material-cycle decision/category must remain KOR-owned")
+    require(one(decision, "visible") == one(category, "visible") == parse(f"has_completed_focus = {MATERIAL_FOCUS}"),
+            "material-cycle decision/category must unlock from the existing II focus")
+    require(one(decision, "available") == parse(
+        f"has_completed_focus = {MATERIAL_FOCUS} has_idea = {MATERIAL_TIERS[1]} has_civil_war = no has_capitulated = no "
+        f"NOT = {{ has_idea = {MATERIAL_BOOST} }}"), "material-cycle availability must forbid active reuse and invalid country states")
+    check_pp_only_project(MATERIAL_DECISION, decision)
+    for field, value in (("cost", "150"), ("days_remove", "90"), ("days_re_enable", "0"), ("fire_only_once", "no")):
+        require(scalar(decision, field) == value, f"material-cycle cost/duration/repeat contract changed: {field}")
+    require(one(decision, "complete_effect") == parse(f"add_timed_idea = {{ idea = {MATERIAL_BOOST} days = 90 }}"),
+            "material-cycle program must grant exactly one 90-day temporary idea without a second charge")
+    require(one(decision, "cancel_trigger") == parse(
+        f"OR = {{ NOT = {{ has_idea = {MATERIAL_TIERS[1]} }} has_civil_war = yes has_capitulated = yes }}"),
+        "material-cycle project cancellation conditions changed")
+    cleanup = parse(f"if = {{ limit = {{ has_idea = {MATERIAL_BOOST} }} remove_ideas = {MATERIAL_BOOST} }}")
+    require(one(decision, "cancel_effect") == one(decision, "remove_effect") == cleanup,
+            "material-cycle cleanup must remove only the temporary idea without a refund, permanent removal or cooldown")
+    require(one(decision, "ai_will_do") == parse("factor = 0.5 modifier = { factor = 0 NOT = { has_political_power > 149 } }"),
+            "material-cycle AI weight or PP guard changed")
+    allowed_keys = {
+        "allowed", "original_tag", "allowed_civil_war", "always", "removal_cost", "picture", "modifier",
+        "local_resources_factor", "production_lack_of_resource_penalty_factor", "cancel", "OR", "NOT",
+        "has_civil_war", "has_capitulated", "has_idea", "icon", "visible", "has_completed_focus", "available",
+        "cost", "days_remove", "days_re_enable", "fire_only_once", "complete_effect", "add_timed_idea", "idea", "days",
+        "cancel_trigger", "cancel_effect", "remove_effect", "if", "limit", "remove_ideas", "ai_will_do", "factor", "has_political_power",
+    }
+    require(all(entry.key in allowed_keys for block in (boost, decision, category) for entry in walk(block)),
+            "material-cycle program introduced a scope switch, map target, persistent flag/variable or unreviewed command")
+    for identifier, texture in MATERIAL_SPRITES.items():
+        require(groups["sprite"][identifier] == parse(f'name = "{identifier}" texturefile = "{texture}"'),
+                f"material-cycle sprite mapping changed: {identifier}")
+    require(scalar(boost, "picture") == "HOK_KOR_icon_cmn_emergency_material_cycle_boost"
+            and scalar(decision, "icon") == "GFX_HOK_KOR_decision_cmn_emergency_material_cycle"
+            and scalar(category, "icon") == "GFX_HOK_KOR_decision_category_cmn_material_cycle_projects",
+            "material-cycle artwork consumer changed")
+
+    payloads = localisation_payloads() if payloads is None else payloads
+    new_keys = {identifier + suffix for identifier in (MATERIAL_BOOST, MATERIAL_DECISION, MATERIAL_CATEGORY) for suffix in ("", "_desc")}
+    changed_descriptions = {identifier + "_desc" for identifier in MATERIAL_TIERS}
+    pattern = re.compile(r'(?m)^\s+([A-Za-z0-9_.-]+):\d+ "((?:[^"\\\r\n]|\\.)*)"\s*$')
+    for relative in MATERIAL_LOCALES:
+        baseline = read_localisation_source(relative)
+        data = payloads[relative]
+        old_entries = pattern.findall(baseline.decode("utf-8-sig"))
+        new_entries = pattern.findall(data.decode("utf-8-sig"))
+        old_order, new_order = [key for key, _ in old_entries], [key for key, _ in new_entries]
+        require(new_order[:len(old_order)] == old_order and set(new_order[len(old_order):]) == new_keys
+                and len(new_order) == len(old_order) + 6, f"material-cycle localisation changed old key order or its six-key addition: {relative}")
+        values = dict(new_entries)
+        require(all(values[key] == value for key, value in old_entries if key not in changed_descriptions),
+                f"material-cycle localisation changed unrelated prose: {relative}")
+        require(all(values[key].strip() for key in new_keys | changed_descriptions), f"empty material-cycle description: {relative}")
+        old_notes = [line for line in baseline.decode("utf-8-sig").splitlines() if line.lstrip().startswith("#")]
+        require(all(note in data.decode("utf-8-sig").splitlines() for note in old_notes), f"material-cycle localisation lost contributor notes: {relative}")
 
 
 def check_references(groups: dict[str, dict[str, Block]], added: set[str]) -> None:
@@ -372,7 +517,7 @@ def check_references(groups: dict[str, dict[str, Block]], added: set[str]) -> No
     collisions = {kind: (set(groups[kind]) if kind != "focus" else added, directory) for kind, directory in (
         ("focus", "common/national_focus"), ("idea", "common/ideas"), ("decision", "common/decisions"),
         ("category", "common/decisions/categories"), ("dynamic", "common/dynamic_modifiers"))}
-    check_new_id_collisions(collisions, {Path(path).as_posix() for path in SECOND_WAVE_RUNTIME_PATHS})
+    check_new_id_collisions(collisions, {Path(path).as_posix() for path in runtime_paths()})
 
 
 def run_checks() -> None:
@@ -383,11 +528,13 @@ def run_checks() -> None:
     check_layout(groups["focus"], added)
     check_projects(groups)
     check_regional_gates(groups)
+    check_material_cycle(groups)
     check_assets(groups, added)
     check_localisation(localisation_payloads(), groups, added)
     check_references(groups, added)
-    print("PASS second wave: pinned 460 focuses (134 new), 63 ideas, 18 projects, 12 state modifiers; ordered source/port contracts")
-    print("PASS second-wave artwork/localisation: 231 exact DDS, 365 sprites, 16 registries, 11 paired language files; vanilla shine fallback")
+    print("PASS second wave plus material cycle: pinned 460 focuses (134 new), 64 ideas, 19 projects, 5 categories, 12 state modifiers; ordered source/port contracts")
+    print("PASS material cycle: unchanged focuses and unrelated content; +30%/+60% tiers, one PP150/90-day boost, no stacking or cooldown, temporary-only cleanup")
+    print("PASS second-wave artwork/localisation: 234 exact DDS, 368 sprites, 17 registries, 11 paired language files; vanilla shine fallback")
     print("STATIC ONLY: no HOI4 evaluation, geography lifecycle, layout rendering, AI, save or multiplayer proof.")
 
 
@@ -398,6 +545,7 @@ def run_self_tests() -> None:
     groups = collect(current)
     added = check_inventory(groups)
     check_projects(groups)
+    check_material_cycle(groups)
     caught = []
 
     def rejects(label, action):
@@ -462,6 +610,31 @@ def run_self_tests() -> None:
     rejects("missing one language key", lambda: check_localisation(missing_key, groups, added))
     rejects("DDS exact-case mismatch", lambda: exact_case("gfx/interface/goals/HOK_KOR/Missing.dds", {Path(path).as_posix() for path in SECOND_WAVE_ASSET_PATHS}))
     rejects("missing local DDS", lambda: check_assets(groups, added, {}))
+    #20261003_kpopmodder: Reject lifecycle and preservation regressions using bounded in-memory material-cycle mutations.
+    emergency = groups["decision"][MATERIAL_DECISION]
+    material_mutations = (
+        ("active reuse", ("available",), parse(
+            f"has_completed_focus = {MATERIAL_FOCUS} has_idea = {MATERIAL_TIERS[1]} has_civil_war = no has_capitulated = no")),
+        ("double charge", ("complete_effect",), one(emergency, "complete_effect") + parse("add_political_power = -150")),
+        ("stacked boost", ("complete_effect",), one(emergency, "complete_effect") + one(emergency, "complete_effect")),
+        ("wrong cost", ("cost",), "75"),
+        ("wrong duration", ("days_remove",), "45"),
+        ("post-expiry cooldown", ("days_re_enable",), "90"),
+        ("permanent-II cleanup", ("remove_effect",), parse(f"remove_ideas = {MATERIAL_TIERS[1]}")),
+        ("persistent shared flag", ("cancel_effect",), one(emergency, "cancel_effect") + parse("set_country_flag = material_cycle_busy")),
+    )
+    for label, location, value in material_mutations:
+        changed = {**groups, "decision": {**groups["decision"], MATERIAL_DECISION: replace_entry(emergency, location, value)}}
+        rejects(f"material-cycle {label}", lambda changed=changed: check_material_cycle(changed))
+    charged = {**groups, "decision": {**groups["decision"], MATERIAL_DECISION: emergency + parse("modifier = { civilian_factory_use = 2 }")}}
+    rejects("material-cycle factory charge", lambda: check_material_cycle(charged))
+    changed_ideas = {**groups, "idea": {**groups["idea"], MATERIAL_TIERS[1]: replace_entry(
+        groups["idea"][MATERIAL_TIERS[1]], ("modifier",), parse("local_resources_factor = 0.9 production_lack_of_resource_penalty_factor = -0.9"))}}
+    rejects("material-cycle permanent tier stacks emergency value", lambda: check_material_cycle(changed_ideas))
+    locale = MATERIAL_LOCALES[0]
+    missing_material_key = {**local, locale: re.sub(
+        rb"(?m)^ " + MATERIAL_BOOST.encode() + rb"_desc:[^\r\n]*\r?\n?", b"", local[locale])}
+    rejects("material-cycle temporary spirit description removed", lambda: check_material_cycle(groups, missing_material_key))
     print(f"PASS second-wave mutation self-test: {len(caught)} regressions rejected; immutable-source positive fixture accepted; no production writes")
 
 

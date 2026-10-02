@@ -33,7 +33,8 @@ GENERATOR_CHECKS = (
     # [2026-09-23]_kpopmodder: Keep new policies, images, regions and mutation detection under a separate gate.
     ("Korean second-wave contracts", "check_korean_second_wave.py", "--check"),
     # [2026-09-23]_kpopmodder: Include the selected second-wave files and their immutable provenance.
-    ("1,411-file integration manifest", "build_integration_manifest.py", "--check"),
+    #20261003_kpopmodder: Include the six reviewed material-cycle additions in the provenance gate.
+    ("1,417-file integration manifest", "build_integration_manifest.py", "--check"),
 )
 
 SCRIPT_SUFFIXES = {".txt", ".gfx", ".asset", ".gui"}

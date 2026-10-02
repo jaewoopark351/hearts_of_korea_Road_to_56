@@ -22,6 +22,7 @@ from source_snapshot import (
     SECOND_WAVE_RUNTIME_PATHS, second_wave_records, read_second_wave_source,
     policy_update_lock, read_policy_source,
     localisation_update_lock, read_localisation_source,
+    material_cycle_lock, read_material_cycle_source,
 )
 
 
@@ -668,6 +669,51 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "donor_source_checkout": record["checkout"],
         })
         row["reason"] += "; 2026-09-26 HOK 8609d0b 현지화 갱신: tools/hok_localisation_update_lock.json; ADR-0005 지역 대응 유지"
+
+    #20261003_kpopmodder: Attribute the frozen material-cycle delta and six additions without claiming a donor commit.
+    material = material_cycle_lock()
+    for group in ("runtime_text", "runtime_assets"):
+        for relative, record in material[group].items():
+            if (RT56_ROOT / relative).exists():
+                raise RuntimeError(f"unreviewed material-cycle RT56 collision: {relative}")
+            payload = read_material_cycle_source(relative)
+            if (REPO_ROOT / relative).read_bytes() != payload or expected_outputs[Path(relative)] != payload:
+                raise RuntimeError(f"material-cycle output differs from its frozen source: {relative}")
+            matching = [row for row in rows if row["source_path"] == relative]
+            classification = "ASSET_COPY" if group == "runtime_assets" else "ADD"
+            if "previous_output_sha256" in record:
+                if len(matching) != 1 or matching[0]["integration_class"] != classification:
+                    raise RuntimeError(f"material-cycle overlay requires its existing ADD row: {relative}")
+                row = matching[0]
+                row.update({
+                    "previous_source_commit": row["donor_source_commit"],
+                    "previous_source_sha256": row["donor_source_sha256"],
+                })
+            else:
+                if matching or relative in donor_relatives:
+                    raise RuntimeError(f"unreviewed material-cycle addition collision: {relative}")
+                counts[classification] += 1
+                row = {
+                    "source_path": relative, "integration_class": classification,
+                    "status": "SHIPPED", "exact_path_rt56_collision": "no",
+                    "output_path": relative, "rt56_base_sha256": "",
+                }
+                rows.append(row)
+            row.update({
+                "donor_sha256": record["sha256"], "output_sha256": sha256(REPO_ROOT / relative),
+                "donor_source_commit": "", "donor_source_blob": "",
+                "donor_source_sha256": record["sha256"],
+                "donor_source_checkout": material["source_kind"],
+                "reason": "2026-10-03 원료 순환체계 I/II 강화·90일 반복 결정 선택 이식; tools/hok_material_cycle_lock.json의 8609d0b 이후 미커밋 원본 동결; 기존 중점·RT56 지도/공용 시스템 보존",
+            })
+            if group == "runtime_assets" or relative.startswith("interface/"):
+                row.update({
+                    "artwork_source_kind": material["source_kind"],
+                    "artwork_source_base_commit": material["base_commit"],
+                    "artwork_source_sha256": record["sha256"],
+                })
+    if len(rows) != 1417:
+        raise RuntimeError(f"unexpected material-cycle integration inventory: {len(rows)}")
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(

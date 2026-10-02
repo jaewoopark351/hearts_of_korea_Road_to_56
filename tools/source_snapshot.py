@@ -46,6 +46,101 @@ LOCALISATION_UPDATE_COMMIT = "8609d0b61e4c00e6be6c204dcf31cfa41150664e"
 LOCALISATION_UPDATE_LOCK_PATH = Path(__file__).with_name("hok_localisation_update_lock.json")
 
 
+#20261003_kpopmodder: Preserve the approved uncommitted material-cycle module as an exact local source snapshot.
+MATERIAL_CYCLE_LOCK_PATH = Path(__file__).with_name("hok_material_cycle_lock.json")
+MATERIAL_CYCLE_SNAPSHOT_ROOT = "docs/upstream/hok-material-cycle-20261003"
+MATERIAL_CYCLE_TEXT_PATHS = (
+    "common/ideas/HOK_KOR_common_followup.txt",
+    "common/decisions/HOK_KOR_common_followup.txt",
+    "common/decisions/categories/HOK_KOR_common_followup.txt",
+    "interface/HOK_KOR_material_cycle_icons.gfx",
+    "localisation/english/HOK_KOR_common_followup_l_english.yml",
+    "localisation/korean/HOK_KOR_common_followup_l_korean.yml",
+)
+MATERIAL_CYCLE_ASSET_PATHS = (
+    "gfx/interface/decisions/HOK_KOR/material_cycle/cmn_emergency_material_cycle.dds",
+    "gfx/interface/decisions/HOK_KOR/material_cycle/cmn_material_cycle_projects.dds",
+    "gfx/interface/ideas/HOK_KOR/material_cycle/cmn_emergency_material_cycle_boost.dds",
+)
+MATERIAL_CYCLE_DOCUMENTATION_PATHS = (
+    "docs/HOK_KOREAN_REGIONAL_COMMON_FOLLOWUP_SPEC.md",
+    "docs/HOK_KOREAN_MATERIAL_CYCLE_REWARD_SPEC.md",
+    "docs/HOK_KOREAN_MATERIAL_CYCLE_ICON_CREDITS.md",
+    "docs/data/HOK_KOREAN_MATERIAL_CYCLE_ICON_MANIFEST.json",
+    "docs/incidents/2026-10-02-korean-material-cycle.md",
+    "docs/assets/korean-material-cycle-icons/sources/CREDITS.txt",
+    "docs/assets/korean-material-cycle-icons/sources/Circle.png",
+    "docs/assets/korean-material-cycle-icons/sources/Circular Arrows.png",
+    "docs/assets/korean-material-cycle-icons/sources/Factories2.png",
+    "docs/assets/korean-material-cycle-icons/sources/Steel.png",
+    "docs/assets/korean-material-cycle-icons/sources/clock-original.png",
+)
+MATERIAL_CYCLE_RUNTIME_PATHS = MATERIAL_CYCLE_TEXT_PATHS + MATERIAL_CYCLE_ASSET_PATHS
+
+
+@lru_cache(maxsize=1)
+def material_cycle_lock() -> dict:
+    lock = json.loads(MATERIAL_CYCLE_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["base_commit"], lock["snapshot_root"]) != (
+        1, "frozen-working-tree-snapshot", LOCALISATION_UPDATE_COMMIT, MATERIAL_CYCLE_SNAPSHOT_ROOT
+    ):
+        raise ValueError("unreviewed material-cycle snapshot revision")
+    groups = {
+        "runtime_text": MATERIAL_CYCLE_TEXT_PATHS,
+        "runtime_assets": MATERIAL_CYCLE_ASSET_PATHS,
+        "documentation": MATERIAL_CYCLE_DOCUMENTATION_PATHS,
+    }
+    records = {}
+    for group, allowed in groups.items():
+        if set(lock[group]) != set(allowed):
+            raise ValueError(f"material-cycle {group} allowlist mismatch")
+        for relative, record in lock[group].items():
+            expected_path = ("documents/" if group == "documentation" else "runtime/") + relative
+            if record["snapshot_path"] != expected_path:
+                raise ValueError(f"unsafe material-cycle snapshot path: {relative}")
+            target = (REPO_ROOT / lock["snapshot_root"] / record["snapshot_path"]).resolve()
+            target.relative_to((REPO_ROOT / MATERIAL_CYCLE_SNAPSHOT_ROOT).resolve())
+            if not re.fullmatch(r"[A-F0-9]{64}", record["sha256"]) or record["size"] <= 0:
+                raise ValueError(f"invalid material-cycle source fingerprint: {relative}")
+            records[relative] = record
+    if sha256("\n".join(sorted(records)).encode()) != lock["paths_sha256"]:
+        raise ValueError("material-cycle snapshot inventory fingerprint mismatch")
+    for relative, expected in lock["preserved_historical_locks"].items():
+        if sha256((REPO_ROOT / relative).read_bytes()) != expected:
+            raise ValueError(f"historical source lock changed during material-cycle port: {relative}")
+    #20261003_kpopmodder: Prove each accepted checkout variant against the unchanged committed bytes, not a new content hash.
+    for relative, record in lock["checkout_restoration"].items():
+        if Path(relative).is_absolute() or any(part in (".", "..") for part in relative.split("/")) or any(c in relative for c in "\\:"):
+            raise ValueError(f"unsafe checkout restoration path: {relative}")
+        row = subprocess.check_output([
+            "git", "-C", str(REPO_ROOT), "ls-tree", lock["compatibility_base_commit"], "--", relative
+        ])
+        if not row or row.split()[2].decode() != record["base_blob"]:
+            raise ValueError(f"checkout restoration provenance mismatch: {relative}")
+        raw = subprocess.check_output(["git", "-C", str(REPO_ROOT), "cat-file", "blob", record["base_blob"]])
+        if b"\r" in raw or sha256(raw) != record["restored_output_sha256"] or sha256(
+            raw.replace(b"\n", b"\r\n")
+        ) != record["previous_output_sha256"]:
+            raise ValueError(f"checkout restoration is not the original LF content: {relative}")
+    return lock
+
+
+def read_material_cycle_source(relative: str | Path) -> bytes:
+    relative = Path(relative).as_posix()
+    lock = material_cycle_lock()
+    records = {path: record for group in ("runtime_text", "runtime_assets", "documentation")
+               for path, record in lock[group].items()}
+    record = records[relative]
+    data = (REPO_ROOT / lock["snapshot_root"] / record["snapshot_path"]).read_bytes()
+    if len(data) != record["size"] or sha256(data) != record["sha256"]:
+        raise ValueError(f"material-cycle frozen source drift: {relative}")
+    if relative.endswith(".yml") and not data.startswith(
+        b"\xef\xbb\xbf" + f"l_{Path(relative).parts[1]}:".encode()
+    ):
+        raise ValueError(f"material-cycle localisation BOM/header mismatch: {relative}")
+    return data
+
+
 @lru_cache(maxsize=1)
 def localisation_update_lock() -> dict:
     lock = json.loads(LOCALISATION_UPDATE_LOCK_PATH.read_text(encoding="utf-8"))
@@ -489,6 +584,12 @@ def main() -> int:
     for relative in localisation_update_lock()["runtime_text"]:
         read_localisation_source(relative)
     print("HOK localisation update: 28 immutable Git inputs verified")
+    #20261003_kpopmodder: Validate the complete frozen update independently of the donor's future changes.
+    lock = material_cycle_lock()
+    for group in ("runtime_text", "runtime_assets", "documentation"):
+        for relative in lock[group]:
+            read_material_cycle_source(relative)
+    print("HOK material-cycle snapshot: 6 runtime text + 3 DDS + 11 source documents/assets verified")
     return 0
 
 

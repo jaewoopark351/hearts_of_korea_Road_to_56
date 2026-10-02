@@ -1,0 +1,359 @@
+{
+  "format": 1,
+  "source_kind": "frozen-working-tree-snapshot",
+  "source_root": "C:\\hoi\\hearts_of_korea",
+  "base_commit": "8609d0b61e4c00e6be6c204dcf31cfa41150664e",
+  "captured_date": "2026-10-03",
+  "source_update_date": "2026-10-02",
+  "snapshot_root": "docs/upstream/hok-material-cycle-20261003",
+  "compatibility_base_commit": "825bb411b2e12ce1d5f9545d7a24ad82fc7dcdfa",
+  "rt56_manifest": "7475007536894105204",
+  "runtime_text": {
+    "common/decisions/HOK_KOR_common_followup.txt": {
+      "snapshot_path": "runtime/common/decisions/HOK_KOR_common_followup.txt",
+      "sha256": "0C0C035A970608CEDAC7DAD8D8353C463E8EDCB15104198E0BCD8B1193E7F605",
+      "size": 1348,
+      "base_blob": "",
+      "integration_class": "ADD"
+    },
+    "common/decisions/categories/HOK_KOR_common_followup.txt": {
+      "snapshot_path": "runtime/common/decisions/categories/HOK_KOR_common_followup.txt",
+      "sha256": "2219EF472748DD9957ADF296EFA0226BBD4D59B776BB32AA0B9705EE1699408E",
+      "size": 329,
+      "base_blob": "",
+      "integration_class": "ADD"
+    },
+    "common/ideas/HOK_KOR_common_followup.txt": {
+      "snapshot_path": "runtime/common/ideas/HOK_KOR_common_followup.txt",
+      "sha256": "5284448EF7A5851859828AA778994193DDBF2EAD70B04CAF1E0C0915E9F69CCB",
+      "size": 4480,
+      "base_blob": "7ec3a611fc8e957dd8086022c7107af58613a99c",
+      "base_object_sha256": "0EAA988B0E18A151D9EFB9A10447DF492B17ACAFBF16A263B3052403DB1A149C",
+      "integration_class": "ADD",
+      "previous_output_sha256": "D49D791A028EBABF878F580623C257BB93CC6E05706A043488ECA72228AF87F6"
+    },
+    "interface/HOK_KOR_material_cycle_icons.gfx": {
+      "snapshot_path": "runtime/interface/HOK_KOR_material_cycle_icons.gfx",
+      "sha256": "570A2799B06ACC6CC0047CFDFC1C4C47733E07910C563A22C8AF16BF98095CA5",
+      "size": 757,
+      "base_blob": "",
+      "integration_class": "ADD"
+    },
+    "localisation/english/HOK_KOR_common_followup_l_english.yml": {
+      "snapshot_path": "runtime/localisation/english/HOK_KOR_common_followup_l_english.yml",
+      "sha256": "3EC2CE087F0D5DFCAF495AAA2267DDF621FE893E97202E817621E537DCB31E2B",
+      "size": 13256,
+      "base_blob": "5435a90c01d734f80fbdb1ca11924f1ee0383803",
+      "base_object_sha256": "E2A8A98BC624B57DE67BF9CA694AE364E3A2F59DE3B021DD9F8E069265D74F99",
+      "integration_class": "ADD",
+      "previous_output_sha256": "E2A8A98BC624B57DE67BF9CA694AE364E3A2F59DE3B021DD9F8E069265D74F99"
+    },
+    "localisation/korean/HOK_KOR_common_followup_l_korean.yml": {
+      "snapshot_path": "runtime/localisation/korean/HOK_KOR_common_followup_l_korean.yml",
+      "sha256": "7A4FF16EFD4D8FFC20010CC6260BCD04B2CB1482246AD73E97443FF3F2A19598",
+      "size": 13255,
+      "base_blob": "d485722c458fdfdc725aa4d77592d6de126f7f1f",
+      "base_object_sha256": "EFCBB871A02C46532D2260E0A5A4A9CC3467FDF28EDC5C24709D7FD49404BA34",
+      "integration_class": "ADD",
+      "previous_output_sha256": "EFCBB871A02C46532D2260E0A5A4A9CC3467FDF28EDC5C24709D7FD49404BA34"
+    }
+  },
+  "runtime_assets": {
+    "gfx/interface/decisions/HOK_KOR/material_cycle/cmn_emergency_material_cycle.dds": {
+      "snapshot_path": "runtime/gfx/interface/decisions/HOK_KOR/material_cycle/cmn_emergency_material_cycle.dds",
+      "sha256": "8DE32FBDD83FE1D5137906DAC2AD9070AA56DCF1CE7975EAD397D27C61867AC7",
+      "size": 4224,
+      "base_blob": "",
+      "integration_class": "ASSET_COPY"
+    },
+    "gfx/interface/decisions/HOK_KOR/material_cycle/cmn_material_cycle_projects.dds": {
+      "snapshot_path": "runtime/gfx/interface/decisions/HOK_KOR/material_cycle/cmn_material_cycle_projects.dds",
+      "sha256": "5CA46C1B4B2247487EDA7D41AA6580BFBEAD10F642911014C912182775754DC3",
+      "size": 8288,
+      "base_blob": "",
+      "integration_class": "ASSET_COPY"
+    },
+    "gfx/interface/ideas/HOK_KOR/material_cycle/cmn_emergency_material_cycle_boost.dds": {
+      "snapshot_path": "runtime/gfx/interface/ideas/HOK_KOR/material_cycle/cmn_emergency_material_cycle_boost.dds",
+      "sha256": "386B9F24720BCDD04EB8176A1AA3458F42F6D5AA691E89CB5DBAF5E97B0D6D2F",
+      "size": 16448,
+      "base_blob": "",
+      "integration_class": "ASSET_COPY"
+    }
+  },
+  "documentation": {
+    "docs/HOK_KOREAN_MATERIAL_CYCLE_ICON_CREDITS.md": {
+      "snapshot_path": "documents/docs/HOK_KOREAN_MATERIAL_CYCLE_ICON_CREDITS.md",
+      "sha256": "A34A3D724C716A4AFD493D40C2E9591562CC187FD7144B0137940268FF7B73B1",
+      "size": 5250,
+      "base_blob": ""
+    },
+    "docs/HOK_KOREAN_MATERIAL_CYCLE_REWARD_SPEC.md": {
+      "snapshot_path": "documents/docs/HOK_KOREAN_MATERIAL_CYCLE_REWARD_SPEC.md",
+      "sha256": "9DFDC218C75AE7D5373C7E1A850392ED98DBB7CD213B7DDBEAFE555F9BC187FD",
+      "size": 13838,
+      "base_blob": ""
+    },
+    "docs/HOK_KOREAN_REGIONAL_COMMON_FOLLOWUP_SPEC.md": {
+      "snapshot_path": "documents/docs/HOK_KOREAN_REGIONAL_COMMON_FOLLOWUP_SPEC.md",
+      "sha256": "46D090C665AD51F22C0BCD0E78BE4EAE624EF738BE8B839765576CC5DAD6FBBC",
+      "size": 13675,
+      "base_blob": "11d3ab4a3c2d4bbd21c6b8ee8cc81b9760b07e0c",
+      "base_object_sha256": "7027D236D123E98686EB3DD419A5668A55D4C6D3710FF278276DA1298878EE0A"
+    },
+    "docs/assets/korean-material-cycle-icons/sources/CREDITS.txt": {
+      "snapshot_path": "documents/docs/assets/korean-material-cycle-icons/sources/CREDITS.txt",
+      "sha256": "CF220DC66463D75163F7690AD77B02B662D0C05CA5D53DC62D33ED504512A7F5",
+      "size": 1029,
+      "base_blob": ""
+    },
+    "docs/assets/korean-material-cycle-icons/sources/Circle.png": {
+      "snapshot_path": "documents/docs/assets/korean-material-cycle-icons/sources/Circle.png",
+      "sha256": "11004EFA4F5CAFA05524BD1293D6FC464B42C0E33F0DD740A67DE4C52BF17804",
+      "size": 25055,
+      "base_blob": ""
+    },
+    "docs/assets/korean-material-cycle-icons/sources/Circular Arrows.png": {
+      "snapshot_path": "documents/docs/assets/korean-material-cycle-icons/sources/Circular Arrows.png",
+      "sha256": "49D17868495B84CABEEF78C85A2111ADF8D325A5B76A0CB72973F51F9150F4C4",
+      "size": 22609,
+      "base_blob": ""
+    },
+    "docs/assets/korean-material-cycle-icons/sources/Factories2.png": {
+      "snapshot_path": "documents/docs/assets/korean-material-cycle-icons/sources/Factories2.png",
+      "sha256": "10898F9E4600558CD329D8BCB601CB453D89D8B46D90D079CE328294A96A31A7",
+      "size": 19363,
+      "base_blob": ""
+    },
+    "docs/assets/korean-material-cycle-icons/sources/Steel.png": {
+      "snapshot_path": "documents/docs/assets/korean-material-cycle-icons/sources/Steel.png",
+      "sha256": "1B118FDADFD2D4B0F1BB3B16735913C5CACB428A0AE4DDE490F747160236294A",
+      "size": 18109,
+      "base_blob": ""
+    },
+    "docs/assets/korean-material-cycle-icons/sources/clock-original.png": {
+      "snapshot_path": "documents/docs/assets/korean-material-cycle-icons/sources/clock-original.png",
+      "sha256": "C3E1C0F0392A062D5DE4C155A779449526FE405421ADF09B394157C46E8FDFC9",
+      "size": 719,
+      "base_blob": ""
+    },
+    "docs/data/HOK_KOREAN_MATERIAL_CYCLE_ICON_MANIFEST.json": {
+      "snapshot_path": "documents/docs/data/HOK_KOREAN_MATERIAL_CYCLE_ICON_MANIFEST.json",
+      "sha256": "689E98F790786498F6A4D5240CAAE78ECFC5A409481DA468D13D56D9EB049C5A",
+      "size": 8844,
+      "base_blob": ""
+    },
+    "docs/incidents/2026-10-02-korean-material-cycle.md": {
+      "snapshot_path": "documents/docs/incidents/2026-10-02-korean-material-cycle.md",
+      "sha256": "32939338990286BAEBD6E7C6EE813E6372DC781BA8B68455C0717E9D56297EE3",
+      "size": 13475,
+      "base_blob": ""
+    }
+  },
+  "preserved_historical_locks": {
+    "tools/hok_source_lock.json": "436B730E92D58A33FBBBB913E064C3A0D6A904D069F61D8CDBE38DCCB28FC94B",
+    "tools/hok_icon_lock.json": "DBB2A37CAE0DB55171C393CDFDA3F24E9B09B65CEF224E81593310A9620C59A3",
+    "tools/hok_second_wave_lock.json": "FCBF178914F5D88894A3CDFB686E45D7E63DFFA6081113B58E0D415D152DE48D",
+    "tools/hok_policy_update_lock.json": "57746F8E23CD9EDBF00089805F63969F6D7EF433689073A2B3AE6BAE7BDCAB20",
+    "tools/hok_localisation_update_lock.json": "4F6084926CE5B9888B436D8A028D4F15F8DCEDA5186EBF3C5858FD22947D1E0A"
+  },
+  "preserved_runtime": {
+    "common/national_focus/korea.txt": "6F9F76036B21D22E9716ACE44C124D20BBF2CAF3751AAEE5313C758FC3B8F162",
+    "descriptor.mod": "D68DCE620EA3DDDE422F26F2E5155E4D52F35AC4B2EBE1224DC71E07035141CB",
+    "map/buildings.txt": "839486E33E51AB800BB8930A11AB5F7A9F6C779FE8F9CADB1E54E5D147733841",
+    "history/countries/KOR - Korea.txt": "243FC1FBDE8DB75B82CCFEBD6BB01CA7001DABCD944CA8534E7324413705BE30"
+  },
+  "checkout_restoration": {
+    "common/decisions/HOK_KOR_democratic_expansion.txt": {
+      "previous_output_sha256": "6C9C3A56B4A29D126661E40AAAB3782FBD3E3CC8B5ABC2AF529CF2C2284B1B60",
+      "restored_output_sha256": "071B619DF1722F938E1677E79E2197E6808A937FCEE96E9BB43616588677220C",
+      "base_blob": "a08cec8897a5eb39694937cdfaedd59cbf3fd2ae"
+    },
+    "common/decisions/HOK_KOR_industry_expansion.txt": {
+      "previous_output_sha256": "207C5E9F7C9336F3B2B6BED3089AA7B39928ACA381380DBE43E5D2F94DA2A7ED",
+      "restored_output_sha256": "9CB7C18CFB6755CA94E64A6A21834BB7880535797E9F1E3835AA6DB9E2FC5C23",
+      "base_blob": "a4355c0c513a5a650b77da06afe2fa7d0c48325a"
+    },
+    "common/decisions/categories/HOK_KOR_democratic_expansion.txt": {
+      "previous_output_sha256": "9F5669658A3D583CC3E927BAE85DB7BB84FDF57F57A3232874349EF6A50F062A",
+      "restored_output_sha256": "0BD424CFADD58693EB6083F7CEF1E7F916E64EEFFD792CF762AAEF40FEB7C06E",
+      "base_blob": "9728fdabd8d51208335c68637630eb4ec418979a"
+    },
+    "common/decisions/categories/HOK_KOR_industry_expansion.txt": {
+      "previous_output_sha256": "73D73B1C1D7E6CE62CCF4FCFE0CA4750C8DEF86CC65AC4382751E132114E7B0A",
+      "restored_output_sha256": "140234E91FC12703F5263A80583EF5452B3D1B96E0B8C09931D4037B6225894D",
+      "base_blob": "295aff2bf9b6bf182e787a2e0dfe549743888559"
+    },
+    "common/ideas/HOK_KOR_democratic_expansion.txt": {
+      "previous_output_sha256": "F1709D5678C55D2C389EDDEC76379CEFCAC23548C050317821245B6862833A9B",
+      "restored_output_sha256": "A189E64951EFFD2B309BD892ADF1EB3BD25C60D9A6D445CAF5EE65CAA283FA14",
+      "base_blob": "f1415cca3e86a89e4e7c610997dde8cd01b5ca4d"
+    },
+    "common/ideas/HOK_KOR_industry_expansion.txt": {
+      "previous_output_sha256": "611A66D302D71BF73946F34D3251898185BA8DA48AFDF5C02B2A35F52CB8938E",
+      "restored_output_sha256": "AA9C316611B9888CEA8A958FED7C3B281FE6EDF075615E1E9422C8238C37EE34",
+      "base_blob": "1ddd3cac3210d5a0434cf953322c4810359359d0"
+    },
+    "common/ideas/HOK_KOR_military_expansion.txt": {
+      "previous_output_sha256": "4003F9384C3202984DE9A000EAD843E628AE361A7D7D512243CAE449F902B42B",
+      "restored_output_sha256": "1D98036B142AA8DB56318300D8267AB2E9F2206B134BEC80B3316072C2341725",
+      "base_blob": "75be2a931a90c7d41fb1f42c54b5d4e8cdf31a8c"
+    },
+    "common/modifiers/HOK_KOR_democratic_expansion.txt": {
+      "previous_output_sha256": "78052EB1DBFB7FB4F3E26CF7495335CA6E4390AD294540D45EF60C81CCFD2596",
+      "restored_output_sha256": "E91E6E987B2AE60597C805180B657112E3ADF2A4DB1C41BAF09275681B40A64B",
+      "base_blob": "38d5fcd818b5b6c26b37703ce7893b2996893124"
+    },
+    "events/HOK_KOR_democratic_expansion.txt": {
+      "previous_output_sha256": "ED2E658C6900302D7AC0064B042F4A79A3DB869A3ED15A77C1D46F962A81E1B4",
+      "restored_output_sha256": "62264F2E2AAEC8A2826427BB3C5D64D04194DA840616C1E4A0DD6CBD489999DF",
+      "base_blob": "cccb8b18fed1ace26ec5aec86cf1a835177970bb"
+    },
+    "localisation/english/HOK_KOR_democratic_expansion_l_english.yml": {
+      "previous_output_sha256": "C60F047F87CAAC9B7DBB5C782EECA6B0B23E424622CBC65F27BF9D8DB1AF1824",
+      "restored_output_sha256": "ECEC15F14E6FE74C8D63FEFCE6BB8A0448D2F34CDA572324848220B30DBB053F",
+      "base_blob": "46f459005c221018368ecda2620226729bcf2121"
+    },
+    "localisation/english/HOK_KOR_industry_expansion_l_english.yml": {
+      "previous_output_sha256": "47E8765FEE4BD131EA80913A7BAA6281D3479A3ED63415039674CF7C622C74E8",
+      "restored_output_sha256": "783DF9BD3FE98FCAC058116DFA00FFC73F387E1BC72977932A6A7E16E9BAC771",
+      "base_blob": "86e7aa802dbc310318f8bfb2a85ecd5554cc00a6"
+    },
+    "localisation/english/HOK_KOR_military_expansion_l_english.yml": {
+      "previous_output_sha256": "ACF342ADB558E31D266E376B4EDE4544D8780D3D5A087A98EFDD8212D0A9414A",
+      "restored_output_sha256": "C022ABABD4FA610DBE481D8B97A3A1DE57491C4A15E56A527B1CBB6589070FA9",
+      "base_blob": "2a52844b9a736359765eea7cd1cc8e2d74c52d20"
+    },
+    "localisation/korean/HOK_KOR_democratic_expansion_l_korean.yml": {
+      "previous_output_sha256": "5B6CDEF8EFF405B1F31E73A9109491B24BF5FF8243E710C7A0120CF118E21389",
+      "restored_output_sha256": "11934EE9E21876EC0791D715AE74AEA6B4BF8BB05561BBC8B639077E8E3303DA",
+      "base_blob": "f6f2538ecea89df7b5c83798d46c628869f17d20"
+    },
+    "localisation/korean/HOK_KOR_industry_expansion_l_korean.yml": {
+      "previous_output_sha256": "5298B4320CC660729F87CEFD40753A69F91C24DF34799E670B424DE5FE30CBB1",
+      "restored_output_sha256": "5E44DBE2FF7E65FC769FA830C70BD9799821B0E5C01D57971F8A687E87C31554",
+      "base_blob": "4234f49032db7f1827f9b14d60176d9130593361"
+    },
+    "localisation/korean/HOK_KOR_military_expansion_l_korean.yml": {
+      "previous_output_sha256": "7248C985E499C5E13814D87316F25C46973546DAB691EF537116FC5C86A0E24A",
+      "restored_output_sha256": "39B0AA11307E9ED51ABBF04AF3ACA110CEF574E3F290B12670BDA6C004EE4A18",
+      "base_blob": "45947935248d6756f80a47811b52cb914e8f5138"
+    },
+    "common/ideas/HOK_KOR_fascist_followup.txt": {
+      "previous_output_sha256": "05D61C2980E23F6BA1D1F095D768152BD6D1713656D9D3D397D1B41076D2D630",
+      "restored_output_sha256": "42791943D50C16784B20406C49A4912FCA46F17701CD87318C60403CAFCFF19F",
+      "base_blob": "245261290c960f3295b0ac42beca30f53458e67d"
+    },
+    "localisation/english/HOK_KOR_common_followup_l_english.yml": {
+      "previous_output_sha256": "D50ED048CD36BC8382CA5DB3E80A7F88FCC7749B1D199F624607ACEC43E7F606",
+      "restored_output_sha256": "E2A8A98BC624B57DE67BF9CA694AE364E3A2F59DE3B021DD9F8E069265D74F99",
+      "base_blob": "5435a90c01d734f80fbdb1ca11924f1ee0383803"
+    },
+    "localisation/english/HOK_KOR_communist_development_l_english.yml": {
+      "previous_output_sha256": "BA571EC80A2ABED6781120971492AB6CCB1F6C4AF84D3075B62DAD4A82391C93",
+      "restored_output_sha256": "E2D3C1A3D2B01AAE1466844539DCC9A767D0E56BA700C288752752EF5331E43D",
+      "base_blob": "6b7e530a4813704e7aefba6018ff04555e9487dc"
+    },
+    "localisation/english/HOK_KOR_communist_governance_l_english.yml": {
+      "previous_output_sha256": "AAADF1A8F415CD853DE903BCB09FD4A872708518BD9A6402D9A3ABAD26E4EB25",
+      "restored_output_sha256": "45BC1B6160BE9BD7760E3BD5969FA22D30B65E7D507E88611C742DA4DE21F1CC",
+      "base_blob": "c6587ee0080aba41a334e55a6edf51e466778eb5"
+    },
+    "localisation/english/HOK_KOR_communist_policy_l_english.yml": {
+      "previous_output_sha256": "9EB14A0402E3BDC71B6EE828B86FEC6C7B42CDA2F77CC447B1848AA4D4719FB4",
+      "restored_output_sha256": "76E4548CC1379C8BA1362F3680CB620206CCA27CCCBB811F1BC71A5C09CD9135",
+      "base_blob": "6919eeb4036e3c9bca214c818fe3ccadf334b464"
+    },
+    "localisation/english/HOK_KOR_constitutional_followup_l_english.yml": {
+      "previous_output_sha256": "6130FADA91319AAB8D14C5FB9C02781D1600BA2F2EA36FAB3B14447C69544F15",
+      "restored_output_sha256": "CFB69B3A7AEE822826FD2C86CB30FDB5D73DBA08263F245779425EAE4C70D000",
+      "base_blob": "5d8e4089ff7e99bdd2988ec48eeac5c5999a843d"
+    },
+    "localisation/english/HOK_KOR_fascist_followup_l_english.yml": {
+      "previous_output_sha256": "F6DD34B4AA17CE43F95E24A6C9A655FDCD446283D9333C2AC395570892DF1787",
+      "restored_output_sha256": "158845E67BB091B8AE4BAEF60BD9DB2A5B8DEE3436FE6866C14087C7D1F89FA6",
+      "base_blob": "4a96dd6aef0d4868a5a0ed76655bacdbe1e53068"
+    },
+    "localisation/english/HOK_KOR_fascist_mobilization_l_english.yml": {
+      "previous_output_sha256": "919AC837ED5FD3A7D9672F8C3062C985DED33BCA7AADD6F8D324CC9BAC247321",
+      "restored_output_sha256": "7C3972B6BB17CEB35A0B7139BD3AAFFF94E510854C08C7E22EDA2726594C005D",
+      "base_blob": "233614dfcd43dbd6b19c57a795daa33289c1b3a1"
+    },
+    "localisation/english/HOK_KOR_fascist_procurement_l_english.yml": {
+      "previous_output_sha256": "EAA85B384BD6BFF1303A256BD068B7407D93FEB4E9D067B6BBDA6EE3BA5AD998",
+      "restored_output_sha256": "4C78DC6EF707EC92598F225F85BF19CA0E2C1DC126143B578F087B3EB71CDE30",
+      "base_blob": "b34b4b41f432e9fd3108a5ba2a2d6bd2d4d430f8"
+    },
+    "localisation/english/HOK_KOR_fascist_staff_l_english.yml": {
+      "previous_output_sha256": "4A37DAE762C91ACA47450C1933A67033DBA4D8862C4B7BAD347B02FAB6EED5D8",
+      "restored_output_sha256": "6B4CDD83862C83AC88365AD02E342D07B62FAF583872E71249773484C245313E",
+      "base_blob": "1cf85852c14d53c53eb63cd99b45df041ad414a2"
+    },
+    "localisation/english/HOK_KOR_manchurian_followup_l_english.yml": {
+      "previous_output_sha256": "8899474BD20978A9871B9057CA28130CE6D399E6017BB6FFB03E04034426167A",
+      "restored_output_sha256": "5601074A406E0C41822D34730A98589DE999E323B447FB1915BB17D596FB266B",
+      "base_blob": "52f337b9e203e1d11272e8c8964f68df7891538e"
+    },
+    "localisation/english/HOK_KOR_royal_followup_l_english.yml": {
+      "previous_output_sha256": "6FDA1FA450813B1D3E13F362037A3C1BE15E9974A709E1C8C6EFB62F5F7CD6E8",
+      "restored_output_sha256": "B707597B514850BD9D2165784C4ECA218AA460A5C3572A517AA681F5F3E411F2",
+      "base_blob": "8f68a3801a09ee0c9ed6101311b46204950347ef"
+    },
+    "localisation/korean/HOK_KOR_common_followup_l_korean.yml": {
+      "previous_output_sha256": "396D68AD69710AE22A2BEF1149CC31B6452D6274C5F21A919BE6870CC24C2752",
+      "restored_output_sha256": "EFCBB871A02C46532D2260E0A5A4A9CC3467FDF28EDC5C24709D7FD49404BA34",
+      "base_blob": "d485722c458fdfdc725aa4d77592d6de126f7f1f"
+    },
+    "localisation/korean/HOK_KOR_communist_development_l_korean.yml": {
+      "previous_output_sha256": "95DBF2EA9AD52AA99F6767CBAC81B4A67D03F245E35E41C9A9082D4379D0903B",
+      "restored_output_sha256": "E5440B0AAD8164D55FAE13488C15E3D3AA7C7A7F0A28F8810BC1AF0499B48061",
+      "base_blob": "7964c63cd1bcbd8fc03d356e27daee8d6631eb23"
+    },
+    "localisation/korean/HOK_KOR_communist_governance_l_korean.yml": {
+      "previous_output_sha256": "2D64BFF266ECC46F6F053E665DB24E98E58F27D6CF975566F4B1CDEA2DFA1D04",
+      "restored_output_sha256": "703BBFB44141991D67A564CDC63E4C242F979BA602E14115B952EEF667E60D5F",
+      "base_blob": "137b85cb4726d88ad79a96ab4368f061875d0b5f"
+    },
+    "localisation/korean/HOK_KOR_communist_policy_l_korean.yml": {
+      "previous_output_sha256": "5B64EBFA9DD401BC81CAF0D6F8B98E05972AC660C104FB41936608A798AA264F",
+      "restored_output_sha256": "860613A24F6AEB0AFB571EB63566AA04EFD11610941F1E6E3193795986D87C2A",
+      "base_blob": "f6d9da693bcc736f7105536ca6ddec808c7a1b16"
+    },
+    "localisation/korean/HOK_KOR_constitutional_followup_l_korean.yml": {
+      "previous_output_sha256": "C9F14D0AEC846B4860CA9862C38A7200CA726BBEFD625C8740EB702DC86537BA",
+      "restored_output_sha256": "B47912F45CCE8DB23F022D4969939B99FBC1C88154FF3A6A76DE80C55163C2D2",
+      "base_blob": "a7ca0625a01bf900ac004465efd0ea8db6a5f2e7"
+    },
+    "localisation/korean/HOK_KOR_fascist_followup_l_korean.yml": {
+      "previous_output_sha256": "E252E8EA63A1346D75D6BD1930643E27CA0825119017C20560E65397D429AEBF",
+      "restored_output_sha256": "DF4C01459924D83EB7022059CC2C81FB0612A6161827B541454E21E799E91748",
+      "base_blob": "e8ee75bafa41363236d3b7c7f22dbf035310168f"
+    },
+    "localisation/korean/HOK_KOR_fascist_mobilization_l_korean.yml": {
+      "previous_output_sha256": "4C7C2D329CB1274E9926C0126713AF5BEA6954679002BCCCFB46EB01DD3001D4",
+      "restored_output_sha256": "C6B34892B0E0E6802B849FEABF44CD732EC4F8D2CC451D0DBC2D698EFC2AB11F",
+      "base_blob": "ddc1f01e0ee221bf1a55572fc1c57133712a7133"
+    },
+    "localisation/korean/HOK_KOR_fascist_procurement_l_korean.yml": {
+      "previous_output_sha256": "CC5BD59991D05A4F736032AD3793415E9CB0A94B04FF5FC5FBA258621C34649D",
+      "restored_output_sha256": "C7FE41D2AA88E7F27A3DC1E5D5AB50739AC42468F383F5D34CCA628A60D85F4F",
+      "base_blob": "318df27938cf952603b0cd19f53d1962d55c9118"
+    },
+    "localisation/korean/HOK_KOR_fascist_staff_l_korean.yml": {
+      "previous_output_sha256": "E7C250AFAC1B09AE67661C930686CDE3A95C9A2D5E5C041D680A532170B1E6CC",
+      "restored_output_sha256": "3FD05806B473477B395F66D79D47481181FDD81D2810A149BEF73EAD87F77B72",
+      "base_blob": "7685236d8118c0c8da170d6f6070281074269d8f"
+    },
+    "localisation/korean/HOK_KOR_manchurian_followup_l_korean.yml": {
+      "previous_output_sha256": "7711C9C1B2CC4B8C6D9B29653654AAFAC5AA9740180E5F7BF37472194C97080E",
+      "restored_output_sha256": "AAA49DA0C46412E3C859F18911E9E466539CAFF6DDA5C5F17971FAF735C3F3CD",
+      "base_blob": "0cd48542fc875a51c9ba42a3ed1f3558cffaa7d8"
+    },
+    "localisation/korean/HOK_KOR_royal_followup_l_korean.yml": {
+      "previous_output_sha256": "5CB5FCA23F8590173EEEF386C1CFD253C5C1BF463833B029DD3AC041BDA23D22",
+      "restored_output_sha256": "11A81773197230F2D42FDF71ADD666E0CF3BEF46D48CE11BAA44DCA066B90719",
+      "base_blob": "8f5888ae125f10819f3692aa247261c60f8f166b"
+    }
+  },
+  "paths_sha256": "786766E5D0E54A6C251742138A0593346FBA6225F1205E32A7450999CB05E319"
+}
