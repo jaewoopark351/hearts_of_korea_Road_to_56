@@ -145,6 +145,13 @@ Additional instruction sync recorded on 2026-09-23:
 - Links beginning `../hearts_of_korea/docs/` refer to read-only donor specifications and evidence, not documents shipped in this repository. Donor counts, coordinates, and runtime results are source-specific history, not the compatibility tree's current state or validation. Resolve the latest source and the port's integration records before implementing them.
 - The compatibility repository's identity, RT56 host-preservation rules, source pins, generated-file ownership, map-ID migrations, shared-host artwork exceptions, attribution, and publication boundaries remain in force. The donor's project identity, superseded baseline claims, and conflicting personal-history claims are not imported.
 
+Additional instruction sync recorded on 2026-10-03:
+
+- This documentation-only sync imports the donor's new national-spirit/decision description prose and test-file storage rules from `C:\hoi\hearts_of_korea\AGENTS.md` at donor HEAD `8609d0b61e4c00e6be6c204dcf31cfa41150664e`, including its uncommitted instruction changes (source SHA-256 `AE0726753A48EBA93E91639FEE1377B5B210EF01ABC3E7C7F688956FA84186E2`).
+- Section 10 applies the external test-storage rule to authorized diagnostics and validation, while retaining the compatibility port's audited generator-input caches. No existing files are relocated or deleted by this instruction sync, and it does not authorize runtime changes, tests, Git actions, or publication.
+- The compatibility identity, RT56 host-preservation rules, source pins, generated-file ownership, authorship record, and publication boundaries remain in force.
+- A later documentation-only sync on 2026-10-03 imports the strengthened English-only commit-message rule from the same donor HEAD, including uncommitted changes (source SHA-256 `AA6149D92F415097F5D53D758A67E051B7EC598C3074D0D55CE0EE0D0E4E407D`). The earlier source hash above remains the record of the first sync; explicit commit/push authorization is still required.
+
 Treat the continuation mandate and the compatibility-port request as established project context. Do not require another original-author approval for work the user has already authorized; escalate only concrete contradictory evidence, a specific third-party restriction, or a required user decision.
 
 Do not infer the current target version from memory or from `supported_version` alone. Before compatibility work, record when available:
@@ -520,6 +527,12 @@ Missing text may be a reference or load-order failure rather than a missing stri
 
 The 2026-09-06 baseline has `Korean Language` installed but not active, while `The Road to 56 Korean Translation` is active and declares `replace_path="localisation"`. Before choosing a release dependency, test the HOK `l_english`/`l_korean` contract and whether that replacement hides compatibility localisation. Do not assume the two localisation mods are interchangeable.
 
+### National-spirit and decision description prose
+
+- For national spirits, describe the concrete circumstances they represent and explain why any associated policy or institution is needed. Do not unnecessarily repeat numeric effects already shown automatically in the tooltip.
+- For decisions, describe the background and purpose of the action. Keep costs, duration, reuse restrictions, cancellation and refund rules clear in a short separate paragraph when the automatic tooltip does not adequately explain them.
+- Use concrete workplaces, people and situations to convey the policy's necessity. Avoid bureaucratic boilerplate and lists of rewards in narrative prose.
+
 ---
 
 ## 9. Map and state work is high risk
@@ -552,6 +565,15 @@ Required rules:
 ---
 
 ## 10. Diagnostics and logs
+
+### Test-file storage
+
+- When tests or diagnostics are authorized, store all newly created test and diagnostic files under `C:\hoi\test\<task-or-run-id>\`. This includes test scripts, fixtures, generated reports, copied logs, screenshots, crash dumps, test saves, and save backups.
+- Set test helpers' output and backup paths to that external location before running them. Do not store new test files in this repository, including `.local-artifacts`, or in a Steam Workshop upload/package directory. Historical records referencing `.local-artifacts` do not authorize reusing it for new tests.
+- Keep production mod files and maintained documentation in their normal repository locations. Audited source snapshots and generator-input caches such as `.local-artifacts/sources` retain their source-input role; they are not destinations for test or diagnostic output.
+- Game-generated originals remain in the actual HOI4 user-data directory; place any test/evidence copies in `C:\hoi\test`. This storage rule does not itself authorize moving or deleting existing files, changing game or launcher settings, writing to user-data, or running tests.
+
+### Runtime evidence
 
 The common Windows user-data location is:
 
@@ -737,14 +759,15 @@ Not sufficient by itself:
 
 ## 14. File, Git, attribution, and publication safety
 
-- By default, create and modify files only under `C:\hoi\hearts_of_korea_Road_to_56` for this project.
+- By default, create and modify files only under `C:\hoi\hearts_of_korea_Road_to_56` for this project, except for authorized test and diagnostic files, which must use the bounded `C:\hoi\test\<task-or-run-id>\` location specified in Section 10.
 - Never modify `C:\hoi\hearts_of_korea`, the base-game installation, the RT56 Workshop directory, HOI4 user data/logs, saves, or launcher files without separate explicit authorization.
 - Never use a Workshop-managed copy or HOK donor as the authoritative working tree.
 - Never overwrite user saves, playsets, or settings without explicit authorization and backup.
 - Do not commit logs, crash dumps, saves, caches, credentials, account data, or personal launcher data unless requested as sanitized fixtures.
 - Do not use destructive Git commands such as `git reset --hard`, `git clean`, forced checkout, or force-push.
 - Do not discard pre-existing user changes, rename large trees for aesthetics, or mass-convert binary assets.
-- When commits are explicitly requested, write every commit subject and body in English. Commit or push only within the requested scope; a completed earlier commit/push request is not standing authorization for later work.
+- All Git commit messages MUST be written in English, including both the subject and body. Do not use Korean or mixed-language prose in commit messages.
+- Commit or push only when explicitly requested and within the requested scope; a completed earlier commit/push request is not standing authorization for later work.
 - Do not add tools, dependencies, generators, or formatters unless approved and materially useful.
 - Keep restoration and compatibility patches small; keep intentional redesign/new-content changes separately attributable whenever practical.
 - Publication of a new compatibility item is permitted only when explicitly directed.
