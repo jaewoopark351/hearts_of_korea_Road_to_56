@@ -13,13 +13,15 @@ import re
 from pathlib import Path
 
 from migrate_hok_ids import identified_block_span, matching_brace
+from source_snapshot import HOK_ROOT
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 ROOTS = {
     "vanilla": Path(r"C:\Program Files (x86)\Steam\steamapps\common\Hearts of Iron IV"),
     "rt56": Path(r"C:\Program Files (x86)\Steam\steamapps\workshop\content\394360\820260968"),
-    "donor": Path(r"C:\hoi\hearts_of_korea"),
+    #20261003_kpopmodder: Read the already pinned historical map bytes, independent of later donor checkout conversion.
+    "donor": HOK_ROOT,
 }
 
 #20260923_kpopmodder: Fail closed if the physical geography used by ADR-0005 changes.

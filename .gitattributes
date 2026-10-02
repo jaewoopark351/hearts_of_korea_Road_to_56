@@ -1,0 +1,90 @@
+#20261003_kpopmodder: Preserve the verified source-lock byte contracts across Windows checkouts.
+tools/hok_source_lock.json text eol=lf
+tools/hok_second_wave_lock.json text eol=lf
+tools/hok_policy_update_lock.json text eol=lf
+tools/hok_localisation_update_lock.json text eol=lf
+tools/hok_material_cycle_lock.json text eol=lf
+tools/hok_icon_lock.json text eol=crlf
+
+# Byte-exact upstream evidence includes historical mixed line endings.
+docs/upstream/hok-second-wave-be5fb40/** -text
+docs/upstream/hok-policy-update-20260923/** -text
+docs/upstream/hok-material-cycle-20261003/** -text
+docs/audits/2026-09-06-production-file-classification.csv text eol=lf
+
+# Existing generated LF outputs must retain the exact bytes their owners reproduce.
+common/countries/zz_hok_rt56_colors.txt text eol=lf
+common/countries/zz_hok_rt56_cosmetic.txt text eol=lf
+common/decisions/HOK_KOR_democratic_expansion.txt text eol=lf
+common/decisions/HOK_KOR_industry_expansion.txt text eol=lf
+common/decisions/KOR.txt text eol=lf
+common/decisions/categories/HOK_KOR_democratic_expansion.txt text eol=lf
+common/decisions/categories/HOK_KOR_industry_expansion.txt text eol=lf
+common/ideas/HOK_KOR_democratic_expansion.txt text eol=lf
+common/ideas/HOK_KOR_fascist_followup.txt text eol=lf
+common/ideas/HOK_KOR_industry_expansion.txt text eol=lf
+common/ideas/HOK_KOR_military_expansion.txt text eol=lf
+common/intelligence_agencies/zz_hok_rt56_intelligence_agencies.txt text eol=lf
+common/modifiers/HOK_KOR_democratic_expansion.txt text eol=lf
+common/names/zz_hok_rt56_names.txt text eol=lf
+common/peace_conference/ai_peace/SOV.txt text eol=lf
+common/peace_conference/ai_peace/USA.txt text eol=lf
+common/scripted_effects/SP_scripted_effects.txt text eol=lf
+common/scripted_triggers/JAP_scripted_triggers.txt text eol=lf
+events/HOK_KOR_democratic_expansion.txt text eol=lf
+gfx/interface/equipmentdesigner/graphic_db/00_hok_plane_icons.txt text eol=lf
+history/states/1144-Gangwon.txt text eol=lf
+history/states/1145-Chungcheong.txt text eol=lf
+history/states/1146-Jeju.txt text eol=lf
+history/states/1147-Tsushima.txt text eol=lf
+"history/states/525-South Korea.txt" text eol=lf
+"history/states/527-North Korea.txt" text eol=lf
+history/states/917-Hwanghae.txt text eol=lf
+history/states/918-Hamgyong.txt text eol=lf
+history/states/919-Jeolla.txt text eol=lf
+history/states/920-Gyeongsang.txt text eol=lf
+history/units/JAP_1936.txt text eol=lf
+history/units/JAP_1936_naval_legacy.txt text eol=lf
+history/units/JAP_1936_nsb.txt text eol=lf
+localisation/english/HOK_KOR_communist_development_l_english.yml text eol=lf
+localisation/english/HOK_KOR_communist_governance_l_english.yml text eol=lf
+localisation/english/HOK_KOR_communist_policy_l_english.yml text eol=lf
+localisation/english/HOK_KOR_constitutional_followup_l_english.yml text eol=lf
+localisation/english/HOK_KOR_democratic_expansion_l_english.yml text eol=lf
+localisation/english/HOK_KOR_fascist_followup_l_english.yml text eol=lf
+localisation/english/HOK_KOR_fascist_mobilization_l_english.yml text eol=lf
+localisation/english/HOK_KOR_fascist_procurement_l_english.yml text eol=lf
+localisation/english/HOK_KOR_fascist_staff_l_english.yml text eol=lf
+localisation/english/HOK_KOR_industry_expansion_l_english.yml text eol=lf
+localisation/english/HOK_KOR_manchurian_followup_l_english.yml text eol=lf
+localisation/english/HOK_KOR_military_expansion_l_english.yml text eol=lf
+localisation/english/HOK_KOR_royal_followup_l_english.yml text eol=lf
+localisation/english/HoK_music_l_english.yml text eol=lf
+localisation/english/HoK_start_game_setup_l_english.yml text eol=lf
+localisation/english/korea_event_l_english.yml text eol=lf
+localisation/korean/HOK_KOR_communist_development_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_communist_governance_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_communist_policy_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_constitutional_followup_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_democratic_expansion_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_fascist_followup_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_fascist_mobilization_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_fascist_procurement_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_fascist_staff_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_industry_expansion_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_manchurian_followup_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_military_expansion_l_korean.yml text eol=lf
+localisation/korean/HOK_KOR_royal_followup_l_korean.yml text eol=lf
+localisation/korean/HoK_music_l_korean.yml text eol=lf
+localisation/korean/HoK_start_game_setup_l_korean.yml text eol=lf
+localisation/korean/korea_event_l_korean.yml text eol=lf
+music/hok_music.asset text eol=lf
+events/NewsEvents_KOR.txt -text
+
+# Only the newly selected module uses these donor-derived runtime line endings.
+common/decisions/HOK_KOR_common_followup.txt text eol=lf
+common/decisions/categories/HOK_KOR_common_followup.txt text eol=lf
+common/ideas/HOK_KOR_common_followup.txt text eol=crlf
+interface/HOK_KOR_material_cycle_icons.gfx text eol=lf
+localisation/english/HOK_KOR_common_followup_l_english.yml text eol=crlf
+localisation/korean/HOK_KOR_common_followup_l_korean.yml text eol=crlf
