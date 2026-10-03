@@ -22,6 +22,7 @@ from source_snapshot import (
     SECOND_WAVE_FOCUS_PATH, read_second_wave_source, second_wave_lock,
     policy_update_lock, read_policy_source, localisation_update_lock, read_localisation_source,
     MATERIAL_CYCLE_RUNTIME_PATHS, material_cycle_lock, read_material_cycle_source,
+    PROSE_UPDATE_RUNTIME_PATHS, prose_update_lock, read_prose_source, verify_prose_snapshot,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -119,9 +120,15 @@ ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     for relative, record in material_cycle_lock()["runtime_text"].items()
     if "previous_output_sha256" in record
 })
+#20261003_kpopmodder: Accept only the reviewed immediate prior output for each prose file.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): record["previous_output_sha256"]
+    for relative, record in prose_update_lock()["runtime_text"].items()
+})
 CHECKOUT_RESTORATION_HASHES = {
     Path(relative): record["previous_output_sha256"]
     for relative, record in material_cycle_lock()["checkout_restoration"].items()
+    if relative not in PROSE_UPDATE_RUNTIME_PATHS
 }
 PORT_NOTES = {
     Path("common/national_focus/korea.txt"):
@@ -309,6 +316,25 @@ def build_all() -> dict[Path, bytes]:
             elif relative in outputs:
                 raise ValueError(f"material-cycle addition duplicates a generated output: {name}")
             outputs[relative] = read_material_cycle_source(name)
+    #20261003_kpopmodder: Overlay only reviewed description prose while preserving RT56 regional guidance and all other values.
+    verify_prose_snapshot()
+    entry_pattern = rb'(?m)^[ \t]+([A-Za-z0-9_.-]+):(\d+) "((?:[^"\\\r\n]|\\[^\r\n])*)"[ \t]*\r?$'
+    for name, record in prose_update_lock()["runtime_text"].items():
+        relative = Path(name)
+        if relative not in outputs or sha256_bytes(outputs[relative]) != record["previous_output_sha256"]:
+            raise ValueError(f"unreviewed pre-prose output: {name}")
+        previous = re.findall(entry_pattern, outputs[relative])
+        migrated = apply_second_wave_geography(name, read_prose_source(name))
+        updated = re.findall(entry_pattern, migrated)
+        if (len(previous) != record["key_count"] or len(updated) != record["key_count"]
+                or [entry[:2] for entry in previous] != [entry[:2] for entry in updated]):
+            raise ValueError(f"prose update changed keys, versions or order: {name}")
+        changed = {key.encode() for key in record["changed_description_keys"]}
+        for old, new in zip(previous, updated):
+            if old != new and new[0] not in changed:
+                raise ValueError(f"prose update changed a protected localisation value: {name}/{new[0].decode()}")
+        outputs[relative] = migrated
+    verify_prose_snapshot()
     verify_geography_inputs()
     verify_inputs()
     return outputs

@@ -77,6 +77,15 @@ MATERIAL_CYCLE_DOCUMENTATION_PATHS = (
 )
 MATERIAL_CYCLE_RUNTIME_PATHS = MATERIAL_CYCLE_TEXT_PATHS + MATERIAL_CYCLE_ASSET_PATHS
 
+#20261003_kpopmodder: Freeze only the author's reviewed decision/spirit prose after the existing material-cycle layer.
+PROSE_UPDATE_BASE_COMMIT = "43dbb38ac2553942e898e6093a2a46f0430995fc"
+PROSE_UPDATE_LOCK_PATH = Path(__file__).with_name("hok_prose_update_lock.json")
+PROSE_UPDATE_SNAPSHOT_ROOT = "docs/upstream/hok-prose-update-20261003"
+PROSE_UPDATE_DOCUMENTATION_PATHS = (
+    "docs/HOK_KOREAN_DECISION_SPIRIT_PROSE_PLAN.md",
+    "docs/incidents/2026-10-03-korean-decision-spirit-prose.md",
+)
+
 
 @lru_cache(maxsize=1)
 def material_cycle_lock() -> dict:
@@ -185,6 +194,117 @@ def read_localisation_source(relative: str | Path) -> bytes:
         ):
             raise ValueError(f"malformed localisation source: {relative}:{number}")
     return data
+
+
+#20261003_kpopmodder: Keep the prose snapshot independent of the donor's later working-tree changes.
+@lru_cache(maxsize=1)
+def prose_update_lock() -> dict:
+    lock = json.loads(PROSE_UPDATE_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["base_commit"], lock["snapshot_root"]) != (
+        1, "frozen-working-tree-snapshot", PROSE_UPDATE_BASE_COMMIT, PROSE_UPDATE_SNAPSHOT_ROOT
+    ):
+        raise ValueError("unreviewed prose snapshot revision")
+    allowed = set(localisation_update_lock()["runtime_text"])
+    if set(lock["runtime_text"]) != allowed or len(allowed) != 28 or set(lock["documentation"]) != set(PROSE_UPDATE_DOCUMENTATION_PATHS):
+        raise ValueError("prose snapshot allowlist mismatch")
+    records = {**lock["runtime_text"], **lock["documentation"]}
+    if sha256("\n".join(sorted(records)).encode()) != lock["paths_sha256"] or lock["paths_sha256"] != "BA93B3E2B8E52D5E3C2DF653C78C3597C6084FA5AF8F3B8C7116156B534F83C4":
+        raise ValueError("prose snapshot inventory fingerprint mismatch")
+    if sha256("\n".join(sorted(allowed)).encode()) != lock["runtime_paths_sha256"]:
+        raise ValueError("prose runtime inventory fingerprint mismatch")
+    #20261003_kpopmodder: Verify the pinned base path/blob without consulting the donor's current HEAD or working files.
+    rows = subprocess.check_output(git_command() + ["ls-tree", "-z", PROSE_UPDATE_BASE_COMMIT, "--", *sorted(records)])
+    tree = {}
+    for row in rows.split(b"\0"):
+        if not row:
+            continue
+        metadata, relative = row.split(b"\t", 1)
+        mode, kind, blob = metadata.decode().split()
+        if kind != "blob" or mode not in ("100644", "100755"):
+            raise ValueError(f"unsupported prose base object: {relative.decode()}")
+        tree[relative.decode()] = blob
+    counts = {"english": 0, "korean": 0}
+    for group in ("runtime_text", "documentation"):
+        for relative, record in lock[group].items():
+            expected_path = ("runtime/" if group == "runtime_text" else "documents/") + relative
+            if record["snapshot_path"] != expected_path:
+                raise ValueError(f"unsafe prose snapshot path: {relative}")
+            target = (REPO_ROOT / PROSE_UPDATE_SNAPSHOT_ROOT / record["snapshot_path"]).resolve()
+            target.relative_to((REPO_ROOT / PROSE_UPDATE_SNAPSHOT_ROOT).resolve())
+            if not re.fullmatch(r"[A-F0-9]{64}", record["sha256"]) or record["size"] <= 0:
+                raise ValueError(f"invalid prose source fingerprint: {relative}")
+            if tree.get(relative, "") != record["base_blob"]:
+                raise ValueError(f"prose base path/blob provenance mismatch: {relative}")
+            if record["base_blob"]:
+                base = subprocess.check_output(git_command() + ["cat-file", "blob", record["base_blob"]])
+                if sha256(base) != record["base_object_sha256"]:
+                    raise ValueError(f"prose base object hash mismatch: {relative}")
+            if group == "runtime_text":
+                keys = record["changed_description_keys"]
+                if (record["integration_class"] != "ADD" or len(keys) != len(set(keys))
+                        or not all(key.endswith("_desc") for key in keys)
+                        or not re.fullmatch(r"[A-F0-9]{64}", record["previous_output_sha256"])):
+                    raise ValueError(f"unreviewed prose description changes: {relative}")
+                counts[Path(relative).parts[1]] += len(keys)
+    if counts != lock["changed_descriptions_per_channel"] or counts != {"english": 124, "korean": 124}:
+        raise ValueError("prose update must contain 124 revised descriptions per channel")
+    if lock["collision_audit"] != {name: {"exact_paths": [], "logical_ids": []} for name in ("rt56", "vanilla")}:
+        raise ValueError("unreviewed prose host localisation collision")
+    historical = {f"tools/hok_{name}_lock.json" for name in (
+        "source", "second_wave", "policy_update", "icon", "localisation_update", "material_cycle"
+    )}
+    if set(lock["preserved_historical_locks"]) != historical:
+        raise ValueError("prose historical source-lock allowlist mismatch")
+    for relative, expected in lock["preserved_historical_locks"].items():
+        if sha256((REPO_ROOT / relative).read_bytes()) != expected:
+            raise ValueError(f"historical source lock changed during prose port: {relative}")
+    if len(lock["preserved_runtime"]) != 381 or allowed & set(lock["preserved_runtime"]):
+        raise ValueError("prose preserved-runtime allowlist mismatch")
+    for relative, expected in lock["preserved_runtime"].items():
+        path = Path(relative)
+        if (path.is_absolute() or any(part in (".", "..") for part in relative.split("/"))
+                or any(c in relative for c in "\\:") or not re.fullmatch(r"[A-F0-9]{64}", expected)):
+            raise ValueError(f"unsafe prose preserved-runtime path/fingerprint: {relative}")
+    return lock
+
+
+def read_prose_source(relative: str | Path) -> bytes:
+    relative = Path(relative).as_posix()
+    lock = prose_update_lock()
+    record = {**lock["runtime_text"], **lock["documentation"]}[relative]
+    data = (REPO_ROOT / lock["snapshot_root"] / record["snapshot_path"]).read_bytes()
+    if len(data) != record["size"] or sha256(data) != record["sha256"]:
+        raise ValueError(f"prose frozen source drift: {relative}")
+    if relative in lock["runtime_text"]:
+        language = Path(relative).parts[1]
+        if not data.startswith(b"\xef\xbb\xbf" + f"l_{language}:\r\n".encode()) or b"\n" in data.replace(b"\r\n", b""):
+            raise ValueError(f"prose localisation BOM/header/CRLF mismatch: {relative}")
+        keys = []
+        for number, line in enumerate(data.decode("utf-8-sig").splitlines()[1:], 2):
+            if not line.strip() or line.lstrip().startswith("#"):
+                continue
+            match = re.fullmatch(r'\s+([A-Za-z0-9_.-]+):\d+ "(?:[^"\\]|\\.)*"\s*', line)
+            if match is None:
+                raise ValueError(f"malformed prose localisation source: {relative}:{number}")
+            keys.append(match[1])
+        if (len(keys) != record["key_count"] or len(keys) != len(set(keys))
+                or sha256("\n".join(keys).encode()) != record["keys_sha256"]
+                or not set(record["changed_description_keys"]).issubset(keys)):
+            raise ValueError(f"prose localisation key inventory mismatch: {relative}")
+    return data
+
+
+def verify_prose_snapshot() -> None:
+    lock = prose_update_lock()
+    expected = {record["snapshot_path"] for group in ("runtime_text", "documentation")
+                for record in lock[group].values()} | {"README.md"}
+    root = REPO_ROOT / lock["snapshot_root"]
+    actual = {path.relative_to(root).as_posix() for path in root.rglob("*") if path.is_file()}
+    if actual != expected:
+        raise ValueError(f"prose snapshot file inventory mismatch: {sorted(actual ^ expected)}")
+    for group in ("runtime_text", "documentation"):
+        for relative in lock[group]:
+            read_prose_source(relative)
 
 
 @lru_cache(maxsize=1)
@@ -560,6 +680,8 @@ SECOND_WAVE_ASSET_PATHS = tuple(second_wave_lock()["runtime_assets"])
 SECOND_WAVE_SPRITE_PATHS = tuple(path for path in second_wave_lock()["runtime_text"] if path.startswith("interface/"))
 SECOND_WAVE_SUPPORT_PATHS = tuple(path for path in second_wave_lock()["runtime_text"] if path != SECOND_WAVE_FOCUS_PATH and not path.startswith("interface/"))
 SECOND_WAVE_DOCUMENTATION_PATHS = tuple(second_wave_lock()["documentation"])
+#20261003_kpopmodder: Derive prose output ownership from the unchanged historical localisation allowlist.
+PROSE_UPDATE_RUNTIME_PATHS = tuple(prose_update_lock()["runtime_text"])
 
 
 def main() -> int:
@@ -590,6 +712,9 @@ def main() -> int:
         for relative in lock[group]:
             read_material_cycle_source(relative)
     print("HOK material-cycle snapshot: 6 runtime text + 3 DDS + 11 source documents/assets verified")
+    #20261003_kpopmodder: Verify all frozen prose bytes even after the live donor changes.
+    verify_prose_snapshot()
+    print("HOK prose snapshot: 28 runtime localisation + 2 source documents verified")
     return 0
 
 

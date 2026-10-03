@@ -23,6 +23,7 @@ from source_snapshot import (
     policy_update_lock, read_policy_source,
     localisation_update_lock, read_localisation_source,
     material_cycle_lock, read_material_cycle_source,
+    prose_update_lock, read_prose_source,
 )
 
 
@@ -677,8 +678,13 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             if (RT56_ROOT / relative).exists():
                 raise RuntimeError(f"unreviewed material-cycle RT56 collision: {relative}")
             payload = read_material_cycle_source(relative)
-            if (REPO_ROOT / relative).read_bytes() != payload or expected_outputs[Path(relative)] != payload:
+            if relative in prose_update_lock()["runtime_text"]:
+                if prose_update_lock()["runtime_text"][relative]["previous_output_sha256"] != hashlib.sha256(payload).hexdigest().upper():
+                    raise RuntimeError(f"prose overlay lost its material-cycle source: {relative}")
+            elif expected_outputs[Path(relative)] != payload:
                 raise RuntimeError(f"material-cycle output differs from its frozen source: {relative}")
+            if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+                raise RuntimeError(f"material-cycle final output differs from its reviewed merge: {relative}")
             matching = [row for row in rows if row["source_path"] == relative]
             classification = "ASSET_COPY" if group == "runtime_assets" else "ADD"
             if "previous_output_sha256" in record:
@@ -714,6 +720,29 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
                 })
     if len(rows) != 1417:
         raise RuntimeError(f"unexpected material-cycle integration inventory: {len(rows)}")
+
+    #20261003_kpopmodder: Record the author's frozen prose separately from committed sources and retain ADR-0005.
+    prose = prose_update_lock()
+    for relative, record in prose["runtime_text"].items():
+        matching = [row for row in rows if row["source_path"] == relative]
+        if len(matching) != 1 or (RT56_ROOT / relative).exists():
+            raise RuntimeError(f"unreviewed prose integration collision: {relative}")
+        row = matching[0]
+        if row["integration_class"] != "ADD" or row["output_path"] != relative:
+            raise RuntimeError(f"prose overlay requires an existing ADD row: {relative}")
+        read_prose_source(relative)
+        if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+            raise RuntimeError(f"prose output differs from its frozen source/geography merge: {relative}")
+        row.update({
+            "previous_source_commit": row["donor_source_commit"],
+            "previous_source_sha256": row["donor_source_sha256"],
+            "donor_sha256": record["sha256"],
+            "output_sha256": sha256(REPO_ROOT / relative),
+            "donor_source_commit": "", "donor_source_blob": "",
+            "donor_source_sha256": record["sha256"],
+            "donor_source_checkout": prose["source_kind"],
+        })
+        row["reason"] += "; 2026-10-03 국민정신·디시전·범주 설명 선택 이식: tools/hok_prose_update_lock.json, 43dbb38 이후 미커밋 원본 동결; 명칭·효과·기존 지역 안내 보존"
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(

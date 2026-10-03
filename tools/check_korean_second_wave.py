@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import re
 import struct
+import subprocess
 from pathlib import Path
 
 from check_korean_focus_update import (
@@ -23,6 +24,7 @@ from source_snapshot import (
     policy_update_lock, read_policy_source, second_wave_lock,
     localisation_update_lock, read_localisation_source,
     material_cycle_lock, read_material_cycle_source,
+    git_command, prose_update_lock, read_prose_source,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -52,17 +54,49 @@ MATERIAL_SPRITES = {
 }
 
 
+#20261003_kpopmodder: Keep the prose import bounded to the fourteen reviewed module pairs and six protected descriptions.
+PROSE_CHANGED_COUNTS = {
+    "industry_expansion": 16, "military_expansion": 10, "democratic_expansion": 14,
+    "communist_policy": 13, "communist_governance": 9, "communist_development": 8,
+    "fascist_procurement": 5, "fascist_staff": 2, "fascist_mobilization": 3,
+    "fascist_followup": 8, "constitutional_followup": 7, "royal_followup": 15,
+    "common_followup": 9, "manchurian_followup": 5,
+}
+PROSE_PATHS = frozenset(
+    f"localisation/{language}/HOK_KOR_{module}_l_{language}.yml"
+    for language in ("english", "korean") for module in PROSE_CHANGED_COUNTS
+)
+PROSE_PROTECTED = frozenset(identifier + "_desc" for identifier in (
+    *MATERIAL_TIERS, MATERIAL_BOOST, MATERIAL_DECISION,
+    "HOK_KOR_rapid_repairs_spirit", "HOK_KOR_air_maintenance_spirit",
+))
+PROSE_NOTE = "#20261003_kpopmodder: Explain new decision and spirit policies through concrete circumstances; preserve gameplay and lifecycle rules."
+PROSE_TONE_NOTE = "#20261003_kpopmodder: Apply varied HOI4 fascist and communist voices to description narrative; preserve effects and explicit rules."
+PROSE_COAST_NOTE = "#20261003_kpopmodder: Clarify Gyeongsang coastal-state wording without changing construction requirements."
+PROSE_TONE_MODULES = frozenset((
+    "communist_policy", "communist_governance", "communist_development",
+    "fascist_procurement", "fascist_staff", "fascist_mobilization", "fascist_followup",
+))
+PROSE_ROW = re.compile(rb'([ \t]+(?P<key>[A-Za-z0-9_.-]+):(?P<version>\d+) ")(?P<value>(?:[^"\\\r\n]|\\.)*)("[ \t]*)')
+
+
 def runtime_paths() -> tuple[str, ...]:
     return tuple(dict.fromkeys((*SECOND_WAVE_RUNTIME_PATHS, *material_cycle_lock()["runtime_text"])))
 
 
-def selected_source(relative: str) -> bytes:
+def previous_prose_source(relative: str) -> bytes:
     if relative in material_cycle_lock()["runtime_text"]:
         return read_material_cycle_source(relative)
     #20260926_kpopmodder: Compare the revised prose against its own immutable source before regional adaptation.
     if relative in localisation_update_lock()["runtime_text"]:
         return read_localisation_source(relative)
     return read_policy_source(relative) if relative in policy_update_lock()["runtime_text"] else read_second_wave_source(relative)
+
+
+def selected_source(relative: str) -> bytes:
+    if relative in prose_update_lock()["runtime_text"]:
+        return read_prose_source(relative)
+    return previous_prose_source(relative)
 
 
 def expected_payload(relative: str) -> bytes:
@@ -444,7 +478,8 @@ def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str
             and scalar(category, "icon") == "GFX_HOK_KOR_decision_category_cmn_material_cycle_projects",
             "material-cycle artwork consumer changed")
 
-    payloads = localisation_payloads() if payloads is None else payloads
+    #20261003_kpopmodder: This historical contract uses the frozen material prose; the newest actual output is checked separately.
+    payloads = {relative: read_material_cycle_source(relative) for relative in MATERIAL_LOCALES} if payloads is None else payloads
     new_keys = {identifier + suffix for identifier in (MATERIAL_BOOST, MATERIAL_DECISION, MATERIAL_CATEGORY) for suffix in ("", "_desc")}
     changed_descriptions = {identifier + "_desc" for identifier in MATERIAL_TIERS}
     pattern = re.compile(r'(?m)^\s+([A-Za-z0-9_.-]+):\d+ "((?:[^"\\\r\n]|\\.)*)"\s*$')
@@ -462,6 +497,120 @@ def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str
         require(all(values[key].strip() for key in new_keys | changed_descriptions), f"empty material-cycle description: {relative}")
         old_notes = [line for line in baseline.decode("utf-8-sig").splitlines() if line.lstrip().startswith("#")]
         require(all(note in data.decode("utf-8-sig").splitlines() for note in old_notes), f"material-cycle localisation lost contributor notes: {relative}")
+
+
+def prose_entries(data: bytes, relative: str) -> list[tuple[str, str, bytes]]:
+    language = Path(relative).parts[1]
+    require(data.startswith(b"\xef\xbb\xbf" + f"l_{language}:".encode()), f"prose BOM/header drift: {relative}")
+    result = []
+    for number, line in enumerate(data.replace(b"\r\n", b"\n").splitlines()[1:], 2):
+        if not line.strip() or line.lstrip().startswith(b"#"):
+            continue
+        match = PROSE_ROW.fullmatch(line)
+        require(match is not None, f"malformed prose localisation row: {relative}:{number}")
+        result.append((match["key"].decode(), match["version"].decode(), match["value"]))
+    require(len(result) == len({key for key, _, _ in result}), f"duplicate prose localisation key: {relative}")
+    return result
+
+
+def prose_description_keys() -> set[str]:
+    definitions = {kind: set() for kind in ("idea", "decision", "category")}
+    for module in PROSE_CHANGED_COUNTS:
+        for kind, directory in (("idea", "common/ideas"), ("decision", "common/decisions"),
+                                ("category", "common/decisions/categories")):
+            path = ROOT / directory / f"HOK_KOR_{module}.txt"
+            if not path.exists():
+                continue
+            block = read(path)
+            if kind == "idea":
+                identifiers = named(one(one(block, "ideas"), "country"))
+            elif kind == "decision":
+                identifiers = {identifier: body for category in named(block).values()
+                               for identifier, body in named(category).items()}
+            else:
+                identifiers = named(block)
+            require(not definitions[kind] & identifiers.keys(), f"duplicate prose {kind} consumer IDs: {path}")
+            definitions[kind].update(identifiers)
+    require({kind: len(ids) for kind, ids in definitions.items()} == {"idea": 93, "decision": 29, "category": 8},
+            "prose consumers must remain 93 country ideas, 29 decisions and eight categories")
+    descriptions = {identifier + "_desc" for ids in definitions.values() for identifier in ids}
+    require(len(descriptions) == 130 and PROSE_PROTECTED <= descriptions,
+            "prose consumer namespace or protected descriptions changed")
+    return descriptions - PROSE_PROTECTED
+
+
+def check_prose_update(payloads: dict[str, bytes] | None = None) -> None:
+    from korean_second_wave_geography import apply_second_wave_geography
+    lock = prose_update_lock()
+    require(lock["base_commit"] == "43dbb38ac2553942e898e6093a2a46f0430995fc",
+            "prose donor baseline must remain immutable 43dbb38")
+    require(set(lock["runtime_text"]) == PROSE_PATHS, "prose update must remain the explicit fourteen localisation pairs")
+    require(lock["changed_descriptions_per_channel"] == {"english": 124, "korean": 124},
+            "prose update count metadata changed")
+    preserved = lock["preserved_runtime"]
+    require({FOCUS_PATH, MATERIAL_IDEA_PATH, MATERIAL_DECISION_PATH, MATERIAL_CATEGORY_PATH, MATERIAL_GFX_PATH,
+             "descriptor.mod"} <= preserved.keys(), "prose import lacks required unchanged gameplay/presentation pins")
+    require(not PROSE_PATHS & preserved.keys(), "prose preserved-runtime pins include approved description outputs")
+    for relative, digest in preserved.items():
+        require(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest().upper() == digest.upper(),
+                f"prose update changed preserved gameplay/presentation: {relative}")
+    allowed = prose_description_keys()
+    payloads = {relative: (ROOT / relative).read_bytes() for relative in PROSE_PATHS} if payloads is None else payloads
+    require(set(payloads) == PROSE_PATHS, "actual prose localisation inventory changed")
+    changed_by_language = {language: set() for language in ("english", "korean")}
+    for relative, record in lock["runtime_text"].items():
+        language = Path(relative).parts[1]
+        module = Path(relative).name.removeprefix("HOK_KOR_").removesuffix(f"_l_{language}.yml")
+        source = read_prose_source(relative)
+        base = subprocess.check_output(git_command() + ["cat-file", "blob", record["base_blob"]])
+        previous = previous_prose_source(relative)
+        require(base.replace(b"\r\n", b"\n") == previous.replace(b"\r\n", b"\n"),
+                f"prose donor baseline differs from the previously imported content: {relative}")
+        previous_output = apply_second_wave_geography(relative, previous)
+        require(hashlib.sha256(previous_output).hexdigest().upper() == record["previous_output_sha256"].upper(),
+                f"prose previous port-output provenance drift: {relative}")
+        old_entries, entries = prose_entries(base, relative), prose_entries(source, relative)
+        require([(key, version) for key, version, _ in entries] == [(key, version) for key, version, _ in old_entries],
+                f"prose key/version/order drift: {relative}")
+        old_values, values = {key: value for key, _, value in old_entries}, {key: value for key, _, value in entries}
+        changed = {key for key in values if values[key] != old_values[key]}
+        require(len(changed) == PROSE_CHANGED_COUNTS[module] and changed == set(record["changed_description_keys"]),
+                f"prose description change inventory drift: {relative}: {sorted(changed)}")
+        require(changed <= allowed and not changed & PROSE_PROTECTED,
+                f"prose touched a name, focus, event, tooltip or protected description: {relative}: {sorted(changed - allowed)}")
+        require(not changed_by_language[language] & changed, f"prose changed key appears in multiple modules: {relative}")
+        changed_by_language[language].update(changed)
+        notes = ([PROSE_COAST_NOTE] if module == "industry_expansion" else [])
+        notes += ([PROSE_TONE_NOTE] if module in PROSE_TONE_MODULES else []) + [PROSE_NOTE]
+        lines = source.replace(b"\r\n", b"\n").splitlines()
+        require(lines[1:1 + len(notes)] == [note.encode() for note in notes],
+                f"prose contributor notes missing or displaced: {relative}")
+        without_notes = [lines[0], *lines[1 + len(notes):]]
+        def unchanged_lines(rows: list[bytes]) -> list[bytes]:
+            result = []
+            for line in rows:
+                match = PROSE_ROW.fullmatch(line)
+                if match and match["key"].decode() in changed:
+                    line = match[1] + b"<reviewed-description>" + match[5]
+                result.append(line)
+            return result
+        require(unchanged_lines(without_notes) == unchanged_lines(base.replace(b"\r\n", b"\n").splitlines()),
+                f"prose changed text, comments or formatting outside reviewed description values: {relative}")
+        previous_values = {key: value for key, _, value in prose_entries(previous_output, relative)}
+        actual = payloads[relative]
+        require(actual == apply_second_wave_geography(relative, source),
+                f"actual prose differs from frozen source/ADR-0005 region contract: {relative}")
+        actual_values = {key: value for key, _, value in prose_entries(actual, relative)}
+        for key in PROSE_PROTECTED & previous_values.keys():
+            require(actual_values[key] == previous_values[key], f"prose changed a protected existing description: {relative}/{key}")
+        if language == "english":
+            counterpart = relative.replace("/english/", "/korean/").replace("_l_english.yml", "_l_korean.yml")
+            require(source.decode("utf-8-sig").splitlines()[1:] == read_prose_source(counterpart).decode("utf-8-sig").splitlines()[1:],
+                    f"frozen prose language bodies diverged: {relative}")
+            require(actual.decode("utf-8-sig").splitlines()[1:] == payloads[counterpart].decode("utf-8-sig").splitlines()[1:],
+                    f"actual prose language bodies diverged: {relative}")
+    require(all(keys == allowed for keys in changed_by_language.values()) and len(allowed) == 124,
+            "prose import must change exactly the same 124 permitted descriptions in both channels")
 
 
 def check_references(groups: dict[str, dict[str, Block]], added: set[str]) -> None:
@@ -529,12 +678,14 @@ def run_checks() -> None:
     check_projects(groups)
     check_regional_gates(groups)
     check_material_cycle(groups)
+    check_prose_update()
     check_assets(groups, added)
     check_localisation(localisation_payloads(), groups, added)
     check_references(groups, added)
     print("PASS second wave plus material cycle: pinned 460 focuses (134 new), 64 ideas, 19 projects, 5 categories, 12 state modifiers; ordered source/port contracts")
     print("PASS material cycle: unchanged focuses and unrelated content; +30%/+60% tiers, one PP150/90-day boost, no stacking or cooldown, temporary-only cleanup")
     print("PASS second-wave artwork/localisation: 234 exact DDS, 368 sprites, 17 registries, 11 paired language files; vanilla shine fallback")
+    print("PASS prose update: 124 descriptions per channel, fourteen frozen pairs; keys, six protected descriptions, gameplay and ADR-0005 regions preserved")
     print("STATIC ONLY: no HOI4 evaluation, geography lifecycle, layout rendering, AI, save or multiplayer proof.")
 
 
@@ -546,6 +697,7 @@ def run_self_tests() -> None:
     added = check_inventory(groups)
     check_projects(groups)
     check_material_cycle(groups)
+    check_prose_update()
     caught = []
 
     def rejects(label, action):
@@ -632,8 +784,9 @@ def run_self_tests() -> None:
         groups["idea"][MATERIAL_TIERS[1]], ("modifier",), parse("local_resources_factor = 0.9 production_lack_of_resource_penalty_factor = -0.9"))}}
     rejects("material-cycle permanent tier stacks emergency value", lambda: check_material_cycle(changed_ideas))
     locale = MATERIAL_LOCALES[0]
-    missing_material_key = {**local, locale: re.sub(
-        rb"(?m)^ " + MATERIAL_BOOST.encode() + rb"_desc:[^\r\n]*\r?\n?", b"", local[locale])}
+    frozen_material = {relative: read_material_cycle_source(relative) for relative in MATERIAL_LOCALES}
+    missing_material_key = {**frozen_material, locale: re.sub(
+        rb"(?m)^ " + MATERIAL_BOOST.encode() + rb"_desc:[^\r\n]*\r?\n?", b"", frozen_material[locale])}
     rejects("material-cycle temporary spirit description removed", lambda: check_material_cycle(groups, missing_material_key))
     print(f"PASS second-wave mutation self-test: {len(caught)} regressions rejected; immutable-source positive fixture accepted; no production writes")
 
