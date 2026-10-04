@@ -87,6 +87,81 @@ PROSE_UPDATE_DOCUMENTATION_PATHS = (
 )
 
 
+#20261005_kpopmodder: Pin only the committed two-line decision notice, keeping every historical source lock intact.
+FOCUS_TOOLTIP_COMMIT = "062a60287e00ac11352c38bca0fca1ae556e7801"
+FOCUS_TOOLTIP_LOCK_PATH = Path(__file__).with_name("hok_focus_tooltip_update_lock.json")
+
+
+@lru_cache(maxsize=1)
+def focus_tooltip_update_lock() -> dict:
+    lock = json.loads(FOCUS_TOOLTIP_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["source_commit"], lock["base_commit"],
+            lock["path"], lock["focus_id"], lock["decision_id"], lock["checkout"]) != (
+        1, "immutable-git-objects", FOCUS_TOOLTIP_COMMIT, "272e7a2f4f30f4739c23440a9f271bbd0acf9878",
+        SECOND_WAVE_FOCUS_PATH, "HOK_KOR_cmn_closed_material_cycle",
+        "HOK_KOR_cmn_emergency_material_cycle", "crlf"
+    ):
+        raise ValueError("unreviewed focus decision-tooltip revision or target")
+    payloads = []
+    for commit_key, blob_key, hash_key in (
+        ("base_commit", "base_blob", "base_object_sha256"),
+        ("source_commit", "blob", "object_sha256"),
+    ):
+        blob = subprocess.check_output(git_command() + ["rev-parse", f"{lock[commit_key]}:{lock['path']}"]).decode().strip()
+        data = subprocess.check_output(git_command() + ["cat-file", "blob", lock[blob_key]])
+        if blob != lock[blob_key] or sha256(data) != lock[hash_key] or b"\r" in data:
+            raise ValueError("focus decision-tooltip immutable source drift")
+        payloads.append(data)
+    base, updated = payloads
+    addition = ("\n".join(lock["added_lines"]) + "\n").encode("utf-8")
+    if len(lock["added_lines"]) != 2 or lock["added_lines"][1] != "\t\t\tunlock_decision_tooltip = " + lock["decision_id"]:
+        raise ValueError("focus decision-tooltip must contain only its contributor note and existing decision notice")
+    anchor = focus_tooltip_anchor()
+    focus_start = base.index(("\t\tid = " + lock["focus_id"] + "\n").encode())
+    focus_end = base.index(b"\n\t}\n", focus_start)
+    if (base.count(anchor) != 1 or not focus_start < base.index(anchor) < focus_end
+            or updated != base.replace(anchor, anchor + addition, 1)
+            or sha256(updated.replace(b"\n", b"\r\n")) != lock["source_sha256"]):
+        raise ValueError("focus decision-tooltip changed more than the reviewed two-line source delta")
+    return lock
+
+
+def focus_tooltip_anchor() -> bytes:
+    return (b"\t\t\tif = { limit = { has_idea = HOK_KOR_cmn_material_cycle_1 } "
+            b"swap_ideas = { remove_idea = HOK_KOR_cmn_material_cycle_1 add_idea = HOK_KOR_cmn_material_cycle_2 } } "
+            b"else = { add_ideas = HOK_KOR_cmn_material_cycle_2 }\n")
+
+
+def apply_focus_tooltip_update(data: bytes) -> bytes:
+    lock = focus_tooltip_update_lock()
+    if sha256(data) != lock["previous_output_sha256"]:
+        raise ValueError("unreviewed pre-tooltip focus output")
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    anchor = focus_tooltip_anchor().replace(b"\n", newline)
+    addition = ("\n".join(lock["added_lines"]) + "\n").encode().replace(b"\n", newline)
+    if data.count(anchor) != 1:
+        raise ValueError("focus decision-tooltip reward anchor is not unique")
+    updated = data.replace(anchor, anchor + addition, 1)
+    if sha256(updated) != lock["output_sha256"]:
+        raise ValueError("focus decision-tooltip output differs from the reviewed merge")
+    return updated
+
+
+def remove_focus_tooltip_update(data: bytes) -> bytes:
+    #20261005_kpopmodder: Check historical contracts against the exact ancestor without accepting unrelated focus edits.
+    lock = focus_tooltip_update_lock()
+    if sha256(data) != lock["output_sha256"]:
+        raise ValueError("unreviewed current focus decision-tooltip output")
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    addition = ("\n".join(lock["added_lines"]) + "\n").encode().replace(b"\n", newline)
+    if data.count(addition) != 1:
+        raise ValueError("focus decision-tooltip notice is missing or duplicated")
+    previous = data.replace(addition, b"", 1)
+    if sha256(previous) != lock["previous_output_sha256"]:
+        raise ValueError("focus decision-tooltip reversal changed historical gameplay")
+    return previous
+
+
 @lru_cache(maxsize=1)
 def material_cycle_lock() -> dict:
     lock = json.loads(MATERIAL_CYCLE_LOCK_PATH.read_text(encoding="utf-8"))
@@ -715,6 +790,8 @@ def main() -> int:
     #20261003_kpopmodder: Verify all frozen prose bytes even after the live donor changes.
     verify_prose_snapshot()
     print("HOK prose snapshot: 28 runtime localisation + 2 source documents verified")
+    focus_tooltip_update_lock()
+    print("HOK focus decision-tooltip: immutable two-line source delta verified")
     return 0
 
 

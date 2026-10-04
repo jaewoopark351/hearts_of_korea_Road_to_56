@@ -5,6 +5,10 @@ tools/hok_policy_update_lock.json text eol=lf
 tools/hok_localisation_update_lock.json text eol=lf
 tools/hok_material_cycle_lock.json text eol=lf
 tools/hok_prose_update_lock.json text eol=lf
+#20261005_kpopmodder: Preserve the independent tooltip source fingerprint on Windows checkouts.
+tools/hok_focus_tooltip_update_lock.json text eol=lf
+#20261005_kpopmodder: Keep the descriptor checkout identical to both historical preservation locks.
+descriptor.mod text eol=crlf
 tools/hok_icon_lock.json text eol=crlf
 
 # Byte-exact upstream evidence includes historical mixed line endings.

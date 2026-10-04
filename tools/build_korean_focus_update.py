@@ -23,6 +23,7 @@ from source_snapshot import (
     policy_update_lock, read_policy_source, localisation_update_lock, read_localisation_source,
     MATERIAL_CYCLE_RUNTIME_PATHS, material_cycle_lock, read_material_cycle_source,
     PROSE_UPDATE_RUNTIME_PATHS, prose_update_lock, read_prose_source, verify_prose_snapshot,
+    focus_tooltip_update_lock, apply_focus_tooltip_update,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -125,6 +126,8 @@ ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     Path(relative): record["previous_output_sha256"]
     for relative, record in prose_update_lock()["runtime_text"].items()
 })
+#20261005_kpopmodder: Accept only the reviewed complete pre-tooltip tree for the final source overlay.
+ACCEPTED_PRIOR_OUTPUT_HASHES[Path(SECOND_WAVE_FOCUS_PATH)] = focus_tooltip_update_lock()["previous_output_sha256"]
 CHECKOUT_RESTORATION_HASHES = {
     Path(relative): record["previous_output_sha256"]
     for relative, record in material_cycle_lock()["checkout_restoration"].items()
@@ -335,6 +338,8 @@ def build_all() -> dict[Path, bytes]:
                 raise ValueError(f"prose update changed a protected localisation value: {name}/{new[0].decode()}")
         outputs[relative] = migrated
     verify_prose_snapshot()
+    #20261005_kpopmodder: Show the existing decision unlock after all prior gameplay and geography layers.
+    outputs[Path(SECOND_WAVE_FOCUS_PATH)] = apply_focus_tooltip_update(outputs[Path(SECOND_WAVE_FOCUS_PATH)])
     verify_geography_inputs()
     verify_inputs()
     return outputs

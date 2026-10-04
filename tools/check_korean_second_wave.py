@@ -25,6 +25,7 @@ from source_snapshot import (
     localisation_update_lock, read_localisation_source,
     material_cycle_lock, read_material_cycle_source,
     git_command, prose_update_lock, read_prose_source,
+    focus_tooltip_update_lock, remove_focus_tooltip_update,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -148,11 +149,18 @@ def expected_script(relative: str) -> Block:
         return tuple(result)
 
     if relative == FOCUS_PATH:
+        #20261005_kpopmodder: Add only the frozen decision notice to the independent ordered focus contract.
+        tooltip = focus_tooltip_update_lock()
+        require((tooltip["path"], tooltip["focus_id"], tooltip["decision_id"]) ==
+                (FOCUS_PATH, MATERIAL_FOCUS, MATERIAL_DECISION), "unreviewed focus-tooltip overlay target")
         tree = []
         for entry in one(source, "focus_tree"):
             if entry.key == "focus" and isinstance(entry.value, tuple):
                 identifier = scalar(entry.value, "id")
                 body = policy(entry.value) if identifier in FOCUS_IDS else stronghold(entry.value) if identifier in HW_FOCUS_IDS else entry.value
+                if identifier == MATERIAL_FOCUS:
+                    body = replace_entry(body, ("completion_reward",), one(body, "completion_reward") +
+                                         (Entry("unlock_decision_tooltip", "=", MATERIAL_DECISION),))
                 tree.append(Entry(entry.key, entry.op, body))
             else:
                 tree.append(entry)
@@ -399,9 +407,13 @@ def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str
                                           MATERIAL_GFX_PATH, *MATERIAL_LOCALES},
             "material-cycle runtime allowlist must remain six text files without map or on_action changes")
     require(set(lock["runtime_assets"]) == set(MATERIAL_SPRITES.values()), "material-cycle artwork allowlist changed")
-    require(FOCUS_PATH in lock["preserved_runtime"], "material-cycle update must pin the unchanged focus tree")
+    require(FOCUS_PATH in lock["preserved_runtime"], "material-cycle update must pin the pre-tooltip focus tree")
     for relative, digest in lock["preserved_runtime"].items():
-        require(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest().upper() == digest.upper(),
+        #20261005_kpopmodder: Reverse only the strict frozen tooltip overlay before checking historical preservation pins.
+        data = (ROOT / relative).read_bytes()
+        if relative == FOCUS_PATH:
+            data = remove_focus_tooltip_update(data)
+        require(hashlib.sha256(data).hexdigest().upper() == digest.upper(),
                 f"material-cycle update changed preserved runtime: {relative}")
 
     original = named(one(one(parse(read_second_wave_source(MATERIAL_IDEA_PATH).decode("utf-8-sig")), "ideas"), "country"))
@@ -429,7 +441,8 @@ def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str
             "scrap collection no longer grants only material-cycle I")
     require(one(focuses[MATERIAL_FOCUS], "completion_reward") == parse(
         f"if = {{ limit = {{ has_idea = {MATERIAL_TIERS[0]} }} swap_ideas = {{ remove_idea = {MATERIAL_TIERS[0]} add_idea = {MATERIAL_TIERS[1]} }} }} "
-        f"else = {{ add_ideas = {MATERIAL_TIERS[1]} }}"), "material-cycle II must replace I without stacking the lower tier")
+        f"else = {{ add_ideas = {MATERIAL_TIERS[1]} }} unlock_decision_tooltip = {MATERIAL_DECISION}"),
+        "material-cycle II must replace I without stacking the lower tier and retain the decision notice")
     require(one(focuses[MATERIAL_FOCUS], "prerequisite") == parse("focus = HOK_KOR_cmn_foundry_exchange"),
             "closed material-cycle prerequisite changed")
     for identifier, reward in (
@@ -552,7 +565,11 @@ def check_prose_update(payloads: dict[str, bytes] | None = None) -> None:
              "descriptor.mod"} <= preserved.keys(), "prose import lacks required unchanged gameplay/presentation pins")
     require(not PROSE_PATHS & preserved.keys(), "prose preserved-runtime pins include approved description outputs")
     for relative, digest in preserved.items():
-        require(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest().upper() == digest.upper(),
+        #20261005_kpopmodder: Preserve the prose import's historical pins underneath the later decision notice.
+        data = (ROOT / relative).read_bytes()
+        if relative == FOCUS_PATH:
+            data = remove_focus_tooltip_update(data)
+        require(hashlib.sha256(data).hexdigest().upper() == digest.upper(),
                 f"prose update changed preserved gameplay/presentation: {relative}")
     allowed = prose_description_keys()
     payloads = {relative: (ROOT / relative).read_bytes() for relative in PROSE_PATHS} if payloads is None else payloads
@@ -683,7 +700,7 @@ def run_checks() -> None:
     check_localisation(localisation_payloads(), groups, added)
     check_references(groups, added)
     print("PASS second wave plus material cycle: pinned 460 focuses (134 new), 64 ideas, 19 projects, 5 categories, 12 state modifiers; ordered source/port contracts")
-    print("PASS material cycle: unchanged focuses and unrelated content; +30%/+60% tiers, one PP150/90-day boost, no stacking or cooldown, temporary-only cleanup")
+    print("PASS material cycle: focus gameplay and unrelated content preserved; closed-cycle decision notice added; +30%/+60% tiers, one PP150/90-day boost, no stacking or cooldown, temporary-only cleanup")
     print("PASS second-wave artwork/localisation: 234 exact DDS, 368 sprites, 17 registries, 11 paired language files; vanilla shine fallback")
     print("PASS prose update: 124 descriptions per channel, fourteen frozen pairs; keys, six protected descriptions, gameplay and ADR-0005 regions preserved")
     print("STATIC ONLY: no HOI4 evaluation, geography lifecycle, layout rendering, AI, save or multiplayer proof.")

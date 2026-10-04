@@ -24,6 +24,7 @@ from source_snapshot import (
     localisation_update_lock, read_localisation_source,
     material_cycle_lock, read_material_cycle_source,
     prose_update_lock, read_prose_source,
+    focus_tooltip_update_lock,
 )
 
 
@@ -743,6 +744,27 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "donor_source_checkout": prose["source_kind"],
         })
         row["reason"] += "; 2026-10-03 국민정신·디시전·범주 설명 선택 이식: tools/hok_prose_update_lock.json, 43dbb38 이후 미커밋 원본 동결; 명칭·효과·기존 지역 안내 보존"
+
+    #20261005_kpopmodder: Attribute only the committed decision-unlock notice without replacing the historical focus merge.
+    tooltip = focus_tooltip_update_lock()
+    relative = tooltip["path"]
+    matching = [row for row in rows if row["source_path"] == relative]
+    if (len(matching) != 1 or matching[0]["integration_class"] != "OVERRIDE"
+            or matching[0]["output_path"] != relative):
+        raise RuntimeError(f"focus tooltip overlay requires its existing merge row: {relative}")
+    if ((REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]
+            or sha256(REPO_ROOT / relative) != tooltip["output_sha256"]):
+        raise RuntimeError(f"focus tooltip output differs from its reviewed source merge: {relative}")
+    row = matching[0]
+    row.update({
+        "donor_sha256": tooltip["source_sha256"],
+        "output_sha256": tooltip["output_sha256"],
+        "donor_source_commit": tooltip["source_commit"],
+        "donor_source_blob": tooltip["blob"],
+        "donor_source_sha256": tooltip["source_sha256"],
+        "donor_source_checkout": tooltip["checkout"],
+    })
+    row["reason"] += "; 2026-10-05 HOK 062a602의 긴급 원료 순환 결정 해금 툴팁만 선택 이식; 기존 중점·RT56 지역 병합·실제 결정 조건 보존"
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(

@@ -152,6 +152,11 @@ Additional instruction sync recorded on 2026-10-03:
 - The compatibility identity, RT56 host-preservation rules, source pins, generated-file ownership, authorship record, and publication boundaries remain in force.
 - A later documentation-only sync on 2026-10-03 imports the strengthened English-only commit-message rule from the same donor HEAD, including uncommitted changes (source SHA-256 `AA6149D92F415097F5D53D758A67E051B7EC598C3074D0D55CE0EE0D0E4E407D`). The earlier source hash above remains the record of the first sync; explicit commit/push authorization is still required.
 
+Additional instruction sync recorded on 2026-10-05:
+
+- The requested upstream update imports only the donor's focus decision-unlock tooltip rule from `C:\hoi\hearts_of_korea\AGENTS.md` at donor commit `062a60287e00ac11352c38bca0fca1ae556e7801` (source SHA-256 `3DB3917841B773F1264EDD310916FD8CB676A963331C500C9C6EEDBE7832FF40`). Existing unlock conditions, costs, duration, gameplay, compatibility identity, RT56 ownership, source pins, and publication boundaries remain in force.
+- This instruction sync does not authorize adding notices throughout inherited content. The selected upstream runtime delta is the existing emergency material-cycle decision notice in `HOK_KOR_cmn_closed_material_cycle`; its implementation and validation are recorded separately.
+
 Treat the continuation mandate and the compatibility-port request as established project context. Do not require another original-author approval for work the user has already authorized; escalate only concrete contradictory evidence, a specific third-party restriction, or a required user decision.
 
 Do not infer the current target version from memory or from `supported_version` alone. Before compatibility work, record when available:
@@ -405,6 +410,12 @@ For `descriptor.mod` and launcher `.mod` files:
 - Verify focus prerequisites, bypass, cancel, mutual exclusion, rewards, and AI selection.
 - Verify decision visibility separately from availability and completion/removal.
 - Check recurring content for accidental daily firing or unbounded event chains.
+
+#### Focus effects must explain decision unlocks
+
+- When completing a focus unlocks a decision or decision category, the focus's effects must explicitly name it and state that it is unlocked. This also applies when the actual unlock is driven by decision visibility/availability conditions such as `has_completed_focus`, a flag, or a national spirit.
+- Display the decision-unlock notice with `unlock_decision_tooltip = <decision_id>` in the focus's `completion_reward`. When a decision category itself is unlocked, display its notice with `unlock_decision_category_tooltip = <category_id>`. Reuse the existing localised name; use an accurate localised effect tooltip if the standard notice cannot describe a conditional unlock.
+- Keep the actual unlock logic, costs, durations, and other usage requirements unchanged when adding this notice. Describe the content as unlocked without promising immediate use when separate requirements remain. Do not describe an individual decision unlock as unlocking its entire category.
 
 #### Focus placement, x/y, and relative coordinates
 

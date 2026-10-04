@@ -4,6 +4,7 @@
 
 ## 현재 상태
 
+- 2026-10-05 최신 원본 변경: **폐쇄형 원료 순환체계 중점의 기존 긴급 결정 해금 툴팁 2줄 이식 완료**. donor `062a602`와 새 작성 지침을 선택 반영하고 기존 효과·조건·RT56 병합을 보존했다. aggregate **20 PASS / 0 WARNING / 1 기존 history ERROR**, 이번 UI·실행 미검증. descriptor의 내용 없는 checkout 개행 복원과 기존 원장 해시 갱신은 [구현 기록](implementation/2026-10-05-focus-decision-tooltip-port.md)에 구분했다.
 - 2026-10-03 최신 설명 업데이트: **14쌍·28개 현지화 파일, 국민정신 88개·디시전 28개·범주 8개의 설명 124개/채널 선택 이식 완료**. 원료 순환의 보호 문안과 RT56 만주 지역 안내, 게임 로직·지도·그림을 보존했다. subsystem·회귀 35개 통과, aggregate **20 PASS / 0 WARNING / 1 기존 history ERROR**; 이번 UI·실행 미검증. 작업 전 19 PASS / 2 기존 ERROR와 원장 갱신을 [이식 기록](implementation/2026-10-03-korean-prose-update-port.md)에 구분했다.
 - 2026-10-03 원료 순환체계 업데이트: **선택 이식·해당 module 정적 검사 완료, aggregate 20 PASS / 0 WARNING / 1 기존 ERROR. 이번 호환판 실행 검증 미실행**. 영구 I·II 보상 강화와 정치력 150의 별도 90일 긴급 지원, 전용 그림·현지화를 반영했다. 원장 1,417개·관리 output 406개, 의도적 회귀 35개 거부. [구현 기록](implementation/2026-10-03-korean-material-cycle-port.md)에 현재 source/playset, 작업 전 `9 PASS / 12 ERROR`와 별도 checkout 바이트 복구, 잔여 history 오류·whitespace 검사 제한을 기록한다.
 - 2026-09-23 후속 한국 업데이트: **콘텐츠·이미지 병합 완료, 460개 중점. 실제 엔진 9개 시나리오 909 PASS / 0 FAIL / 0 SKIP; 신규 134개 중점·63개 국민정신 확인. 정적 20 PASS / 0 WARNING / 1 기존 ERROR**. 18개 사업·12개 주 효과·231개 그림을 선택 이식했다. 강제 효과와 기간 경과 검사의 범위·한계·초기 계측 실패는 [실행 감사](audits/2026-09-23-second-wave-runtime.md)에 구분했다. [구현 기록](implementation/2026-09-23-korean-second-wave-port.md), [지역 대응 ADR-0005](decisions/0005-korean-second-wave-regional-integration.md), [출처·충돌 감사](audits/2026-09-23-second-wave-source-audit.md). 정적 잔여 오류는 작업 전 KOR history 전쟁 지지도와 생성기의 불일치다. 아래 9월 22일 수치는 이전 326개 이식의 역사적 기록이다.
@@ -25,6 +26,7 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 구현 | [2026-10-05 중점 결정 해금 툴팁](implementation/2026-10-05-focus-decision-tooltip-port.md) | donor062a602의 2줄·지침 선택 이식, 기존 gameplay 보존; 정적20 PASS와 기존history1 ERROR, 실행 미검증 |
 | 구현 | [2026-10-03 국민정신·디시전 설명 업데이트](implementation/2026-10-03-korean-prose-update-port.md) | 설명124개/채널·28파일, runtime 나머지1,324개 동일; 정적20 PASS와 기존history1 ERROR, 실행 미검증 |
 | 원본 기록 | [2026-10-03 최신 설명 동결본](upstream/hok-prose-update-20261003/README.md) | donor43dbb38 위 미커밋 locale28개·문서2개, immutable base·해시·보존lock 분리 |
 | 구현 | [2026-10-03 원료 순환체계 업데이트 이식](implementation/2026-10-03-korean-material-cycle-port.md) | runtime 9개·관리 406개·원장 1,417개, 20 PASS / 1 기존 ERROR; 실행 미검증 |
