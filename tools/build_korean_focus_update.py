@@ -25,6 +25,7 @@ from source_snapshot import (
     PROSE_UPDATE_RUNTIME_PATHS, prose_update_lock, read_prose_source, verify_prose_snapshot,
     focus_tooltip_update_lock, apply_focus_tooltip_update,
     prerequisite_update_lock, apply_focus_prerequisite_update,
+    royal_update_lock, apply_royal_update,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -131,6 +132,11 @@ ACCEPTED_PRIOR_OUTPUT_HASHES.update({
 ACCEPTED_PRIOR_OUTPUT_HASHES[Path(SECOND_WAVE_FOCUS_PATH)] = focus_tooltip_update_lock()["previous_output_sha256"]
 #20261010_kpopmodder: Accept only the byte-exact tooltip ancestor for the six prerequisite edits.
 ACCEPTED_PRIOR_OUTPUT_HASHES[Path(SECOND_WAVE_FOCUS_PATH)] = prerequisite_update_lock()["previous_output_sha256"]
+#20261010_kpopmodder: Accept only the two reviewed royal ancestors, preserving any independent user edits.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): record["previous_output_sha256"]
+    for relative, record in royal_update_lock()["runtime_text"].items()
+})
 CHECKOUT_RESTORATION_HASHES = {
     Path(relative): record["previous_output_sha256"]
     for relative, record in material_cycle_lock()["checkout_restoration"].items()
@@ -345,6 +351,9 @@ def build_all() -> dict[Path, bytes]:
     outputs[Path(SECOND_WAVE_FOCUS_PATH)] = apply_focus_tooltip_update(outputs[Path(SECOND_WAVE_FOCUS_PATH)])
     #20261010_kpopmodder: Apply only the author's six entry/prerequisite changes after all historical RT56 merges.
     outputs[Path(SECOND_WAVE_FOCUS_PATH)] = apply_focus_prerequisite_update(outputs[Path(SECOND_WAVE_FOCUS_PATH)])
+    #20261010_kpopmodder: Apply the royal policy/layout delta after all geography and prerequisite merges.
+    for relative in royal_update_lock()["runtime_text"]:
+        outputs[Path(relative)] = apply_royal_update(relative, outputs[Path(relative)])
     verify_geography_inputs()
     verify_inputs()
     return outputs

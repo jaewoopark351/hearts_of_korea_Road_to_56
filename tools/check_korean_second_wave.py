@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import re
 import struct
 import subprocess
@@ -27,6 +28,7 @@ from source_snapshot import (
     git_command, prose_update_lock, read_prose_source,
     focus_tooltip_update_lock, remove_focus_tooltip_update,
     prerequisite_update_lock, remove_focus_prerequisite_update,
+    royal_update_lock, remove_royal_update,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -137,6 +139,67 @@ def focus_prerequisite_contract(block: Block) -> Block:
             if entry.key == "prerequisite" else (entry,)))
     return body
 
+#20261010_kpopmodder: Keep the new royal gate, supply-anchor and courier-lifetime delta independent of prior source contracts.
+ROYAL_IDEA_PATH = "common/ideas/HOK_KOR_royal_followup.txt"
+ROYAL_AM_IDS = tuple("HOK_KOR_am_" + suffix for suffix in (
+    "petition_calendar", "granary_ledgers", "relief_dispatches", "regimental_returns",
+    "nco_examinations", "reserve_cadre", "mobilization_review", "technical_memorials",
+    "civil_service_practicum", "merit_registers",
+))
+ROYAL_H2_IDS = tuple("HOK_KOR_hw_" + suffix for suffix in (
+    "dispatch_codes", "courier_relays", "signal_logs", "relay_exercises",
+))
+ROYAL_REMOVALS = {
+    identifier: ("KOR_reconstruction_confusian_order",) +
+    (("KOR_reform_military",) if identifier == "HOK_KOR_am_regimental_returns" else
+     ("KOR_revive_bibyeonsa",) if identifier == "HOK_KOR_am_technical_memorials" else ())
+    for identifier in ROYAL_AM_IDS
+}
+ROYAL_REMOVALS.update({identifier: ("KOR_empire_of_hwan",) for identifier in ROYAL_H2_IDS})
+ROYAL_SUPPLY_ROOT = "HOK_KOR_hw_provincial_inventory"
+ROYAL_SUPPLY_OFFSETS = {
+    ROYAL_SUPPLY_ROOT: (0, 0), "HOK_KOR_hw_provision_accounts": (-1, 1),
+    "HOK_KOR_hw_inspection_circuits": (1, 1), "HOK_KOR_hw_supply_returns": (0, 2),
+}
+ROYAL_FOCUS_IDS = frozenset((*ROYAL_REMOVALS, ROYAL_SUPPLY_ROOT))
+ROYAL_COURIER_IDEAS = tuple("HOK_KOR_hw_courier_service_" + str(tier) for tier in (1, 2))
+ROYAL_OFFSET_ROOT = "KOR_urihwangsilsaranghoe"
+
+
+def royal_focus_contract(block: Block, *, reverse: bool = False) -> Block:
+    """Apply or reverse only the reviewed ordered-AST royal fields; retain all state scopes."""
+    identifier = scalar(block, "id")
+    if identifier in ROYAL_REMOVALS:
+        removed = tuple(Entry("has_completed_focus", "=", value) for value in ROYAL_REMOVALS[identifier])
+        gate = one(block, "available")
+        if reverse:
+            require(not any(entry in gate for entry in removed), f"royal removed gate unexpectedly retained: {identifier}")
+            anchor = Entry("has_civil_war", "=", "no") if identifier in ROYAL_AM_IDS else Entry("is_subject", "=", "no")
+            require(gate.count(anchor) == 1, f"royal retained availability anchor missing: {identifier}")
+            gate = tuple(item for entry in gate for item in ((entry, *removed) if entry == anchor else (entry,)))
+        else:
+            require(all(gate.count(entry) == 1 for entry in removed), f"royal baseline completion gate changed: {identifier}")
+            gate = tuple(entry for entry in gate if entry not in removed)
+        block = replace_entry(block, ("available",), gate)
+    if identifier == ROYAL_SUPPLY_ROOT:
+        old_parent, new_parent = ("KOR_empire_of_hwan", "KOR_return_of_the_king") if reverse else ("KOR_return_of_the_king", "KOR_empire_of_hwan")
+        old_x, new_x = ("6", "25") if reverse else ("25", "6")
+        require(scalar(block, "relative_position_id") == old_parent and scalar(block, "x") == old_x
+                and scalar(block, "y") == "1" and children(block, "prerequisite") == [parse(f"focus = {old_parent}")],
+                "royal supply-root ancestor or layout fields changed")
+        block = replace_entry(replace_entry(replace_entry(block, ("relative_position_id",), new_parent),
+                                            ("x",), new_x), ("prerequisite",), parse(f"focus = {new_parent}"))
+    return block
+
+
+def royal_idea_contract(identifier: str, block: Block) -> Block:
+    if identifier not in ROYAL_COURIER_IDEAS:
+        return block
+    require(one(block, "cancel") == parse("NOT = { has_completed_focus = KOR_empire_of_hwan }"),
+            f"royal courier baseline lifetime changed: {identifier}")
+    return replace_entry(block, ("cancel",), None)
+
+
 
 def runtime_paths() -> tuple[str, ...]:
     return tuple(dict.fromkeys((*SECOND_WAVE_RUNTIME_PATHS, *material_cycle_lock()["runtime_text"])))
@@ -167,7 +230,7 @@ def expected_payload(relative: str) -> bytes:
     return apply_second_wave_geography(relative, data)
 
 
-def expected_script(relative: str, *, prerequisite_update: bool = True) -> Block:
+def expected_script(relative: str, *, prerequisite_update: bool = True, royal_update: bool = True) -> Block:
     # [2026-09-23]_kpopmodder: Reconstruct geography with an independent ordered-AST algorithm, not the generator's text replacements.
     from korean_second_wave_geography import DECISION_PATH, FOCUS_IDS, HW_FOCUS_IDS, STATE_GROUPS, STRONGHOLD_GROUPS
     require(STATE_GROUPS == {328: (328, 941), 714: (714, 944, 945), 717: (717, 942, 943)}, "unreviewed M policy geography contract")
@@ -221,10 +284,18 @@ def expected_script(relative: str, *, prerequisite_update: bool = True) -> Block
                 #20261010_kpopmodder: Layer the six entry edits after the independent geography and decision-notice contracts.
                 if prerequisite_update:
                     body = focus_prerequisite_contract(body)
+                #20261010_kpopmodder: Apply the reviewed royal delta after retaining every earlier gameplay and geography layer.
+                if royal_update:
+                    body = royal_focus_contract(body)
                 tree.append(Entry(entry.key, entry.op, body))
             else:
                 tree.append(entry)
         return replace_entry(source, ("focus_tree",), tuple(tree))
+    if relative == ROYAL_IDEA_PATH and royal_update:
+        ideas = one(one(source, "ideas"), "country")
+        revised = tuple(Entry(entry.key, entry.op, royal_idea_contract(entry.key, entry.value))
+                        if isinstance(entry.value, tuple) else entry for entry in ideas)
+        return replace_entry(source, ("ideas", "country"), revised)
     return policy(source) if relative == DECISION_PATH else source
 
 
@@ -245,8 +316,9 @@ def check_focus_prerequisite_update(groups: dict[str, dict[str, Block]]) -> None
     require(source == replace_entry(base, ("focus_tree",), tree),
             "donor prerequisite update changed an unrelated field, definition or declaration order")
 
-    focuses = groups["focus"]
-    previous = focus_blocks(expected_script(FOCUS_PATH, prerequisite_update=False))
+    #20261010_kpopmodder: Audit the earlier six-focus delta underneath the strictly reversed royal AST layer.
+    focuses = {identifier: royal_focus_contract(block, reverse=True) for identifier, block in groups["focus"].items()}
+    previous = focus_blocks(expected_script(FOCUS_PATH, prerequisite_update=False, royal_update=False))
     require(list(focuses) == list(previous), "prerequisite update changed focus IDs or declaration order")
     changed = {identifier for identifier in focuses if focuses[identifier] != previous[identifier]}
     require(changed == PREREQUISITE_IDS, f"prerequisite update changed the wrong focuses: {sorted(changed)}")
@@ -271,6 +343,166 @@ def check_focus_prerequisite_update(groups: dict[str, dict[str, Block]]) -> None
             require(one(focuses[identifier], "available") == one(previous[identifier], "available")
                     and Entry("has_completed_focus", "=", gate) in one(focuses[identifier], "available"),
                     f"prerequisite update removed a later policy completion gate: {identifier}/{gate}")
+
+#20261010_kpopmodder: Model relative coordinates and the one inherited royal HIDE offset separately from engine rendering.
+def focus_base_positions(focuses: dict[str, Block]) -> dict[str, tuple[float, float]]:
+    positions: dict[str, tuple[float, float]] = {}
+    visiting: set[str] = set()
+    def resolve(identifier: str) -> tuple[float, float]:
+        require(identifier in focuses, f"missing royal layout anchor: {identifier}")
+        require(identifier not in visiting, f"cyclic royal layout anchor: {identifier}")
+        if identifier in positions:
+            return positions[identifier]
+        visiting.add(identifier)
+        block = focuses[identifier]
+        anchors = [entry.value for entry in block if entry.key == "relative_position_id"]
+        require(len(anchors) <= 1, f"multiple royal layout anchors: {identifier}")
+        x, y = float(scalar(block, "x")), float(scalar(block, "y"))
+        if anchors:
+            parent_x, parent_y = resolve(anchors[0])
+            x, y = x + parent_x, y + parent_y
+        visiting.remove(identifier)
+        positions[identifier] = (x, y)
+        return positions[identifier]
+    for identifier in focuses:
+        resolve(identifier)
+    return positions
+
+
+def check_royal_layout(focuses: dict[str, Block], previous: dict[str, Block]) -> None:
+    require(len(focuses) == len(previous) == 460 and list(focuses) == list(previous),
+            "royal layout must preserve all 460 IDs and declaration order")
+    check_layout(focuses, set(ROYAL_FOCUS_IDS))
+    before, positions = focus_base_positions(previous), focus_base_positions(focuses)
+    moved = {identifier for identifier in positions if positions[identifier] != before[identifier]}
+    require(moved == set(ROYAL_SUPPLY_OFFSETS), f"royal layout moved the wrong focuses: {sorted(moved)}")
+    empire_x, empire_y = positions["KOR_empire_of_hwan"]
+    root = (empire_x + 6, empire_y + 1)
+    for identifier, (x, y) in ROYAL_SUPPLY_OFFSETS.items():
+        require(positions[identifier] == (root[0] + x, root[1] + y),
+                f"royal supply diamond coordinate changed: {identifier}")
+        if identifier != ROYAL_SUPPLY_ROOT:
+            require(tuple(entry for entry in focuses[identifier] if entry.key in ("relative_position_id", "x", "y")) ==
+                    tuple(entry for entry in previous[identifier] if entry.key in ("relative_position_id", "x", "y")),
+                    f"royal supply child-local offset changed: {identifier}")
+    for identifier in focuses:
+        require(children(focuses[identifier], "offset") == children(previous[identifier], "offset"),
+                f"royal update changed a conditional offset: {identifier}")
+    offset = parse("x = -101 y = 0 trigger = { AND = { has_game_rule = { rule = obsolete_focus_branches_visibility option = HIDE } has_completed_focus = KOR_urihwangsilsaranghoe } }")
+    require(children(focuses[ROYAL_OFFSET_ROOT], "offset") == [offset],
+            "royal conditional HIDE/completion contract changed")
+    affected = set(ROYAL_REMOVALS) | set(ROYAL_SUPPLY_OFFSETS)
+    for identifier in affected:
+        ancestors, node = [], identifier
+        while True:
+            require(node not in ancestors, f"cyclic royal offset inheritance: {identifier}")
+            ancestors.append(node)
+            anchor = [entry.value for entry in focuses[node] if entry.key == "relative_position_id"]
+            if not anchor:
+                break
+            node = anchor[0]
+        require([node for node in ancestors if children(focuses[node], "offset")] == [ROYAL_OFFSET_ROOT],
+                f"royal branch must inherit the political offset exactly once: {identifier}")
+        # These four static cases model the explicit source condition; they are not UI observations.
+        for option, completed, displacement in (("SHOW", False, 0), ("SHOW", True, 0),
+                                                ("HIDE", False, 0), ("HIDE", True, -101)):
+            shifted = tuple(positions[identifier][axis] + sum(
+                float(scalar(item, ("x", "y")[axis])) for node in ancestors for item in children(focuses[node], "offset")
+                if option == "HIDE" and completed) for axis in (0, 1))
+            require(shifted == (positions[identifier][0] + displacement, positions[identifier][1]),
+                    f"royal SHOW/HIDE offset applied early, twice or on SHOW: {identifier}/{option}/{completed}")
+
+#20261010_kpopmodder: Keep the maintained coordinate record tied to the actual port ancestor and reconstructed output.
+def check_royal_coordinate_spec(focuses: dict[str, Block], previous: dict[str, Block]) -> None:
+    spec = json.loads((ROOT / "docs/data/HOK_KOREAN_ROYAL_LAYOUT_COORDINATES.json").read_text(encoding="utf-8"))
+    require(spec["schema_version"] == 1 and spec["status"] == "STATIC_SPEC_RUNTIME_UNPROVEN"
+            and spec["source"] == FOCUS_PATH and spec["donor_commit"] == "4d8241e3cd33ebbceaca9650ab36b9891a22b56d"
+            and spec["count"] == 460 and spec["absolute_anchors"] == 7 and spec["relative_nodes"] == 453,
+            "royal coordinate record identity or inventory changed")
+    require(spec["baseline_source_sha256"] == royal_update_lock()["runtime_text"][FOCUS_PATH]["previous_output_sha256"],
+            "royal coordinate record has the wrong port ancestor")
+    nodes = spec["nodes"]
+    require([node["id"] for node in nodes] == list(focuses)
+            and [node["declaration_order"] for node in nodes] == list(range(460)),
+            "royal coordinate record must retain all IDs in declaration order")
+    before, after = focus_base_positions(previous), focus_base_positions(focuses)
+    for node in nodes:
+        identifier = node["id"]
+        for label, documents, positions in (("before", previous, before), ("after", focuses, after)):
+            body, record = documents[identifier], node[label]
+            anchors = [entry.value for entry in body if entry.key == "relative_position_id"]
+            require(record["relative_position_id"] == (anchors[0] if anchors else None)
+                    and record["script_xy"] == {"x": float(scalar(body, "x")), "y": float(scalar(body, "y"))}
+                    and record["base_absolute"] == dict(zip(("x", "y"), positions[identifier]))
+                    and record["prerequisite_groups"] == [[entry.value for entry in relation] for relation in children(body, "prerequisite")],
+                    f"royal coordinate record differs from the ordered AST: {identifier}/{label}")
+        if identifier in set(ROYAL_REMOVALS) | set(ROYAL_SUPPLY_OFFSETS):
+            x, y = after[identifier]
+            require(node["conditional_positions"] == {"SHOW": {"x": x, "y": y},
+                    "HIDE_INITIAL": {"x": x, "y": y}, "HIDE_ROYAL_COMPLETED": {"x": x - 101, "y": y}},
+                    f"royal coordinate record misstates conditional political movement: {identifier}")
+
+
+
+#20261010_kpopmodder: Verify the new source delta and every unchanged field against an independent ordered-AST ancestor.
+def check_royal_update(groups: dict[str, dict[str, Block]]) -> None:
+    lock = royal_update_lock()
+    require((lock["source_commit"], lock["base_commit"]) == (
+        "4d8241e3cd33ebbceaca9650ab36b9891a22b56d", "af6fccf2248311c01565c796555ed334ec685015"),
+        "unreviewed royal update source revision")
+    require(set(lock["runtime_text"]) == {FOCUS_PATH, ROYAL_IDEA_PATH}, "royal runtime allowlist changed")
+    for relative, record in lock["runtime_text"].items():
+        base = parse(subprocess.check_output(git_command() + ["cat-file", "blob", record["base_blob"]]).decode("utf-8-sig"))
+        source = parse(subprocess.check_output(git_command() + ["cat-file", "blob", record["blob"]]).decode("utf-8-sig"))
+        identifiers = {edit["id"] for edit in record["edits"]}
+        if relative == FOCUS_PATH:
+            require(identifiers == ROYAL_FOCUS_IDS, "royal source focus edit inventory changed")
+            tree = tuple(Entry(entry.key, entry.op, royal_focus_contract(entry.value))
+                         if entry.key == "focus" and isinstance(entry.value, tuple) else entry
+                         for entry in one(base, "focus_tree"))
+            expected = replace_entry(base, ("focus_tree",), tree)
+        else:
+            require(identifiers == set(ROYAL_COURIER_IDEAS), "royal source idea edit inventory changed")
+            country = tuple(Entry(entry.key, entry.op, royal_idea_contract(entry.key, entry.value))
+                            if isinstance(entry.value, tuple) else entry for entry in one(one(base, "ideas"), "country"))
+            expected = replace_entry(base, ("ideas", "country"), country)
+        require(source == expected, f"royal donor update changed an unreviewed field or declaration order: {relative}")
+    require(len(ROYAL_REMOVALS) == 14 and sum(map(len, ROYAL_REMOVALS.values())) == 16,
+            "royal update must remove exactly sixteen completion gates in fourteen focuses")
+    focuses = groups["focus"]
+    previous = focus_blocks(expected_script(FOCUS_PATH, royal_update=False))
+    require(list(focuses) == list(previous), "royal update changed focus IDs or declaration order")
+    changed = {identifier for identifier in focuses if focuses[identifier] != previous[identifier]}
+    require(changed == ROYAL_FOCUS_IDS, f"royal update changed the wrong focuses: {sorted(changed)}")
+    for identifier, block in focuses.items():
+        require(block == royal_focus_contract(previous[identifier]),
+                f"royal update changed rewards, timing, AI, lifecycle, geography or unrelated fields: {identifier}")
+        if identifier in ROYAL_AM_IDS:
+            require(one(block, "available") == parse("original_tag = KOR has_government = neutrality has_civil_war = no"),
+                    f"royal original-tag, neutrality or civil-war gate changed: {identifier}")
+        if identifier in ROYAL_H2_IDS:
+            require(one(block, "available") == parse("original_tag = KOR has_civil_war = no is_subject = no") +
+                    (Entry("OR", "=", one(one(previous[identifier], "available"), "OR")),),
+                    f"royal subject, civil-war or whole-region stronghold gate changed: {identifier}")
+        if identifier != ROYAL_SUPPLY_ROOT:
+            require(children(block, "prerequisite") == children(previous[identifier], "prerequisite"),
+                    f"royal internal prerequisite or AND grouping changed: {identifier}")
+    check_royal_layout(focuses, previous)
+    check_royal_coordinate_spec(focuses, previous)
+    previous_ideas = named(one(one(expected_script(ROYAL_IDEA_PATH, royal_update=False), "ideas"), "country"))
+    changed_ideas = {identifier for identifier, block in previous_ideas.items() if groups["idea"][identifier] != block}
+    require(changed_ideas == set(ROYAL_COURIER_IDEAS), "royal update changed an unrelated national spirit")
+    for identifier, block in previous_ideas.items():
+        require(groups["idea"][identifier] == royal_idea_contract(identifier, block),
+                f"royal idea modifiers, tiers, ownership or unrelated cancellation changed: {identifier}")
+    for identifier, reward in zip(ROYAL_COURIER_IDEAS, (
+        "initiative_factor = 0.10 army_speed_factor = 0.05",
+        "initiative_factor = 0.15 army_speed_factor = 0.10",
+    )):
+        idea = groups["idea"][identifier]
+        require(not any(entry.key == "cancel" for entry in idea) and one(idea, "modifier") == parse(reward),
+                f"royal acquired courier tier cancels or has incorrect modifiers: {identifier}")
+
 
 
 def documents() -> tuple[dict[str, Block], dict[str, Block]]:
@@ -516,6 +748,9 @@ def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str
     for relative, digest in lock["preserved_runtime"].items():
         #20261010_kpopmodder: Reverse both strict overlays before checking the original material-cycle preservation pins.
         data = (ROOT / relative).read_bytes()
+        #20261010_kpopmodder: Recover both the focus and royal-idea ancestors before testing unchanged historical pins.
+        if relative in (FOCUS_PATH, ROYAL_IDEA_PATH):
+            data = remove_royal_update(relative, data)
         if relative == FOCUS_PATH:
             data = remove_focus_tooltip_update(remove_focus_prerequisite_update(data))
         require(hashlib.sha256(data).hexdigest().upper() == digest.upper(),
@@ -673,6 +908,9 @@ def check_prose_update(payloads: dict[str, bytes] | None = None) -> None:
         #20261005_kpopmodder: Preserve the prose import's historical pins underneath the later decision notice.
         #20261010_kpopmodder: Reverse the six prerequisite edits before applying the historical tooltip reversal.
         data = (ROOT / relative).read_bytes()
+        #20261010_kpopmodder: Recover both the focus and royal-idea ancestors before testing unchanged historical pins.
+        if relative in (FOCUS_PATH, ROYAL_IDEA_PATH):
+            data = remove_royal_update(relative, data)
         if relative == FOCUS_PATH:
             data = remove_focus_tooltip_update(remove_focus_prerequisite_update(data))
         require(hashlib.sha256(data).hexdigest().upper() == digest.upper(),
@@ -802,6 +1040,7 @@ def run_checks() -> None:
     check_regional_gates(groups)
     check_material_cycle(groups)
     check_focus_prerequisite_update(groups)
+    check_royal_update(groups)
     check_prose_update()
     check_assets(groups, added)
     check_localisation(localisation_payloads(), groups, added)
@@ -810,35 +1049,12 @@ def run_checks() -> None:
     print("PASS material cycle: focus gameplay and unrelated content preserved; closed-cycle decision notice added; +30%/+60% tiers, one PP150/90-day boost, no stacking or cooldown, temporary-only cleanup")
     print("PASS second-wave artwork/localisation: 234 exact DDS, 368 sprites, 17 registries, 11 paired language files; vanilla shine fallback")
     print("PASS prerequisite update: six focuses only; two separate mining AND parents, five entry gates removed; rewards, timing, layout, AI and later policy gates preserved")
+    print("PASS royal update: sixteen gates removed in fourteen focuses; supply diamond only four coordinates move; two courier lifetimes updated; rewards, tiers, AI, regional AND gates and conditional offsets preserved")
     print("PASS prose update: 124 descriptions per channel, fourteen frozen pairs; keys, six protected descriptions, gameplay and ADR-0005 regions preserved")
     print("STATIC ONLY: no HOI4 evaluation, geography lifecycle, layout rendering, AI, save or multiplayer proof.")
 
 
-def run_self_tests() -> None:
-    # [2026-09-23]_kpopmodder: Inject bounded in-memory faults against immutable-source expectations; never mutate production files.
-    current, expected = documents()
-    compare_documents(current, expected)
-    groups = collect(current)
-    added = check_inventory(groups)
-    check_projects(groups)
-    check_material_cycle(groups)
-    check_focus_prerequisite_update(groups)
-    check_prose_update()
-    caught = []
-
-    def rejects(label, action):
-        try:
-            action()
-        except (ValueError, KeyError, StopIteration):
-            caught.append(label)
-        else:
-            raise ValueError(f"second-wave mutation was not detected: {label}")
-
-    def focus_mutation(identifier, transform):
-        tree = one(current[FOCUS_PATH], "focus_tree")
-        modified = tuple(Entry(entry.key, entry.op, transform(entry.value)) if entry.key == "focus" and scalar(entry.value, "id") == identifier else entry for entry in tree)
-        return {**current, FOCUS_PATH: replace_entry(current[FOCUS_PATH], ("focus_tree",), modified)}
-
+def prerequisite_mutation_checks(groups, rejects, focus_mutation) -> None:
     #20261010_kpopmodder: Reject lost mining conjunctions, retained obsolete gates and changes outside the six-entry delta.
     mining = groups["focus"][PREREQUISITE_MINING]
     mining_parents = children(mining, "prerequisite")
@@ -879,6 +1095,121 @@ def run_self_tests() -> None:
                     lambda relaxed=relaxed: check_focus_prerequisite_update(collect(relaxed)))
     reward_drift = focus_mutation(PREREQUISITE_MINING, lambda body: replace_entry(body, ("completion_reward",), parse("add_political_power = 1")))
     rejects("prerequisite update mining reward drift", lambda: check_focus_prerequisite_update(collect(reward_drift)))
+
+
+
+def royal_mutation_checks(groups, rejects, focus_mutation) -> None:
+    #20261010_kpopmodder: Exercise newly early access, acquired-spirit persistence and the relocated four-node supply diamond.
+    previous = focus_blocks(expected_script(FOCUS_PATH, royal_update=False))
+    for identifier, removed in ROYAL_REMOVALS.items():
+        retained = focus_mutation(identifier, lambda body, removed=removed: replace_entry(
+            body, ("available",), one(body, "available") + tuple(Entry("has_completed_focus", "=", value) for value in removed)))
+        rejects(f"royal obsolete gates restored: {identifier}", lambda retained=retained: check_royal_update(collect(retained)))
+    for identifier, guard in (
+        (ROYAL_AM_IDS[0], "original_tag"), (ROYAL_AM_IDS[0], "has_government"), (ROYAL_AM_IDS[0], "has_civil_war"),
+        (ROYAL_H2_IDS[0], "original_tag"), (ROYAL_H2_IDS[0], "has_civil_war"), (ROYAL_H2_IDS[0], "is_subject"),
+    ):
+        relaxed = focus_mutation(identifier, lambda body, guard=guard: replace_entry(
+            body, ("available",), tuple(entry for entry in one(body, "available") if entry.key != guard)))
+        rejects(f"royal retained guard removed: {identifier}/{guard}", lambda relaxed=relaxed: check_royal_update(collect(relaxed)))
+    fragment = focus_mutation(ROYAL_H2_IDS[0], lambda body: replace_entry(body, ("available", "OR"),
+                              parse("AND = { owns_state = 941 has_full_control_of_state = 941 }")))
+    rejects("royal split-region fragment accepted", lambda: check_royal_update(collect(fragment)))
+    for identifier in ROYAL_COURIER_IDEAS:
+        body = groups["idea"][identifier]
+        restored = {**groups, "idea": {**groups["idea"], identifier: body + parse("cancel = { NOT = { has_completed_focus = KOR_empire_of_hwan } }")}}
+        rejects(f"royal acquired courier cancels: {identifier}", lambda restored=restored: check_royal_update(restored))
+        weak = {**groups, "idea": {**groups["idea"], identifier: replace_entry(body, ("modifier",), parse("initiative_factor = 0.01 army_speed_factor = 0.01"))}}
+        rejects(f"royal courier modifier drift: {identifier}", lambda weak=weak: check_royal_update(weak))
+    other = next(identifier for identifier, body in named(one(one(expected_script(ROYAL_IDEA_PATH, royal_update=False), "ideas"), "country")).items()
+                 if identifier not in ROYAL_COURIER_IDEAS and children(body, "cancel"))
+    lost_cancel = {**groups, "idea": {**groups["idea"], other: replace_entry(groups["idea"][other], ("cancel",), None)}}
+    rejects("royal unrelated spirit cancellation removed", lambda: check_royal_update(lost_cancel))
+    for identifier in ("HOK_KOR_am_mobilization_review", "HOK_KOR_hw_supply_returns", "HOK_KOR_hw_relay_exercises"):
+        body = groups["focus"][identifier]
+        parents = children(body, "prerequisite")
+        collapsed = focus_mutation(identifier, lambda body, parents=parents: tuple(entry for entry in body if entry.key != "prerequisite") +
+                                  (Entry("prerequisite", "=", tuple(item for parent in parents for item in parent)),))
+        rejects(f"royal internal AND collapsed: {identifier}", lambda collapsed=collapsed: check_royal_update(collect(collapsed)))
+    stacked = focus_mutation("HOK_KOR_hw_relay_exercises", lambda body: replace_entry(body, ("completion_reward",), parse("add_ideas = HOK_KOR_hw_courier_service_2")))
+    rejects("royal courier upgrade retains lower tier", lambda: check_royal_update(collect(stacked)))
+    old_parent = focus_mutation(ROYAL_SUPPLY_ROOT, lambda body: replace_entry(body, ("prerequisite",), parse("focus = KOR_return_of_the_king")))
+    rejects("royal supply parent remains at king return", lambda: check_royal_update(collect(old_parent)))
+    layout_changes = (
+        ("root horizontal shift", ROYAL_SUPPLY_ROOT, ("x",), "7"),
+        ("root vertical shift", ROYAL_SUPPLY_ROOT, ("y",), "2"),
+        ("child local shift", "HOK_KOR_hw_provision_accounts", ("x",), "-2"),
+        ("unrelated focus shift", ROYAL_AM_IDS[0], ("x",), "5"),
+        ("cyclic root anchor", ROYAL_SUPPLY_ROOT, ("relative_position_id",), ROYAL_SUPPLY_ROOT),
+        ("forward cyclic anchor", ROYAL_SUPPLY_ROOT, ("relative_position_id",), "HOK_KOR_hw_supply_returns"),
+        ("missing anchor", ROYAL_SUPPLY_ROOT, ("relative_position_id",), "hok_rt56_missing_royal_anchor"),
+        ("offset before royal completion", ROYAL_OFFSET_ROOT, ("offset", "trigger"), parse("always = yes")),
+        ("offset applies on SHOW", ROYAL_OFFSET_ROOT, ("offset", "trigger"), parse("has_game_rule = { rule = obsolete_focus_branches_visibility option = SHOW }")),
+    )
+    for label, identifier, location, value in layout_changes:
+        altered = focus_mutation(identifier, lambda body, location=location, value=value: replace_entry(body, location, value))
+        rejects(f"royal layout {label}", lambda altered=altered: check_royal_layout(collect(altered)["focus"], previous))
+    doubled = focus_mutation(ROYAL_SUPPLY_ROOT, lambda body: body + parse("offset = { x = -101 y = 0 trigger = { always = yes } }"))
+    rejects("royal political offset inherited twice", lambda: check_royal_layout(collect(doubled)["focus"], previous))
+
+
+def run_royal_self_tests() -> None:
+    #20261010_kpopmodder: Keep focused royal/prerequisite evidence available without weakening unrelated historical descriptor assertions.
+    current, expected = documents()
+    compare_documents(current, expected)
+    groups = collect(current)
+    check_inventory(groups)
+    check_regional_gates(groups)
+    check_focus_prerequisite_update(groups)
+    check_royal_update(groups)
+    caught = []
+    def rejects(label, action):
+        try:
+            action()
+        except (ValueError, KeyError, StopIteration):
+            caught.append(label)
+        else:
+            raise ValueError(f"royal/prerequisite mutation was not detected: {label}")
+    def focus_mutation(identifier, transform):
+        tree = one(current[FOCUS_PATH], "focus_tree")
+        modified = tuple(Entry(entry.key, entry.op, transform(entry.value))
+                         if entry.key == "focus" and scalar(entry.value, "id") == identifier else entry for entry in tree)
+        return {**current, FOCUS_PATH: replace_entry(current[FOCUS_PATH], ("focus_tree",), modified)}
+    prerequisite_mutation_checks(groups, rejects, focus_mutation)
+    royal_mutation_checks(groups, rejects, focus_mutation)
+    print(f"PASS royal/prerequisite mutation self-test: {len(caught)} regressions rejected; current immutable-source fixture accepted; no production writes")
+    print("SCOPED STATIC ONLY: historical descriptor/material/prose assertions remain enforced by --check and --self-test; no UI, progression, AI, save or multiplayer proof.")
+
+
+
+def run_self_tests() -> None:
+    # [2026-09-23]_kpopmodder: Inject bounded in-memory faults against immutable-source expectations; never mutate production files.
+    current, expected = documents()
+    compare_documents(current, expected)
+    groups = collect(current)
+    added = check_inventory(groups)
+    check_projects(groups)
+    check_material_cycle(groups)
+    check_focus_prerequisite_update(groups)
+    check_royal_update(groups)
+    check_prose_update()
+    caught = []
+
+    def rejects(label, action):
+        try:
+            action()
+        except (ValueError, KeyError, StopIteration):
+            caught.append(label)
+        else:
+            raise ValueError(f"second-wave mutation was not detected: {label}")
+
+    def focus_mutation(identifier, transform):
+        tree = one(current[FOCUS_PATH], "focus_tree")
+        modified = tuple(Entry(entry.key, entry.op, transform(entry.value)) if entry.key == "focus" and scalar(entry.value, "id") == identifier else entry for entry in tree)
+        return {**current, FOCUS_PATH: replace_entry(current[FOCUS_PATH], ("focus_tree",), modified)}
+
+    prerequisite_mutation_checks(groups, rejects, focus_mutation)
+    royal_mutation_checks(groups, rejects, focus_mutation)
 
     and_focus = next(identifier for identifier in added if len(children(groups["focus"][identifier], "prerequisite")) == 2)
     first_parent = children(groups["focus"][and_focus], "prerequisite")[0]
@@ -963,9 +1294,10 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--self-test", action="store_true")
+    mode.add_argument("--royal-self-test", action="store_true")
     args = parser.parse_args()
     try:
-        run_self_tests() if args.self_test else run_checks()
+        run_royal_self_tests() if args.royal_self_test else run_self_tests() if args.self_test else run_checks()
     except (OSError, UnicodeError, ValueError, KeyError, StopIteration) as exc:
         print(f"ERROR Korean second-wave contract: {exc}")
         return 1

@@ -4,6 +4,7 @@
 
 ## 현재 상태
 
+- 2026-10-10 원본 `4d8241e` 왕정 업데이트: **A2/A3/A4·H2의 추가 완료 조건 제거, H1 물자 4중점 배치·선행 이동, 연락망 국민정신 I/II 형성 전 유지 반영**. 보상·기간·AI·RT56 지역 조건 보존, 460개 좌표 명세 추가. scoped 정적 통과·회귀57개 거부; aggregate **16 PASS / 0 WARNING / 5 ERROR**(기존 host drift4·시작부터 존재한 descriptor 바이트 pin1). 이번 호환판 실행 미검증. [구현 기록](implementation/2026-10-10-korean-royal-update-port.md), [포트 좌표 명세](HOK_KOREAN_ROYAL_LAYOUT_COORDINATES.md).
 - 2026-10-10 원본 `af6fccf` 업데이트: **한국 중점 6개의 선행 조건 선택 이식**. 채굴의 두 AND 선행 연결 표시와 진입 조건 5개 완화, 보상·기간·좌표·AI·후속 조건 보존. 원본 문서 7개·독립 lock·원장 갱신, subsystem 통과·회귀51개 거부, aggregate **17 PASS / 0 WARNING / 4 기존 source drift ERROR**, 이번 실행 미검증. 최신 RT56 manifest `7553774178744855191`의 기존 공용 입력 7개 drift를 [구현 기록](implementation/2026-10-10-korean-focus-prerequisite-port.md)에 별도로 기록했다.
 - 2026-10-05 최신 원본 변경: **폐쇄형 원료 순환체계 중점의 기존 긴급 결정 해금 툴팁 2줄 이식 완료**. donor `062a602`와 새 작성 지침을 선택 반영하고 기존 효과·조건·RT56 병합을 보존했다. aggregate **20 PASS / 0 WARNING / 1 기존 history ERROR**, 이번 UI·실행 미검증. descriptor의 내용 없는 checkout 개행 복원과 기존 원장 해시 갱신은 [구현 기록](implementation/2026-10-05-focus-decision-tooltip-port.md)에 구분했다.
 - 2026-10-03 최신 설명 업데이트: **14쌍·28개 현지화 파일, 국민정신 88개·디시전 28개·범주 8개의 설명 124개/채널 선택 이식 완료**. 원료 순환의 보호 문안과 RT56 만주 지역 안내, 게임 로직·지도·그림을 보존했다. subsystem·회귀 35개 통과, aggregate **20 PASS / 0 WARNING / 1 기존 history ERROR**; 이번 UI·실행 미검증. 작업 전 19 PASS / 2 기존 ERROR와 원장 갱신을 [이식 기록](implementation/2026-10-03-korean-prose-update-port.md)에 구분했다.
@@ -27,6 +28,9 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 구현 | [2026-10-10 왕정 선행·물자 배치](implementation/2026-10-10-korean-royal-update-port.md) | donor4d8241e; runtime2파일·scoped회귀57개, 정적16 PASS/기존5 ERROR, 실행 미검증 |
+| 배치 | [호환판 왕정 좌표 명세](HOK_KOREAN_ROYAL_LAYOUT_COORDINATES.md) / [460개 JSON](data/HOK_KOREAN_ROYAL_LAYOUT_COORDINATES.json) | H1 네 개 이동·다른456개 보존; SHOW/초기HIDE/왕정완료HIDE 정적 명세, UI 미검증 |
+| 원본 기록 | [4d8241e 왕정 명세·메타데이터](upstream/hok-royal-update-20261010/README.md) | immutable 변경 docs7개·독립 royal lock, historical pins 보존 |
 | 구현 | [2026-10-10 한국 중점 선행 조건](implementation/2026-10-10-korean-focus-prerequisite-port.md) | donor af6fccf의 6개 중점·회귀51개; 정적17 PASS와 기존source drift4 ERROR, 실행 미검증 |
 | 원본 기록 | [af6fccf 선행 조건 명세·메타데이터](upstream/hok-prerequisite-update-20261010/README.md) | immutable 변경 문서 7개·source/출력 해시·historical host provenance 보존 |
 | 구현 | [2026-10-05 중점 결정 해금 툴팁](implementation/2026-10-05-focus-decision-tooltip-port.md) | donor062a602의 2줄·지침 선택 이식, 기존 gameplay 보존; 정적20 PASS와 기존history1 ERROR, 실행 미검증 |

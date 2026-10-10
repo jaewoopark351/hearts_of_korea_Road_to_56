@@ -13026,7 +13026,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = KOR_urihwangsilsaranghoe }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13046,7 +13047,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = HOK_KOR_am_petition_calendar }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13065,7 +13067,8 @@ focus_tree = {
 		y = 2
 		cost = 5
 		prerequisite = { focus = HOK_KOR_am_granary_ledgers }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13084,7 +13087,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = KOR_urihwangsilsaranghoe }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order has_completed_focus = KOR_reform_military }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13103,7 +13107,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = HOK_KOR_am_regimental_returns }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13122,7 +13127,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = HOK_KOR_am_regimental_returns }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13143,7 +13149,8 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = HOK_KOR_am_nco_examinations }
 		prerequisite = { focus = HOK_KOR_am_reserve_cadre }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13162,7 +13169,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = KOR_urihwangsilsaranghoe }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order has_completed_focus = KOR_revive_bibyeonsa }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13181,7 +13189,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = HOK_KOR_am_technical_memorials }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13201,7 +13210,8 @@ focus_tree = {
 		y = 2
 		cost = 5
 		prerequisite = { focus = HOK_KOR_am_civil_service_practicum }
-		available = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_government = neutrality has_civil_war = no }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13215,13 +13225,14 @@ focus_tree = {
 	focus = {
 		id = HOK_KOR_hw_provincial_inventory
 		icon = GFX_HOK_KOR_focus_hw_provincial_inventory
+		#20261010_kpopmodder: Connect the supply branch to Hwan restoration and move its diamond beside the conquest sector.
 		#20260923_kpopmodder: Move the Hwan supply module clear of the royal exclusion line and adjacent focus plates.
-		relative_position_id = KOR_return_of_the_king
+		relative_position_id = KOR_empire_of_hwan
 		#20260923_kpopmodder: Place the Hwan supply branch in the upper-right space, clear of the court branch entry line.
-		x = 25
+		x = 6
 		y = 1
 		cost = 5
-		prerequisite = { focus = KOR_return_of_the_king }
+		prerequisite = { focus = KOR_empire_of_hwan }
 		available = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
@@ -13300,7 +13311,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = KOR_urihwangsilsaranghoe }
-		available = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13319,7 +13331,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = HOK_KOR_hw_dispatch_codes }
-		available = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13338,7 +13351,8 @@ focus_tree = {
 		y = 1
 		cost = 5
 		prerequisite = { focus = HOK_KOR_hw_dispatch_codes }
-		available = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no
@@ -13359,7 +13373,8 @@ focus_tree = {
 		cost = 5
 		prerequisite = { focus = HOK_KOR_hw_courier_relays }
 		prerequisite = { focus = HOK_KOR_hw_signal_logs }
-		available = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }
+		#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.
+		available = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }
 		cancel_if_invalid = yes
 		continue_if_invalid = no
 		available_if_capitulated = no

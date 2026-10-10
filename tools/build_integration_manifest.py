@@ -26,6 +26,7 @@ from source_snapshot import (
     material_cycle_lock, read_material_cycle_source,
     prose_update_lock, read_prose_source,
     focus_tooltip_update_lock, prerequisite_update_lock, remove_focus_prerequisite_update,
+    royal_update_lock, remove_royal_update,
 )
 
 
@@ -780,7 +781,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             or matching[0]["output_path"] != relative):
         raise RuntimeError(f"focus tooltip overlay requires its existing merge row: {relative}")
     if ((REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]
-            or hashlib.sha256(remove_focus_prerequisite_update((REPO_ROOT / relative).read_bytes())).hexdigest().upper() != tooltip["output_sha256"]):
+            or hashlib.sha256(remove_focus_prerequisite_update(remove_royal_update(relative, (REPO_ROOT / relative).read_bytes()))).hexdigest().upper() != tooltip["output_sha256"]):
         raise RuntimeError(f"focus tooltip output differs from its reviewed source merge: {relative}")
     row = matching[0]
     row.update({
@@ -795,7 +796,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
 
     #20261010_kpopmodder: Attribute the six selected prerequisite changes while retaining the unchanged RT56 Korean base.
     prerequisites = prerequisite_update_lock()
-    if (relative != prerequisites["path"] or sha256(REPO_ROOT / relative) != prerequisites["output_sha256"]
+    if (relative != prerequisites["path"] or hashlib.sha256(remove_royal_update(relative, (REPO_ROOT / relative).read_bytes())).hexdigest().upper() != prerequisites["output_sha256"]
             or row["rt56_base_sha256"] != prerequisites["rt56_base_sha256"]):
         raise RuntimeError("focus prerequisite output or Korean host base differs from its reviewed merge")
     row.update({
@@ -809,6 +810,35 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         "donor_source_checkout": prerequisites["checkout"],
     })
     row["reason"] += "; 2026-10-10 HOK af6fccf의 6개 중점 선행 조건만 선택 이식: 채굴 AND 연결 표시·진입 조건 5개 완화; 보상·좌표·AI·후속 조건·RT56 지역 병합 보존"
+
+    #20261010_kpopmodder: Attribute the royal delta without discarding historical host hashes or earlier donor provenance.
+    royal = royal_update_lock()
+    for relative, record in royal["runtime_text"].items():
+        matching = [entry for entry in rows if entry["source_path"] == relative]
+        expected_class = "OVERRIDE" if record["kind"] == "focus" else "ADD"
+        if (len(matching) != 1 or matching[0]["integration_class"] != expected_class
+                or matching[0]["output_path"] != relative):
+            raise RuntimeError(f"royal update requires its existing integration row: {relative}")
+        entry = matching[0]
+        if ((REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]
+                or sha256(REPO_ROOT / relative) != record["output_sha256"]):
+            raise RuntimeError(f"royal output differs from its reviewed source merge: {relative}")
+        remove_royal_update(relative, (REPO_ROOT / relative).read_bytes())
+        if record["kind"] == "focus" and entry["rt56_base_sha256"] != royal["rt56_base_sha256"]:
+            raise RuntimeError("royal focus update changed the recorded Korean host base")
+        if record["kind"] == "idea" and (RT56_ROOT / relative).exists():
+            raise RuntimeError("royal spirit source now collides with RT56")
+        entry.update({
+            "previous_source_commit": entry["donor_source_commit"],
+            "previous_source_sha256": entry["donor_source_sha256"],
+            "donor_sha256": record["source_sha256"],
+            "output_sha256": record["output_sha256"],
+            "donor_source_commit": royal["source_commit"],
+            "donor_source_blob": record["blob"],
+            "donor_source_sha256": record["source_sha256"],
+            "donor_source_checkout": record["checkout"],
+        })
+        entry["reason"] += "; 2026-10-10 HOK 4d8241e 왕정 선택 이식: A2/A3/A4·H2 추가 완료 검사 제거, H1 환제국 진입·4개 배치 이동, 연락망 I/II 형성 취소 제거; RT56 지역 조건·기존 보상·AI 보존; tools/hok_royal_update_lock.json"
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(

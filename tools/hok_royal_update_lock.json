@@ -1,0 +1,394 @@
+{
+  "format": 1,
+  "source_kind": "immutable-git-objects",
+  "source_root": "C:\\hoi\\hearts_of_korea",
+  "source_commit": "4d8241e3cd33ebbceaca9650ab36b9891a22b56d",
+  "base_commit": "af6fccf2248311c01565c796555ed334ec685015",
+  "captured_date": "2026-10-10",
+  "compatibility_base_commit": "ecd265795982f29cddaa7610acf0427a66f0db6c",
+  "rt56_manifest": "7553774178744855191",
+  "rt56_base_sha256": "A80FBC767C21902FC56EBBCA35DC3C120700E527B52EA98F3CFDF5221EB0EF90",
+  "runtime_text": {
+    "common/national_focus/korea.txt": {
+      "kind": "focus",
+      "blob": "8f91b2305356c4bc4f293d81a18ec5dd5d4e163b",
+      "base_blob": "b646b92912c81e78219830efd4e76a7e881086df",
+      "object_sha256": "E254896264A5FDF628B92FFEDC48007215259C70F97B9DB80761B69ECD65B3C5",
+      "base_object_sha256": "877AA911F613E26F3351BB3A2E4EC8110D20BB9404911F945A5B526DBF2923A3",
+      "source_sha256": "572C035B21A79D89F7E8FA55AEE353F12B4230816CBFD491FF0667EFC09AC007",
+      "checkout": "crlf",
+      "previous_output_sha256": "EB78279B778326F1EC6B08932533CE2FDEEA618C6872610A0A7746E0FDE50AD4",
+      "output_sha256": "332DE63A191236AE44C0F5BB87706095002D69C08B5A770DD503D0293323894A",
+      "output_checkout": "crlf",
+      "edits": [
+        {
+          "id": "HOK_KOR_am_petition_calendar",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_am_granary_ledgers",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_am_relief_dispatches",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_am_regimental_returns",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order has_completed_focus = KOR_reform_military }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order has_completed_focus = KOR_reform_military }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_am_nco_examinations",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_am_reserve_cadre",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_am_mobilization_review",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_am_technical_memorials",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order has_completed_focus = KOR_revive_bibyeonsa }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order has_completed_focus = KOR_revive_bibyeonsa }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_am_civil_service_practicum",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_am_merit_registers",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no has_completed_focus = KOR_reconstruction_confusian_order }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_government = neutrality has_civil_war = no }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_hw_dispatch_codes",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 } AND = { owns_state = 717 has_full_control_of_state = 717 } AND = { owns_state = 714 has_full_control_of_state = 714 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 } AND = { owns_state = 610 has_full_control_of_state = 610 } } }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 } AND = { owns_state = 717 has_full_control_of_state = 717 } AND = { owns_state = 714 has_full_control_of_state = 714 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 } AND = { owns_state = 610 has_full_control_of_state = 610 } } }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_hw_courier_relays",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 } AND = { owns_state = 717 has_full_control_of_state = 717 } AND = { owns_state = 714 has_full_control_of_state = 714 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 } AND = { owns_state = 610 has_full_control_of_state = 610 } } }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 } AND = { owns_state = 717 has_full_control_of_state = 717 } AND = { owns_state = 714 has_full_control_of_state = 714 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 } AND = { owns_state = 610 has_full_control_of_state = 610 } } }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_hw_signal_logs",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 } AND = { owns_state = 717 has_full_control_of_state = 717 } AND = { owns_state = 714 has_full_control_of_state = 714 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 } AND = { owns_state = 610 has_full_control_of_state = 610 } } }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 } AND = { owns_state = 717 has_full_control_of_state = 717 } AND = { owns_state = 714 has_full_control_of_state = 714 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 } AND = { owns_state = 610 has_full_control_of_state = 610 } } }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_hw_relay_exercises",
+          "before_lines": [
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 owns_state = 941 has_full_control_of_state = 941 } AND = { owns_state = 717 has_full_control_of_state = 717 owns_state = 942 has_full_control_of_state = 942 owns_state = 943 has_full_control_of_state = 943 } AND = { owns_state = 714 has_full_control_of_state = 714 owns_state = 944 has_full_control_of_state = 944 owns_state = 945 has_full_control_of_state = 945 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 owns_state = 946 has_full_control_of_state = 946 } AND = { owns_state = 610 has_full_control_of_state = 610 owns_state = 947 has_full_control_of_state = 947 } } }"
+          ],
+          "source_before_lines": [
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no has_completed_focus = KOR_empire_of_hwan OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 } AND = { owns_state = 717 has_full_control_of_state = 717 } AND = { owns_state = 714 has_full_control_of_state = 714 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 } AND = { owns_state = 610 has_full_control_of_state = 610 } } }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Remove extra completion gates while preserving the displayed policy prerequisites.",
+            "\t\tavailable = { original_tag = KOR has_civil_war = no is_subject = no OR = { AND = { owns_state = 716 has_full_control_of_state = 716 } AND = { owns_state = 745 has_full_control_of_state = 745 } AND = { owns_state = 328 has_full_control_of_state = 328 } AND = { owns_state = 717 has_full_control_of_state = 717 } AND = { owns_state = 714 has_full_control_of_state = 714 } AND = { owns_state = 761 has_full_control_of_state = 761 } AND = { owns_state = 715 has_full_control_of_state = 715 } AND = { owns_state = 610 has_full_control_of_state = 610 } } }"
+          ]
+        },
+        {
+          "id": "HOK_KOR_hw_provincial_inventory",
+          "before_lines": [
+            "\t\t#20260923_kpopmodder: Move the Hwan supply module clear of the royal exclusion line and adjacent focus plates.",
+            "\t\trelative_position_id = KOR_return_of_the_king",
+            "\t\t#20260923_kpopmodder: Place the Hwan supply branch in the upper-right space, clear of the court branch entry line.",
+            "\t\tx = 25",
+            "\t\ty = 1",
+            "\t\tcost = 5",
+            "\t\tprerequisite = { focus = KOR_return_of_the_king }"
+          ],
+          "after_lines": [
+            "\t\t#20261010_kpopmodder: Connect the supply branch to Hwan restoration and move its diamond beside the conquest sector.",
+            "\t\t#20260923_kpopmodder: Move the Hwan supply module clear of the royal exclusion line and adjacent focus plates.",
+            "\t\trelative_position_id = KOR_empire_of_hwan",
+            "\t\t#20260923_kpopmodder: Place the Hwan supply branch in the upper-right space, clear of the court branch entry line.",
+            "\t\tx = 6",
+            "\t\ty = 1",
+            "\t\tcost = 5",
+            "\t\tprerequisite = { focus = KOR_empire_of_hwan }"
+          ],
+          "source_before_lines": [
+            "\t\t#20260923_kpopmodder: Move the Hwan supply module clear of the royal exclusion line and adjacent focus plates.",
+            "\t\trelative_position_id = KOR_return_of_the_king",
+            "\t\t#20260923_kpopmodder: Place the Hwan supply branch in the upper-right space, clear of the court branch entry line.",
+            "\t\tx = 25",
+            "\t\ty = 1",
+            "\t\tcost = 5",
+            "\t\tprerequisite = { focus = KOR_return_of_the_king }"
+          ],
+          "source_after_lines": [
+            "\t\t#20261010_kpopmodder: Connect the supply branch to Hwan restoration and move its diamond beside the conquest sector.",
+            "\t\t#20260923_kpopmodder: Move the Hwan supply module clear of the royal exclusion line and adjacent focus plates.",
+            "\t\trelative_position_id = KOR_empire_of_hwan",
+            "\t\t#20260923_kpopmodder: Place the Hwan supply branch in the upper-right space, clear of the court branch entry line.",
+            "\t\tx = 6",
+            "\t\ty = 1",
+            "\t\tcost = 5",
+            "\t\tprerequisite = { focus = KOR_empire_of_hwan }"
+          ]
+        }
+      ]
+    },
+    "common/ideas/HOK_KOR_royal_followup.txt": {
+      "kind": "idea",
+      "blob": "53460387e1753b49037bbfbfcaea08b7d32cc1d5",
+      "base_blob": "68d409912c882bf3d2cd530ea07cd299f516b1ea",
+      "object_sha256": "899EFE1BF2ABCB983D9D9E29A411172B7A991EDD02B20D7B53D913E593EF2A79",
+      "base_object_sha256": "FB60EAAA5B562B5E87C79FE926D41A5170E1DD7F9AE69D2EDC9D8B042C4D7585",
+      "source_sha256": "409BB42B63602F01B15800EF7BD92BB0C85D7EDC56FC5E4A4A26DA2A9625D5FA",
+      "checkout": "crlf",
+      "previous_output_sha256": "985B07C6D64F3039AE398B83764DB9312B328D23285AC23967CE0F5FBD62E2F0",
+      "output_sha256": "409BB42B63602F01B15800EF7BD92BB0C85D7EDC56FC5E4A4A26DA2A9625D5FA",
+      "output_checkout": "crlf",
+      "edits": [
+        {
+          "id": "HOK_KOR_hw_courier_service_1",
+          "before_lines": [
+            "\t\t\tcancel = { NOT = { has_completed_focus = KOR_empire_of_hwan } }"
+          ],
+          "after_lines": [
+            "\t\t\t#20261010_kpopmodder: Retain the acquired courier service before Hwan formation, matching its newly accessible focus branch."
+          ]
+        },
+        {
+          "id": "HOK_KOR_hw_courier_service_2",
+          "before_lines": [
+            "\t\t\tcancel = { NOT = { has_completed_focus = KOR_empire_of_hwan } }"
+          ],
+          "after_lines": [
+            "\t\t\t#20261010_kpopmodder: Retain the acquired courier service before Hwan formation, matching its newly accessible focus branch."
+          ]
+        }
+      ]
+    }
+  },
+  "snapshot_root": "docs/upstream/hok-royal-update-20261010",
+  "documentation": {
+    "docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md": {
+      "blob": "a9fd252d247a5ba15e2d5dbef1d2f484af0bc132",
+      "sha256": "D49067183C257993A1122718F7C1F163584C95EBAF826486D98CBD829E16BD38",
+      "size": 81202,
+      "snapshot_path": "documents/docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md"
+    },
+    "docs/HOK_KOREAN_ROYAL_FOLLOWUP_SPEC.md": {
+      "blob": "fc763bcd5f14d04ca59793c89db9dd100d01f506",
+      "sha256": "00D31257069A2F8739142E778030D2D729FFDFDDDF3AE82DE6885985C919671A",
+      "size": 25073,
+      "snapshot_path": "documents/docs/HOK_KOREAN_ROYAL_FOLLOWUP_SPEC.md"
+    },
+    "docs/HOK_KOREAN_ROYAL_PREREQUISITE_LAYOUT_PLAN.md": {
+      "blob": "c80bf6cb45c754e99848e2e23dabcfb55d94ab56",
+      "sha256": "54951D93EB2724B0FADF55513465FD7D86FF3B9861B67813ECAA7030792E04F9",
+      "size": 16065,
+      "snapshot_path": "documents/docs/HOK_KOREAN_ROYAL_PREREQUISITE_LAYOUT_PLAN.md"
+    },
+    "docs/HOK_KOREAN_SECOND_WAVE_PLAN.md": {
+      "blob": "354de35b88fcb6451f37ddd4a8281a3a1f9df75c",
+      "sha256": "8416007F845861979F937617CAF88F57FC836E1466E4752399FC55E532E10AC1",
+      "size": 41890,
+      "snapshot_path": "documents/docs/HOK_KOREAN_SECOND_WAVE_PLAN.md"
+    },
+    "docs/data/HOK_KOREAN_SECOND_WAVE_CANDIDATES.json": {
+      "blob": "2c0c7b27c1b0f8b19fa70957b5bc6d9149af82bc",
+      "sha256": "E56BB3B939C811197B4480B7BAB71D69E5B47791A7D7A17963D0D8E3A012B982",
+      "size": 240988,
+      "snapshot_path": "documents/docs/data/HOK_KOREAN_SECOND_WAVE_CANDIDATES.json"
+    },
+    "docs/data/HOK_KOREAN_SECOND_WAVE_COORDINATES.json": {
+      "blob": "3162fb58f926c6444d32037c124e5db255c133ad",
+      "sha256": "7CD5C397E35148EA2FF3F8A0672AEF4ECA29DA629BA52C5C7B96ED765EF95CCB",
+      "size": 495169,
+      "snapshot_path": "documents/docs/data/HOK_KOREAN_SECOND_WAVE_COORDINATES.json"
+    },
+    "docs/incidents/2026-10-10-korean-royal-prerequisites-layout.md": {
+      "blob": "6de87fd79595b0c4cc84670231639cdd1bc26e85",
+      "sha256": "800EC808818C8051C3B677B790BB6CF79BEC29129602DE5CD7AB2DB7C790CDB1",
+      "size": 10615,
+      "snapshot_path": "documents/docs/incidents/2026-10-10-korean-royal-prerequisites-layout.md"
+    }
+  },
+  "preserved_historical_locks": {
+    "tools/hok_source_lock.json": "436B730E92D58A33FBBBB913E064C3A0D6A904D069F61D8CDBE38DCCB28FC94B",
+    "tools/hok_icon_lock.json": "DBB2A37CAE0DB55171C393CDFDA3F24E9B09B65CEF224E81593310A9620C59A3",
+    "tools/hok_second_wave_lock.json": "FCBF178914F5D88894A3CDFB686E45D7E63DFFA6081113B58E0D415D152DE48D",
+    "tools/hok_policy_update_lock.json": "57746F8E23CD9EDBF00089805F63969F6D7EF433689073A2B3AE6BAE7BDCAB20",
+    "tools/hok_localisation_update_lock.json": "4F6084926CE5B9888B436D8A028D4F15F8DCEDA5186EBF3C5858FD22947D1E0A",
+    "tools/hok_material_cycle_lock.json": "3952BBEE107B7293282378739338636AFA77DEB54473D3DF56379A42F308B13B",
+    "tools/hok_prose_update_lock.json": "FA480E4921F3D97CB7B2380A9A17D6D2A0E3C847D23EE0943A18C4FB001D3809",
+    "tools/hok_focus_tooltip_update_lock.json": "F517E2BF2D469A216928279EFF35CB71F7B5D5C84C05C968D3E53736F7C6C680",
+    "tools/hok_focus_prerequisite_update_lock.json": "D389AD58C1A164B7500B8F33E6E295F8A99C95A519401AAD372E95732501C242"
+  }
+}

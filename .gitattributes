@@ -98,3 +98,7 @@ localisation/korean/HOK_KOR_common_followup_l_korean.yml text eol=crlf
 #20261010_kpopmodder: Preserve the new immutable prerequisite lock and source documents.
 tools/hok_focus_prerequisite_update_lock.json text eol=lf
 docs/upstream/hok-prerequisite-update-20261010/** -text
+
+#20261010_kpopmodder: Preserve the independent royal lock and byte-exact source documents.
+tools/hok_royal_update_lock.json text eol=lf
+docs/upstream/hok-royal-update-20261010/** -text

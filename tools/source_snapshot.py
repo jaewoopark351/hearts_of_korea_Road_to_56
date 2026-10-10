@@ -257,6 +257,138 @@ def remove_focus_prerequisite_update(data: bytes) -> bytes:
     return previous
 
 
+
+#20261010_kpopmodder: Keep the royal prerequisite, supply-layout and courier-lifetime delta separate from prior locks.
+ROYAL_UPDATE_COMMIT = "4d8241e3cd33ebbceaca9650ab36b9891a22b56d"
+ROYAL_UPDATE_LOCK_PATH = Path(__file__).with_name("hok_royal_update_lock.json")
+ROYAL_IDEA_PATH = "common/ideas/HOK_KOR_royal_followup.txt"
+ROYAL_FOCUS_IDS = (
+    "HOK_KOR_am_petition_calendar", "HOK_KOR_am_granary_ledgers", "HOK_KOR_am_relief_dispatches",
+    "HOK_KOR_am_regimental_returns", "HOK_KOR_am_nco_examinations", "HOK_KOR_am_reserve_cadre",
+    "HOK_KOR_am_mobilization_review", "HOK_KOR_am_technical_memorials",
+    "HOK_KOR_am_civil_service_practicum", "HOK_KOR_am_merit_registers",
+    "HOK_KOR_hw_dispatch_codes", "HOK_KOR_hw_courier_relays", "HOK_KOR_hw_signal_logs",
+    "HOK_KOR_hw_relay_exercises", "HOK_KOR_hw_provincial_inventory",
+)
+ROYAL_IDEA_IDS = ("HOK_KOR_hw_courier_service_1", "HOK_KOR_hw_courier_service_2")
+
+
+def _replace_royal_lines(data: bytes, edit: dict, kind: str, *, source: bool = False, reverse: bool = False) -> bytes:
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    before, after = ("after_lines", "before_lines") if reverse else ("before_lines", "after_lines")
+    if source and "source_" + before in edit:
+        before, after = "source_" + before, "source_" + after
+    old = "\n".join(edit[before]).encode("utf-8").replace(b"\n", newline)
+    new = "\n".join(edit[after]).encode("utf-8").replace(b"\n", newline)
+    if kind == "focus":
+        identifier = ("\t\tid = " + edit["id"]).encode() + newline
+        closing = newline + b"\t}" + newline
+    elif kind == "idea":
+        identifier = ("\t\t" + edit["id"] + " = {").encode() + newline
+        closing = newline + b"\t\t}" + newline
+    else:
+        raise ValueError(f"unreviewed royal definition kind: {kind}")
+    if data.count(identifier) != 1:
+        raise ValueError(f"royal update target is missing or duplicated: {edit['id']}")
+    start = data.index(identifier)
+    end = data.index(closing, start)
+    block = data[start:end]
+    if not old or block.count(old) != 1:
+        raise ValueError(f"royal update span is missing or duplicated inside its definition: {edit['id']}")
+    return data[:start] + block.replace(old, new, 1) + data[end:]
+
+
+@lru_cache(maxsize=1)
+def royal_update_lock() -> dict:
+    lock = json.loads(ROYAL_UPDATE_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["source_commit"], lock["base_commit"], lock["snapshot_root"]) != (
+        1, "immutable-git-objects", ROYAL_UPDATE_COMMIT, FOCUS_PREREQUISITE_COMMIT,
+        "docs/upstream/hok-royal-update-20261010"
+    ) or set(lock["runtime_text"]) != {SECOND_WAVE_FOCUS_PATH, ROYAL_IDEA_PATH}:
+        raise ValueError("unreviewed royal update revision or runtime inventory")
+    expected_locks = {
+        "tools/hok_source_lock.json", "tools/hok_icon_lock.json", "tools/hok_second_wave_lock.json",
+        "tools/hok_policy_update_lock.json", "tools/hok_localisation_update_lock.json",
+        "tools/hok_material_cycle_lock.json", "tools/hok_prose_update_lock.json",
+        "tools/hok_focus_tooltip_update_lock.json", "tools/hok_focus_prerequisite_update_lock.json",
+    }
+    if set(lock["preserved_historical_locks"]) != expected_locks:
+        raise ValueError("royal update historical lock inventory changed")
+    for relative, expected in lock["preserved_historical_locks"].items():
+        if sha256((REPO_ROOT / relative).read_bytes()) != expected:
+            raise ValueError(f"historical source lock changed during royal update: {relative}")
+    if (lock["runtime_text"][SECOND_WAVE_FOCUS_PATH]["previous_output_sha256"] != prerequisite_update_lock()["output_sha256"]
+            or lock["rt56_base_sha256"] != prerequisite_update_lock()["rt56_base_sha256"]):
+        raise ValueError("royal update must preserve the exact prerequisite ancestor and Korean host base")
+    for relative, record in lock["runtime_text"].items():
+        kind, identifiers = ("focus", ROYAL_FOCUS_IDS) if relative == SECOND_WAVE_FOCUS_PATH else ("idea", ROYAL_IDEA_IDS)
+        if (record["kind"], record["checkout"], record["output_checkout"]) != (kind, "crlf", "crlf") or tuple(
+            edit["id"] for edit in record["edits"]
+        ) != identifiers:
+            raise ValueError(f"unreviewed royal definition inventory: {relative}")
+        payloads = []
+        for commit_key, blob_key, hash_key in (
+            ("base_commit", "base_blob", "base_object_sha256"),
+            ("source_commit", "blob", "object_sha256"),
+        ):
+            blob = subprocess.check_output(git_command() + ["rev-parse", f"{lock[commit_key]}:{relative}"]).decode().strip()
+            raw = subprocess.check_output(git_command() + ["cat-file", "blob", record[blob_key]])
+            if blob != record[blob_key] or sha256(raw) != record[hash_key] or b"\r" in raw:
+                raise ValueError(f"royal update immutable source drift: {relative}")
+            payloads.append(raw)
+        updated = payloads[0]
+        for edit in record["edits"]:
+            updated = _replace_royal_lines(updated, edit, kind, source=True)
+        if updated != payloads[1] or sha256(updated.replace(b"\n", b"\r\n")) != record["source_sha256"]:
+            raise ValueError(f"royal source changed outside the reviewed definitions: {relative}")
+        if kind == "idea" and sha256(payloads[0].replace(b"\n", b"\r\n")) != record["previous_output_sha256"]:
+            raise ValueError("royal idea overlay must follow the unchanged original reward definitions")
+    changed_docs = subprocess.check_output(git_command() + [
+        "diff", "--name-only", lock["base_commit"], lock["source_commit"], "--", "docs"
+    ]).decode().splitlines()
+    if sorted(lock["documentation"]) != changed_docs or len(changed_docs) != 7:
+        raise ValueError("royal update documentation inventory mismatch")
+    snapshot_root = (REPO_ROOT / lock["snapshot_root"]).resolve()
+    for relative, record in lock["documentation"].items():
+        if record["snapshot_path"] != "documents/" + relative:
+            raise ValueError(f"unsafe royal snapshot path: {relative}")
+        target = (snapshot_root / record["snapshot_path"]).resolve()
+        target.relative_to(snapshot_root)
+        blob = subprocess.check_output(git_command() + ["rev-parse", f"{lock['source_commit']}:{relative}"]).decode().strip()
+        raw = subprocess.check_output(git_command() + ["cat-file", "blob", record["blob"]])
+        if (blob != record["blob"] or len(raw) != record["size"] or sha256(raw) != record["sha256"]
+                or target.read_bytes() != raw):
+            raise ValueError(f"royal update source documentation drift: {relative}")
+    return lock
+
+
+def apply_royal_update(relative: str | Path, data: bytes) -> bytes:
+    relative = Path(relative).as_posix()
+    record = royal_update_lock()["runtime_text"][relative]
+    if sha256(data) != record["previous_output_sha256"]:
+        raise ValueError(f"unreviewed pre-royal output: {relative}")
+    updated = data
+    for edit in record["edits"]:
+        updated = _replace_royal_lines(updated, edit, record["kind"])
+    if sha256(updated) != record["output_sha256"]:
+        raise ValueError(f"royal output differs from the reviewed RT56 merge: {relative}")
+    return updated
+
+
+def remove_royal_update(relative: str | Path, data: bytes) -> bytes:
+    #20261010_kpopmodder: Recover byte-exact prior outputs for every unchanged historical preservation gate.
+    relative = Path(relative).as_posix()
+    record = royal_update_lock()["runtime_text"][relative]
+    if sha256(data) != record["output_sha256"]:
+        raise ValueError(f"unreviewed current royal output: {relative}")
+    previous = data
+    for edit in reversed(record["edits"]):
+        previous = _replace_royal_lines(previous, edit, record["kind"], reverse=True)
+    if sha256(previous) != record["previous_output_sha256"]:
+        raise ValueError(f"royal reversal changed historical gameplay: {relative}")
+    return previous
+
+
 @lru_cache(maxsize=1)
 def material_cycle_lock() -> dict:
     lock = json.loads(MATERIAL_CYCLE_LOCK_PATH.read_text(encoding="utf-8"))
