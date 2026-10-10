@@ -56146,7 +56146,6 @@
 527;special_project_facility_spawn;4783.00;13.23;1323.00;3.90;0
 527;special_project_facility_spawn;4781.00;13.65;1336.00;3.43;0
 527;special_project_facility_spawn;4787.00;12.62;1308.00;3.44;0
-918;rocket_site_spawn;4784.00;12.82;1312.00;5.72;0
 528;steel_mill;4854.00;11.50;1200.00;5.26;0
 528;aluminum_mill;4840.00;10.73;1201.00;4.32;0
 528;rubber_refinery;4842.00;11.25;1204.00;2.38;0
@@ -58660,7 +58659,6 @@
 918;special_project_facility_spawn;4794.00;9.82;1318.00;1.27;0
 918;special_project_facility_spawn;4828.00;9.68;1350.00;1.22;0
 918;special_project_facility_spawn;4839.00;9.60;1368.00;2.34;0
-918;rocket_site_spawn;4827.00;9.65;1341.00;1.39;0
 918;naval_base_spawn;4839.00;9.50;1365.00;0.64;7028
 918;naval_base_spawn;4822.00;9.60;1337.00;0.79;2609
 918;naval_base_spawn;4795.00;9.62;1319.00;0.79;2609
@@ -58744,7 +58742,6 @@
 1145;special_project_facility_spawn;4787.00;9.73;1262.00;1.32;0
 919;special_project_facility_spawn;4786.00;10.00;1235.00;5.89;0
 919;special_project_facility_spawn;4784.00;9.60;1224.00;1.71;0
-1145;rocket_site_spawn;4788.00;9.70;1254.00;2.71;0
 1146;naval_base_spawn;4780.00;9.53;1203.00;1.57;2708
 919;naval_base_spawn;4782.00;9.50;1219.00;-0.79;2708
 1145;naval_base_spawn;4783.00;9.50;1250.00;-1.33;2781
@@ -71890,3 +71887,4 @@
 917;air_base;4766.00;9.53;1284.00;6.14;0
 919;air_base;4781.00;9.70;1237.00;4.03;0
 919;rocket_site_spawn;4785.00;9.70;1230.00;1.82;0
+918;rocket_site_spawn;4816.00;9.70;1333.00;1.13;0

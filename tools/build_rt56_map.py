@@ -114,6 +114,8 @@ STATE_OUTPUT_NAMES = {
 
 KOREA_STATE_IDS = set(STATE_OUTPUT_NAMES)
 BUILDING_TARGET_STATES = KOREA_STATE_IDS - {528}
+#20261011_kpopmodder: Limit rocket-site uniqueness to the eight mainland states.
+KOREAN_MAINLAND_STATES = BUILDING_TARGET_STATES - {1146, 1147}
 EXPECTED_OVERLAY_PIXELS = 1889
 COASTAL_FALSE_PROVINCES = {4126, 7125, 7175, 7204, 10065}
 
@@ -141,6 +143,8 @@ REQUIRED_KOREAN_STATE_SITE_ROWS = (
     (b"1083;air_base;4766.00;9.53;1284.00;6.14;0", 13559),
     (b"1082;air_base;4781.00;9.70;1237.00;4.03;0", 13546),
     (b"1082;rocket_site_spawn;4785.00;9.70;1230.00;1.82;0", 10110),
+    #20261011_kpopmodder: Restore the vanilla-identical HOK Hamgyong site omitted by the two-way delta.
+    (b"1028;rocket_site_spawn;4816.00;9.70;1333.00;1.13;0", 6922),
 )
 REQUIRED_STATE_SITE_TYPES = (b"air_base", b"rocket_site_spawn")
 
@@ -157,6 +161,25 @@ KOREAN_AIR_BASE_SITE_OVERRIDES = (
         1145,
     ),
 )
+
+#20261011_kpopmodder: Select only the two reviewed HOK rocket sites over three exact host placements.
+KOREAN_ROCKET_SITE_OVERRIDES = (
+    (
+        (
+            (b"527;rocket_site_spawn;4784.00;12.82;1312.00;5.72;0", 10083),
+            (b"918;rocket_site_spawn;4827.00;9.65;1341.00;1.39;0", 959),
+        ),
+        b"1028;rocket_site_spawn;4816.00;9.70;1333.00;1.13;0",
+        918, 6922,
+    ),
+    (
+        ((b"919;rocket_site_spawn;4788.00;9.70;1254.00;2.71;0", 7175),),
+        b"1031;rocket_site_spawn;4785.00;9.68;1255.00;3.78;0",
+        1145, 13563,
+    ),
+)
+#20261011_kpopmodder: A buildings-only build must preserve the existing audited railway output.
+BUILDINGS_ONLY_RAILWAY_SHA256 = "D424E72B580B35C836B0881D6D6C18744B5C747C1652BD25D3E555D65FFED89E"
 
 EXPECTED_STATE_VICTORY_POINTS = {
     525: {7125, 7221, 12040, 13535},
@@ -181,9 +204,12 @@ def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest().upper()
 
 
-def verify_inputs() -> None:
+#20261011_kpopmodder: The bounded placement build never reads the changed host railway; full synthesis still verifies its pin.
+def verify_inputs(*, buildings_only: bool = False) -> None:
     failures: list[str] = []
     for path, expected in EXPECTED_SHA256.items():
+        if buildings_only and path == RT56_ROOT / "map/railways.txt":
+            continue
         if not path.is_file():
             failures.append(f"missing: {path}")
             continue
@@ -501,6 +527,33 @@ def validate_korean_air_base_sites(lines: list[bytes]) -> None:
         raise BuildError(f"expected exactly one air_base site per Korean target state: {invalid}")
 
 
+#20261011_kpopmodder: Reject missing, duplicate or off-land rocket positions in the mainland states.
+def validate_korean_rocket_sites(
+    lines: list[bytes], provinces_bmp: bytes, definition: bytes,
+    province_state: dict[int, int],
+) -> None:
+    definition_rows = parse_definition(definition)
+    rgb_to_province = {
+        (row[0], row[1], row[2]): province for province, row in definition_rows.items()
+    }
+    bmp_meta = bmp_metadata(provinces_bmp)
+    counts: Counter[int] = Counter()
+    for line in lines:
+        fields = line.split(b";")
+        if len(fields) != 7:
+            raise BuildError(f"malformed building-position row: {line!r}")
+        state = int(fields[0])
+        if fields[1] != b"rocket_site_spawn" or state not in KOREAN_MAINLAND_STATES:
+            continue
+        counts[state] += 1
+        _, province = sample_building_province(line, provinces_bmp, rgb_to_province, bmp_meta)
+        if province_state.get(province) != state or definition_rows[province][3][4] != b"land":
+            raise BuildError(f"rocket site does not lie on land in target state {state}: {line!r}")
+    invalid = {state: counts[state] for state in sorted(KOREAN_MAINLAND_STATES) if counts[state] != 1}
+    if invalid:
+        raise BuildError(f"expected exactly one rocket site per Korean mainland state: {invalid}")
+
+
 def effective_province_states(state_outputs: dict[str, bytes]) -> dict[int, int]:
     states: dict[int, set[int]] = {}
     for path in (RT56_ROOT / "history/states").glob("*.txt"):
@@ -707,12 +760,41 @@ def build_buildings(
             )
         state_site_restorations.append(restoration)
         restored_sites.add((new_state, site_type))
-    expected_sites = {(917, b"air_base"), (919, b"air_base"), (919, b"rocket_site_spawn")}
-    if restored_sites != expected_sites or len(state_site_restorations) != 3:
+    #20261011_kpopmodder: Include the reviewed Hamgyong restoration alongside the three existing sites.
+    expected_sites = {(917, b"air_base"), (919, b"air_base"), (919, b"rocket_site_spawn"), (918, b"rocket_site_spawn")}
+    if restored_sites != expected_sites or len(state_site_restorations) != 4:
         raise BuildError(
             f"expected Korean state site restorations {sorted(expected_sites)!r}, "
             f"found {sorted(restored_sites)!r}"
         )
+
+    #20261011_kpopmodder: Fail closed on exact source, migration or sampled-province drift before excluding any host site.
+    for rt_sources, donor_source, target_state, donor_province in KOREAN_ROCKET_SITE_OVERRIDES:
+        donor_state, donor_remainder = donor_source.split(b";", 1)
+        if donor_counts[donor_source] != 1 or sum(
+            line.startswith(donor_state + b";rocket_site_spawn;") for line in donor_lines
+        ) != 1:
+            raise BuildError(f"rocket override HOK source is no longer unique: {donor_source!r}")
+        if STATE_ID_MAP.get(int(donor_state), int(donor_state)) != target_state:
+            raise BuildError(f"rocket override target migration changed: {donor_source!r}")
+        donor_rebased = replace_numeric_tokens(
+            str(target_state).encode() + b";" + donor_remainder, PROVINCE_ID_MAP
+        )
+        if (rebased + additions + state_site_restorations).count(donor_rebased) != 1:
+            raise BuildError(f"rocket override HOK merge row is not unique: {donor_rebased!r}")
+        _, sampled = sample_building_province(donor_rebased, provinces_bmp, rgb_to_province, bmp_meta)
+        if sampled != donor_province or province_state.get(sampled) != target_state or definition_rows[sampled][3][4] != b"land":
+            raise BuildError(f"rocket override HOK site moved from province {donor_province} in state {target_state}")
+        for rt_source, expected_province in rt_sources:
+            if rt_counts[rt_source] != 1:
+                raise BuildError(f"rocket override RT56 source is no longer unique: {rt_source!r}")
+            rt_rebased = str(target_state).encode() + b";" + rt_source.split(b";", 1)[1]
+            if rebased.count(rt_rebased) != 1:
+                raise BuildError(f"rocket override RT56 merge row is no longer unique: {rt_rebased!r}")
+            _, sampled = sample_building_province(rt_rebased, provinces_bmp, rgb_to_province, bmp_meta)
+            if sampled != expected_province or province_state.get(sampled) != target_state or definition_rows[sampled][3][4] != b"land":
+                raise BuildError(f"rocket override RT56 site moved from province {expected_province} in state {target_state}")
+            rebased.remove(rt_rebased)
 
     existing = Counter(rebased)
     restored_rows = topology_restorations + state_site_restorations
@@ -724,9 +806,11 @@ def build_buildings(
     merged = rebased + additions + restored_rows
     # [2026-09-22]_kpopmodder: Reviewed RT56 has 71863 rows; retain 21 HOK and 10 restored sites.
     #20261001_kpopmodder: Two superseded RT56 airbase sites are replaced by the retained HOK additions.
-    if len(merged) != 71892:
-        raise BuildError(f"expected 71892 merged building rows, found {len(merged)}")
+    #20261011_kpopmodder: Exclude three RT56 rocket rows and restore one HOK row; preserve all other placements.
+    if len(merged) != 71890:
+        raise BuildError(f"expected 71890 merged building rows, found {len(merged)}")
     validate_korean_air_base_sites(merged)
+    validate_korean_rocket_sites(merged, provinces_bmp, definition, province_state)
 
     rt_missing = coastal_without_naval_base_spawn(
         rt_lines,
@@ -950,15 +1034,22 @@ def validate_map_references(outputs: dict[str, bytes]) -> None:
             raise BuildError(f"undefined unit-stack province {province_id}: {line!r}")
 
 
-def build_all() -> tuple[dict[str, bytes], Counter[int], int]:
+#20261011_kpopmodder: A placement-only rebuild validates all companions without regenerating the unrelated railway network.
+def build_all(*, buildings_only: bool = False) -> tuple[dict[str, bytes], Counter[int], int]:
     definition = build_definition()
     provinces, pixel_counts, overlay_pixels = build_provinces_bmp()
     state_outputs = build_states()
+    if buildings_only:
+        railway = (REPO_ROOT / "map/railways.txt").read_bytes()
+        if sha256_bytes(railway) != BUILDINGS_ONLY_RAILWAY_SHA256:
+            raise BuildError("buildings-only mode requires the unchanged audited railway output")
+    else:
+        railway = build_railways()
     outputs = {
         "map/definition.csv": definition,
         "map/provinces.bmp": provinces,
         "map/buildings.txt": build_buildings(provinces, definition, state_outputs),
-        "map/railways.txt": build_railways(),
+        "map/railways.txt": railway,
         "map/supply_nodes.txt": build_supply_nodes(),
         "map/unitstacks.txt": build_unitstacks(),
         "map/strategicregions/186-Korea.txt": build_strategic_region(),
@@ -966,6 +1057,12 @@ def build_all() -> tuple[dict[str, bytes], Counter[int], int]:
     }
     validate_effective_states(state_outputs, definition)
     validate_map_references(outputs)
+    if buildings_only:
+        companions = {path: data for path, data in outputs.items() if path != "map/buildings.txt"}
+        mismatches = [path for path, data in companions.items() if not (REPO_ROOT / path).is_file() or (REPO_ROOT / path).read_bytes() != data]
+        if len(companions) != 17 or mismatches:
+            raise BuildError(f"buildings-only mode requires 17 unchanged map companions: {mismatches}")
+        outputs = {"map/buildings.txt": outputs["map/buildings.txt"]}
     return outputs, pixel_counts, overlay_pixels
 
 
@@ -974,11 +1071,14 @@ def main() -> int:
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--apply", action="store_true", help="write generated files under the repository")
     mode.add_argument("--check", action="store_true", help="verify that repository files match generated output")
+    #20261011_kpopmodder: Offer bounded placement generation while preserving the full source-drift gate.
+    parser.add_argument("--buildings-only", action="store_true", help="generate/check buildings only; require 17 unchanged companion outputs")
     args = parser.parse_args()
 
     try:
-        verify_inputs()
-        outputs, pixel_counts, overlay_pixels = build_all()
+        verify_inputs(buildings_only=args.buildings_only)
+        outputs, pixel_counts, overlay_pixels = build_all(buildings_only=args.buildings_only)
+        verify_inputs(buildings_only=args.buildings_only)
         messages = [write_if_changed(path, data, args.apply) for path, data in sorted(outputs.items())]
         if args.check:
             mismatches = [message for message in messages if message.startswith("would-write")]

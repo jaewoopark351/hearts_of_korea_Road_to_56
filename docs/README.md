@@ -4,6 +4,7 @@
 
 ## 현재 상태
 
+- 2026-10-11 미사일 기지: **함경918·충청1145의 HoK 우선 배치와 정적 검증 완료, 실제 UI 검증 대기**. RT56 위치3행 제외·HoK 함경1행 복원, buildings-only에서 철도 포함 동반 지도17개 보존. 외부 회귀34 PASS·독립 과거 정규화12개 변형 거부; aggregate 작업 전16/0/5 → 작업 후17/0/5(같은 기존 host drift4·descriptor pin1). 전체 지도·철도 source drift와 실행 증거는 별도 미완료다. 최초 문서화 전용 요청과 수정 전 지문을 [수정 계획](plans/2026-10-11-korean-rocket-site-fix-plan.md)에 보존하고, 후속 구현 승인·검사 결과를 [구현 기록](implementation/2026-10-11-korean-rocket-site-fix.md)에 구분했다.
 - 2026-10-10 원본 `4d8241e` 왕정 업데이트: **A2/A3/A4·H2의 추가 완료 조건 제거, H1 물자 4중점 배치·선행 이동, 연락망 국민정신 I/II 형성 전 유지 반영**. 보상·기간·AI·RT56 지역 조건 보존, 460개 좌표 명세 추가. scoped 정적 통과·회귀57개 거부; aggregate **16 PASS / 0 WARNING / 5 ERROR**(기존 host drift4·시작부터 존재한 descriptor 바이트 pin1). 이번 호환판 실행 미검증. [구현 기록](implementation/2026-10-10-korean-royal-update-port.md), [포트 좌표 명세](HOK_KOREAN_ROYAL_LAYOUT_COORDINATES.md).
 - 2026-10-10 원본 `af6fccf` 업데이트: **한국 중점 6개의 선행 조건 선택 이식**. 채굴의 두 AND 선행 연결 표시와 진입 조건 5개 완화, 보상·기간·좌표·AI·후속 조건 보존. 원본 문서 7개·독립 lock·원장 갱신, subsystem 통과·회귀51개 거부, aggregate **17 PASS / 0 WARNING / 4 기존 source drift ERROR**, 이번 실행 미검증. 최신 RT56 manifest `7553774178744855191`의 기존 공용 입력 7개 drift를 [구현 기록](implementation/2026-10-10-korean-focus-prerequisite-port.md)에 별도로 기록했다.
 - 2026-10-05 최신 원본 변경: **폐쇄형 원료 순환체계 중점의 기존 긴급 결정 해금 툴팁 2줄 이식 완료**. donor `062a602`와 새 작성 지침을 선택 반영하고 기존 효과·조건·RT56 병합을 보존했다. aggregate **20 PASS / 0 WARNING / 1 기존 history ERROR**, 이번 UI·실행 미검증. descriptor의 내용 없는 checkout 개행 복원과 기존 원장 해시 갱신은 [구현 기록](implementation/2026-10-05-focus-decision-tooltip-port.md)에 구분했다.
@@ -28,6 +29,8 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 계획 | [2026-10-11 한반도 미사일 기지 중복 배치](plans/2026-10-11-korean-rocket-site-fix-plan.md) | 최초 문서화 전용 계획·수정 전 지문 보존; 후속 구현 및 정적 완료, UI 대기 |
+| 구현 | [2026-10-11 함경·충청 미사일 위치 선택](implementation/2026-10-11-korean-rocket-site-fix.md) | RT56 3행 제외·HoK 1행 복원, 동반 지도17개 보존; 회귀34 PASS·변형12개 거부, aggregate17 PASS/기존5 ERROR, UI 대기 |
 | 구현 | [2026-10-10 왕정 선행·물자 배치](implementation/2026-10-10-korean-royal-update-port.md) | donor4d8241e; runtime2파일·scoped회귀57개, 정적16 PASS/기존5 ERROR, 실행 미검증 |
 | 배치 | [호환판 왕정 좌표 명세](HOK_KOREAN_ROYAL_LAYOUT_COORDINATES.md) / [460개 JSON](data/HOK_KOREAN_ROYAL_LAYOUT_COORDINATES.json) | H1 네 개 이동·다른456개 보존; SHOW/초기HIDE/왕정완료HIDE 정적 명세, UI 미검증 |
 | 원본 기록 | [4d8241e 왕정 명세·메타데이터](upstream/hok-royal-update-20261010/README.md) | immutable 변경 docs7개·독립 royal lock, historical pins 보존 |

@@ -21,6 +21,8 @@ GENERATOR_CHECKS = (
     # [2026-09-22]_kpopmodder: Audit the immutable donor overlay before any derived output gate.
     ("audited HOK source snapshot", "source_snapshot.py", "--check"),
     ("map synthesis", "build_rt56_map.py", "--check"),
+    #20261011_kpopmodder: Check scoped building synthesis even when unrelated host railway drift blocks the full map gate.
+    ("Korean building placements", "build_rt56_map.py", "--check", "--buildings-only"),
     ("shared overrides", "build_shared_overrides.py", "--check"),
     ("East Asia overrides", "build_east_asia_overrides.py", "--check"),
     ("HOK-first Korean assets", "build_korean_assets.py", "--check"),
@@ -213,9 +215,10 @@ def iter_runtime_text_files() -> list[Path]:
 
 
 def run_generator_checks(result: Validation) -> None:
-    for label, script, mode in GENERATOR_CHECKS:
+    #20261011_kpopmodder: Pass the explicit scoped-mode arguments without weakening existing generator checks.
+    for label, script, *modes in GENERATOR_CHECKS:
         completed = subprocess.run(
-            [sys.executable, "-B", str(ROOT / "tools" / script), mode],
+            [sys.executable, "-B", str(ROOT / "tools" / script), *modes],
             cwd=ROOT,
             capture_output=True,
             text=True,

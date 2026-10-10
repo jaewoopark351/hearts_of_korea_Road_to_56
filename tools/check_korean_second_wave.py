@@ -737,6 +737,41 @@ def check_localisation(payloads: dict[str, bytes], groups: dict[str, dict[str, B
         require(required <= keys[language], f"missing {language} new definition keys: {sorted(required - keys[language])}")
 
 
+#20261011_kpopmodder: Recover the exact pre-missile map beneath only the three audited removals and one HOK restoration.
+def historical_map_buildings(data: bytes) -> bytes:
+    baseline_hash = "839486E33E51AB800BB8930A11AB5F7A9F6C779FE8F9CADB1E54E5D147733841"
+    if hashlib.sha256(data).hexdigest().upper() == baseline_hash:
+        return data
+    rows = data.split(b"\r\n")
+    require(not any(b"\r" in row or b"\n" in row for row in rows),
+            "missile map overlay changed preserved row endings")
+    added = b"918;rocket_site_spawn;4816.00;9.70;1333.00;1.13;0"
+    require(rows.count(added) == 1, "missile map overlay must add the canonical HOK Hamgyong row once")
+    rows.remove(added)
+    removals = (
+        (b"527;special_project_facility_spawn;4787.00;12.62;1308.00;3.44;0",
+         b"918;rocket_site_spawn;4784.00;12.82;1312.00;5.72;0",
+         b"528;steel_mill;4854.00;11.50;1200.00;5.26;0"),
+        (b"918;special_project_facility_spawn;4839.00;9.60;1368.00;2.34;0",
+         b"918;rocket_site_spawn;4827.00;9.65;1341.00;1.39;0",
+         b"918;naval_base_spawn;4839.00;9.50;1365.00;0.64;7028"),
+        (b"919;special_project_facility_spawn;4784.00;9.60;1224.00;1.71;0",
+         b"1145;rocket_site_spawn;4788.00;9.70;1254.00;2.71;0",
+         b"1146;naval_base_spawn;4780.00;9.53;1203.00;1.57;2708"),
+    )
+    for before, removed, after in removals:
+        require(rows.count(before) == rows.count(after) == 1,
+                f"missile map overlay changed a unique preservation anchor: {removed!r}")
+        require(removed not in rows, f"missile map overlay retained an audited RT56 rocket row: {removed!r}")
+        index = rows.index(before)
+        require(index + 1 < len(rows) and rows[index + 1] == after,
+                f"missile map overlay changed adjacent preserved rows: {removed!r}")
+        rows.insert(index + 1, removed)
+    historical = b"\r\n".join(rows)
+    require(hashlib.sha256(historical).hexdigest().upper() == baseline_hash,
+            "missile map overlay changed unrelated preserved building rows")
+    return historical
+
 #20261003_kpopmodder: Require the intended permanent rewards and bounded PP-only timed effect independently of frozen-source equality.
 def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str, bytes] | None = None) -> None:
     lock = material_cycle_lock()
@@ -753,6 +788,9 @@ def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str
             data = remove_royal_update(relative, data)
         if relative == FOCUS_PATH:
             data = remove_focus_tooltip_update(remove_focus_prerequisite_update(data))
+        #20261011_kpopmodder: Preserve immutable historical map pins beneath the narrowly audited missile placement repair.
+        if relative == "map/buildings.txt":
+            data = historical_map_buildings(data)
         require(hashlib.sha256(data).hexdigest().upper() == digest.upper(),
                 f"material-cycle update changed preserved runtime: {relative}")
 
@@ -913,6 +951,9 @@ def check_prose_update(payloads: dict[str, bytes] | None = None) -> None:
             data = remove_royal_update(relative, data)
         if relative == FOCUS_PATH:
             data = remove_focus_tooltip_update(remove_focus_prerequisite_update(data))
+        #20261011_kpopmodder: Preserve immutable historical map pins beneath the narrowly audited missile placement repair.
+        if relative == "map/buildings.txt":
+            data = historical_map_buildings(data)
         require(hashlib.sha256(data).hexdigest().upper() == digest.upper(),
                 f"prose update changed preserved gameplay/presentation: {relative}")
     allowed = prose_description_keys()
