@@ -94,3 +94,7 @@ common/ideas/HOK_KOR_common_followup.txt text eol=crlf
 interface/HOK_KOR_material_cycle_icons.gfx text eol=lf
 localisation/english/HOK_KOR_common_followup_l_english.yml text eol=crlf
 localisation/korean/HOK_KOR_common_followup_l_korean.yml text eol=crlf
+
+#20261010_kpopmodder: Preserve the new immutable prerequisite lock and source documents.
+tools/hok_focus_prerequisite_update_lock.json text eol=lf
+docs/upstream/hok-prerequisite-update-20261010/** -text

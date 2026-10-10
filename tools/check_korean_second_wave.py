@@ -26,6 +26,7 @@ from source_snapshot import (
     material_cycle_lock, read_material_cycle_source,
     git_command, prose_update_lock, read_prose_source,
     focus_tooltip_update_lock, remove_focus_tooltip_update,
+    prerequisite_update_lock, remove_focus_prerequisite_update,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -80,6 +81,62 @@ PROSE_TONE_MODULES = frozenset((
 ))
 PROSE_ROW = re.compile(rb'([ \t]+(?P<key>[A-Za-z0-9_.-]+):(?P<version>\d+) ")(?P<value>(?:[^"\\\r\n]|\\.)*)("[ \t]*)')
 
+#20261010_kpopmodder: Audit only the six frozen prerequisite edits; retain later policy gates and every unrelated focus field.
+PREREQUISITE_MINING = "HOK_KOR_cmn_ore_classification"
+PREREQUISITE_REMOVALS = {
+    "HOK_KOR_cmn_export_invoices": "KOR_support_light_industry_export",
+    "HOK_KOR_cm_court_clerks": "KOR_reaffirming_the_independence_of_the_judiciary",
+    "HOK_KOR_cm_public_patronage": "KOR_modern_sejong_the_great",
+    "HOK_KOR_nrsc_military_administration": "KOR_korea_reigns_above_the_world",
+    "HOK_KOR_nrsc_interservice_liaison": "KOR_prussia_in_the_far_east",
+}
+PREREQUISITE_IDS = frozenset((PREREQUISITE_MINING, *PREREQUISITE_REMOVALS))
+PREREQUISITE_PARENTS = {
+    PREREQUISITE_MINING: ("KOR_develop_unsan_gold_mine", "KOR_hamgyeong_underground_resources"),
+    "HOK_KOR_cmn_export_invoices": ("KOR_devalue_the_won",),
+    "HOK_KOR_cm_court_clerks": ("KOR_nomination_prime_minister",),
+    "HOK_KOR_cm_public_patronage": ("KOR_nomination_prime_minister",),
+    "HOK_KOR_nrsc_military_administration": ("HOK_KOR_nrsc_staff_regulations",),
+    "HOK_KOR_nrsc_interservice_liaison": ("KOR_empowering_the_nrsc",),
+}
+PREREQUISITE_AVAILABLE = {
+    PREREQUISITE_MINING: "has_civil_war = no",
+    "HOK_KOR_cmn_export_invoices": "has_civil_war = no",
+    "HOK_KOR_cm_court_clerks": "has_government = democratic has_civil_war = no has_completed_focus = KOR_nomination_prime_minister",
+    "HOK_KOR_cm_public_patronage": "has_government = democratic has_civil_war = no has_completed_focus = KOR_nomination_prime_minister",
+    "HOK_KOR_nrsc_military_administration": "has_government = fascism has_civil_war = no has_completed_focus = KOR_establishment_of_the_national_salvation_army any_controlled_state = { NOT = { is_core_of = ROOT } is_fully_controlled_by = ROOT }",
+    "HOK_KOR_nrsc_interservice_liaison": "has_government = fascism has_civil_war = no has_completed_focus = KOR_establishment_of_the_national_salvation_army",
+}
+PREREQUISITE_LATER_GATES = {
+    "KOR_korea_reigns_above_the_world": (
+        "HOK_KOR_nrsc_civil_supply_offices", "HOK_KOR_nrsc_claims_accounts", "HOK_KOR_nrsc_civil_administration_rules",
+    ),
+    "KOR_prussia_in_the_far_east": (
+        "HOK_KOR_nrsc_joint_logistics_board", "HOK_KOR_nrsc_joint_dispatch_records", "HOK_KOR_nrsc_service_supply_rules",
+    ),
+}
+
+
+def focus_prerequisite_contract(block: Block) -> Block:
+    """Reconstruct the reviewed edit in ordered AST form, independently of the text builder."""
+    identifier = scalar(block, "id")
+    if identifier not in PREREQUISITE_IDS:
+        return block
+    removed = ("KOR_hamgyeong_underground_resources" if identifier == PREREQUISITE_MINING
+               else PREREQUISITE_REMOVALS[identifier])
+    gate = one(block, "available")
+    require(sum(entry == Entry("has_completed_focus", "=", removed) for entry in gate) == 1,
+            f"prerequisite update baseline gate missing or duplicated: {identifier}")
+    body = replace_entry(block, ("available",), tuple(
+        entry for entry in gate if entry != Entry("has_completed_focus", "=", removed)))
+    if identifier == PREREQUISITE_MINING:
+        require(children(body, "prerequisite") == [parse("focus = KOR_develop_unsan_gold_mine")],
+                "prerequisite update mining baseline changed")
+        body = tuple(item for entry in body for item in (
+            (entry, Entry("prerequisite", "=", parse("focus = KOR_hamgyeong_underground_resources")))
+            if entry.key == "prerequisite" else (entry,)))
+    return body
+
 
 def runtime_paths() -> tuple[str, ...]:
     return tuple(dict.fromkeys((*SECOND_WAVE_RUNTIME_PATHS, *material_cycle_lock()["runtime_text"])))
@@ -110,7 +167,7 @@ def expected_payload(relative: str) -> bytes:
     return apply_second_wave_geography(relative, data)
 
 
-def expected_script(relative: str) -> Block:
+def expected_script(relative: str, *, prerequisite_update: bool = True) -> Block:
     # [2026-09-23]_kpopmodder: Reconstruct geography with an independent ordered-AST algorithm, not the generator's text replacements.
     from korean_second_wave_geography import DECISION_PATH, FOCUS_IDS, HW_FOCUS_IDS, STATE_GROUPS, STRONGHOLD_GROUPS
     require(STATE_GROUPS == {328: (328, 941), 714: (714, 944, 945), 717: (717, 942, 943)}, "unreviewed M policy geography contract")
@@ -161,11 +218,59 @@ def expected_script(relative: str) -> Block:
                 if identifier == MATERIAL_FOCUS:
                     body = replace_entry(body, ("completion_reward",), one(body, "completion_reward") +
                                          (Entry("unlock_decision_tooltip", "=", MATERIAL_DECISION),))
+                #20261010_kpopmodder: Layer the six entry edits after the independent geography and decision-notice contracts.
+                if prerequisite_update:
+                    body = focus_prerequisite_contract(body)
                 tree.append(Entry(entry.key, entry.op, body))
             else:
                 tree.append(entry)
         return replace_entry(source, ("focus_tree",), tuple(tree))
     return policy(source) if relative == DECISION_PATH else source
+
+
+#20261010_kpopmodder: Separate the intentional entry-gate changes from prior rewards, geography, layout and tooltip contracts.
+def check_focus_prerequisite_update(groups: dict[str, dict[str, Block]]) -> None:
+    lock = prerequisite_update_lock()
+    require((lock["path"], lock["source_commit"], lock["base_commit"]) == (
+        FOCUS_PATH, "af6fccf2248311c01565c796555ed334ec685015", "062a60287e00ac11352c38bca0fca1ae556e7801"),
+        "unreviewed focus-prerequisite source revision or target")
+    identifiers = [edit["focus_id"] for edit in lock["edits"]]
+    require(len(identifiers) == 6 and set(identifiers) == PREREQUISITE_IDS,
+            "focus-prerequisite update must contain exactly the six reviewed focuses")
+    base = parse(subprocess.check_output(git_command() + ["cat-file", "blob", lock["base_blob"]]).decode("utf-8-sig"))
+    source = parse(subprocess.check_output(git_command() + ["cat-file", "blob", lock["blob"]]).decode("utf-8-sig"))
+    tree = tuple(Entry(entry.key, entry.op, focus_prerequisite_contract(entry.value))
+                 if entry.key == "focus" and isinstance(entry.value, tuple) else entry
+                 for entry in one(base, "focus_tree"))
+    require(source == replace_entry(base, ("focus_tree",), tree),
+            "donor prerequisite update changed an unrelated field, definition or declaration order")
+
+    focuses = groups["focus"]
+    previous = focus_blocks(expected_script(FOCUS_PATH, prerequisite_update=False))
+    require(list(focuses) == list(previous), "prerequisite update changed focus IDs or declaration order")
+    changed = {identifier for identifier in focuses if focuses[identifier] != previous[identifier]}
+    require(changed == PREREQUISITE_IDS, f"prerequisite update changed the wrong focuses: {sorted(changed)}")
+    for identifier, block in focuses.items():
+        require(block == focus_prerequisite_contract(previous[identifier]),
+                f"prerequisite update changed unrelated ordered focus fields: {identifier}")
+        if identifier not in PREREQUISITE_IDS:
+            continue
+        unchanged = lambda body: tuple(entry for entry in body if entry.key not in ("prerequisite", "available"))
+        require(unchanged(block) == unchanged(previous[identifier]),
+                f"prerequisite update changed rewards, timing, layout, AI or lifecycle: {identifier}")
+        required = [parse(f"focus = {parent}") for parent in PREREQUISITE_PARENTS[identifier]]
+        require(children(block, "prerequisite") == required,
+                f"prerequisite update changed parent order or AND grouping: {identifier}")
+        require(one(block, "available") == parse(PREREQUISITE_AVAILABLE[identifier]),
+                f"prerequisite update removed a retained gate or kept the obsolete entry gate: {identifier}")
+        require(all(parent in focuses for parent in PREREQUISITE_PARENTS[identifier]),
+                f"prerequisite update references a missing focus: {identifier}")
+    # Later occupation and logistics rewards retain their original world/military-first conditions.
+    for gate, later in PREREQUISITE_LATER_GATES.items():
+        for identifier in later:
+            require(one(focuses[identifier], "available") == one(previous[identifier], "available")
+                    and Entry("has_completed_focus", "=", gate) in one(focuses[identifier], "available"),
+                    f"prerequisite update removed a later policy completion gate: {identifier}/{gate}")
 
 
 def documents() -> tuple[dict[str, Block], dict[str, Block]]:
@@ -409,10 +514,10 @@ def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str
     require(set(lock["runtime_assets"]) == set(MATERIAL_SPRITES.values()), "material-cycle artwork allowlist changed")
     require(FOCUS_PATH in lock["preserved_runtime"], "material-cycle update must pin the pre-tooltip focus tree")
     for relative, digest in lock["preserved_runtime"].items():
-        #20261005_kpopmodder: Reverse only the strict frozen tooltip overlay before checking historical preservation pins.
+        #20261010_kpopmodder: Reverse both strict overlays before checking the original material-cycle preservation pins.
         data = (ROOT / relative).read_bytes()
         if relative == FOCUS_PATH:
-            data = remove_focus_tooltip_update(data)
+            data = remove_focus_tooltip_update(remove_focus_prerequisite_update(data))
         require(hashlib.sha256(data).hexdigest().upper() == digest.upper(),
                 f"material-cycle update changed preserved runtime: {relative}")
 
@@ -566,9 +671,10 @@ def check_prose_update(payloads: dict[str, bytes] | None = None) -> None:
     require(not PROSE_PATHS & preserved.keys(), "prose preserved-runtime pins include approved description outputs")
     for relative, digest in preserved.items():
         #20261005_kpopmodder: Preserve the prose import's historical pins underneath the later decision notice.
+        #20261010_kpopmodder: Reverse the six prerequisite edits before applying the historical tooltip reversal.
         data = (ROOT / relative).read_bytes()
         if relative == FOCUS_PATH:
-            data = remove_focus_tooltip_update(data)
+            data = remove_focus_tooltip_update(remove_focus_prerequisite_update(data))
         require(hashlib.sha256(data).hexdigest().upper() == digest.upper(),
                 f"prose update changed preserved gameplay/presentation: {relative}")
     allowed = prose_description_keys()
@@ -695,6 +801,7 @@ def run_checks() -> None:
     check_projects(groups)
     check_regional_gates(groups)
     check_material_cycle(groups)
+    check_focus_prerequisite_update(groups)
     check_prose_update()
     check_assets(groups, added)
     check_localisation(localisation_payloads(), groups, added)
@@ -702,6 +809,7 @@ def run_checks() -> None:
     print("PASS second wave plus material cycle: pinned 460 focuses (134 new), 64 ideas, 19 projects, 5 categories, 12 state modifiers; ordered source/port contracts")
     print("PASS material cycle: focus gameplay and unrelated content preserved; closed-cycle decision notice added; +30%/+60% tiers, one PP150/90-day boost, no stacking or cooldown, temporary-only cleanup")
     print("PASS second-wave artwork/localisation: 234 exact DDS, 368 sprites, 17 registries, 11 paired language files; vanilla shine fallback")
+    print("PASS prerequisite update: six focuses only; two separate mining AND parents, five entry gates removed; rewards, timing, layout, AI and later policy gates preserved")
     print("PASS prose update: 124 descriptions per channel, fourteen frozen pairs; keys, six protected descriptions, gameplay and ADR-0005 regions preserved")
     print("STATIC ONLY: no HOI4 evaluation, geography lifecycle, layout rendering, AI, save or multiplayer proof.")
 
@@ -714,6 +822,7 @@ def run_self_tests() -> None:
     added = check_inventory(groups)
     check_projects(groups)
     check_material_cycle(groups)
+    check_focus_prerequisite_update(groups)
     check_prose_update()
     caught = []
 
@@ -729,6 +838,47 @@ def run_self_tests() -> None:
         tree = one(current[FOCUS_PATH], "focus_tree")
         modified = tuple(Entry(entry.key, entry.op, transform(entry.value)) if entry.key == "focus" and scalar(entry.value, "id") == identifier else entry for entry in tree)
         return {**current, FOCUS_PATH: replace_entry(current[FOCUS_PATH], ("focus_tree",), modified)}
+
+    #20261010_kpopmodder: Reject lost mining conjunctions, retained obsolete gates and changes outside the six-entry delta.
+    mining = groups["focus"][PREREQUISITE_MINING]
+    mining_parents = children(mining, "prerequisite")
+    def mining_or(body: Block) -> Block:
+        merged = tuple(entry for relation in children(body, "prerequisite") for entry in relation)
+        result, inserted = [], False
+        for entry in body:
+            if entry.key == "prerequisite":
+                if not inserted:
+                    result.append(Entry("prerequisite", "=", merged))
+                    inserted = True
+            else:
+                result.append(entry)
+        return tuple(result)
+    collapsed = focus_mutation(PREREQUISITE_MINING, mining_or)
+    rejects("mining AND parents collapsed into OR", lambda: check_focus_prerequisite_update(collect(collapsed)))
+    missing_mining = focus_mutation(PREREQUISITE_MINING, lambda body: tuple(
+        entry for entry in body if entry != Entry("prerequisite", "=", mining_parents[1])))
+    rejects("mining second parent removed", lambda: check_focus_prerequisite_update(collect(missing_mining)))
+    for identifier, removed in PREREQUISITE_REMOVALS.items():
+        stale_gate = focus_mutation(identifier, lambda body, removed=removed: replace_entry(
+            body, ("available",), one(body, "available") + parse(f"has_completed_focus = {removed}")))
+        rejects(f"obsolete entry gate restored: {identifier}",
+                lambda stale_gate=stale_gate: check_focus_prerequisite_update(collect(stale_gate)))
+    liaison = "HOK_KOR_nrsc_interservice_liaison"
+    lost_coup = focus_mutation(liaison, lambda body: replace_entry(
+        body, ("available",), parse("has_government = fascism has_civil_war = no")))
+    rejects("liaison coup gate removed", lambda: check_focus_prerequisite_update(collect(lost_coup)))
+    occupation = "HOK_KOR_nrsc_military_administration"
+    lost_control = focus_mutation(occupation, lambda body: replace_entry(body, ("available",),
+        parse("has_government = fascism has_civil_war = no has_completed_focus = KOR_establishment_of_the_national_salvation_army")))
+    rejects("occupation actual non-core control gate removed", lambda: check_focus_prerequisite_update(collect(lost_control)))
+    for gate, later in PREREQUISITE_LATER_GATES.items():
+        for identifier in later:
+            relaxed = focus_mutation(identifier, lambda body, gate=gate: replace_entry(body, ("available",), tuple(
+                entry for entry in one(body, "available") if entry != Entry("has_completed_focus", "=", gate))))
+            rejects(f"later policy gate removed: {identifier}",
+                    lambda relaxed=relaxed: check_focus_prerequisite_update(collect(relaxed)))
+    reward_drift = focus_mutation(PREREQUISITE_MINING, lambda body: replace_entry(body, ("completion_reward",), parse("add_political_power = 1")))
+    rejects("prerequisite update mining reward drift", lambda: check_focus_prerequisite_update(collect(reward_drift)))
 
     and_focus = next(identifier for identifier in added if len(children(groups["focus"][identifier], "prerequisite")) == 2)
     first_parent = children(groups["focus"][and_focus], "prerequisite")[0]

@@ -12,6 +12,7 @@ import argparse
 import csv
 import hashlib
 import io
+import subprocess
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
@@ -24,7 +25,7 @@ from source_snapshot import (
     localisation_update_lock, read_localisation_source,
     material_cycle_lock, read_material_cycle_source,
     prose_update_lock, read_prose_source,
-    focus_tooltip_update_lock,
+    focus_tooltip_update_lock, prerequisite_update_lock, remove_focus_prerequisite_update,
 )
 
 
@@ -489,8 +490,34 @@ def output_description(relative: str, rule: Rule) -> tuple[str, str, str]:
     return " | ".join(outputs), hash_cell, status
 
 
+#20261010_kpopmodder: Keep unchanged generated outputs attributed to their actual historical host base after Steam source drift.
+def historical_host_bases() -> dict[str, dict[str, str]]:
+    lock = prerequisite_update_lock()
+    record = lock["previous_manifest"]
+    command = ["git", "-c", f"safe.directory={REPO_ROOT.as_posix()}", "-C", str(REPO_ROOT)]
+    blob = subprocess.check_output(command + ["rev-parse", f"{lock['compatibility_base_commit']}:{record['path']}"]).decode().strip()
+    data = subprocess.check_output(command + ["cat-file", "blob", record["blob"]])
+    if blob != record["blob"] or hashlib.sha256(data).hexdigest().upper() != record["object_sha256"]:
+        raise RuntimeError("historical RT56 provenance ledger drift")
+    return {row["source_path"]: row for row in csv.DictReader(io.StringIO(data.decode("utf-8")))}
+
+
+def host_base_sha256(relative: str, rule: Rule, output_hash: str, previous: dict) -> str:
+    current = sha256(RT56_ROOT / relative)
+    prior = previous.get(relative)
+    if rule.integration_class == "USE_RT56" or not prior or not prior["rt56_base_sha256"]:
+        return current
+    historical = prior["rt56_base_sha256"]
+    if current == historical:
+        return current
+    if output_hash != prior["output_sha256"]:
+        raise RuntimeError(f"changed output requires a reviewed RT56 rebase: {relative}")
+    return historical
+
+
 def build_csv() -> tuple[bytes, Counter[str], int]:
     files = donor_files()
+    previous_host_rows = historical_host_bases()
     if len(files) != EXPECTED_DONOR_FILES:
         raise RuntimeError(
             f"donor file count changed: expected {EXPECTED_DONOR_FILES}, got {len(files)}"
@@ -530,7 +557,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
                 "donor_source_blob": provenance["blob"],
                 "donor_source_sha256": provenance["sha256"],
                 "donor_source_checkout": provenance["checkout"],
-                "rt56_base_sha256": sha256(RT56_ROOT / relative) if rt_collision else "",
+                "rt56_base_sha256": host_base_sha256(relative, rule, output_hash, previous_host_rows) if rt_collision else "",
             }
         )
         # [2026-09-23]_kpopmodder: Keep the merge ancestor while identifying the new tree's actual source.
@@ -753,7 +780,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             or matching[0]["output_path"] != relative):
         raise RuntimeError(f"focus tooltip overlay requires its existing merge row: {relative}")
     if ((REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]
-            or sha256(REPO_ROOT / relative) != tooltip["output_sha256"]):
+            or hashlib.sha256(remove_focus_prerequisite_update((REPO_ROOT / relative).read_bytes())).hexdigest().upper() != tooltip["output_sha256"]):
         raise RuntimeError(f"focus tooltip output differs from its reviewed source merge: {relative}")
     row = matching[0]
     row.update({
@@ -765,6 +792,23 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         "donor_source_checkout": tooltip["checkout"],
     })
     row["reason"] += "; 2026-10-05 HOK 062a602의 긴급 원료 순환 결정 해금 툴팁만 선택 이식; 기존 중점·RT56 지역 병합·실제 결정 조건 보존"
+
+    #20261010_kpopmodder: Attribute the six selected prerequisite changes while retaining the unchanged RT56 Korean base.
+    prerequisites = prerequisite_update_lock()
+    if (relative != prerequisites["path"] or sha256(REPO_ROOT / relative) != prerequisites["output_sha256"]
+            or row["rt56_base_sha256"] != prerequisites["rt56_base_sha256"]):
+        raise RuntimeError("focus prerequisite output or Korean host base differs from its reviewed merge")
+    row.update({
+        "previous_source_commit": row["donor_source_commit"],
+        "previous_source_sha256": row["donor_source_sha256"],
+        "donor_sha256": prerequisites["source_sha256"],
+        "output_sha256": prerequisites["output_sha256"],
+        "donor_source_commit": prerequisites["source_commit"],
+        "donor_source_blob": prerequisites["blob"],
+        "donor_source_sha256": prerequisites["source_sha256"],
+        "donor_source_checkout": prerequisites["checkout"],
+    })
+    row["reason"] += "; 2026-10-10 HOK af6fccf의 6개 중점 선행 조건만 선택 이식: 채굴 AND 연결 표시·진입 조건 5개 완화; 보상·좌표·AI·후속 조건·RT56 지역 병합 보존"
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(

@@ -162,6 +162,101 @@ def remove_focus_tooltip_update(data: bytes) -> bytes:
     return previous
 
 
+#20261010_kpopmodder: Pin six prerequisite edits independently of all historical world and gameplay inputs.
+FOCUS_PREREQUISITE_COMMIT = "af6fccf2248311c01565c796555ed334ec685015"
+FOCUS_PREREQUISITE_LOCK_PATH = Path(__file__).with_name("hok_focus_prerequisite_update_lock.json")
+FOCUS_PREREQUISITE_IDS = (
+    "HOK_KOR_nrsc_military_administration", "HOK_KOR_nrsc_interservice_liaison",
+    "HOK_KOR_cm_court_clerks", "HOK_KOR_cm_public_patronage",
+    "HOK_KOR_cmn_export_invoices", "HOK_KOR_cmn_ore_classification",
+)
+
+
+def _replace_focus_prerequisite_lines(data: bytes, edit: dict, reverse: bool = False) -> bytes:
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    before, after = ("after_lines", "before_lines") if reverse else ("before_lines", "after_lines")
+    old = "\n".join(edit[before]).encode("utf-8").replace(b"\n", newline)
+    new = "\n".join(edit[after]).encode("utf-8").replace(b"\n", newline)
+    identifier = ("\t\tid = " + edit["focus_id"]).encode() + newline
+    if data.count(identifier) != 1 or data.count(old) != 1:
+        raise ValueError(f"prerequisite update target is not unique: {edit['focus_id']}")
+    start = data.index(identifier)
+    end = data.index(newline + b"\t}" + newline, start)
+    if not start < data.index(old) < end or data.index(old) + len(old) > end:
+        raise ValueError(f"prerequisite update escaped its focus: {edit['focus_id']}")
+    return data.replace(old, new, 1)
+
+
+@lru_cache(maxsize=1)
+def prerequisite_update_lock() -> dict:
+    lock = json.loads(FOCUS_PREREQUISITE_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["source_commit"], lock["base_commit"],
+            lock["path"], lock["checkout"], lock["snapshot_root"]) != (
+        1, "immutable-git-objects", FOCUS_PREREQUISITE_COMMIT, FOCUS_TOOLTIP_COMMIT,
+        SECOND_WAVE_FOCUS_PATH, "crlf", "docs/upstream/hok-prerequisite-update-20261010"
+    ) or tuple(edit["focus_id"] for edit in lock["edits"]) != FOCUS_PREREQUISITE_IDS:
+        raise ValueError("unreviewed focus prerequisite revision or target inventory")
+    if lock["previous_output_sha256"] != focus_tooltip_update_lock()["output_sha256"]:
+        raise ValueError("prerequisite overlay must follow the exact historical tooltip output")
+    payloads = []
+    for commit_key, blob_key, hash_key in (
+        ("base_commit", "base_blob", "base_object_sha256"),
+        ("source_commit", "blob", "object_sha256"),
+    ):
+        blob = subprocess.check_output(git_command() + ["rev-parse", f"{lock[commit_key]}:{lock['path']}"]).decode().strip()
+        data = subprocess.check_output(git_command() + ["cat-file", "blob", lock[blob_key]])
+        if blob != lock[blob_key] or sha256(data) != lock[hash_key] or b"\r" in data:
+            raise ValueError("focus prerequisite immutable source drift")
+        payloads.append(data)
+    expected = payloads[0]
+    for edit in lock["edits"]:
+        expected = _replace_focus_prerequisite_lines(expected, edit)
+    if expected != payloads[1] or sha256(expected.replace(b"\n", b"\r\n")) != lock["source_sha256"]:
+        raise ValueError("focus prerequisite source changed outside the six reviewed edits")
+    changed_docs = subprocess.check_output(git_command() + [
+        "diff", "--name-only", lock["base_commit"], lock["source_commit"], "--", "docs"
+    ]).decode().splitlines()
+    if sorted(lock["documentation"]) != changed_docs or len(changed_docs) != 7:
+        raise ValueError("focus prerequisite documentation inventory mismatch")
+    snapshot_root = (REPO_ROOT / lock["snapshot_root"]).resolve()
+    for relative, record in lock["documentation"].items():
+        if record["snapshot_path"] != "documents/" + relative:
+            raise ValueError(f"unsafe prerequisite snapshot path: {relative}")
+        target = (snapshot_root / record["snapshot_path"]).resolve()
+        target.relative_to(snapshot_root)
+        blob = subprocess.check_output(git_command() + ["rev-parse", f"{lock['source_commit']}:{relative}"]).decode().strip()
+        raw = subprocess.check_output(git_command() + ["cat-file", "blob", record["blob"]])
+        if (blob != record["blob"] or len(raw) != record["size"] or sha256(raw) != record["sha256"]
+                or target.read_bytes() != raw):
+            raise ValueError(f"focus prerequisite source documentation drift: {relative}")
+    return lock
+
+
+def apply_focus_prerequisite_update(data: bytes) -> bytes:
+    lock = prerequisite_update_lock()
+    if sha256(data) != lock["previous_output_sha256"]:
+        raise ValueError("unreviewed pre-prerequisite focus output")
+    updated = data
+    for edit in lock["edits"]:
+        updated = _replace_focus_prerequisite_lines(updated, edit)
+    if sha256(updated) != lock["output_sha256"]:
+        raise ValueError("focus prerequisite output differs from the reviewed merge")
+    return updated
+
+
+def remove_focus_prerequisite_update(data: bytes) -> bytes:
+    #20261010_kpopmodder: Recover the byte-exact tooltip ancestor for existing preservation gates.
+    lock = prerequisite_update_lock()
+    if sha256(data) != lock["output_sha256"]:
+        raise ValueError("unreviewed current focus prerequisite output")
+    previous = data
+    for edit in reversed(lock["edits"]):
+        previous = _replace_focus_prerequisite_lines(previous, edit, reverse=True)
+    if sha256(previous) != lock["previous_output_sha256"]:
+        raise ValueError("focus prerequisite reversal changed historical gameplay")
+    return previous
+
+
 @lru_cache(maxsize=1)
 def material_cycle_lock() -> dict:
     lock = json.loads(MATERIAL_CYCLE_LOCK_PATH.read_text(encoding="utf-8"))
@@ -792,6 +887,8 @@ def main() -> int:
     print("HOK prose snapshot: 28 runtime localisation + 2 source documents verified")
     focus_tooltip_update_lock()
     print("HOK focus decision-tooltip: immutable two-line source delta verified")
+    prerequisite_update_lock()
+    print("HOK focus prerequisites: six immutable source edits + seven source documents verified")
     return 0
 
 

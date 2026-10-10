@@ -1,0 +1,145 @@
+{
+  "format": 1,
+  "source_kind": "immutable-git-objects",
+  "source_root": "C:\\hoi\\hearts_of_korea",
+  "source_commit": "af6fccf2248311c01565c796555ed334ec685015",
+  "base_commit": "062a60287e00ac11352c38bca0fca1ae556e7801",
+  "captured_date": "2026-10-10",
+  "compatibility_base_commit": "ecc5f0fceefd6ef2d13d7a5958228b2427f7f5dc",
+  "rt56_manifest": "7553774178744855191",
+  "rt56_base_sha256": "A80FBC767C21902FC56EBBCA35DC3C120700E527B52EA98F3CFDF5221EB0EF90",
+  "path": "common/national_focus/korea.txt",
+  "blob": "b646b92912c81e78219830efd4e76a7e881086df",
+  "base_blob": "7cc1d3c41f643ef65db5b88d1b7ad7696f109be5",
+  "object_sha256": "877AA911F613E26F3351BB3A2E4EC8110D20BB9404911F945A5B526DBF2923A3",
+  "base_object_sha256": "377787CD86EC6E51A153215FD596EC3752BC9486B0F92E856F4569C218A93B2A",
+  "source_sha256": "E2C2E7B028D8D6D922114C68474B7A569D2AA11CBCF109CA20A4168CACFF47CA",
+  "checkout": "crlf",
+  "previous_output_sha256": "4A349FE1631C7A79B178C24C241F00F3E20C20F3B59E061FE1FE6B59DB5F74E1",
+  "output_sha256": "EB78279B778326F1EC6B08932533CE2FDEEA618C6872610A0A7746E0FDE50AD4",
+  "edits": [
+    {
+      "focus_id": "HOK_KOR_nrsc_military_administration",
+      "before_lines": [
+        "\t\tprerequisite = { focus = HOK_KOR_nrsc_staff_regulations }",
+        "\t\tavailable = { has_government = fascism has_civil_war = no has_completed_focus = KOR_establishment_of_the_national_salvation_army has_completed_focus = KOR_korea_reigns_above_the_world any_controlled_state = { NOT = { is_core_of = ROOT } is_fully_controlled_by = ROOT } }"
+      ],
+      "after_lines": [
+        "\t\tprerequisite = { focus = HOK_KOR_nrsc_staff_regulations }",
+        "\t\t#20261010_kpopmodder: Allow occupation administration before the world focus while retaining coup and actual non-core control gates.",
+        "\t\tavailable = { has_government = fascism has_civil_war = no has_completed_focus = KOR_establishment_of_the_national_salvation_army any_controlled_state = { NOT = { is_core_of = ROOT } is_fully_controlled_by = ROOT } }"
+      ]
+    },
+    {
+      "focus_id": "HOK_KOR_nrsc_interservice_liaison",
+      "before_lines": [
+        "\t\tprerequisite = { focus = KOR_empowering_the_nrsc }",
+        "\t\tavailable = { has_government = fascism has_civil_war = no has_completed_focus = KOR_establishment_of_the_national_salvation_army has_completed_focus = KOR_prussia_in_the_far_east }"
+      ],
+      "after_lines": [
+        "\t\tprerequisite = { focus = KOR_empowering_the_nrsc }",
+        "\t\t#20261010_kpopmodder: Allow interservice liaison before the military-first focus while retaining the coup gate.",
+        "\t\tavailable = { has_government = fascism has_civil_war = no has_completed_focus = KOR_establishment_of_the_national_salvation_army }"
+      ]
+    },
+    {
+      "focus_id": "HOK_KOR_cm_court_clerks",
+      "before_lines": [
+        "\t\tprerequisite = { focus = KOR_nomination_prime_minister }",
+        "\t\tavailable = { has_government = democratic has_civil_war = no has_completed_focus = KOR_nomination_prime_minister has_completed_focus = KOR_reaffirming_the_independence_of_the_judiciary }"
+      ],
+      "after_lines": [
+        "\t\tprerequisite = { focus = KOR_nomination_prime_minister }",
+        "\t\t#20261010_kpopmodder: Remove the unconnected judiciary completion gate from the legal-aid entry.",
+        "\t\tavailable = { has_government = democratic has_civil_war = no has_completed_focus = KOR_nomination_prime_minister }"
+      ]
+    },
+    {
+      "focus_id": "HOK_KOR_cm_public_patronage",
+      "before_lines": [
+        "\t\tprerequisite = { focus = KOR_nomination_prime_minister }",
+        "\t\tavailable = { has_government = democratic has_civil_war = no has_completed_focus = KOR_nomination_prime_minister has_completed_focus = KOR_modern_sejong_the_great }"
+      ],
+      "after_lines": [
+        "\t\tprerequisite = { focus = KOR_nomination_prime_minister }",
+        "\t\t#20261010_kpopmodder: Remove the unconnected Sejong completion gate from the public-patronage entry.",
+        "\t\tavailable = { has_government = democratic has_civil_war = no has_completed_focus = KOR_nomination_prime_minister }"
+      ]
+    },
+    {
+      "focus_id": "HOK_KOR_cmn_export_invoices",
+      "before_lines": [
+        "\t\tprerequisite = { focus = KOR_devalue_the_won }",
+        "\t\tavailable = { has_civil_war = no has_completed_focus = KOR_support_light_industry_export }"
+      ],
+      "after_lines": [
+        "\t\tprerequisite = { focus = KOR_devalue_the_won }",
+        "\t\t#20261010_kpopmodder: Remove the unconnected light-industry export completion gate from the export entry.",
+        "\t\tavailable = { has_civil_war = no }"
+      ]
+    },
+    {
+      "focus_id": "HOK_KOR_cmn_ore_classification",
+      "before_lines": [
+        "\t\tprerequisite = { focus = KOR_develop_unsan_gold_mine }",
+        "\t\tavailable = { has_civil_war = no has_completed_focus = KOR_hamgyeong_underground_resources }"
+      ],
+      "after_lines": [
+        "\t\tprerequisite = { focus = KOR_develop_unsan_gold_mine }",
+        "\t\t#20261010_kpopmodder: Show both mining prerequisites as required connections while preserving the completion requirement.",
+        "\t\tprerequisite = { focus = KOR_hamgyeong_underground_resources }",
+        "\t\tavailable = { has_civil_war = no }"
+      ]
+    }
+  ],
+  "snapshot_root": "docs/upstream/hok-prerequisite-update-20261010",
+  "documentation": {
+    "docs/HOK_KOREAN_CONSTITUTIONAL_FOLLOWUP_SPEC.md": {
+      "blob": "ba38c9181ece1404bf3ff7f1951f4b0a00030054",
+      "sha256": "F56FDE96CDDDC8E5A0682737ED251313CB3A3437D22C54EA42F9517A2C194554",
+      "size": 14747,
+      "snapshot_path": "documents/docs/HOK_KOREAN_CONSTITUTIONAL_FOLLOWUP_SPEC.md"
+    },
+    "docs/HOK_KOREAN_FASCIST_FOLLOWUP_SPEC.md": {
+      "blob": "627cc2a0cd4f56c2beb36bf0c5a7986a8f878b97",
+      "sha256": "F0D8EFEBF70B0A0302FA2592A0E3FF4FBD0BB213A3D31FE4FEEFD99AB8E0991F",
+      "size": 18636,
+      "snapshot_path": "documents/docs/HOK_KOREAN_FASCIST_FOLLOWUP_SPEC.md"
+    },
+    "docs/HOK_KOREAN_FOCUS_PREREQUISITE_READABILITY_PLAN.md": {
+      "blob": "3b7ce2d86b036b3ef65dc488f6df6daee8beba0f",
+      "sha256": "FDAC42BBABBAAB4787A87259C91288EA066E5248CF339119030369C76C9061CD",
+      "size": 13012,
+      "snapshot_path": "documents/docs/HOK_KOREAN_FOCUS_PREREQUISITE_READABILITY_PLAN.md"
+    },
+    "docs/HOK_KOREAN_REGIONAL_COMMON_FOLLOWUP_SPEC.md": {
+      "blob": "9c5db86676b706100e9b28ef8b6c1af87cf662cf",
+      "sha256": "6BFBE0C695A90D3F999EC6EF89731DD21C17B807E573314BA628B932571986ED",
+      "size": 14498,
+      "snapshot_path": "documents/docs/HOK_KOREAN_REGIONAL_COMMON_FOLLOWUP_SPEC.md"
+    },
+    "docs/HOK_KOREAN_SECOND_WAVE_PLAN.md": {
+      "blob": "0ab2b195b9dd1ece8d69206c5f5733933cbe40b1",
+      "sha256": "304DF66F824A0811EE81505DE3D47E536EA428BD6217C330EA8700F9B4E9FFBF",
+      "size": 40304,
+      "snapshot_path": "documents/docs/HOK_KOREAN_SECOND_WAVE_PLAN.md"
+    },
+    "docs/data/HOK_KOREAN_SECOND_WAVE_CANDIDATES.json": {
+      "blob": "6e0b4a74d95101547043d198f817a6bd4f143206",
+      "sha256": "E14787CCC63D67912EC87745BF53FB754857AFF7DD6A202CCA7EEC6F1C495254",
+      "size": 241810,
+      "snapshot_path": "documents/docs/data/HOK_KOREAN_SECOND_WAVE_CANDIDATES.json"
+    },
+    "docs/incidents/2026-10-10-korean-focus-prerequisite-readability.md": {
+      "blob": "0cde85c281757b7e0d81db51e59cdd0fb63bc267",
+      "sha256": "203B8028049A3EB54431276AF41BFDD7FAFACA661F43E5D92EDF2FFF0E1D9647",
+      "size": 10784,
+      "snapshot_path": "documents/docs/incidents/2026-10-10-korean-focus-prerequisite-readability.md"
+    }
+  },
+  "previous_manifest": {
+    "path": "docs/audits/2026-09-06-production-file-classification.csv",
+    "blob": "a335a17c05f02131d94aa75c679f783b76493ca7",
+    "object_sha256": "5E0BD5F54302B405E11EAA8465FB52524716A17AA85433F1D7853F2616AA9DEB"
+  }
+}
