@@ -29,6 +29,7 @@ from source_snapshot import (
     focus_tooltip_update_lock, remove_focus_tooltip_update,
     prerequisite_update_lock, remove_focus_prerequisite_update,
     royal_update_lock, remove_royal_update,
+    CIVIC_UPDATE_RUNTIME_PATHS, civic_update_lock, read_civic_source, remove_civic_update,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -512,7 +513,7 @@ def documents() -> tuple[dict[str, Block], dict[str, Block]]:
         if Path(relative).suffix not in (".txt", ".gfx"):
             continue
         expected[relative] = expected_script(relative)
-        current[relative] = read(ROOT / relative)
+        current[relative] = parse(historical_civic_payload(relative, (ROOT / relative).read_bytes()).decode("utf-8-sig"))
     return current, expected
 
 
@@ -782,7 +783,7 @@ def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str
     require(FOCUS_PATH in lock["preserved_runtime"], "material-cycle update must pin the pre-tooltip focus tree")
     for relative, digest in lock["preserved_runtime"].items():
         #20261010_kpopmodder: Reverse both strict overlays before checking the original material-cycle preservation pins.
-        data = (ROOT / relative).read_bytes()
+        data = historical_civic_payload(relative, (ROOT / relative).read_bytes())
         #20261010_kpopmodder: Recover both the focus and royal-idea ancestors before testing unchanged historical pins.
         if relative in (FOCUS_PATH, ROYAL_IDEA_PATH):
             data = remove_royal_update(relative, data)
@@ -945,7 +946,7 @@ def check_prose_update(payloads: dict[str, bytes] | None = None) -> None:
     for relative, digest in preserved.items():
         #20261005_kpopmodder: Preserve the prose import's historical pins underneath the later decision notice.
         #20261010_kpopmodder: Reverse the six prerequisite edits before applying the historical tooltip reversal.
-        data = (ROOT / relative).read_bytes()
+        data = historical_civic_payload(relative, (ROOT / relative).read_bytes())
         #20261010_kpopmodder: Recover both the focus and royal-idea ancestors before testing unchanged historical pins.
         if relative in (FOCUS_PATH, ROYAL_IDEA_PATH):
             data = remove_royal_update(relative, data)
@@ -1071,7 +1072,371 @@ def check_references(groups: dict[str, dict[str, Block]], added: set[str]) -> No
     check_new_id_collisions(collisions, {Path(path).as_posix() for path in runtime_paths()})
 
 
+
+#20261012_kpopmodder: Validate the complete civic source layer separately, recovering strict ancestors for all historical contracts.
+CIVIC_DECISIONS = "common/decisions/HOK_KOR_civic_decisions.txt"
+CIVIC_IDEAS = "common/ideas/HOK_KOR_civic_ideas.txt"
+CIVIC_EFFECTS = "common/scripted_effects/HOK_KOR_civic_effects.txt"
+CIVIC_TRIGGERS = "common/scripted_triggers/HOK_KOR_civic_triggers.txt"
+CIVIC_ACTIONS = "common/on_actions/HOK_KOR_civic_on_actions.txt"
+CIVIC_EVENTS = "events/HOK_KOR_civic_events.txt"
+CIVIC_INLAY = "common/focus_inlay_windows/HOK_KOR_civic_influence_inlay_window.txt"
+CIVIC_GUI = "interface/HOK_KOR_civic_influence.gui"
+CIVIC_LEGACY = "common/national_focus/HOK_KOR_civic_legacy_focus.txt"
+CIVIC_REMOVED = "KOR_cooperation_with_the_jaebeol"
+CIVIC_FOCUS_IDS = frozenset("HOK_KOR_civic_" + suffix for suffix in (
+    "industrial_compact", "chaebol_cooperation", "nationalization", "break_monopolies",
+    "sunkyong_investment", "samsung_electronics", "goldstar_mass_production", "labor_compact",
+    "mass_conscription", "public_accountability", "social_settlement", "public_procurement", "procurement_inspections",
+))
+CIVIC_VARIABLES = ("HOK_KOR_chaebol_influence", "HOK_KOR_civic_influence",
+                   "HOK_KOR_procurement_corruption", "HOK_KOR_institutional_capture")
+CIVIC_POLICIES = ("HOK_KOR_policy_cooperation", "HOK_KOR_policy_civic_reform", "HOK_KOR_policy_public_ownership")
+CIVIC_BUTTONS = tuple("HOK_KOR_" + suffix for suffix in ("support_chaebol", "suppress_chaebol", "support_civic", "suppress_civic"))
+
+
+def historical_civic_payload(relative: str, data: bytes) -> bytes:
+    record = civic_update_lock()["runtime_text"].get(relative, {})
+    return remove_civic_update(relative, data) if "previous_output_sha256" in record else data
+
+
+def civic_documents() -> tuple[dict[str, bytes], dict[str, Block]]:
+    payloads = {relative: (ROOT / relative).read_bytes() for relative in CIVIC_UPDATE_RUNTIME_PATHS}
+    return payloads, {relative: parse(data.decode("utf-8-sig")) for relative, data in payloads.items()
+                      if Path(relative).suffix in (".txt", ".gfx", ".gui")}
+
+
+def civic_expected_payload(relative: str, data: bytes) -> bytes:
+    """Reconstruct reviewed hunks independently of the production apply helper."""
+    record = civic_update_lock()["runtime_text"].get(relative, civic_update_lock()["runtime_assets"].get(relative))
+    if "previous_output_sha256" in record:
+        ancestor = remove_civic_update(relative, data)
+        if relative == FOCUS_PATH:
+            require(parse(ancestor.decode("utf-8-sig")) == expected_script(relative),
+                    "civic overlay changed the historical ordered focus ancestor")
+        result = ancestor
+        newline = b"\r\n" if b"\r\n" in ancestor else b"\n"
+        for edit in record["edits"]:
+            before = ("\n".join(edit["before_lines"]) + "\n").encode().replace(b"\n", newline)
+            after = ("\n".join(edit["after_lines"]) + "\n").encode().replace(b"\n", newline)
+            require(before and result.count(before) == 1, f"civic hunk anchor missing or duplicated: {relative}")
+            result = result.replace(before, after, 1)
+        return result
+    result = read_civic_source(relative)
+    for edit in record.get("transformations", ()):
+        before, after = edit["before"].encode(), edit["after"].encode()
+        require(result.count(before) == edit["count"], f"civic transformation source count changed: {relative}")
+        result = result.replace(before, after)
+    return result
+
+
+def check_civic_source(payloads: dict[str, bytes], documents: dict[str, Block]) -> None:
+    lock = civic_update_lock()
+    records = {**lock["runtime_text"], **lock["runtime_assets"]}
+    require(len(lock["runtime_text"]) == 23 and len(lock["runtime_assets"]) == 8
+            and len(records) == 31 and set(payloads) == set(records), "civic 23-text/8-asset source allowlist changed")
+    require({path for path, row in lock["runtime_text"].items() if "previous_output_sha256" in row}
+            == {FOCUS_PATH, "common/decisions/KOR_decision.txt"}, "civic existing-file delta changed")
+    expected_docs = {}
+    for relative, data in payloads.items():
+        require(hashlib.sha256(data).hexdigest().upper() == records[relative]["output_sha256"],
+                f"civic pinned output differs: {relative}")
+        expected = civic_expected_payload(relative, data)
+        require(data == expected, f"civic complete immutable source delta differs: {relative}")
+        if Path(relative).suffix in (".txt", ".gfx", ".gui"):
+            expected_docs[relative] = parse(expected.decode("utf-8-sig"))
+    # Every historical generated output and the three separately shipped sources stay byte-exact.
+    for relative, digest in {**lock["preserved_outputs"], **lock["preserved_runtime"]}.items():
+        require(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest().upper() == digest,
+                f"civic update changed an unselected output: {relative}")
+    require(documents.keys() == expected_docs.keys(), "civic ordered script inventory changed")
+    for relative, expected in expected_docs.items():
+        require(documents[relative] == expected, f"civic entire ordered AST differs: {relative}")
+
+
+def civic_flat_decisions(document: Block) -> dict[str, Block]:
+    result = {}
+    for category in named(document).values():
+        definitions = named(category)
+        require(not result.keys() & definitions.keys(), "duplicate civic decision ID")
+        result.update(definitions)
+    return result
+
+
+def check_civic_semantics(documents: dict[str, Block]) -> None:
+    focuses = focus_blocks(documents[FOCUS_PATH])
+    require(len(focuses) == 472 and CIVIC_FOCUS_IDS <= focuses.keys() and CIVIC_REMOVED not in focuses,
+            "civic tree must contain 472 playable IDs, thirteen civic additions and no legacy cooperation node")
+    tree = one(documents[FOCUS_PATH], "focus_tree")
+    require(not children(tree, "shared_focus"), "legacy shared focus was imported into the playable tree")
+    legacy = one(documents[CIVIC_LEGACY], "shared_focus")
+    require(scalar(legacy, "id") == CIVIC_REMOVED and one(legacy, "available") == parse("always = no")
+            and one(legacy, "ai_will_do") == parse("factor = 0") and one(legacy, "completion_reward") == (),
+            "legacy focus lookup must remain registered, unavailable and reward-free")
+    for identifier in CIVIC_FOCUS_IDS:
+        focus = focuses[identifier]
+        require(scalar(focus, "cost") == "5" and scalar(focus, "cancel_if_invalid") == "yes"
+                and scalar(focus, "continue_if_invalid") == "no" and scalar(focus, "available_if_capitulated") == "no",
+                f"civic 35-day cancellation contract changed: {identifier}")
+        require(one(focus, "ai_will_do") and scalar(one(focus, "ai_will_do"), "factor") == "2",
+                f"civic base AI weight changed: {identifier}")
+        for entry in walk(focus):
+            if entry.key in ("focus", "relative_position_id") and isinstance(entry.value, str):
+                require(entry.value in focuses, f"unresolved civic focus link: {identifier}/{entry.value}")
+    policy_focuses = {"HOK_KOR_civic_" + suffix for suffix in ("chaebol_cooperation", "nationalization", "break_monopolies")}
+    for identifier in policy_focuses:
+        excluded = {entry.value for entry in one(focuses[identifier], "mutually_exclusive") if entry.key == "focus"}
+        require(excluded == policy_focuses - {identifier}, f"civic policy mutual exclusion changed: {identifier}")
+    require(one(focuses["HOK_KOR_civic_industrial_compact"], "prerequisite")
+            == parse("focus = KOR_liberal_party_sole_power focus = KOR_independent_party_in_power"),
+            "civic democratic entry OR prerequisite changed")
+    require(one(one(tree, "inlay_window"), "position") == parse("x = 1050 y = 1400")
+            and scalar(one(tree, "inlay_window"), "id") == "HOK_KOR_civic_influence_inlay_window",
+            "civic inlay placement/registration changed")
+    effects = named(documents[CIVIC_EFFECTS])
+    require(len(effects) == 18, "civic helper inventory changed")
+    seed = one(effects["HOK_KOR_initialize_civic_system"], "if")
+    require(one(seed, "limit") == parse("tag = KOR NOT = { has_country_flag = HOK_KOR_civic_system_initialized }"),
+            "civic initialization lost its Korean once-only guard")
+    require(children(seed, "set_variable") == [parse(f"{variable} = {value}")
+            for variable, value in zip(CIVIC_VARIABLES, (60, 35, 20, 40))], "civic independent seed values changed")
+    require(scalar(seed, "set_country_flag") == "HOK_KOR_civic_system_initialized"
+            and scalar(seed, "HOK_KOR_sync_civic_state") == "yes", "civic initialization lifecycle changed")
+    sync = effects["HOK_KOR_sync_civic_state"]
+    require(children(sync, "clamp_variable") == [parse(f"var = {variable} min = 0 max = 100") for variable in CIVIC_VARIABLES],
+            "civic four-variable 0..100 clamp changed")
+    for faction in ("chaebol", "civic"):
+        variable = f"HOK_KOR_{faction}_influence"
+        branches = [entry.value for entry in sync if entry.key in ("if", "else_if") and isinstance(entry.value, tuple)
+                    and any(item.key == "check_variable" and isinstance(item.value, tuple)
+                            and scalar(item.value, "var") == variable for item in one(entry.value, "limit"))]
+        require(len(branches) == 3, f"civic influence tier branch count changed: {faction}")
+        for branch, threshold, tier in zip(branches, (75, 50, 25), ("dominant", "interfering", "established")):
+            require(one(branch, "limit") == parse(f"check_variable = {{ var = {variable} value = {threshold} compare = greater_than_or_equals }}"),
+                    f"civic tier threshold/order changed: {faction}/{tier}")
+            ideas = {entry.value for entry in walk(branch) if entry.key == "add_ideas"}
+            removed = {entry.value for entry in branch if entry.key == "remove_ideas"}
+            require(ideas == {f"HOK_KOR_{faction}_{tier}"} and removed == {f"HOK_KOR_{faction}_{other}"
+                    for other in ("dominant", "interfering", "established") if other != tier},
+                    f"civic influence tier stacking changed: {faction}/{tier}")
+    corruption_branches = [entry.value for entry in sync if entry.key in ("if", "else_if")
+                           and isinstance(entry.value, tuple) and any(item.key == "check_variable"
+                           and isinstance(item.value, tuple) and scalar(item.value, "var") == CIVIC_VARIABLES[2]
+                           for item in one(entry.value, "limit"))]
+    require([scalar(one(one(branch, "limit"), "check_variable"), "value") for branch in corruption_branches] == ["70", "40"],
+            "civic corruption severe/moderate threshold order changed")
+    for helper, selected in zip(("chaebol_cooperation", "civic_reform", "public_ownership"), CIVIC_POLICIES):
+        choice = one(effects["HOK_KOR_select_" + helper], "if")
+        require(one(choice, "limit") == parse("tag = KOR")
+                and [entry.value for entry in choice if entry.key == "clr_country_flag"] == list(CIVIC_POLICIES)
+                and selected in [entry.value for entry in choice if entry.key == "set_country_flag"],
+                f"civic saved policy replacement changed: {helper}")
+    actions = one(documents[CIVIC_ACTIONS], "on_actions")
+    require([entry.key for entry in actions] == ["on_startup", "on_monthly_KOR"], "civic callback cadence changed")
+    for callback, helper in (("on_startup", "HOK_KOR_register_legacy_civic_state"), ("on_monthly_KOR", "HOK_KOR_monthly_civic_update")):
+        require(one(one(actions, callback), "effect") == parse(f"KOR = {{ {helper} = yes }}"),
+                f"civic callback lost explicit Korean country scope: {callback}")
+    registry = effects["HOK_KOR_register_legacy_civic_state"]
+    require(registry[0] == Entry("HOK_KOR_initialize_civic_system", "=", "yes"), "legacy registration must initialize first")
+    require({entry.value for entry in walk(registry) if entry.key == "has_completed_focus"}
+            == {CIVIC_REMOVED, "HOK_KOR_civic_chaebol_cooperation", "KOR_taming_the_jaebeol", "KOR_confiscation_of_chaebol_assets"},
+            "civic legacy/new completion lookup closure changed")
+    for suffix in ("cooperation", "taming", "nationalization"):
+        body = effects[f"HOK_KOR_legacy_{suffix}_adjustment"]
+        guard = f"HOK_KOR_legacy_{suffix}_registered"
+        require(one(one(body, "if"), "limit") == parse(f"tag = KOR NOT = {{ has_country_flag = {guard} }}")
+                and scalar(one(body, "if"), "set_country_flag") == guard,
+                f"civic legacy adjustment can repeat: {suffix}")
+    require(effects["HOK_KOR_monthly_civic_update"][0] == Entry("HOK_KOR_register_legacy_civic_state", "=", "yes"),
+            "monthly civic update lost legacy registration")
+    decisions = civic_flat_decisions(documents[CIVIC_DECISIONS])
+    require(len(decisions) == 13 and len(named(documents["common/decisions/categories/HOK_KOR_civic_categories.txt"])) == 2,
+            "civic decision/category inventory must remain 13/2")
+    for identifier, cost, duration in (
+        ("secure_prosecutorial_records", "150", "45"), ("break_capture_networks", "200", "60"),
+        ("restore_civilian_mandate", "200", "90"), ("independent_procurement_audit", "100", "60"),
+        ("recover_air_procurement", "150", "60"), ("recover_rocket_procurement", "150", "60"),
+    ):
+        body = decisions["HOK_KOR_" + identifier]
+        require(scalar(body, "cost") == cost and scalar(body, "days_remove") == duration,
+                f"civic timed policy cost/duration changed: {identifier}")
+    require(scalar(decisions["HOK_KOR_prosecutor_coup_countdown"], "days_mission_timeout") == "90",
+            "civic coup warning mission must remain ninety days")
+    for identifier in ("fast_track_air_contracts", "fast_track_rocket_contracts"):
+        require(scalar(decisions["HOK_KOR_" + identifier], "cost") == "75", f"civic procurement cost changed: {identifier}")
+    inlay = one(documents[CIVIC_INLAY], "HOK_KOR_civic_influence_inlay_window")
+    require(scalar(inlay, "window_name") == "HOK_KOR_civic_influence_window"
+            and one(inlay, "visible") == parse("tag = KOR has_country_flag = HOK_KOR_civic_system_initialized"),
+            "civic inlay scope or initialization gate changed")
+    buttons = named(one(inlay, "scripted_buttons"))
+    require(set(buttons) == {identifier + "_button" for identifier in CIVIC_BUTTONS}, "civic four-button inventory changed")
+    triggers = named(documents[CIVIC_TRIGGERS])
+    require(triggers["HOK_KOR_civic_action_state_available"] == parse("tag = KOR has_country_flag = HOK_KOR_civic_system_initialized has_country_flag = HOK_KOR_civic_panel_unlocked has_capitulated = no has_civil_war = no NOT = { has_country_flag = HOK_KOR_civic_action_cooldown }"),
+            "civic action state gate changed")
+    require(triggers["HOK_KOR_civic_action_available"] == parse("HOK_KOR_civic_action_state_available = yes NOT = { has_political_power < 50 }"),
+            "civic GUI readiness must retain the separate PP gate")
+    for identifier in CIVIC_BUTTONS:
+        wrapper = effects[identifier]
+        require([entry.value for entry in walk(wrapper) if entry.key == "add_political_power"] == ["-50"],
+                f"civic GUI action must charge PP50 once: {identifier}")
+        require(scalar(decisions[identifier], "cost") == "50"
+                and not any(entry.key == "add_political_power" for entry in walk(decisions[identifier])),
+                f"civic decision duplicated or removed its engine charge: {identifier}")
+        require(one(buttons[identifier + "_button"], "click_effect") == parse(identifier + " = yes"),
+                f"civic inlay click helper changed: {identifier}")
+        helper = effects[identifier.replace("HOK_KOR_", "HOK_KOR_apply_", 1)]
+        require(children(one(helper, "if"), "set_country_flag") == [parse("flag = HOK_KOR_civic_action_cooldown value = 1 days = 90")]
+                and scalar(one(helper, "if"), "HOK_KOR_sync_civic_state") == "yes",
+                f"civic action lost shared cooldown/sync: {identifier}")
+    ideas = named(one(one(documents[CIVIC_IDEAS], "ideas"), "country"))
+    require(len(ideas) == 20 and all(one(idea, "allowed_civil_war") == parse("always = no") for idea in ideas.values()),
+            "civic twenty country spirits/civil-war exclusion changed")
+    events_list = children(documents[CIVIC_EVENTS], "country_event")
+    events = {scalar(event, "id"): event for event in events_list}
+    require(len(events) == len(events_list) == 11
+            and set(events) == {f"HOK_KOR_CIVIC.{number}" for number in (1, 2, 3, 11, 12, 13, 20, 21, 22, 23, 24)},
+            "civic event namespace/inventory changed")
+    for identifier, event in events.items():
+        require(scalar(event, "is_triggered_only") == "yes" and Entry("tag", "=", "KOR") in one(event, "trigger"),
+                f"civic event lost triggered-only Korean scope: {identifier}")
+    scope_forbidden = {"every_country", "any_country", "random_country", "every_state", "any_state", "random_state",
+                       "every_owned_state", "every_controlled_state", "capital_scope", "owner", "controller"}
+    for relative in (CIVIC_EFFECTS, CIVIC_TRIGGERS, CIVIC_EVENTS, CIVIC_ACTIONS, CIVIC_DECISIONS, CIVIC_INLAY):
+        require(not any(entry.key in scope_forbidden for entry in walk(documents[relative])),
+                f"civic country logic gained a broad/foreign/state scope: {relative}")
+    orders = named(one(documents["common/decisions/KOR_decision.txt"], "KOR_jaebeol_category"))
+    for identifier in ("KOR_order_to_samsung", "KOR_order_to_hyundai", "KOR_order_to_sk"):
+        expected = parse("OR = { has_completed_focus = HOK_KOR_civic_chaebol_cooperation has_country_flag = HOK_KOR_legacy_cooperation_registered has_completed_focus = KOR_cooperation_with_the_jaebeol has_completed_focus = KOR_taming_the_jaebeol }")
+        require(one(orders[identifier], "available") == expected and one(orders[identifier], "visible") == expected,
+                f"civic company-order access regression: {identifier}")
+
+
+def check_civic_presentation(payloads: dict[str, bytes], documents: dict[str, Block]) -> None:
+    locales = {relative: data for relative, data in payloads.items() if relative.endswith(".yml")}
+    require(len(locales) == 6, "civic localisation must remain three bilingual pairs")
+    keys = {language: set() for language in ("english", "korean")}
+    for relative, data in locales.items():
+        language = Path(relative).parts[1]
+        require(data.startswith(b"\xef\xbb\xbf" + f"l_{language}:".encode()), f"civic localisation BOM/header changed: {relative}")
+        found = re.findall(r"(?m)^\s+([A-Za-z0-9_.-]+):\d*\s", data.decode("utf-8-sig"))
+        require(len(found) == len(set(found)) and not keys[language] & set(found), f"duplicate civic localisation: {relative}")
+        keys[language].update(found)
+    require(keys["english"] == keys["korean"], "civic bilingual key sets differ")
+    focuses = focus_blocks(documents[FOCUS_PATH])
+    ideas = named(one(one(documents[CIVIC_IDEAS], "ideas"), "country"))
+    decisions = civic_flat_decisions(documents[CIVIC_DECISIONS])
+    required = set(CIVIC_FOCUS_IDS) | set(ideas) | set(decisions) | {"HOK_KOR_civic_balance", "HOK_KOR_procurement_integrity"}
+    required |= {identifier + "_desc" for identifier in required}
+    require(required <= keys["english"], f"civic missing definition descriptions: {sorted(required - keys['english'])}")
+    sprites = {}
+    for path in effective_files("interface", "*.gfx"):
+        text = path.read_bytes().decode("utf-8-sig")
+        for match in re.finditer(r'\bname\s*=\s*"?([A-Za-z0-9_]+)"?', mask_comments(text)):
+            sprites[match.group(1)] = path
+    consumed = {scalar(focuses[identifier], "icon") for identifier in CIVIC_FOCUS_IDS}
+    consumed |= {"GFX_idea_" + scalar(idea, "picture") for idea in ideas.values()}
+    consumed |= {scalar(decision, "icon") for decision in decisions.values()}
+    for relative in (CIVIC_GUI, CIVIC_INLAY):
+        consumed |= {entry.value for entry in walk(documents[relative])
+                     if entry.key.lower() in ("spritetype", "quadtexturesprite") and isinstance(entry.value, str)}
+    require(consumed <= sprites.keys(), f"unresolved civic sprite: {sorted(consumed - sprites.keys())}")
+    selected_sprites = {}
+    for relative, block in documents.items():
+        if relative.endswith(".gfx"):
+            for sprite in children(block, "spriteTypes"):
+                for entry in sprite:
+                    require(isinstance(entry.value, tuple), "civic invalid sprite registration")
+                    identifier = scalar(entry.value, "name")
+                    require(identifier not in selected_sprites, "civic duplicate sprite ID")
+                    selected_sprites[identifier] = entry.value
+                    for item in walk(entry.value):
+                        if item.key.lower() in ("texturefile", "animationmaskfile", "animationtexturefile"):
+                            texture = Path(item.value)
+                            require(any((base / texture).is_file() for base in (ROOT, RT56_ROOT, VANILLA_ROOT)),
+                                    f"missing civic presentation dependency: {identifier}/{texture}")
+                        if item.key.lower() == "effectfile":
+                            # The target vanilla registry uses the historical .lua effect key with a physical .shader provider.
+                            provider = {SHINE_EFFECT: "interface/goals_shine.gfx",
+                                        "gfx/FX/buttonstate_nodowneffect.lua": "interface/core.gfx"}
+                            require(item.value in provider
+                                    and (VANILLA_ROOT / Path(item.value).with_suffix(".shader")).is_file()
+                                    and item.value in mask_comments((VANILLA_ROOT / provider[item.value]).read_text(encoding="utf-8-sig")),
+                                    "civic shine effect differs from the target vanilla registration/provider")
+                        if item.key.lower() == "animationtexturefile":
+                            require(item.value == SHINE_OVERLAY, "civic shine must use the host/vanilla shared overlay")
+    for relative, data in payloads.items():
+        if relative.endswith(".dds"):
+            require(data[:4] == b"DDS " and len(data) >= 128 and struct.unpack("<I", data[4:8])[0] == 124,
+                    f"invalid civic DDS header: {relative}")
+    for relative in (CIVIC_INLAY, "common/scripted_localisation/HOK_KOR_civic_influence_scripted_loc.txt", CIVIC_GUI):
+        for entry in walk(documents[relative]):
+            if entry.key in ("localization_key", "buttonText", "context_aware_text", "context_aware_tooltip") and isinstance(entry.value, str) and entry.value.startswith("HOK_KOR_"):
+                require(entry.value in keys["english"], f"unresolved civic UI localisation: {entry.value}")
+
+
+def check_civic_update(payloads: dict[str, bytes] | None = None, documents: dict[str, Block] | None = None) -> None:
+    if payloads is None or documents is None:
+        payloads, documents = civic_documents()
+    check_civic_source(payloads, documents)
+    check_civic_semantics(documents)
+    check_civic_presentation(payloads, documents)
+
+
+def run_civic_checks() -> None:
+    check_civic_update()
+    print("PASS civic source/contracts: 31 selected outputs, 472 playable focuses plus legacy lookup, 13 decisions, 20 ideas, 11 events; seeds/clamps/tier replacement, PP/cooldown, country callbacks, inlay/localisation/artwork closure; 405 earlier generated outputs unchanged")
+    print("STATIC ONLY: no engine evaluation, UI, progression, save, AI, DLC or multiplayer proof.")
+
+
+def run_civic_self_tests() -> None:
+    payloads, current = civic_documents()
+    check_civic_update(payloads, current)
+    caught = []
+    def rejects(label, action):
+        try:
+            action()
+        except (ValueError, KeyError, StopIteration, UnicodeError):
+            caught.append(label)
+        else:
+            raise ValueError(f"civic mutation was not detected: {label}")
+    def mutation(relative, path, value):
+        return {**current, relative: replace_entry(current[relative], path, value)}
+    for variable in CIVIC_VARIABLES:
+        clamps = children(named(current[CIVIC_EFFECTS])["HOK_KOR_sync_civic_state"], "clamp_variable")
+        index = CIVIC_VARIABLES.index(variable)
+        changed = list(named(current[CIVIC_EFFECTS])["HOK_KOR_sync_civic_state"])
+        changed[index] = Entry("clamp_variable", "=", replace_entry(clamps[index], ("max",), "101"))
+        rejects("clamp-" + variable, lambda changed=changed: check_civic_semantics(mutation(CIVIC_EFFECTS, ("HOK_KOR_sync_civic_state",), tuple(changed))))
+    for path, value, label in (
+        (("HOK_KOR_initialize_civic_system", "if", "limit"), parse("tag = KOR"), "once-only-init"),
+        (("HOK_KOR_select_chaebol_cooperation", "if", "limit"), parse("always = yes"), "policy-scope"),
+        (("HOK_KOR_support_chaebol", "if", "add_political_power"), "-25", "gui-cost"),
+        (("HOK_KOR_legacy_cooperation_adjustment", "if", "limit"), parse("tag = KOR"), "legacy-repeat"),
+    ):
+        rejects(label, lambda path=path, value=value: check_civic_semantics(mutation(CIVIC_EFFECTS, path, value)))
+    for callback in ("on_startup", "on_monthly_KOR"):
+        rejects("country-scope-" + callback, lambda callback=callback: check_civic_semantics(mutation(CIVIC_ACTIONS, ("on_actions", callback, "effect"), parse("HOK_KOR_monthly_civic_update = yes"))))
+    rejects("legacy-rewards", lambda: check_civic_semantics(mutation(CIVIC_LEGACY, ("shared_focus", "completion_reward"), parse("add_political_power = 150"))))
+    rejects("legacy-playable", lambda: check_civic_semantics(mutation(CIVIC_LEGACY, ("shared_focus", "available"), parse("always = yes"))))
+    rejects("inlay-country-leak", lambda: check_civic_semantics(mutation(CIVIC_INLAY, ("HOK_KOR_civic_influence_inlay_window", "visible"), parse("always = yes"))))
+    for identifier in CIVIC_BUTTONS:
+        rejects("decision-cost-" + identifier, lambda identifier=identifier: check_civic_semantics(mutation(CIVIC_DECISIONS, ("HOK_KOR_civic_balance", identifier, "cost"), "0")))
+    rejects("inlay-position", lambda: check_civic_semantics(mutation(FOCUS_PATH, ("focus_tree", "inlay_window", "position"), parse("x = 0 y = 0"))))
+    rejects("missing-decision", lambda: check_civic_semantics(mutation(CIVIC_DECISIONS, ("HOK_KOR_civic_balance", "HOK_KOR_support_civic"), None)))
+    for relative in (CIVIC_EVENTS, CIVIC_GUI, "interface/HOK_KOR_civic_focus.gfx", FOCUS_PATH):
+        changed = {**current, relative: current[relative] + parse("unexpected_civic_regression = yes")}
+        rejects("ordered-AST-" + relative, lambda changed=changed: check_civic_source(payloads, changed))
+    locale = "localisation/korean/HOK_KOR_civic_ui_l_korean.yml"
+    rejects("locale-header", lambda: check_civic_presentation({**payloads, locale: payloads[locale][3:]}, current))
+    asset = next(relative for relative in payloads if relative.endswith(".dds"))
+    rejects("asset-source", lambda: check_civic_source({**payloads, asset: payloads[asset][:-1] + bytes([payloads[asset][-1] ^ 1])}, current))
+    rejects("missing-path", lambda: check_civic_source({relative: data for relative, data in payloads.items() if relative != asset}, current))
+    print(f"PASS civic mutation self-test: {len(caught)} regressions rejected; exact immutable-source fixture accepted; no production writes")
+    print("SCOPED STATIC ONLY: 472 playable focuses and one legacy lookup; 13 decisions, 20 country spirits, 11 events; lifecycle/scope/presentation contracts only. Historical aggregate assertions remain enforced; no engine, UI, progression, save, AI or multiplayer proof.")
+
+
 def run_checks() -> None:
+    check_civic_update()
     current, expected = documents()
     compare_documents(current, expected)
     groups = collect(current)
@@ -1336,9 +1701,11 @@ def main() -> int:
     mode.add_argument("--check", action="store_true")
     mode.add_argument("--self-test", action="store_true")
     mode.add_argument("--royal-self-test", action="store_true")
+    mode.add_argument("--civic-self-test", action="store_true")
+    mode.add_argument("--civic-check", action="store_true")
     args = parser.parse_args()
     try:
-        run_royal_self_tests() if args.royal_self_test else run_self_tests() if args.self_test else run_checks()
+        run_civic_checks() if args.civic_check else run_civic_self_tests() if args.civic_self_test else run_royal_self_tests() if args.royal_self_test else run_self_tests() if args.self_test else run_checks()
     except (OSError, UnicodeError, ValueError, KeyError, StopIteration) as exc:
         print(f"ERROR Korean second-wave contract: {exc}")
         return 1

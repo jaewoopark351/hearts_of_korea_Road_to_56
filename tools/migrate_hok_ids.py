@@ -9,6 +9,7 @@ with only the reviewed HOK delta applied.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
 import sys
 from pathlib import Path
@@ -1024,6 +1025,17 @@ def main() -> int:
         destination = (REPO_ROOT / Path(relative)).resolve()
         destination.relative_to(REPO_ROOT)
         current = destination.read_bytes()
+        #20261012_kpopmodder: Audit the exact pre-civic ancestor without undoing the generator-owned gameplay overlay.
+        if relative == "common/decisions/KOR_decision.txt" and current != migrated:
+            from source_snapshot import civic_update_lock, remove_civic_update
+            civic_output_hash = civic_update_lock()["runtime_text"][relative]["output_sha256"]
+            if hashlib.sha256(current).hexdigest().upper() == civic_output_hash:
+                projected = remove_civic_update(relative, current)
+            else:
+                projected = current
+            if projected != current and projected != migrated:
+                raise ValueError("civic decision overlay changed the historical ID-migration ancestor")
+            current = projected
         legacy_migrated = replace_tokens(original, {**PROVINCE_ID_MAP, **STATE_ID_MAP})
         if relative.endswith("HoK_state_name_l_english.yml") or relative.endswith(
             "HoK_state_name_l_korean.yml"

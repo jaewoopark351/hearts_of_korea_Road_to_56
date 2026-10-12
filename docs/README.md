@@ -4,6 +4,7 @@
 
 ## 현재 상태
 
+- 2026-10-12 원본 d4031aa 재벌·시민사회: **한국 runtime31개 선택 이식, playable472개·신규13중점·20정신·13결정/mission·11사건·영향력패널 반영**. 이전 생성 출력405개·RT56 지역 병합·historical lock10개 보존. Civic scoped 정적/회귀26개와 기존 royal/선행57개 통과, aggregate **18 PASS / 0 WARNING / 5 기존 ERROR**, 현재 실행 미검증. 기존 host drift·descriptor pin은 아래 [구현 기록](implementation/2026-10-12-korean-civic-update-port.md)에 구분했다. [472개 좌표 명세](HOK_KOREAN_CIVIC_LAYOUT_COORDINATES.md).
 - 2026-10-11 미사일 기지: **함경918·충청1145의 HoK 우선 배치와 정적 검증 완료, 실제 UI 검증 대기**. RT56 위치3행 제외·HoK 함경1행 복원, buildings-only에서 철도 포함 동반 지도17개 보존. 외부 회귀34 PASS·독립 과거 정규화12개 변형 거부; aggregate 작업 전16/0/5 → 작업 후17/0/5(같은 기존 host drift4·descriptor pin1). 전체 지도·철도 source drift와 실행 증거는 별도 미완료다. 최초 문서화 전용 요청과 수정 전 지문을 [수정 계획](plans/2026-10-11-korean-rocket-site-fix-plan.md)에 보존하고, 후속 구현 승인·검사 결과를 [구현 기록](implementation/2026-10-11-korean-rocket-site-fix.md)에 구분했다.
 - 2026-10-10 원본 `4d8241e` 왕정 업데이트: **A2/A3/A4·H2의 추가 완료 조건 제거, H1 물자 4중점 배치·선행 이동, 연락망 국민정신 I/II 형성 전 유지 반영**. 보상·기간·AI·RT56 지역 조건 보존, 460개 좌표 명세 추가. scoped 정적 통과·회귀57개 거부; aggregate **16 PASS / 0 WARNING / 5 ERROR**(기존 host drift4·시작부터 존재한 descriptor 바이트 pin1). 이번 호환판 실행 미검증. [구현 기록](implementation/2026-10-10-korean-royal-update-port.md), [포트 좌표 명세](HOK_KOREAN_ROYAL_LAYOUT_COORDINATES.md).
 - 2026-10-10 원본 `af6fccf` 업데이트: **한국 중점 6개의 선행 조건 선택 이식**. 채굴의 두 AND 선행 연결 표시와 진입 조건 5개 완화, 보상·기간·좌표·AI·후속 조건 보존. 원본 문서 7개·독립 lock·원장 갱신, subsystem 통과·회귀51개 거부, aggregate **17 PASS / 0 WARNING / 4 기존 source drift ERROR**, 이번 실행 미검증. 최신 RT56 manifest `7553774178744855191`의 기존 공용 입력 7개 drift를 [구현 기록](implementation/2026-10-10-korean-focus-prerequisite-port.md)에 별도로 기록했다.
@@ -29,6 +30,9 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 구현 | [2026-10-12 재벌·시민사회 이식](implementation/2026-10-12-korean-civic-update-port.md) | donor d4031aa·runtime31개·생성436개·원장1,446개; scoped static/회귀26개 통과, 실행 미검증 |
+| 배치 | [재벌·시민사회 좌표](HOK_KOREAN_CIVIC_LAYOUT_COORDINATES.md) / [472개 JSON](data/HOK_KOREAN_CIVIC_LAYOUT_COORDINATES.json) | 13개 신규·2개 기존 이동·457개 위치 보존, 10개 SHOW/HIDE 상태 정적 기록 |
+| 원본 기록 | [d4031aa 모듈·문서·소재](upstream/hok-civic-update-20261012/README.md) | runtime31개·문서/소재23개 immutable source, 기존 source pins 보존 |
 | 계획 | [2026-10-11 한반도 미사일 기지 중복 배치](plans/2026-10-11-korean-rocket-site-fix-plan.md) | 최초 문서화 전용 계획·수정 전 지문 보존; 후속 구현 및 정적 완료, UI 대기 |
 | 구현 | [2026-10-11 함경·충청 미사일 위치 선택](implementation/2026-10-11-korean-rocket-site-fix.md) | RT56 3행 제외·HoK 1행 복원, 동반 지도17개 보존; 회귀34 PASS·변형12개 거부, aggregate17 PASS/기존5 ERROR, UI 대기 |
 | 구현 | [2026-10-10 왕정 선행·물자 배치](implementation/2026-10-10-korean-royal-update-port.md) | donor4d8241e; runtime2파일·scoped회귀57개, 정적16 PASS/기존5 ERROR, 실행 미검증 |
@@ -60,7 +64,7 @@
 | 구현 | [2026-09-06 한국 우선 자산·KOR 기술 보정](implementation/2026-09-06-korea-first-assets-and-kor-tech.md) | HOK 음성·기본 항공기 복원과 폐기 수송기 기술 정리 |
 | 구현 | [2026-09-06 한국 해안 항구 배치 closure 보정](implementation/2026-09-06-map-building-closure-fix.md) | 누락 항구 spawn 7행과 RT56 대비 회귀 gate 추가 |
 | 감사 | [통합 ledger](audits/2026-09-06-integration-ledger.md) | ADR-0004를 반영한 현재 ownership·merge 요약 |
-| 감사 | [1,411개 파일 분류 CSV](audits/2026-09-06-production-file-classification.csv) | 생성기가 관리하는 현재 행별 분류·Git/미커밋 출처·호스트/출력 해시 원장 |
+| 감사 | [1,446개 파일 분류 CSV](audits/2026-09-06-production-file-classification.csv) | 생성기가 관리하는 현재 행별 분류·Git/미커밋 출처·호스트/출력 해시 원장 |
 | 검증 | [정적 검증 기록](validation/2026-09-06-static-validation.md) | 1차 정책 당시 역사적 결과 |
 | 검증 | [한국 우선 후속 정적 검증](validation/2026-09-06-korea-first-static-validation.md) | 당시 15 PASS와 미등록 `Minshu_ikki.ogg` pruning 오류 1건의 역사적 기록 |
 | 결정 | [ADR-0001: 런타임 의존성과 로드 구성](decisions/0001-runtime-dependencies-and-load-order.md) | RT56 host 채택, 실제 localisation 구성 불일치 잔존 |

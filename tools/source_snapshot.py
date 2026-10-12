@@ -389,6 +389,194 @@ def remove_royal_update(relative: str | Path, data: bytes) -> bytes:
     return previous
 
 
+
+#20261012_kpopmodder: Preserve the immutable Korean civic module as a separate delta over the royal RT56 merge.
+CIVIC_UPDATE_COMMIT = "d4031aaa0c1f85bb89b0e6ca21d041beade8bd26"
+CIVIC_UPDATE_LOCK_PATH = Path(__file__).with_name("hok_civic_update_lock.json")
+CIVIC_UPDATE_SNAPSHOT_ROOT = "docs/upstream/hok-civic-update-20261012"
+CIVIC_UPDATE_TEXT_PATHS = (
+    "common/decisions/HOK_KOR_civic_decisions.txt",
+    "common/decisions/KOR_decision.txt",
+    "common/decisions/categories/HOK_KOR_civic_categories.txt",
+    "common/focus_inlay_windows/HOK_KOR_civic_influence_inlay_window.txt",
+    "common/ideas/HOK_KOR_civic_ideas.txt",
+    "common/national_focus/HOK_KOR_civic_legacy_focus.txt",
+    "common/national_focus/korea.txt",
+    "common/on_actions/HOK_KOR_civic_on_actions.txt",
+    "common/scripted_effects/HOK_KOR_civic_effects.txt",
+    "common/scripted_localisation/HOK_KOR_civic_influence_scripted_loc.txt",
+    "common/scripted_triggers/HOK_KOR_civic_triggers.txt",
+    "events/HOK_KOR_civic_events.txt",
+    "interface/HOK_KOR_civic_decisions.gfx",
+    "interface/HOK_KOR_civic_events.gfx",
+    "interface/HOK_KOR_civic_focus.gfx",
+    "interface/HOK_KOR_civic_influence.gfx",
+    "interface/HOK_KOR_civic_influence.gui",
+    "localisation/english/HOK_KOR_civic_focus_l_english.yml",
+    "localisation/english/HOK_KOR_civic_state_l_english.yml",
+    "localisation/english/HOK_KOR_civic_ui_l_english.yml",
+    "localisation/korean/HOK_KOR_civic_focus_l_korean.yml",
+    "localisation/korean/HOK_KOR_civic_state_l_korean.yml",
+    "localisation/korean/HOK_KOR_civic_ui_l_korean.yml",
+)
+CIVIC_UPDATE_ASSET_PATHS = (
+    "gfx/event_pictures/HOK_KOR/civic/report_event_fighters.dds",
+    "gfx/event_pictures/HOK_KOR/civic/report_event_generic_parliament.dds",
+    "gfx/interface/HOK_KOR/civic/button_94x31.dds",
+    "gfx/interface/HOK_KOR/civic/pol_leader_frame.dds",
+    "gfx/interface/HOK_KOR/civic/tiled_window_small.dds",
+    "gfx/interface/HOK_KOR/civic/tiled_window_thin_border2.dds",
+    "gfx/interface/decisions/HOK_KOR/civic/category.dds",
+    "gfx/interface/decisions/HOK_KOR/civic/influence_blue.dds",
+)
+CIVIC_UPDATE_RUNTIME_PATHS = CIVIC_UPDATE_TEXT_PATHS + CIVIC_UPDATE_ASSET_PATHS
+CIVIC_UPDATE_MODIFIED_PATHS = (SECOND_WAVE_FOCUS_PATH, "common/decisions/KOR_decision.txt")
+
+
+def _replace_civic_lines(data: bytes, edit: dict, *, source: bool = False, reverse: bool = False) -> bytes:
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    before, after = ("after_lines", "before_lines") if reverse else ("before_lines", "after_lines")
+    if source:
+        before, after = "source_" + before, "source_" + after
+    old = ("\n".join(edit[before]) + "\n").encode("utf-8").replace(b"\n", newline)
+    new = ("\n".join(edit[after]) + "\n").encode("utf-8").replace(b"\n", newline)
+    if not old or data.count(old) != 1:
+        raise ValueError("civic update span is missing or duplicated")
+    return data.replace(old, new, 1)
+
+
+@lru_cache(maxsize=1)
+def civic_update_lock() -> dict:
+    lock = json.loads(CIVIC_UPDATE_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["source_commit"], lock["base_commit"], lock["snapshot_root"]) != (
+        1, "immutable-git-objects", CIVIC_UPDATE_COMMIT, ROYAL_UPDATE_COMMIT, CIVIC_UPDATE_SNAPSHOT_ROOT
+    ) or set(lock["runtime_text"]) != set(CIVIC_UPDATE_TEXT_PATHS) or set(lock["runtime_assets"]) != set(CIVIC_UPDATE_ASSET_PATHS):
+        raise ValueError("unreviewed civic source revision or runtime inventory")
+    if lock["runtime_paths_sha256"] != sha256("\n".join(sorted(CIVIC_UPDATE_RUNTIME_PATHS)).encode()):
+        raise ValueError("civic runtime inventory fingerprint mismatch")
+    expected_locks = set(royal_update_lock()["preserved_historical_locks"]) | {"tools/hok_royal_update_lock.json"}
+    if set(lock["preserved_historical_locks"]) != expected_locks:
+        raise ValueError("civic update historical source-lock inventory changed")
+    for relative, expected in lock["preserved_historical_locks"].items():
+        if sha256((REPO_ROOT / relative).read_bytes()) != expected:
+            raise ValueError(f"historical source lock changed during civic update: {relative}")
+    if (lock["runtime_text"][SECOND_WAVE_FOCUS_PATH]["previous_output_sha256"] != royal_update_lock()["runtime_text"][SECOND_WAVE_FOCUS_PATH]["output_sha256"]
+            or lock["rt56_base_sha256"] != royal_update_lock()["rt56_base_sha256"]):
+        raise ValueError("civic update must retain the reviewed royal ancestor and Korean host base")
+    changed = subprocess.check_output(git_command() + [
+        "diff", "--name-only", lock["base_commit"], lock["source_commit"]
+    ]).decode().splitlines()
+    if (set(changed) != set(CIVIC_UPDATE_RUNTIME_PATHS) | set(lock["documentation"]) | {".gitattributes", "README.md"}
+            or lock["excluded_source_paths"] != [".gitattributes", "README.md"]
+            or len(lock["documentation"]) != 23
+            or lock["documentation_paths_sha256"] != sha256("\n".join(sorted(lock["documentation"])).encode())):
+        raise ValueError("civic update source diff or documentation inventory changed")
+
+    statuses = dict(line.split("\t", 1)[::-1] for line in subprocess.check_output(git_command() + [
+        "diff", "--name-status", lock["base_commit"], lock["source_commit"]
+    ]).decode().splitlines())
+    if statuses != lock["source_status"] or any(
+        statuses[relative] != ("M" if relative in CIVIC_UPDATE_MODIFIED_PATHS else "A")
+        for relative in CIVIC_UPDATE_RUNTIME_PATHS
+    ):
+        raise ValueError("civic source additions/modifications changed")
+    snapshot_root = (REPO_ROOT / CIVIC_UPDATE_SNAPSHOT_ROOT).resolve()
+    for group in ("runtime_text", "runtime_assets", "documentation"):
+        for relative, record in lock[group].items():
+            expected_path = ("documents/" if group == "documentation" else "runtime/") + relative
+            if record["snapshot_path"] != expected_path or Path(relative).is_absolute() or ".." in Path(relative).parts:
+                raise ValueError(f"unsafe civic snapshot path: {relative}")
+            target = (snapshot_root / record["snapshot_path"]).resolve()
+            target.relative_to(snapshot_root)
+            blob = subprocess.check_output(git_command() + ["rev-parse", f"{lock['source_commit']}:{relative}"]).decode().strip()
+            raw = subprocess.check_output(git_command() + ["cat-file", "blob", record["blob"]])
+            raw_hash = record["sha256"] if group == "documentation" else record["object_sha256"]
+            raw_size = record["size"] if group == "documentation" else record["raw_size"]
+            if blob != record["blob"] or sha256(raw) != raw_hash or len(raw) != raw_size or target.read_bytes() != raw:
+                raise ValueError(f"civic immutable source or snapshot drift: {relative}")
+            if group == "documentation":
+                continue
+            source = checkout_bytes(raw, record)
+            if sha256(source) != record["source_sha256"] or len(source) != record["size"]:
+                raise ValueError(f"civic source checkout mismatch: {relative}")
+            if relative.endswith(".yml") and not source.startswith(b"\xef\xbb\xbf" + f"l_{Path(relative).parts[1]}:".encode()):
+                raise ValueError(f"civic localisation BOM/header mismatch: {relative}")
+
+            expected_transform = [{
+                "before": "gfx/interface/goals/HOK_KOR/shine_overlay.dds",
+                "after": "gfx/interface/goals/shine_overlay.dds", "count": 26,
+                "reason": "Preserve the existing shared vanilla shine provider; HOK masks and primary images remain local."
+            }] if relative == "interface/HOK_KOR_civic_focus.gfx" else []
+            if record.get("transformations", []) != expected_transform:
+                raise ValueError(f"unreviewed civic asset transformation: {relative}")
+            if relative not in CIVIC_UPDATE_MODIFIED_PATHS:
+                output = source
+                for edit in expected_transform:
+                    before, after = edit["before"].encode(), edit["after"].encode()
+                    if output.count(before) != edit["count"]:
+                        raise ValueError(f"civic shared shine count mismatch: {relative}")
+                    output = output.replace(before, after)
+                if sha256(output) != record["output_sha256"] or len(output) != record["output_size"]:
+                    raise ValueError(f"civic addition transform fingerprint mismatch: {relative}")
+            if relative in CIVIC_UPDATE_MODIFIED_PATHS:
+                base_blob = subprocess.check_output(git_command() + ["rev-parse", f"{lock['base_commit']}:{relative}"]).decode().strip()
+                base = subprocess.check_output(git_command() + ["cat-file", "blob", record["base_blob"]])
+                if base_blob != record["base_blob"] or sha256(base) != record["base_object_sha256"] or len(base) != record["base_raw_size"]:
+                    raise ValueError(f"civic immutable ancestor drift: {relative}")
+                expected_count = 6 if relative == SECOND_WAVE_FOCUS_PATH else 3
+                if len(record["edits"]) != expected_count or any(
+                    edit["before_lines"] != edit["source_before_lines"] or edit["after_lines"] != edit["source_after_lines"]
+                    for edit in record["edits"]
+                ):
+                    raise ValueError(f"unreviewed civic source/port edit inventory: {relative}")
+                for edit in record["edits"]:
+                    base = _replace_civic_lines(base, edit, source=True)
+                if base != raw:
+                    raise ValueError(f"civic source changed outside the reviewed byte spans: {relative}")
+            elif "previous_output_sha256" in record or "edits" in record:
+                raise ValueError(f"civic addition unexpectedly replaces an existing output: {relative}")
+    return lock
+
+
+def read_civic_source(relative: str | Path) -> bytes:
+    relative = Path(relative).as_posix()
+    lock = civic_update_lock()
+    record = {**lock["runtime_text"], **lock["runtime_assets"]}[relative]
+    raw = (REPO_ROOT / lock["snapshot_root"] / record["snapshot_path"]).read_bytes()
+    if sha256(raw) != record["object_sha256"] or len(raw) != record["raw_size"]:
+        raise ValueError(f"civic frozen source drift: {relative}")
+    return checkout_bytes(raw, record)
+
+
+def apply_civic_update(relative: str | Path, data: bytes) -> bytes:
+    relative = Path(relative).as_posix()
+    if relative not in CIVIC_UPDATE_MODIFIED_PATHS:
+        raise ValueError(f"civic overlay may only change its two reviewed existing outputs: {relative}")
+    record = civic_update_lock()["runtime_text"][relative]
+    if sha256(data) != record["previous_output_sha256"]:
+        raise ValueError(f"unreviewed pre-civic output: {relative}")
+    for edit in record["edits"]:
+        data = _replace_civic_lines(data, edit)
+    if sha256(data) != record["output_sha256"]:
+        raise ValueError(f"civic output differs from the reviewed RT56 merge: {relative}")
+    return data
+
+
+def remove_civic_update(relative: str | Path, data: bytes) -> bytes:
+    #20261012_kpopmodder: Recover exact historical outputs for preservation checks without admitting unrelated edits.
+    relative = Path(relative).as_posix()
+    if relative not in CIVIC_UPDATE_MODIFIED_PATHS:
+        raise ValueError(f"civic reversal may only restore its two reviewed existing outputs: {relative}")
+    record = civic_update_lock()["runtime_text"][relative]
+    if sha256(data) != record["output_sha256"]:
+        raise ValueError(f"unreviewed current civic output: {relative}")
+    for edit in reversed(record["edits"]):
+        data = _replace_civic_lines(data, edit, reverse=True)
+    if sha256(data) != record["previous_output_sha256"]:
+        raise ValueError(f"civic reversal changed historical gameplay: {relative}")
+    return data
+
+
 @lru_cache(maxsize=1)
 def material_cycle_lock() -> dict:
     lock = json.loads(MATERIAL_CYCLE_LOCK_PATH.read_text(encoding="utf-8"))
@@ -1021,6 +1209,8 @@ def main() -> int:
     print("HOK focus decision-tooltip: immutable two-line source delta verified")
     prerequisite_update_lock()
     print("HOK focus prerequisites: six immutable source edits + seven source documents verified")
+    civic_update_lock()
+    print("HOK civic update: 23 runtime text + 8 DDS + 23 source documents/assets verified")
     return 0
 
 

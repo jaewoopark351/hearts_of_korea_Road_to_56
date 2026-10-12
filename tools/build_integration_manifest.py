@@ -27,6 +27,7 @@ from source_snapshot import (
     prose_update_lock, read_prose_source,
     focus_tooltip_update_lock, prerequisite_update_lock, remove_focus_prerequisite_update,
     royal_update_lock, remove_royal_update,
+    CIVIC_UPDATE_MODIFIED_PATHS, civic_update_lock, read_civic_source, remove_civic_update,
 )
 
 
@@ -517,6 +518,11 @@ def host_base_sha256(relative: str, rule: Rule, output_hash: str, previous: dict
     return historical
 
 
+#20261012_kpopmodder: Reverse only the reviewed civic overlays when auditing historical ledger layers.
+def historical_civic_bytes(relative: str, data: bytes) -> bytes:
+    return remove_civic_update(relative, data) if relative in CIVIC_UPDATE_MODIFIED_PATHS else data
+
+
 def build_csv() -> tuple[bytes, Counter[str], int]:
     files = donor_files()
     previous_host_rows = historical_host_bases()
@@ -782,7 +788,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             or matching[0]["output_path"] != relative):
         raise RuntimeError(f"focus tooltip overlay requires its existing merge row: {relative}")
     if ((REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]
-            or hashlib.sha256(remove_focus_prerequisite_update(remove_royal_update(relative, (REPO_ROOT / relative).read_bytes()))).hexdigest().upper() != tooltip["output_sha256"]):
+            or hashlib.sha256(remove_focus_prerequisite_update(remove_royal_update(relative, historical_civic_bytes(relative, (REPO_ROOT / relative).read_bytes())))).hexdigest().upper() != tooltip["output_sha256"]):
         raise RuntimeError(f"focus tooltip output differs from its reviewed source merge: {relative}")
     row = matching[0]
     row.update({
@@ -797,7 +803,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
 
     #20261010_kpopmodder: Attribute the six selected prerequisite changes while retaining the unchanged RT56 Korean base.
     prerequisites = prerequisite_update_lock()
-    if (relative != prerequisites["path"] or hashlib.sha256(remove_royal_update(relative, (REPO_ROOT / relative).read_bytes())).hexdigest().upper() != prerequisites["output_sha256"]
+    if (relative != prerequisites["path"] or hashlib.sha256(remove_royal_update(relative, historical_civic_bytes(relative, (REPO_ROOT / relative).read_bytes()))).hexdigest().upper() != prerequisites["output_sha256"]
             or row["rt56_base_sha256"] != prerequisites["rt56_base_sha256"]):
         raise RuntimeError("focus prerequisite output or Korean host base differs from its reviewed merge")
     row.update({
@@ -822,9 +828,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             raise RuntimeError(f"royal update requires its existing integration row: {relative}")
         entry = matching[0]
         if ((REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]
-                or sha256(REPO_ROOT / relative) != record["output_sha256"]):
+                or hashlib.sha256(historical_civic_bytes(relative, (REPO_ROOT / relative).read_bytes())).hexdigest().upper() != record["output_sha256"]):
             raise RuntimeError(f"royal output differs from its reviewed source merge: {relative}")
-        remove_royal_update(relative, (REPO_ROOT / relative).read_bytes())
+        remove_royal_update(relative, historical_civic_bytes(relative, (REPO_ROOT / relative).read_bytes()))
         if record["kind"] == "focus" and entry["rt56_base_sha256"] != royal["rt56_base_sha256"]:
             raise RuntimeError("royal focus update changed the recorded Korean host base")
         if record["kind"] == "idea" and (RT56_ROOT / relative).exists():
@@ -840,6 +846,44 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "donor_source_checkout": record["checkout"],
         })
         entry["reason"] += "; 2026-10-10 HOK 4d8241e 왕정 선택 이식: A2/A3/A4·H2 추가 완료 검사 제거, H1 환제국 진입·4개 배치 이동, 연락망 I/II 형성 취소 제거; RT56 지역 조건·기존 보상·AI 보존; tools/hok_royal_update_lock.json"
+
+    #20261012_kpopmodder: Attribute the civic module after preserving every historical host merge and source layer.
+    civic = civic_update_lock()
+    for group in ("runtime_text", "runtime_assets"):
+        for relative, record in civic[group].items():
+            payload = read_civic_source(relative)
+            current = (REPO_ROOT / relative).read_bytes()
+            if current != expected_outputs[Path(relative)] or hashlib.sha256(current).hexdigest().upper() != record["output_sha256"]:
+                raise RuntimeError(f"civic output differs from its reviewed source merge: {relative}")
+            matching = [entry for entry in rows if entry["source_path"] == relative]
+            if "previous_output_sha256" in record:
+                if len(matching) != 1 or matching[0]["output_path"] != relative:
+                    raise RuntimeError(f"civic overlay requires its existing integration row: {relative}")
+                row = matching[0]
+                historical_civic_bytes(relative, current)
+                if relative == SECOND_WAVE_FOCUS_PATH and row["rt56_base_sha256"] != civic["rt56_base_sha256"]:
+                    raise RuntimeError("civic focus overlay changed its reviewed Korean host base")
+                row.update({"previous_source_commit": row["donor_source_commit"],
+                            "previous_source_sha256": row["donor_source_sha256"]})
+            else:
+                if matching or relative in donor_relatives or (RT56_ROOT / relative).exists():
+                    raise RuntimeError(f"unreviewed civic addition collision: {relative}")
+                classification = "ASSET_COPY" if group == "runtime_assets" else "ADD"
+                counts[classification] += 1
+                row = {"source_path": relative, "integration_class": classification,
+                       "status": "SHIPPED", "exact_path_rt56_collision": "no",
+                       "output_path": relative, "rt56_base_sha256": ""}
+                rows.append(row)
+            row.update({"donor_sha256": record["sha256"], "output_sha256": hashlib.sha256(current).hexdigest().upper(),
+                        "donor_source_commit": civic["source_commit"], "donor_source_blob": record["blob"],
+                        "donor_source_sha256": record["sha256"], "donor_source_checkout": record["checkout"]})
+            row["reason"] = row.get("reason", "") + "; 2026-10-12 HOK d4031aa 재벌·시민사회 13중점·영향력·결정·사건·패널 선택 이식; 구 협력 ID 등록·RT56 지역 병합 보존; tools/hok_civic_update_lock.json"
+            if group == "runtime_assets" or relative.startswith("interface/"):
+                row.update({"artwork_source_kind": civic["source_kind"],
+                            "artwork_source_base_commit": civic["source_commit"],
+                            "artwork_source_sha256": record["sha256"]})
+    if len(rows) != 1446:
+        raise RuntimeError(f"unexpected civic integration inventory: {len(rows)}")
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(

@@ -110,6 +110,17 @@ def read(path: Path) -> Block:
         raise ValueError(f"{path}: {exc}") from exc
 
 
+#20261012_kpopmodder: Recover the exact pre-civic source for legacy expansion, artwork and AI contracts.
+def read_historical(path: Path) -> Block:
+    from source_snapshot import civic_update_lock, remove_civic_update
+    relative = path.relative_to(ROOT).as_posix()
+    record = civic_update_lock()["runtime_text"].get(relative, {})
+    data = path.read_bytes()
+    if "previous_output_sha256" in record:
+        data = remove_civic_update(relative, data)
+    return parse(data.decode("utf-8-sig"))
+
+
 def children(block: Block, key: str) -> list[Block]:
     return [entry.value for entry in block if entry.key == key and isinstance(entry.value, tuple)]
 
@@ -501,7 +512,7 @@ def source_equivalence(manifest: dict) -> None:
             # [2026-09-23]_kpopmodder: Admit exact pinned layout changes without weakening any legacy gameplay field.
             from source_snapshot import read_second_wave_source
             latest = focus_blocks(parse(read_second_wave_source(FOCUS_PATH).decode("utf-8-sig")))
-            current = focus_blocks(read(ROOT / relative))
+            current = focus_blocks(read_historical(ROOT / relative))
             for identifier, old in focus_blocks(expected).items():
                 approved = LEGACY_LAYOUT_DELTA.get(identifier, set())
                 actual = current[identifier]
@@ -760,7 +771,7 @@ def replace_entry(block: Block, path: tuple[str, ...], value: str | Block | None
 
 def run_self_tests() -> None:
     # [2026-09-22]_kpopmodder: Fail if a guard regression survives; fixtures are immutable in-memory copies.
-    focuses = focus_blocks(read(ROOT / FOCUS_PATH))
+    focuses = focus_blocks(read_historical(ROOT / FOCUS_PATH))
     baseline = focus_blocks(parse(read_source_file(FOCUS_PATH, updated=False).decode("utf-8-sig")))
     source = focus_blocks(parse(read_source_file(FOCUS_PATH, updated=True).decode("utf-8-sig")))
     added = check_focus_contract(focuses, baseline, source)
@@ -837,7 +848,7 @@ def run_self_tests() -> None:
 
 
 def run_checks() -> None:
-    focus_doc = read(ROOT / FOCUS_PATH)
+    focus_doc = read_historical(ROOT / FOCUS_PATH)
     focuses = focus_blocks(focus_doc)
     baseline = focus_blocks(parse(read_source_file(FOCUS_PATH, updated=False).decode("utf-8-sig")))
     source = focus_blocks(parse(read_source_file(FOCUS_PATH, updated=True).decode("utf-8-sig")))

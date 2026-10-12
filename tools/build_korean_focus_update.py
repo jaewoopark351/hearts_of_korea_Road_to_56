@@ -26,6 +26,7 @@ from source_snapshot import (
     focus_tooltip_update_lock, apply_focus_tooltip_update,
     prerequisite_update_lock, apply_focus_prerequisite_update,
     royal_update_lock, apply_royal_update,
+    CIVIC_UPDATE_RUNTIME_PATHS, civic_update_lock, read_civic_source, apply_civic_update,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -80,7 +81,8 @@ ICON_ASSET_PATHS = tuple(Path(relative) for relative in icon_lock()["runtime_ass
 # [2026-09-23]_kpopmodder: Extend the reviewed allowlist without repinning unrelated historical generators.
 #20261003_kpopmodder: Add only the reviewed material-cycle module to the existing generated allowlist.
 OUTPUT_PATHS = tuple(dict.fromkeys(GAMEPLAY_PATHS + ICON_ASSET_PATHS + tuple(Path(p) for p in SECOND_WAVE_RUNTIME_PATHS)
-                                 + tuple(Path(p) for p in MATERIAL_CYCLE_RUNTIME_PATHS)))
+                                 + tuple(Path(p) for p in MATERIAL_CYCLE_RUNTIME_PATHS)
+                                 + tuple(Path(p) for p in CIVIC_UPDATE_RUNTIME_PATHS)))
 SOURCE_COMMITS = {
     relative: AI_COMMIT if relative.parts[1] == "ai_strategy_plans" else FOCUS_COMMIT
     for relative in GAMEPLAY_PATHS
@@ -136,6 +138,13 @@ ACCEPTED_PRIOR_OUTPUT_HASHES[Path(SECOND_WAVE_FOCUS_PATH)] = prerequisite_update
 ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     Path(relative): record["previous_output_sha256"]
     for relative, record in royal_update_lock()["runtime_text"].items()
+})
+
+#20261012_kpopmodder: Accept only the exact reviewed ancestors of the two civic integration edits.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): record["previous_output_sha256"]
+    for relative, record in civic_update_lock()["runtime_text"].items()
+    if "previous_output_sha256" in record
 })
 CHECKOUT_RESTORATION_HASHES = {
     Path(relative): record["previous_output_sha256"]
@@ -354,6 +363,38 @@ def build_all() -> dict[Path, bytes]:
     #20261010_kpopmodder: Apply the royal policy/layout delta after all geography and prerequisite merges.
     for relative in royal_update_lock()["runtime_text"]:
         outputs[Path(relative)] = apply_royal_update(relative, outputs[Path(relative)])
+
+    #20261012_kpopmodder: Layer the Korean civic module only after all historical RT56 geography and royal merges.
+    civic = civic_update_lock()
+    for name, expected in civic["preserved_outputs"].items():
+        if Path(name) not in outputs or sha256_bytes(outputs[Path(name)]) != expected:
+            raise ValueError(f"civic update changed a preserved generated output: {name}")
+    # The legacy decision file retains the original map/event/Manchurian migrations before its three order-gate additions.
+    name = "common/decisions/KOR_decision.txt"
+    record = civic["runtime_text"][name]
+    original = (HOK_ROOT / name).read_bytes()
+    if sha256_bytes(original) != record["inherited_source_sha256"]:
+        raise ValueError("civic company-order migration ancestor drift")
+    outputs[Path(name)] = apply_post_migration_fixes(name, replace_tokens(original, mapping))
+    for group in ("runtime_text", "runtime_assets"):
+        for name, record in civic[group].items():
+            relative = Path(name)
+            if "previous_output_sha256" in record:
+                if relative not in outputs:
+                    raise ValueError(f"civic update cannot replace an unreviewed output: {name}")
+                outputs[relative] = apply_civic_update(relative, outputs[relative])
+            else:
+                if relative in outputs:
+                    raise ValueError(f"civic addition duplicates a generated output: {name}")
+                data = read_civic_source(relative)
+                for edit in record.get("transformations", []):
+                    before, after = edit["before"].encode(), edit["after"].encode()
+                    if data.count(before) != edit["count"]:
+                        raise ValueError(f"civic shared-asset transformation count changed: {name}")
+                    data = data.replace(before, after)
+                if sha256_bytes(data) != record["output_sha256"]:
+                    raise ValueError(f"civic addition differs from its reviewed source transform: {name}")
+                outputs[relative] = data
     verify_geography_inputs()
     verify_inputs()
     return outputs
@@ -361,7 +402,7 @@ def build_all() -> dict[Path, bytes]:
 
 def preflight(outputs: dict[Path, bytes]) -> None:
     if set(outputs) != set(OUTPUT_PATHS):
-        raise ValueError("Korean update outputs must match the 406 reviewed historical, second-wave and material-cycle paths")
+        raise ValueError(f"Korean update outputs must match the {len(OUTPUT_PATHS)} reviewed source paths")
     errors = []
     for relative, expected in outputs.items():
         destination = (REPO_ROOT / relative).resolve()

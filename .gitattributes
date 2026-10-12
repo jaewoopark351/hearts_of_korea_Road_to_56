@@ -102,3 +102,30 @@ docs/upstream/hok-prerequisite-update-20261010/** -text
 #20261010_kpopmodder: Preserve the independent royal lock and byte-exact source documents.
 tools/hok_royal_update_lock.json text eol=lf
 docs/upstream/hok-royal-update-20261010/** -text
+
+#20261012_kpopmodder: Preserve immutable civic inputs and reproducible runtime bytes across checkouts.
+tools/hok_civic_update_lock.json text eol=lf
+docs/upstream/hok-civic-update-20261012/** -text
+common/decisions/HOK_KOR_civic_decisions.txt text eol=crlf
+common/decisions/KOR_decision.txt text eol=crlf
+common/decisions/categories/HOK_KOR_civic_categories.txt text eol=crlf
+common/focus_inlay_windows/HOK_KOR_civic_influence_inlay_window.txt text eol=lf
+common/ideas/HOK_KOR_civic_ideas.txt text eol=crlf
+common/national_focus/HOK_KOR_civic_legacy_focus.txt text eol=crlf
+common/national_focus/korea.txt text eol=crlf
+common/on_actions/HOK_KOR_civic_on_actions.txt text eol=crlf
+common/scripted_effects/HOK_KOR_civic_effects.txt text eol=crlf
+common/scripted_localisation/HOK_KOR_civic_influence_scripted_loc.txt text eol=lf
+common/scripted_triggers/HOK_KOR_civic_triggers.txt text eol=crlf
+events/HOK_KOR_civic_events.txt text eol=crlf
+interface/HOK_KOR_civic_decisions.gfx text eol=crlf
+interface/HOK_KOR_civic_events.gfx text eol=lf
+interface/HOK_KOR_civic_focus.gfx text eol=crlf
+interface/HOK_KOR_civic_influence.gfx text eol=lf
+interface/HOK_KOR_civic_influence.gui text eol=lf
+localisation/english/HOK_KOR_civic_focus_l_english.yml text eol=crlf
+localisation/english/HOK_KOR_civic_state_l_english.yml text eol=crlf
+localisation/english/HOK_KOR_civic_ui_l_english.yml text eol=crlf
+localisation/korean/HOK_KOR_civic_focus_l_korean.yml text eol=crlf
+localisation/korean/HOK_KOR_civic_state_l_korean.yml text eol=crlf
+localisation/korean/HOK_KOR_civic_ui_l_korean.yml text eol=crlf
