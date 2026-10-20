@@ -15,6 +15,8 @@
 
 출처·병합 판단·검증과 기존 정적 실패는 [영어 이식 기록](../implementation/2026-10-20-english-localisation-import.md)에 구분한다. 아래 2026-09-06 수치와 런타임 논의는 역사 기록이다.
 
+같은 날 후속 [긴급 특별 건함계획 이식](../implementation/2026-10-20-korean-emergency-shipbuilding-port.md)에서 언어당 4키를 더해 현재 각 채널은 37파일·2,747키다. 기존 36파일의 바이트와 일반판 영어 255키 제외 정책은 유지한다. 신규 donor 영어 채널의 한국어 4값만 영국 영어로 번역했으며, 언어 모드 의존성이나 런타임 지원 상태는 바꾸지 않았다.
+
 > 2026-09-06 19:20 후속 상태: 저장소와 launcher descriptor는 현재 `The Road to 56` 및 `Korean Language`를 선언한다. 실제 실행은 `The Road to 56 Korean Translation`을 활성화하고 `Korean Language`를 활성화하지 않았다. 따라서 아래 “RT56만 dependency”는 1차 구현 당시 결정 기록이며 현재 파일 상태가 아니다. 어느 구성을 최종 지원할지는 여전히 미결정이다.
 
 ## 맥락

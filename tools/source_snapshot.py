@@ -1174,6 +1174,116 @@ SECOND_WAVE_DOCUMENTATION_PATHS = tuple(second_wave_lock()["documentation"])
 PROSE_UPDATE_RUNTIME_PATHS = tuple(prose_update_lock()["runtime_text"])
 
 
+#20261020_kpopmodder: Freeze only the author's emergency shipbuilding delta after the existing RT56 and English layers.
+SHIPBUILDING_LOCK_PATH = Path(__file__).with_name("hok_shipbuilding_update_lock.json")
+SHIPBUILDING_SNAPSHOT_ROOT = REPO_ROOT / "docs/upstream/hok-emergency-shipbuilding-20261020"
+SHIPBUILDING_MODIFIED_PATHS = frozenset((SECOND_WAVE_FOCUS_PATH, "common/ideas/korea.txt", "common/decisions/KOR_decision.txt"))
+
+
+@lru_cache(maxsize=1)
+def shipbuilding_update_lock() -> dict:
+    lock = json.loads(SHIPBUILDING_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["source_commit"], lock["compatibility_base_commit"],
+            len(lock["runtime_text"]), len(lock["runtime_assets"]), len(lock["documentation"])) != (
+        1, "reviewed-working-tree-snapshot", "d4031aaa0c1f85bb89b0e6ca21d041beade8bd26",
+        "1cb07066bc929489293a21f9418f3d427cfab8a6", 7, 2, 8
+    ) or {p for p, r in lock["runtime_text"].items() if "previous_output_sha256" in r} != SHIPBUILDING_MODIFIED_PATHS:
+        raise ValueError("unreviewed shipbuilding source revision or runtime inventory")
+    expected_keys = {name + suffix for name in ("HOK_KOR_enact_emergency_special_shipbuilding", "HOK_KOR_emergency_special_shipbuilding") for suffix in ("", "_desc")}
+    if set(lock["english_values"]) != expected_keys:
+        raise ValueError("shipbuilding English translation key inventory drift")
+    for relative, expected in lock["preserved_historical_locks"].items():
+        #20261020_kpopmodder: Accept only the captured raw bytes or their separately pinned LF checkout, preserving JSON content across Git filters.
+        data = (REPO_ROOT / relative).read_bytes()
+        exact_lf = b"\r" not in data and sha256(data) == lock["preserved_historical_lock_lf_sha256"][relative]
+        if sha256(data) != expected and not exact_lf:
+            raise ValueError(f"shipbuilding changed a historical source lock: {relative}")
+    return lock
+
+
+def read_shipbuilding_source(relative: str) -> bytes:
+    relative = Path(relative).as_posix()
+    lock = shipbuilding_update_lock()
+    records = {**lock["runtime_text"], **lock["runtime_assets"], **lock["documentation"]}
+    record = records[relative]
+    path = (REPO_ROOT / record["snapshot_path"]).resolve()
+    path.relative_to(SHIPBUILDING_SNAPSHOT_ROOT.resolve())
+    data = path.read_bytes()
+    if len(data) != record["size"] or sha256(data) != record["sha256"]:
+        raise ValueError(f"shipbuilding frozen source drift: {relative}")
+    return data
+
+
+def _shipbuilding_edits(data: bytes, record: dict, reverse: bool = False) -> bytes:
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    for edit in reversed(record["edits"]) if reverse else record["edits"]:
+        before, after = ("after_lines", "before_lines") if reverse else ("before_lines", "after_lines")
+        old = ("\n".join(edit[before]) + "\n").encode().replace(b"\n", newline)
+        new = ("\n".join(edit[after]) + "\n").encode().replace(b"\n", newline)
+        if data.count(old) != 1:
+            raise ValueError("shipbuilding hunk anchor missing or duplicated")
+        data = data.replace(old, new, 1)
+    return data
+
+
+def apply_shipbuilding_update(relative: str, data: bytes) -> bytes:
+    relative = Path(relative).as_posix()
+    record = shipbuilding_update_lock()["runtime_text"].get(relative, {})
+    if "previous_output_sha256" not in record:
+        return data
+    if sha256(data) != record["previous_output_sha256"]:
+        raise ValueError(f"unreviewed pre-shipbuilding output: {relative}")
+    result = _shipbuilding_edits(data, record)
+    if sha256(result) != record["output_sha256"]:
+        raise ValueError(f"shipbuilding merged output drift: {relative}")
+    return result
+
+
+def remove_shipbuilding_update(relative: str, data: bytes) -> bytes:
+    relative = Path(relative).as_posix()
+    record = shipbuilding_update_lock()["runtime_text"].get(relative, {})
+    if "previous_output_sha256" not in record:
+        return data
+    if sha256(data) != record["output_sha256"]:
+        raise ValueError(f"shipbuilding output differs from reviewed merge: {relative}")
+    result = _shipbuilding_edits(data, record, reverse=True)
+    if sha256(result) != record["previous_output_sha256"]:
+        raise ValueError(f"shipbuilding reversal changed historical output: {relative}")
+    return result
+
+
+def shipbuilding_addition(relative: str) -> bytes:
+    relative = Path(relative).as_posix()
+    lock = shipbuilding_update_lock()
+    record = {**lock["runtime_text"], **lock["runtime_assets"]}[relative]
+    if "previous_output_sha256" in record:
+        raise ValueError(f"shipbuilding existing output requires a reviewed ancestor: {relative}")
+    data = read_shipbuilding_source(relative)
+    if relative.startswith("localisation/english/"):
+        data = ENGLISH_ROW.sub(lambda row: row[1] + lock["english_values"][row[2]] + row[5],
+                               data.decode("utf-8-sig")).encode("utf-8-sig")
+    if sha256(data) != record["output_sha256"]:
+        raise ValueError(f"shipbuilding addition output drift: {relative}")
+    return data
+
+
+def verify_shipbuilding_snapshot() -> None:
+    lock = shipbuilding_update_lock()
+    for group in ("runtime_text", "runtime_assets", "documentation"):
+        for relative, record in lock[group].items():
+            data = read_shipbuilding_source(relative)
+            if "previous_output_sha256" in record:
+                blob = subprocess.check_output(git_command() + ["rev-parse", f"{lock['source_commit']}:{relative}"]).decode().strip()
+                original = subprocess.check_output(git_command() + ["cat-file", "blob", record["base_blob"]])
+                if blob != record["base_blob"] or sha256(original) != record["base_object_sha256"]:
+                    raise ValueError(f"shipbuilding immutable base drift: {relative}")
+                if _shipbuilding_edits(original, record).replace(b"\r\n", b"\n") != data.replace(b"\r\n", b"\n"):
+                    raise ValueError(f"shipbuilding donor changed outside the reviewed hunk: {relative}")
+            elif group != "documentation":
+                shipbuilding_addition(relative)
+    print("PASS shipbuilding frozen source: 7 runtime text, 2 DDS, 8 source documents/assets; three reviewed source hunks")
+
+
 #20261020_kpopmodder: Reuse the reviewed English translation only for the port's existing keys and RT56-specific wording.
 ENGLISH_TRANSLATION_LOCK_PATH = Path(__file__).with_name("hok_english_translation_lock.json")
 ENGLISH_TRANSLATION_ARCHIVE = REPO_ROOT / "docs/upstream/hok-english-20261020"
@@ -1280,8 +1390,9 @@ def verify_english_translation() -> None:
     source = _english_source_values()
     expected_paths = set(lock["runtime_text"])
     paths = {p.relative_to(REPO_ROOT).as_posix() for p in (REPO_ROOT / "localisation/english").rglob("*.yml")}
-    if paths != expected_paths:
-        raise ValueError("English output file inventory differs from the reviewed 36 paths")
+    additions = {p: r for p, r in shipbuilding_update_lock()["runtime_text"].items() if p.startswith("localisation/english/")}
+    if paths != expected_paths | additions.keys():
+        raise ValueError("English output file inventory differs from the reviewed translation layers")
     keys, changed, added = set(), set(lock["changed_common_keys"]), set(lock["port_only_keys"])
     if len(changed) != 25 or len(added) != 27 or changed & added or changed | added != lock["adapted_values"].keys():
         raise ValueError("English RT56-specific translation allowlist drift")
@@ -1309,7 +1420,27 @@ def verify_english_translation() -> None:
         raise ValueError("English target/reuse/exclusion key inventory drift")
     if keys - source.keys() != added or source.keys() - keys != set(lock["excluded_source_keys"]):
         raise ValueError("English target contains an unreviewed source-only or missing port key")
-    print("PASS English translation: 36 files, 2743 keys; 2691 reused, 25 adapted, 27 port-only; 255 excluded; Korean bytes/tokens preserved")
+    extra_keys = set()
+    for relative in additions:
+        data = (REPO_ROOT / relative).read_bytes()
+        if data != shipbuilding_addition(relative):
+            raise ValueError(f"shipbuilding English output drift: {relative}")
+        korean_path = relative.replace("/english/", "/korean/").replace("_l_english.yml", "_l_korean.yml")
+        korean = (REPO_ROOT / korean_path).read_bytes()
+        if korean != shipbuilding_addition(korean_path):
+            raise ValueError("shipbuilding Korean source drift")
+        en_rows, ko_rows = english_entries(data), english_entries(korean)
+        if en_rows.keys() != ko_rows.keys() or keys & en_rows.keys():
+            raise ValueError("shipbuilding bilingual/new-English key collision")
+        for key, (version, value) in en_rows.items():
+            kr_version, kr_value = ko_rows[key]
+            if (version != kr_version or Counter(ENGLISH_TOKENS.findall(value)) != Counter(ENGLISH_TOKENS.findall(kr_value))
+                    or value.count(r"\n") != kr_value.count(r"\n") or re.search(r"[\uac00-\ud7a3]", value)):
+                raise ValueError(f"shipbuilding English protected text drift: {key}")
+        extra_keys.update(en_rows)
+    if len(extra_keys) != 4:
+        raise ValueError("shipbuilding English must add exactly four keys")
+    print("PASS English translation: 37 files, 2747 keys; historical 2691 reused, 25 adapted, 27 port-only, 255 excluded; four shipbuilding strings translated")
 
 
 def main() -> int:
@@ -1353,6 +1484,7 @@ def main() -> int:
     print("HOK focus prerequisites: six immutable source edits + seven source documents verified")
     civic_update_lock()
     print("HOK civic update: 23 runtime text + 8 DDS + 23 source documents/assets verified")
+    verify_shipbuilding_snapshot()
     return 0
 
 

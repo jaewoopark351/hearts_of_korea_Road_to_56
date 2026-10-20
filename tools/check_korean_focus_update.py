@@ -19,7 +19,7 @@ from pathlib import Path
 
 from build_rt56_map import PROVINCE_ID_MAP, STATE_ID_MAP
 from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
-from source_snapshot import FOCUS_UPDATE_PATHS, policy_update_lock, read_policy_source, read_source_file, remove_english_translation
+from source_snapshot import FOCUS_UPDATE_PATHS, policy_update_lock, read_policy_source, read_source_file, remove_english_translation, remove_shipbuilding_update
 from validate_port import ROOT, RT56_ROOT, VANILLA_ROOT, localisation_keys, mask_comments, matching_brace
 
 
@@ -115,7 +115,8 @@ def read_historical(path: Path) -> Block:
     from source_snapshot import civic_update_lock, remove_civic_update
     relative = path.relative_to(ROOT).as_posix()
     record = civic_update_lock()["runtime_text"].get(relative, {})
-    data = path.read_bytes()
+    #20261020_kpopmodder: Verify and reverse the final shipbuilding layer before checking exact older ancestors.
+    data = remove_shipbuilding_update(relative, path.read_bytes())
     if "previous_output_sha256" in record:
         data = remove_civic_update(relative, data)
     return parse(data.decode("utf-8-sig"))

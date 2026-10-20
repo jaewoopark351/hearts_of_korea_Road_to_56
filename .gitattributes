@@ -134,3 +134,12 @@ localisation/english/HOK_KOR_civic_ui_l_english.yml text eol=crlf
 localisation/korean/HOK_KOR_civic_focus_l_korean.yml text eol=crlf
 localisation/korean/HOK_KOR_civic_state_l_korean.yml text eol=crlf
 localisation/korean/HOK_KOR_civic_ui_l_korean.yml text eol=crlf
+
+#20261020_kpopmodder: Preserve the frozen shipbuilding source and exact new runtime bytes across checkouts.
+tools/hok_shipbuilding_update_lock.json text eol=lf
+docs/upstream/hok-emergency-shipbuilding-20261020/** -text
+common/ideas/korea.txt text eol=crlf
+common/ideas/HOK_KOR_emergency_shipbuilding.txt text eol=lf
+interface/HOK_KOR_emergency_shipbuilding_icons.gfx text eol=lf
+localisation/english/HOK_KOR_emergency_shipbuilding_l_english.yml text eol=lf
+localisation/korean/HOK_KOR_emergency_shipbuilding_l_korean.yml text eol=lf

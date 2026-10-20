@@ -1,0 +1,78 @@
+# Hearts of Korea 디버깅 문서
+
+이 폴더는 Hearts of Korea 모드의 크래시를 재현하고 원인을 좁히며, 특히 맵 데이터를 현재 Hearts of Iron IV 기준에 맞게 이식할 때 사용할 작업 문서다.
+
+문서 자체는 작업 허가가 아니다. 매 작업을 시작하기 전에 요청이 아래 어느 범위인지 확인한다.
+
+- **Review**: 파일을 읽고 상태와 위험만 보고한다.
+- **Diagnostic**: 로그와 데이터를 비교해 원인을 진단한다. 프로덕션 동작은 바꾸지 않으며, 사용자가 별도로 허가한 경우에만 가설을 구분하기 위한 최소·한정 instrumentation을 사용한다.
+- **Implementation**: 사용자가 승인한 범위만 수정하고 검증한다.
+
+## 문서 목록
+
+- [비전 1950 긴급 특별 건함계획 명세](docs/HOK_KOREAN_VISION_1950_EMERGENCY_SHIPBUILDING_PLAN.md): 구현·정적 86/0·기록한 조건의 기능 검증 완료. 정치력 150으로 함정·지원함·수리함·수송선 비용 −50% 보정 180일, 적용 중 사용 차단·만료 후 추가 대기 없이 무제한 반복
+- [긴급 특별 건함계획 구현·검증 기록](docs/incidents/2026-10-20-korean-emergency-shipbuilding.md): 실제 사용·비용 감소와 복귀·재사용·최종 일반 실행 새 게임 새 정규화 오류 0. 강제 조건 준비·합성 저장 경고·정상 진행 및 미검증 항목은 분리
+- [긴급 특별 건함계획 이미지 출처](docs/HOK_KOREAN_EMERGENCY_SHIPBUILDING_ASSET_CREDITS.md): AI 생성 전용 그림 2개·원본 보존·32×32 디시전과 60×68 국민정신·GFX 및 정적 검수
+- [한국 재벌과 시민사회 내정 설계와 모드 이식 후보](docs/HOK_KOREAN_CHAEBOL_CIVIL_SOCIETY_RESEARCH_PLAN.md): 선행 원본 조사; 이후 승인한 한국판 구현은 별도 확정 명세·검증 기록을 따름
+- [한국 재벌·시민사회 확정 명세](docs/HOK_KOREAN_CHAEBOL_CIVIL_SOCIETY_SPEC.md): 두 세력 UI·13개 중점·조달 사고·검찰 정변과 비용·복구 계약
+- [내정 시스템 자산 출처](docs/HOK_KOREAN_CHAEBOL_CIVIL_SOCIETY_ASSET_CREDITS.md): 기존 한국 초상·기업 로고와 공용 UI·사건 그림 재사용
+- [내정 시스템 개정·검증 기록](docs/incidents/2026-10-12-korean-civic-revision.md): 진입·주문·배치·표시 개정의 정상 진행·합성 검사·세이브 검증을 구분
+- [내정 디시전 아이콘 구현·검증 기록](docs/incidents/2026-10-12-korean-civic-decision-icons.md): 전용 배지·파란 지원/견제 아이콘, 출처·정적 확인·실제 표시와 테스트 정리
+- [왕정 중점 완료 조건과 환제국 물자 가지 배치 계획](docs/HOK_KOREAN_ROYAL_PREREQUISITE_LAYOUT_PLAN.md): 기존 18개 코드 적용·정적/로드/초기 SHOW/HIDE 일부 UI 확인·정상 진행 검증 대기; 14개 지정 완료 조건 삭제, 연락망 I·II 형성 전 유지, 물자 가지는 환제국 선행·우측 하단 (184,11)로 이동
+- [한국 중점 선행 조건 가독성 개선 계획](docs/HOK_KOREAN_FOCUS_PREREQUISITE_READABILITY_PLAN.md): 여섯 시작 중점 코드 적용·정적 및 초기 UI 확인·정상 진행 검증 대기; 원료는 두 선행 AND 연결, 나머지 다섯은 지정 완료 조건만 삭제. 삼군의 을해군란·F4/F5 후속 조건은 유지
+- [한국 신규 디시전과 국민정신 설명 보강 계획](docs/HOK_KOREAN_DECISION_SPIRIT_PROSE_PLAN.md): 설명 124개·한국어/영어 14쌍 적용, 파시즘·공산주의 문체와 좋은 기존 문안 보존; 정적 보존 검사 통과, UI 확인 대기
+- [디시전·국민정신 설명 구현 기록](docs/incidents/2026-10-03-korean-decision-spirit-prose.md): 누적 124개와 문체 후속 48개, 효과·조건 대조, 최종 보존 검사와 Rt56 플레이셋으로 인한 화면 검증 대기
+- [한국 중점 2차 확장 현황](docs/HOK_KOREAN_SECOND_WAVE_PLAN.md): 현재 472개; 기존 460개에 내정 13개 추가·구 협력 중점 1개 제거, 실제 플레이 검증은 소스·기록별로 구분
+- [파시즘 점령행정·삼군 조정·재건예산 명세](docs/HOK_KOREAN_FASCIST_FOLLOWUP_SPEC.md): 신규 12개·국민정신 8개, 영토·평시 조건과 실제 예산 선택
+- [한국 중점 보상 재조정 설계·적용 상태](docs/HOK_KOREAN_FOCUS_REBALANCE_PLAN.md): 보상 강화 적용, 게임 검증 진행 중; 보병장비 한정 생산량 +10%는 미적용·대안 응답 대기
+- [한국 중점 트리 보존·35일화·확장 설계](docs/HOK_KOREAN_FOCUS_EXPANSION_PLAN.md): 기존 266개 보존, 기간 단축 범위와 단계별 확장 제안
+- [한국 중점 좌표·연결선 재배치 설계](docs/HOK_KOREAN_FOCUS_LAYOUT_PLAN.md): x0~194·y0~24 압축 배치 적용; HIDE 초기 상태 전체 분야 화면 검수 완료, 조건별 검증 범위는 문서 참조
+- [한국 중점 압축 좌표표](docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md): AA58→압축 배치 326개 전후 좌표; 절대 7/상대 319, offset 조건 유지·이동량 0
+- [한국 중점 압축 작업 기록](docs/incidents/2026-09-21-korean-focus-compact.md): 현재 압축 배치의 실행·화면 검증과 남은 범위
+- [한국 중점 첫 재배치 이력](docs/incidents/2026-09-21-korean-focus-layout.md): AA58 넓은 배치의 HIDE·SHOW, 만주 선 수정과 바로가기·최종 실행 관측
+- [한국 중점 1차 확장 구현 기록](docs/incidents/2026-09-21-korean-focus-expansion.md): 152개 35일화, 신규 60개와 검증 범위
+- [한국 중점 1차 60개 명세](docs/HOK_KOREAN_FOCUS_FIRST_60_SPEC.md): 실제 이름·연결·보상·원본 대응과 현재 압축 기본 절대좌표
+- [한국 신규 중점·국민정신 아이콘 개선 계획](docs/HOK_KOREAN_FOCUS_SPIRIT_ICON_PLAN.md): 신규 중점 60개·국민정신 29개 반복 현황, 재사용 자료·조건과 교체 우선순위; 문서화만 완료
+- [한국 신규 아이콘 구현·검증 기록](docs/incidents/2026-09-22-korean-focus-icons.md): 위 초기 계획의 후속 구현, 중점 60개·국민정신 29개 이미지 적용 및 실제 검증 범위
+- [한국 신규 아이콘 색상 재구성 계획](docs/HOK_KOREAN_FOCUS_ICON_COLOR_PLAN.md): 신규 60개·29개를 정치 계열·정책 용도별로 구분; DDS 82개 배경색 수정, 기존 군종색 7개 유지. [구현·검증 기록](docs/incidents/2026-09-22-korean-focus-icon-colors.md) · [색상 전후 비교](docs/assets/korean-focus-icon-colors/index.html). 정적 검증 통과, 이번 색상 런타임 미실행
+- [아이콘 전후 비교](docs/assets/korean-focus-icons/index.html) · [사용 소재·크레딧](docs/HOK_KOREAN_FOCUS_ICON_CREDITS.md) · [대상별 출처·가공·해시](docs/data/HOK_KOREAN_FOCUS_ICON_MANIFEST.json)
+- [한국 중점용 바닐라 이식 후보](docs/HOK_KOREAN_FOCUS_DONOR_CATALOG.md): 원본 중점·의존성·한국 연결 지점과 이식 난도
+- [크래시 디버깅 런북](docs/CRASH_DEBUGGING_RUNBOOK.md): 재현부터 원인 격리까지의 표준 절차
+- [증거 기록 양식](docs/EVIDENCE_RECORD_TEMPLATE.md): 실행별 로그와 가설을 섞지 않고 기록하는 양식
+- [맵 호환성 점검표](docs/MAP_COMPATIBILITY_CHECKLIST.md): 맵 데이터 이식 전후의 필수 검사
+- [검증 점검표](docs/VALIDATION_CHECKLIST.md): 수정 승인 후 완료 판정 기준
+- [2026-08-31 시작 크래시 조사](docs/incidents/2026-08-31-startup-crash.md): 현재 확인된 사실과 남은 가설
+
+## 고정 안전 원칙
+
+1. `C:\Program Files (x86)\Steam\steamapps\common\Hearts of Iron IV`의 게임 원본과 Workshop 모드는 읽기 전용 기준 자료로 취급한다.
+2. 로그, 크래시 덤프, 세이브, 런처 사용자 데이터는 증거다. 사용자의 별도 승인 없이 수정·이동·삭제하지 않는다.
+3. 목표 버전의 바닐라 파일을 기준으로 삼고, 구버전 파일 전체를 복사해 덮지 않는다.
+4. 모드의 의도, 이벤트·포커스 ID, 밸런스, 명칭은 호환성 수정에 필요한 경우가 아니면 변경하지 않는다.
+5. 맵 ID 변경은 세이브·스크립트·서브모드와의 호환성을 깨뜨릴 수 있다. 명시적인 마이그레이션 승인 전에는 실행하지 않는다.
+6. 숫자는 문맥 없이 일괄 치환하지 않는다. 같은 숫자가 state, province, 이벤트 값 등 서로 다른 의미로 사용될 수 있다.
+7. 수정이 승인되더라도 먼저 대상과 영향 범위를 기록하고, 작은 단위로 적용한 뒤 같은 조건에서 검증한다.
+8. 게임 실행, Nudger 사용, 테스트, 커밋·푸시·배포는 각각 사용자의 명시적인 요청 범위 안에서만 한다.
+9. 저장소 `descriptor.mod`와 launcher `.mod`의 `dependencies`, `replace_path`, `remote_file_id`, `path`를 감사하고, 런처가 실제로 읽은 물리적 모드 복사본을 확인한다.
+10. `supported_version` 변경이나 메인 메뉴 진입만으로 호환성이 증명됐다고 판단하지 않는다.
+11. localisation은 일반 YAML이 아니다. UTF-8 BOM, locale header, 키·토큰과 `Korean Language` 의존 계약을 보존하고 일반 YAML formatter를 사용하지 않는다.
+
+## 증거 등급
+
+- **확인됨(Confirmed)**: 파일·로그·반복 재현으로 직접 확인한 사실
+- **강하게 뒷받침됨(Strongly supported)**: 여러 증거가 같은 원인을 가리키지만 수정 후 재현 검증이 남은 판단
+- **미확인(Unproven)**: 가능성은 있으나 직접 증거 또는 분리 시험이 부족한 가설
+- **반증됨(Disproven)**: 현재 재현 조건에서 성립하지 않는 가설
+
+결론에는 반드시 이 등급을 붙인다. 엔진 크래시 주소만으로 내부 원인을 단정하지 않는다.
+
+## 민감하거나 임시인 자료
+
+다음 자료는 필요할 때 원래 위치에서 읽고, 기본적으로 프로젝트에 복사하거나 커밋하지 않는다.
+
+- `error.log`, `game.log`, `system.log`, `setup.log`, `exceptions.log`
+- Windows Error Reporting 보고서와 덤프
+- 플레이어 세이브 및 런처 설정
+- 사용자 이름이나 로컬 절대 경로가 포함된 진단 자료
+
+사건 문서에는 원본 파일 자체가 아니라 감사에 필요한 경로 별칭, 파일명, 줄 번호, 수정 시각과 짧은 발췌만 기록한다. 개인 식별 경로는 `<HOI4_USER_DATA>` 같은 별칭으로 비식별화한다. 원본 로그 보존이 필요하면 사용자가 승인한 별도 진단 위치에 실행 ID별로 복사하고, 커밋하지 않는다.

@@ -31,6 +31,7 @@ from source_snapshot import (
     royal_update_lock, remove_royal_update,
     CIVIC_UPDATE_RUNTIME_PATHS, civic_update_lock, read_civic_source, remove_civic_update,
     remove_english_translation,
+    shipbuilding_update_lock, read_shipbuilding_source, remove_shipbuilding_update,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -1104,6 +1105,8 @@ CIVIC_BUTTONS = tuple("HOK_KOR_" + suffix for suffix in ("support_chaebol", "sup
 
 
 def historical_civic_payload(relative: str, data: bytes) -> bytes:
+    #20261020_kpopmodder: The new naval policy must project to the exact previously audited source first.
+    data = remove_shipbuilding_update(relative, data)
     #20261020_kpopmodder: Undo only the exact approved translation before checking older preservation contracts.
     data = remove_english_translation(relative, data)
     record = civic_update_lock()["runtime_text"].get(relative, {})
@@ -1112,7 +1115,7 @@ def historical_civic_payload(relative: str, data: bytes) -> bytes:
 
 def civic_documents() -> tuple[dict[str, bytes], dict[str, Block]]:
     payloads = {relative: (ROOT / relative).read_bytes() for relative in CIVIC_UPDATE_RUNTIME_PATHS}
-    return payloads, {relative: parse(data.decode("utf-8-sig")) for relative, data in payloads.items()
+    return payloads, {relative: parse(remove_shipbuilding_update(relative, data).decode("utf-8-sig")) for relative, data in payloads.items()
                       if Path(relative).suffix in (".txt", ".gfx", ".gui")}
 
 
@@ -1149,6 +1152,7 @@ def check_civic_source(payloads: dict[str, bytes], documents: dict[str, Block]) 
             == {FOCUS_PATH, "common/decisions/KOR_decision.txt"}, "civic existing-file delta changed")
     expected_docs = {}
     for relative, data in payloads.items():
+        data = remove_shipbuilding_update(relative, data)
         data = remove_english_translation(relative, data)
         require(hashlib.sha256(data).hexdigest().upper() == records[relative]["output_sha256"],
                 f"civic pinned output differs: {relative}")
@@ -1158,7 +1162,7 @@ def check_civic_source(payloads: dict[str, bytes], documents: dict[str, Block]) 
             expected_docs[relative] = parse(expected.decode("utf-8-sig"))
     # Every historical generated output and the three separately shipped sources stay byte-exact.
     for relative, digest in {**lock["preserved_outputs"], **lock["preserved_runtime"]}.items():
-        data = remove_english_translation(relative, (ROOT / relative).read_bytes())
+        data = remove_english_translation(relative, remove_shipbuilding_update(relative, (ROOT / relative).read_bytes()))
         require(hashlib.sha256(data).hexdigest().upper() == digest,
                 f"civic update changed an unselected output: {relative}")
     require(documents.keys() == expected_docs.keys(), "civic ordered script inventory changed")
@@ -1714,6 +1718,270 @@ def run_self_tests() -> None:
     print(f"PASS second-wave mutation self-test: {len(caught)} regressions rejected; immutable-source positive fixture accepted; no production writes")
 
 
+#20261020_kpopmodder: Audit the bounded naval policy independently of the production text-hunk builder.
+SHIPBUILDING_DECISIONS = "common/decisions/KOR_decision.txt"
+SHIPBUILDING_IDEAS = "common/ideas/korea.txt"
+SHIPBUILDING_NEW_IDEAS = "common/ideas/HOK_KOR_emergency_shipbuilding.txt"
+SHIPBUILDING_GFX = "interface/HOK_KOR_emergency_shipbuilding_icons.gfx"
+SHIPBUILDING_FOCUS = "KOR_vision_1950"
+SHIPBUILDING_CATEGORY = "KOR_vision_1950_category"
+SHIPBUILDING_DECISION = "HOK_KOR_enact_emergency_special_shipbuilding"
+SHIPBUILDING_SPIRIT = "HOK_KOR_emergency_special_shipbuilding"
+SHIPBUILDING_EXISTING = frozenset((FOCUS_PATH, SHIPBUILDING_DECISIONS, SHIPBUILDING_IDEAS))
+SHIPBUILDING_LOCALES = tuple(
+    f"localisation/{language}/HOK_KOR_emergency_shipbuilding_l_{language}.yml"
+    for language in ("english", "korean"))
+SHIPBUILDING_ARCHETYPES = (
+    "ship_hull_light", "ship_hull_cruiser", "ship_hull_heavy", "ship_hull_carrier",
+    "ship_hull_submarine", "support_ship_hull", "repair_ship_hull", "convoy",
+)
+SHIPBUILDING_SPRITES = {
+    "GFX_HOK_KOR_decision_emergency_special_shipbuilding":
+        "gfx/interface/decisions/HOK_KOR/emergency_shipbuilding/emergency_special_shipbuilding.dds",
+    "GFX_idea_HOK_KOR_emergency_special_shipbuilding":
+        "gfx/interface/ideas/HOK_KOR/emergency_special_shipbuilding.dds",
+}
+
+
+def shipbuilding_documents() -> tuple[dict[str, bytes], dict[str, Block], dict[str, Block]]:
+    lock = shipbuilding_update_lock()
+    payloads = {relative: (ROOT / relative).read_bytes()
+                for relative in (*lock["runtime_text"], *lock["runtime_assets"])}
+    documents = {relative: parse(data.decode("utf-8-sig")) for relative, data in payloads.items()
+                 if Path(relative).suffix in (".txt", ".gfx")}
+    ancestors = {relative: parse(remove_shipbuilding_update(relative, payloads[relative]).decode("utf-8-sig"))
+                 for relative in SHIPBUILDING_EXISTING}
+    return payloads, documents, ancestors
+
+
+def check_shipbuilding_source(payloads: dict[str, bytes]) -> None:
+    lock = shipbuilding_update_lock()
+    text_paths = SHIPBUILDING_EXISTING | {SHIPBUILDING_NEW_IDEAS, SHIPBUILDING_GFX, *SHIPBUILDING_LOCALES}
+    require(set(lock["runtime_text"]) == text_paths and set(lock["runtime_assets"]) == set(SHIPBUILDING_SPRITES.values()),
+            "shipbuilding seven-text/two-asset source allowlist changed")
+    records = {**lock["runtime_text"], **lock["runtime_assets"]}
+    require(set(payloads) == set(records), "missing or extra shipbuilding runtime payload")
+    require({relative for relative, row in lock["runtime_text"].items() if "previous_output_sha256" in row}
+            == SHIPBUILDING_EXISTING, "shipbuilding must modify only three existing runtime files")
+    for relative, data in payloads.items():
+        require(hashlib.sha256(data).hexdigest().upper() == records[relative]["output_sha256"].upper(),
+                f"shipbuilding pinned output differs: {relative}")
+        if relative in SHIPBUILDING_EXISTING:
+            # The inverse helper verifies the final bytes before returning a pinned ancestor.
+            ancestor = remove_shipbuilding_update(relative, data)
+            require(hashlib.sha256(ancestor).hexdigest().upper()
+                    == records[relative]["previous_output_sha256"].upper(),
+                    f"shipbuilding changed its historical ancestor: {relative}")
+        elif relative != SHIPBUILDING_LOCALES[0]:
+            require(data == read_shipbuilding_source(relative), f"shipbuilding source copy differs: {relative}")
+    # Retain the exact preceding English and civic outputs, rather than projecting away arbitrary edits.
+    for relative, digest in lock.get("preserved_outputs", {}).items():
+        require(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest().upper() == digest.upper(),
+                f"shipbuilding changed an unselected generated output: {relative}")
+
+
+def check_shipbuilding_semantics(documents: dict[str, Block], ancestors: dict[str, Block]) -> None:
+    focuses = focus_blocks(documents[FOCUS_PATH])
+    old_focuses = focus_blocks(ancestors[FOCUS_PATH])
+    require(len(focuses) == len(old_focuses) == 472 and focuses.keys() == old_focuses.keys(),
+            "shipbuilding changed the playable focus inventory")
+    old_focus = old_focuses[SHIPBUILDING_FOCUS]
+    reward = one(old_focus, "completion_reward")
+    require(reward == parse("add_ideas = KOR_vision_1950 navy_experience = 50"),
+            "shipbuilding inherited focus reward changed")
+    require(scalar(focuses[SHIPBUILDING_FOCUS], "cost") == "5", "shipbuilding changed the 35-day focus")
+    expected_focus = replace_entry(ancestors[FOCUS_PATH], ("focus_tree",), tuple(
+        Entry(entry.key, entry.op, replace_entry(entry.value, ("completion_reward",),
+              reward + parse(f"unlock_decision_tooltip = {SHIPBUILDING_DECISION}")))
+        if entry.key == "focus" and scalar(entry.value, "id") == SHIPBUILDING_FOCUS else entry
+        for entry in one(ancestors[FOCUS_PATH], "focus_tree")))
+    require(documents[FOCUS_PATH] == expected_focus,
+            "shipbuilding changed focus prerequisites, timing, AI, layout, existing rewards or unrelated content")
+    old_idea = one(one(one(ancestors[SHIPBUILDING_IDEAS], "ideas"), "country"), SHIPBUILDING_FOCUS)
+    require(one(old_idea, "modifier") == parse("industrial_capacity_dockyard = 0.2"),
+            "shipbuilding permanent dockyard ancestor changed")
+    expected_ideas = replace_entry(ancestors[SHIPBUILDING_IDEAS],
+                                  ("ideas", "country", SHIPBUILDING_FOCUS, "modifier", "industrial_capacity_dockyard"), "0.3")
+    require(documents[SHIPBUILDING_IDEAS] == expected_ideas,
+            "shipbuilding permanent reward must be +30 percent with all other ideas preserved")
+    decision = parse(f"""
+        icon = GFX_HOK_KOR_decision_emergency_special_shipbuilding
+        allowed = {{ tag = KOR }}
+        visible = {{ has_completed_focus = {SHIPBUILDING_FOCUS} }}
+        available = {{ has_completed_focus = {SHIPBUILDING_FOCUS} NOT = {{ has_idea = {SHIPBUILDING_SPIRIT} }} }}
+        cost = 150 fire_only_once = no days_re_enable = 0
+        complete_effect = {{ add_timed_idea = {{ idea = {SHIPBUILDING_SPIRIT} days = 180 }} }}
+        ai_will_do = {{ factor = 1 }}
+    """)
+    category = one(documents[SHIPBUILDING_DECISIONS], SHIPBUILDING_CATEGORY)
+    require(one(category, SHIPBUILDING_DECISION) == decision,
+            "shipbuilding decision cost, focus gate, no-stack, repeat, duration, cooldown or AI contract changed")
+    old_category = one(ancestors[SHIPBUILDING_DECISIONS], SHIPBUILDING_CATEGORY)
+    require(set(named(old_category)) == {f"KOR_vision_1950_step_{number}" for number in (1, 2, 3)},
+            "shipbuilding inherited three fleet milestones changed")
+    expected_decisions = replace_entry(ancestors[SHIPBUILDING_DECISIONS], (SHIPBUILDING_CATEGORY,),
+                                      (Entry(SHIPBUILDING_DECISION, "=", decision), *old_category))
+    require(documents[SHIPBUILDING_DECISIONS] == expected_decisions,
+            "shipbuilding changed a legacy milestone, category, migrated state reference or unrelated decision")
+    bonuses = tuple(Entry(archetype, "=", parse("build_cost_ic = -0.5 instant = yes"))
+                    for archetype in SHIPBUILDING_ARCHETYPES)
+    spirit = parse(f"""
+        picture = {SHIPBUILDING_SPIRIT}
+        allowed = {{ original_tag = KOR }}
+        allowed_civil_war = {{ always = yes }} removal_cost = -1
+    """) + (Entry("equipment_bonus", "=", bonuses),)
+    expected_spirit = (Entry("ideas", "=", (Entry("country", "=", (Entry(SHIPBUILDING_SPIRIT, "=", spirit),)),)),)
+    require(documents[SHIPBUILDING_NEW_IDEAS] == expected_spirit,
+            "shipbuilding must contain one temporary spirit with exactly eight immediate -50 percent cost bonuses")
+
+
+def check_shipbuilding_presentation(payloads: dict[str, bytes], documents: dict[str, Block]) -> None:
+    required_keys = {SHIPBUILDING_DECISION, SHIPBUILDING_DECISION + "_desc",
+                     SHIPBUILDING_SPIRIT, SHIPBUILDING_SPIRIT + "_desc"}
+    for relative in SHIPBUILDING_LOCALES:
+        entries = prose_entries(payloads[relative], relative)
+        require({key for key, _, _ in entries} == required_keys and len(entries) == 4,
+                f"shipbuilding four-key localisation closure changed: {relative}")
+        require(all(version == "0" and value for _, version, value in entries),
+                f"shipbuilding localisation version or nonempty text changed: {relative}")
+        if relative.startswith("localisation/english/"):
+            require(not any(re.search("[가-힣]", value.decode("utf-8")) for _, _, value in entries),
+                    "shipbuilding English must contain translated English strings")
+        else:
+            require(payloads[relative] == read_shipbuilding_source(relative),
+                    "shipbuilding Korean source text changed")
+    registry = one(documents[SHIPBUILDING_GFX], "spriteTypes")
+    require(len(registry) == 2 and all(entry.key.lower() == "spritetype" and isinstance(entry.value, tuple) for entry in registry),
+            "shipbuilding must register exactly two sprites")
+    sprites = {scalar(entry.value, "name"): entry.value for entry in registry}
+    require(len(sprites) == 2 and set(sprites) == set(SHIPBUILDING_SPRITES), "shipbuilding sprite ID closure changed")
+    disk_assets = {path.relative_to(ROOT).as_posix() for path in (ROOT / "gfx/interface").rglob("*.dds")}
+    for identifier, texture in SHIPBUILDING_SPRITES.items():
+        require(sprites[identifier] == parse(f'name = "{identifier}" texturefile = "{texture}"'),
+                f"shipbuilding sprite must use its exact local texture: {identifier}")
+        exact_case(texture, disk_assets)
+        data = payloads[texture]
+        require(data[:4] == b"DDS " and len(data) >= 128, f"shipbuilding invalid DDS: {texture}")
+        header = struct.unpack("<31I", data[4:128])
+        dimensions = (60, 68) if "/ideas/" in texture else (32, 32)
+        require(header[0] == 124 and (header[3], header[2]) == dimensions
+                and header[18:26] == (32, 65, 0, 32, 0x00FF0000, 0x0000FF00, 0x000000FF, 0xFF000000)
+                and header[6] in (0, 1) and len(data) == 128 + dimensions[0] * dimensions[1] * 4,
+                f"shipbuilding DDS dimensions, BGRA or single-frame contract changed: {texture}")
+    declarations = re.compile(r'\bname\s*=\s*"?([A-Za-z0-9_]+)"?')
+    for root in (ROOT, RT56_ROOT, VANILLA_ROOT):
+        for path in (root / "interface").rglob("*.gfx"):
+            if root == ROOT and path.relative_to(root).as_posix() == SHIPBUILDING_GFX:
+                continue
+            found = set(declarations.findall(mask_comments(path.read_bytes().decode("utf-8-sig"))))
+            require(not set(sprites) & found, f"shipbuilding sprite ID collision: {path}")
+
+
+def check_shipbuilding_references() -> None:
+    check_new_id_collisions({
+        "idea": ({SHIPBUILDING_SPIRIT}, "common/ideas"),
+        "decision": ({SHIPBUILDING_DECISION}, "common/decisions"),
+    }, {SHIPBUILDING_NEW_IDEAS, SHIPBUILDING_DECISIONS})
+    equipment_files = {path.name: path for path in effective_files("common/units/equipment")}
+    for archetype in SHIPBUILDING_ARCHETYPES:
+        filename = {"support_ship_hull": "support_ships.txt", "repair_ship_hull": "repair_ships.txt",
+                    "convoy": "convoys.txt"}.get(archetype, archetype + ".txt")
+        require(filename in equipment_files, f"shipbuilding equipment source missing: {filename}")
+        definitions = named(one(read(equipment_files[filename]), "equipments"))
+        require(archetype in definitions and scalar(definitions[archetype], "is_archetype") == "yes",
+                f"shipbuilding archetype missing from current effective equipment source: {archetype}")
+    category = one(read(ROOT / "common/decisions/categories/KOR_decision_categories.txt"), SHIPBUILDING_CATEGORY)
+    require(one(category, "allowed") == parse("tag = KOR"), "shipbuilding category no longer allows Korea")
+
+
+def run_shipbuilding_checks() -> None:
+    payloads, documents, ancestors = shipbuilding_documents()
+    check_shipbuilding_source(payloads)
+    check_shipbuilding_semantics(documents, ancestors)
+    check_shipbuilding_presentation(payloads, documents)
+    check_shipbuilding_references()
+    print("PASS emergency shipbuilding: exact three-file delta, nine runtime outputs; PP150/180-day repeatable no-stack policy; eight immediate -50% costs; permanent dockyard +30%; legacy milestones/rewards preserved")
+    print("PASS emergency shipbuilding presentation: four bilingual keys, translated English, two local DDS/sprites and current host equipment archetype closure")
+    print("SCOPED STATIC ONLY: historical descriptor assertions remain enforced; no RT56 engine, UI, natural expiry, progression, AI, DLC, save or multiplayer proof.")
+
+
+def run_shipbuilding_self_tests() -> None:
+    payloads, documents, ancestors = shipbuilding_documents()
+    check_shipbuilding_source(payloads)
+    check_shipbuilding_semantics(documents, ancestors)
+    check_shipbuilding_presentation(payloads, documents)
+    check_shipbuilding_references()
+    caught = []
+
+    def rejects(label, action):
+        try:
+            action()
+        except (ValueError, KeyError, StopIteration):
+            caught.append(label)
+        else:
+            raise ValueError(f"shipbuilding mutation was not detected: {label}")
+
+    def decision_mutation(location, value):
+        return {**documents, SHIPBUILDING_DECISIONS: replace_entry(documents[SHIPBUILDING_DECISIONS],
+                (SHIPBUILDING_CATEGORY, SHIPBUILDING_DECISION, *location), value)}
+
+    mutations = (
+        ("wrong PP charge", ("cost",), "75"),
+        ("pre-focus visibility", ("visible",), parse("always = yes")),
+        ("missing focus availability", ("available", "has_completed_focus"), None),
+        ("active reuse", ("available", "NOT"), None),
+        ("one-time decision", ("fire_only_once",), "yes"),
+        ("post-expiry cooldown", ("days_re_enable",), "180"),
+        ("wrong timed duration", ("complete_effect", "add_timed_idea", "days"), "90"),
+        ("wrong target idea", ("complete_effect", "add_timed_idea", "idea"), SHIPBUILDING_FOCUS),
+        ("double PP charge", ("complete_effect",), parse(f"add_political_power = -150 add_timed_idea = {{ idea = {SHIPBUILDING_SPIRIT} days = 180 }}")),
+        ("permanent idea removed", ("complete_effect",), parse(f"remove_ideas = {SHIPBUILDING_FOCUS} add_timed_idea = {{ idea = {SHIPBUILDING_SPIRIT} days = 180 }}")),
+        ("AI disabled", ("ai_will_do", "factor"), "0"),
+    )
+    for label, location, value in mutations:
+        changed = decision_mutation(location, value)
+        rejects(label, lambda changed=changed: check_shipbuilding_semantics(changed, ancestors))
+    for archetype in SHIPBUILDING_ARCHETYPES:
+        for label, location, value in (
+            ("missing hull", ("equipment_bonus", archetype), None),
+            ("non-immediate bonus", ("equipment_bonus", archetype, "instant"), None),
+            ("wrong cost modifier", ("equipment_bonus", archetype, "build_cost_ic"), "-0.25"),
+        ):
+            changed = {**documents, SHIPBUILDING_NEW_IDEAS: replace_entry(documents[SHIPBUILDING_NEW_IDEAS],
+                       ("ideas", "country", SHIPBUILDING_SPIRIT, *location), value)}
+            rejects(f"{label}: {archetype}", lambda changed=changed: check_shipbuilding_semantics(changed, ancestors))
+    changed = {**documents, SHIPBUILDING_IDEAS: replace_entry(documents[SHIPBUILDING_IDEAS],
+               ("ideas", "country", SHIPBUILDING_FOCUS, "modifier", "industrial_capacity_dockyard"), "0.2")}
+    rejects("stale permanent dockyard reward", lambda: check_shipbuilding_semantics(changed, ancestors))
+    focus_tree = one(documents[FOCUS_PATH], "focus_tree")
+    changed_tree = tuple(Entry(entry.key, entry.op, replace_entry(entry.value, ("completion_reward", "navy_experience"), None))
+                         if entry.key == "focus" and scalar(entry.value, "id") == SHIPBUILDING_FOCUS else entry
+                         for entry in focus_tree)
+    changed = {**documents, FOCUS_PATH: replace_entry(documents[FOCUS_PATH], ("focus_tree",), changed_tree)}
+    rejects("lost existing navy XP", lambda: check_shipbuilding_semantics(changed, ancestors))
+    changed = {**documents, SHIPBUILDING_DECISIONS: replace_entry(documents[SHIPBUILDING_DECISIONS],
+               (SHIPBUILDING_CATEGORY, "KOR_vision_1950_step_1", "complete_effect", "navy_experience"), "1")}
+    rejects("legacy milestone reward drift", lambda: check_shipbuilding_semantics(changed, ancestors))
+    locale = SHIPBUILDING_LOCALES[0]
+    rejects("missing English key", lambda: check_shipbuilding_presentation(
+        {**payloads, locale: re.sub(rb"(?m)^ " + SHIPBUILDING_SPIRIT.encode() + rb"_desc:[^\r\n]*\r?\n?", b"", payloads[locale])}, documents))
+    rejects("English Korean placeholder", lambda: check_shipbuilding_presentation(
+        {**payloads, locale: read_shipbuilding_source(locale)}, documents))
+    rejects("missing locale BOM", lambda: check_shipbuilding_presentation({**payloads, locale: payloads[locale][3:]}, documents))
+    sprite_doc = documents[SHIPBUILDING_GFX]
+    registry = one(sprite_doc, "spriteTypes")
+    broken = (Entry(registry[0].key, registry[0].op, replace_entry(registry[0].value, ("texturefile",), "gfx/missing.dds")), *registry[1:])
+    rejects("missing local sprite texture", lambda: check_shipbuilding_presentation(payloads,
+        {**documents, SHIPBUILDING_GFX: replace_entry(sprite_doc, ("spriteTypes",), broken)}))
+    texture = next(iter(SHIPBUILDING_SPRITES.values()))
+    rejects("invalid DDS dimensions", lambda: check_shipbuilding_presentation(
+        {**payloads, texture: payloads[texture][:12] + struct.pack("<I", 99) + payloads[texture][16:]}, documents))
+    rejects("missing runtime output", lambda: check_shipbuilding_source({relative: data for relative, data in payloads.items() if relative != texture}))
+    rejects("output hash drift", lambda: check_shipbuilding_source({**payloads, locale: payloads[locale] + b"# unreviewed mutation\n"}))
+    print(f"PASS emergency shipbuilding mutation self-test: {len(caught)} bounded regressions rejected; exact current positive fixture accepted; no production writes")
+    print("SCOPED STATIC ONLY: semantic mutations do not execute the engine or prove AI, expiry, save, DLC or multiplayer behaviour.")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -1722,9 +1990,11 @@ def main() -> int:
     mode.add_argument("--royal-self-test", action="store_true")
     mode.add_argument("--civic-self-test", action="store_true")
     mode.add_argument("--civic-check", action="store_true")
+    mode.add_argument("--shipbuilding-check", action="store_true")
+    mode.add_argument("--shipbuilding-self-test", action="store_true")
     args = parser.parse_args()
     try:
-        run_civic_checks() if args.civic_check else run_civic_self_tests() if args.civic_self_test else run_royal_self_tests() if args.royal_self_test else run_self_tests() if args.self_test else run_checks()
+        run_shipbuilding_checks() if args.shipbuilding_check else run_shipbuilding_self_tests() if args.shipbuilding_self_test else run_civic_checks() if args.civic_check else run_civic_self_tests() if args.civic_self_test else run_royal_self_tests() if args.royal_self_test else run_self_tests() if args.self_test else run_checks()
     except (OSError, UnicodeError, ValueError, KeyError, StopIteration) as exc:
         print(f"ERROR Korean second-wave contract: {exc}")
         return 1

@@ -13,7 +13,7 @@ import hashlib
 import re
 import sys
 from pathlib import Path
-from source_snapshot import FOCUS_UPDATE_PATHS, apply_english_translation
+from source_snapshot import FOCUS_UPDATE_PATHS, apply_english_translation, remove_shipbuilding_update
 
 from build_rt56_map import (
     HOK_ROOT,
@@ -1028,7 +1028,8 @@ def main() -> int:
     for relative, original, migrated in targets:
         destination = (REPO_ROOT / Path(relative)).resolve()
         destination.relative_to(REPO_ROOT)
-        current = destination.read_bytes()
+        #20261020_kpopmodder: Preserve the generator-owned naval overlay while auditing its exact migrated ancestor.
+        current = remove_shipbuilding_update(relative, destination.read_bytes())
         #20261012_kpopmodder: Audit the exact pre-civic ancestor without undoing the generator-owned gameplay overlay.
         if relative == "common/decisions/KOR_decision.txt" and current != migrated:
             from source_snapshot import civic_update_lock, remove_civic_update

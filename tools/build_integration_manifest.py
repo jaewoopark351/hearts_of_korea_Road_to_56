@@ -29,6 +29,7 @@ from source_snapshot import (
     royal_update_lock, remove_royal_update,
     CIVIC_UPDATE_MODIFIED_PATHS, civic_update_lock, read_civic_source, remove_civic_update,
     english_translation_lock, remove_english_translation,
+    shipbuilding_update_lock, read_shipbuilding_source, remove_shipbuilding_update,
 )
 
 
@@ -440,8 +441,15 @@ def sha256(path: Path) -> str:
 
 
 #20261020_kpopmodder: Audit earlier integration layers against their frozen pre-translation bytes.
+#20261020_kpopmodder: Undo the bounded shipbuilding overlay before auditing earlier English and gameplay layers.
+def pre_shipbuilding_bytes(relative: str | Path, data: bytes) -> bytes:
+    return remove_shipbuilding_update(Path(relative).as_posix(), data)
+
+
 def historical_output_bytes(relative: str) -> bytes:
-    return remove_english_translation(relative, (REPO_ROOT / relative).read_bytes())
+    return remove_english_translation(
+        relative, pre_shipbuilding_bytes(relative, (REPO_ROOT / relative).read_bytes())
+    )
 
 
 def historical_output_sha256(relative: str) -> str:
@@ -640,9 +648,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
 
     # [2026-09-23]_kpopmodder: Verify and attribute the selected 288 additions independently of the historical donor tree.
     from build_korean_focus_update import build_all
-    expected_outputs = {path: remove_english_translation(path, data)
+    expected_outputs = {path: remove_english_translation(path, pre_shipbuilding_bytes(path, data))
                         for path, data in build_all().items()}
-    if (REPO_ROOT / SECOND_WAVE_FOCUS_PATH).read_bytes() != expected_outputs[Path(SECOND_WAVE_FOCUS_PATH)]:
+    if historical_output_bytes(SECOND_WAVE_FOCUS_PATH) != expected_outputs[Path(SECOND_WAVE_FOCUS_PATH)]:
         raise RuntimeError("second-wave focus output differs from the reviewed merge")
     for relative in SECOND_WAVE_RUNTIME_PATHS:
         if relative == SECOND_WAVE_FOCUS_PATH:
@@ -905,7 +913,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         matching = [row for row in rows if row["output_path"] == relative]
         if len(matching) != 1:
             raise RuntimeError(f"English translation requires its existing integration row: {relative}")
-        current = (REPO_ROOT / relative).read_bytes()
+        current = pre_shipbuilding_bytes(relative, (REPO_ROOT / relative).read_bytes())
         previous = remove_english_translation(relative, current)
         previous_hash = hashlib.sha256(previous).hexdigest().upper()
         current_hash = hashlib.sha256(current).hexdigest().upper()
@@ -928,6 +936,83 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "english_translation_lock": "tools/hok_english_translation_lock.json",
         })
         row["reason"] += "; 2026-10-20 standard HOK British English translation 6f50120 selectively adapted to RT56 keys, geography and retained content; tools/hok_english_translation_lock.json; original translation and earlier HOK/RT56 provenance retained"
+
+    #20261020_kpopmodder: Record nine frozen shipbuilding sources after every historical layer without replacing earlier provenance.
+    shipbuilding = shipbuilding_update_lock()
+    if (shipbuilding["source_commit"] != "d4031aaa0c1f85bb89b0e6ca21d041beade8bd26"
+            or shipbuilding["source_kind"] != "reviewed-working-tree-snapshot"
+            or len(shipbuilding["runtime_text"]) != 7
+            or len(shipbuilding["runtime_assets"]) != 2):
+        raise RuntimeError("unexpected emergency shipbuilding integration inventory or source baseline")
+    modified = 0
+    additions = 0
+    for group in ("runtime_text", "runtime_assets"):
+        for relative, record in shipbuilding[group].items():
+            payload = read_shipbuilding_source(relative)
+            if hashlib.sha256(payload).hexdigest().upper() != record["sha256"]:
+                raise RuntimeError(f"shipbuilding frozen source hash differs from its lock: {relative}")
+            current = (REPO_ROOT / relative).read_bytes()
+            current_hash = hashlib.sha256(current).hexdigest().upper()
+            if current_hash != record["output_sha256"]:
+                raise RuntimeError(f"shipbuilding output differs from its reviewed merge: {relative}")
+            matching = [entry for entry in rows if entry["source_path"] == relative]
+            classification = record["classification"]
+            if "previous_output_sha256" in record:
+                modified += 1
+                previous = pre_shipbuilding_bytes(relative, current)
+                previous_hash = hashlib.sha256(previous).hexdigest().upper()
+                if (len(matching) != 1 or matching[0]["output_path"] != relative
+                        or matching[0]["integration_class"] != classification
+                        or matching[0]["output_sha256"] != previous_hash
+                        or previous_hash != record["previous_output_sha256"]):
+                    raise RuntimeError(f"shipbuilding overlay lost its earlier integration row: {relative}")
+                row = matching[0]
+            else:
+                additions += 1
+                expected_class = "ASSET_COPY" if group == "runtime_assets" else "ADD"
+                if (matching or relative in donor_relatives or (RT56_ROOT / relative).exists()
+                        or classification != expected_class):
+                    raise RuntimeError(f"unreviewed shipbuilding addition collision or classification: {relative}")
+                counts[classification] += 1
+                row = {
+                    "source_path": relative, "integration_class": classification,
+                    "status": "SHIPPED", "exact_path_rt56_collision": "no",
+                    "output_path": relative, "rt56_base_sha256": "",
+                    "donor_sha256": record["sha256"], "donor_source_commit": "",
+                    "donor_source_blob": "", "donor_source_sha256": record["sha256"],
+                    "donor_source_checkout": shipbuilding["source_kind"],
+                    "reason": "HOK emergency shipbuilding addition; frozen uncommitted source and original asset credits retained",
+                }
+                rows.append(row)
+            if classification == "ASSET_COPY" and current != payload:
+                raise RuntimeError(f"shipbuilding ASSET_COPY changed its source bytes: {relative}")
+            row.update({
+                "output_sha256": current_hash,
+                "shipbuilding_source_kind": shipbuilding["source_kind"],
+                "shipbuilding_source_base_commit": shipbuilding["source_commit"],
+                "shipbuilding_source_sha256": record["sha256"],
+                "shipbuilding_source_snapshot_path": record["snapshot_path"],
+                "shipbuilding_previous_output_sha256": record.get("previous_output_sha256", ""),
+                "shipbuilding_classification": classification,
+                "shipbuilding_lock": "tools/hok_shipbuilding_update_lock.json",
+            })
+            row["reason"] += "; 2026-10-20 HOK Vision 1950 repeatable emergency special shipbuilding decision, timed spirit and dedicated artwork selectively integrated; existing HOK/RT56 ownership and British English overlay retained"
+            if relative.startswith("localisation/english/"):
+                if current == payload:
+                    raise RuntimeError("shipbuilding English output must translate the frozen Korean source")
+                row["shipbuilding_english_reason"] = (
+                    "Four new keys translated from the frozen Korean source into British English; "
+                    "the existing 36-file/2743-key English translation overlay is preserved"
+                )
+                row["reason"] += "; new l_english values translated into British English from donor Korean text, with final output hash recorded separately from the raw source hash"
+            if group == "runtime_assets" or relative.startswith("interface/"):
+                row.update({
+                    "artwork_source_kind": shipbuilding["source_kind"],
+                    "artwork_source_base_commit": shipbuilding["source_commit"],
+                    "artwork_source_sha256": record["sha256"],
+                })
+    if modified != 3 or additions != 6 or len(rows) != 1452:
+        raise RuntimeError(f"unexpected shipbuilding integration totals: modified={modified} additions={additions} rows={len(rows)}")
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(
@@ -960,6 +1045,14 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "english_translation_previous_snapshot_path",
             "english_translation_classification",
             "english_translation_lock",
+            "shipbuilding_source_kind",
+            "shipbuilding_source_base_commit",
+            "shipbuilding_source_sha256",
+            "shipbuilding_source_snapshot_path",
+            "shipbuilding_previous_output_sha256",
+            "shipbuilding_classification",
+            "shipbuilding_english_reason",
+            "shipbuilding_lock",
         ),
         lineterminator="\n",
     )

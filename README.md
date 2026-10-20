@@ -6,6 +6,8 @@
 
 이 저장소는 Hearts of Korea(HOK)의 한국 콘텐츠를 **현재 The Road to 56(RT56)을 호스트로 삼아 다시 이식하는 별도 신규 모드**다. `C:\hoi\hearts_of_korea`는 읽기 전용 donor이며 플레이할 때 함께 켜는 모드가 아니다.
 
+**2026-10-20 선택 이식:** 비전 1950의 조선소 생산량을 +30%로 올리고, 정치력 150으로 180일간 함정·수송선 생산 비용 −50% 보정을 부여하는 반복 「긴급 특별 건함계획」을 가져왔다. 적용 중에는 재사용할 수 없고 만료 뒤 추가 대기기간 없이 다시 사용할 수 있다. 전용 결정·국민정신 그림과 신규 영어 4키를 포함하며 기존 영어 36파일과 한국어 36파일은 보존했다. [출처·병합·검증 기록](docs/implementation/2026-10-20-korean-emergency-shipbuilding-port.md)을 따른다. 이번 RT56판의 실제 게임 표시는 아직 미검증이다.
+
 **2026-09-22 이미지 업데이트:** 중점 60개·국민정신 29개의 새 그림과 GFX를 가져오고 AGENTS의 이미지 작업 규칙을 포트에 맞게 반영했다. 그림 연결 외 게임 효과는 보존했다. [이식·검증 기록](docs/implementation/2026-09-22-korean-icon-port.md), [색상 비교](docs/assets/korean-focus-icon-colors/index.html), [소재 크레딧](docs/HOK_KOREAN_FOCUS_ICON_CREDITS.md)을 따른다. 새 이미지의 포트 게임 실행은 아직 하지 않았다.
 
 **2026-09-22 구현:** 한국 runtime 20개 파일에 중점 266→326개 확장, 보상·결정·이벤트·현지화와 역사 AI 기본106개·지원3계획을 반영했다. 기존 지도 ID, 만주15개 주와 대일 강화 처리를 보존하고 RT56 manifest `7475007536894105204`의 변경9개 파일을 재병합했다. [구현·검증 기록](docs/implementation/2026-09-22-korean-focus-update-port.md)과 [이식 계획](docs/plans/2026-09-22-korean-focus-update-port-plan.md)을 구분한다. 기간 단축은 실제 이식 전 호환판 대비154개(확장152개+원본 선행2개)다.

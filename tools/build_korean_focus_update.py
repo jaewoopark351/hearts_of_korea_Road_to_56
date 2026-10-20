@@ -28,6 +28,7 @@ from source_snapshot import (
     royal_update_lock, apply_royal_update,
     CIVIC_UPDATE_RUNTIME_PATHS, civic_update_lock, read_civic_source, apply_civic_update,
     english_translation_lock, apply_english_translation,
+    shipbuilding_update_lock, verify_shipbuilding_snapshot, apply_shipbuilding_update, shipbuilding_addition,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -84,7 +85,8 @@ ICON_ASSET_PATHS = tuple(Path(relative) for relative in icon_lock()["runtime_ass
 OUTPUT_PATHS = tuple(dict.fromkeys(GAMEPLAY_PATHS + ICON_ASSET_PATHS + tuple(Path(p) for p in SECOND_WAVE_RUNTIME_PATHS)
                                  + tuple(Path(p) for p in MATERIAL_CYCLE_RUNTIME_PATHS)
                                  + tuple(Path(p) for p in CIVIC_UPDATE_RUNTIME_PATHS)
-                                 + tuple(Path(p) for p in english_translation_lock()["runtime_text"])))
+                                 + tuple(Path(p) for p in english_translation_lock()["runtime_text"])
+                                 + tuple(Path(p) for group in ("runtime_text", "runtime_assets") for p in shipbuilding_update_lock()[group])))
 SOURCE_COMMITS = {
     relative: AI_COMMIT if relative.parts[1] == "ai_strategy_plans" else FOCUS_COMMIT
     for relative in GAMEPLAY_PATHS
@@ -152,6 +154,12 @@ ACCEPTED_PRIOR_OUTPUT_HASHES.update({
 ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     Path(relative): record["previous_output_sha256"]
     for relative, record in english_translation_lock()["runtime_text"].items()
+})
+#20261020_kpopmodder: Apply the shipbuilding module only over the exact reviewed compatibility ancestors.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): record["previous_output_sha256"]
+    for relative, record in shipbuilding_update_lock()["runtime_text"].items()
+    if "previous_output_sha256" in record
 })
 CHECKOUT_RESTORATION_HASHES = {
     Path(relative): record["previous_output_sha256"]
@@ -411,6 +419,18 @@ def build_all() -> dict[Path, bytes]:
         if previous is None:
             previous = (REPO_ROOT / record["previous_snapshot_path"]).read_bytes()
         outputs[relative] = apply_english_translation(name, previous)
+    #20261020_kpopmodder: Add the author's naval policy after geography, civic and English merges without copying donor gameplay files.
+    verify_shipbuilding_snapshot()
+    shipbuilding = shipbuilding_update_lock()
+    for group in ("runtime_text", "runtime_assets"):
+        for name, record in shipbuilding[group].items():
+            relative = Path(name)
+            if "previous_output_sha256" in record:
+                outputs[relative] = apply_shipbuilding_update(name, outputs[relative])
+            else:
+                if relative in outputs:
+                    raise ValueError(f"shipbuilding addition duplicates a generated output: {name}")
+                outputs[relative] = shipbuilding_addition(name)
     return outputs
 
 

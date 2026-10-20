@@ -1,0 +1,252 @@
+{
+  "format": 1,
+  "source_kind": "reviewed-working-tree-snapshot",
+  "source_commit": "d4031aaa0c1f85bb89b0e6ca21d041beade8bd26",
+  "compatibility_base_commit": "1cb07066bc929489293a21f9418f3d427cfab8a6",
+  "source_root": "C:\\hoi\\hearts_of_korea",
+  "snapshot_root": "docs/upstream/hok-emergency-shipbuilding-20261020",
+  "rt56_manifest": "7553774178744855191",
+  "runtime_text": {
+    "common/decisions/KOR_decision.txt": {
+      "sha256": "FD620CC464F8F5C6229A000E6987D010A4BACF2DE560435E295B2FD5C8CB929C",
+      "size": 48048,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/runtime/common/decisions/KOR_decision.txt",
+      "classification": "ADD",
+      "base_blob": "6e3e1c60051105668103cc0c34e3a8a10e1b3016",
+      "base_object_sha256": "2CE2BD772F20F85F247C881C9DA9ECF83EF81AB3310B3EFD5E9DB57F35F6DEE5",
+      "previous_output_sha256": "F0B90524C98B7CD3D45D977462C5EDCA7D1BA5FB3BCFD7B9C0E05BFA64F6673C",
+      "edits": [
+        {
+          "before_lines": [
+            "}",
+            "",
+            "KOR_vision_1950_category = {",
+            "",
+            "\tKOR_vision_1950_step_1 = {",
+            "\t\t"
+          ],
+          "after_lines": [
+            "}",
+            "",
+            "KOR_vision_1950_category = {",
+            "",
+            "\t#20261020_kpopmodder: Spend 150 political power on a repeatable 180-day shipbuilding plan, without stacking or an extra cooldown.",
+            "\tHOK_KOR_enact_emergency_special_shipbuilding = {",
+            "\t\ticon = GFX_HOK_KOR_decision_emergency_special_shipbuilding",
+            "\t\tallowed = { tag = KOR }",
+            "\t\tvisible = { has_completed_focus = KOR_vision_1950 }",
+            "\t\tavailable = {",
+            "\t\t\thas_completed_focus = KOR_vision_1950",
+            "\t\t\tNOT = { has_idea = HOK_KOR_emergency_special_shipbuilding }",
+            "\t\t}",
+            "\t\tcost = 150",
+            "\t\tfire_only_once = no",
+            "\t\tdays_re_enable = 0",
+            "\t\tcomplete_effect = {",
+            "\t\t\tadd_timed_idea = { idea = HOK_KOR_emergency_special_shipbuilding days = 180 }",
+            "\t\t}",
+            "\t\tai_will_do = { factor = 1 }",
+            "\t}",
+            "",
+            "\tKOR_vision_1950_step_1 = {",
+            "\t\t"
+          ]
+        }
+      ],
+      "output_sha256": "5B26EB3F061B712092DCE8EB7CB4A158EE8E75087ACF126ABE5F9A285AF27361"
+    },
+    "common/ideas/korea.txt": {
+      "sha256": "71CCFABB75832A31D80090410AAFFC2D1B3BF97A86A11026EE4ECF39B5991F23",
+      "size": 17596,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/runtime/common/ideas/korea.txt",
+      "classification": "OVERRIDE",
+      "base_blob": "bbc8e27de365afe6b1e556ce52d562c60ac07aae",
+      "base_object_sha256": "6EA2D3DEE8F508FF7E42369C9EA76BEDE7BB892FB06F16373311A90FEC03C7FB",
+      "previous_output_sha256": "DE22B2B0F7733AE5BC5A1564D9BBA8F47AE439456F893E6238903AC8BE953254",
+      "edits": [
+        {
+          "before_lines": [
+            "\t\t\tpicture = kor_vision_1950",
+            "\t\t\t",
+            "\t\t\tmodifier = {",
+            "\t\t\t\tindustrial_capacity_dockyard = 0.2",
+            "\t\t\t}",
+            "\t\t}",
+            "\t\t"
+          ],
+          "after_lines": [
+            "\t\t\tpicture = kor_vision_1950",
+            "\t\t\t",
+            "\t\t\tmodifier = {",
+            "\t\t\t\t#20261020_kpopmodder: Increase Vision 1950 dockyard output from 20 to 30 percent as requested.",
+            "\t\t\t\tindustrial_capacity_dockyard = 0.3",
+            "\t\t\t}",
+            "\t\t}",
+            "\t\t"
+          ]
+        }
+      ],
+      "output_sha256": "71CCFABB75832A31D80090410AAFFC2D1B3BF97A86A11026EE4ECF39B5991F23"
+    },
+    "common/national_focus/korea.txt": {
+      "sha256": "0F3BFC0FCD96377BFC82FECD19E4100F71CA82E3671206C0A1544AE06032F00E",
+      "size": 484781,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/runtime/common/national_focus/korea.txt",
+      "classification": "OVERRIDE",
+      "base_blob": "4d9b922c5e4dacf88dd4db222c1ec0a832daf6a8",
+      "base_object_sha256": "A7D4A0067DFFD28AA7F27F24E6FF40D8DA46B98C27FA7CF0946DFAD4D474AAEE",
+      "previous_output_sha256": "7AE9465EE5DA4E3FC59CCAADC36E1F492BC81AEFA715D11992229D383F7AE9D8",
+      "edits": [
+        {
+          "before_lines": [
+            "\t\tcompletion_reward = {",
+            "\t\t\tadd_ideas = KOR_vision_1950",
+            "\t\t\tnavy_experience = 50",
+            "\t\t}",
+            "\t}",
+            "\t#Focus for Jeju Naval Base"
+          ],
+          "after_lines": [
+            "\t\tcompletion_reward = {",
+            "\t\t\tadd_ideas = KOR_vision_1950",
+            "\t\t\tnavy_experience = 50",
+            "\t\t\t#20261020_kpopmodder: Announce the repeatable emergency shipbuilding decision unlocked by Vision 1950.",
+            "\t\t\tunlock_decision_tooltip = HOK_KOR_enact_emergency_special_shipbuilding",
+            "\t\t}",
+            "\t}",
+            "\t#Focus for Jeju Naval Base"
+          ]
+        }
+      ],
+      "output_sha256": "635A56041182DB8E4782BE485238BD2B14CCE2D344898BD6E21DF2AD73A574C6"
+    },
+    "common/ideas/HOK_KOR_emergency_shipbuilding.txt": {
+      "sha256": "EAF09A20AF56F0B48FCAC0B58960786FD80230DCDEEBA62392659C53429CA414",
+      "size": 993,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/runtime/common/ideas/HOK_KOR_emergency_shipbuilding.txt",
+      "classification": "ADD",
+      "output_sha256": "EAF09A20AF56F0B48FCAC0B58960786FD80230DCDEEBA62392659C53429CA414"
+    },
+    "interface/HOK_KOR_emergency_shipbuilding_icons.gfx": {
+      "sha256": "0A5E3D2674418DC48634AB1683F96066DD83225EB22C85EDA1F2979AA3A96ED9",
+      "size": 490,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/runtime/interface/HOK_KOR_emergency_shipbuilding_icons.gfx",
+      "classification": "ADD",
+      "output_sha256": "0A5E3D2674418DC48634AB1683F96066DD83225EB22C85EDA1F2979AA3A96ED9"
+    },
+    "localisation/english/HOK_KOR_emergency_shipbuilding_l_english.yml": {
+      "sha256": "970ACF0C23946C526F8056ED3D7F1D40EFAFBFF5732CA4F560E92A9F04F4BB27",
+      "size": 1494,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/runtime/localisation/english/HOK_KOR_emergency_shipbuilding_l_english.yml",
+      "classification": "ADD",
+      "output_sha256": "B795BA7525E9BF264C6C0027D49378877C6F65DFEA30BA76986343CABC418D20"
+    },
+    "localisation/korean/HOK_KOR_emergency_shipbuilding_l_korean.yml": {
+      "sha256": "9F4CDA0625DC19E16FA9B79DCAEE6DF06540D67755A5320097DF571390913AB3",
+      "size": 1493,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/runtime/localisation/korean/HOK_KOR_emergency_shipbuilding_l_korean.yml",
+      "classification": "ADD",
+      "output_sha256": "9F4CDA0625DC19E16FA9B79DCAEE6DF06540D67755A5320097DF571390913AB3"
+    }
+  },
+  "runtime_assets": {
+    "gfx/interface/decisions/HOK_KOR/emergency_shipbuilding/emergency_special_shipbuilding.dds": {
+      "sha256": "383CFE8E1552ECA4EB6621535E3B3DA89984A414F3E00AD2F63C5F2FED1FE350",
+      "size": 4224,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/runtime/gfx/interface/decisions/HOK_KOR/emergency_shipbuilding/emergency_special_shipbuilding.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "383CFE8E1552ECA4EB6621535E3B3DA89984A414F3E00AD2F63C5F2FED1FE350"
+    },
+    "gfx/interface/ideas/HOK_KOR/emergency_special_shipbuilding.dds": {
+      "sha256": "F7A33FD43EEEADCEEFF2ED8F32D6B6B1DAE97B8482FD1C9E7A0D97DA724A1B9B",
+      "size": 16448,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/runtime/gfx/interface/ideas/HOK_KOR/emergency_special_shipbuilding.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "F7A33FD43EEEADCEEFF2ED8F32D6B6B1DAE97B8482FD1C9E7A0D97DA724A1B9B"
+    }
+  },
+  "documentation": {
+    "README.md": {
+      "sha256": "FF5C8463BCAF348D1AF023E2D4D0406A816CE38C7E5E7830D55E6B197C6E2CAB",
+      "size": 10614,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/documents/README.md",
+      "classification": "ADD"
+    },
+    "docs/HOK_KOREAN_EMERGENCY_SHIPBUILDING_ASSET_CREDITS.md": {
+      "sha256": "FF2749AA4479D518EDBBCFC072A15C9487EA2D06522EDD7FE40ACFE92ED93C97",
+      "size": 6448,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/documents/docs/HOK_KOREAN_EMERGENCY_SHIPBUILDING_ASSET_CREDITS.md",
+      "classification": "ADD"
+    },
+    "docs/HOK_KOREAN_VISION_1950_EMERGENCY_SHIPBUILDING_PLAN.md": {
+      "sha256": "CFA8D2D12F9B47F56C5683C7215679D365BFF50F32348BAF088ED2E1E877F113",
+      "size": 12808,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/documents/docs/HOK_KOREAN_VISION_1950_EMERGENCY_SHIPBUILDING_PLAN.md",
+      "classification": "ADD"
+    },
+    "docs/assets/korean-emergency-shipbuilding/emergency_special_shipbuilding_decision_original.png": {
+      "sha256": "7A8C56023EE44AB988F59E62D23063BEA2A3507A58FFF2EFA09F7D6BB69F6E14",
+      "size": 2225745,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/documents/docs/assets/korean-emergency-shipbuilding/emergency_special_shipbuilding_decision_original.png",
+      "classification": "ADD"
+    },
+    "docs/assets/korean-emergency-shipbuilding/emergency_special_shipbuilding_spirit_original.png": {
+      "sha256": "B81195035FF28BEC9DAEEE3F7C573465412EC13CBFAC4A5F7BA4C56B51038B7E",
+      "size": 2666405,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/documents/docs/assets/korean-emergency-shipbuilding/emergency_special_shipbuilding_spirit_original.png",
+      "classification": "ADD"
+    },
+    "docs/assets/korean-emergency-shipbuilding/generation-record.json": {
+      "sha256": "E381B2A4744DED561A5D1FF7C842FAB84081C2053292BD836B91DFF0147E1FAA",
+      "size": 4184,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/documents/docs/assets/korean-emergency-shipbuilding/generation-record.json",
+      "classification": "ADD"
+    },
+    "docs/data/HOK_KOREAN_EMERGENCY_SHIPBUILDING_ICON_MANIFEST.json": {
+      "sha256": "4D0813132949FA5DB00EEB0B9B033BBCC9D5BC0FD3CB0D039954AF240905568D",
+      "size": 9723,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/documents/docs/data/HOK_KOREAN_EMERGENCY_SHIPBUILDING_ICON_MANIFEST.json",
+      "classification": "ADD"
+    },
+    "docs/incidents/2026-10-20-korean-emergency-shipbuilding.md": {
+      "sha256": "0B8CFFB1A329CA662BF3EE1C52721335643075EADDEDB3B81A5D00B0FC974D60",
+      "size": 23113,
+      "snapshot_path": "docs/upstream/hok-emergency-shipbuilding-20261020/documents/docs/incidents/2026-10-20-korean-emergency-shipbuilding.md",
+      "classification": "ADD"
+    }
+  },
+  "english_values": {
+    "HOK_KOR_enact_emergency_special_shipbuilding": "Launch the Emergency Special Shipbuilding Programme",
+    "HOK_KOR_enact_emergency_special_shipbuilding_desc": "We cannot build an ocean-going fleet while our slipways stand empty. We shall launch an emergency special shipbuilding programme so that the navy and shipyards coordinate deliveries of steel and engines, and concentrate skilled workers and dock capacity on building ships. From the yards constructing warships to the convoys that carry supplies, we shall accelerate the work needed to fulfil Vision 1950.\\n\\nSpends 150 Political Power to gain the §YEmergency Special Shipbuilding Programme§! national spirit for 180 days. It cannot be launched again while active. Once it expires, it can be launched again without limit for the same cost, with no additional waiting period.",
+    "HOK_KOR_emergency_special_shipbuilding": "Emergency Special Shipbuilding Programme",
+    "HOK_KOR_emergency_special_shipbuilding_desc": "The fleet the navy needs begins on the slipways. We are coordinating deliveries and concentrating skilled workers so that hulls waiting for steel plate and docks waiting for engines can make progress together. Warships, support vessels and the convoys needed to carry the fleet's supplies will be built under one emergency programme, hastening the fulfilment of Vision 1950."
+  },
+  "preserved_historical_locks": {
+    "tools/hok_civic_update_lock.json": "ED693575051D42F209497003FB637E0DD8382992238C9FF9CD4B1FC907E2B725",
+    "tools/hok_english_translation_lock.json": "0A6E2FA9B49531A503A7845BBCD729D35658F74DA3DC3B1FBDC3414355587BC3",
+    "tools/hok_focus_prerequisite_update_lock.json": "D389AD58C1A164B7500B8F33E6E295F8A99C95A519401AAD372E95732501C242",
+    "tools/hok_focus_tooltip_update_lock.json": "F517E2BF2D469A216928279EFF35CB71F7B5D5C84C05C968D3E53736F7C6C680",
+    "tools/hok_icon_lock.json": "DBB2A37CAE0DB55171C393CDFDA3F24E9B09B65CEF224E81593310A9620C59A3",
+    "tools/hok_localisation_update_lock.json": "4F6084926CE5B9888B436D8A028D4F15F8DCEDA5186EBF3C5858FD22947D1E0A",
+    "tools/hok_material_cycle_lock.json": "3952BBEE107B7293282378739338636AFA77DEB54473D3DF56379A42F308B13B",
+    "tools/hok_policy_update_lock.json": "57746F8E23CD9EDBF00089805F63969F6D7EF433689073A2B3AE6BAE7BDCAB20",
+    "tools/hok_prose_update_lock.json": "FA480E4921F3D97CB7B2380A9A17D6D2A0E3C847D23EE0943A18C4FB001D3809",
+    "tools/hok_royal_update_lock.json": "51D24C03F63F3C0B01D88EFE606D0C620A6682449370309250F6822651ED4DC5",
+    "tools/hok_second_wave_lock.json": "FCBF178914F5D88894A3CDFB686E45D7E63DFFA6081113B58E0D415D152DE48D",
+    "tools/hok_source_lock.json": "436B730E92D58A33FBBBB913E064C3A0D6A904D069F61D8CDBE38DCCB28FC94B"
+  },
+  "preserved_historical_lock_lf_sha256": {
+    "tools/hok_civic_update_lock.json": "ED693575051D42F209497003FB637E0DD8382992238C9FF9CD4B1FC907E2B725",
+    "tools/hok_english_translation_lock.json": "DF3646B4DCA33127FEC07661BEFF9983501C9B92D7D5ED090D939F110B131611",
+    "tools/hok_focus_prerequisite_update_lock.json": "D389AD58C1A164B7500B8F33E6E295F8A99C95A519401AAD372E95732501C242",
+    "tools/hok_focus_tooltip_update_lock.json": "F517E2BF2D469A216928279EFF35CB71F7B5D5C84C05C968D3E53736F7C6C680",
+    "tools/hok_icon_lock.json": "0CA9321B95419716DB343A57D891C55A660E56FECCD05E44AB5F5F17DFC7FC6F",
+    "tools/hok_localisation_update_lock.json": "4F6084926CE5B9888B436D8A028D4F15F8DCEDA5186EBF3C5858FD22947D1E0A",
+    "tools/hok_material_cycle_lock.json": "3952BBEE107B7293282378739338636AFA77DEB54473D3DF56379A42F308B13B",
+    "tools/hok_policy_update_lock.json": "57746F8E23CD9EDBF00089805F63969F6D7EF433689073A2B3AE6BAE7BDCAB20",
+    "tools/hok_prose_update_lock.json": "FA480E4921F3D97CB7B2380A9A17D6D2A0E3C847D23EE0943A18C4FB001D3809",
+    "tools/hok_royal_update_lock.json": "51D24C03F63F3C0B01D88EFE606D0C620A6682449370309250F6822651ED4DC5",
+    "tools/hok_second_wave_lock.json": "FCBF178914F5D88894A3CDFB686E45D7E63DFFA6081113B58E0D415D152DE48D",
+    "tools/hok_source_lock.json": "436B730E92D58A33FBBBB913E064C3A0D6A904D069F61D8CDBE38DCCB28FC94B"
+  }
+}

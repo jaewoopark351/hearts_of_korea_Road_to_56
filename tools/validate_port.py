@@ -38,9 +38,11 @@ GENERATOR_CHECKS = (
     ("Korean second-wave contracts", "check_korean_second_wave.py", "--check"),
     #20261012_kpopmodder: Validate the new civic layer independently of unrelated historical preservation failures.
     ("Korean civic contracts", "check_korean_second_wave.py", "--civic-check"),
+    #20261020_kpopmodder: Check the temporary shipbuilding policy and deliberate permanent output increase separately.
+    ("Emergency shipbuilding contracts", "check_korean_second_wave.py", "--shipbuilding-check"),
     # [2026-09-23]_kpopmodder: Include the selected second-wave files and their immutable provenance.
     #20261003_kpopmodder: Include the six reviewed material-cycle additions in the provenance gate.
-    ("1,446-file integration manifest", "build_integration_manifest.py", "--check"),
+    ("1,452-file integration manifest", "build_integration_manifest.py", "--check"),
 )
 
 SCRIPT_SUFFIXES = {".txt", ".gfx", ".asset", ".gui"}
