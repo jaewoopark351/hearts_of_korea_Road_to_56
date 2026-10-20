@@ -1,0 +1,11 @@
+﻿l_english:
+#20260921_kpopmodder: Name eight sector shortcuts for the spacious Korean focus layout.
+#20260921_kpopmodder: Name shortcuts for the first Korean focus expansion.
+ HOK_KOR_industry_expansion_shortcut:0 "Industry and Education"
+ HOK_KOR_military_expansion_shortcut:0 "Army, Navy and Air Force"
+ HOK_KOR_democratic_expansion_shortcut:0 "Democratic Domestic Policy"
+ HOK_KOR_manchuria_shortcut:0 "Manchurian Development"
+ HOK_KOR_communist_shortcut:0 "Communism"
+ HOK_KOR_union_shortcut:0 "Asian Union and Diplomacy"
+ HOK_KOR_nrsc_shortcut:0 "National Salvation Army"
+ HOK_KOR_royal_shortcut:0 "Imperial House and Monarchism"

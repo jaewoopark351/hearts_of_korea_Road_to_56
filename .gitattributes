@@ -16,9 +16,14 @@ docs/upstream/hok-second-wave-be5fb40/** -text
 docs/upstream/hok-policy-update-20260923/** -text
 docs/upstream/hok-material-cycle-20261003/** -text
 docs/upstream/hok-prose-update-20261003/** -text
+#20261020_kpopmodder: Preserve both immutable English Git blobs and mixed-ending historical translation inputs.
+docs/upstream/hok-english-20261020/** -text
+tools/hok_english_translation_lock.json text eol=lf
 docs/audits/2026-09-06-production-file-classification.csv text eol=lf
 
 # Generated outputs must retain the exact bytes their owners reproduce.
+#20261020_kpopmodder: Keep generated English CRLF outputs portable; the explicit LF exceptions below retain precedence.
+localisation/english/** text eol=crlf
 common/countries/zz_hok_rt56_colors.txt text eol=lf
 common/countries/zz_hok_rt56_cosmetic.txt text eol=lf
 common/decisions/HOK_KOR_democratic_expansion.txt text eol=lf

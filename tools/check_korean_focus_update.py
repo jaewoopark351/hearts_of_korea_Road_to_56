@@ -19,7 +19,7 @@ from pathlib import Path
 
 from build_rt56_map import PROVINCE_ID_MAP, STATE_ID_MAP
 from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
-from source_snapshot import FOCUS_UPDATE_PATHS, policy_update_lock, read_policy_source, read_source_file
+from source_snapshot import FOCUS_UPDATE_PATHS, policy_update_lock, read_policy_source, read_source_file, remove_english_translation
 from validate_port import ROOT, RT56_ROOT, VANILLA_ROOT, localisation_keys, mask_comments, matching_brace
 
 
@@ -634,7 +634,9 @@ def check_reference_closure(focuses: dict[str, Block], added: set[str], ideas: d
             require(raw.startswith(b"\xef\xbb\xbf"), f"new localisation lacks BOM: {path}")
             lines = raw.decode("utf-8-sig").splitlines()
             require(lines[0].strip() == f"l_{locale}:", f"new localisation header changed: {path}")
-            payloads.append(lines[1:])
+            #20261020_kpopmodder: Preserve the original paired-body contract beneath the exact pinned English translation.
+            historical = remove_english_translation(path.relative_to(ROOT).as_posix(), raw)
+            payloads.append(historical.decode("utf-8-sig").splitlines()[1:])
         require(payloads[0] == payloads[1], f"paired HOK Korean text diverges: {part}")
     required_sprites = {scalar(focuses[identifier], "icon") for identifier in added}
     required_sprites |= {scalar(event, "picture") for event in events.values()}

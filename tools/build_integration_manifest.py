@@ -28,6 +28,7 @@ from source_snapshot import (
     focus_tooltip_update_lock, prerequisite_update_lock, remove_focus_prerequisite_update,
     royal_update_lock, remove_royal_update,
     CIVIC_UPDATE_MODIFIED_PATHS, civic_update_lock, read_civic_source, remove_civic_update,
+    english_translation_lock, remove_english_translation,
 )
 
 
@@ -438,6 +439,15 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest().upper()
 
 
+#20261020_kpopmodder: Audit earlier integration layers against their frozen pre-translation bytes.
+def historical_output_bytes(relative: str) -> bytes:
+    return remove_english_translation(relative, (REPO_ROOT / relative).read_bytes())
+
+
+def historical_output_sha256(relative: str) -> str:
+    return hashlib.sha256(historical_output_bytes(relative)).hexdigest().upper()
+
+
 def donor_files() -> list[Path]:
     result = []
     for path in HOK_ROOT.rglob("*"):
@@ -479,7 +489,7 @@ def output_description(relative: str, rule: Rule) -> tuple[str, str, str]:
         path = REPO_ROOT / item
         if not path.is_file():
             raise RuntimeError(f"classified output is missing: {relative} -> {item}")
-        hashes.append(sha256(path))
+        hashes.append(historical_output_sha256(item))
     if rule.integration_class == "ASSET_COPY":
         donor_hash = sha256(HOK_ROOT / relative)
         if outputs != (relative,) or hashes != [donor_hash]:
@@ -606,7 +616,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         if relative in donor_relatives or (RT56_ROOT / relative).exists():
             raise RuntimeError(f"unreviewed artwork path collision: {relative}")
         payload = read_icon_source(relative)
-        if (REPO_ROOT / relative).read_bytes() != payload:
+        if historical_output_bytes(relative) != payload:
             raise RuntimeError(f"artwork bytes differ from reviewed source: {relative}")
         classification = "ASSET_COPY" if relative.endswith(".dds") else "ADD"
         counts[classification] += 1
@@ -618,7 +628,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "output_path": relative,
             "reason": "HOK 한국 중점·국민정신 전용 이미지/registry; 원본 소재·가공 크레딧 보존",
             "donor_sha256": record["sha256"],
-            "output_sha256": sha256(REPO_ROOT / relative),
+            "output_sha256": historical_output_sha256(relative),
             "donor_source_commit": "",
             "donor_source_blob": "",
             "donor_source_sha256": record["sha256"],
@@ -630,7 +640,8 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
 
     # [2026-09-23]_kpopmodder: Verify and attribute the selected 288 additions independently of the historical donor tree.
     from build_korean_focus_update import build_all
-    expected_outputs = build_all()
+    expected_outputs = {path: remove_english_translation(path, data)
+                        for path, data in build_all().items()}
     if (REPO_ROOT / SECOND_WAVE_FOCUS_PATH).read_bytes() != expected_outputs[Path(SECOND_WAVE_FOCUS_PATH)]:
         raise RuntimeError("second-wave focus output differs from the reviewed merge")
     for relative in SECOND_WAVE_RUNTIME_PATHS:
@@ -640,7 +651,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             raise RuntimeError(f"unreviewed second-wave path collision: {relative}")
         record = second_wave_records()[relative]
         read_second_wave_source(relative)
-        if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+        if historical_output_bytes(relative) != expected_outputs[Path(relative)]:
             raise RuntimeError(f"second-wave output differs from the reviewed merge: {relative}")
         classification = "ASSET_COPY" if relative.endswith(".dds") else "ADD"
         counts[classification] += 1
@@ -652,7 +663,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "output_path": relative,
             "reason": "HOK 한국 2차 확장 선택 이식; 지역 변환 ADR-0005, 공용 광택 vanilla, 원본 소재·가공 크레딧 보존",
             "donor_sha256": record["sha256"],
-            "output_sha256": sha256(REPO_ROOT / relative),
+            "output_sha256": historical_output_sha256(relative),
             "donor_source_commit": record["commit"],
             "donor_source_blob": record["blob"],
             "donor_source_sha256": record["sha256"],
@@ -668,7 +679,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         if len(matching) != 1 or (RT56_ROOT / relative).exists():
             raise RuntimeError(f"unreviewed policy integration collision: {relative}")
         read_policy_source(relative)
-        if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+        if historical_output_bytes(relative) != expected_outputs[Path(relative)]:
             raise RuntimeError(f"policy output differs from reviewed source merge: {relative}")
         row = matching[0]
         row.update({
@@ -694,7 +705,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         if row["integration_class"] != "ADD" or row["output_path"] != relative:
             raise RuntimeError(f"localisation overlay requires an existing ADD row: {relative}")
         read_localisation_source(relative)
-        if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+        if historical_output_bytes(relative) != expected_outputs[Path(relative)]:
             raise RuntimeError(f"localisation output differs from reviewed source merge: {relative}")
         row.update({
             "previous_source_commit": row["donor_source_commit"],
@@ -719,7 +730,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
                     raise RuntimeError(f"prose overlay lost its material-cycle source: {relative}")
             elif expected_outputs[Path(relative)] != payload:
                 raise RuntimeError(f"material-cycle output differs from its frozen source: {relative}")
-            if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+            if historical_output_bytes(relative) != expected_outputs[Path(relative)]:
                 raise RuntimeError(f"material-cycle final output differs from its reviewed merge: {relative}")
             matching = [row for row in rows if row["source_path"] == relative]
             classification = "ASSET_COPY" if group == "runtime_assets" else "ADD"
@@ -742,7 +753,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
                 }
                 rows.append(row)
             row.update({
-                "donor_sha256": record["sha256"], "output_sha256": sha256(REPO_ROOT / relative),
+                "donor_sha256": record["sha256"], "output_sha256": historical_output_sha256(relative),
                 "donor_source_commit": "", "donor_source_blob": "",
                 "donor_source_sha256": record["sha256"],
                 "donor_source_checkout": material["source_kind"],
@@ -767,13 +778,13 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         if row["integration_class"] != "ADD" or row["output_path"] != relative:
             raise RuntimeError(f"prose overlay requires an existing ADD row: {relative}")
         read_prose_source(relative)
-        if (REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]:
+        if historical_output_bytes(relative) != expected_outputs[Path(relative)]:
             raise RuntimeError(f"prose output differs from its frozen source/geography merge: {relative}")
         row.update({
             "previous_source_commit": row["donor_source_commit"],
             "previous_source_sha256": row["donor_source_sha256"],
             "donor_sha256": record["sha256"],
-            "output_sha256": sha256(REPO_ROOT / relative),
+            "output_sha256": historical_output_sha256(relative),
             "donor_source_commit": "", "donor_source_blob": "",
             "donor_source_sha256": record["sha256"],
             "donor_source_checkout": prose["source_kind"],
@@ -787,8 +798,8 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     if (len(matching) != 1 or matching[0]["integration_class"] != "OVERRIDE"
             or matching[0]["output_path"] != relative):
         raise RuntimeError(f"focus tooltip overlay requires its existing merge row: {relative}")
-    if ((REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]
-            or hashlib.sha256(remove_focus_prerequisite_update(remove_royal_update(relative, historical_civic_bytes(relative, (REPO_ROOT / relative).read_bytes())))).hexdigest().upper() != tooltip["output_sha256"]):
+    if (historical_output_bytes(relative) != expected_outputs[Path(relative)]
+            or hashlib.sha256(remove_focus_prerequisite_update(remove_royal_update(relative, historical_civic_bytes(relative, historical_output_bytes(relative))))).hexdigest().upper() != tooltip["output_sha256"]):
         raise RuntimeError(f"focus tooltip output differs from its reviewed source merge: {relative}")
     row = matching[0]
     row.update({
@@ -803,7 +814,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
 
     #20261010_kpopmodder: Attribute the six selected prerequisite changes while retaining the unchanged RT56 Korean base.
     prerequisites = prerequisite_update_lock()
-    if (relative != prerequisites["path"] or hashlib.sha256(remove_royal_update(relative, historical_civic_bytes(relative, (REPO_ROOT / relative).read_bytes()))).hexdigest().upper() != prerequisites["output_sha256"]
+    if (relative != prerequisites["path"] or hashlib.sha256(remove_royal_update(relative, historical_civic_bytes(relative, historical_output_bytes(relative)))).hexdigest().upper() != prerequisites["output_sha256"]
             or row["rt56_base_sha256"] != prerequisites["rt56_base_sha256"]):
         raise RuntimeError("focus prerequisite output or Korean host base differs from its reviewed merge")
     row.update({
@@ -827,10 +838,10 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
                 or matching[0]["output_path"] != relative):
             raise RuntimeError(f"royal update requires its existing integration row: {relative}")
         entry = matching[0]
-        if ((REPO_ROOT / relative).read_bytes() != expected_outputs[Path(relative)]
-                or hashlib.sha256(historical_civic_bytes(relative, (REPO_ROOT / relative).read_bytes())).hexdigest().upper() != record["output_sha256"]):
+        if (historical_output_bytes(relative) != expected_outputs[Path(relative)]
+                or hashlib.sha256(historical_civic_bytes(relative, historical_output_bytes(relative))).hexdigest().upper() != record["output_sha256"]):
             raise RuntimeError(f"royal output differs from its reviewed source merge: {relative}")
-        remove_royal_update(relative, historical_civic_bytes(relative, (REPO_ROOT / relative).read_bytes()))
+        remove_royal_update(relative, historical_civic_bytes(relative, historical_output_bytes(relative)))
         if record["kind"] == "focus" and entry["rt56_base_sha256"] != royal["rt56_base_sha256"]:
             raise RuntimeError("royal focus update changed the recorded Korean host base")
         if record["kind"] == "idea" and (RT56_ROOT / relative).exists():
@@ -852,7 +863,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     for group in ("runtime_text", "runtime_assets"):
         for relative, record in civic[group].items():
             payload = read_civic_source(relative)
-            current = (REPO_ROOT / relative).read_bytes()
+            current = historical_output_bytes(relative)
             if current != expected_outputs[Path(relative)] or hashlib.sha256(current).hexdigest().upper() != record["output_sha256"]:
                 raise RuntimeError(f"civic output differs from its reviewed source merge: {relative}")
             matching = [entry for entry in rows if entry["source_path"] == relative]
@@ -885,6 +896,39 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     if len(rows) != 1446:
         raise RuntimeError(f"unexpected civic integration inventory: {len(rows)}")
 
+    #20261020_kpopmodder: Attribute the English overlay without replacing any earlier HOK/RT56 provenance.
+    translation = english_translation_lock()
+    if (translation["source_commit"] != "6f501200f723245636ecf3b246e0d3e74c490422"
+            or len(translation["runtime_text"]) != 36):
+        raise RuntimeError("unexpected English translation integration inventory or source revision")
+    for relative, record in translation["runtime_text"].items():
+        matching = [row for row in rows if row["output_path"] == relative]
+        if len(matching) != 1:
+            raise RuntimeError(f"English translation requires its existing integration row: {relative}")
+        current = (REPO_ROOT / relative).read_bytes()
+        previous = remove_english_translation(relative, current)
+        previous_hash = hashlib.sha256(previous).hexdigest().upper()
+        current_hash = hashlib.sha256(current).hexdigest().upper()
+        if (previous_hash != record["previous_output_sha256"]
+                or current_hash != record["output_sha256"]):
+            raise RuntimeError(f"English translation output differs from its reviewed overlay: {relative}")
+        row = matching[0]
+        if row["output_sha256"] != previous_hash:
+            raise RuntimeError(f"English translation lost its earlier integration output: {relative}")
+        row.update({
+            "output_sha256": current_hash,
+            "english_translation_source_commit": translation["source_commit"],
+            "english_translation_source_relative": record["source_relative"],
+            "english_translation_source_blob": record["source_blob"],
+            "english_translation_source_sha256": record["source_sha256"],
+            "english_translation_source_snapshot_path": record["snapshot_path"],
+            "english_translation_previous_output_sha256": previous_hash,
+            "english_translation_previous_snapshot_path": record["previous_snapshot_path"],
+            "english_translation_classification": record["classification"],
+            "english_translation_lock": "tools/hok_english_translation_lock.json",
+        })
+        row["reason"] += "; 2026-10-20 standard HOK British English translation 6f50120 selectively adapted to RT56 keys, geography and retained content; tools/hok_english_translation_lock.json; original translation and earlier HOK/RT56 provenance retained"
+
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(
         stream,
@@ -907,6 +951,15 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "rt56_base_sha256",
             "previous_source_commit",
             "previous_source_sha256",
+            "english_translation_source_commit",
+            "english_translation_source_relative",
+            "english_translation_source_blob",
+            "english_translation_source_sha256",
+            "english_translation_source_snapshot_path",
+            "english_translation_previous_output_sha256",
+            "english_translation_previous_snapshot_path",
+            "english_translation_classification",
+            "english_translation_lock",
         ),
         lineterminator="\n",
     )

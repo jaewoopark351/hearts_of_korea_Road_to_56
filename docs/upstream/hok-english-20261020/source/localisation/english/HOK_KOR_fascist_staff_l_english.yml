@@ -1,0 +1,20 @@
+﻿l_english:
+#20261003_kpopmodder: Apply varied HOI4 fascist and communist voices to description narrative; preserve effects and explicit rules.
+#20261003_kpopmodder: Explain new decision and spirit policies through concrete circumstances; preserve gameplay and lifecycle rules.
+#20260926_kpopmodder: Use escaped ASCII dialogue quotes and compact decision UI text; preserve gameplay and explicit lifecycle warnings.
+#20260926_kpopmodder: Compact new focus descriptions for the fixed-height UI; preserve gameplay and non-focus localisation.
+#20260926_kpopmodder: Restore fictional NRSC command and conscription black comedy while preserving all gameplay rules.
+#20260925_kpopmodder: Rewrite focus, decision and event prose with grounded voices; preserve keys, gameplay rules and paired Korean text.
+#20260922_kpopmodder: Describe parallel fascist staff policies and their matching national-spirit upgrades.
+ HOK_KOR_nrsc_staff_registry:0 "Reorganise Staff Appointments"
+ HOK_KOR_nrsc_staff_registry_desc:0 "\"Did he volunteer for this post?\"\n\"No. We haven't notified him yet.\"\nThe National Salvation Army's staff register shall record specialisms and responsibility for handovers."
+ HOK_KOR_nrsc_operations_directorate:0 "Operations Planning Directorate"
+ HOK_KOR_nrsc_operations_directorate_desc:0 "\"Will we be ready by then?\"\n\"Your orders are to plan for us to be ready.\"\nWe shall add operational planning to the existing staff system, increasing preparation speed and the maximum planning bonus."
+ HOK_KOR_nrsc_field_report_system:0 "Field Reporting System"
+ HOK_KOR_nrsc_field_report_system_desc:0 "\"Where is the report now?\" \"On the divisional commander's desk.\"\n\"I meant the unit's position!\"\nWe shall standardise communications and reporting. This can be pursued independently of the Operations Planning Directorate."
+ HOK_KOR_nrsc_staff_regulations:0 "Staff Regulations"
+ HOK_KOR_nrsc_staff_regulations_desc:0 "\"Who's responsible if he's absent?\"\n\"The person listed below him. Your name's there too.\"\nWe shall bring operational planning and field reporting together to strengthen the existing planning benefits."
+ HOK_KOR_nrsc_staff_administration_1:0 "Staff Administration System I"
+ HOK_KOR_nrsc_staff_administration_1_desc:0 "There is no reason to doubt the National Salvation Army's victory. Precisely which units must prepare what before that victory, however, deserves a little more attention. The Operations Planning Directorate assigns responsibilities, sets preparation schedules and gathers information to review plans. A staff officer may leave his desk, but his responsibility to hand over his duties remains. Faith in the motherland alone will not produce an operation at an empty desk.\n\nApplies alongside existing military command bodies and other staff policies. Removed if the government ceases to be fascist."
+ HOK_KOR_nrsc_staff_administration_2:0 "Staff Administration System II"
+ HOK_KOR_nrsc_staff_administration_2_desc:0 "On the desk, the entire army is advancing in perfect order. Field reports suggest we should first check where several units actually are. For the dignity of a unified army, the National Salvation Army has decided to unify the map with reality first. Common regulations bring units' readiness and positions into the plans, keeping reviews and handovers going even when personnel change. Our vision of victory now includes preparations to get there.\n\nReplaces Staff Administration System I and strengthens its existing planning benefits. Removed if the government ceases to be fascist."

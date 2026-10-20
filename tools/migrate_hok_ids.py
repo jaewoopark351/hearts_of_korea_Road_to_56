@@ -13,7 +13,7 @@ import hashlib
 import re
 import sys
 from pathlib import Path
-from source_snapshot import FOCUS_UPDATE_PATHS
+from source_snapshot import FOCUS_UPDATE_PATHS, apply_english_translation
 
 from build_rt56_map import (
     HOK_ROOT,
@@ -1007,7 +1007,11 @@ def source_targets() -> list[tuple[str, bytes, bytes]]:
                 migrated = migrated.replace(b"STATE_1088", b"STATE_1147")
             migrated = apply_post_migration_fixes(relative, migrated)
             if migrated != original:
-                targets.append((relative, original, migrated))
+                #20261020_kpopmodder: Match the archived runtime CRLF convention before the strict historical-input hash check.
+                if relative.startswith("localisation/english/"):
+                    migrated = migrated.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+                #20261020_kpopmodder: ID-migration rebuilds must retain the exact approved English output.
+                targets.append((relative, original, apply_english_translation(relative, migrated)))
     return sorted(targets)
 
 

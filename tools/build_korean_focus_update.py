@@ -27,6 +27,7 @@ from source_snapshot import (
     prerequisite_update_lock, apply_focus_prerequisite_update,
     royal_update_lock, apply_royal_update,
     CIVIC_UPDATE_RUNTIME_PATHS, civic_update_lock, read_civic_source, apply_civic_update,
+    english_translation_lock, apply_english_translation,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -82,7 +83,8 @@ ICON_ASSET_PATHS = tuple(Path(relative) for relative in icon_lock()["runtime_ass
 #20261003_kpopmodder: Add only the reviewed material-cycle module to the existing generated allowlist.
 OUTPUT_PATHS = tuple(dict.fromkeys(GAMEPLAY_PATHS + ICON_ASSET_PATHS + tuple(Path(p) for p in SECOND_WAVE_RUNTIME_PATHS)
                                  + tuple(Path(p) for p in MATERIAL_CYCLE_RUNTIME_PATHS)
-                                 + tuple(Path(p) for p in CIVIC_UPDATE_RUNTIME_PATHS)))
+                                 + tuple(Path(p) for p in CIVIC_UPDATE_RUNTIME_PATHS)
+                                 + tuple(Path(p) for p in english_translation_lock()["runtime_text"])))
 SOURCE_COMMITS = {
     relative: AI_COMMIT if relative.parts[1] == "ai_strategy_plans" else FOCUS_COMMIT
     for relative in GAMEPLAY_PATHS
@@ -145,6 +147,11 @@ ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     Path(relative): record["previous_output_sha256"]
     for relative, record in civic_update_lock()["runtime_text"].items()
     if "previous_output_sha256" in record
+})
+#20261020_kpopmodder: Accept only the exact existing English-channel files before their reviewed translation.
+ACCEPTED_PRIOR_OUTPUT_HASHES.update({
+    Path(relative): record["previous_output_sha256"]
+    for relative, record in english_translation_lock()["runtime_text"].items()
 })
 CHECKOUT_RESTORATION_HASHES = {
     Path(relative): record["previous_output_sha256"]
@@ -397,6 +404,13 @@ def build_all() -> dict[Path, bytes]:
                 outputs[relative] = data
     verify_geography_inputs()
     verify_inputs()
+    #20261020_kpopmodder: Apply English after every historical gameplay/prose merge; preserve the Korean channel byte-for-byte.
+    for name, record in english_translation_lock()["runtime_text"].items():
+        relative = Path(name)
+        previous = outputs.get(relative)
+        if previous is None:
+            previous = (REPO_ROOT / record["previous_snapshot_path"]).read_bytes()
+        outputs[relative] = apply_english_translation(name, previous)
     return outputs
 
 

@@ -9,6 +9,7 @@ import re
 from pathlib import Path
 
 from build_rt56_map import HOK_ROOT, REPO_ROOT
+from source_snapshot import apply_english_translation
 
 
 EXPECTED_SHA256 = {
@@ -503,7 +504,7 @@ def build_event_localisation(relative: str) -> bytes:
 
 def outputs() -> dict[str, bytes]:
     verify_sources()
-    return {
+    generated = {
         "common/game_rules/hok_game_rules.txt": build_game_rules(),
         "common/country_leader/00_hok_traits.txt": build_country_leader_traits(),
         "events/NewsEvents_KOR.txt": build_news_events(),
@@ -544,6 +545,11 @@ def outputs() -> dict[str, bytes]:
         "localisation/korean/korea_event_l_korean.yml": build_event_localisation(
             "localisation/korean/korea_event_l_korean.yml"
         ),
+    }
+    #20261020_kpopmodder: Preserve the pinned English layer after the historical Korea-only pruning.
+    return {
+        relative: apply_english_translation(relative, data)
+        for relative, data in generated.items()
     }
 
 

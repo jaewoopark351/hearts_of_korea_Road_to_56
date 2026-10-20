@@ -1174,14 +1174,156 @@ SECOND_WAVE_DOCUMENTATION_PATHS = tuple(second_wave_lock()["documentation"])
 PROSE_UPDATE_RUNTIME_PATHS = tuple(prose_update_lock()["runtime_text"])
 
 
+#20261020_kpopmodder: Reuse the reviewed English translation only for the port's existing keys and RT56-specific wording.
+ENGLISH_TRANSLATION_LOCK_PATH = Path(__file__).with_name("hok_english_translation_lock.json")
+ENGLISH_TRANSLATION_ARCHIVE = REPO_ROOT / "docs/upstream/hok-english-20261020"
+ENGLISH_ROW = re.compile(r'(?m)^([ \t]*([A-Za-z0-9_.-]+):(\d*)[ \t]+")((?:[^"\\\r\n]|\\[^\r\n])*)("[ \t]*(?:#[^\r\n]*)?\r?$)')
+ENGLISH_TOKENS = re.compile(r'\$[^$\r\n]+\$|\[(?:\?|[A-Z][A-Za-z0-9_]*\.|Get)[^\]\r\n]+\]|§.|£[A-Za-z0-9_]+|@[A-Z][A-Z0-9]{2}')
+
+
+@lru_cache(maxsize=1)
+def english_translation_lock() -> dict:
+    lock = json.loads(ENGLISH_TRANSLATION_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_commit"], lock["compatibility_base_commit"],
+            len(lock["source_files"]), len(lock["runtime_text"]), len(lock["adapted_values"])) != (
+        1, "6f501200f723245636ecf3b246e0d3e74c490422", "bf2b997f9d7ddc1710533e9700b641f2fb9e8ce0", 37, 36, 52
+    ):
+        raise ValueError("unreviewed English translation source or inventory")
+    return lock
+
+
+def _english_archive(relative: str, digest: str) -> bytes:
+    path = (REPO_ROOT / relative).resolve()
+    path.relative_to(ENGLISH_TRANSLATION_ARCHIVE.resolve())
+    data = path.read_bytes()
+    if sha256(data) != digest:
+        raise ValueError(f"English translation archive drift: {relative}")
+    return data
+
+
+def english_entries(data: bytes) -> dict[str, tuple[str, str]]:
+    text = data.decode("utf-8-sig")
+    rows = list(ENGLISH_ROW.finditer(text))
+    entries = {row[2]: (row[3], row[4]) for row in rows}
+    if len(rows) != len(entries):
+        raise ValueError("duplicate English translation key")
+    for line in text.splitlines()[1:]:
+        if line.strip() and not line.lstrip().startswith("#") and ENGLISH_ROW.fullmatch(line) is None:
+            raise ValueError(f"unparsed localisation line: {line[:100]}")
+    return entries
+
+
+@lru_cache(maxsize=1)
+def _english_source_values() -> dict[str, tuple[str, str]]:
+    values = {}
+    for relative, record in english_translation_lock()["source_files"].items():
+        data = _english_archive(record["snapshot_path"], record["sha256"])
+        blob = hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+        if blob != record["blob"] or not data.startswith(b"\xef\xbb\xbfl_english:"):
+            raise ValueError(f"English immutable Git blob/header drift: {relative}")
+        entries = english_entries(data)
+        if values.keys() & entries.keys():
+            raise ValueError(f"English source key collision: {relative}")
+        values.update(entries)
+    if len(values) != 2971:
+        raise ValueError("English source key inventory drift")
+    return values
+
+
+@lru_cache(maxsize=None)
+def english_translation_payload(relative: str) -> bytes:
+    lock = english_translation_lock()
+    record = lock["runtime_text"][relative]
+    previous = _english_archive(record["previous_snapshot_path"], record["previous_output_sha256"])
+    sources = _english_source_values()
+    def translate(row: re.Match) -> str:
+        key, version = row[2], row[3]
+        if key in lock["adapted_values"]:
+            value = lock["adapted_values"][key]
+        else:
+            source_version, value = sources[key]
+            if source_version != version:
+                raise ValueError(f"English key version drift: {relative}/{key}")
+        #20261020_kpopmodder: Drop the one inherited trailing space on this translated line so the new diff passes whitespace checks.
+        suffix = re.sub(r'[ \t]+(?=\r?$)', '', row[5]) if key == "KOR_anti_air_equipment_2" else row[5]
+        return row[1] + value + suffix
+    output = ENGLISH_ROW.sub(translate, previous.decode("utf-8-sig")).encode("utf-8-sig")
+    if sha256(output) != record["output_sha256"]:
+        raise ValueError(f"English translation output drift: {relative}")
+    return output
+
+
+def apply_english_translation(relative: str, data: bytes) -> bytes:
+    relative = Path(relative).as_posix()
+    record = english_translation_lock()["runtime_text"].get(relative)
+    if record is None:
+        return data
+    if sha256(data) not in (record["previous_output_sha256"], record["output_sha256"]):
+        raise ValueError(f"unreviewed pre-English localisation output: {relative}")
+    return english_translation_payload(relative)
+
+
+def remove_english_translation(relative: str, data: bytes) -> bytes:
+    """Recover a byte-exact historical contract only after checking the final translation."""
+    relative = Path(relative).as_posix()
+    record = english_translation_lock()["runtime_text"].get(relative)
+    if record is None:
+        return data
+    if data != english_translation_payload(relative):
+        raise ValueError(f"English localisation differs from reviewed translation: {relative}")
+    return _english_archive(record["previous_snapshot_path"], record["previous_output_sha256"])
+
+
+def verify_english_translation() -> None:
+    from collections import Counter
+    lock = english_translation_lock()
+    source = _english_source_values()
+    expected_paths = set(lock["runtime_text"])
+    paths = {p.relative_to(REPO_ROOT).as_posix() for p in (REPO_ROOT / "localisation/english").rglob("*.yml")}
+    if paths != expected_paths:
+        raise ValueError("English output file inventory differs from the reviewed 36 paths")
+    keys, changed, added = set(), set(lock["changed_common_keys"]), set(lock["port_only_keys"])
+    if len(changed) != 25 or len(added) != 27 or changed & added or changed | added != lock["adapted_values"].keys():
+        raise ValueError("English RT56-specific translation allowlist drift")
+    for relative, record in lock["runtime_text"].items():
+        actual = (REPO_ROOT / relative).read_bytes()
+        remove_english_translation(relative, actual)
+        korean_path = relative.replace("/english/", "/korean/").replace("_l_english.yml", "_l_korean.yml")
+        korean = (REPO_ROOT / korean_path).read_bytes()
+        if sha256(korean) != lock["preserved_korean"][korean_path]:
+            raise ValueError(f"English import changed its Korean source: {korean_path}")
+        previous = _english_archive(record["previous_snapshot_path"], record["previous_output_sha256"])
+        english_rows, korean_rows = english_entries(actual), english_entries(korean)
+        if list(english_rows) != list(english_entries(previous)) or english_rows.keys() != korean_rows.keys():
+            raise ValueError(f"English import changed keys/order: {relative}")
+        if len(english_rows) != record["key_count"] or keys & english_rows.keys():
+            raise ValueError(f"English output key count/collision: {relative}")
+        keys.update(english_rows)
+        for key, (version, value) in english_rows.items():
+            kr_version, kr_value = korean_rows[key]
+            if version != kr_version or Counter(ENGLISH_TOKENS.findall(value)) != Counter(ENGLISH_TOKENS.findall(kr_value)):
+                raise ValueError(f"English protected token/version drift: {relative}/{key}")
+            if value.count(r"\n") != kr_value.count(r"\n") or re.search(r"[\uac00-\ud7a3]", value):
+                raise ValueError(f"English newline/untranslated Korean: {relative}/{key}")
+    if (len(keys), len(keys & source.keys()), len(keys - source.keys()), len(source.keys() - keys)) != (2743, 2716, 27, 255):
+        raise ValueError("English target/reuse/exclusion key inventory drift")
+    if keys - source.keys() != added or source.keys() - keys != set(lock["excluded_source_keys"]):
+        raise ValueError("English target contains an unreviewed source-only or missing port key")
+    print("PASS English translation: 36 files, 2743 keys; 2691 reused, 25 adapted, 27 port-only; 255 excluded; Korean bytes/tokens preserved")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
+    parser.add_argument("--english-check", action="store_true", help="check the pinned English import without rebuilding historical sources")
     parser.add_argument("--import-icons", action="store_true", help="materialize the reviewed artwork bytes without changing donor files")
     parser.add_argument("--import-second-wave", action="store_true", help="materialize only the reviewed second-wave Git inputs in a separate cache")
     parser.add_argument("--export-second-wave-docs", action="store_true", help="preserve the selected upstream specifications, icon manifests and credits byte-for-byte")
     parser.add_argument("--export-policy-docs", action="store_true", help="export the seven reviewed September 23 policy documents")
     args = parser.parse_args()
+    if args.english_check:
+        verify_english_translation()
+        return 0
     changed = ensure_source_snapshot(check_only=args.check)
     print(f"HOK source snapshot: 1014 base + 20 selected overlay = 1031 files; created {changed}")
     icon_changes = ensure_icon_snapshot(check_only=not args.import_icons or args.check)

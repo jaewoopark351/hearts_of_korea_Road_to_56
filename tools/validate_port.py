@@ -31,6 +31,8 @@ GENERATOR_CHECKS = (
     ("HOK ID migration", "migrate_hok_ids.py", "--list"),
     ("doctrine migration", "migrate_doctrines.py", "--check"),
     ("Korean focus update", "build_korean_focus_update.py", "--check"),
+    #20261020_kpopmodder: Enforce final English bytes, RT56-only keys and protected tokens independently of historical Korean contracts.
+    ("English translation import", "source_snapshot.py", "--english-check"),
     ("Korean expansion contracts", "check_korean_focus_update.py", "--check"),
     # [2026-09-23]_kpopmodder: Keep new policies, images, regions and mutation detection under a separate gate.
     ("Korean second-wave contracts", "check_korean_second_wave.py", "--check"),
@@ -372,7 +374,8 @@ def check_localisation(result: Validation) -> None:
     file_count = 0
     key_count = 0
     before = len(result.errors)
-    key_pattern = re.compile(r"^[ \t]*([^#\s][^:]*):[0-9]+(?:[ \t]+|$)")
+    #20261020_kpopmodder: Include the inherited versionless names in the English/Korean integrity and reference checks.
+    key_pattern = re.compile(r'^[ \t]*([^#\s][^:]*):[0-9]*[ \t]+"')
 
     for path in sorted(root.rglob("*.yml")):
         file_count += 1
@@ -429,7 +432,7 @@ def check_localisation(result: Validation) -> None:
 
 def localisation_keys(root: Path, locale: str) -> set[str]:
     keys: set[str] = set()
-    pattern = re.compile(r"^[ \t]*([^#\s][^:]*):[0-9]+(?:[ \t]+|$)")
+    pattern = re.compile(r'^[ \t]*([^#\s][^:]*):[0-9]*[ \t]+"')
     directory = root / "localisation" / locale
     if not directory.is_dir():
         return keys

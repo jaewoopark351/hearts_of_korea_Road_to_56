@@ -30,6 +30,7 @@ from source_snapshot import (
     prerequisite_update_lock, remove_focus_prerequisite_update,
     royal_update_lock, remove_royal_update,
     CIVIC_UPDATE_RUNTIME_PATHS, civic_update_lock, read_civic_source, remove_civic_update,
+    remove_english_translation,
 )
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
@@ -724,14 +725,16 @@ def check_localisation(payloads: dict[str, bytes], groups: dict[str, dict[str, B
     for relative, data in payloads.items():
         language = Path(relative).parts[1]
         expected = expected_payload(relative)
-        require(data == expected, f"localisation differs from immutable source/geography contract: {relative}")
+        #20261020_kpopmodder: The strict translation projection retains every historical source/geography byte assertion.
+        historical = remove_english_translation(relative, data)
+        require(historical == expected, f"localisation differs from immutable source/geography contract: {relative}")
         require(data.startswith(b"\xef\xbb\xbf" + f"l_{language}:".encode()), f"localisation BOM/header changed: {relative}")
         found = re.findall(r"(?m)^\s+([A-Za-z0-9_.-]+):\d*\s", data.decode("utf-8-sig"))
         require(len(found) == len(set(found)) and not keys[language] & set(found), f"duplicate new localisation: {relative}")
         keys[language].update(found)
         if language == "english":
             counterpart = relative.replace("/english/", "/korean/").replace("_l_english.yml", "_l_korean.yml")
-            require(counterpart in payloads and data.decode("utf-8-sig").splitlines()[1:] == payloads[counterpart].decode("utf-8-sig").splitlines()[1:], f"paired Korean-content localisation diverged: {relative}")
+            require(counterpart in payloads and historical.decode("utf-8-sig").splitlines()[1:] == remove_english_translation(counterpart, payloads[counterpart]).decode("utf-8-sig").splitlines()[1:], f"paired Korean-content localisation diverged: {relative}")
     required = added | set(groups["idea"]) | set(groups["decision"]) | set(groups["category"]) | set(groups["dynamic"])
     required |= {identifier + "_desc" for identifier in required}
     for language in keys:
@@ -1001,16 +1004,21 @@ def check_prose_update(payloads: dict[str, bytes] | None = None) -> None:
                 f"prose changed text, comments or formatting outside reviewed description values: {relative}")
         previous_values = {key: value for key, _, value in prose_entries(previous_output, relative)}
         actual = payloads[relative]
-        require(actual == apply_second_wave_geography(relative, source),
+        historical = remove_english_translation(relative, actual)
+        require(historical == apply_second_wave_geography(relative, source),
                 f"actual prose differs from frozen source/ADR-0005 region contract: {relative}")
-        actual_values = {key: value for key, _, value in prose_entries(actual, relative)}
+        actual_entries, historical_entries = prose_entries(actual, relative), prose_entries(historical, relative)
+        require([(key, version) for key, version, _ in actual_entries]
+                == [(key, version) for key, version, _ in historical_entries],
+                f"translation changed prose key/version/order: {relative}")
+        actual_values = {key: value for key, _, value in historical_entries}
         for key in PROSE_PROTECTED & previous_values.keys():
             require(actual_values[key] == previous_values[key], f"prose changed a protected existing description: {relative}/{key}")
         if language == "english":
             counterpart = relative.replace("/english/", "/korean/").replace("_l_english.yml", "_l_korean.yml")
             require(source.decode("utf-8-sig").splitlines()[1:] == read_prose_source(counterpart).decode("utf-8-sig").splitlines()[1:],
                     f"frozen prose language bodies diverged: {relative}")
-            require(actual.decode("utf-8-sig").splitlines()[1:] == payloads[counterpart].decode("utf-8-sig").splitlines()[1:],
+            require(historical.decode("utf-8-sig").splitlines()[1:] == remove_english_translation(counterpart, payloads[counterpart]).decode("utf-8-sig").splitlines()[1:],
                     f"actual prose language bodies diverged: {relative}")
     require(all(keys == allowed for keys in changed_by_language.values()) and len(allowed) == 124,
             "prose import must change exactly the same 124 permitted descriptions in both channels")
@@ -1096,6 +1104,8 @@ CIVIC_BUTTONS = tuple("HOK_KOR_" + suffix for suffix in ("support_chaebol", "sup
 
 
 def historical_civic_payload(relative: str, data: bytes) -> bytes:
+    #20261020_kpopmodder: Undo only the exact approved translation before checking older preservation contracts.
+    data = remove_english_translation(relative, data)
     record = civic_update_lock()["runtime_text"].get(relative, {})
     return remove_civic_update(relative, data) if "previous_output_sha256" in record else data
 
@@ -1139,6 +1149,7 @@ def check_civic_source(payloads: dict[str, bytes], documents: dict[str, Block]) 
             == {FOCUS_PATH, "common/decisions/KOR_decision.txt"}, "civic existing-file delta changed")
     expected_docs = {}
     for relative, data in payloads.items():
+        data = remove_english_translation(relative, data)
         require(hashlib.sha256(data).hexdigest().upper() == records[relative]["output_sha256"],
                 f"civic pinned output differs: {relative}")
         expected = civic_expected_payload(relative, data)
@@ -1147,7 +1158,8 @@ def check_civic_source(payloads: dict[str, bytes], documents: dict[str, Block]) 
             expected_docs[relative] = parse(expected.decode("utf-8-sig"))
     # Every historical generated output and the three separately shipped sources stay byte-exact.
     for relative, digest in {**lock["preserved_outputs"], **lock["preserved_runtime"]}.items():
-        require(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest().upper() == digest,
+        data = remove_english_translation(relative, (ROOT / relative).read_bytes())
+        require(hashlib.sha256(data).hexdigest().upper() == digest,
                 f"civic update changed an unselected output: {relative}")
     require(documents.keys() == expected_docs.keys(), "civic ordered script inventory changed")
     for relative, expected in expected_docs.items():
@@ -1428,6 +1440,8 @@ def run_civic_self_tests() -> None:
         rejects("ordered-AST-" + relative, lambda changed=changed: check_civic_source(payloads, changed))
     locale = "localisation/korean/HOK_KOR_civic_ui_l_korean.yml"
     rejects("locale-header", lambda: check_civic_presentation({**payloads, locale: payloads[locale][3:]}, current))
+    english = "localisation/english/HOK_KOR_civic_ui_l_english.yml"
+    rejects("english-output-drift", lambda: check_civic_source({**payloads, english: payloads[english] + b"# unexpected English mutation\n"}, current))
     asset = next(relative for relative in payloads if relative.endswith(".dds"))
     rejects("asset-source", lambda: check_civic_source({**payloads, asset: payloads[asset][:-1] + bytes([payloads[asset][-1] ^ 1])}, current))
     rejects("missing-path", lambda: check_civic_source({relative: data for relative, data in payloads.items() if relative != asset}, current))
@@ -1664,6 +1678,11 @@ def run_self_tests() -> None:
     first = next(iter(local))
     missing_key = {**local, first: local[first].split(b"\n", 1)[0] + b"\n"}
     rejects("missing one language key", lambda: check_localisation(missing_key, groups, added))
+    english = next(relative for relative in local if relative.startswith("localisation/english/"))
+    rejects("English translation drift", lambda: check_localisation({**local, english: local[english] + b"# unexpected English mutation\n"}, groups, added))
+    prose = {relative: (ROOT / relative).read_bytes() for relative in PROSE_PATHS}
+    english_prose = "localisation/english/HOK_KOR_industry_expansion_l_english.yml"
+    rejects("English prose translation drift", lambda: check_prose_update({**prose, english_prose: prose[english_prose] + b"# unexpected English mutation\n"}))
     rejects("DDS exact-case mismatch", lambda: exact_case("gfx/interface/goals/HOK_KOR/Missing.dds", {Path(path).as_posix() for path in SECOND_WAVE_ASSET_PATHS}))
     rejects("missing local DDS", lambda: check_assets(groups, added, {}))
     #20261003_kpopmodder: Reject lifecycle and preservation regressions using bounded in-memory material-cycle mutations.
