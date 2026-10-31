@@ -153,7 +153,9 @@ EXPLICIT: dict[str, Rule] = {
             "common/characters/zz_hok_rt56_kor_host_references.txt",
             "common/characters/MAN.txt",
         ),
-        "HOK 한국 인물·미모집 정책 유지; RT56 김창룡 정의 원본 복원 및 donor에 없는 RT56 MAN의 KOR 고문 고용 검사 두 곳만 조건부 character trigger로 병합",
+        #20261101_kpopmodder: Attribute the selected advisor trait update without replacing the merged character database or host glue.
+        "HOK 한국 인물·미모집 정책 유지; RT56 김창룡 정의 원본 복원 및 donor에 없는 RT56 MAN의 KOR 고문 고용 검사 두 곳만 조건부 character trigger로 병합; "
+        "2026-11-01 KOR_Ilhan_Yu: KOR_economist -> financial_expert; donor f79cebf working-tree common/characters/KOR.txt SHA256 EC8EEEC8BA2A3055BE8F01466353A0575330C87660CE90E0663A461838D8C2D8; docs/implementation/2026-11-01-ilhan-yu-financial-expert-port.md",
     ),
     "common/countries/colors.txt": Rule(
         "THREE_WAY_MERGE",
