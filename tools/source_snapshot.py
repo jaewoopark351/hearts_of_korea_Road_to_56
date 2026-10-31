@@ -1347,6 +1347,8 @@ def apply_feature_update(relative: str, data: bytes) -> bytes:
 
 def remove_feature_update(relative: str, data: bytes) -> bytes:
     name = Path(relative).as_posix()
+    #20261101_kpopmodder: Verify and reverse the placement-only overlay before checking the historical feature ancestor.
+    data = remove_democratic_layout_update(name, data)
     record = feature_update_lock()["runtime_text"].get(name, {})
     if "previous_output_sha256" not in record:
         return data
@@ -1423,6 +1425,95 @@ def verify_feature_snapshot() -> None:
             elif group != "documentation":
                 feature_addition(relative)
     print(f"PASS Korean feature source: {len(lock['runtime_text'])} runtime text, {len(lock['runtime_assets'])} assets, {len(lock['documentation'])} source records")
+
+
+#20261101_kpopmodder: Freeze the author's uncommitted democratic placement changes separately from gameplay and prior source locks.
+DEMOCRATIC_LAYOUT_LOCK_PATH = Path(__file__).with_name("hok_democratic_layout_lock.json")
+DEMOCRATIC_LAYOUT_SNAPSHOT_ROOT = REPO_ROOT / "docs/upstream/hok-democratic-layout-20261101"
+
+
+@lru_cache(maxsize=1)
+def democratic_layout_lock() -> dict:
+    lock = json.loads(DEMOCRATIC_LAYOUT_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], lock["source_commit"], lock["base_commit"],
+            lock["compatibility_base_commit"]) != (
+        1, "reviewed-working-tree-snapshot", FEATURE_COMMIT, FEATURE_COMMIT,
+        "656d9b425a66d95f55d8c86f1b976b2e094cc4d8"
+    ) or set(lock["runtime_text"]) != {SECOND_WAVE_FOCUS_PATH} or len(lock["documentation"]) != 6:
+        raise ValueError("unreviewed democratic layout source revision or allowlist")
+    record = lock["runtime_text"][SECOND_WAVE_FOCUS_PATH]
+    if (record["sha256"], record["previous_output_sha256"]) != (
+        "6562D4ACFD05F791026502A9AEACE3668D3C89869DF4279F75C2F1016763F163",
+        feature_update_lock()["runtime_text"][SECOND_WAVE_FOCUS_PATH]["output_sha256"]
+    ):
+        raise ValueError("democratic layout must follow the exact reviewed Korean feature output")
+    return lock
+
+
+def _democratic_layout_archive(relative: str, digest: str) -> bytes:
+    path = (REPO_ROOT / relative).resolve()
+    path.relative_to(DEMOCRATIC_LAYOUT_SNAPSHOT_ROOT.resolve())
+    data = path.read_bytes()
+    if sha256(data) != digest:
+        raise ValueError(f"democratic layout snapshot drift: {relative}")
+    return data
+
+
+def apply_democratic_layout_update(relative: str, data: bytes) -> bytes:
+    if Path(relative).as_posix() != SECOND_WAVE_FOCUS_PATH:
+        return data
+    record = democratic_layout_lock()["runtime_text"][SECOND_WAVE_FOCUS_PATH]
+    if sha256(data) != record["previous_output_sha256"]:
+        raise ValueError("unreviewed pre-democratic-layout focus output")
+    result = _feature_edits(data, record)
+    if sha256(result) != record["output_sha256"]:
+        raise ValueError("democratic layout output differs from its reviewed merge")
+    return result
+
+
+def remove_democratic_layout_update(relative: str, data: bytes) -> bytes:
+    if Path(relative).as_posix() != SECOND_WAVE_FOCUS_PATH:
+        return data
+    record = democratic_layout_lock()["runtime_text"][SECOND_WAVE_FOCUS_PATH]
+    if sha256(data) == record["previous_output_sha256"]:
+        return data
+    if sha256(data) != record["output_sha256"]:
+        raise ValueError("unreviewed democratic layout focus output")
+    previous = _feature_edits(data, record, reverse=True)
+    if sha256(previous) != record["previous_output_sha256"]:
+        raise ValueError("democratic layout reversal changed historical gameplay")
+    return previous
+
+
+def verify_democratic_layout_snapshot() -> None:
+    lock = democratic_layout_lock()
+    for group in ("runtime_text", "documentation"):
+        for relative, record in lock[group].items():
+            data = _democratic_layout_archive(record["snapshot_path"], record["sha256"])
+            if len(data) != record["size"]:
+                raise ValueError(f"democratic layout source size drift: {relative}")
+            if group == "runtime_text":
+                blob = subprocess.check_output(git_command() + ["rev-parse", f"{FEATURE_COMMIT}:{relative}"]).decode().strip()
+                original = subprocess.check_output(git_command() + ["cat-file", "blob", record["base_blob"]])
+                if blob != record["base_blob"] or sha256(original) != record["base_object_sha256"]:
+                    raise ValueError("democratic layout committed donor ancestor drift")
+                if _democratic_layout_archive(record["base_snapshot_path"], record["base_object_sha256"]) != original:
+                    raise ValueError("democratic layout archived donor ancestor differs from its immutable Git object")
+                if _feature_edits(original, record).replace(b"\r\n", b"\n") != data.replace(b"\r\n", b"\n"):
+                    raise ValueError("donor layout changed outside the selected coordinate hunks")
+                previous = _democratic_layout_archive(record["previous_snapshot_path"], record["previous_output_sha256"])
+                expected = _democratic_layout_archive(record["output_snapshot_path"], record["output_sha256"])
+                if apply_democratic_layout_update(relative, previous) != expected or remove_democratic_layout_update(relative, expected) != previous:
+                    raise ValueError("democratic layout must reproduce and reverse its exact compatibility output")
+    roots = (("host_files", Path(r"C:\Program Files (x86)\Steam\steamapps\workshop\content\394360\820260968")),
+             ("vanilla_files", Path(r"C:\Program Files (x86)\Steam\steamapps\common\Hearts of Iron IV")))
+    for group, root in roots:
+        for relative, expected in lock.get(group, {}).items():
+            path = (root / relative).resolve()
+            path.relative_to(root.resolve())
+            if sha256(path.read_bytes()) != expected:
+                raise ValueError(f"democratic layout {group} source drift: {relative}")
+    print("PASS democratic layout snapshot: one focus source, six source documents, exact coordinate merge and reversal")
 
 
 #20261020_kpopmodder: Reuse the reviewed English translation only for the port's existing keys and RT56-specific wording.
@@ -1649,6 +1740,7 @@ def main() -> int:
     print("HOK civic update: 23 runtime text + 8 DDS + 23 source documents/assets verified")
     verify_shipbuilding_snapshot()
     verify_feature_snapshot()
+    verify_democratic_layout_snapshot()
     return 0
 
 

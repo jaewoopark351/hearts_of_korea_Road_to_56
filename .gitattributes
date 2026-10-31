@@ -147,6 +147,9 @@ localisation/korean/HOK_KOR_emergency_shipbuilding_l_korean.yml text eol=lf
 #20261031_kpopmodder: Preserve immutable feature inputs and the exact bytes reproduced by the Korean feature overlay.
 tools/hok_feature_update_lock.json text eol=lf
 docs/upstream/hok-feature-integration-20261031/** -text
+#20261101_kpopmodder: Preserve the reviewed democratic coordinate snapshot and lock across checkouts.
+tools/hok_democratic_layout_lock.json text eol=lf
+docs/upstream/hok-democratic-layout-20261101/** -text
 common/decisions/HOK_KOR_soyang_water_gates.txt text eol=crlf
 common/decisions/categories/KOR_decision_categories.txt text eol=crlf
 common/factions/templates/HOK_KOR_factions.txt text eol=crlf

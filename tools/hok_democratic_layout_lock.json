@@ -1,0 +1,1397 @@
+{
+  "format": 1,
+  "source_kind": "reviewed-working-tree-snapshot",
+  "source_root": "C:\\hoi\\hearts_of_korea",
+  "source_commit": "07de265c1e992abb6584bdfcdf140320188c07f9",
+  "base_commit": "07de265c1e992abb6584bdfcdf140320188c07f9",
+  "compatibility_base_commit": "656d9b425a66d95f55d8c86f1b976b2e094cc4d8",
+  "captured_date": "2026-11-01",
+  "snapshot_root": "docs/upstream/hok-democratic-layout-20261101",
+  "runtime_text": {
+    "common/national_focus/korea.txt": {
+      "sha256": "6562D4ACFD05F791026502A9AEACE3668D3C89869DF4279F75C2F1016763F163",
+      "size": 496602,
+      "snapshot_path": "docs/upstream/hok-democratic-layout-20261101/runtime/common/national_focus/korea.txt",
+      "classification": "THREE_WAY_MERGE",
+      "base_blob": "a0922a5fabc9a62aea94281a92af2ec839054648",
+      "base_object_sha256": "E0EC525768556BA3D2167D1CBE724602B62B64A23FDBAD688EE1FD038857C77A",
+      "base_size": 478531,
+      "base_snapshot_path": "docs/upstream/hok-democratic-layout-20261101/base/common/national_focus/korea.txt",
+      "previous_output_sha256": "FDD4296796566676BD1B298FB3587AA7F4486D4F436116102B58E57842E6C753",
+      "previous_output_size": 506935,
+      "previous_snapshot_path": "docs/upstream/hok-democratic-layout-20261101/previous/common/national_focus/korea.txt",
+      "hunks": [
+        {
+          "focus_id": "KOR_president_kim_gu",
+          "before": [
+            "\t\tid = KOR_president_kim_gu",
+            "\t\ticon = GFX_focus_kor_president_kim_gu",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -9",
+            "\t\ty = 1"
+          ],
+          "after": [
+            "\t\tid = KOR_president_kim_gu",
+            "\t\ticon = GFX_focus_kor_president_kim_gu",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -6",
+            "\t\ty = 1"
+          ]
+        },
+        {
+          "focus_id": "KOR_syngman_rhee_reelected",
+          "before": [
+            "\t\tid = KOR_syngman_rhee_reelected",
+            "\t\ticon = GFX_focus_kor_syngman_rhee_reelected",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 9",
+            "\t\ty = 1"
+          ],
+          "after": [
+            "\t\tid = KOR_syngman_rhee_reelected",
+            "\t\ticon = GFX_focus_kor_syngman_rhee_reelected",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 4",
+            "\t\ty = 1"
+          ]
+        },
+        {
+          "focus_id": "KOR_democracy_is_our_strength",
+          "before": [
+            "\t\tid = KOR_democracy_is_our_strength",
+            "\t\ticon = GFX_goal_continuous_increase_nu",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -6",
+            "\t\ty = 4"
+          ],
+          "after": [
+            "\t\tid = KOR_democracy_is_our_strength",
+            "\t\ticon = GFX_goal_continuous_increase_nu",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -4",
+            "\t\ty = 4"
+          ]
+        },
+        {
+          "focus_id": "KOR_ban_extremism",
+          "before": [
+            "\t\tid = KOR_ban_extremism",
+            "\t\ticon = GFX_focus_BRA_end_the_state_of_emergency",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -2",
+            "\t\ty = 4"
+          ],
+          "after": [
+            "\t\tid = KOR_ban_extremism",
+            "\t\ticon = GFX_focus_BRA_end_the_state_of_emergency",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 0",
+            "\t\ty = 4"
+          ]
+        },
+        {
+          "focus_id": "KOR_strengthen_government_support",
+          "before": [
+            "\t\tid = KOR_strengthen_government_support",
+            "\t\ticon = GFX_goal_generic_demand_territory",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_liberal_party_sole_power",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -13",
+            "\t\ty = 3"
+          ],
+          "after": [
+            "\t\tid = KOR_strengthen_government_support",
+            "\t\ticon = GFX_goal_generic_demand_territory",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_liberal_party_sole_power",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -6",
+            "\t\ty = 3"
+          ]
+        },
+        {
+          "focus_id": "KOR_expend_military_budget",
+          "before": [
+            "\t\tid = KOR_expend_military_budget",
+            "\t\ticon = GFX_focus_kor_ganghanchingu_daehan_yuggun",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_liberal_party_sole_power",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -8",
+            "\t\ty = 5"
+          ],
+          "after": [
+            "\t\tid = KOR_expend_military_budget",
+            "\t\ticon = GFX_focus_kor_ganghanchingu_daehan_yuggun",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_liberal_party_sole_power",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -3",
+            "\t\ty = 5"
+          ]
+        },
+        {
+          "focus_id": "KOR_the_vanguard_of_asian_democracy",
+          "before": [
+            "\t\tid = KOR_the_vanguard_of_asian_democracy",
+            "\t\ticon = GFX_focus_kor_the_vanguard_of_asian_democracy",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_independent_party_in_power",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -8",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_the_vanguard_of_asian_democracy",
+            "\t\ticon = GFX_focus_kor_the_vanguard_of_asian_democracy",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_independent_party_in_power",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -5",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_construction_syngman_rhee_line",
+          "before": [
+            "\t\tid = KOR_construction_syngman_rhee_line",
+            "\t\ticon = GFX_focus_BEL_better_than_maginot",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_prepare_for_the_next_war",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 2",
+            "\t\ty = 1"
+          ],
+          "after": [
+            "\t\tid = KOR_construction_syngman_rhee_line",
+            "\t\ticon = GFX_focus_BEL_better_than_maginot",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_prepare_for_the_next_war",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 1",
+            "\t\ty = 1"
+          ]
+        },
+        {
+          "focus_id": "KOR_korea_in_the_world",
+          "before": [
+            "\t\tid = KOR_korea_in_the_world",
+            "\t\ticon = GFX_focus_KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_liberal_party_sole_power",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 12",
+            "\t\ty = 2",
+            "\t\t#20260921_kpopmodder: Shorten this existing focus from 70 to 35 days."
+          ],
+          "after": [
+            "\t\tid = KOR_korea_in_the_world",
+            "\t\ticon = GFX_focus_KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_liberal_party_sole_power",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 14",
+            "\t\ty = 1",
+            "\t\t#20260921_kpopmodder: Shorten this existing focus from 70 to 35 days."
+          ]
+        },
+        {
+          "focus_id": "KOR_trust_in_the_west",
+          "before": [
+            "\t\tid = KOR_trust_in_the_west",
+            "\t\ticon = GFX_focus_generic_league_of_nations",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -8",
+            "\t\ty = 1",
+            "\t\tcost = 5"
+          ],
+          "after": [
+            "\t\tid = KOR_trust_in_the_west",
+            "\t\ticon = GFX_focus_generic_league_of_nations",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -5",
+            "\t\ty = 2",
+            "\t\tcost = 5"
+          ]
+        },
+        {
+          "focus_id": "KOR_eef_command",
+          "before": [
+            "\t\tid = KOR_eef_command",
+            "\t\ticon = GFX_focus_usa_focus_on_europe",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_join_the_allie",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 0",
+            "\t\ty = 8"
+          ],
+          "after": [
+            "\t\tid = KOR_eef_command",
+            "\t\ticon = GFX_focus_usa_focus_on_europe",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_join_the_allie",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 1",
+            "\t\ty = 8"
+          ]
+        },
+        {
+          "focus_id": "KOR_contect_with_america",
+          "before": [
+            "\t\tid = KOR_contect_with_america",
+            "\t\ticon = GFX_focus_chi_mission_to_the_us",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 8",
+            "\t\ty = 1",
+            "\t\tcost = 5"
+          ],
+          "after": [
+            "\t\tid = KOR_contect_with_america",
+            "\t\ticon = GFX_focus_chi_mission_to_the_us",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 5",
+            "\t\ty = 2",
+            "\t\tcost = 5"
+          ]
+        },
+        {
+          "focus_id": "KOR_usfk",
+          "before": [
+            "\t\tid = KOR_usfk",
+            "\t\ticon = GFX_focus_KOR_deploy_united_states_eighth_army",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_rok_us_mutual_defense_treaty",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -2",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_usfk",
+            "\t\ticon = GFX_focus_KOR_deploy_united_states_eighth_army",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_rok_us_mutual_defense_treaty",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_lend_lease_from_usa",
+          "before": [
+            "\t\tid = KOR_lend_lease_from_usa",
+            "\t\ticon = GFX_focus_generic_american_investments",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_rok_us_mutual_defense_treaty",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 2",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_lend_lease_from_usa",
+            "\t\ticon = GFX_focus_generic_american_investments",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_rok_us_mutual_defense_treaty",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_absorb_the_allies",
+          "before": [
+            "\t\tid = KOR_absorb_the_allies",
+            "\t\ticon = GFX_focus_chi_british_cooperation",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_establish_ofn",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -2",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_absorb_the_allies",
+            "\t\ticon = GFX_focus_chi_british_cooperation",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_establish_ofn",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_securing_the_former_commonwealth",
+          "before": [
+            "\t\tid = KOR_securing_the_former_commonwealth",
+            "\t\ticon = GFX_focus_eng_bring_the_dominions_back_into_the_fold",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_establish_ofn",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 2",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_securing_the_former_commonwealth",
+            "\t\ticon = GFX_focus_eng_bring_the_dominions_back_into_the_fold",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_establish_ofn",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_protect_benelux",
+          "before": [
+            "\t\tid = KOR_protect_benelux",
+            "\t\ticon = GFX_focus_generic_treaty",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_torch_of_the_freedom",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -2",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_protect_benelux",
+            "\t\ticon = GFX_focus_generic_treaty",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_torch_of_the_freedom",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_protect_finland",
+          "before": [
+            "\t\tid = KOR_protect_finland",
+            "\t\ticon = GFX_focus_KOR_support_fin",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_torch_of_the_freedom",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 2",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_protect_finland",
+            "\t\ticon = GFX_focus_KOR_support_fin",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_torch_of_the_freedom",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_korean_volunteer_corps",
+          "before": [
+            "\t\tid = KOR_korean_volunteer_corps",
+            "\t\ticon = GFX_focus_KOR_korean_volunteer_corps",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 0",
+            "\t\ty = 3",
+            "\t\tcost = 5"
+          ],
+          "after": [
+            "\t\tid = KOR_korean_volunteer_corps",
+            "\t\ticon = GFX_focus_KOR_korean_volunteer_corps",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 0",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\ty = 4",
+            "\t\tcost = 5"
+          ]
+        },
+        {
+          "focus_id": "KOR_forced_decolonization",
+          "before": [
+            "\t\tid = KOR_forced_decolonization",
+            "\t\ticon = GFX_focus_eng_decolonization",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -9",
+            "\t\ty = 13",
+            "\t\t#20260921_kpopmodder: Shorten this existing focus from 70 to 35 days."
+          ],
+          "after": [
+            "\t\tid = KOR_forced_decolonization",
+            "\t\ticon = GFX_focus_eng_decolonization",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -7",
+            "\t\ty = 14",
+            "\t\t#20260921_kpopmodder: Shorten this existing focus from 70 to 35 days."
+          ]
+        },
+        {
+          "focus_id": "KOR_abcdfk_blocade",
+          "before": [
+            "\t\tid = KOR_abcdfk_blocade",
+            "\t\ticon = GFX_focus_KOR_expand_ofn",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -3",
+            "\t\ty = 13",
+            "\t\tcost = 5"
+          ],
+          "after": [
+            "\t\tid = KOR_abcdfk_blocade",
+            "\t\ticon = GFX_focus_KOR_expand_ofn",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_korea_in_the_world",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -1",
+            "\t\ty = 14",
+            "\t\tcost = 5"
+          ]
+        },
+        {
+          "focus_id": "KOR_founding_of_the_asian_union",
+          "before": [
+            "\t\tid = KOR_founding_of_the_asian_union",
+            "\t\ticon = GFX_focus_kor_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_preemptive_strike_on_manchuria",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 3",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_founding_of_the_asian_union",
+            "\t\ticon = GFX_focus_kor_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_preemptive_strike_on_manchuria",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_invite_china",
+          "before": [
+            "\t\tid = KOR_invite_china",
+            "\t\ticon = GFX_focus_chi_cooperation_with_the_nationalists",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -4",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_invite_china",
+            "\t\ticon = GFX_focus_chi_cooperation_with_the_nationalists",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -2",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_support_for_democracy_in_china",
+          "before": [
+            "\t\tid = KOR_support_for_democracy_in_china",
+            "\t\ticon = GFX_goal_generic_dangerous_deal",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -7",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_support_for_democracy_in_china",
+            "\t\ticon = GFX_goal_generic_dangerous_deal",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -6",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_invite_japan",
+          "before": [
+            "\t\tid = KOR_invite_japan",
+            "\t\ticon = GFX_focus_generic_handshake_with_democratic_japan",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 4",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_invite_japan",
+            "\t\ticon = GFX_focus_generic_handshake_with_democratic_japan",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 2",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_support_for_democracy_in_japan",
+          "before": [
+            "\t\tid = KOR_support_for_democracy_in_japan",
+            "\t\ticon = GFX_goal_generic_dangerous_deal",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 6",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_support_for_democracy_in_japan",
+            "\t\ticon = GFX_goal_generic_dangerous_deal",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 4",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "KOR_asian_independence_support",
+          "before": [
+            "\t\tid = KOR_asian_independence_support",
+            "\t\ticon = GFX_goal_generic_forceful_treaty",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_invitation_to_independent_asian_countries",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 0",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = KOR_asian_independence_support",
+            "\t\ticon = GFX_goal_generic_forceful_treaty",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_invitation_to_independent_asian_countries",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "HOK_KOR_parliamentary_committee",
+          "before": [
+            "\t\tid = HOK_KOR_parliamentary_committee",
+            "\t\t#20260922_kpopmodder: Distinguish parliament with a dedicated policy icon.",
+            "\t\ticon = GFX_HOK_KOR_focus_parliamentary_committee",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_strengthen_government_support",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -6",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = HOK_KOR_parliamentary_committee",
+            "\t\t#20260922_kpopmodder: Distinguish parliament with a dedicated policy icon.",
+            "\t\ticon = GFX_HOK_KOR_focus_parliamentary_committee",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_strengthen_government_support",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -5",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "HOK_KOR_overseas_medical_detachments",
+          "before": [
+            "\t\tid = HOK_KOR_overseas_medical_detachments",
+            "\t\t#20260922_kpopmodder: Distinguish medical with a dedicated policy icon.",
+            "\t\ticon = GFX_HOK_KOR_focus_overseas_medical_detachments",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = HOK_KOR_volunteer_liaison_bureau",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = -2",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = HOK_KOR_overseas_medical_detachments",
+            "\t\t#20260922_kpopmodder: Distinguish medical with a dedicated policy icon.",
+            "\t\ticon = GFX_HOK_KOR_focus_overseas_medical_detachments",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = HOK_KOR_volunteer_liaison_bureau",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = -1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "HOK_KOR_volunteer_supply_depots",
+          "before": [
+            "\t\tid = HOK_KOR_volunteer_supply_depots",
+            "\t\t#20260922_kpopmodder: Distinguish volunteer supply with a dedicated policy icon.",
+            "\t\ticon = GFX_HOK_KOR_focus_volunteer_supply_depots",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = HOK_KOR_volunteer_liaison_bureau",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 2",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = HOK_KOR_volunteer_supply_depots",
+            "\t\t#20260922_kpopmodder: Distinguish volunteer supply with a dedicated policy icon.",
+            "\t\ticon = GFX_HOK_KOR_focus_volunteer_supply_depots",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = HOK_KOR_volunteer_liaison_bureau",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 1",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "HOK_KOR_asian_trade_secretariat",
+          "before": [
+            "\t\tid = HOK_KOR_asian_trade_secretariat",
+            "\t\t#20260922_kpopmodder: Distinguish trade secretariat with a dedicated policy icon.",
+            "\t\ticon = GFX_HOK_KOR_focus_asian_trade_secretariat",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\tx = 11",
+            "\t\ty = 2"
+          ],
+          "after": [
+            "\t\tid = HOK_KOR_asian_trade_secretariat",
+            "\t\t#20260922_kpopmodder: Distinguish trade secretariat with a dedicated policy icon.",
+            "\t\ticon = GFX_HOK_KOR_focus_asian_trade_secretariat",
+            "\t\t#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.",
+            "\t\trelative_position_id = KOR_founding_of_the_asian_union",
+            "\t\t#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 10",
+            "\t\ty = 2"
+          ]
+        },
+        {
+          "focus_id": "HOK_KOR_civic_industrial_compact",
+          "before": [
+            "\t\tid = HOK_KOR_civic_industrial_compact",
+            "\t\ticon = GFX_HOK_KOR_focus_civic_industrial_compact",
+            "\t\t#20261012_kpopmodder: Place the compact at the former democratic cooperation entry and inherit its single route offset.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\tx = 6",
+            "\t\ty = 4"
+          ],
+          "after": [
+            "\t\tid = HOK_KOR_civic_industrial_compact",
+            "\t\ticon = GFX_HOK_KOR_focus_civic_industrial_compact",
+            "\t\t#20261012_kpopmodder: Place the compact at the former democratic cooperation entry and inherit its single route offset.",
+            "\t\trelative_position_id = KOR_democracy_advance_forward",
+            "\t\t#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.",
+            "\t\tx = 5",
+            "\t\ty = 4"
+          ]
+        }
+      ],
+      "output_snapshot_path": "docs/upstream/hok-democratic-layout-20261101/integrated/common/national_focus/korea.txt",
+      "output_sha256": "DE7959986349B07C014C866B08E03DC2BF0AE81BE80E6AF29D92CF03F572B5B1",
+      "output_size": 510262,
+      "output_checkout": "crlf"
+    }
+  },
+  "documentation": {
+    "README.md": {
+      "sha256": "C40A3E3AA1A5BBB8FF0BFF5F59B37590B3E5E004CDEF9A94ABB623F7535E0683",
+      "size": 12870,
+      "snapshot_path": "docs/upstream/hok-democratic-layout-20261101/documents/README.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md": {
+      "sha256": "A5356BDC0DF4AA38C54F4A79E1E156DE58D7B6A5B3915C898A4A399E71773377",
+      "size": 94555,
+      "snapshot_path": "docs/upstream/hok-democratic-layout-20261101/documents/docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_FOCUS_LAYOUT_PLAN.md": {
+      "sha256": "DFDCF57442D2A3124CD638A65EE9A2FD85C131F6741350DFF41DAA7C4B066164",
+      "size": 37826,
+      "snapshot_path": "docs/upstream/hok-democratic-layout-20261101/documents/docs/HOK_KOREAN_FOCUS_LAYOUT_PLAN.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/data/HOK_KOREAN_SECOND_WAVE_COORDINATES.json": {
+      "sha256": "52C29FC66E83F510D2CBC7B80F2E16E8B0C8CFEE488B9536237C94743B8B1129",
+      "size": 605013,
+      "snapshot_path": "docs/upstream/hok-democratic-layout-20261101/documents/docs/data/HOK_KOREAN_SECOND_WAVE_COORDINATES.json",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_DEMOCRATIC_FOCUS_COMPACTION_PLAN.md": {
+      "sha256": "5D3EDD7C94BCF5835013C5DB39720D8D99F56DF7AC94795CC3B6736A6FBDB06E",
+      "size": 42057,
+      "snapshot_path": "docs/upstream/hok-democratic-layout-20261101/documents/docs/HOK_KOREAN_DEMOCRATIC_FOCUS_COMPACTION_PLAN.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/incidents/2026-10-31-korean-democratic-focus-compaction.md": {
+      "sha256": "88841854E5F10CE1AE6796C29D867E497F7B03B0FA67D803D8FC2CA1848C08D5",
+      "size": 29249,
+      "snapshot_path": "docs/upstream/hok-democratic-layout-20261101/documents/docs/incidents/2026-10-31-korean-democratic-focus-compaction.md",
+      "classification": "DOCUMENTATION"
+    }
+  },
+  "excluded": {
+    "descriptor.mod": {
+      "reason": "Upstream working-tree status reflects EOL conversion only; preserve compatibility identity, dependency and upload boundaries.",
+      "sha256": "3FBC6868A7D95BACD6B55AF71593A61AF3A7EADA5654D46CC4C828422ECA032A",
+      "size": 267
+    }
+  },
+  "focus_changes": [
+    {
+      "focus_id": "KOR_president_kim_gu",
+      "anchor": "KOR_democracy_advance_forward",
+      "before_xy": {
+        "x": -9,
+        "y": 1
+      },
+      "after_xy": {
+        "x": -6,
+        "y": 1
+      }
+    },
+    {
+      "focus_id": "KOR_syngman_rhee_reelected",
+      "anchor": "KOR_democracy_advance_forward",
+      "before_xy": {
+        "x": 9,
+        "y": 1
+      },
+      "after_xy": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    {
+      "focus_id": "KOR_democracy_is_our_strength",
+      "anchor": "KOR_democracy_advance_forward",
+      "before_xy": {
+        "x": -6,
+        "y": 4
+      },
+      "after_xy": {
+        "x": -4,
+        "y": 4
+      }
+    },
+    {
+      "focus_id": "KOR_ban_extremism",
+      "anchor": "KOR_democracy_advance_forward",
+      "before_xy": {
+        "x": -2,
+        "y": 4
+      },
+      "after_xy": {
+        "x": 0,
+        "y": 4
+      }
+    },
+    {
+      "focus_id": "KOR_strengthen_government_support",
+      "anchor": "KOR_liberal_party_sole_power",
+      "before_xy": {
+        "x": -13,
+        "y": 3
+      },
+      "after_xy": {
+        "x": -6,
+        "y": 3
+      }
+    },
+    {
+      "focus_id": "KOR_expend_military_budget",
+      "anchor": "KOR_liberal_party_sole_power",
+      "before_xy": {
+        "x": -8,
+        "y": 5
+      },
+      "after_xy": {
+        "x": -3,
+        "y": 5
+      }
+    },
+    {
+      "focus_id": "KOR_the_vanguard_of_asian_democracy",
+      "anchor": "KOR_independent_party_in_power",
+      "before_xy": {
+        "x": -8,
+        "y": 2
+      },
+      "after_xy": {
+        "x": -5,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_construction_syngman_rhee_line",
+      "anchor": "KOR_prepare_for_the_next_war",
+      "before_xy": {
+        "x": 2,
+        "y": 1
+      },
+      "after_xy": {
+        "x": 1,
+        "y": 1
+      }
+    },
+    {
+      "focus_id": "KOR_korea_in_the_world",
+      "anchor": "KOR_liberal_party_sole_power",
+      "before_xy": {
+        "x": 12,
+        "y": 2
+      },
+      "after_xy": {
+        "x": 14,
+        "y": 1
+      }
+    },
+    {
+      "focus_id": "KOR_trust_in_the_west",
+      "anchor": "KOR_korea_in_the_world",
+      "before_xy": {
+        "x": -8,
+        "y": 1
+      },
+      "after_xy": {
+        "x": -5,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_eef_command",
+      "anchor": "KOR_join_the_allie",
+      "before_xy": {
+        "x": 0,
+        "y": 8
+      },
+      "after_xy": {
+        "x": 1,
+        "y": 8
+      }
+    },
+    {
+      "focus_id": "KOR_contect_with_america",
+      "anchor": "KOR_korea_in_the_world",
+      "before_xy": {
+        "x": 8,
+        "y": 1
+      },
+      "after_xy": {
+        "x": 5,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_usfk",
+      "anchor": "KOR_rok_us_mutual_defense_treaty",
+      "before_xy": {
+        "x": -2,
+        "y": 2
+      },
+      "after_xy": {
+        "x": -1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_lend_lease_from_usa",
+      "anchor": "KOR_rok_us_mutual_defense_treaty",
+      "before_xy": {
+        "x": 2,
+        "y": 2
+      },
+      "after_xy": {
+        "x": 1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_absorb_the_allies",
+      "anchor": "KOR_establish_ofn",
+      "before_xy": {
+        "x": -2,
+        "y": 2
+      },
+      "after_xy": {
+        "x": -1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_securing_the_former_commonwealth",
+      "anchor": "KOR_establish_ofn",
+      "before_xy": {
+        "x": 2,
+        "y": 2
+      },
+      "after_xy": {
+        "x": 1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_protect_benelux",
+      "anchor": "KOR_torch_of_the_freedom",
+      "before_xy": {
+        "x": -2,
+        "y": 2
+      },
+      "after_xy": {
+        "x": -1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_protect_finland",
+      "anchor": "KOR_torch_of_the_freedom",
+      "before_xy": {
+        "x": 2,
+        "y": 2
+      },
+      "after_xy": {
+        "x": 1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_korean_volunteer_corps",
+      "anchor": "KOR_korea_in_the_world",
+      "before_xy": {
+        "x": 0,
+        "y": 3
+      },
+      "after_xy": {
+        "x": 0,
+        "y": 4
+      }
+    },
+    {
+      "focus_id": "KOR_forced_decolonization",
+      "anchor": "KOR_korea_in_the_world",
+      "before_xy": {
+        "x": -9,
+        "y": 13
+      },
+      "after_xy": {
+        "x": -7,
+        "y": 14
+      }
+    },
+    {
+      "focus_id": "KOR_abcdfk_blocade",
+      "anchor": "KOR_korea_in_the_world",
+      "before_xy": {
+        "x": -3,
+        "y": 13
+      },
+      "after_xy": {
+        "x": -1,
+        "y": 14
+      }
+    },
+    {
+      "focus_id": "KOR_founding_of_the_asian_union",
+      "anchor": "KOR_preemptive_strike_on_manchuria",
+      "before_xy": {
+        "x": 3,
+        "y": 2
+      },
+      "after_xy": {
+        "x": 1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_invite_china",
+      "anchor": "KOR_founding_of_the_asian_union",
+      "before_xy": {
+        "x": -4,
+        "y": 2
+      },
+      "after_xy": {
+        "x": -2,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_support_for_democracy_in_china",
+      "anchor": "KOR_founding_of_the_asian_union",
+      "before_xy": {
+        "x": -7,
+        "y": 2
+      },
+      "after_xy": {
+        "x": -6,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_invite_japan",
+      "anchor": "KOR_founding_of_the_asian_union",
+      "before_xy": {
+        "x": 4,
+        "y": 2
+      },
+      "after_xy": {
+        "x": 2,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_support_for_democracy_in_japan",
+      "anchor": "KOR_founding_of_the_asian_union",
+      "before_xy": {
+        "x": 6,
+        "y": 2
+      },
+      "after_xy": {
+        "x": 4,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "KOR_asian_independence_support",
+      "anchor": "KOR_invitation_to_independent_asian_countries",
+      "before_xy": {
+        "x": 0,
+        "y": 2
+      },
+      "after_xy": {
+        "x": -1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "HOK_KOR_parliamentary_committee",
+      "anchor": "KOR_strengthen_government_support",
+      "before_xy": {
+        "x": -6,
+        "y": 2
+      },
+      "after_xy": {
+        "x": -5,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "HOK_KOR_overseas_medical_detachments",
+      "anchor": "HOK_KOR_volunteer_liaison_bureau",
+      "before_xy": {
+        "x": -2,
+        "y": 2
+      },
+      "after_xy": {
+        "x": -1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "HOK_KOR_volunteer_supply_depots",
+      "anchor": "HOK_KOR_volunteer_liaison_bureau",
+      "before_xy": {
+        "x": 2,
+        "y": 2
+      },
+      "after_xy": {
+        "x": 1,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "HOK_KOR_asian_trade_secretariat",
+      "anchor": "KOR_founding_of_the_asian_union",
+      "before_xy": {
+        "x": 11,
+        "y": 2
+      },
+      "after_xy": {
+        "x": 10,
+        "y": 2
+      }
+    },
+    {
+      "focus_id": "HOK_KOR_civic_industrial_compact",
+      "anchor": "KOR_democracy_advance_forward",
+      "before_xy": {
+        "x": 6,
+        "y": 4
+      },
+      "after_xy": {
+        "x": 5,
+        "y": 4
+      }
+    }
+  ],
+  "direct_focus_change_count": 32,
+  "coordinate_value_change_count": 37,
+  "contributor_note_count": 32,
+  "democratic_focus_ids": [
+    "KOR_democracy_advance_forward",
+    "KOR_president_kim_gu",
+    "KOR_syngman_rhee_reelected",
+    "KOR_independent_party_in_power",
+    "KOR_liberal_party_sole_power",
+    "KOR_democracy_is_our_strength",
+    "KOR_ban_extremism",
+    "KOR_strengthen_government_support",
+    "KOR_national_unity",
+    "KOR_expend_military_budget",
+    "KOR_homeland_defence_special_act",
+    "KOR_call_up_the_rokrf",
+    "KOR_the_vanguard_of_asian_democracy",
+    "KOR_stop_moderate_diplomacy",
+    "KOR_war_on_pacifism",
+    "KOR_claiming_northern_conquest",
+    "KOR_preemptive_strike_on_manchuria",
+    "KOR_rok_roc_alliance",
+    "KOR_prepare_for_the_next_war",
+    "KOR_construction_syngman_rhee_line",
+    "KOR_syngman_rhee_line_final_fortifications",
+    "KOR_port_fortification",
+    "KOR_korea_in_the_world",
+    "KOR_trust_in_the_west",
+    "KOR_join_the_allie",
+    "KOR_expand_merchant_marine",
+    "KOR_british_naval_ship",
+    "KOR_learn_from_french_army",
+    "KOR_allies_military_aid",
+    "KOR_eef_command",
+    "KOR_contect_with_america",
+    "KOR_rok_us_mutual_defense_treaty",
+    "KOR_usfk",
+    "KOR_katusa",
+    "KOR_lend_lease_from_usa",
+    "KOR_invite_macarthur",
+    "KOR_establish_ofn",
+    "KOR_absorb_the_allies",
+    "KOR_securing_the_former_commonwealth",
+    "KOR_torch_of_the_freedom",
+    "KOR_protect_benelux",
+    "KOR_crash_the_nazis",
+    "KOR_protect_finland",
+    "KOR_hunt_the_bear",
+    "KOR_korean_volunteer_corps",
+    "KOR_forced_decolonization",
+    "KOR_freedom_to_indochina",
+    "KOR_freedom_to_malaysia",
+    "KOR_freedom_to_philippines",
+    "KOR_freedom_to_indonesia",
+    "KOR_abcdfk_blocade",
+    "KOR_pressure_on_thailand",
+    "KOR_freedom_to_ryukyu_and_ainu",
+    "KOR_end_the_threat",
+    "KOR_liberation_of_the_europe",
+    "KOR_founding_of_the_asian_union",
+    "KOR_invitation_to_independent_asian_countries",
+    "KOR_invite_china",
+    "KOR_support_for_democracy_in_china",
+    "KOR_overthrow_the_chinese_dictators",
+    "KOR_invite_japan",
+    "KOR_support_for_democracy_in_japan",
+    "KOR_minshu_ikki",
+    "KOR_asian_independence_support",
+    "KOR_expelling_european_imperialists",
+    "KOR_death_to_the_fascists",
+    "KOR_end_of_the_red_plague",
+    "HOK_KOR_parliamentary_committee",
+    "HOK_KOR_civil_service_audit",
+    "HOK_KOR_technical_civic_schools",
+    "HOK_KOR_rural_education_missions",
+    "HOK_KOR_public_accounts_committee",
+    "HOK_KOR_volunteer_liaison_bureau",
+    "HOK_KOR_overseas_medical_detachments",
+    "HOK_KOR_volunteer_supply_depots",
+    "HOK_KOR_expeditionary_lessons",
+    "HOK_KOR_overseas_relief_network",
+    "HOK_KOR_asian_trade_secretariat",
+    "HOK_KOR_asian_customs_convention",
+    "HOK_KOR_asian_development_fund",
+    "HOK_KOR_asian_armaments_commission",
+    "HOK_KOR_asian_license_agreement",
+    "HOK_KOR_civic_industrial_compact",
+    "HOK_KOR_civic_chaebol_cooperation",
+    "HOK_KOR_civic_nationalization",
+    "HOK_KOR_civic_break_monopolies",
+    "HOK_KOR_civic_sunkyong_investment",
+    "HOK_KOR_civic_samsung_electronics",
+    "HOK_KOR_civic_goldstar_mass_production",
+    "HOK_KOR_civic_labor_compact",
+    "HOK_KOR_civic_mass_conscription",
+    "HOK_KOR_civic_public_accountability",
+    "HOK_KOR_civic_social_settlement",
+    "HOK_KOR_civic_public_procurement",
+    "HOK_KOR_civic_procurement_inspections"
+  ],
+  "moved_focus_ids": [
+    "KOR_president_kim_gu",
+    "KOR_syngman_rhee_reelected",
+    "KOR_independent_party_in_power",
+    "KOR_liberal_party_sole_power",
+    "KOR_democracy_is_our_strength",
+    "KOR_ban_extremism",
+    "KOR_strengthen_government_support",
+    "KOR_national_unity",
+    "KOR_homeland_defence_special_act",
+    "KOR_call_up_the_rokrf",
+    "KOR_the_vanguard_of_asian_democracy",
+    "KOR_stop_moderate_diplomacy",
+    "KOR_war_on_pacifism",
+    "KOR_claiming_northern_conquest",
+    "KOR_preemptive_strike_on_manchuria",
+    "KOR_rok_roc_alliance",
+    "KOR_construction_syngman_rhee_line",
+    "KOR_syngman_rhee_line_final_fortifications",
+    "KOR_port_fortification",
+    "KOR_korea_in_the_world",
+    "KOR_eef_command",
+    "KOR_contect_with_america",
+    "KOR_rok_us_mutual_defense_treaty",
+    "KOR_usfk",
+    "KOR_katusa",
+    "KOR_lend_lease_from_usa",
+    "KOR_invite_macarthur",
+    "KOR_establish_ofn",
+    "KOR_absorb_the_allies",
+    "KOR_securing_the_former_commonwealth",
+    "KOR_torch_of_the_freedom",
+    "KOR_protect_benelux",
+    "KOR_crash_the_nazis",
+    "KOR_protect_finland",
+    "KOR_hunt_the_bear",
+    "KOR_korean_volunteer_corps",
+    "KOR_forced_decolonization",
+    "KOR_freedom_to_indochina",
+    "KOR_freedom_to_malaysia",
+    "KOR_freedom_to_philippines",
+    "KOR_freedom_to_indonesia",
+    "KOR_abcdfk_blocade",
+    "KOR_pressure_on_thailand",
+    "KOR_freedom_to_ryukyu_and_ainu",
+    "KOR_end_the_threat",
+    "KOR_liberation_of_the_europe",
+    "KOR_founding_of_the_asian_union",
+    "KOR_invitation_to_independent_asian_countries",
+    "KOR_invite_china",
+    "KOR_support_for_democracy_in_china",
+    "KOR_overthrow_the_chinese_dictators",
+    "KOR_invite_japan",
+    "KOR_support_for_democracy_in_japan",
+    "KOR_minshu_ikki",
+    "KOR_asian_independence_support",
+    "KOR_expelling_european_imperialists",
+    "KOR_death_to_the_fascists",
+    "KOR_end_of_the_red_plague",
+    "HOK_KOR_parliamentary_committee",
+    "HOK_KOR_civil_service_audit",
+    "HOK_KOR_technical_civic_schools",
+    "HOK_KOR_rural_education_missions",
+    "HOK_KOR_public_accounts_committee",
+    "HOK_KOR_volunteer_liaison_bureau",
+    "HOK_KOR_overseas_medical_detachments",
+    "HOK_KOR_volunteer_supply_depots",
+    "HOK_KOR_expeditionary_lessons",
+    "HOK_KOR_overseas_relief_network",
+    "HOK_KOR_asian_trade_secretariat",
+    "HOK_KOR_asian_customs_convention",
+    "HOK_KOR_asian_development_fund",
+    "HOK_KOR_asian_armaments_commission",
+    "HOK_KOR_asian_license_agreement",
+    "HOK_KOR_civic_industrial_compact",
+    "HOK_KOR_civic_chaebol_cooperation",
+    "HOK_KOR_civic_nationalization",
+    "HOK_KOR_civic_break_monopolies",
+    "HOK_KOR_civic_sunkyong_investment",
+    "HOK_KOR_civic_samsung_electronics",
+    "HOK_KOR_civic_goldstar_mass_production",
+    "HOK_KOR_civic_labor_compact",
+    "HOK_KOR_civic_mass_conscription",
+    "HOK_KOR_civic_public_accountability",
+    "HOK_KOR_civic_social_settlement",
+    "HOK_KOR_civic_public_procurement",
+    "HOK_KOR_civic_procurement_inspections"
+  ],
+  "before_bounds": {
+    "min_x": 108,
+    "max_x": 158,
+    "min_y": 2,
+    "max_y": 24
+  },
+  "after_bounds": {
+    "min_x": 113,
+    "max_x": 151,
+    "min_y": 2,
+    "max_y": 24
+  },
+  "center_span_x_before": 50,
+  "center_span_x_after": 38,
+  "center_span_x_reduction_percent": 24,
+  "host_files": {
+    "descriptor.mod": "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61",
+    "common/national_focus/korea.txt": "A80FBC767C21902FC56EBBCA35DC3C120700E527B52EA98F3CFDF5221EB0EF90"
+  },
+  "vanilla_files": {
+    "common/national_focus/japan.txt": "6BD6E7866F91BD31EA5CFE62BF5651E359A9AA5D100BA179BA992C3ADBF2D619",
+    "interface/nationalfocusview.gui": "247B096A53AEE65E139FFF1BF0049C9FBD7A3AFA40916882304749FEFAAAED96",
+    "launcher-settings.json": "D1E72CF0AA33346DE8C16A8E53F90199011576331A76A0F0A916DA289DB755EC"
+  },
+  "workshop_manifest": "7553774178744855191"
+}

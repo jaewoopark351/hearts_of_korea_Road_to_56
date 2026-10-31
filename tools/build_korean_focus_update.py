@@ -30,6 +30,7 @@ from source_snapshot import (
     english_translation_lock, apply_english_translation,
     shipbuilding_update_lock, verify_shipbuilding_snapshot, apply_shipbuilding_update, shipbuilding_addition,
     feature_update_lock, verify_feature_snapshot, apply_feature_update, feature_addition,
+    democratic_layout_lock, verify_democratic_layout_snapshot, apply_democratic_layout_update,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -169,6 +170,8 @@ ACCEPTED_PRIOR_OUTPUT_HASHES.update({
     for relative, record in feature_update_lock()["runtime_text"].items()
     if "previous_output_sha256" in record
 })
+#20261101_kpopmodder: Accept only the reviewed feature output before applying the democratic placement overlay.
+ACCEPTED_PRIOR_OUTPUT_HASHES[Path(SECOND_WAVE_FOCUS_PATH)] = democratic_layout_lock()["runtime_text"][SECOND_WAVE_FOCUS_PATH]["previous_output_sha256"]
 CHECKOUT_RESTORATION_HASHES = {
     Path(relative): record["previous_output_sha256"]
     for relative, record in material_cycle_lock()["checkout_restoration"].items()
@@ -454,6 +457,10 @@ def build_all() -> dict[Path, bytes]:
                 if relative in outputs:
                     raise ValueError(f"Korean feature addition duplicates an existing output: {name}")
                 outputs[relative] = feature_addition(name)
+    #20261101_kpopmodder: Compact only selected democratic focus coordinates after every gameplay and RT56 merge.
+    verify_democratic_layout_snapshot()
+    outputs[Path(SECOND_WAVE_FOCUS_PATH)] = apply_democratic_layout_update(
+        SECOND_WAVE_FOCUS_PATH, outputs[Path(SECOND_WAVE_FOCUS_PATH)])
     return outputs
 
 

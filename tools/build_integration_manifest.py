@@ -31,6 +31,7 @@ from source_snapshot import (
     english_translation_lock, remove_english_translation,
     shipbuilding_update_lock, read_shipbuilding_source, remove_shipbuilding_update,
     feature_update_lock, remove_feature_update, verify_feature_snapshot,
+    democratic_layout_lock, remove_democratic_layout_update, verify_democratic_layout_snapshot,
 )
 
 
@@ -1025,7 +1026,8 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     feature_additions = 0
     for group in ("runtime_text", "runtime_assets"):
         for relative, record in feature[group].items():
-            current = (REPO_ROOT / relative).read_bytes()
+            #20261101_kpopmodder: Attribute the unchanged feature ancestor before recording the separate placement-only overlay.
+            current = remove_democratic_layout_update(relative, (REPO_ROOT / relative).read_bytes())
             current_hash = hashlib.sha256(current).hexdigest().upper()
             if current_hash != record["output_sha256"].upper():
                 raise RuntimeError(f"feature output differs from its reviewed merge: {relative}")
@@ -1069,6 +1071,37 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             row["reason"] += "; 2026-10-31 HOK feature integration selectively merged over the preserved RT56 geography, access rules and earlier English translation"
     if len(rows) != 1452 + feature_additions:
         raise RuntimeError("feature integration ledger inventory mismatch")
+
+    #20261101_kpopmodder: Retain all prior ownership and feature provenance while updating the single compacted focus output.
+    verify_democratic_layout_snapshot()
+    layout = democratic_layout_lock()
+    if set(layout["runtime_text"]) != {SECOND_WAVE_FOCUS_PATH} or len(rows) != 1505:
+        raise RuntimeError("unreviewed democratic layout runtime or integration inventory")
+    relative = SECOND_WAVE_FOCUS_PATH
+    record = layout["runtime_text"][relative]
+    current = (REPO_ROOT / relative).read_bytes()
+    current_hash = hashlib.sha256(current).hexdigest().upper()
+    previous = remove_democratic_layout_update(relative, current)
+    previous_hash = hashlib.sha256(previous).hexdigest().upper()
+    matching = [entry for entry in rows if entry["source_path"] == relative]
+    if (current_hash != record["output_sha256"].upper() or len(matching) != 1
+            or matching[0]["output_path"] != relative
+            or matching[0]["output_sha256"] != previous_hash
+            or previous_hash != record["previous_output_sha256"].upper()
+            or matching[0]["feature_lock"] != "tools/hok_feature_update_lock.json"):
+        raise RuntimeError("democratic placement overlay lost its exact feature ancestor or earlier provenance")
+    row = matching[0]
+    row.update({
+        "output_sha256": current_hash,
+        "democratic_layout_source_kind": layout["source_kind"],
+        "democratic_layout_source_base_commit": layout["base_commit"],
+        "democratic_layout_source_sha256": record["sha256"],
+        "democratic_layout_source_snapshot_path": record["snapshot_path"],
+        "democratic_layout_previous_output_sha256": previous_hash,
+        "democratic_layout_classification": "THREE_WAY_MERGE",
+        "democratic_layout_lock": "tools/hok_democratic_layout_lock.json",
+    })
+    row["reason"] += "; 2026-11-01 democratic layout: 32 direct placement blocks compact the 95-focus sector, preserving gameplay, all anchors, offsets and preceding source layers"
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(
@@ -1116,6 +1149,13 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "feature_previous_output_sha256",
             "feature_classification",
             "feature_lock",
+            "democratic_layout_source_kind",
+            "democratic_layout_source_base_commit",
+            "democratic_layout_source_sha256",
+            "democratic_layout_source_snapshot_path",
+            "democratic_layout_previous_output_sha256",
+            "democratic_layout_classification",
+            "democratic_layout_lock",
         ),
         lineterminator="\n",
     )

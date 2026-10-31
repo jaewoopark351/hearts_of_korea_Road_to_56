@@ -33,6 +33,7 @@ from source_snapshot import (
     remove_english_translation,
     shipbuilding_update_lock, read_shipbuilding_source, remove_shipbuilding_update as _remove_shipbuilding_update,
     feature_update_lock, remove_feature_update, verify_feature_snapshot,
+    democratic_layout_lock, remove_democratic_layout_update, verify_democratic_layout_snapshot,
 )
 
 
@@ -1996,7 +1997,8 @@ def run_feature_checks() -> None:
     require(len(lock["runtime_text"]) == 30 and len(lock["runtime_assets"]) == 28
             and sum("previous_output_sha256" in record for record in records.values()) == 5,
             "feature runtime inventory must remain thirty text files, twenty-eight assets and five existing-file overlays")
-    payloads = {relative: (ROOT / relative).read_bytes() for relative in records}
+    #20261101_kpopmodder: Preserve the exact feature ancestor beneath the separate democratic placement overlay.
+    payloads = {relative: remove_democratic_layout_update(relative, (ROOT / relative).read_bytes()) for relative in records}
     for relative, data in payloads.items():
         require(hashlib.sha256(data).hexdigest().upper() == records[relative]["output_sha256"].upper(),
                 f"feature final output hash differs: {relative}")
@@ -2189,6 +2191,132 @@ def run_feature_checks() -> None:
     print("SCOPED STATIC ONLY: no RT56 engine, UI, natural progression, AI, DLC matrix, save or multiplayer proof.")
 
 
+#20261101_kpopmodder: Check democratic compaction with ordered semantic preservation and an independent relative-coordinate model.
+def run_democratic_layout_checks() -> None:
+    verify_democratic_layout_snapshot()
+    lock = democratic_layout_lock()
+    require(set(lock["runtime_text"]) == {FOCUS_PATH}, "democratic layout must change only the Korean focus source")
+    record = lock["runtime_text"][FOCUS_PATH]
+    current_bytes = (ROOT / FOCUS_PATH).read_bytes()
+    require(hashlib.sha256(current_bytes).hexdigest().upper() == record["output_sha256"].upper(),
+            "democratic layout final output differs from its reviewed merge")
+    ancestor_bytes = remove_democratic_layout_update(FOCUS_PATH, current_bytes)
+    require(hashlib.sha256(ancestor_bytes).hexdigest().upper() == record["previous_output_sha256"].upper(),
+            "democratic layout did not recover the exact preceding feature output")
+    current_document, ancestor_document = (parse(data.decode("utf-8-sig")) for data in (current_bytes, ancestor_bytes))
+
+    def without_direct_coordinates(document: Block) -> Block:
+        transformed = []
+        for entry in document:
+            if entry.key != "focus_tree" or not isinstance(entry.value, tuple):
+                transformed.append(entry)
+                continue
+            tree = tuple(Entry(item.key, item.op, tuple(field for field in item.value if field.key not in {"x", "y"}))
+                         if item.key == "focus" and isinstance(item.value, tuple) else item for item in entry.value)
+            transformed.append(Entry(entry.key, entry.op, tree))
+        return tuple(transformed)
+
+    require(without_direct_coordinates(current_document) == without_direct_coordinates(ancestor_document),
+            "democratic layout changed ordered gameplay, anchors, offsets or non-focus UI definitions")
+    current, ancestor = focus_blocks(current_document), focus_blocks(ancestor_document)
+    require(len(current) == len(ancestor) == 474 and list(current) == list(ancestor),
+            "democratic layout changed focus IDs or declaration order")
+    changes = lock["focus_changes"]
+    expected_changed = [change["focus_id"] for change in changes]
+    require(len(expected_changed) == len(set(expected_changed)) == 32, "democratic layout must select exactly thirty-two focus blocks")
+    actual_changed = [identifier for identifier in current
+                      if any(scalar(current[identifier], axis) != scalar(ancestor[identifier], axis) for axis in ("x", "y"))]
+    require(actual_changed == expected_changed, "democratic layout direct-change inventory or order differs")
+    changed_values = sum(scalar(current[identifier], axis) != scalar(ancestor[identifier], axis)
+                         for identifier in current for axis in ("x", "y"))
+    require(changed_values == 37, "democratic layout must change exactly thirty-seven coordinate values")
+    for change in changes:
+        identifier = change["focus_id"]
+        require(scalar(current[identifier], "relative_position_id") == change["anchor"], f"democratic layout anchor changed: {identifier}")
+        for label, focuses in (("before_xy", ancestor), ("after_xy", current)):
+            require({axis: int(scalar(focuses[identifier], axis)) for axis in ("x", "y")} == change[label],
+                    f"democratic layout direct coordinates differ from the selected source: {identifier}/{label}")
+
+    def coordinates(focuses: dict[str, Block], rule: str | None = None, completed: frozenset[str] = frozenset()) -> tuple[dict, dict]:
+        positions, chains = {}, {}
+
+        def trigger(block: Block, mode: str = "AND") -> bool:
+            values = []
+            for entry in block:
+                if entry.key in {"AND", "OR", "NOT"} and isinstance(entry.value, tuple):
+                    value = trigger(entry.value, "OR" if entry.key == "OR" else "AND")
+                    values.append(not value if entry.key == "NOT" else value)
+                elif entry.key == "has_game_rule" and isinstance(entry.value, tuple):
+                    require(scalar(entry.value, "rule") == "obsolete_focus_branches_visibility", "unsupported layout game rule")
+                    values.append(rule == scalar(entry.value, "option"))
+                elif entry.key == "has_completed_focus" and isinstance(entry.value, str):
+                    values.append(entry.value in completed)
+                else:
+                    raise ValueError(f"unsupported layout predicate: {entry.key}")
+            return any(values) if mode == "OR" else all(values)
+
+        for identifier, body in focuses.items():
+            anchors = [entry.value for entry in body if entry.key == "relative_position_id"]
+            require(len(anchors) <= 1, f"democratic layout has multiple anchors: {identifier}")
+            x, y = (int(scalar(body, axis)) for axis in ("x", "y"))
+            if anchors:
+                anchor = anchors[0]
+                require(anchor in positions, f"democratic layout anchor is missing, forward, self-referencing or cyclic: {identifier}")
+                x, y = x + positions[anchor][0], y + positions[anchor][1]
+                chains[identifier] = (*chains[anchor], identifier)
+            else:
+                chains[identifier] = (identifier,)
+            if rule is not None:
+                for offset in children(body, "offset"):
+                    if trigger(one(offset, "trigger")):
+                        x, y = x + int(scalar(offset, "x")), y + int(scalar(offset, "y"))
+            positions[identifier] = (x, y)
+        return positions, chains
+
+    before, before_chains = coordinates(ancestor)
+    after, after_chains = coordinates(current)
+    require(before_chains == after_chains, "democratic layout changed a placement anchor chain")
+    require(sum(len(chain) == 1 for chain in after_chains.values()) == 7
+            and sum(len(children(body, "offset")) for body in current.values()) == 7,
+            "democratic layout must retain seven absolute anchors and seven direct offsets")
+    root_id = "KOR_democracy_advance_forward"
+    sector = {identifier for identifier, chain in after_chains.items() if root_id in chain}
+    require(len(sector) == 95 and sector == set(lock["democratic_focus_ids"]), "democratic layout sector membership differs")
+    moved = {identifier for identifier in current if before[identifier] != after[identifier]}
+    require(len(moved) == 86 and moved == set(lock["moved_focus_ids"]) and moved <= sector,
+            "democratic layout must move exactly eighty-six selected democratic positions")
+    require(len(current.keys() - sector) == 379 and all(before[identifier] == after[identifier] for identifier in current.keys() - sector),
+            "democratic layout changed a non-democratic position")
+
+    def bounds(positions: dict, selected: set[str]) -> dict:
+        return {"min_x": min(positions[identifier][0] for identifier in selected), "max_x": max(positions[identifier][0] for identifier in selected),
+                "min_y": min(positions[identifier][1] for identifier in selected), "max_y": max(positions[identifier][1] for identifier in selected)}
+
+    require(before[root_id] == after[root_id] == (127, 2), "democratic layout moved its protected absolute entry")
+    require(bounds(before, sector) == lock["before_bounds"] == {"min_x": 108, "max_x": 158, "min_y": 2, "max_y": 24}
+            and bounds(after, sector) == lock["after_bounds"] == {"min_x": 113, "max_x": 151, "min_y": 2, "max_y": 24},
+            "democratic layout sector bounds differ from the selected compaction")
+    require(bounds(before, set(current)) == bounds(after, set(current)), "democratic layout expanded or moved the whole-tree bounds")
+    for left, right in (("KOR_president_kim_gu", "KOR_syngman_rhee_reelected"), ("KOR_trust_in_the_west", "KOR_contect_with_america")):
+        require(abs(after[left][0] - after[right][0]) == 10, "democratic layout president or West/US spacing differs")
+    for rule in ("SHOW", "HIDE"):
+        for complete in (False, True):
+            completed = frozenset({root_id}) if complete else frozenset()
+            before_final, _ = coordinates(ancestor, rule, completed)
+            after_final, _ = coordinates(current, rule, completed)
+            shift = -35 if rule == "HIDE" and complete else 0
+            for identifier in sector:
+                require(after_final[identifier] == (after[identifier][0] + shift, after[identifier][1]),
+                        f"democratic layout offset must be inherited exactly once: {identifier}/{rule}/{complete}")
+            require(all((after_final[identifier][0] - before_final[identifier][0], after_final[identifier][1] - before_final[identifier][1])
+                        == (after[identifier][0] - before[identifier][0], after[identifier][1] - before[identifier][1]) for identifier in current),
+                    f"democratic layout changed conditional movement beyond its base coordinates: {rule}/{complete}")
+    print("PASS democratic layout source/gameplay: exact feature ancestor, 474 IDs/order; only 32 direct blocks / 37 x-y values differ; ordered non-layout semantics preserved")
+    print("PASS democratic layout geometry: 95-node sector x108..158 to113..151, y2..24; 86 positions moved, 379 other positions fixed; seven anchors and offsets preserved")
+    print("PASS democratic conditional model: SHOW/HIDE before and after route completion; inherited -35x once after HIDE completion, unchanged anchor declaration order and whole-tree bounds")
+    print("SCOPED STATIC ONLY: grid centers and a bounded trigger model do not prove RT56 icon/title/wire/click rendering, normal progression, saves or all runtime states.")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -2200,9 +2328,10 @@ def main() -> int:
     mode.add_argument("--shipbuilding-check", action="store_true")
     mode.add_argument("--shipbuilding-self-test", action="store_true")
     mode.add_argument("--feature-check", action="store_true")
+    mode.add_argument("--democratic-layout-check", action="store_true")
     args = parser.parse_args()
     try:
-        run_feature_checks() if args.feature_check else run_shipbuilding_checks() if args.shipbuilding_check else run_shipbuilding_self_tests() if args.shipbuilding_self_test else run_civic_checks() if args.civic_check else run_civic_self_tests() if args.civic_self_test else run_royal_self_tests() if args.royal_self_test else run_self_tests() if args.self_test else run_checks()
+        run_democratic_layout_checks() if args.democratic_layout_check else run_feature_checks() if args.feature_check else run_shipbuilding_checks() if args.shipbuilding_check else run_shipbuilding_self_tests() if args.shipbuilding_self_test else run_civic_checks() if args.civic_check else run_civic_self_tests() if args.civic_self_test else run_royal_self_tests() if args.royal_self_test else run_self_tests() if args.self_test else run_checks()
     except (OSError, UnicodeError, ValueError, KeyError, StopIteration) as exc:
         print(f"ERROR Korean second-wave contract: {exc}")
         return 1

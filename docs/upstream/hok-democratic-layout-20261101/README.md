@@ -1,0 +1,9 @@
+# HOK democratic layout source snapshot ? 2026-11-01
+
+This snapshot captures the reviewed, uncommitted donor layout update on `07de265c1e992abb6584bdfcdf140320188c07f9`; it is not an immutable donor commit. The physical focus source SHA-256 is `6562D4ACFD05F791026502A9AEACE3668D3C89869DF4279F75C2F1016763F163`. Exact captured bytes and the committed Git baseline blob/hash are recorded in `tools/hok_democratic_layout_lock.json`.
+
+The update changes 32 direct focus layout blocks, 37 coordinate values and 32 contributor notes. Relative anchors stay fixed. The 95-focus democratic sector has 86 resolved position moves; its horizontal centre span contracts from 50 to 38 grid units (24%), while vertical bounds remain y2?24. Other sectors, gameplay, identifiers, declaration order, all seven offset blocks and the existing single inherited democratic HIDE shift remain unchanged.
+
+`runtime/` contains the hash-pinned donor working-tree source; `base/` contains exact committed donor Git blob bytes; `previous/` contains the exact compatibility ancestor; `integrated/` contains the expected narrow merge preserving existing RT56 and HOK feature integration. Each of the 32 hunks is anchored within its focus and includes its ID. Reapplying all captured hunks reconstructs the complete captured donor source bytes. Six documentation files are captured under `documents/`, including the upstream README, plans, coordinates and incident. The modified donor descriptor is excluded because it must not replace compatibility identity or dependencies.
+
+Donor incident runtime observations are donor-specific historical evidence. They do not prove RT56 rendering, normal progression, save behaviour, DLC combinations or multiplayer compatibility for the integrated output. This snapshot generation performs source capture and hunk reconstruction only; it does not run gameplay validators or launch HOI4.
