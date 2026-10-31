@@ -16,7 +16,7 @@ from check_korean_focus_update import (
     check_new_id_collisions, check_pp_only_project, named, one, parse, read, replace_entry,
     require, scalar, walk,
 )
-from validate_port import localisation_keys, mask_comments
+from validate_port import localisation_keys, mask_comments, top_level_block_keys
 from build_rt56_map import PROVINCE_ID_MAP, STATE_ID_MAP
 from migrate_hok_ids import apply_post_migration_fixes, replace_tokens
 from source_snapshot import (
@@ -31,8 +31,14 @@ from source_snapshot import (
     royal_update_lock, remove_royal_update,
     CIVIC_UPDATE_RUNTIME_PATHS, civic_update_lock, read_civic_source, remove_civic_update,
     remove_english_translation,
-    shipbuilding_update_lock, read_shipbuilding_source, remove_shipbuilding_update,
+    shipbuilding_update_lock, read_shipbuilding_source, remove_shipbuilding_update as _remove_shipbuilding_update,
+    feature_update_lock, remove_feature_update, verify_feature_snapshot,
 )
+
+
+#20261031_kpopmodder: Audit earlier layers only after verifying and reversing the exact approved feature output.
+def remove_shipbuilding_update(relative: str, data: bytes) -> bytes:
+    return _remove_shipbuilding_update(relative, remove_feature_update(relative, data))
 
 # [2026-09-23]_kpopmodder: Compare immutable donor input with only reviewed port transformations, never builder output.
 DONOR_OVERLAY = "gfx/interface/goals/HOK_KOR/shine_overlay.dds"
@@ -1745,11 +1751,11 @@ SHIPBUILDING_SPRITES = {
 
 def shipbuilding_documents() -> tuple[dict[str, bytes], dict[str, Block], dict[str, Block]]:
     lock = shipbuilding_update_lock()
-    payloads = {relative: (ROOT / relative).read_bytes()
+    payloads = {relative: remove_feature_update(relative, (ROOT / relative).read_bytes())
                 for relative in (*lock["runtime_text"], *lock["runtime_assets"])}
     documents = {relative: parse(data.decode("utf-8-sig")) for relative, data in payloads.items()
                  if Path(relative).suffix in (".txt", ".gfx")}
-    ancestors = {relative: parse(remove_shipbuilding_update(relative, payloads[relative]).decode("utf-8-sig"))
+    ancestors = {relative: parse(_remove_shipbuilding_update(relative, payloads[relative]).decode("utf-8-sig"))
                  for relative in SHIPBUILDING_EXISTING}
     return payloads, documents, ancestors
 
@@ -1768,7 +1774,7 @@ def check_shipbuilding_source(payloads: dict[str, bytes]) -> None:
                 f"shipbuilding pinned output differs: {relative}")
         if relative in SHIPBUILDING_EXISTING:
             # The inverse helper verifies the final bytes before returning a pinned ancestor.
-            ancestor = remove_shipbuilding_update(relative, data)
+            ancestor = _remove_shipbuilding_update(relative, data)
             require(hashlib.sha256(ancestor).hexdigest().upper()
                     == records[relative]["previous_output_sha256"].upper(),
                     f"shipbuilding changed its historical ancestor: {relative}")
@@ -1776,7 +1782,7 @@ def check_shipbuilding_source(payloads: dict[str, bytes]) -> None:
             require(data == read_shipbuilding_source(relative), f"shipbuilding source copy differs: {relative}")
     # Retain the exact preceding English and civic outputs, rather than projecting away arbitrary edits.
     for relative, digest in lock.get("preserved_outputs", {}).items():
-        require(hashlib.sha256((ROOT / relative).read_bytes()).hexdigest().upper() == digest.upper(),
+        require(hashlib.sha256(remove_feature_update(relative, (ROOT / relative).read_bytes())).hexdigest().upper() == digest.upper(),
                 f"shipbuilding changed an unselected generated output: {relative}")
 
 
@@ -1982,6 +1988,207 @@ def run_shipbuilding_self_tests() -> None:
     print("SCOPED STATIC ONLY: semantic mutations do not execute the engine or prove AI, expiry, save, DLC or multiplayer behaviour.")
 
 
+#20261031_kpopmodder: Validate the selected native DLC systems against ordered runtime blocks and the port's geography.
+def run_feature_checks() -> None:
+    verify_feature_snapshot()
+    lock = feature_update_lock()
+    records = {**lock["runtime_text"], **lock["runtime_assets"]}
+    require(len(lock["runtime_text"]) == 30 and len(lock["runtime_assets"]) == 28
+            and sum("previous_output_sha256" in record for record in records.values()) == 5,
+            "feature runtime inventory must remain thirty text files, twenty-eight assets and five existing-file overlays")
+    payloads = {relative: (ROOT / relative).read_bytes() for relative in records}
+    for relative, data in payloads.items():
+        require(hashlib.sha256(data).hexdigest().upper() == records[relative]["output_sha256"].upper(),
+                f"feature final output hash differs: {relative}")
+        if "previous_output_sha256" in records[relative]:
+            ancestor = remove_feature_update(relative, data)
+            require(hashlib.sha256(ancestor).hexdigest().upper() == records[relative]["previous_output_sha256"].upper(),
+                    f"feature failed to restore the exact preceding output: {relative}")
+    docs = {relative: parse(data.decode("utf-8-sig")) for relative, data in payloads.items()
+            if Path(relative).suffix in (".txt", ".gfx")}
+    current = focus_blocks(docs[FOCUS_PATH])
+    old = focus_blocks(parse(remove_feature_update(FOCUS_PATH, payloads[FOCUS_PATH]).decode("utf-8-sig")))
+    fission_id = "HOK_KOR_fission_chain_reaction_experiments"
+    civilian_id = "HOK_KOR_civilian_nuclear_investment"
+    require(len(old) == 472 and len(current) == 474 and current.keys() - old.keys() == {fission_id, civilian_id},
+            "feature focus additions must be exactly the two civil nuclear focuses")
+    fission, civilian = current[fission_id], current[civilian_id]
+    require(scalar(fission, "cost") == "5" and scalar(civilian, "cost") == "35",
+            "civil nuclear base costs must remain 35 and 245 days at seven days per focus point")
+    require(one(fission, "prerequisite") == parse("focus = KOR_seoul_national_university_expansion")
+            and one(civilian, "prerequisite") == parse(f"focus = {fission_id}"), "civil nuclear progression changed")
+    fission_reward = one(fission, "completion_reward")
+    require(one(fission_reward, "add_breakthrough_progress") == parse("specialization = specialization_nuclear value = 1.00"),
+            "fission focus must grant one nuclear breakthrough point")
+    require(one(fission_reward, "add_tech_bonus") == parse(f"name = {fission_id} ahead_reduction = 2 uses = 1 category = nuclear"),
+            "fission focus must retain its one-use two-year nuclear research bonus")
+    require(one(civilian, "available") == parse('has_tech = atomic_research has_dlc = "Gotterdammerung"')
+            and one(civilian, "bypass") == parse("has_tech = commercial_nuclear_reactor_tech")
+            and scalar(civilian, "cancel_if_invalid") == "yes" and scalar(civilian, "continue_if_invalid") == "no",
+            "civil nuclear DLC, technology, bypass or cancellation gate changed")
+    require(one(one(one(civilian, "completion_reward"), "hidden_effect"), "set_technology")
+            == parse("commercial_nuclear_reactor_tech = 1 popup = no"), "civil investment must grant reactor technology only")
+    require(not any(entry.key == "add_focus_progress" for body in (fission, civilian) for entry in walk(body)),
+            "removed civilian investment focus discount must not return")
+    seen = set()
+    for identifier, body in current.items():
+        anchors = [entry.value for entry in body if entry.key == "relative_position_id"]
+        require(not anchors or len(anchors) == 1 and anchors[0] in seen, f"focus anchor must precede its child: {identifier}")
+        seen.add(identifier)
+
+    mio_path = "common/military_industrial_organization/organizations/KOR_organization.txt"
+    organizations = named(docs[mio_path])
+    old_organizations = named(parse(remove_feature_update(mio_path, payloads[mio_path]).decode("utf-8-sig")))
+    require(organizations.keys() == old_organizations.keys(), "feature changed the existing MIO inventory")
+    inherited_mios = {}
+    for path in effective_files("common/military_industrial_organization/organizations"):
+        if path.name == "00_generic_organization.txt":
+            inherited_mios.update(named(read(path)))
+    traits = {}
+    for identifier, body in organizations.items():
+        additions = children(body, "add_trait")
+        require(tuple(entry for entry in body if entry.key != "add_trait") == old_organizations[identifier],
+                f"feature changed inherited RT56/HOK MIO access or design: {identifier}")
+        require(len(additions) == 1, f"each Korean MIO must receive exactly one specialization: {identifier}")
+        trait = additions[0]
+        token = scalar(trait, "token")
+        require(token.startswith("HOK_KOR_mio_trait_") and token not in traits, "MIO specialization token collision")
+        traits[token] = trait
+        gate = one(one(trait, "available"), "FROM")
+        require(scalar(gate, "has_completed_focus") in current, f"MIO trait has a missing focus gate: {token}")
+        parent = scalar(trait, "relative_position_id")
+        parents = [entry.key for entry in one(trait, "any_parent")]
+        require(parent in parents and len(parents) == len(set(parents)), f"MIO trait parent/position mismatch: {token}")
+        inherited = inherited_mios[scalar(body, "include")]
+        inherited_tokens = {entry.value for entry in walk(inherited) if entry.key == "token"}
+        require(set(parents) <= inherited_tokens, f"MIO specialization references a missing inherited parent: {token}")
+        require(scalar(trait, "special_trait_background") == "yes", f"MIO specialization presentation changed: {token}")
+    require(len(traits) == 15 and "original_tag = NKR" in payloads[mio_path].decode("utf-8-sig")
+            and "controls_state = 525" in payloads[mio_path].decode("utf-8-sig"),
+            "fifteen MIO specializations must preserve RT56 Hanjin eligibility")
+
+    research_path = "common/scripted_effects/HOK_KOR_research_network_effects.txt"
+    networks = named(docs[research_path])
+    require(len(networks) == 4, "research network must contain four service specializations")
+    for service, state in (("land", 525), ("naval", 920), ("air", 1144), ("nuclear", 918)):
+        effect = networks[f"HOK_KOR_establish_{service}_research_network"]
+        dlc_branch = one(effect, "if")
+        require(one(dlc_branch, "limit") == parse('has_dlc = "Gotterdammerung"'), f"research network DLC gate changed: {service}")
+        hidden = one(dlc_branch, "hidden_effect")
+        placement = [entry.value for entry in walk(hidden) if entry.key == "random_owned_controlled_state"]
+        require(len(placement) == 1, f"research facility placement count changed: {service}")
+        placement = placement[0]
+        require(one(placement, "prioritize") == parse(str(state)), f"research facility preferred state was not migrated: {service}")
+        limit = one(placement, "limit")
+        require(scalar(limit, "is_core_of") == "ROOT" and scalar(limit, "is_fully_controlled_by") == "ROOT",
+                f"research facility must use a fully controlled owned core: {service}")
+        for facility in ("air_facility", "land_facility", "naval_facility", "nuclear_facility"):
+            require(Entry(facility, "<", "1") in limit, f"research facility could replace an existing facility: {service}/{facility}")
+        require(one(placement, "construct_building_in_random_province") == parse(f"{service}_facility = 1"),
+                f"research network constructs the wrong facility: {service}")
+        levels = [entry.value for entry in walk(hidden) if entry.key == "add_scientist_level"]
+        require(levels == [parse(f"specialization = specialization_{service} level = 1")], f"research scientist level changed: {service}")
+        require(sum(entry.key == "set_country_flag" and entry.value == f"HOK_KOR_{service}_scientist_training_awarded"
+                    for entry in walk(hidden)) == 1, f"research scientist award must be marked once: {service}")
+
+    water_path = "common/decisions/HOK_KOR_soyang_water_gates.txt"
+    water = named(one(docs[water_path], "KOR_soyanggangdam_category"))
+    require(set(water) == {"KOR_inundate_the_water_lines", "KOR_drain_the_water_lines"}, "Soyang decision inventory changed")
+    for identifier, decision in water.items():
+        require(scalar(decision, "cost") == "25" and scalar(decision, "days_remove") == "14"
+                and scalar(decision, "fire_only_once") == "no" and one(decision, "ai_will_do") == parse("factor = 0"),
+                f"Soyang decision cost, duration, reuse or AI gate changed: {identifier}")
+        highlight = one(decision, "highlight_states")
+        require(one(highlight, "highlight_state_targets") == parse("state = 525 state = 1144")
+                and one(highlight, "highlight_provinces") == parse("7125 13539"), "Soyang highlights must use migrated geography")
+    water_effects = named(docs["common/scripted_effects/HOK_KOR_soyang_water_gates.txt"])
+    operation = one(docs["common/scripted_triggers/HOK_KOR_soyang_water_gates.txt"], "HOK_KOR_soyang_operation_conditions_trigger")
+    require(scalar(operation, "tag") == "KOR" and scalar(operation, "has_capitulated") == "no"
+            and scalar(operation, "has_war") == "yes"
+            and {entry.value for entry in operation if entry.key == "owns_state"} == {"525", "1144"}
+            and {entry.value for entry in operation if entry.key == "controls_province"} == {"7125", "13539"},
+            "Soyang operation must require wartime Korea and the two migrated river locations")
+    cleanup = water_effects["HOK_KOR_soyang_cleanup_effect"]
+    require({entry.key for entry in cleanup if isinstance(entry.value, tuple)} == {"525", "1144"},
+            "Soyang cleanup must remain bounded to the two river states")
+    flags = {entry.value for entry in cleanup if entry.key == "clr_global_flag"}
+    require(flags == {"HOK_KOR_soyang_" + suffix for suffix in ("managed_water", "opening", "flooding_active", "draining")},
+            "Soyang cleanup must clear only its four lifecycle flags")
+    actions = one(docs["common/on_actions/HOK_KOR_soyang_water_gates.txt"], "on_actions")
+    require({entry.key for entry in actions} == {"on_daily", "on_peace", "on_capitulation", "on_annex", "on_state_control_changed"},
+            "Soyang lifecycle hook inventory changed")
+    require("every_country" not in {entry.key for entry in walk(actions)} and "every_state" not in {entry.key for entry in walk(actions)},
+            "Soyang safety hook must not introduce a global scan")
+
+    raid = one(one(docs["common/raids/HOK_KOR_naval_commando_raids.txt"], "types"), "HOK_KOR_nagasaki_port_raid")
+    require(one(raid, "allowed") == parse('has_dlc = "Thunder at Our Gates" tag = KOR')
+            and one(raid, "visible") == parse("has_completed_focus = KOR_organization_rokmc")
+            and scalar(raid, "days_to_prepare") == "120" and scalar(raid, "command_power") == "40"
+            and scalar(raid, "fire_only_once") == "yes", "native naval raid gates, preparation or cost changed")
+    require(one(raid, "target_type") == parse("province = 9950")
+            and one(one(raid, "starting_point"), "types") == parse("naval_base"), "native raid port target or source type changed")
+    require(one(raid, "essential_equipment") == parse("convoy = 40")
+            and one(one(one(raid, "unit_requirements"), "battalion_types"), "marine") == parse("min = 3"),
+            "native raid marine or convoy requirement changed")
+    launch = one(raid, "launchable")
+    require(scalar(launch, "has_war_with") == "FROM" and scalar(one(launch, "FROM"), "controls_province") == "9950",
+            "native raid launch must require war and Japan's current control of Nagasaki port")
+    candidates = list((ROOT / "history/states").glob("528-*"))
+    require(len(candidates) == 1, "Nagasaki target state must resolve uniquely")
+    state = one(read(candidates[0]), "state")
+    require(scalar(state, "id") == "528" and "9950" in {entry.key for entry in one(state, "provinces")},
+            "Nagasaki port must belong to target state 528")
+    factions = named(docs["common/factions/templates/HOK_KOR_factions.txt"])
+    require(len(factions) == 4 and all(scalar(body, "can_leader_join_other_factions") == "yes"
+            and "change_leader_rule_industry" in {entry.key for entry in one(body, "default_rules")} for body in factions.values()),
+            "faction templates must retain four intended modern faction contracts")
+    faction_host_ids = {identifier for directory in ("common/factions/goals", "common/factions/rules")
+                        for path in effective_files(directory) for identifier, _ in top_level_block_keys(path)}
+    for identifier, template in factions.items():
+        references = {scalar(template, "manifest"), *(entry.key for entry in one(template, "goals")),
+                      *(entry.key for entry in one(template, "default_rules"))}
+        require(references <= faction_host_ids, f"faction template references a missing host goal or rule: {identifier}")
+    medals = named(one(docs["common/unit_medals/hok_medal_default.txt"], "unit_medals"))
+    require(len(medals) == 4 and all(scalar(body, "officer_xp") == "100" and children(body, "ship_modifiers")
+            and not children(body, "one_time_effect") for body in medals.values()), "naval medal counterpart or shared officer XP changed")
+
+    sprites = {}
+    for relative, document in docs.items():
+        if not relative.endswith(".gfx"):
+            continue
+        for entry in one(document, "spriteTypes"):
+            require(isinstance(entry.value, tuple), f"invalid feature sprite: {relative}")
+            identifier = scalar(entry.value, "name")
+            require(identifier not in sprites, f"duplicate feature sprite ID: {identifier}")
+            sprites[identifier] = entry.value
+            for item in walk(entry.value):
+                if item.key.lower() in {"texturefile", "animationmaskfile", "animationtexturefile"}:
+                    require(isinstance(item.value, str) and not Path(item.value).is_absolute() and ".." not in Path(item.value).parts,
+                            f"unsafe feature asset path: {identifier}")
+                    require(item.value in lock["runtime_assets"] and (ROOT / item.value).is_file(),
+                            f"feature HOK artwork must resolve through its selected local payload: {identifier}/{item.value}")
+    for identifier in (scalar(fission, "icon"), scalar(civilian, "icon"), *(scalar(trait, "icon") for trait in traits.values())):
+        require(identifier in sprites, f"feature content has no selected local sprite: {identifier}")
+    declaration = re.compile(r'\bname\s*=\s*"?([A-Za-z0-9_]+)"?')
+    selected_registries = {relative for relative in docs if relative.endswith(".gfx")}
+    for root in (ROOT, RT56_ROOT, VANILLA_ROOT):
+        for path in (root / "interface").rglob("*.gfx"):
+            if root == ROOT and path.relative_to(root).as_posix() in selected_registries:
+                continue
+            found = set(declaration.findall(mask_comments(path.read_bytes().decode("utf-8-sig"))))
+            require(not sprites.keys() & found, f"feature sprite ID collision: {path}")
+    for relative in lock["runtime_assets"]:
+        data = payloads[relative]
+        require(data[:4] == b"DDS " and len(data) >= 128, f"invalid feature DDS: {relative}")
+        height, width = struct.unpack("<II", data[12:20])
+        require(0 < width <= 4096 and 0 < height <= 4096, f"invalid feature image dimensions: {relative}")
+    check_new_id_collisions({"focus": ({fission_id, civilian_id}, "common/national_focus")}, {FOCUS_PATH})
+    print(f"PASS Korean feature integration: {len(records)} pinned runtime outputs and five exact ancestor reversals; 474-focus tree")
+    print("PASS feature semantics: civil nuclear 35/245-day costs and rewards; fifteen MIO specializations with RT56 access preserved; four migrated research facilities")
+    print("PASS feature scope: reversible Soyang decisions and bounded hooks; native Nagasaki raid; four factions; naval medals; selected local artwork")
+    print("SCOPED STATIC ONLY: no RT56 engine, UI, natural progression, AI, DLC matrix, save or multiplayer proof.")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -1992,9 +2199,10 @@ def main() -> int:
     mode.add_argument("--civic-check", action="store_true")
     mode.add_argument("--shipbuilding-check", action="store_true")
     mode.add_argument("--shipbuilding-self-test", action="store_true")
+    mode.add_argument("--feature-check", action="store_true")
     args = parser.parse_args()
     try:
-        run_shipbuilding_checks() if args.shipbuilding_check else run_shipbuilding_self_tests() if args.shipbuilding_self_test else run_civic_checks() if args.civic_check else run_civic_self_tests() if args.civic_self_test else run_royal_self_tests() if args.royal_self_test else run_self_tests() if args.self_test else run_checks()
+        run_feature_checks() if args.feature_check else run_shipbuilding_checks() if args.shipbuilding_check else run_shipbuilding_self_tests() if args.shipbuilding_self_test else run_civic_checks() if args.civic_check else run_civic_self_tests() if args.civic_self_test else run_royal_self_tests() if args.royal_self_test else run_self_tests() if args.self_test else run_checks()
     except (OSError, UnicodeError, ValueError, KeyError, StopIteration) as exc:
         print(f"ERROR Korean second-wave contract: {exc}")
         return 1

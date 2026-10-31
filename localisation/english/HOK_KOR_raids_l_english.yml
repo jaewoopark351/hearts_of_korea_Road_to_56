@@ -1,0 +1,12 @@
+﻿l_english:
+#20261031_kpopmodder: Explain Korea's native marine-raid category, exact Nagasaki target, costs, outcomes and focus unlock.
+ raid_category_HOK_KOR_naval_commando_raids:0 "Naval Commando Raids"
+ raid_category_header_HOK_KOR_naval_commando_raids:0 "Republic of Korea Naval Commando Operations"
+ tooltip_raid_category_HOK_KOR_naval_commando_raids:0 "§HNaval Commando Raids§!\nMarines approach enemy naval bases aboard transports to strike moored ships and harbour facilities."
+ raid_category_fluff_text_HOK_KOR_naval_commando_raids:0 "§LRepublic of Korea Naval Headquarters§!"
+ HOK_KOR_nagasaki_port_raid:0 "Strait of Korea Naval Base Raid"
+ HOK_KOR_nagasaki_port_raid_desc:0 "Before meeting the Japanese fleet in open battle, we should strike enemy ships tied to their berths. A marine raiding force will cross the Strait of Korea, attack the docks and moored ships at Nagasaki, and withdraw. Preparation will be lengthy and casualties severe, but we have only one chance to strike before the enemy fleet sails."
+ raid_type_HOK_KOR_nagasaki_port_raid:0 "$HOK_KOR_nagasaki_port_raid$"
+ raid_type_HOK_KOR_nagasaki_port_raid_desc:0 "$HOK_KOR_nagasaki_port_raid_desc$\n\n§YPreparation and Launch:§!\nRequires a division with at least 3 marine battalions, a departure naval base and 40 convoys. Assigns 40 Command Power and takes 120 days to prepare. Japan must own and control Nagasaki state and control the target port for preparation to begin. The raid can only launch while at war with Japan and can only be carried out once.\n\n§YResults - Limited Success / Success / Critical Success:§!\nDamages the target naval base at Nagasaki by 1 / 2 / 3 levels, and deals 25% / 50% / 75% damage to the organisation and strength of enemy ships moored there. Target damage is not applied if peace is made with Japan or ownership or control of the target state or port changes before the operation ends.\n\n§RRisks to the Assigned Division:§!\nEvery result costs 65% of its current organisation and 60% of its current strength. The division gains 10 percentage points of experience, and its divisional commander gains 50 experience on a limited success or better."
+ HOK_KOR_nagasaki_port_target:0 "Nagasaki Naval Base"
+ HOK_KOR_unlock_nagasaki_port_raid_tt:0 "Unlocks the §YStrait of Korea Naval Base Raid§! naval commando operation.\nRequires a division with at least 3 marine battalions, 40 convoys and a departure naval base. Nagasaki Naval Base may be raided once while at war with Japan."

@@ -143,3 +143,37 @@ common/ideas/HOK_KOR_emergency_shipbuilding.txt text eol=lf
 interface/HOK_KOR_emergency_shipbuilding_icons.gfx text eol=lf
 localisation/english/HOK_KOR_emergency_shipbuilding_l_english.yml text eol=lf
 localisation/korean/HOK_KOR_emergency_shipbuilding_l_korean.yml text eol=lf
+
+#20261031_kpopmodder: Preserve immutable feature inputs and the exact bytes reproduced by the Korean feature overlay.
+tools/hok_feature_update_lock.json text eol=lf
+docs/upstream/hok-feature-integration-20261031/** -text
+common/decisions/HOK_KOR_soyang_water_gates.txt text eol=crlf
+common/decisions/categories/KOR_decision_categories.txt text eol=crlf
+common/factions/templates/HOK_KOR_factions.txt text eol=crlf
+common/military_industrial_organization/organizations/KOR_organization.txt text eol=crlf
+common/modifiers/HOK_KOR_soyang_water_gates.txt text eol=crlf
+common/national_focus/korea.txt text eol=crlf
+common/on_actions/HOK_KOR_soyang_water_gates.txt text eol=crlf
+common/raids/HOK_KOR_naval_commando_raids.txt text eol=crlf
+common/raids/categories/HOK_KOR_raid_categories.txt text eol=crlf
+common/scripted_effects/HOK_KOR_research_network_effects.txt text eol=crlf
+common/scripted_effects/HOK_KOR_soyang_water_gates.txt text eol=crlf
+common/scripted_triggers/HOK_KOR_soyang_water_gates.txt text eol=crlf
+common/unit_medals/hok_medal_default.txt text eol=crlf
+events/korea.txt text eol=crlf
+interface/HOK_KOR_civil_nuclear_research.gfx text eol=crlf
+interface/HOK_KOR_factions.gfx text eol=crlf
+interface/HOK_KOR_mio_specializations.gfx text eol=crlf
+interface/HOK_KOR_raids.gfx text eol=crlf
+interface/HOK_KOR_soyang_water_gates.gfx text eol=crlf
+localisation/english/HOK_KOR_civil_nuclear_research_l_english.yml text eol=crlf
+localisation/english/HOK_KOR_mio_specializations_l_english.yml text eol=crlf
+localisation/english/HOK_KOR_raids_l_english.yml text eol=crlf
+localisation/english/HOK_KOR_research_network_l_english.yml text eol=crlf
+localisation/english/HOK_KOR_soyang_water_gates_l_english.yml text eol=crlf
+localisation/korean/HOK_KOR_civil_nuclear_research_l_korean.yml text eol=crlf
+localisation/korean/HOK_KOR_mio_specializations_l_korean.yml text eol=crlf
+localisation/korean/HOK_KOR_naval_captains_l_korean.yml text eol=crlf
+localisation/korean/HOK_KOR_raids_l_korean.yml text eol=crlf
+localisation/korean/HOK_KOR_research_network_l_korean.yml text eol=crlf
+localisation/korean/HOK_KOR_soyang_water_gates_l_korean.yml text eol=crlf

@@ -1,0 +1,8 @@
+﻿l_english:
+#20261031_kpopmodder: Localise the university fission experiment and civilian reactor technology investment.
+ HOK_KOR_fission_chain_reaction_experiments:0 "Fission Chain Reaction Experiments"
+ HOK_KOR_fission_chain_reaction_experiments_desc:0 "University physicists are examining nuclear fission. We must assemble experimental equipment and research materials to test whether a chain reaction is possible, and establish the foundations for further atomic research."
+ HOK_KOR_civilian_nuclear_investment:0 "Civilian Reactor Investment"
+ HOK_KOR_civilian_nuclear_investment_desc:0 "Our growing factories and cities need a reliable supply of electricity. Long-term investment in reactor design and operator training will turn the results of nuclear research into civilian power stations."
+ HOK_KOR_civilian_nuclear_technology_tt:0 "§YReactor Construction Technology§! will be acquired, allowing us to construct §YCivilian Reactors§!."
+ commercial_nuclear_reactor_tech:0 "Civilian Reactor Construction Technology"

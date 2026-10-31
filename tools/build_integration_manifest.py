@@ -30,6 +30,7 @@ from source_snapshot import (
     CIVIC_UPDATE_MODIFIED_PATHS, civic_update_lock, read_civic_source, remove_civic_update,
     english_translation_lock, remove_english_translation,
     shipbuilding_update_lock, read_shipbuilding_source, remove_shipbuilding_update,
+    feature_update_lock, remove_feature_update, verify_feature_snapshot,
 )
 
 
@@ -443,7 +444,9 @@ def sha256(path: Path) -> str:
 #20261020_kpopmodder: Audit earlier integration layers against their frozen pre-translation bytes.
 #20261020_kpopmodder: Undo the bounded shipbuilding overlay before auditing earlier English and gameplay layers.
 def pre_shipbuilding_bytes(relative: str | Path, data: bytes) -> bytes:
-    return remove_shipbuilding_update(Path(relative).as_posix(), data)
+    #20261031_kpopmodder: Require the exact feature output before restoring the independently pinned earlier layers.
+    name = Path(relative).as_posix()
+    return remove_shipbuilding_update(name, remove_feature_update(name, data))
 
 
 def historical_output_bytes(relative: str) -> bytes:
@@ -951,7 +954,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             payload = read_shipbuilding_source(relative)
             if hashlib.sha256(payload).hexdigest().upper() != record["sha256"]:
                 raise RuntimeError(f"shipbuilding frozen source hash differs from its lock: {relative}")
-            current = (REPO_ROOT / relative).read_bytes()
+            current = remove_feature_update(relative, (REPO_ROOT / relative).read_bytes())
             current_hash = hashlib.sha256(current).hexdigest().upper()
             if current_hash != record["output_sha256"]:
                 raise RuntimeError(f"shipbuilding output differs from its reviewed merge: {relative}")
@@ -959,7 +962,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             classification = record["classification"]
             if "previous_output_sha256" in record:
                 modified += 1
-                previous = pre_shipbuilding_bytes(relative, current)
+                previous = remove_shipbuilding_update(relative, current)
                 previous_hash = hashlib.sha256(previous).hexdigest().upper()
                 if (len(matching) != 1 or matching[0]["output_path"] != relative
                         or matching[0]["integration_class"] != classification
@@ -1014,6 +1017,59 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     if modified != 3 or additions != 6 or len(rows) != 1452:
         raise RuntimeError(f"unexpected shipbuilding integration totals: modified={modified} additions={additions} rows={len(rows)}")
 
+    #20261031_kpopmodder: Append the immutable DLC-feature delta while retaining every prior source and host-base column.
+    verify_feature_snapshot()
+    feature = feature_update_lock()
+    if feature["source_commit"] != "07de265c1e992abb6584bdfcdf140320188c07f9":
+        raise RuntimeError("unreviewed Korean feature revision")
+    feature_additions = 0
+    for group in ("runtime_text", "runtime_assets"):
+        for relative, record in feature[group].items():
+            current = (REPO_ROOT / relative).read_bytes()
+            current_hash = hashlib.sha256(current).hexdigest().upper()
+            if current_hash != record["output_sha256"].upper():
+                raise RuntimeError(f"feature output differs from its reviewed merge: {relative}")
+            matching = [entry for entry in rows if entry["source_path"] == relative]
+            classification = record["classification"]
+            if "previous_output_sha256" in record:
+                previous_hash = hashlib.sha256(remove_feature_update(relative, current)).hexdigest().upper()
+                if (len(matching) != 1 or matching[0]["output_path"] != relative
+                        or classification != "THREE_WAY_MERGE"
+                        or matching[0]["output_sha256"] != previous_hash
+                        or previous_hash != record["previous_output_sha256"].upper()):
+                    raise RuntimeError(f"feature overlay lost its preceding integration row: {relative}")
+                row = matching[0]
+            else:
+                if matching or relative in donor_relatives or (RT56_ROOT / relative).exists():
+                    raise RuntimeError(f"unreviewed feature addition collision: {relative}")
+                expected_class = "ASSET_COPY" if group == "runtime_assets" else "ADD"
+                if classification != expected_class:
+                    raise RuntimeError(f"unreviewed feature addition classification: {relative}")
+                feature_additions += 1
+                counts[classification] += 1
+                row = {
+                    "source_path": relative, "integration_class": classification,
+                    "status": "SHIPPED", "exact_path_rt56_collision": "no", "output_path": relative,
+                    "rt56_base_sha256": "", "donor_sha256": record["sha256"],
+                    "donor_source_commit": feature["source_commit"], "donor_source_blob": record["blob"],
+                    "donor_source_sha256": record["sha256"], "donor_source_checkout": "immutable-git-objects",
+                    "reason": "Selected HOK DLC features and civil nuclear research; original source and artwork attribution retained",
+                }
+                rows.append(row)
+            if classification == "ASSET_COPY" and current_hash != record["sha256"].upper():
+                raise RuntimeError(f"feature ASSET_COPY changed its source bytes: {relative}")
+            row.update({
+                "output_sha256": current_hash,
+                "feature_source_commit": feature["source_commit"],
+                "feature_source_blob": record["blob"], "feature_source_sha256": record["sha256"],
+                "feature_source_snapshot_path": record["snapshot_path"],
+                "feature_previous_output_sha256": record.get("previous_output_sha256", ""),
+                "feature_classification": classification, "feature_lock": "tools/hok_feature_update_lock.json",
+            })
+            row["reason"] += "; 2026-10-31 HOK feature integration selectively merged over the preserved RT56 geography, access rules and earlier English translation"
+    if len(rows) != 1452 + feature_additions:
+        raise RuntimeError("feature integration ledger inventory mismatch")
+
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(
         stream,
@@ -1053,6 +1109,13 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             "shipbuilding_classification",
             "shipbuilding_english_reason",
             "shipbuilding_lock",
+            "feature_source_commit",
+            "feature_source_blob",
+            "feature_source_sha256",
+            "feature_source_snapshot_path",
+            "feature_previous_output_sha256",
+            "feature_classification",
+            "feature_lock",
         ),
         lineterminator="\n",
     )

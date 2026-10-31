@@ -1284,6 +1284,147 @@ def verify_shipbuilding_snapshot() -> None:
     print("PASS shipbuilding frozen source: 7 runtime text, 2 DDS, 8 source documents/assets; three reviewed source hunks")
 
 
+#20261031_kpopmodder: Keep the new Korean systems as a reversible, immutable overlay over the reviewed RT56 outputs.
+FEATURE_LOCK_PATH = Path(__file__).with_name("hok_feature_update_lock.json")
+FEATURE_SNAPSHOT_ROOT = REPO_ROOT / "docs/upstream/hok-feature-integration-20261031"
+FEATURE_COMMIT = "07de265c1e992abb6584bdfcdf140320188c07f9"
+FEATURE_BASE_COMMIT = "860efe7a3513148dc6964b7e0e3dfafd19addfb7"
+
+
+@lru_cache(maxsize=1)
+def feature_update_lock() -> dict:
+    lock = json.loads(FEATURE_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_commit"], lock["base_commit"]) != (1, FEATURE_COMMIT, FEATURE_BASE_COMMIT):
+        raise ValueError("unreviewed Korean feature source revision")
+    if (len(lock["runtime_text"]), len(lock["runtime_assets"]), len(lock["documentation"])) != (30, 28, 51):
+        raise ValueError("Korean feature source allowlist changed")
+    return lock
+
+
+def _feature_archive(relative: str, digest: str) -> bytes:
+    path = (REPO_ROOT / relative).resolve()
+    path.relative_to(FEATURE_SNAPSHOT_ROOT.resolve())
+    data = path.read_bytes()
+    if sha256(data) != digest:
+        raise ValueError(f"Korean feature snapshot drift: {relative}")
+    return data
+
+
+def read_feature_source(relative: str) -> bytes:
+    name = Path(relative).as_posix()
+    lock = feature_update_lock()
+    record = {**lock["runtime_text"], **lock["runtime_assets"], **lock["documentation"]}[name]
+    data = _feature_archive(record["snapshot_path"], record["sha256"])
+    if len(data) != record["size"]:
+        raise ValueError(f"Korean feature source size drift: {name}")
+    return data
+
+
+def _feature_edits(data: bytes, record: dict, reverse: bool = False) -> bytes:
+    newline = b"\r\n" if b"\r\n" in data else b"\n"
+    for edit in reversed(record["hunks"]) if reverse else record["hunks"]:
+        old_key, new_key = ("after", "before") if reverse else ("before", "after")
+        old = "\n".join(edit[old_key]).encode("utf-8").replace(b"\n", newline)
+        new = "\n".join(edit[new_key]).encode("utf-8").replace(b"\n", newline)
+        if not old or data.count(old) != 1:
+            raise ValueError("Korean feature hunk is missing or duplicated")
+        data = data.replace(old, new, 1)
+    return data
+
+
+def apply_feature_update(relative: str, data: bytes) -> bytes:
+    name = Path(relative).as_posix()
+    record = feature_update_lock()["runtime_text"].get(name, {})
+    if "previous_output_sha256" not in record:
+        return data
+    if sha256(data) != record["previous_output_sha256"]:
+        raise ValueError(f"unreviewed pre-feature output: {name}")
+    result = _feature_edits(data, record)
+    if sha256(result) != record["output_sha256"]:
+        raise ValueError(f"Korean feature merged output drift: {name}")
+    return result
+
+
+def remove_feature_update(relative: str, data: bytes) -> bytes:
+    name = Path(relative).as_posix()
+    record = feature_update_lock()["runtime_text"].get(name, {})
+    if "previous_output_sha256" not in record:
+        return data
+    if sha256(data) != record["output_sha256"]:
+        raise ValueError(f"Korean feature output differs from reviewed merge: {name}")
+    result = _feature_edits(data, record, reverse=True)
+    if sha256(result) != record["previous_output_sha256"]:
+        raise ValueError(f"Korean feature reversal changed historical output: {name}")
+    return result
+
+
+def feature_addition(relative: str) -> bytes:
+    name = Path(relative).as_posix()
+    lock = feature_update_lock()
+    record = {**lock["runtime_text"], **lock["runtime_assets"]}[name]
+    if "previous_output_sha256" in record:
+        raise ValueError(f"Korean feature existing file requires its reviewed ancestor: {name}")
+    data = read_feature_source(name)
+    translated = False
+    for edit in record.get("transformations", []):
+        if edit["kind"] == "english_translation":
+            if not name.startswith("localisation/english/") or translated:
+                raise ValueError(f"invalid Korean feature translation target: {name}")
+            data = _feature_archive(edit["output_snapshot_path"], record["output_sha256"])
+            translated = True
+            continue
+        if edit["kind"] != "persistent_id_migration" or edit["match"] != "numeric-token":
+            raise ValueError(f"unreviewed Korean feature transformation: {name}")
+        old, new = edit["before"].encode("utf-8"), edit["after"].encode("utf-8")
+        data, count = re.subn(rb"(?<![0-9])" + re.escape(old) + rb"(?![0-9])", lambda _: new, data)
+        if count != edit["count"]:
+            raise ValueError(f"Korean feature transformation count drift: {name}")
+    if record.get("output_checkout") == "crlf":
+        data = data.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+    if "output_snapshot_path" in record and data != _feature_archive(record["output_snapshot_path"], record["output_sha256"]):
+        raise ValueError(f"Korean feature addition differs from its reviewed transformations: {name}")
+    if sha256(data) != record["output_sha256"]:
+        raise ValueError(f"Korean feature addition drift: {name}")
+    return data
+
+
+def verify_feature_snapshot() -> None:
+    lock = feature_update_lock()
+    #20261031_kpopmodder: Reject drift in the current host/schema inputs without altering older unresolved source pins.
+    roots = (("host_files", Path(r"C:\Program Files (x86)\Steam\steamapps\workshop\content\394360\820260968")),
+             ("vanilla_files", Path(r"C:\Program Files (x86)\Steam\steamapps\common\Hearts of Iron IV")))
+    for group, root in roots:
+        for relative, expected in lock[group].items():
+            path = (root / relative).resolve()
+            path.relative_to(root.resolve())
+            if sha256(path.read_bytes()) != expected:
+                raise ValueError(f"Korean feature {group} source drift: {relative}")
+    workshop = roots[0][1].parents[2] / "appworkshop_394360.acf"
+    entries = re.findall(r'"820260968"\s*\{([^}]+)\}', workshop.read_text(encoding="utf-8"))
+    manifests = [re.search(r'"manifest"\s*"(\d+)"', entry) for entry in entries]
+    if not manifests or any(item is None or item[1] != lock["workshop_manifest"] for item in manifests):
+        raise ValueError("Korean feature RT56 Workshop manifest drift")
+    for group in ("runtime_text", "runtime_assets", "documentation"):
+        for relative, record in lock[group].items():
+            data = read_feature_source(relative)
+            blob = subprocess.check_output(git_command() + ["rev-parse", f"{FEATURE_COMMIT}:{relative}"]).decode().strip()
+            raw = subprocess.check_output(git_command() + ["cat-file", "blob", record["blob"]])
+            if blob != record["blob"] or raw != data:
+                raise ValueError(f"Korean feature immutable source drift: {relative}")
+            if "previous_output_sha256" in record:
+                base_blob = subprocess.check_output(git_command() + ["rev-parse", f"{FEATURE_BASE_COMMIT}:{relative}"]).decode().strip()
+                original = subprocess.check_output(git_command() + ["cat-file", "blob", record["base_blob"]])
+                if base_blob != record["base_blob"] or sha256(original) != record["base_object_sha256"]:
+                    raise ValueError(f"Korean feature immutable base drift: {relative}")
+                if _feature_edits(original, record) != data:
+                    raise ValueError(f"Korean feature donor changed outside its reviewed hunks: {relative}")
+                previous = _feature_archive(record["previous_snapshot_path"], record["previous_output_sha256"])
+                apply_feature_update(relative, previous)
+            elif group != "documentation":
+                feature_addition(relative)
+    print(f"PASS Korean feature source: {len(lock['runtime_text'])} runtime text, {len(lock['runtime_assets'])} assets, {len(lock['documentation'])} source records")
+
+
 #20261020_kpopmodder: Reuse the reviewed English translation only for the port's existing keys and RT56-specific wording.
 ENGLISH_TRANSLATION_LOCK_PATH = Path(__file__).with_name("hok_english_translation_lock.json")
 ENGLISH_TRANSLATION_ARCHIVE = REPO_ROOT / "docs/upstream/hok-english-20261020"
@@ -1391,7 +1532,9 @@ def verify_english_translation() -> None:
     expected_paths = set(lock["runtime_text"])
     paths = {p.relative_to(REPO_ROOT).as_posix() for p in (REPO_ROOT / "localisation/english").rglob("*.yml")}
     additions = {p: r for p, r in shipbuilding_update_lock()["runtime_text"].items() if p.startswith("localisation/english/")}
-    if paths != expected_paths | additions.keys():
+    #20261031_kpopmodder: Extend English only by the reviewed new feature files, retaining every earlier translation contract.
+    feature_english = {p: r for p, r in feature_update_lock()["runtime_text"].items() if p.startswith("localisation/english/")}
+    if paths != expected_paths | additions.keys() | feature_english.keys():
         raise ValueError("English output file inventory differs from the reviewed translation layers")
     keys, changed, added = set(), set(lock["changed_common_keys"]), set(lock["port_only_keys"])
     if len(changed) != 25 or len(added) != 27 or changed & added or changed | added != lock["adapted_values"].keys():
@@ -1441,6 +1584,26 @@ def verify_english_translation() -> None:
     if len(extra_keys) != 4:
         raise ValueError("shipbuilding English must add exactly four keys")
     print("PASS English translation: 37 files, 2747 keys; historical 2691 reused, 25 adapted, 27 port-only, 255 excluded; four shipbuilding strings translated")
+    #20261031_kpopmodder: Enforce translated prose and protected game tokens for each additional feature locale pair.
+    feature_keys = set()
+    for relative in feature_english:
+        data = (REPO_ROOT / relative).read_bytes()
+        if data != feature_addition(relative):
+            raise ValueError(f"Korean feature English output drift: {relative}")
+        korean_path = relative.replace("/english/", "/korean/").replace("_l_english.yml", "_l_korean.yml")
+        korean = (REPO_ROOT / korean_path).read_bytes()
+        if korean != feature_addition(korean_path):
+            raise ValueError(f"Korean feature Korean output drift: {korean_path}")
+        en_rows, ko_rows = english_entries(data), english_entries(korean)
+        if en_rows.keys() != ko_rows.keys() or (keys | extra_keys | feature_keys) & en_rows.keys():
+            raise ValueError(f"Korean feature bilingual key collision: {relative}")
+        for key, (version, value) in en_rows.items():
+            kr_version, kr_value = ko_rows[key]
+            if (version != kr_version or Counter(ENGLISH_TOKENS.findall(value)) != Counter(ENGLISH_TOKENS.findall(kr_value))
+                    or value.count(r"\n") != kr_value.count(r"\n") or re.search(r"[\uac00-\ud7a3]", value)):
+                raise ValueError(f"Korean feature English protected text drift: {key}")
+        feature_keys.update(en_rows)
+    print(f"PASS Korean feature English: {len(feature_english)} files, {len(feature_keys)} additional translated keys")
 
 
 def main() -> int:
@@ -1485,6 +1648,7 @@ def main() -> int:
     civic_update_lock()
     print("HOK civic update: 23 runtime text + 8 DDS + 23 source documents/assets verified")
     verify_shipbuilding_snapshot()
+    verify_feature_snapshot()
     return 0
 
 

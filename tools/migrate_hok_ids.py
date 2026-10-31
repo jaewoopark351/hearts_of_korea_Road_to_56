@@ -13,7 +13,7 @@ import hashlib
 import re
 import sys
 from pathlib import Path
-from source_snapshot import FOCUS_UPDATE_PATHS, apply_english_translation, remove_shipbuilding_update
+from source_snapshot import FOCUS_UPDATE_PATHS, apply_english_translation, remove_shipbuilding_update, remove_feature_update
 
 from build_rt56_map import (
     HOK_ROOT,
@@ -1029,7 +1029,8 @@ def main() -> int:
         destination = (REPO_ROOT / Path(relative)).resolve()
         destination.relative_to(REPO_ROOT)
         #20261020_kpopmodder: Preserve the generator-owned naval overlay while auditing its exact migrated ancestor.
-        current = remove_shipbuilding_update(relative, destination.read_bytes())
+        #20261031_kpopmodder: Check the migrated ancestor after verifying and reversing the new Korean feature merge.
+        current = remove_shipbuilding_update(relative, remove_feature_update(relative, destination.read_bytes()))
         #20261012_kpopmodder: Audit the exact pre-civic ancestor without undoing the generator-owned gameplay overlay.
         if relative == "common/decisions/KOR_decision.txt" and current != migrated:
             from source_snapshot import civic_update_lock, remove_civic_update

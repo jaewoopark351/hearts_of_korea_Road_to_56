@@ -1,0 +1,2262 @@
+{
+  "format": 1,
+  "source_kind": "immutable-git-objects",
+  "source_root": "C:\\hoi\\hearts_of_korea",
+  "source_commit": "07de265c1e992abb6584bdfcdf140320188c07f9",
+  "base_commit": "860efe7a3513148dc6964b7e0e3dfafd19addfb7",
+  "compatibility_base_commit": "e871bd1246152c2d32f67c43181441ff31a706e7",
+  "captured_date": "2026-10-31",
+  "snapshot_root": "docs/upstream/hok-feature-integration-20261031",
+  "runtime_text": {
+    "common/decisions/HOK_KOR_soyang_water_gates.txt": {
+      "blob": "565363992c3ce4fbaf35d7e09dc7ac197aba27fe",
+      "sha256": "9A19E8BA2D3F1288B244778104AA9B08C0DA6FB7F9883BA54FF508AEAE7634D8",
+      "size": 2824,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/decisions/HOK_KOR_soyang_water_gates.txt",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "persistent_id_migration",
+          "before": "1029",
+          "after": "1144",
+          "count": 2,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "persistent_id_migration",
+          "before": "13418",
+          "after": "13539",
+          "count": 2,
+          "match": "numeric-token"
+        }
+      ],
+      "output_sha256": "603985506552D53D875C46137CE2B6CAFE1BDE73AD73ADCE633C095D34BCB953",
+      "output_size": 2911,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/decisions/HOK_KOR_soyang_water_gates.txt"
+    },
+    "common/decisions/categories/KOR_decision_categories.txt": {
+      "blob": "a6676eb82d9ddeb51e65472ef988fe82c86caba1",
+      "sha256": "D5E98F5F30DB0E624D4BA9EB5DA206F7FD1EE31341DE450E2148EA5187F1D05F",
+      "size": 2098,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/decisions/categories/KOR_decision_categories.txt",
+      "classification": "THREE_WAY_MERGE",
+      "base_blob": "2b7e79f2bbc15ded4184264bc8e6e8dd6fda924c",
+      "base_object_sha256": "5ACC115261ECADCA7C7DE38E30DD250A5D9B7B27B0306DB0F03908CB5661899C",
+      "previous_output_sha256": "70469FC0116178E64738D0DDEB3C499656FAFCCB1CFF51658BD46307395573FB",
+      "previous_output_size": 2107,
+      "previous_snapshot_path": "docs/upstream/hok-feature-integration-20261031/previous/common/decisions/categories/KOR_decision_categories.txt",
+      "hunks": [
+        {
+          "before": [
+            "\ticon = hol_prepare_the_inundation_lines"
+          ],
+          "after": [
+            "\t#20261031_kpopmodder: Use the project-owned small artwork for the completed Korean water-gate system.",
+            "\ticon = GFX_HOK_KOR_decision_category_soyang_water_gates"
+          ]
+        },
+        {
+          "before": [
+            "\t\thas_completed_focus = KOR_call_up_the_rokrf",
+            "\t}",
+            "}"
+          ],
+          "after": [
+            "\t\thas_completed_focus = KOR_call_up_the_rokrf",
+            "\t}",
+            "}",
+            ""
+          ]
+        }
+      ],
+      "output_sha256": "422E297593D729736107145AFF81F4BBF92F9A71D9842CF4A3C0A4C6BB3DAA4D",
+      "output_size": 2229,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/decisions/categories/KOR_decision_categories.txt"
+    },
+    "common/factions/templates/HOK_KOR_factions.txt": {
+      "blob": "9e82840808efc1d20655c25d1e159860387145e8",
+      "sha256": "6CA08B31FDCA2B27749FA5892CD0ECB0DD73FEBA6A717D82728B21D667BEA87F",
+      "size": 2299,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/factions/templates/HOK_KOR_factions.txt",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "0A9CCB696C96F5BF8D20BAEEB1D0D90C503805213B6EEB055CBF5404F067118C",
+      "output_size": 2378,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/factions/templates/HOK_KOR_factions.txt"
+    },
+    "common/military_industrial_organization/organizations/KOR_organization.txt": {
+      "blob": "876c15bc3fe1fadc308ee5106ca4c10298a0deb5",
+      "sha256": "A8E48B131241FF83138C11AC123FE3D5B10F9FF6EBD5892CB5D4549923ED3656",
+      "size": 12330,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/military_industrial_organization/organizations/KOR_organization.txt",
+      "classification": "THREE_WAY_MERGE",
+      "base_blob": "18ea35af9b5e1291848d22b642956c43a3da6f99",
+      "base_object_sha256": "30AF5EAFECDEC96C13359B9B735124C7C99059DA13E2DAB1D2C3A624BF06B78E",
+      "previous_output_sha256": "B0CBC7FC0905F9415955EDE4233C74171304AC45103A76BE42F350B73303926A",
+      "previous_output_size": 3125,
+      "previous_snapshot_path": "docs/upstream/hok-feature-integration-20261031/previous/common/military_industrial_organization/organizations/KOR_organization.txt",
+      "hunks": [
+        {
+          "before": [
+            "\t}",
+            "}",
+            "KOR_hyundai_rotem_organization = {"
+          ],
+          "after": [
+            "\t}",
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_daewoo_standardized_parts",
+            "\t\tname = HOK_KOR_mio_trait_daewoo_standardized_parts",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_daewoo_standardized_parts",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = -1 y = 1 }",
+            "\t\trelative_position_id = generic_mio_trait_simplified_suspension",
+            "\t\tany_parent = { generic_mio_trait_simplified_suspension }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_army_augmentation }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\treliability = 0.05",
+            "\t\t}",
+            "\t\tproduction_bonus = {",
+            "\t\t\tproduction_cost_factor = -0.05",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_hyundai_rotem_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "}",
+            "KOR_rygyeong_organization = {"
+          ],
+          "after": [
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_rotem_reinforced_armor",
+            "\t\tname = HOK_KOR_mio_trait_rotem_reinforced_armor",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_rotem_reinforced_armor",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = -1 y = 1 }",
+            "\t\trelative_position_id = generic_mio_trait_wide_tracks",
+            "\t\tany_parent = { generic_mio_trait_wide_tracks }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_armored_focus }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tarmor_value = 0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_rygyeong_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "}",
+            "KOR_doosan_organization = {"
+          ],
+          "after": [
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_rygyeong_infantry_breakthrough",
+            "\t\tname = HOK_KOR_mio_trait_rygyeong_infantry_breakthrough",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_rygyeong_infantry_breakthrough",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = 2 y = 0 }",
+            "\t\trelative_position_id = generic_mio_trait_battle_tank_specifications",
+            "\t\tany_parent = { generic_mio_trait_battle_tank_specifications }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_armored_focus }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tbreakthrough = 0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_doosan_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "\t}",
+            "}",
+            "",
+            "",
+            "#AIRCRAFT"
+          ],
+          "after": [
+            "\t}",
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_doosan_mobile_powertrain",
+            "\t\tname = HOK_KOR_mio_trait_doosan_mobile_powertrain",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_doosan_mobile_powertrain",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = -1 y = 1 }",
+            "\t\trelative_position_id = generic_mio_quality_assurance_routines",
+            "\t\tany_parent = { generic_mio_quality_assurance_routines }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_mobile_infantry }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tmaximum_speed = 0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "",
+            "",
+            "#AIRCRAFT"
+          ]
+        },
+        {
+          "before": [
+            "}",
+            "KOR_hanjin_air_organization = {"
+          ],
+          "after": [
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_kai_agile_airframes",
+            "\t\tname = HOK_KOR_mio_trait_kai_agile_airframes",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_kai_agile_airframes",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = 2 y = 0 }",
+            "\t\trelative_position_id = generic_mio_trait_advanced_aerodynamics",
+            "\t\tany_parent = { generic_mio_trait_advanced_aerodynamics }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_korea_aerospace_industry }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tair_agility = 0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_hanjin_air_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "}",
+            "KOR_jinhae_naval_air_factory_organization = {"
+          ],
+          "after": [
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_hanjin_long_range_navigation",
+            "\t\tname = HOK_KOR_mio_trait_hanjin_long_range_navigation",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_hanjin_long_range_navigation",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = 2 y = 0 }",
+            "\t\trelative_position_id = generic_mio_trait_conservative_designs",
+            "\t\tany_parent = { generic_mio_trait_conservative_designs }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_daehanminguk_gonggun }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tair_range = 0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_jinhae_naval_air_factory_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "\ticon = GFX_idea_kor_jinhae_naval_air_factory",
+            "\tallowed = {",
+            "\t\ttag = KOR"
+          ],
+          "after": [
+            "\ticon = GFX_idea_kor_jinhae_naval_air_factory",
+            "\tallowed = {",
+            "\t\ttag = KOR",
+            "\t}",
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_jinhae_torpedo_sights",
+            "\t\tname = HOK_KOR_mio_trait_jinhae_torpedo_sights",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_jinhae_torpedo_sights",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = 2 y = 0 }",
+            "\t\trelative_position_id = generic_mio_trait_navigation_equipment",
+            "\t\tany_parent = { generic_mio_trait_navigation_equipment }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = HOK_KOR_naval_air_coordination }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tnaval_strike_targetting = 0.1",
+            "\t\t\tnaval_strike_attack = 0.05",
+            "\t\t}"
+          ]
+        },
+        {
+          "before": [
+            "}",
+            "KOR_hyundai_heavy_industries_organization = {"
+          ],
+          "after": [
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_daewoo_heavy_gun_mounts",
+            "\t\tname = HOK_KOR_mio_trait_daewoo_heavy_gun_mounts",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_daewoo_heavy_gun_mounts",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = 2 y = 0 }",
+            "\t\trelative_position_id = generic_mio_trait_primary_battery_layout",
+            "\t\tany_parent = { generic_mio_trait_primary_battery_layout }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_large_surface_fleet }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\thg_attack = 0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_hyundai_heavy_industries_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "}",
+            "KOR_daehanjoseongongsa_organization = {"
+          ],
+          "after": [
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_hyundai_carrier_assembly",
+            "\t\tname = HOK_KOR_mio_trait_hyundai_carrier_assembly",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_hyundai_carrier_assembly",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = 2 y = 0 }",
+            "\t\trelative_position_id = generic_mio_trait_primary_fire_director_control",
+            "\t\tany_parent = { generic_mio_trait_primary_fire_director_control }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_carrier_focus }",
+            "\t\t}",
+            "\t\tlimit_to_equipment_type = { mio_cat_eq_all_carrier }",
+            "\t\tproduction_bonus = {",
+            "\t\t\tproduction_cost_factor = -0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_daehanjoseongongsa_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "\t}",
+            "}",
+            "KOR_gms_organization = {"
+          ],
+          "after": [
+            "\t}",
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_daehan_escort_sonar",
+            "\t\tname = HOK_KOR_mio_trait_daehan_escort_sonar",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_daehan_escort_sonar",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = 2 y = 0 }",
+            "\t\trelative_position_id = generic_mio_trait_submarine_hunters",
+            "\t\tany_parent = { generic_mio_trait_submarine_hunters }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_daehanminguk_haegun }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tsub_detection = 0.1",
+            "\t\t\tsub_attack = 0.05",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_gms_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "\t}",
+            "}",
+            "",
+            "",
+            "#MATERIEL"
+          ],
+          "after": [
+            "\t}",
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_gms_torpedo_fire_control",
+            "\t\tname = HOK_KOR_mio_trait_gms_torpedo_fire_control",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_gms_torpedo_fire_control",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = 3 y = 1 }",
+            "\t\trelative_position_id = generic_mio_trait_long_range_raiding",
+            "\t\tany_parent = { generic_mio_trait_long_range_raiding generic_mio_trait_high_speed_raiding }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_commerce_raiding }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\ttorpedo_attack = 0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "",
+            "",
+            "#MATERIEL"
+          ]
+        },
+        {
+          "before": [
+            "}",
+            "KOR_hanhwa_organization = {"
+          ],
+          "after": [
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_gukgun_rifle_tooling",
+            "\t\tname = HOK_KOR_mio_trait_gukgun_rifle_tooling",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_gukgun_rifle_tooling",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = -1 y = 1 }",
+            "\t\trelative_position_id = generic_mio_trait_drum_pattern_sights",
+            "\t\tany_parent = { generic_mio_trait_drum_pattern_sights }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_new_model_rifle }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tsoft_attack = 0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_hanhwa_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "}",
+            "KOR_kia_motors_organization = {"
+          ],
+          "after": [
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_hanhwa_artillery_ammunition",
+            "\t\tname = HOK_KOR_mio_trait_hanhwa_artillery_ammunition",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_hanhwa_artillery_ammunition",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = -1 y = 1 }",
+            "\t\trelative_position_id = generic_mio_trait_advanced_barrel_forging",
+            "\t\tany_parent = { generic_mio_trait_advanced_barrel_forging }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_improved_artillery }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tsoft_attack = 0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_kia_motors_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "\t}",
+            "}",
+            "KOR_mmaa_organization = {"
+          ],
+          "after": [
+            "\t}",
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_kia_economical_drivetrain",
+            "\t\tname = HOK_KOR_mio_trait_kia_economical_drivetrain",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_kia_economical_drivetrain",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = -1 y = 1 }",
+            "\t\trelative_position_id = generic_mio_trait_medium_machinegun_mounts",
+            "\t\tany_parent = { generic_mio_trait_medium_machinegun_mounts }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_mobile_infantry }",
+            "\t\t}",
+            "\t\tequipment_bonus = {",
+            "\t\t\tfuel_consumption = -0.1",
+            "\t\t}",
+            "\t}",
+            "}",
+            "KOR_mmaa_organization = {"
+          ]
+        },
+        {
+          "before": [
+            "\t\towner = { has_completed_focus = KOR_expansion_of_non_combat_support_units }",
+            "\t}"
+          ],
+          "after": [
+            "\t\towner = { has_completed_focus = KOR_expansion_of_non_combat_support_units }",
+            "\t}",
+            "",
+            "\t#20261031_kpopmodder: Add a focus-gated company specialization while preserving the inherited MIO tree and access rules.",
+            "\tadd_trait = {",
+            "\t\ttoken = HOK_KOR_mio_trait_mmaa_support_standardization",
+            "\t\tname = HOK_KOR_mio_trait_mmaa_support_standardization",
+            "\t\ticon = GFX_HOK_KOR_mio_trait_mmaa_support_standardization",
+            "\t\tspecial_trait_background = yes",
+            "\t\tposition = { x = -2 y = 0 }",
+            "\t\trelative_position_id = generic_mio_trait_private_scientists_program",
+            "\t\tany_parent = { generic_mio_trait_private_scientists_program }",
+            "\t\tavailable = {",
+            "\t\t\tFROM = { has_completed_focus = KOR_expansion_of_non_combat_support_units }",
+            "\t\t}",
+            "\t\tproduction_bonus = {",
+            "\t\t\tproduction_cost_factor = -0.1",
+            "\t\t}",
+            "\t}"
+          ]
+        }
+      ],
+      "output_sha256": "5D6A7630565416E4777A6225900FA95E9C8703008D51AAD3F9549F76F8188300",
+      "output_size": 12867,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/military_industrial_organization/organizations/KOR_organization.txt"
+    },
+    "common/modifiers/HOK_KOR_soyang_water_gates.txt": {
+      "blob": "d163d73fcb0dffd4f6c47a83076f095a6980aa4a",
+      "sha256": "03C99070AAFC7A9E717BF9F197883877F60876BB8ECD948B35D9BA34542FE181",
+      "size": 326,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/modifiers/HOK_KOR_soyang_water_gates.txt",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "6F4BE4EC67D3F5A563EC5944D34FDE887CFE2AA872AC0FC781556B5C6DC30769",
+      "output_size": 335,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/modifiers/HOK_KOR_soyang_water_gates.txt"
+    },
+    "common/national_focus/korea.txt": {
+      "blob": "a0922a5fabc9a62aea94281a92af2ec839054648",
+      "sha256": "E0EC525768556BA3D2167D1CBE724602B62B64A23FDBAD688EE1FD038857C77A",
+      "size": 478531,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/national_focus/korea.txt",
+      "classification": "THREE_WAY_MERGE",
+      "base_blob": "6a12049a7743da4aca34b31ec116a7e2d8d35ed9",
+      "base_object_sha256": "F4914830103B7FC5BEEC9173C8188300362C3FD8A767C7C5BCD51844FF7CB9B8",
+      "previous_output_sha256": "635A56041182DB8E4782BE485238BD2B14CCE2D344898BD6E21DF2AD73A574C6",
+      "previous_output_size": 498441,
+      "previous_snapshot_path": "docs/upstream/hok-feature-integration-20261031/previous/common/national_focus/korea.txt",
+      "hunks": [
+        {
+          "before": [
+            "\t\t\t\tINDENT = \"    \"",
+            "\t\t\t}"
+          ],
+          "after": [
+            "\t\t\t\tINDENT = \"    \"",
+            "\t\t\t}",
+            "\t\t\t#20261031_kpopmodder: Explain the two water-gate decisions unlocked by the completed dam.",
+            "\t\t\tunlock_decision_tooltip = KOR_inundate_the_water_lines",
+            "\t\t\tunlock_decision_tooltip = KOR_drain_the_water_lines"
+          ]
+        },
+        {
+          "before": [
+            "\t\t}",
+            "\t}",
+            "\t#Focus for Attract world-class scholars"
+          ],
+          "after": [
+            "\t\t}",
+            "\t}",
+            "\t#20261031_kpopmodder: Grant one nuclear breakthrough point; remove the five-day investment discount as requested.",
+            "\tfocus = {",
+            "\t\tid = HOK_KOR_fission_chain_reaction_experiments",
+            "\t\ticon = GFX_HOK_KOR_focus_fission_chain_reaction_experiments",
+            "\t\trelative_position_id = KOR_seoul_national_university_expansion",
+            "\t\tx = 0",
+            "\t\ty = 1",
+            "\t\tcost = 5",
+            "\t\tavailable_if_capitulated = no",
+            "\t\tprerequisite = { focus = KOR_seoul_national_university_expansion }",
+            "\t\tsearch_filters = { FOCUS_FILTER_RESEARCH }",
+            "\t\tai_will_do = { factor = 1 }",
+            "\t\tcompletion_reward = {",
+            "\t\t\tadd_breakthrough_progress = {",
+            "\t\t\t\tspecialization = specialization_nuclear",
+            "\t\t\t\tvalue = 1.00",
+            "\t\t\t}",
+            "\t\t\t#20261031_kpopmodder: Add one nuclear technology bonus reducing the ahead-of-time penalty by two years.",
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = HOK_KOR_fission_chain_reaction_experiments",
+            "\t\t\t\tahead_reduction = 2",
+            "\t\t\t\tuses = 1",
+            "\t\t\t\tcategory = nuclear",
+            "\t\t\t}",
+            "\t\t}",
+            "\t}",
+            "\t#20261031_kpopmodder: Keep the civilian reactor investment at its unmodified 245-day base cost.",
+            "\tfocus = {",
+            "\t\tid = HOK_KOR_civilian_nuclear_investment",
+            "\t\ticon = GFX_HOK_KOR_focus_civilian_nuclear_investment",
+            "\t\trelative_position_id = HOK_KOR_fission_chain_reaction_experiments",
+            "\t\tx = 0",
+            "\t\ty = 1",
+            "\t\tcost = 35",
+            "\t\tavailable_if_capitulated = no",
+            "\t\tprerequisite = { focus = HOK_KOR_fission_chain_reaction_experiments }",
+            "\t\tavailable = {",
+            "\t\t\thas_tech = atomic_research",
+            "\t\t\thas_dlc = \"Gotterdammerung\"",
+            "\t\t}",
+            "\t\tbypass = { has_tech = commercial_nuclear_reactor_tech }",
+            "\t\tcancel_if_invalid = yes",
+            "\t\tcontinue_if_invalid = no",
+            "\t\tsearch_filters = { FOCUS_FILTER_RESEARCH FOCUS_FILTER_INDUSTRY }",
+            "\t\tai_will_do = { factor = 1 }",
+            "\t\tcompletion_reward = {",
+            "\t\t\tcustom_effect_tooltip = HOK_KOR_civilian_nuclear_technology_tt",
+            "\t\t\thidden_effect = {",
+            "\t\t\t\tset_technology = {",
+            "\t\t\t\t\tcommercial_nuclear_reactor_tech = 1",
+            "\t\t\t\t\tpopup = no",
+            "\t\t\t\t}",
+            "\t\t\t}",
+            "\t\t}",
+            "\t}",
+            "\t#Focus for Attract world-class scholars"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_ideas = generic_secret_weapons_ns"
+          ],
+          "after": [
+            "\t\t\tadd_ideas = generic_secret_weapons_ns",
+            "\t\t\t#20261031_kpopmodder: Connect the defence research agency to a land facility and its existing scientist.",
+            "\t\t\tHOK_KOR_establish_land_research_network = yes"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\t\tcategory = jet_technology",
+            "\t\t\t}"
+          ],
+          "after": [
+            "\t\t\t\tcategory = jet_technology",
+            "\t\t\t}",
+            "\t\t\t#20261031_kpopmodder: Retain the research reward and establish the aviation project network when supported.",
+            "\t\t\tHOK_KOR_establish_air_research_network = yes"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tnews_event = { id = news.174 hours = 6 }"
+          ],
+          "after": [
+            "\t\t\tnews_event = { id = news.174 hours = 6 }",
+            "\t\t\t#20261031_kpopmodder: Retain the nuclear rewards and connect a facility with the existing nuclear scientist.",
+            "\t\t\tHOK_KOR_establish_nuclear_research_network = yes"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_ideas = KOR_expansion_army_officer_corps"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_daewoo_tank_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_daewoo_standardized_parts }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tadd_ideas = KOR_expansion_army_officer_corps"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = armor_bonus"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_hyundai_rotem_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_rotem_reinforced_armor }",
+            "\t\t\t\tmio:KOR_rygyeong_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_rygyeong_infantry_breakthrough }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = armor_bonus"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = motorized_bonus"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_doosan_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_doosan_mobile_powertrain }",
+            "\t\t\t\tmio:KOR_kia_motors_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_kia_economical_drivetrain }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = motorized_bonus"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = infantry_artillery_bonus",
+            "\t\t\t\tbonus = 1.0",
+            "\t\t\t\tuses = 2",
+            "\t\t\t\tcategory = infantry_weapons"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_gukgun_jobyeongchang_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_gukgun_rifle_tooling }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = infantry_artillery_bonus",
+            "\t\t\t\tbonus = 1.0",
+            "\t\t\t\tuses = 2",
+            "\t\t\t\tcategory = infantry_weapons"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = infantry_artillery_bonus",
+            "\t\t\t\tbonus = 1.0",
+            "\t\t\t\tuses = 2",
+            "\t\t\t\tcategory = artillery"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_hanhwa_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_hanhwa_artillery_ammunition }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = infantry_artillery_bonus",
+            "\t\t\t\tbonus = 1.0",
+            "\t\t\t\tuses = 2",
+            "\t\t\t\tcategory = artillery"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = special_bonus"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_mmaa_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_mmaa_support_standardization }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = special_bonus"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tcountry_event = { id = kor_events.5 }"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_daehanjoseongongsa_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_daehan_escort_sonar }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tcountry_event = { id = kor_events.5 }"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\t\tshow_ideas_tooltip = gyeongwon",
+            "\t\t\t}"
+          ],
+          "after": [
+            "\t\t\t\tshow_ideas_tooltip = gyeongwon",
+            "\t\t\t}",
+            "\t\t\t#20261031_kpopmodder: Add the naval facility and scientist connection without changing designer access.",
+            "\t\t\tHOK_KOR_establish_naval_research_network = yes"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tcustom_effect_tooltip = KOR_organization_rokmc_tt"
+          ],
+          "after": [
+            "\t\t\tcustom_effect_tooltip = KOR_organization_rokmc_tt",
+            "\t\t\t#20261031_kpopmodder: Explain the native Korean marine raid unlocked by this focus.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Thunder at Our Gates\" }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_unlock_nagasaki_port_raid_tt",
+            "\t\t\t}"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_doctrine_cost_reduction = {",
+            "\t\t\t\tname = fleet_in_being_bonus"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_daewoo_ship_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_daewoo_heavy_gun_mounts }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tadd_doctrine_cost_reduction = {",
+            "\t\t\t\tname = fleet_in_being_bonus"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = {",
+            "\t\t\t\t\thas_dlc = \"Man the Guns\"",
+            "\t\t\t\t}",
+            "\t\t\t\tset_technology = { early_ship_hull_carrier = 1 }"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_hyundai_heavy_industries_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_hyundai_carrier_assembly }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = {",
+            "\t\t\t\t\thas_dlc = \"Man the Guns\"",
+            "\t\t\t\t}",
+            "\t\t\t\tset_technology = { early_ship_hull_carrier = 1 }"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_doctrine_cost_reduction = {",
+            "\t\t\t\tname = sub_op_bonus"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_gms_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_gms_torpedo_fire_control }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tadd_doctrine_cost_reduction = {",
+            "\t\t\t\tname = sub_op_bonus"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tunlock_decision_tooltip = HOK_KOR_enact_emergency_special_shipbuilding"
+          ],
+          "after": [
+            "\t\t\tunlock_decision_tooltip = HOK_KOR_enact_emergency_special_shipbuilding",
+            "\t\t\t#20261031_kpopmodder: Also announce the existing first fleet milestone without changing its fleet requirements.",
+            "\t\t\tunlock_decision_tooltip = KOR_vision_1950_step_1"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tcountry_event = { id = kor_events.6 }"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_hanjin_air_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_hanjin_long_range_navigation }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tcountry_event = { id = kor_events.6 }"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tair_experience = 50",
+            "\t\t\trandom_owned_controlled_state = {"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_kai_company_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_kai_agile_airframes }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tair_experience = 50",
+            "\t\t\trandom_owned_controlled_state = {"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tcreate_faction = \"HoK_faction_name_asian_liberation_front\""
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Create the same liberation-front faction through its explicit modern template.",
+            "\t\t\tcreate_faction_from_template = HOK_KOR_faction_template_asian_liberation_front"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tcreate_faction = \"HoK_faction_name_asian_union\""
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Preserve the Asian Union invitation route while registering explicit faction goals.",
+            "\t\t\tcreate_faction_from_template = HOK_KOR_faction_template_asian_union"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\t\t\tcreate_faction = \"GER_central_powers_faction\""
+          ],
+          "after": [
+            "\t\t\t\t\t#20261031_kpopmodder: Keep Germany as founder and retain the existing alliance invitation when creating a new royal bloc.",
+            "\t\t\t\t\tcreate_faction_from_template = HOK_KOR_faction_template_central_powers"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = HOK_KOR_naval_air_coordination"
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Announce the focus-gated company specialization while retaining normal MIO trait purchase.",
+            "\t\t\tif = {",
+            "\t\t\t\tlimit = { has_dlc = \"Arms Against Tyranny\" }",
+            "\t\t\t\tmio:KOR_jinhae_naval_air_factory_organization = { unlock_mio_trait_tooltip = HOK_KOR_mio_trait_jinhae_torpedo_sights }",
+            "\t\t\t\tcustom_effect_tooltip = HOK_KOR_mio_specialization_purchase_tt",
+            "\t\t\t}",
+            "\t\t\tadd_tech_bonus = {",
+            "\t\t\t\tname = HOK_KOR_naval_air_coordination"
+          ]
+        }
+      ],
+      "output_sha256": "FDD4296796566676BD1B298FB3587AA7F4486D4F436116102B58E57842E6C753",
+      "output_size": 506935,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/national_focus/korea.txt"
+    },
+    "common/on_actions/HOK_KOR_soyang_water_gates.txt": {
+      "blob": "26efbf6b25b7634c220a44689a1e61a7661fa389",
+      "sha256": "5A588698EA7E43569273B62CC1EAE91F8EFF1D4D7A483AEE344C487A85F4F001",
+      "size": 803,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/on_actions/HOK_KOR_soyang_water_gates.txt",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "D8DF5F18155B2CDE75AAA342A67E54C0896A8ED0D5B961819902BE2F6A5F661E",
+      "output_size": 830,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/on_actions/HOK_KOR_soyang_water_gates.txt"
+    },
+    "common/raids/HOK_KOR_naval_commando_raids.txt": {
+      "blob": "db9e07d47a2bbaa2428032b0f2b14e9f360a2f8d",
+      "sha256": "121BCF44E7B3B2781DEE53ABDCF9A3ECE898A3B448757B24D413F816636C8BA9",
+      "size": 6388,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/raids/HOK_KOR_naval_commando_raids.txt",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "3AC4C377A30F4C4A540D76A8CCD475DF08E7DA5559709E626023AA27D2ED76E7",
+      "output_size": 6662,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/raids/HOK_KOR_naval_commando_raids.txt"
+    },
+    "common/raids/categories/HOK_KOR_raid_categories.txt": {
+      "blob": "46bb90d7a9db75fc762315a6781d02272919d591",
+      "sha256": "EA463D0C8DC676EF130A949FBF309C02BE4AAF05F110429AE80363AFFB739BFB",
+      "size": 394,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/raids/categories/HOK_KOR_raid_categories.txt",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "FF5EB886E48D9C272268E92C8EE898037FDE957B01C719BB1FE08AB4CFD978D7",
+      "output_size": 409,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/raids/categories/HOK_KOR_raid_categories.txt"
+    },
+    "common/scripted_effects/HOK_KOR_research_network_effects.txt": {
+      "blob": "c3f00a3c9bff02e45a56ecb8dcd5ac3075cf73f1",
+      "sha256": "1630ADBE5E0ECE8175C636595CFCB7465FB2222CC0EEE0A74925F2A8D6A0D890",
+      "size": 5012,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/scripted_effects/HOK_KOR_research_network_effects.txt",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "persistent_id_migration",
+          "before": "1030",
+          "after": "920",
+          "count": 1,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "persistent_id_migration",
+          "before": "1029",
+          "after": "1144",
+          "count": 1,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "persistent_id_migration",
+          "before": "1028",
+          "after": "918",
+          "count": 1,
+          "match": "numeric-token"
+        }
+      ],
+      "output_sha256": "DCE1D54C1C0B1EAD3ADD96F7F9826D1C5F15490DA36626FE27B5D7DDCE5CC23A",
+      "output_size": 5176,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/scripted_effects/HOK_KOR_research_network_effects.txt"
+    },
+    "common/scripted_effects/HOK_KOR_soyang_water_gates.txt": {
+      "blob": "69324b782e5200c23942d9bf18c4673dd36171de",
+      "sha256": "73EAE9678EFF03EC82A84618841D9541C38BC87389F91950B667EF75296E056A",
+      "size": 2647,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/scripted_effects/HOK_KOR_soyang_water_gates.txt",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "persistent_id_migration",
+          "before": "1029",
+          "after": "1144",
+          "count": 2,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "persistent_id_migration",
+          "before": "13418",
+          "after": "13539",
+          "count": 2,
+          "match": "numeric-token"
+        }
+      ],
+      "output_sha256": "4549B3786662C77465B889FE8608F5FFE91FFB1F77D46B649C02384DA2586A85",
+      "output_size": 2736,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/scripted_effects/HOK_KOR_soyang_water_gates.txt"
+    },
+    "common/scripted_triggers/HOK_KOR_soyang_water_gates.txt": {
+      "blob": "d986b1f00f54057a295f797c52cee260e736e958",
+      "sha256": "E63505FE3329BF4744983A09171F96BE3E3EF70442D67D40EA5BA01BCDE50670",
+      "size": 468,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/scripted_triggers/HOK_KOR_soyang_water_gates.txt",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "persistent_id_migration",
+          "before": "1029",
+          "after": "1144",
+          "count": 2,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "persistent_id_migration",
+          "before": "13418",
+          "after": "13539",
+          "count": 2,
+          "match": "numeric-token"
+        }
+      ],
+      "output_sha256": "E1DE41193146BA92E4D166B36C676C7A64C9BD1EA775455EADBA451B057D0926",
+      "output_size": 486,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/scripted_triggers/HOK_KOR_soyang_water_gates.txt"
+    },
+    "common/unit_medals/hok_medal_default.txt": {
+      "blob": "47d70931510337f3c7c6558408ed6c1db6fb761a",
+      "sha256": "ED1CD660121178860B088BE966B7FBB4BB6843F741CA0A3F067E2F67620009D5",
+      "size": 1681,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/common/unit_medals/hok_medal_default.txt",
+      "classification": "THREE_WAY_MERGE",
+      "base_blob": "eadffa6879a0db0a2f8ce162acb2dcbc98b30f53",
+      "base_object_sha256": "0AACA76BABBE7FCB9C2F63BD44036FEE75510E128B42A548F220075CE169548A",
+      "previous_output_sha256": "78ECF12871B5D3FA1F84BFFBB7522B0B3654B9555EEFBAB6EC4F903C99250C55",
+      "previous_output_size": 1190,
+      "previous_snapshot_path": "docs/upstream/hok-feature-integration-20261031/previous/common/unit_medals/hok_medal_default.txt",
+      "hunks": [
+        {
+          "before": [
+            "\t\t\tarmy_org_factor = 0.05",
+            "\t\t}",
+            "\t\t",
+            "\t\tone_time_effect = {",
+            "\t\t\tadd_divisional_commander_xp = 100"
+          ],
+          "after": [
+            "\t\t\tarmy_org_factor = 0.05",
+            "\t\t}",
+            "\t\t",
+            "\t\t#20261031_kpopmodder: Match the vanilla USA naval counterpart and share the existing 100 officer XP across services.",
+            "\t\tship_modifiers = {",
+            "\t\t\tnavy_org_factor = 0.05",
+            "\t\t\tnaval_morale_factor = 0.05"
+          ]
+        },
+        {
+          "before": [
+            "\t\t",
+            "\t}",
+            "\t",
+            "\tchungmu_mugong_hunjang = {"
+          ],
+          "after": [
+            "\t\tofficer_xp = 100",
+            "\t\t",
+            "\t}",
+            "\t",
+            "\tchungmu_mugong_hunjang = {"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tsupply_consumption_factor = -0.1",
+            "\t\t}",
+            "\t\t",
+            "\t\tone_time_effect = {",
+            "\t\t\tadd_divisional_commander_xp = 100"
+          ],
+          "after": [
+            "\t\t\tsupply_consumption_factor = -0.1",
+            "\t\t}",
+            "\t\t",
+            "\t\t#20261031_kpopmodder: Match the vanilla USA naval counterpart and share the existing 100 officer XP across services.",
+            "\t\tship_modifiers = {",
+            "\t\t\tnaval_supply_consumption_factor = -0.1"
+          ]
+        },
+        {
+          "before": [
+            "\t\t",
+            "\t}",
+            "\t",
+            "\teulji_mugong_hunjang = {"
+          ],
+          "after": [
+            "\t\tofficer_xp = 100",
+            "\t\t",
+            "\t}",
+            "\t",
+            "\teulji_mugong_hunjang = {"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\tarmy_attack_factor = 0.05",
+            "\t\t}",
+            "\t\t",
+            "\t\tone_time_effect = {",
+            "\t\t\tadd_divisional_commander_xp = 100"
+          ],
+          "after": [
+            "\t\t\tarmy_attack_factor = 0.05",
+            "\t\t}",
+            "\t\t",
+            "\t\t#20261031_kpopmodder: Match the vanilla USA naval counterpart and share the existing 100 officer XP across services.",
+            "\t\tship_modifiers = {",
+            "\t\t\tnaval_damage_factor = 0.05"
+          ]
+        },
+        {
+          "before": [
+            "\t\t",
+            "\t}",
+            "\t",
+            "\ttaeguk_mugong_hunjang = {"
+          ],
+          "after": [
+            "\t\tofficer_xp = 100",
+            "\t\t",
+            "\t}",
+            "\t",
+            "\ttaeguk_mugong_hunjang = {"
+          ]
+        },
+        {
+          "before": [
+            "\t\t\texperience_loss_factor = -0.2",
+            "\t\t}",
+            "\t\t",
+            "\t\tone_time_effect = {",
+            "\t\t\tadd_divisional_commander_xp = 100"
+          ],
+          "after": [
+            "\t\t\texperience_loss_factor = -0.2",
+            "\t\t}",
+            "\t\t",
+            "\t\t#20261031_kpopmodder: Match the vanilla USA naval counterpart and share the existing 100 officer XP across services.",
+            "\t\tship_modifiers = {",
+            "\t\t\texperience_gain_navy_unit_factor = 0.2"
+          ]
+        },
+        {
+          "before": [
+            "\t\t",
+            "\t}",
+            "}"
+          ],
+          "after": [
+            "\t\tofficer_xp = 100",
+            "\t\t",
+            "\t}",
+            "}"
+          ]
+        }
+      ],
+      "output_sha256": "2F66C4E1951F2C1C63C9ADC18C4C6858421027175BA7CCB525F5B5B948A560BE",
+      "output_size": 1769,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/common/unit_medals/hok_medal_default.txt"
+    },
+    "events/korea.txt": {
+      "blob": "bfc8e57167b6d93ef0d165b880a46f0d73b0c648",
+      "sha256": "3E3AFB823D459712F82C9CA05F7361E11FB0DC65C0897EC5BFA08BA15F605620",
+      "size": 48264,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/events/korea.txt",
+      "classification": "THREE_WAY_MERGE",
+      "base_blob": "26ec539dfcc28dd273f5d6c35dbdf671124a52ab",
+      "base_object_sha256": "B9B062BF98D9F5F7A31AA9BF12A59409C6026D6FB37DC4F37E12138F5E92FD93",
+      "previous_output_sha256": "074092E94CDE473C9DD4508DFDD8B8A8AC3494993BC4F3911D17DA69EAB6A09F",
+      "previous_output_size": 51439,
+      "previous_snapshot_path": "docs/upstream/hok-feature-integration-20261031/previous/events/korea.txt",
+      "hunks": [
+        {
+          "before": [
+            "\t\t\tcreate_faction = \"HoK_faction_name_organization_of_free_nations\""
+          ],
+          "after": [
+            "\t\t\t#20261031_kpopmodder: Retain the US-founded OFN event chain and register its modern democratic faction template.",
+            "\t\t\tcreate_faction_from_template = HOK_KOR_faction_template_organization_of_free_nations"
+          ]
+        }
+      ],
+      "output_sha256": "9A36BB62CB4F7B1D7B3C997ABD5AD18C6B13ED585D452CB7A76BB20A8866BB80",
+      "output_size": 51576,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/events/korea.txt"
+    },
+    "interface/HOK_KOR_civil_nuclear_research.gfx": {
+      "blob": "d286214d230680ff49ca414f3bcb6e0ead9dfe72",
+      "sha256": "FE6DCD77A1760B548EE0CE97D5063048951F4CEA9D683DCF9D43E316C953C29E",
+      "size": 3450,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/interface/HOK_KOR_civil_nuclear_research.gfx",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "30D25F79F3C468730017DA84F04B6E4C4986FAB7A8497292CD2380360911018A",
+      "output_size": 3521,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/interface/HOK_KOR_civil_nuclear_research.gfx"
+    },
+    "interface/HOK_KOR_factions.gfx": {
+      "blob": "a42460a939afe517868acc371e20443ad337d386",
+      "sha256": "864B0A1CAB4E7556D8F30CB2CA41DB50CD08D3BE328521D6DD141F6B32ED8AB9",
+      "size": 798,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/interface/HOK_KOR_factions.gfx",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "EA1A1A42C59D35D20A50352AC30498922AB7AE3B1176807DC72A94CF4D0201E9",
+      "output_size": 821,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/interface/HOK_KOR_factions.gfx"
+    },
+    "interface/HOK_KOR_mio_specializations.gfx": {
+      "blob": "1931d25da9ac1bc306747b8576ef776fd6ddb8d7",
+      "sha256": "3437AE462298FE5DEC2F8FF40D9DC469AF243747F941AF9E8CE6D7C19DBDD75C",
+      "size": 2837,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/interface/HOK_KOR_mio_specializations.gfx",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "51E3F95E8BA6365C41ADF54332B03378664383D7AE6B8EFC58110F2AC2528B04",
+      "output_size": 2915,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/interface/HOK_KOR_mio_specializations.gfx"
+    },
+    "interface/HOK_KOR_raids.gfx": {
+      "blob": "e316d8f337142843ee19693dc3bf22324e33e0c8",
+      "sha256": "3967DEA46A4BAB3D68059EB9A1FEF878B552A7D02D6212768205182E93825562",
+      "size": 1038,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/interface/HOK_KOR_raids.gfx",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "ED989FD3AE78564A6C6548B53E2BF1DB6FA8E6CDD2CF1020423710B3BC9E8CBF",
+      "output_size": 1062,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/interface/HOK_KOR_raids.gfx"
+    },
+    "interface/HOK_KOR_soyang_water_gates.gfx": {
+      "blob": "bf05a4a56dba0e2489df4bf5efa667d44e37fee3",
+      "sha256": "3EB465F3A5F0C137950D34ECF81D13EBD2EB7C7A895D4EC8429C5F67CFA9E2BA",
+      "size": 602,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/interface/HOK_KOR_soyang_water_gates.gfx",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "F17076D2AB7933798D803D093F0209EABA3E57A9F17BADEF328BD4FA15A37BD1",
+      "output_size": 617,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/interface/HOK_KOR_soyang_water_gates.gfx"
+    },
+    "localisation/english/HOK_KOR_civil_nuclear_research_l_english.yml": {
+      "blob": "e0fa7c4a23f6c7dd1ee1210c4d00e65b40f59e1d",
+      "sha256": "6812605FDF1653C04E9864AFD698A0DC0E5072E4FBB3DFA7535A5573FE60BB86",
+      "size": 1041,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/english/HOK_KOR_civil_nuclear_research_l_english.yml",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "english_translation",
+          "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_civil_nuclear_research_l_english.yml",
+          "note": "Translate the upstream Korean fallback into British English for the compatibility port; preserve keys, placeholders, mechanics and formatting."
+        }
+      ],
+      "output_sha256": "C1CC960404BE1186A1346A6F5FEAC8B829F97B7A78054C5FCEDCF3F916B14555",
+      "output_size": 1036,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_civil_nuclear_research_l_english.yml",
+      "translation_note": "Translate the upstream Korean fallback into British English for the compatibility port; preserve keys, placeholders, mechanics and formatting.",
+      "translated_key_count": 6
+    },
+    "localisation/english/HOK_KOR_mio_specializations_l_english.yml": {
+      "blob": "5b6c3da5761e4e1b2652241fd1f529c2d70ff29e",
+      "sha256": "B8778E6C68ACCD78684E03B34AE4E86B4F643C940594C816DD31637525559EE1",
+      "size": 3884,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/english/HOK_KOR_mio_specializations_l_english.yml",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "english_translation",
+          "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_mio_specializations_l_english.yml",
+          "note": "Translate the upstream Korean fallback into British English for the compatibility port; preserve keys, placeholders, mechanics and formatting."
+        }
+      ],
+      "output_sha256": "60F8011EFBD5FF9C5A220AC01AF97076A1FDA76BA64C53FA0BD6E69A36DF4735",
+      "output_size": 3965,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_mio_specializations_l_english.yml",
+      "translation_note": "Translate the upstream Korean fallback into British English for the compatibility port; preserve keys, placeholders, mechanics and formatting.",
+      "translated_key_count": 31
+    },
+    "localisation/english/HOK_KOR_raids_l_english.yml": {
+      "blob": "1e0eb371def49428899dc99e1910ee1283c48d92",
+      "sha256": "B1A614523664ABC4DCE33EC6E1CADF1CC18BD5515697555A7C3D241BEB141631",
+      "size": 2570,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/english/HOK_KOR_raids_l_english.yml",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "english_translation",
+          "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_raids_l_english.yml",
+          "note": "Translate the upstream Korean fallback into British English for the compatibility port; preserve keys, placeholders, mechanics and formatting."
+        }
+      ],
+      "output_sha256": "C6AE0D0529FB39513816ACD3D056D6BD34E683776256D8C648D3431C11D5B826",
+      "output_size": 2517,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_raids_l_english.yml",
+      "translation_note": "Translate the upstream Korean fallback into British English for the compatibility port; preserve keys, placeholders, mechanics and formatting.",
+      "translated_key_count": 10
+    },
+    "localisation/english/HOK_KOR_research_network_l_english.yml": {
+      "blob": "4477e90901124f72c736c98b226ab7eaabf0d822",
+      "sha256": "46F83F15640B65E2B449B853C18F853A9F492462AA36DE6DCD8399828DD4594D",
+      "size": 2320,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/english/HOK_KOR_research_network_l_english.yml",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "persistent_id_migration",
+          "before": "1030",
+          "after": "920",
+          "count": 1,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "persistent_id_migration",
+          "before": "1029",
+          "after": "1144",
+          "count": 1,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "persistent_id_migration",
+          "before": "1028",
+          "after": "918",
+          "count": 1,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "english_translation",
+          "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_research_network_l_english.yml",
+          "note": "Translate the upstream Korean fallback into British English for the compatibility port; preserve keys, placeholders, mechanics and formatting."
+        }
+      ],
+      "output_sha256": "CB99E3AA06453DF9A0B8AD4898AAED21220B314314A8F7A7037F725719A757C6",
+      "output_size": 2145,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_research_network_l_english.yml",
+      "translation_note": "Translate the upstream Korean fallback into British English for the compatibility port; preserve keys, placeholders, mechanics and formatting.",
+      "translated_key_count": 4
+    },
+    "localisation/english/HOK_KOR_soyang_water_gates_l_english.yml": {
+      "blob": "da5b0fabef8e486e03f676d12693477da6120a1c",
+      "sha256": "B8ED062B4A56998D5AA366F191763AA6F59CA6D9CF8B2325988A432740E73E97",
+      "size": 2679,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/english/HOK_KOR_soyang_water_gates_l_english.yml",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "english_translation",
+          "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_soyang_water_gates_l_english.yml",
+          "note": "Retain upstream English wording; use British spelling for defence, organisation and normalise."
+        }
+      ],
+      "output_sha256": "C014978EB99FFA8E3BDC0431C986343C1F861E398260F2FB26BF04EDB35B061C",
+      "output_size": 2690,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/english/HOK_KOR_soyang_water_gates_l_english.yml",
+      "translation_note": "Retain upstream English wording; use British spelling for defence, organisation and normalise."
+    },
+    "localisation/korean/HOK_KOR_civil_nuclear_research_l_korean.yml": {
+      "blob": "fb9a863a47e6ade790acdb8bf0cc7c787bd1e856",
+      "sha256": "315A237F8F1922C9D3BC6D29CF3C09A79DE979C267F64550205498B6CF643A7A",
+      "size": 1040,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/korean/HOK_KOR_civil_nuclear_research_l_korean.yml",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "1CFCFBCD3E49EDFFDBF54F5E58223B309C38D7E131D0D07EC2A0F9D7E4DB9062",
+      "output_size": 1048,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/korean/HOK_KOR_civil_nuclear_research_l_korean.yml"
+    },
+    "localisation/korean/HOK_KOR_mio_specializations_l_korean.yml": {
+      "blob": "8d32a1c57cafb4ba6df4366a3cfa5ff3ba9afc2b",
+      "sha256": "A3F660B7F2A2ACF18F071893AF27CC0A1C7D9A79A5CB7144A5E04A18C577A59D",
+      "size": 3883,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/korean/HOK_KOR_mio_specializations_l_korean.yml",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "40FBC5511406C29A787A7BD7D15E3BA1B04D5A4798F35D56C407B2B1BAA56526",
+      "output_size": 3916,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/korean/HOK_KOR_mio_specializations_l_korean.yml"
+    },
+    "localisation/korean/HOK_KOR_naval_captains_l_korean.yml": {
+      "blob": "97ee4b3b2d30e8443e84e86a88db4461438930a5",
+      "sha256": "AC5574894A9BF732D81B507D18FEEE24336774193A84AE8FE6DC68E987CE7F76",
+      "size": 1479,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/korean/HOK_KOR_naval_captains_l_korean.yml",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "836E3780675A377065B0469578BB1E33D7BCE3A268E4A86C80EAB280EE060EC5",
+      "output_size": 1494,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/korean/HOK_KOR_naval_captains_l_korean.yml"
+    },
+    "localisation/korean/HOK_KOR_raids_l_korean.yml": {
+      "blob": "03a4c47f0fd123248250a24e57b36872def48046",
+      "sha256": "D18935D679BB870F2F48FA86525007ABF6AB10554B080457433D3FED902F27B9",
+      "size": 2569,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/korean/HOK_KOR_raids_l_korean.yml",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "D22D021C802464B85A0E65597FB6F06CA3855C47122C4234701C7DE8D8FC7149",
+      "output_size": 2581,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/korean/HOK_KOR_raids_l_korean.yml"
+    },
+    "localisation/korean/HOK_KOR_research_network_l_korean.yml": {
+      "blob": "e3d2a02c106446df548402ebb02e75436b23caa5",
+      "sha256": "DE1E8BCE20CF056520925124AE718680B795880398A215C5D621DE25616BBEF1",
+      "size": 2319,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/korean/HOK_KOR_research_network_l_korean.yml",
+      "classification": "ADD",
+      "transformations": [
+        {
+          "kind": "persistent_id_migration",
+          "before": "1030",
+          "after": "920",
+          "count": 1,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "persistent_id_migration",
+          "before": "1029",
+          "after": "1144",
+          "count": 1,
+          "match": "numeric-token"
+        },
+        {
+          "kind": "persistent_id_migration",
+          "before": "1028",
+          "after": "918",
+          "count": 1,
+          "match": "numeric-token"
+        }
+      ],
+      "output_sha256": "F410C77B3BB37053736B2A5262FFFB2A62EF3AF44AF484C075CC26A607BABAC6",
+      "output_size": 2323,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/korean/HOK_KOR_research_network_l_korean.yml"
+    },
+    "localisation/korean/HOK_KOR_soyang_water_gates_l_korean.yml": {
+      "blob": "40f72f06b91cb96407bf16a338de7ccbe9610cd1",
+      "sha256": "B2483114A77FA1BD04708219CA1F430C2263C5130448516885928CBC020D4ED5",
+      "size": 2935,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/korean/HOK_KOR_soyang_water_gates_l_korean.yml",
+      "classification": "ADD",
+      "transformations": [],
+      "output_sha256": "70E24CDDF22A25FDF2B44A413903008CDEE769517A45D023F7C6628ACD1BA7D5",
+      "output_size": 2946,
+      "output_checkout": "crlf",
+      "output_snapshot_path": "docs/upstream/hok-feature-integration-20261031/integrated/localisation/korean/HOK_KOR_soyang_water_gates_l_korean.yml"
+    }
+  },
+  "runtime_assets": {
+    "gfx/interface/decisions/HOK_KOR/soyang_water_gates/soyang_category.dds": {
+      "blob": "cc974f033cfe279f557ce2af85e2c6336d1a19df",
+      "sha256": "E763200BAD13B44A9CB2CDE073272D95CE96480D9DE8F6BC386B76BB0F759C89",
+      "size": 8288,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/decisions/HOK_KOR/soyang_water_gates/soyang_category.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "E763200BAD13B44A9CB2CDE073272D95CE96480D9DE8F6BC386B76BB0F759C89",
+      "output_size": 8288
+    },
+    "gfx/interface/decisions/HOK_KOR/soyang_water_gates/soyang_drain.dds": {
+      "blob": "51e962ccce544bfd449ee92a0a8684754877acaa",
+      "sha256": "0B3D7D4B27505B90AA57658796BAECD2AB7CDE16F2D4E34CEDFC68D157A8FB66",
+      "size": 4224,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/decisions/HOK_KOR/soyang_water_gates/soyang_drain.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "0B3D7D4B27505B90AA57658796BAECD2AB7CDE16F2D4E34CEDFC68D157A8FB66",
+      "output_size": 4224
+    },
+    "gfx/interface/decisions/HOK_KOR/soyang_water_gates/soyang_inundate.dds": {
+      "blob": "89208743514ee0ae51ee4187064626606603c9b0",
+      "sha256": "CC5F14F8B630A0DBDD21282A2F833E9269B122BA0F35C549B10EACFA76C8D26D",
+      "size": 4224,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/decisions/HOK_KOR/soyang_water_gates/soyang_inundate.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "CC5F14F8B630A0DBDD21282A2F833E9269B122BA0F35C549B10EACFA76C8D26D",
+      "output_size": 4224
+    },
+    "gfx/interface/factions/HOK_KOR/faction_icon_allies.dds": {
+      "blob": "cd32c1edb34f7bac441c7521fc73fa67a4500f86",
+      "sha256": "0D74485244CCF8E822F23CD5BA40CAF2B31CBDF2DB22B30E3FDBD9E41B410EA5",
+      "size": 80128,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/factions/HOK_KOR/faction_icon_allies.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "0D74485244CCF8E822F23CD5BA40CAF2B31CBDF2DB22B30E3FDBD9E41B410EA5",
+      "output_size": 80128
+    },
+    "gfx/interface/factions/HOK_KOR/faction_icon_generic_communist.dds": {
+      "blob": "c618d695060106c67de5103a284329c2658b03fb",
+      "sha256": "8965C81D485FD5BC30BA55ADC2BF8BF5D82D1F2FA622E92B14CD487F9D8CB686",
+      "size": 80128,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/factions/HOK_KOR/faction_icon_generic_communist.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "8965C81D485FD5BC30BA55ADC2BF8BF5D82D1F2FA622E92B14CD487F9D8CB686",
+      "output_size": 80128
+    },
+    "gfx/interface/factions/HOK_KOR/faction_logo_generic.dds": {
+      "blob": "163c4398f662aeb41d150442c3997b815c652026",
+      "sha256": "BC95FF5683742F9DE83E035B16E976D3118A180F1C27076364A788F7AED3AB02",
+      "size": 80128,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/factions/HOK_KOR/faction_logo_generic.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "BC95FF5683742F9DE83E035B16E976D3118A180F1C27076364A788F7AED3AB02",
+      "output_size": 80128
+    },
+    "gfx/interface/factions/HOK_KOR/faction_logo_generic_democratic.dds": {
+      "blob": "4a7fe8be602a5f2db3d88234f965124108760456",
+      "sha256": "A5FFB7A8DF1F37C32F89ACB3B0D98718B9B6BF30AEF1DB2383DA2CBCC66BB1D0",
+      "size": 80128,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/factions/HOK_KOR/faction_logo_generic_democratic.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "A5FFB7A8DF1F37C32F89ACB3B0D98718B9B6BF30AEF1DB2383DA2CBCC66BB1D0",
+      "output_size": 80128
+    },
+    "gfx/interface/goals/HOK_KOR/civil_nuclear_research/civilian_nuclear_investment.dds": {
+      "blob": "86658fb50de1b97ac3f55c0ba352f644c7af3350",
+      "sha256": "74431437FA43FEE63DA63E580B93AECDC8D0C2C7E4BC2C0DBF1F1A6892BEB4F0",
+      "size": 35328,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/goals/HOK_KOR/civil_nuclear_research/civilian_nuclear_investment.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "74431437FA43FEE63DA63E580B93AECDC8D0C2C7E4BC2C0DBF1F1A6892BEB4F0",
+      "output_size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/civil_nuclear_research/fission_chain_reaction_experiments.dds": {
+      "blob": "f9c919c390dbae8d7dec2f408f91f2ee796d7963",
+      "sha256": "BCF3761F057A465B613D366000B9B9679E31FD53326A26839FE3672D9535AE45",
+      "size": 35328,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/goals/HOK_KOR/civil_nuclear_research/fission_chain_reaction_experiments.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "BCF3761F057A465B613D366000B9B9679E31FD53326A26839FE3672D9535AE45",
+      "output_size": 35328
+    },
+    "gfx/interface/goals/HOK_KOR/civil_nuclear_research/shine_overlay.dds": {
+      "blob": "bc5bd9259076e07b9cec4f4c387bd10732501dbf",
+      "sha256": "BB416649358C73D34AACD46BAD61BC44211FAC8111627B56E25F385AD98F4448",
+      "size": 30752,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/goals/HOK_KOR/civil_nuclear_research/shine_overlay.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "BB416649358C73D34AACD46BAD61BC44211FAC8111627B56E25F385AD98F4448",
+      "output_size": 30752
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/daehan_escort_sonar.dds": {
+      "blob": "b6962783948cbcb7411523c5a83ca55fcfb6a73c",
+      "sha256": "C7C53FD61934E25E6FE5AB8A0305AB3B679163D3E35D209E96768A903D5F45AA",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/daehan_escort_sonar.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "C7C53FD61934E25E6FE5AB8A0305AB3B679163D3E35D209E96768A903D5F45AA",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/daewoo_heavy_gun_mounts.dds": {
+      "blob": "3b42d86f55cce53d6439b39d3b295bdb86d0cf3e",
+      "sha256": "1FEAFC71C0C62184C8BA01BA9998759B1319FBB3C820439CA9B6F8F35AC24F59",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/daewoo_heavy_gun_mounts.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "1FEAFC71C0C62184C8BA01BA9998759B1319FBB3C820439CA9B6F8F35AC24F59",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/daewoo_standardized_parts.dds": {
+      "blob": "e82e72e85de499527df3b96b3a4869bdbb40ecd9",
+      "sha256": "49B4CA60C03AB43519BD55030A59D6EBD7C3722772B57A55F5C5EC3FFE6C0F0B",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/daewoo_standardized_parts.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "49B4CA60C03AB43519BD55030A59D6EBD7C3722772B57A55F5C5EC3FFE6C0F0B",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/doosan_mobile_powertrain.dds": {
+      "blob": "bb9a1a6a77e00272187b75e687f7c94e82ca17f4",
+      "sha256": "DA93597200A349465B0B525AAF160174DECED51C8DA046179A9302FD1B1F3C60",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/doosan_mobile_powertrain.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "DA93597200A349465B0B525AAF160174DECED51C8DA046179A9302FD1B1F3C60",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/gms_torpedo_fire_control.dds": {
+      "blob": "8c34c2487220a113212f535d2a201b34d51083b7",
+      "sha256": "47A4A2576A1C75AA111F00D1F0934B7796348089817746714F537A785FD75468",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/gms_torpedo_fire_control.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "47A4A2576A1C75AA111F00D1F0934B7796348089817746714F537A785FD75468",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/gukgun_rifle_tooling.dds": {
+      "blob": "781143623a6d031c4a828da7a5d309394cc06458",
+      "sha256": "10AFA634E520D1D95DD9EA6B458004BE5344BA3156B8DF0209BA02F3A3B4141D",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/gukgun_rifle_tooling.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "10AFA634E520D1D95DD9EA6B458004BE5344BA3156B8DF0209BA02F3A3B4141D",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/hanhwa_artillery_ammunition.dds": {
+      "blob": "781143623a6d031c4a828da7a5d309394cc06458",
+      "sha256": "10AFA634E520D1D95DD9EA6B458004BE5344BA3156B8DF0209BA02F3A3B4141D",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/hanhwa_artillery_ammunition.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "10AFA634E520D1D95DD9EA6B458004BE5344BA3156B8DF0209BA02F3A3B4141D",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/hanjin_long_range_navigation.dds": {
+      "blob": "653b50c9b7b2f3a9a53bbf185dd87900d8c01a76",
+      "sha256": "376217D46594CCCFF36573B174C56DDF4182323E1A2BF4FD9D6D368F58964BB2",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/hanjin_long_range_navigation.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "376217D46594CCCFF36573B174C56DDF4182323E1A2BF4FD9D6D368F58964BB2",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/hyundai_carrier_assembly.dds": {
+      "blob": "7627d9ab5cf0738c88d8d7ffa0a8662191b11bef",
+      "sha256": "9794BE7B86E8F6972198E987396F8B2E968540BC9D4B193F4692023C1A8059FC",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/hyundai_carrier_assembly.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "9794BE7B86E8F6972198E987396F8B2E968540BC9D4B193F4692023C1A8059FC",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/jinhae_torpedo_sights.dds": {
+      "blob": "0bf769a1be64739d9c46d9535d1a4092389b971b",
+      "sha256": "999716C0372FD83BBCA4AA58B48605C3C337802982FF875B5D43555F8097EE8B",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/jinhae_torpedo_sights.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "999716C0372FD83BBCA4AA58B48605C3C337802982FF875B5D43555F8097EE8B",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/kai_agile_airframes.dds": {
+      "blob": "8917285ef682bd19b12f6b9bd3161c10b8503cd9",
+      "sha256": "6FA89B146EE2CC9EEF33056D6671ED78B6ED0AE6FEBB36BD00809E8F49C6EF27",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/kai_agile_airframes.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "6FA89B146EE2CC9EEF33056D6671ED78B6ED0AE6FEBB36BD00809E8F49C6EF27",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/kia_economical_drivetrain.dds": {
+      "blob": "b9a64695ad3e5dd2df8b8206e8806d17d9417fa7",
+      "sha256": "2C33F09A111FC8B9EA6A1A24796F2770A7E600B4B5E38ABB70139EC5BDE13B23",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/kia_economical_drivetrain.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "2C33F09A111FC8B9EA6A1A24796F2770A7E600B4B5E38ABB70139EC5BDE13B23",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/mmaa_support_standardization.dds": {
+      "blob": "7627d9ab5cf0738c88d8d7ffa0a8662191b11bef",
+      "sha256": "9794BE7B86E8F6972198E987396F8B2E968540BC9D4B193F4692023C1A8059FC",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/mmaa_support_standardization.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "9794BE7B86E8F6972198E987396F8B2E968540BC9D4B193F4692023C1A8059FC",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/rotem_reinforced_armor.dds": {
+      "blob": "e8de5e366687cf85c894a347990177babf83be25",
+      "sha256": "A48B688326F4A51FE404B520A3D2F0F88658726C9E1411F2EE96D9FE99DE50EC",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/rotem_reinforced_armor.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "A48B688326F4A51FE404B520A3D2F0F88658726C9E1411F2EE96D9FE99DE50EC",
+      "output_size": 9344
+    },
+    "gfx/interface/military_industrial_organization/HOK_KOR/rygyeong_infantry_breakthrough.dds": {
+      "blob": "c598ff34e7cbb8b45ae41ff68ef11cb303edae68",
+      "sha256": "39903DC08BD15EC07811F5A4C82B997AE60F65E2FE8302CE969A42FE40803E7C",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_industrial_organization/HOK_KOR/rygyeong_infantry_breakthrough.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "39903DC08BD15EC07811F5A4C82B997AE60F65E2FE8302CE969A42FE40803E7C",
+      "output_size": 9344
+    },
+    "gfx/interface/military_raids/HOK_KOR/nagasaki_port_map.dds": {
+      "blob": "822f00850e6f3d88bf1ce7f28a896a39f9f3ab55",
+      "sha256": "E7C9E85BFDE045C51FE2AA686CC67A183394AEDF8339FC003C218806E59937F4",
+      "size": 4224,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_raids/HOK_KOR/nagasaki_port_map.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "E7C9E85BFDE045C51FE2AA686CC67A183394AEDF8339FC003C218806E59937F4",
+      "output_size": 4224
+    },
+    "gfx/interface/military_raids/HOK_KOR/naval_base_target.dds": {
+      "blob": "0af0b9f857d39fb614dfe553675829463c7cdc1e",
+      "sha256": "F72A117ECF8C68245F90A4D7C9B847C35FD4192BC7D62C8F4371C67B7CECC926",
+      "size": 32896,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_raids/HOK_KOR/naval_base_target.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "F72A117ECF8C68245F90A4D7C9B847C35FD4192BC7D62C8F4371C67B7CECC926",
+      "output_size": 32896
+    },
+    "gfx/interface/military_raids/HOK_KOR/naval_commando.dds": {
+      "blob": "22f3969cc6a8d7aefa8f9aed119a1ae4b6d5ec8f",
+      "sha256": "6758C13768D4FE9EF56274C6E5C1FE9E1404342EA9112A1C56A776EACF5E2C90",
+      "size": 4224,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/gfx/interface/military_raids/HOK_KOR/naval_commando.dds",
+      "classification": "ASSET_COPY",
+      "output_sha256": "6758C13768D4FE9EF56274C6E5C1FE9E1404342EA9112A1C56A776EACF5E2C90",
+      "output_size": 4224
+    }
+  },
+  "documentation": {
+    "AGENTS.md": {
+      "blob": "24103d6a9e15f4526dde698999e36519b1c77009",
+      "sha256": "DDF6DBC057371019F09F0ECE27E2C75D569331B77BE93DE13888704EBC15FAFF",
+      "size": 73741,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/AGENTS.source.txt",
+      "classification": "DOCUMENTATION",
+      "note": "Immutable donor instruction provenance only; renamed to avoid creating an applicable nested AGENTS.md."
+    },
+    "README.md": {
+      "blob": "90e5d5c4c25157e39b4d9f0022e0f2c033380258",
+      "sha256": "E773F4B8A878D3C9BE0216A5A749A9145A446EB602C0ECC5FC6E67C9C19DF198",
+      "size": 12123,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/README.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_CIVIL_NUCLEAR_ICON_CREDITS.md": {
+      "blob": "77d7a69b64e18a4fc7e17e3217db71ce4ad88eac",
+      "sha256": "7909043629B4460AA7012F9C4818BEF7771F8D11643E1F60104C550EAFD6C033",
+      "size": 5693,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/HOK_KOREAN_CIVIL_NUCLEAR_ICON_CREDITS.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_CIVIL_NUCLEAR_RESEARCH_SPEC.md": {
+      "blob": "1a3ada632f297ff417d9d8539949dc1a078c6eb2",
+      "sha256": "172C8EA0901F6F4E207BDA7DD870AC60DE400191D8380142604020FD7C0D519A",
+      "size": 30992,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/HOK_KOREAN_CIVIL_NUCLEAR_RESEARCH_SPEC.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_FEATURE_INTEGRATION_SPEC.md": {
+      "blob": "aef88886f685926cf2c4323f863d44cbe9d5a862",
+      "sha256": "B90FD60329DA8A87934D5DD37B01E3D6AE3C8827D4DC11952DD9EC314FDACEFA",
+      "size": 8579,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/HOK_KOREAN_FEATURE_INTEGRATION_SPEC.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md": {
+      "blob": "0e94a45dfdffda15102e99ccaedfba00bc5f3f54",
+      "sha256": "946B26F9733ED160CEF8870FCF2FA7BEEE1A8823CD2EB24C1C96ACD2DE2A3E8D",
+      "size": 90911,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_MIO_SPECIALIZATIONS_SPEC.md": {
+      "blob": "d5ee709abb906d693edbc8d11b05c6e6267e51f2",
+      "sha256": "4EA7F8AF8D806D3D1646B7CB8A13EC7F84AF9D23B378D6C9E3F5D6951B2536CE",
+      "size": 19772,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/HOK_KOREAN_MIO_SPECIALIZATIONS_SPEC.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_NAVAL_RAID_SPEC.md": {
+      "blob": "83368ea1a42ae132db57b4f24fef3a87be7ac490",
+      "sha256": "97AA85D4BA3EB955832E1CCF7AB08E02A3510299AD868E50D5934E016880FE15",
+      "size": 32051,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/HOK_KOREAN_NAVAL_RAID_SPEC.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_RESEARCH_NETWORK_SPEC.md": {
+      "blob": "19c4c47b5d46014734dc17c1e4513225a43135f6",
+      "sha256": "E1DC2136A9238AC1454AAD91E0E08719FF4C4EB5D98EC413C7ABDD4E2EA2FBE0",
+      "size": 23403,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/HOK_KOREAN_RESEARCH_NETWORK_SPEC.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_SECOND_WAVE_PLAN.md": {
+      "blob": "2cac3807d6ccc75e0e7ea30b21056467394fca4e",
+      "sha256": "C13492751B4D5BE3E9385E65419F540A46174069F50C65EAFFA12E74FA83352B",
+      "size": 46994,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/HOK_KOREAN_SECOND_WAVE_PLAN.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/HOK_KOREAN_SOYANG_WATER_GATES_SPEC.md": {
+      "blob": "483c2fb5123c93785fe404c34fe0bb6179d4a951",
+      "sha256": "E9C287769F5D01C5FF36C4FAF1575A856CA13F5C58B0A9C6D4BAAF22F2F7BC9F",
+      "size": 25138,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/HOK_KOREAN_SOYANG_WATER_GATES_SPEC.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/civil-nuclear-research/actual-size-preview.png": {
+      "blob": "b0be382c067ae298ca6ace490b17034c6d0cd308",
+      "sha256": "57196E84CDBF179A826B333C166487DBA7A577CA7BAE3CC6D3B5897FE373F61A",
+      "size": 38009,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/civil-nuclear-research/actual-size-preview.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/civil-nuclear-research/civilian_nuclear_investment.png": {
+      "blob": "a466b7331f46538b6edaccb5c50dd7160a7b34f5",
+      "sha256": "BBDFC19E7AFE043152FA7CC1EA7F1C72311E30B2E10D99C084DF677E3DCE2339",
+      "size": 18939,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/civil-nuclear-research/civilian_nuclear_investment.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/civil-nuclear-research/fission_chain_reaction_experiments.png": {
+      "blob": "e50d620d31fdc717e4d1b68fc15fda1b54d16fb9",
+      "sha256": "05C22E6CDE462069F499B635B2528FC44A10FBBC7490D53B97F0429AE552126E",
+      "size": 19791,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/civil-nuclear-research/fission_chain_reaction_experiments.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/civil-nuclear-research/generated/civilian_nuclear_investment.original.png": {
+      "blob": "69c1debf49f0f8c58b2cc410e3727f1b600d0087",
+      "sha256": "3EB4141798B9F08E9AD7963AFE63F55C9872A0DC8845A60A0AD80BF165CF0824",
+      "size": 2476472,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/civil-nuclear-research/generated/civilian_nuclear_investment.original.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/civil-nuclear-research/generated/fission_chain_reaction_experiments.original.png": {
+      "blob": "1be0fccf9404d99d9c3252709e90b5f2cc30fc41",
+      "sha256": "2D0412933F4AE0A048D878BF597570EE89A9888269F0A7711EF86A83E6A3F7A7",
+      "size": 2705214,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/civil-nuclear-research/generated/fission_chain_reaction_experiments.original.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/civil-nuclear-research/generation-prompts.json": {
+      "blob": "3b6bf8b68358de4ae7468d6f34921f7f39b84396",
+      "sha256": "9AF02468D9308DD9F172CEBDA1DD3534E2FB27954846F4F5266F7D4098140C0A",
+      "size": 3274,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/civil-nuclear-research/generation-prompts.json",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/civil-nuclear-research/sources/shine_overlay.dds": {
+      "blob": "bc5bd9259076e07b9cec4f4c387bd10732501dbf",
+      "sha256": "BB416649358C73D34AACD46BAD61BC44211FAC8111627B56E25F385AD98F4448",
+      "size": 30752,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/civil-nuclear-research/sources/shine_overlay.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/korean-factions/sources/faction_icon_allies.dds": {
+      "blob": "cd32c1edb34f7bac441c7521fc73fa67a4500f86",
+      "sha256": "0D74485244CCF8E822F23CD5BA40CAF2B31CBDF2DB22B30E3FDBD9E41B410EA5",
+      "size": 80128,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/korean-factions/sources/faction_icon_allies.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/korean-factions/sources/faction_icon_generic_communist.dds": {
+      "blob": "c618d695060106c67de5103a284329c2658b03fb",
+      "sha256": "8965C81D485FD5BC30BA55ADC2BF8BF5D82D1F2FA622E92B14CD487F9D8CB686",
+      "size": 80128,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/korean-factions/sources/faction_icon_generic_communist.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/korean-factions/sources/faction_logo_generic.dds": {
+      "blob": "163c4398f662aeb41d150442c3997b815c652026",
+      "sha256": "BC95FF5683742F9DE83E035B16E976D3118A180F1C27076364A788F7AED3AB02",
+      "size": 80128,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/korean-factions/sources/faction_logo_generic.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/korean-factions/sources/faction_logo_generic_democratic.dds": {
+      "blob": "4a7fe8be602a5f2db3d88234f965124108760456",
+      "sha256": "A5FFB7A8DF1F37C32F89ACB3B0D98718B9B6BF30AEF1DB2383DA2CBCC66BB1D0",
+      "size": 80128,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/korean-factions/sources/faction_logo_generic_democratic.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/preview.png": {
+      "blob": "0a7980155f7bdb9290852d30513a00f1aa7623a6",
+      "sha256": "0AA4A3A851F56919765254CEFAD2AB36206BA283E44AB0C208FEDB4E1B29FEB4",
+      "size": 94051,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/preview.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_air_agility.dds": {
+      "blob": "8917285ef682bd19b12f6b9bd3161c10b8503cd9",
+      "sha256": "6FA89B146EE2CC9EEF33056D6671ED78B6ED0AE6FEBB36BD00809E8F49C6EF27",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_air_agility.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_armor_value.dds": {
+      "blob": "e8de5e366687cf85c894a347990177babf83be25",
+      "sha256": "A48B688326F4A51FE404B520A3D2F0F88658726C9E1411F2EE96D9FE99DE50EC",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_armor_value.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_breakthrough.dds": {
+      "blob": "c598ff34e7cbb8b45ae41ff68ef11cb303edae68",
+      "sha256": "39903DC08BD15EC07811F5A4C82B997AE60F65E2FE8302CE969A42FE40803E7C",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_breakthrough.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_build_cost_ic.dds": {
+      "blob": "7627d9ab5cf0738c88d8d7ffa0a8662191b11bef",
+      "sha256": "9794BE7B86E8F6972198E987396F8B2E968540BC9D4B193F4692023C1A8059FC",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_build_cost_ic.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_fuel_consumption.dds": {
+      "blob": "b9a64695ad3e5dd2df8b8206e8806d17d9417fa7",
+      "sha256": "2C33F09A111FC8B9EA6A1A24796F2770A7E600B4B5E38ABB70139EC5BDE13B23",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_fuel_consumption.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_hg_attack.dds": {
+      "blob": "3b42d86f55cce53d6439b39d3b295bdb86d0cf3e",
+      "sha256": "1FEAFC71C0C62184C8BA01BA9998759B1319FBB3C820439CA9B6F8F35AC24F59",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_hg_attack.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_maximum_speed.dds": {
+      "blob": "bb9a1a6a77e00272187b75e687f7c94e82ca17f4",
+      "sha256": "DA93597200A349465B0B525AAF160174DECED51C8DA046179A9302FD1B1F3C60",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_maximum_speed.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_naval_range.dds": {
+      "blob": "653b50c9b7b2f3a9a53bbf185dd87900d8c01a76",
+      "sha256": "376217D46594CCCFF36573B174C56DDF4182323E1A2BF4FD9D6D368F58964BB2",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_naval_range.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_naval_strike_targetting.dds": {
+      "blob": "0bf769a1be64739d9c46d9535d1a4092389b971b",
+      "sha256": "999716C0372FD83BBCA4AA58B48605C3C337802982FF875B5D43555F8097EE8B",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_naval_strike_targetting.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_reliability.dds": {
+      "blob": "e82e72e85de499527df3b96b3a4869bdbb40ecd9",
+      "sha256": "49B4CA60C03AB43519BD55030A59D6EBD7C3722772B57A55F5C5EC3FFE6C0F0B",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_reliability.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_soft_attack.dds": {
+      "blob": "781143623a6d031c4a828da7a5d309394cc06458",
+      "sha256": "10AFA634E520D1D95DD9EA6B458004BE5344BA3156B8DF0209BA02F3A3B4141D",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_soft_attack.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_sub_detection.dds": {
+      "blob": "b6962783948cbcb7411523c5a83ca55fcfb6a73c",
+      "sha256": "C7C53FD61934E25E6FE5AB8A0305AB3B679163D3E35D209E96768A903D5F45AA",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_sub_detection.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/mio-specializations/source/generic_mio_trait_icon_torpedo_attack.dds": {
+      "blob": "8c34c2487220a113212f535d2a201b34d51083b7",
+      "sha256": "47A4A2576A1C75AA111F00D1F0934B7796348089817746714F537A785FD75468",
+      "size": 9344,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/mio-specializations/source/generic_mio_trait_icon_torpedo_attack.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/soyang-water-gates/actual-size-preview.png": {
+      "blob": "29cf75345fae818dfe13481223c3e4bf12b5779d",
+      "sha256": "8567DF9741E8C5BD1DB6E67A39E7E9D104BFA4395CDA1B9ADB59A43887232EF2",
+      "size": 6415,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/soyang-water-gates/actual-size-preview.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/soyang-water-gates/sources/decision_category_hol_prepare_the_inundation_lines.dds": {
+      "blob": "9eb318aaf3055df40ea35335d111b9810f5c4fb5",
+      "sha256": "57279E8A656B55BD3A0A7D778305EEDEDF9B195FD57AB7164172E8EFB64F9C13",
+      "size": 11196,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/soyang-water-gates/sources/decision_category_hol_prepare_the_inundation_lines.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/soyang-water-gates/sources/decision_hol_drain_water_lines.dds": {
+      "blob": "02f00e699108291f473feefa0163d567fd9691d6",
+      "sha256": "C1848F5571452E722159E9F26CE61CAF2FBE14DF2D3F708BFEE65C2A462DBE79",
+      "size": 5464,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/soyang-water-gates/sources/decision_hol_drain_water_lines.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/soyang-water-gates/sources/decision_hol_inundate_water_lines.dds": {
+      "blob": "f36302528f411a0f68cb04a10be225351070db52",
+      "sha256": "2858EF2C1E5E6124ED3E044E7E73AA390B098690BCE915253B0AE64022E64561",
+      "size": 5464,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/soyang-water-gates/sources/decision_hol_inundate_water_lines.dds",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/soyang-water-gates/soyang_category.png": {
+      "blob": "867938df21ba1fdead3de4992f12a00a23f303ae",
+      "sha256": "0740C06B159290F069FF1F21CC176D0740E7C93ED35BC69BC57BE9A96F3C9F6F",
+      "size": 3692,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/soyang-water-gates/soyang_category.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/soyang-water-gates/soyang_drain.png": {
+      "blob": "9d09bfb0286861579d79519a9aa6aceb1436fdd4",
+      "sha256": "18B63C6B358B107A09DCEC0D65EA699F7D8A5FAF09656E5F84218C38125C27DD",
+      "size": 1878,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/soyang-water-gates/soyang_drain.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/assets/soyang-water-gates/soyang_inundate.png": {
+      "blob": "0018fd9acb12a0f1b791c8a7ebec149dd788a97d",
+      "sha256": "2CFEDDA59178C67E8824CBC79872536409C357CCAE61E000281ACBA1701882D6",
+      "size": 2064,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/assets/soyang-water-gates/soyang_inundate.png",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/audits/2026-10-30-korean-feature-integration-review.md": {
+      "blob": "07f2313bd206b89f24e4b4d8055eb5deb715cb0d",
+      "sha256": "50C0EE4D7B151DF52A6A9CAF5999FD0ABC461CD6C4528070D69F092A8F5B0894",
+      "size": 19394,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/audits/2026-10-30-korean-feature-integration-review.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/data/HOK_KOREAN_CIVIL_NUCLEAR_ICON_MANIFEST.json": {
+      "blob": "103a2a34d6c9ce5da7efb1f89f2eaf0523fad4e1",
+      "sha256": "5DECF49184082F8B1646C3A5442061240E341CE88E5E163742EF37401523FCFD",
+      "size": 9222,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/data/HOK_KOREAN_CIVIL_NUCLEAR_ICON_MANIFEST.json",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/data/HOK_KOREAN_FACTION_ASSET_MANIFEST.json": {
+      "blob": "223648ec7732835f0c7dd87c4a0d0a69a9d8b466",
+      "sha256": "73F2CFA7E810833962CBB3E6F8E402558A4ADD5DD6F94F337F44915D848C9800",
+      "size": 4275,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/data/HOK_KOREAN_FACTION_ASSET_MANIFEST.json",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/data/HOK_KOREAN_MIO_SPECIALIZATION_ICON_MANIFEST.json": {
+      "blob": "30d513f327cde48f05a2f881e37795b6a7c2d5f8",
+      "sha256": "8E8D3FC314292E083C987C2DEEB9CF432845B1B347BD076D7F06034B883BC0E8",
+      "size": 33365,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/data/HOK_KOREAN_MIO_SPECIALIZATION_ICON_MANIFEST.json",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/data/HOK_KOREAN_SECOND_WAVE_COORDINATES.json": {
+      "blob": "00551238873a40c260ae4c8827bb08b1b2270e46",
+      "sha256": "593A7FABC0AAC366B64B350AE5E8DBCD8A1817CB38825FD74041DD0E357541F3",
+      "size": 528393,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/data/HOK_KOREAN_SECOND_WAVE_COORDINATES.json",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/data/HOK_KOREAN_SOYANG_WATER_GATES_ICON_MANIFEST.json": {
+      "blob": "1aa13a2e8d2d7b85fd9423f4461afbd3c5e8c794",
+      "sha256": "61BE7A87C33823A7EF3A28CBA7BFCC6A753356FBB738FACCCB91DAE10D8E7103",
+      "size": 4051,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/data/HOK_KOREAN_SOYANG_WATER_GATES_ICON_MANIFEST.json",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/incidents/2026-10-31-korean-civil-nuclear-research.md": {
+      "blob": "b76fbbfb59c104442c3ca82327a237099ec1113c",
+      "sha256": "21651C05D4143B8D70B183E680FFDB184C4B6DC6DF9260537A6C35B1C9F74F39",
+      "size": 26298,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/incidents/2026-10-31-korean-civil-nuclear-research.md",
+      "classification": "DOCUMENTATION"
+    },
+    "docs/incidents/2026-10-31-korean-feature-integration.md": {
+      "blob": "73dce27083c297af5cf0aed6e5fdef0135e163bc",
+      "sha256": "D9572A0C1E9D3F161D13B842DDB4B0411997FD54F7CA0A53E2DDE9B075A1580F",
+      "size": 52419,
+      "snapshot_path": "docs/upstream/hok-feature-integration-20261031/documents/docs/incidents/2026-10-31-korean-feature-integration.md",
+      "classification": "DOCUMENTATION"
+    }
+  },
+  "excluded": {
+    "history": {
+      "history/countries/KCH - Korean China.txt": {
+        "blob": "336b18e9eb19c3faeee74f6e242ee6531d95fe92",
+        "sha256": "24502EA1BAD55C9157B89C8461BF3291A77924C3864FBF9A5B8134FC35C924A3",
+        "size": 3326,
+        "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/history/countries/KCH - Korean China.txt",
+        "classification": "USE_RT56",
+        "reason": "Equivalent doctrine migration already present in compatibility history; preserve port-specific technology and history repairs.",
+        "current_output_sha256": "965C9D5DF6AD3C66874415D30DF3DC74975FD870F3D10E2615E908C8B8832204"
+      },
+      "history/countries/KJP - Korean Japan.txt": {
+        "blob": "6f2e94680fe4130bf336e5f281d940210e461fd1",
+        "sha256": "1B58222A9CF1FC005303B6F8D2B925278B50976FEF16E39D73755646E794A35D",
+        "size": 3324,
+        "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/history/countries/KJP - Korean Japan.txt",
+        "classification": "USE_RT56",
+        "reason": "Equivalent doctrine migration already present in compatibility history; preserve port-specific technology and history repairs.",
+        "current_output_sha256": "47828833F780235D484BD31770ED07374D41B65FC40507A97A079D5D30E4579C"
+      },
+      "history/countries/KOR - Korea.txt": {
+        "blob": "c71929b430cf1e103710d43a08bc053327b6a734",
+        "sha256": "2E30A82720609D282BC0D3553D4C3B726D9191A5C401ED221BAC057DD9354E76",
+        "size": 11641,
+        "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/history/countries/KOR - Korea.txt",
+        "classification": "USE_RT56",
+        "reason": "Equivalent doctrine migration already present in compatibility history; preserve port-specific technology and history repairs.",
+        "current_output_sha256": "243FC1FBDE8DB75B82CCFEBD6BB01CA7001DABCD944CA8534E7324413705BE30"
+      },
+      "history/countries/RKY - Ryukyu.txt": {
+        "blob": "c8b92b0968dc4b46d0f75e20eeab3dc55ffd9cf5",
+        "sha256": "6AD21BBAE42A0EDE0BAE6A2C83817EA69E192921B2502FF4F4B7422E3BFB5763",
+        "size": 3325,
+        "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/history/countries/RKY - Ryukyu.txt",
+        "classification": "USE_RT56",
+        "reason": "Equivalent doctrine migration already present in compatibility history; preserve port-specific technology and history repairs.",
+        "current_output_sha256": "AF7F601B9D14B73FF72C2971726D0978865CFD46B2081455E4784150E1F4A36B"
+      }
+    },
+    "runtime": {
+      "localisation/english/HOK_KOR_naval_captains_l_english.yml": {
+        "blob": "da3b233bccb91408afe4337e716cbd63df7cd2fc",
+        "sha256": "1AF4FA9F1C271B0FD2E85680F87C61C7F421241D327F6ECF396F9EB9CD1F3335",
+        "size": 1480,
+        "snapshot_path": "docs/upstream/hok-feature-integration-20261031/runtime/localisation/english/HOK_KOR_naval_captains_l_english.yml",
+        "classification": "USE_RT56",
+        "reason": "The donor English file contains Korean fallback text for 13 global vanilla UI keys. Preserve vanilla/RT56 English instead of overriding shared English UI.",
+        "shared_localisation_keys": [
+          "l_english",
+          "CAPTAIN_TITLE_TEXT",
+          "SHIP_OFFICER_TITLE_SHIP_DEFAULT",
+          "WAS_IN_NAVAL_COMBAT_HISTORY",
+          "ASSIGN_CAPTAIN_MEDAL_TOOLTIP",
+          "CAPTAIN_PROMOTED_HISTORY",
+          "BASE_CAPTAIN_MEDAL_TYPE",
+          "CAPTAIN_EXPERIENCE_GAIN_TOOLTIP",
+          "HIRED_NEW_ADMIRAL_TITLE",
+          "HIRED_NEW_ADMIRAL_DESC",
+          "UPGRADE_SHIP_CAPTAIN_BUTTON_TITLE",
+          "CAPTAIN_PROMOTION_EXPERIENCE_PENALTY",
+          "submarine_officer",
+          "UNIT_LEADER_NEW_LEADER_CAPTAIN"
+        ]
+      }
+    }
+  },
+  "host_files": {
+    "common/military_industrial_organization/organizations/KOR_organization.txt": "983E65865D4DCEE10BE38D6FD73142BE809C7A1828319FAB4EE2A3F91C5A1C46",
+    "common/national_focus/korea.txt": "A80FBC767C21902FC56EBBCA35DC3C120700E527B52EA98F3CFDF5221EB0EF90",
+    "history/countries/KOR - Korea.txt": "B9F25BA4E62D9A9F6C412DC8FB3F3B942FA88EE193722547BCE5D48CC840BAE8",
+    "descriptor.mod": "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61",
+    "common/military_industrial_organization/organizations/00_generic_organization.txt": "02A80CAB1C40E5F8F4065F14A8D151795F896F134170D9ED16008D2DFDFB8AC0",
+    "common/factions/templates/generic_factions.txt": "3282040FA0016BFFD3EE5A882C65854EFB883FC5C8BA02B59B5942A85FE4A819",
+    "common/factions/templates/r56_generic_factions.txt": "AC2AB441151CD91BAD987575B7D3F000B7C8AAFD56143B94F65593B510D4C438",
+    "common/factions/templates/allies.txt": "6CD942C2AE9E2540A2133259B15DAB51B611857A14FDF84898406BB388E357B1",
+    "common/factions/templates/unique_minor_factions.txt": "F2E9C51C698CF9F393E2E756209D8DC109A0F8877416BB52BF3511B13C98CE80",
+    "common/factions/rules/joining_rules.txt": "8B8880D8344C6C6C95758F096EDE407E31BC042F57C64DDA1C7F2C1E17012FC7",
+    "common/factions/goals/faction_goals_medium_term.txt": "B5F7D20C35C45CEE76E20FEB7A24474B0BDD356E3AC2A9551B891671F76E9E33",
+    "common/factions/goals/faction_goals_short_term.txt": "DB7F194C4797D98EC56F46BE7DED260E3EF6FCECA89AAAD0F13F9D6577187806",
+    "common/factions/goals/r56_manifests.txt": "ED2913AEBEC9D6786EFB4B5BDA612EF348873F11A637EEC48A4EE3D172B3CE86",
+    "common/factions/goals/r56_faction_goals_long_term.txt": "AAEC5964040C4B06EC87F5A0FF2BB17CECDF44F5AEFC49DC9231DB873D880C13",
+    "common/factions/goals/r56_faction_goals_medium_term.txt": "B6A496CBF421F50ECE47FE2607E456D9DA2829CCC8D735981702BC2A10E9C8E2",
+    "common/special_projects/projects/nuclear_projects.txt": "940DBD9AFDD35F3289C4F7D396374698862808B8A0235A39890374199E623CE2",
+    "common/technologies/industry.txt": "D1F52D64DB6B3506E2196CE8A8E14891F022558BF3DC2946DEC866F808881342",
+    "history/states/528-Nagasaki.txt": "85D237EF932FC45F0CF152F107A7BDEB9BAB362C32F842010D5BDB53E649458A",
+    "history/states/917-Hwanghae.txt": "D11EDC8E0CDCA2A604CFA0CC535E9033E696E23C911DA1CDAD09F171C8B23D82",
+    "history/states/918-Hamgyong.txt": "B057B15D33E068D27C32C176BF79A717154E8323205AD6E512308A24872B527B",
+    "history/states/919-Jeolla.txt": "F6E8DCC3ECB96A9E6C25E535816F5FC967E05CB5A743F4695169A126555CB064",
+    "history/states/920-Gyeongsang.txt": "DED093FD53A6D61672582D27945FD0F9F17BFC707C76768C9E433A380B14C4BB"
+  },
+  "workshop_manifest": "7553774178744855191",
+  "vanilla_files": {
+    "launcher-settings.json": "D1E72CF0AA33346DE8C16A8E53F90199011576331A76A0F0A916DA289DB755EC",
+    "common/unit_medals/00_default.txt": "AC8F6FD131ADE8FBB3752541119D154C0B770BE71B1877F672B3F206E5275325",
+    "common/military_industrial_organization/organizations/00_generic_organization.txt": "8AB828D60A35316DFE49FB038133B1ECB2ABBF5F1F85858F1040A2258C8EC743",
+    "common/raids/naval_commando_raids.txt": "F13BA44200E12D6539D2368243760DC3C1F81C8279481BDB1182336F19C184CC",
+    "common/factions/templates/generic_factions.txt": "3E106EFDC44CF5F896D8BA4CB58FCDF6C093968B7D59AD66BB416ECA194C3F22",
+    "common/factions/rules/joining_rules.txt": "471E7A094B401D8F3EFE399B65BDB77684499FEDBFD7659BEB1DEB4500C106B4",
+    "common/factions/rules/change_leader_rules.txt": "61FEA13B1BDAB333A059448F0ACBE8D626B1C0FE93F8F6DAA1DB490D4A2FE3BB",
+    "common/factions/rules/dismissal_rules.txt": "E9EA45B04A1C6140D1BCF4E5F55371E76D5580CC0FE6F096C4E7BD653501BE66",
+    "common/factions/goals/faction_goals_long_term.txt": "8B356091135BA0390F9ACACA4C8A80C7FD9D7A4117ABE120EE2CE819C88D1350",
+    "common/factions/goals/faction_goals_medium_term.txt": "A84A55EF502FBB6C34054952D01146CE738493530C20D9250D7D5F92B0004A96",
+    "common/factions/goals/faction_goals_short_term.txt": "3F3E185F36EC3A181EC1736FEC4D64E99B7FA78DE7F5B759B215207D31123D5C",
+    "common/special_projects/projects/nuclear_projects.txt": "107D27F4F87C7A40EEF8AB7D090D938545B9CBDA642DFE66E4FC568BE8BD32BF",
+    "common/buildings/00_buildings.txt": "E94EF4DD06480AE0D34EE52B4ABBA1BBFD163C4A85C6E6E275C85971C8EC1598",
+    "common/doctrines/grand_doctrines/land_grand_doctrines.txt": "B420F8F7F67CCC34C46262BF71E13DD5DFF52014B7D5F018410DAEA8374CB2D6",
+    "common/doctrines/grand_doctrines/air_grand_doctrines.txt": "C06B6B1AD7C9B67D9F55B70FA9A26A9BA5830956D50EC94F33817755BAACE5A2",
+    "history/countries/GER - Germany.txt": "6907CF77CA09ED78736D4867C822CC066B578C0AB08BEF16ECD6488CCCF5FE20",
+    "documentation/effects_documentation.md": "2CDC93D26775990468EED167442F7A416B13059FB8FE07D139B54250B79209AF",
+    "documentation/triggers_documentation.md": "7D27ED77DADAF3A213A4B3E2C624BF9C02DAE495317ABE8EEE833B27C2D1DE29",
+    "localisation/english/unit_l_english.yml": "4CFA5D82D34A918C165D2B61385D5F7CB00034232E3EA246EBD3091F8472F919"
+  }
+}
