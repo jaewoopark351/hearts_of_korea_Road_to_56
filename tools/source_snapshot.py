@@ -18,7 +18,9 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 DONOR_ROOT = Path(r"C:\hoi\hearts_of_korea")
 LOCK_PATH = Path(__file__).with_name("hok_source_lock.json")
-HOK_ROOT = REPO_ROOT / ".local-artifacts/sources/hok-887930f-korea-118d7b5"
+#20261105_kpopmodder: Keep all audited generator inputs outside the mod tree after artifact relocation.
+SOURCE_CACHE_ROOT = Path(r"C:\hoi\test\hok-rt56-source-cache\sources")
+HOK_ROOT = SOURCE_CACHE_ROOT / "hok-887930f-korea-118d7b5"
 BASE_COMMIT = "887930f6e88c80568d62dab9cfbe1ba8a498a252"
 CONTENT_COMMIT = "da815305e3ce00186a487b3a378bf8536ff59146"
 UPDATE_COMMIT = "118d7b53dfdbc120fcfe4b9d6792e66b2b519be7"
@@ -26,13 +28,13 @@ AI_PATH = "common/ai_strategy_plans/KOR_historical_strategy_plan.txt"
 
 # [2026-09-22]_kpopmodder: Keep uncommitted artwork provenance separate from the immutable gameplay base.
 ICON_LOCK_PATH = Path(__file__).with_name("hok_icon_lock.json")
-ICON_ROOT = REPO_ROOT / ".local-artifacts/sources/hok-icons-20260922"
+ICON_ROOT = SOURCE_CACHE_ROOT / "hok-icons-20260922"
 ICON_MANIFEST = "docs/data/HOK_KOREAN_FOCUS_ICON_MANIFEST.json"
 
 #20260923_kpopmodder: Isolate the reviewed second-wave delta from the historical world and artwork inputs.
 SECOND_WAVE_COMMIT = "be5fb40dbd8de33e5adbf65e808bcb0e8c283560"
 SECOND_WAVE_LOCK_PATH = Path(__file__).with_name("hok_second_wave_lock.json")
-SECOND_WAVE_ROOT = REPO_ROOT / ".local-artifacts/sources/hok-second-wave-be5fb40"
+SECOND_WAVE_ROOT = SOURCE_CACHE_ROOT / "hok-second-wave-be5fb40"
 SECOND_WAVE_FOCUS_PATH = "common/national_focus/korea.txt"
 SECOND_WAVE_DOCUMENTATION_ROOT = REPO_ROOT / "docs/upstream/hok-second-wave-be5fb40"
 

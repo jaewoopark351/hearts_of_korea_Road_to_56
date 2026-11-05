@@ -79,7 +79,7 @@ python tools\check_korean_focus_update.py --check
 python tools\check_korean_focus_update.py --self-test
 ```
 
-검사는 고정 소스·지도·공용 파일·동아시아 파일·한국 자산·삭제 목록·ID 이식·한국 업데이트·1,123개 분류표의 재현성, Paradox Script 괄호/따옴표, descriptor 계약, 폐기 ID, localisation BOM/header/key, event asset/loc, 핵심 논리 ID 중복, 만주15개 주 처리와 신규 중점·지역사업·외교·AI 계약을 확인한다. 최초 소스 준비는 donor의 고정 Git 객체와 별도 해시로 고정한 artwork를 읽어 저장소 내부 `.local-artifacts/sources/`에만 쓴다. 원본 또는 기존 캐시가 기록된 해시와 다르면 덮어쓰지 않고 중단한다.
+검사는 고정 소스·지도·공용 파일·동아시아 파일·한국 자산·삭제 목록·ID 이식·한국 업데이트·1,123개 분류표의 재현성, Paradox Script 괄호/따옴표, descriptor 계약, 폐기 ID, localisation BOM/header/key, event asset/loc, 핵심 논리 ID 중복, 만주15개 주 처리와 신규 중점·지역사업·외교·AI 계약을 확인한다. 최초 소스 준비는 donor의 고정 Git 객체와 별도 해시로 고정한 artwork를 읽어 외부 활성 입력 캐시 `C:\hoi\test\hok-rt56-source-cache\sources\`에만 쓴다. 원본 또는 기존 캐시가 기록된 해시와 다르면 덮어쓰지 않고 중단한다. 저장소의 옛 `.local-artifacts/sources/` 참조는 이 외부 캐시에서 찾으며, 테스트·이미지 작업의 임시 출력과 구분해 보존한다. 과거 실행 자료와 이번 입력 이전의 경로 대응은 [외부 보관 기록](docs/audits/2026-11-05-local-artifact-archive.md)을 따른다.
 
 ADR-0004의 자산 정책과 만주 획득 경로 보정은 도구·원장·회귀 검사에 반영됐다. 이미지 이식 후 정적 결과는 **19 PASS / 0 WARNING / 1 ERROR**다. 기존 사용자 변경인 KOR 시작 전쟁 지지도 `0.1`이 doctrine 생성기의 `0.05`와 달라 한 검사가 실패하며, 이번 이미지 이식에서는 그 게임플레이 변경을 보존했다. 이미지·기존 보상 보존 검사는 통과했다. 과거 정적 20 PASS와 `Minshu_ikki.ogg` 보류 상태는 당시 기록과 구분한다.
 
