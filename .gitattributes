@@ -1,3 +1,6 @@
+#20261106_kpopmodder: Keep the AGENTS documentation fingerprint identical across PC checkouts.
+AGENTS.md text eol=crlf
+
 #20261003_kpopmodder: Preserve the verified source-lock byte contracts across Windows checkouts.
 tools/hok_source_lock.json text eol=lf
 tools/hok_second_wave_lock.json text eol=lf

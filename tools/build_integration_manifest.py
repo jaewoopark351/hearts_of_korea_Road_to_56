@@ -1166,16 +1166,61 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     return stream.getvalue().encode("utf-8"), counts, collision_count
 
 
+#20261106_kpopmodder: Refresh the documentation fingerprint without rewriting unrelated runtime-byte audit rows.
+def build_documentation_csv() -> bytes:
+    current = OUTPUT.read_bytes()
+    reader = csv.DictReader(io.StringIO(current.decode("utf-8"), newline=""))
+    rows = list(reader)
+    fieldnames = reader.fieldnames
+    if fieldnames is None or not {"source_path", "output_path", "integration_class", "status", "exact_path_rt56_collision", "output_sha256"}.issubset(fieldnames):
+        raise RuntimeError("documentation refresh requires the existing integration ledger schema")
+
+    def serialize() -> bytes:
+        stream = io.StringIO(newline="")
+        writer = csv.DictWriter(stream, fieldnames=fieldnames, lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+        return stream.getvalue().encode("utf-8")
+
+    if serialize() != current:
+        raise RuntimeError("documentation refresh refuses to reformat the existing ledger")
+    matches = [row for row in rows if row["source_path"] == "AGENTS.md"]
+    if len(matches) != 1:
+        raise RuntimeError("documentation refresh requires exactly one AGENTS.md row")
+    row = matches[0]
+    output_path, output_hash, status = output_description("AGENTS.md", EXPLICIT["AGENTS.md"])
+    if (row["output_path"] != output_path or row["status"] != status
+            or row["integration_class"] != EXPLICIT["AGENTS.md"].integration_class
+            or row["exact_path_rt56_collision"] != "no"
+            or len(row["output_sha256"]) != 64
+            or any(char not in "0123456789ABCDEF" for char in row["output_sha256"])):
+        raise RuntimeError("documentation refresh cannot change the AGENTS.md classification")
+    before_rows = [dict(item) for item in rows]
+    row["output_sha256"] = output_hash
+    for before, after in zip(before_rows, rows):
+        for field in fieldnames:
+            if before[field] != after[field] and not (
+                    before["source_path"] == "AGENTS.md" and field == "output_sha256"):
+                raise RuntimeError("documentation refresh changed an unrelated ledger cell")
+    return serialize()
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--apply", action="store_true")
     mode.add_argument("--check", action="store_true")
+    parser.add_argument("--documentation-only", action="store_true",
+                        help="Refresh/check only AGENTS.md output_sha256; other rows are retained without validation")
     args = parser.parse_args()
 
-    expected, counts, collisions = build_csv()
+    if args.documentation_only:
+        expected = build_documentation_csv()
+        summary = "documentation-only: AGENTS.md output_sha256; other rows retained without validation"
+    else:
+        expected, counts, collisions = build_csv()
+        classes = ", ".join(f"{key}={counts[key]}" for key in sorted(counts))
+        summary = f"files={sum(counts.values())} collisions={collisions} {classes}"
     current = OUTPUT.read_bytes() if OUTPUT.is_file() else None
-    summary = ", ".join(f"{key}={counts[key]}" for key in sorted(counts))
     if current == expected:
         print(f"unchanged {OUTPUT.relative_to(REPO_ROOT).as_posix()} {sha256(OUTPUT)}")
     elif args.apply:
@@ -1187,7 +1232,7 @@ def main() -> int:
     else:
         print(f"mismatch  {OUTPUT.relative_to(REPO_ROOT).as_posix()}")
         return 1
-    print(f"files={sum(counts.values())} collisions={collisions} {summary}")
+    print(summary)
     return 0
 
 
