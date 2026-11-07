@@ -27,10 +27,11 @@ from source_snapshot import (
     prerequisite_update_lock, apply_focus_prerequisite_update,
     royal_update_lock, apply_royal_update,
     CIVIC_UPDATE_RUNTIME_PATHS, civic_update_lock, read_civic_source, apply_civic_update,
-    english_translation_lock, apply_english_translation,
+    english_translation_lock, english_comment_translation_lock, apply_english_translation,
     shipbuilding_update_lock, verify_shipbuilding_snapshot, apply_shipbuilding_update, shipbuilding_addition,
     feature_update_lock, verify_feature_snapshot, apply_feature_update, feature_addition,
     democratic_layout_lock, verify_democratic_layout_snapshot, apply_democratic_layout_update,
+    apply_prospecting_focus, prospecting_additions, prospecting_lock, verify_prospecting_snapshot,
 )
 from korean_second_wave_geography import apply_second_wave_geography, verify_geography_inputs, LOCALISATION_PATHS
 
@@ -89,7 +90,8 @@ OUTPUT_PATHS = tuple(dict.fromkeys(GAMEPLAY_PATHS + ICON_ASSET_PATHS + tuple(Pat
                                  + tuple(Path(p) for p in CIVIC_UPDATE_RUNTIME_PATHS)
                                  + tuple(Path(p) for p in english_translation_lock()["runtime_text"])
                                  + tuple(Path(p) for group in ("runtime_text", "runtime_assets") for p in shipbuilding_update_lock()[group])
-                                 + tuple(Path(p) for group in ("runtime_text", "runtime_assets") for p in feature_update_lock()[group])))
+                                 + tuple(Path(p) for group in ("runtime_text", "runtime_assets") for p in feature_update_lock()[group])
+                                 + tuple(Path(p) for p in prospecting_lock()["additions"])))
 SOURCE_COMMITS = {
     relative: AI_COMMIT if relative.parts[1] == "ai_strategy_plans" else FOCUS_COMMIT
     for relative in GAMEPLAY_PATHS
@@ -461,6 +463,10 @@ def build_all() -> dict[Path, bytes]:
     verify_democratic_layout_snapshot()
     outputs[Path(SECOND_WAVE_FOCUS_PATH)] = apply_democratic_layout_update(
         SECOND_WAVE_FOCUS_PATH, outputs[Path(SECOND_WAVE_FOCUS_PATH)])
+    verify_prospecting_snapshot()
+    focus_path = Path(SECOND_WAVE_FOCUS_PATH)
+    outputs[focus_path] = apply_prospecting_focus(outputs[focus_path])
+    outputs.update(prospecting_additions())
     return outputs
 
 
@@ -483,7 +489,12 @@ def preflight(outputs: dict[Path, bytes]) -> None:
         if current == expected:
             continue
         accepted = ACCEPTED_PRIOR_OUTPUT_HASHES.get(relative)
-        if sha256_bytes(current) not in {accepted, CHECKOUT_RESTORATION_HASHES.get(relative)}:
+        accepted_hashes = {accepted, CHECKOUT_RESTORATION_HASHES.get(relative)}
+        if relative == Path(SECOND_WAVE_FOCUS_PATH):
+            accepted_hashes.add(prospecting_lock()["focus"]["previous_output_sha256"])
+        if relative.as_posix() in english_comment_translation_lock():
+            accepted_hashes.add(english_translation_lock()["runtime_text"][relative.as_posix()]["output_sha256"])
+        if sha256_bytes(current) not in accepted_hashes:
             errors.append(f"refusing to overwrite independently changed file: {relative}")
     if errors:
         raise RuntimeError("\n".join(errors))

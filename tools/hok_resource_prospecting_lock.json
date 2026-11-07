@@ -1,0 +1,74 @@
+{
+  "format": 1,
+  "working_tree_base": "f927b3a5defe046967413da05069a0f92823fbec",
+  "compatibility_base": "062053b5fdea9b64174ccb03b04749601a2a083e",
+  "source_kind": "reviewed-working-tree-snapshot",
+  "rt56_manifest": "7553774178744855191",
+  "hoi4_build": "1.19.4.2.2da5 / 26409260",
+  "focus": {
+    "source_sha256": "4BD558791B22433B2EA9D77B58FB1350DFDB3618DA036D3061AE9E7EFA57CEB1",
+    "previous_output_sha256": "DE7959986349B07C014C866B08E03DC2BF0AE81BE80E6AF29D92CF03F572B5B1",
+    "output_sha256": "E0A52269D1C6A44BEB0C1DA1D6DFAC019611ADFBFC34D8E59BF21FAD2D375F35",
+    "notice": [
+      "\t\t\t#20261107_kpopmodder: Explain the steelworks decision unlock while preserving the original steel reward.",
+      "\t\t\tunlock_decision_tooltip = HOK_KOR_expand_pohang_steelworks"
+    ]
+  },
+  "additions": {
+    "common/decisions/HOK_KOR_resource_prospecting.txt": {
+      "sha256": "B586D91C5E78773962EFB3BCF6402985072746E6B854813E562D84F4380A2B52",
+      "output_sha256": "A4CE48BE2651E4E2FC8F31549E01C21EA14719D7ECEDB7D3486043366991249C"
+    },
+    "interface/HOK_KOR_resource_prospecting_icons.gfx": {
+      "sha256": "587012CEBCC7CFF7642B38EE16D88DB96E4EBEF45F866256A8E0D61EE2BE6401",
+      "output_sha256": "587012CEBCC7CFF7642B38EE16D88DB96E4EBEF45F866256A8E0D61EE2BE6401"
+    },
+    "localisation/korean/HOK_KOR_resource_prospecting_l_korean.yml": {
+      "sha256": "8A6C8DD889CF96D9DC58993A60BF86E549C46E05AAF871A7E307C0810A5EF89E",
+      "output_sha256": "9532E449AB9D712C52EFDBED153602A49433B8E8ADCD6A7BD7DC9AB536F62AEC"
+    },
+    "localisation/english/HOK_KOR_resource_prospecting_l_english.yml": {
+      "sha256": "EC7F5FEB840D7CFBBC42E4D7755140A090E480F981CAB7B750A8223108FF27D7",
+      "output_sha256": "1C9A1AFACCEF8E8BC7A4FAFEBD45D8E2EA07485FD79311528F19B8CA95263340"
+    },
+    "gfx/interface/decisions/HOK_KOR/resource_prospecting/gangwon_coal.dds": {
+      "sha256": "352A18868C7AA8297427CF05F88EB58DF21E067BB85B6B87FE84715636D3B0EA",
+      "output_sha256": "352A18868C7AA8297427CF05F88EB58DF21E067BB85B6B87FE84715636D3B0EA"
+    },
+    "gfx/interface/decisions/HOK_KOR/resource_prospecting/pohang_steel.dds": {
+      "sha256": "688461188713C346CFB7ECF366C64B714C7586ECD7CED64CD5851F9E28602A8A",
+      "output_sha256": "688461188713C346CFB7ECF366C64B714C7586ECD7CED64CD5851F9E28602A8A"
+    }
+  },
+  "decision_note": "\t#20261107_kpopmodder: Target the compatibility map's Gangwon and Gyeongsang states.",
+  "localisation_note": "#20261107_kpopmodder: Keep the original Korean narrative and provide a matching British English translation.",
+  "english": {
+    "HOK_KOR_expand_gangwon_coal_mines": "Expand the Gangwon Coal Mines",
+    "HOK_KOR_expand_gangwon_coal_mines_desc": "Even where we have found coal seams, miners' pickaxes alone cannot raise output without the equipment to bring the coal to the surface. We will widen the workings and improve drainage, ventilation and haulage to increase output across the Gangwon coalfield.",
+    "HOK_KOR_expand_pohang_steelworks": "Expand the Pohang Steelworks",
+    "HOK_KOR_expand_pohang_steelworks_desc": "Founding the Pohang Iron and Steel Company gave us a foundation for producing our own steel. To meet growing industrial demand, we must expand the blast furnaces, steelmaking and rolling facilities, and improve the docks and transport links that bring in raw materials. Expanding the works will give our factories and shipyards a reliable supply of steel."
+  },
+  "audio": {
+    "source_commit": "15d6e849f5ce003009122874b40d416091bb58b3",
+    "source_blob": "05b2a0dd1ab9e7e13f4e3947cee31ba5fcea1115",
+    "sha256": "5BC405F3943C2FBF0DDBD60B78D2C01096C622D982540F0CBEF951315FF1575E",
+    "previous_output_sha256": "2E2209F5C257BD4695C8D74E110A79B7CD1313099F4FCECFD0C5FC6905271749"
+  },
+  "host_files": {
+    "descriptor.mod": "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61",
+    "common/decisions/categories/00_decision_categories.txt": "1BF3E4C75C7E9C1D76871FA5DEB4BAAA2EF8C84B9375D8C1E4FC3CE682BD9B84",
+    "common/technologies/industry.txt": "D1F52D64DB6B3506E2196CE8A8E14891F022558BF3DC2946DEC866F808881342",
+    "common/technology_tags/r56e_technology.txt": "3B7F9B83F310CF81D791B6499820107332182EFDF0492B2025CA415487BDB6AB",
+    "common/ai_strategy/JAP.txt": "76701BEB9F98DCB98CF790A0E54D291BB592E46061C13B4194B518A8ECBB09E4",
+    "localisation/english/wtt_decisions_l_english.yml": "A86B5E26B80F5BBF108A74A6874AB02F45A1B3164AC16C6215FAE661226C3F58",
+    "history/states/1029-Vasterbotten.txt": "89F2E4992008B1D17DEFC55BD21170DA1BB0030FC26DCEEC3D07ECF0EA8F61E6",
+    "history/states/1030-Varmland.txt": "08C75F3E436781C869DFB889A86AF886EB65F8C8EA14ABB30D3C32AA9B89638C"
+  },
+  "vanilla_files": {
+    "launcher-settings.json": "D844392E7391EFE103EFC96B089910ADBA66605BC41FE43D5BC663F4C4A7FBA6",
+    "interface/countrydecisionview.gui": "1AF3DE93C190635CF866AC7D4D47FE7CBBADC75F1ED0059AB8ED038630531CE7",
+    "gfx/interface/decisions/decision_coal.dds": "352A18868C7AA8297427CF05F88EB58DF21E067BB85B6B87FE84715636D3B0EA",
+    "gfx/interface/decisions/decision_steel.dds": "688461188713C346CFB7ECF366C64B714C7586ECD7CED64CD5851F9E28602A8A",
+    "common/resources/00_resources.txt": "F6D2D193E478AD98FD46DB27A93677E27442BBFDEB44BCD22CBDC901AAD039D5"
+  }
+}

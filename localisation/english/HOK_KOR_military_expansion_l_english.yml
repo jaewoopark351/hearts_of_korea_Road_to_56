@@ -3,7 +3,7 @@
 #20260926_kpopmodder: Use escaped ASCII dialogue quotes and compact decision UI text; preserve gameplay and explicit lifecycle warnings.
 #20260926_kpopmodder: Compact new focus descriptions for the fixed-height UI; preserve gameplay and non-focus localisation.
 #20260925_kpopmodder: Rewrite focus, decision and event prose with grounded voices; preserve keys, gameplay rules and paired Korean text.
-#20260921_kpopmodder: 승인된 보상 강화에 맞춰 최종 교체값·영구 효과·반복 사업 조건과 협정 설명을 두 언어 채널에 동기화합니다.
+#20260921_kpopmodder: Synchronise the final replacement values, permanent effects, repeatable project requirements and agreement descriptions across both languages to reflect the approved reward increases.
 #20260921_kpopmodder: Add paired Korean military expansion names and descriptions.
  HOK_KOR_procurement_contracts:0 "Defence Procurement Contracts"
  HOK_KOR_procurement_contracts_desc:0 "The arsenals await orders; the units await supplies. Long-term procurement contracts shall align the two schedules and carry experience from rifle development into the next production run."

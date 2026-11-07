@@ -17,7 +17,7 @@ from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
-from build_rt56_map import HOK_ROOT, REPO_ROOT, RT56_ROOT
+from build_rt56_map import HOK_ROOT, REPO_ROOT, RT56_ROOT, VANILLA_ROOT
 from source_snapshot import (
     icon_lock, read_icon_source, source_record, SECOND_WAVE_FOCUS_PATH,
     SECOND_WAVE_RUNTIME_PATHS, second_wave_records, read_second_wave_source,
@@ -28,10 +28,12 @@ from source_snapshot import (
     focus_tooltip_update_lock, prerequisite_update_lock, remove_focus_prerequisite_update,
     royal_update_lock, remove_royal_update,
     CIVIC_UPDATE_MODIFIED_PATHS, civic_update_lock, read_civic_source, remove_civic_update,
-    english_translation_lock, remove_english_translation,
+    english_translation_lock, english_comment_translation_lock, remove_english_translation,
     shipbuilding_update_lock, read_shipbuilding_source, remove_shipbuilding_update,
     feature_update_lock, remove_feature_update, verify_feature_snapshot,
     democratic_layout_lock, remove_democratic_layout_update, verify_democratic_layout_snapshot,
+    PROSPECTING_AUDIO, apply_prospecting_focus, remove_prospecting_focus,
+    prospecting_additions, prospecting_lock, read_prospecting_audio, verify_prospecting_snapshot,
 )
 
 
@@ -503,7 +505,10 @@ def output_description(relative: str, rule: Rule) -> tuple[str, str, str]:
         path = REPO_ROOT / item
         if not path.is_file():
             raise RuntimeError(f"classified output is missing: {relative} -> {item}")
-        hashes.append(historical_output_sha256(item))
+        if item == PROSPECTING_AUDIO and path.read_bytes() == read_prospecting_audio():
+            hashes.append(sha256(HOK_ROOT / item))
+        else:
+            hashes.append(historical_output_sha256(item))
     if rule.integration_class == "ASSET_COPY":
         donor_hash = sha256(HOK_ROOT / relative)
         if outputs != (relative,) or hashes != [donor_hash]:
@@ -912,6 +917,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
 
     #20261020_kpopmodder: Attribute the English overlay without replacing any earlier HOK/RT56 provenance.
     translation = english_translation_lock()
+    english_comments = english_comment_translation_lock()
     if (translation["source_commit"] != "6f501200f723245636ecf3b246e0d3e74c490422"
             or len(translation["runtime_text"]) != 36):
         raise RuntimeError("unexpected English translation integration inventory or source revision")
@@ -924,7 +930,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         previous_hash = hashlib.sha256(previous).hexdigest().upper()
         current_hash = hashlib.sha256(current).hexdigest().upper()
         if (previous_hash != record["previous_output_sha256"]
-                or current_hash != record["output_sha256"]):
+                or current_hash != english_comments.get(relative, record)["output_sha256"]):
             raise RuntimeError(f"English translation output differs from its reviewed overlay: {relative}")
         row = matching[0]
         if row["output_sha256"] != previous_hash:
@@ -1081,7 +1087,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         raise RuntimeError("unreviewed democratic layout runtime or integration inventory")
     relative = SECOND_WAVE_FOCUS_PATH
     record = layout["runtime_text"][relative]
-    current = (REPO_ROOT / relative).read_bytes()
+    current = remove_prospecting_focus((REPO_ROOT / relative).read_bytes())
     current_hash = hashlib.sha256(current).hexdigest().upper()
     previous = remove_democratic_layout_update(relative, current)
     previous_hash = hashlib.sha256(previous).hexdigest().upper()
@@ -1104,6 +1110,8 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         "democratic_layout_lock": "tools/hok_democratic_layout_lock.json",
     })
     row["reason"] += "; 2026-11-01 democratic layout: 32 direct placement blocks compact the 95-focus sector, preserving gameplay, all anchors, offsets and preceding source layers"
+
+    counts.update(update_prospecting_rows(rows))
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(
@@ -1204,18 +1212,100 @@ def build_documentation_csv() -> bytes:
                 raise RuntimeError("documentation refresh changed an unrelated ledger cell")
     return serialize()
 
+
+#20261107_kpopmodder: Allow the new scope to be verified when historical host pins block a full rebuild.
+def update_prospecting_rows(rows: list[dict[str, str]]) -> Counter[str]:
+    verify_prospecting_snapshot()
+    lock = prospecting_lock()
+    for group, root in (("host_files", RT56_ROOT), ("vanilla_files", VANILLA_ROOT)):
+        for relative, digest in lock[group].items():
+            if sha256(root / relative) != digest:
+                raise ValueError(f"prospecting {group} drift: {relative}")
+
+    indexed = {row["source_path"]: row for row in rows}
+    if len(indexed) != len(rows):
+        raise ValueError("prospecting ledger requires unique source paths")
+    focus = indexed[SECOND_WAVE_FOCUS_PATH]
+    current_focus = (REPO_ROOT / SECOND_WAVE_FOCUS_PATH).read_bytes()
+    focus_lock = lock["focus"]
+    if (focus["output_path"] != SECOND_WAVE_FOCUS_PATH
+            or focus["output_sha256"] not in {focus_lock["previous_output_sha256"], focus_lock["output_sha256"]}
+            or apply_prospecting_focus(remove_prospecting_focus(current_focus)) != current_focus):
+        raise ValueError("prospecting ledger lost the reviewed preceding focus or notice")
+    focus["output_sha256"] = focus_lock["output_sha256"]
+    focus_reason = "; 2026-11-07 prospecting: Pohang decision notice only (tools/hok_resource_prospecting_lock.json)"
+    if not focus["reason"].endswith(focus_reason):
+        focus["reason"] += focus_reason
+
+    audio = indexed[PROSPECTING_AUDIO]
+    audio_lock = lock["audio"]
+    if (audio["integration_class"] != "ASSET_COPY" or audio["output_path"] != PROSPECTING_AUDIO
+            or audio["output_sha256"] not in {audio_lock["previous_output_sha256"], audio_lock["sha256"]}
+            or (RT56_ROOT / PROSPECTING_AUDIO).exists()
+            or (REPO_ROOT / PROSPECTING_AUDIO).read_bytes() != read_prospecting_audio()):
+        raise ValueError("prospecting ledger lost the reviewed Sinarirang source or asset ownership")
+    if audio["output_sha256"] == audio_lock["previous_output_sha256"]:
+        audio["previous_source_commit"] = audio["donor_source_commit"]
+        audio["previous_source_sha256"] = audio["donor_source_sha256"]
+    audio.update({
+        "reason": "HOK Sinarirang 44.1 kHz donor replacement; original track registration retained",
+        "output_sha256": audio_lock["sha256"], "donor_sha256": audio_lock["sha256"],
+        "donor_source_sha256": audio_lock["sha256"], "donor_source_commit": audio_lock["source_commit"],
+        "donor_source_blob": audio_lock["source_blob"], "donor_source_checkout": "immutable-git-objects",
+    })
+
+    counts: Counter[str] = Counter()
+    for path, data in prospecting_additions().items():
+        relative = path.as_posix()
+        if (RT56_ROOT / path).exists() or (VANILLA_ROOT / path).exists() or (REPO_ROOT / path).read_bytes() != data:
+            raise ValueError(f"prospecting runtime output drift or path collision: {relative}")
+        record = lock["additions"][relative]
+        classification = "ASSET_COPY" if path.suffix == ".dds" else "ADD"
+        row = {
+            "source_path": relative, "integration_class": classification, "status": "SHIPPED",
+            "exact_path_rt56_collision": "no", "output_path": relative,
+            "reason": "HOK Gangwon and Pohang prospecting; reviewed source and RT56 merge in tools/hok_resource_prospecting_lock.json",
+            "donor_sha256": record["sha256"], "output_sha256": record["output_sha256"],
+            "donor_source_sha256": record["sha256"], "donor_source_checkout": "raw-working-tree",
+        }
+        if relative in indexed:
+            if any(indexed[relative].get(key) != value for key, value in row.items()):
+                raise ValueError(f"prospecting ledger row drift: {relative}")
+        else:
+            rows.append(row)
+            counts[classification] += 1
+    return counts
+
+
+def build_prospecting_csv() -> bytes:
+    reader = csv.DictReader(io.StringIO(OUTPUT.read_text(encoding="utf-8"), newline=""))
+    rows = list(reader)
+    update_prospecting_rows(rows)
+    stream = io.StringIO(newline="")
+    writer = csv.DictWriter(stream, fieldnames=reader.fieldnames, lineterminator="\n")
+    writer.writeheader()
+    writer.writerows(rows)
+    return stream.getvalue().encode("utf-8")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--apply", action="store_true")
     mode.add_argument("--check", action="store_true")
-    parser.add_argument("--documentation-only", action="store_true",
-                        help="Refresh/check only AGENTS.md output_sha256; other rows are retained without validation")
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument("--documentation-only", action="store_true",
+                       help="Refresh/check only AGENTS.md output_sha256; other rows are retained without validation")
+    scope.add_argument("--resource-prospecting-only", action="store_true",
+                       help="Refresh/check only the Korean prospecting and Sinarirang rows")
     args = parser.parse_args()
 
     if args.documentation_only:
         expected = build_documentation_csv()
         summary = "documentation-only: AGENTS.md output_sha256; other rows retained without validation"
+    elif args.resource_prospecting_only:
+        expected = build_prospecting_csv()
+        summary = "Korean prospecting: six additions, one focus notice and Sinarirang; other rows retained without validation"
     else:
         expected, counts, collisions = build_csv()
         classes = ", ".join(f"{key}={counts[key]}" for key in sorted(counts))

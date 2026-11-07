@@ -1476,6 +1476,7 @@ def apply_democratic_layout_update(relative: str, data: bytes) -> bytes:
 def remove_democratic_layout_update(relative: str, data: bytes) -> bytes:
     if Path(relative).as_posix() != SECOND_WAVE_FOCUS_PATH:
         return data
+    data = remove_prospecting_focus(data)
     record = democratic_layout_lock()["runtime_text"][SECOND_WAVE_FOCUS_PATH]
     if sha256(data) == record["previous_output_sha256"]:
         return data
@@ -1518,8 +1519,121 @@ def verify_democratic_layout_snapshot() -> None:
     print("PASS democratic layout snapshot: one focus source, six source documents, exact coordinate merge and reversal")
 
 
+#20261107_kpopmodder: Replay the prospecting delta without updating the historical gameplay or artwork pins.
+PROSPECTING_LOCK_PATH = Path(__file__).with_name("hok_resource_prospecting_lock.json")
+PROSPECTING_SNAPSHOT = REPO_ROOT / "docs/upstream/hok-resource-prospecting-20261107/runtime"
+PROSPECTING_DECISIONS = "common/decisions/HOK_KOR_resource_prospecting.txt"
+PROSPECTING_AUDIO = "music/Sinarirang.ogg"
+POHANG_FOCUS_ID = b"\t\tid = KOR_pohang_iron__steel_company\r\n"
+POHANG_REWARD = b"\t\tcompletion_reward = {\r\n"
+
+
+@lru_cache(maxsize=1)
+def prospecting_lock() -> dict:
+    lock = json.loads(PROSPECTING_LOCK_PATH.read_text(encoding="utf-8"))
+    if (lock["format"], lock["source_kind"], len(lock["additions"])) != (
+        1, "reviewed-working-tree-snapshot", 6
+    ) or lock["focus"]["previous_output_sha256"] != democratic_layout_lock()["runtime_text"][SECOND_WAVE_FOCUS_PATH]["output_sha256"]:
+        raise ValueError("unreviewed Korean prospecting source or preceding focus output")
+    return lock
+
+
+def _prospecting_notice() -> bytes:
+    return ("\r\n".join(prospecting_lock()["focus"]["notice"]) + "\r\n").encode("utf-8")
+
+
+def _insert_prospecting_notice(data: bytes, state: bytes) -> bytes:
+    if data.count(POHANG_FOCUS_ID) != 1:
+        raise ValueError("expected one Pohang focus definition")
+    offset = data.index(POHANG_REWARD, data.index(POHANG_FOCUS_ID)) + len(POHANG_REWARD)
+    if not data.startswith(b"\t\t\t" + state + b" = {\r\n\t\t\t\tadd_resource = { ", offset):
+        raise ValueError("Pohang focus reward anchor changed")
+    return data[:offset] + _prospecting_notice() + data[offset:]
+
+
+def apply_prospecting_focus(data: bytes) -> bytes:
+    record = prospecting_lock()["focus"]
+    if sha256(data) != record["previous_output_sha256"]:
+        raise ValueError("unreviewed pre-prospecting focus output")
+    result = _insert_prospecting_notice(data, b"920")
+    if sha256(result) != record["output_sha256"]:
+        raise ValueError("Pohang decision notice differs from the reviewed focus merge")
+    return result
+
+
+def remove_prospecting_focus(data: bytes) -> bytes:
+    notice = _prospecting_notice()
+    if notice not in data:
+        return data
+    record = prospecting_lock()["focus"]
+    if sha256(data) != record["output_sha256"]:
+        raise ValueError("unreviewed prospecting focus output")
+    result = data.replace(notice, b"", 1)
+    if sha256(result) != record["previous_output_sha256"]:
+        raise ValueError("Pohang notice reversal changed the preceding focus output")
+    return result
+
+
+@lru_cache(maxsize=1)
+def prospecting_additions() -> dict[Path, bytes]:
+    lock = prospecting_lock()
+    outputs = {}
+    for relative, record in lock["additions"].items():
+        path = (PROSPECTING_SNAPSHOT / relative).resolve()
+        path.relative_to(PROSPECTING_SNAPSHOT.resolve())
+        data = path.read_bytes()
+        if sha256(data) != record["sha256"]:
+            raise ValueError(f"prospecting snapshot drift: {relative}")
+        if relative == PROSPECTING_DECISIONS:
+            header, body = data.split(b"\r\n", 1)
+            for old, new in ((b"1029", b"1144"), (b"1030", b"920")):
+                body, count = re.subn(rb"\b" + old + rb"\b", new, body)
+                if count != 6:
+                    raise ValueError(f"prospecting state reference count changed: {old!r}")
+            data = b"\r\n".join((header, lock["decision_note"].encode("utf-8"), body))
+        elif path.suffix == ".yml":
+            header, body = data.split(b"\r\n", 1)
+            if header == b"\xef\xbb\xbfl_english:":
+                for key, value in lock["english"].items():
+                    pattern = rb'(?m)^ ' + re.escape(key.encode("ascii")) + rb':0 "[^"\r\n]*"(?=\r$)'
+                    row = f' {key}:0 "{value}"'.encode("utf-8")
+                    body, count = re.subn(pattern, lambda _: row, body)
+                    if count != 1:
+                        raise ValueError(f"prospecting translation key changed: {key}")
+            elif header != b"\xef\xbb\xbfl_korean:":
+                raise ValueError(f"unreviewed prospecting locale: {relative}")
+            data = b"\r\n".join((header, lock["localisation_note"].encode("utf-8"), body))
+        if sha256(data) != record["output_sha256"]:
+            raise ValueError(f"prospecting output differs from its reviewed merge: {relative}")
+        outputs[Path(relative)] = data
+    return outputs
+
+
+@lru_cache(maxsize=1)
+def read_prospecting_audio() -> bytes:
+    record = prospecting_lock()["audio"]
+    revision = f"{record['source_commit']}:{PROSPECTING_AUDIO}"
+    blob = subprocess.check_output(git_command() + ["rev-parse", revision]).decode().strip()
+    data = subprocess.check_output(git_command() + ["cat-file", "blob", blob])
+    if blob != record["source_blob"] or sha256(data) != record["sha256"]:
+        raise ValueError("unreviewed Sinarirang donor source")
+    return data
+
+
+def verify_prospecting_snapshot() -> None:
+    lock = prospecting_lock()
+    revision = f"{lock['working_tree_base']}:{SECOND_WAVE_FOCUS_PATH}"
+    source = subprocess.check_output(git_command() + ["show", revision])
+    source = source.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
+    if sha256(_insert_prospecting_notice(source, b"1030")) != lock["focus"]["source_sha256"]:
+        raise ValueError("Pohang notice differs from the reviewed donor working tree")
+    prospecting_additions()
+    read_prospecting_audio()
+
+
 #20261020_kpopmodder: Reuse the reviewed English translation only for the port's existing keys and RT56-specific wording.
 ENGLISH_TRANSLATION_LOCK_PATH = Path(__file__).with_name("hok_english_translation_lock.json")
+ENGLISH_COMMENT_LOCK_PATH = Path(__file__).with_name("hok_english_comment_translation_lock.json")
 ENGLISH_TRANSLATION_ARCHIVE = REPO_ROOT / "docs/upstream/hok-english-20261020"
 ENGLISH_ROW = re.compile(r'(?m)^([ \t]*([A-Za-z0-9_.-]+):(\d*)[ \t]+")((?:[^"\\\r\n]|\\[^\r\n])*)("[ \t]*(?:#[^\r\n]*)?\r?$)')
 ENGLISH_TOKENS = re.compile(r'\$[^$\r\n]+\$|\[(?:\?|[A-Z][A-Za-z0-9_]*\.|Get)[^\]\r\n]+\]|§.|£[A-Za-z0-9_]+|@[A-Z][A-Z0-9]{2}')
@@ -1534,6 +1648,15 @@ def english_translation_lock() -> dict:
     ):
         raise ValueError("unreviewed English translation source or inventory")
     return lock
+
+
+@lru_cache(maxsize=1)
+def english_comment_translation_lock() -> dict:
+    records = json.loads(ENGLISH_COMMENT_LOCK_PATH.read_text(encoding="utf-8"))
+    if (len(records) != 6 or records.keys() - english_translation_lock()["runtime_text"].keys()
+            or sum(len(record["translations"]) for record in records.values()) != 19):
+        raise ValueError("unreviewed English comment translation inventory")
+    return records
 
 
 def _english_archive(relative: str, digest: str) -> bytes:
@@ -1594,6 +1717,18 @@ def english_translation_payload(relative: str) -> bytes:
     output = ENGLISH_ROW.sub(translate, previous.decode("utf-8-sig")).encode("utf-8-sig")
     if sha256(output) != record["output_sha256"]:
         raise ValueError(f"English translation output drift: {relative}")
+    #20261107_kpopmodder: Translate inherited comments after verifying the original English output.
+    comments = english_comment_translation_lock().get(relative, {})
+    for original, translated in comments.get("translations", {}).items():
+        if any(not line.lstrip().startswith("#") or "\n" in line or "\r" in line
+               for line in (original, translated)):
+            raise ValueError(f"English comment translation must stay commented out: {relative}")
+        pattern = rb"(?m)^" + re.escape(original.encode("utf-8")) + rb"(?=\r?$)"
+        output, count = re.subn(pattern, lambda _: translated.encode("utf-8"), output)
+        if count != 1:
+            raise ValueError(f"English comment translation expected one source line: {relative}")
+    if comments and sha256(output) != comments["output_sha256"]:
+        raise ValueError(f"English comment output drift: {relative}")
     return output
 
 
@@ -1602,7 +1737,9 @@ def apply_english_translation(relative: str, data: bytes) -> bytes:
     record = english_translation_lock()["runtime_text"].get(relative)
     if record is None:
         return data
-    if sha256(data) not in (record["previous_output_sha256"], record["output_sha256"]):
+    comments = english_comment_translation_lock().get(relative, {})
+    if sha256(data) not in (record["previous_output_sha256"], record["output_sha256"],
+                            comments.get("output_sha256")):
         raise ValueError(f"unreviewed pre-English localisation output: {relative}")
     return english_translation_payload(relative)
 
@@ -1627,8 +1764,14 @@ def verify_english_translation() -> None:
     additions = {p: r for p, r in shipbuilding_update_lock()["runtime_text"].items() if p.startswith("localisation/english/")}
     #20261031_kpopmodder: Extend English only by the reviewed new feature files, retaining every earlier translation contract.
     feature_english = {p: r for p, r in feature_update_lock()["runtime_text"].items() if p.startswith("localisation/english/")}
-    if paths != expected_paths | additions.keys() | feature_english.keys():
+    prospecting_locales = {p.as_posix(): data for p, data in prospecting_additions().items() if p.suffix == ".yml"}
+    prospecting_english = {p for p in prospecting_locales if p.startswith("localisation/english/")}
+    if paths != expected_paths | additions.keys() | feature_english.keys() | prospecting_english:
         raise ValueError("English output file inventory differs from the reviewed translation layers")
+    hangul = re.compile(r"[\u1100-\u11ff\u302e-\u302f\u3130-\u318f\ua960-\ua97f\uac00-\ud7ff\uffa0-\uffdc]")
+    for relative in sorted(paths):
+        if hangul.search((REPO_ROOT / relative).read_text(encoding="utf-8-sig")):
+            raise ValueError(f"Hangul remains in English localisation: {relative}")
     keys, changed, added = set(), set(lock["changed_common_keys"]), set(lock["port_only_keys"])
     if len(changed) != 25 or len(added) != 27 or changed & added or changed | added != lock["adapted_values"].keys():
         raise ValueError("English RT56-specific translation allowlist drift")
@@ -1677,26 +1820,31 @@ def verify_english_translation() -> None:
     if len(extra_keys) != 4:
         raise ValueError("shipbuilding English must add exactly four keys")
     print("PASS English translation: 37 files, 2747 keys; historical 2691 reused, 25 adapted, 27 port-only, 255 excluded; four shipbuilding strings translated")
-    #20261031_kpopmodder: Enforce translated prose and protected game tokens for each additional feature locale pair.
-    feature_keys = set()
-    for relative in feature_english:
-        data = (REPO_ROOT / relative).read_bytes()
-        if data != feature_addition(relative):
-            raise ValueError(f"Korean feature English output drift: {relative}")
+    #20261107_kpopmodder: Check the prospecting locale pair under the same new-key and protected-token rules as the DLC features.
+    new_keys = set()
+    new_english_paths = (*feature_english, *sorted(prospecting_english))
+    for relative in new_english_paths:
         korean_path = relative.replace("/english/", "/korean/").replace("_l_english.yml", "_l_korean.yml")
+        if relative in prospecting_english:
+            expected_english, expected_korean = prospecting_locales[relative], prospecting_locales[korean_path]
+        else:
+            expected_english, expected_korean = feature_addition(relative), feature_addition(korean_path)
+        data = (REPO_ROOT / relative).read_bytes()
+        if data != expected_english:
+            raise ValueError(f"new Korean English output drift: {relative}")
         korean = (REPO_ROOT / korean_path).read_bytes()
-        if korean != feature_addition(korean_path):
-            raise ValueError(f"Korean feature Korean output drift: {korean_path}")
+        if korean != expected_korean:
+            raise ValueError(f"new Korean Korean output drift: {korean_path}")
         en_rows, ko_rows = english_entries(data), english_entries(korean)
-        if en_rows.keys() != ko_rows.keys() or (keys | extra_keys | feature_keys) & en_rows.keys():
-            raise ValueError(f"Korean feature bilingual key collision: {relative}")
+        if en_rows.keys() != ko_rows.keys() or (keys | extra_keys | new_keys) & en_rows.keys():
+            raise ValueError(f"new Korean bilingual key collision: {relative}")
         for key, (version, value) in en_rows.items():
             kr_version, kr_value = ko_rows[key]
             if (version != kr_version or Counter(ENGLISH_TOKENS.findall(value)) != Counter(ENGLISH_TOKENS.findall(kr_value))
                     or value.count(r"\n") != kr_value.count(r"\n") or re.search(r"[\uac00-\ud7a3]", value)):
-                raise ValueError(f"Korean feature English protected text drift: {key}")
-        feature_keys.update(en_rows)
-    print(f"PASS Korean feature English: {len(feature_english)} files, {len(feature_keys)} additional translated keys")
+                raise ValueError(f"new Korean English protected text drift: {key}")
+        new_keys.update(en_rows)
+    print(f"PASS Korean feature and prospecting English: {len(new_english_paths)} files, {len(new_keys)} additional translated keys")
 
 
 def main() -> int:
@@ -1743,6 +1891,7 @@ def main() -> int:
     verify_shipbuilding_snapshot()
     verify_feature_snapshot()
     verify_democratic_layout_snapshot()
+    verify_prospecting_snapshot()
     return 0
 
 

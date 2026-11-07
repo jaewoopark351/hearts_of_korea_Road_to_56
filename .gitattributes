@@ -183,3 +183,11 @@ localisation/korean/HOK_KOR_naval_captains_l_korean.yml text eol=crlf
 localisation/korean/HOK_KOR_raids_l_korean.yml text eol=crlf
 localisation/korean/HOK_KOR_research_network_l_korean.yml text eol=crlf
 localisation/korean/HOK_KOR_soyang_water_gates_l_korean.yml text eol=crlf
+
+#20261107_kpopmodder: Preserve the prospecting source snapshot and reviewed runtime bytes.
+docs/upstream/hok-resource-prospecting-20261107/runtime/** -text
+tools/hok_resource_prospecting_lock.json text eol=lf
+common/decisions/HOK_KOR_resource_prospecting.txt text eol=crlf
+interface/HOK_KOR_resource_prospecting_icons.gfx text eol=crlf
+localisation/english/HOK_KOR_resource_prospecting_l_english.yml text eol=crlf
+localisation/korean/HOK_KOR_resource_prospecting_l_korean.yml text eol=crlf

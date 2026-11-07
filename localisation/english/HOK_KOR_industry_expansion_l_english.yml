@@ -4,10 +4,10 @@
 #20260926_kpopmodder: Use escaped ASCII dialogue quotes and compact decision UI text; preserve gameplay and explicit lifecycle warnings.
 #20260926_kpopmodder: Compact new focus descriptions for the fixed-height UI; preserve gameplay and non-focus localisation.
 #20260925_kpopmodder: Rewrite focus, decision and event prose with grounded voices; preserve keys, gameplay rules and paired Korean text.
-#20260923_kpopmodder: 요청한 반복 디시전 7종의 민간공장 비용을 제거하고 정치력 150 비용에 맞춰 설명을 동기화합니다.
-#20260921_kpopmodder: 승인된 보상 강화에 맞춰 최종 교체값·영구 효과·반복 사업 조건과 협정 설명을 두 언어 채널에 동기화합니다.
-#20260921_kpopmodder: 현재 산업 국민정신 수치에 중점·국민정신 설명과 통합 생산계획 툴팁을 맞추고 단계 교체를 명시합니다.
-#20260921_kpopmodder: 바닐라 산업·교육·투자 구조를 한국의 기존 기관과 연결한 신규 설명을 양쪽 언어 채널에 제공합니다.
+#20260923_kpopmodder: Remove the civilian factory cost from the seven requested repeatable decisions and update their descriptions to reflect the political power cost of 150.
+#20260921_kpopmodder: Synchronise the final replacement values, permanent effects, repeatable project requirements and agreement descriptions across both languages to reflect the approved reward increases.
+#20260921_kpopmodder: Update the focus and national spirit descriptions and the Integrated Production Planning tooltip to match the current industrial national spirit values, and specify which tiers replace one another.
+#20260921_kpopmodder: Add descriptions in both languages linking vanilla industry, education and investment to Korea's existing institutions.
  HOK_KOR_link_power_grids:0 "Connect the National Power Grid"
  HOK_KOR_link_power_grids_desc:0 "Power stations have electricity to spare, yet factory machinery stands idle. We shall link regional generation and distribution. An interconnected grid reduces factory energy consumption by 10%."
  HOK_KOR_industrial_power_allocation:0 "Industrial Power Allocation"

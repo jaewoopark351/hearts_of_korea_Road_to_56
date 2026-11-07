@@ -5,7 +5,7 @@
 #20260926_kpopmodder: Compact new focus descriptions for the fixed-height UI; preserve gameplay and non-focus localisation.
 #20260926_kpopmodder: Restore fictional class-conscious and hardline planning voices while preserving all gameplay rules.
 #20260925_kpopmodder: Rewrite focus, decision and event prose with grounded voices; preserve keys, gameplay rules and paired Korean text.
-#20260923_kpopmodder: 요청한 반복 디시전 7종의 민간공장 비용을 제거하고 정치력 150 비용에 맞춰 설명을 동기화합니다.
+#20260923_kpopmodder: Remove the civilian factory cost from the seven requested repeatable decisions and update their descriptions to reflect the political power cost of 150.
  #20260922_kpopmodder: Describe preserved research benefits and distinguish the two political-power-only projects.
  #20260922_kpopmodder: Localise the two communist policy choices and their bounded paid projects.
  HOK_KOR_yeo_cooperative_registry:0 "Cooperative Registration Network"

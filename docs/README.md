@@ -4,6 +4,7 @@
 
 ## 현재 상태
 
+- 2026-11-07 원본 업데이트 **강원·포항 반복 자원 확장과 신아리랑 44.1kHz 이식**. RT56 실제 게임에서 두 사업의 90일 완료 두 회차, 취소, 저장 재로드와 신아리랑 재생을 확인했다. [선택 이식 계획](plans/2026-11-07-hok-upstream-delta-port-plan.md) · [구현·검증 기록](implementation/2026-11-07-hok-resource-prospecting-port.md)
 - 2026-10-12 원본 d4031aa 재벌·시민사회: **한국 runtime31개 선택 이식, playable472개·신규13중점·20정신·13결정/mission·11사건·영향력패널 반영**. 이전 생성 출력405개·RT56 지역 병합·historical lock10개 보존. Civic scoped 정적/회귀26개와 기존 royal/선행57개 통과, aggregate **18 PASS / 0 WARNING / 5 기존 ERROR**, 현재 실행 미검증. 기존 host drift·descriptor pin은 아래 [구현 기록](implementation/2026-10-12-korean-civic-update-port.md)에 구분했다. [472개 좌표 명세](HOK_KOREAN_CIVIC_LAYOUT_COORDINATES.md).
 - 2026-10-11 미사일 기지: **함경918·충청1145의 HoK 우선 배치와 정적 검증 완료, 실제 UI 검증 대기**. RT56 위치3행 제외·HoK 함경1행 복원, buildings-only에서 철도 포함 동반 지도17개 보존. 외부 회귀34 PASS·독립 과거 정규화12개 변형 거부; aggregate 작업 전16/0/5 → 작업 후17/0/5(같은 기존 host drift4·descriptor pin1). 전체 지도·철도 source drift와 실행 증거는 별도 미완료다. 최초 문서화 전용 요청과 수정 전 지문을 [수정 계획](plans/2026-10-11-korean-rocket-site-fix-plan.md)에 보존하고, 후속 구현 승인·검사 결과를 [구현 기록](implementation/2026-10-11-korean-rocket-site-fix.md)에 구분했다.
 - 2026-10-10 원본 `4d8241e` 왕정 업데이트: **A2/A3/A4·H2의 추가 완료 조건 제거, H1 물자 4중점 배치·선행 이동, 연락망 국민정신 I/II 형성 전 유지 반영**. 보상·기간·AI·RT56 지역 조건 보존, 460개 좌표 명세 추가. scoped 정적 통과·회귀57개 거부; aggregate **16 PASS / 0 WARNING / 5 ERROR**(기존 host drift4·시작부터 존재한 descriptor 바이트 pin1). 이번 호환판 실행 미검증. [구현 기록](implementation/2026-10-10-korean-royal-update-port.md), [포트 좌표 명세](HOK_KOREAN_ROYAL_LAYOUT_COORDINATES.md).

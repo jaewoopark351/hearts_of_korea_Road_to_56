@@ -1,0 +1,51 @@
+{
+  "localisation/english/HOK_KOR_communist_policy_l_english.yml": {
+    "translations": {
+      "#20260923_kpopmodder: 요청한 반복 디시전 7종의 민간공장 비용을 제거하고 정치력 150 비용에 맞춰 설명을 동기화합니다.": "#20260923_kpopmodder: Remove the civilian factory cost from the seven requested repeatable decisions and update their descriptions to reflect the political power cost of 150."
+    },
+    "output_sha256": "38B194CC91B31C3AB9ACEB7694F472559BFA9FE439F7832D3478AEB95B310DDE"
+  },
+  "localisation/english/HOK_KOR_democratic_expansion_l_english.yml": {
+    "translations": {
+      "#20260923_kpopmodder: 공직 감찰 정비와 상위 공개 결산 제도의 매일 정치력 +1.0을 설명에 반영합니다.": "#20260923_kpopmodder: Update the descriptions for Reform Public Service Oversight and the upgraded Public Accounts System, including its daily +1.0 political power.",
+      "#20260923_kpopmodder: 요청한 반복 디시전 7종의 민간공장 비용을 제거하고 정치력 150 비용에 맞춰 설명을 동기화합니다.": "#20260923_kpopmodder: Remove the civilian factory cost from the seven requested repeatable decisions and update their descriptions to reflect the political power cost of 150.",
+      "#20260921_kpopmodder: 승인된 보상 강화에 맞춰 최종 교체값·영구 효과·반복 사업 조건과 협정 설명을 두 언어 채널에 동기화합니다.": "#20260921_kpopmodder: Synchronise the final replacement values, permanent effects, repeatable project requirements and agreement descriptions across both languages to reflect the approved reward increases.",
+      "#20260921_kpopmodder: 바닐라 제도·원조·협정 구조를 한국 후속 중점에 맞춰 번안하고 신규 효과와 비용을 영문·한국어 채널에 함께 표시합니다.": "#20260921_kpopmodder: Adapt vanilla institutions, aid and agreements for Korea's follow-up focuses and show the new effects and costs in both languages."
+    },
+    "output_sha256": "C3711BC11B85E9EAD8407CC88A01F03F2C8E43C7DAC3474C2D8D563F3D862110"
+  },
+  "localisation/english/HOK_KOR_industry_expansion_l_english.yml": {
+    "translations": {
+      "#20260923_kpopmodder: 요청한 반복 디시전 7종의 민간공장 비용을 제거하고 정치력 150 비용에 맞춰 설명을 동기화합니다.": "#20260923_kpopmodder: Remove the civilian factory cost from the seven requested repeatable decisions and update their descriptions to reflect the political power cost of 150.",
+      "#20260921_kpopmodder: 승인된 보상 강화에 맞춰 최종 교체값·영구 효과·반복 사업 조건과 협정 설명을 두 언어 채널에 동기화합니다.": "#20260921_kpopmodder: Synchronise the final replacement values, permanent effects, repeatable project requirements and agreement descriptions across both languages to reflect the approved reward increases.",
+      "#20260921_kpopmodder: 현재 산업 국민정신 수치에 중점·국민정신 설명과 통합 생산계획 툴팁을 맞추고 단계 교체를 명시합니다.": "#20260921_kpopmodder: Update the focus and national spirit descriptions and the Integrated Production Planning tooltip to match the current industrial national spirit values, and specify which tiers replace one another.",
+      "#20260921_kpopmodder: 바닐라 산업·교육·투자 구조를 한국의 기존 기관과 연결한 신규 설명을 양쪽 언어 채널에 제공합니다.": "#20260921_kpopmodder: Add descriptions in both languages linking vanilla industry, education and investment to Korea's existing institutions."
+    },
+    "output_sha256": "6939B0C0761D170B1608FA7CBE752A21C4D9CA33E6D3F9A4D8349C33BD86E2B7"
+  },
+  "localisation/english/HOK_KOR_military_expansion_l_english.yml": {
+    "translations": {
+      "#20260921_kpopmodder: 승인된 보상 강화에 맞춰 최종 교체값·영구 효과·반복 사업 조건과 협정 설명을 두 언어 채널에 동기화합니다.": "#20260921_kpopmodder: Synchronise the final replacement values, permanent effects, repeatable project requirements and agreement descriptions across both languages to reflect the approved reward increases."
+    },
+    "output_sha256": "BB8C818C42D687FD214821DC3ED7673C011312496AD325822ECDF837B21F553B"
+  },
+  "localisation/english/korea_focus_l_english.yml": {
+    "translations": {
+      " ##KOR_devalue_the_won:0 \"원화 가치 절하\"": " ##KOR_devalue_the_won:0 \"Devalue the Won\"",
+      " ##KOR_construction_boom:0 \"건설 붐\"": " ##KOR_construction_boom:0 \"Construction Boom\"",
+      " ##KOR_korean_dream:0 \"코리안 드림\"": " ##KOR_korean_dream:0 \"The Korean Dream\"",
+      " ##KOR_vision_1950:0 \"비전 1950\"": " ##KOR_vision_1950:0 \"Vision 1950\"",
+      " ##KOR_korea_aerospace_industry:0 \"한국항공우주산업\"": " ##KOR_korea_aerospace_industry:0 \"Korea Aerospace Industries\"",
+      " ##KOR_air_artillery:0 \"항공포병대\"": " ##KOR_air_artillery:0 \"Air Artillery\"",
+      " ##KOR_burn_the_enemy_mainland:0 \"적의 본토를 불태워라!\"": " ##KOR_burn_the_enemy_mainland:0 \"Burn the Enemy's Homeland!\"",
+      " ##KOR_armed_forces_intelligence_command:0 \"국군정보사령부\"": " ##KOR_armed_forces_intelligence_command:0 \"Armed Forces Intelligence Command\""
+    },
+    "output_sha256": "9555D5CF6760B9548847A2C97F80E4D09A4C4EEFF45726D9ED3C550B0E99F430"
+  },
+  "localisation/english/korea_ideas_l_english.yml": {
+    "translations": {
+      " #KOR_saemaeul_undong:0 \"새마을 운동\"": " #KOR_saemaeul_undong:0 \"New Village Movement\""
+    },
+    "output_sha256": "C8796229BBE99E89CCECFE6E5FFD23E18A1F02B1BCDF0A3D0049D653785E2687"
+  }
+}

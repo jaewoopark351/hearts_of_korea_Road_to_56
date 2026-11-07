@@ -567,6 +567,7 @@ Color represents the focus's political branch or policy field, not the country's
 HOI4 localisation files are not ordinary YAML. Do not run a generic YAML formatter on them.
 
 - Preserve UTF-8 with BOM for localisation `.yml` files.
+- Write all human-readable text under `localisation/english` in English. This applies to active localisation values, commented-out entries, and contributor notes. Translate any inherited Korean text in this directory into English.
 - Preserve each file's established language header while the localisation contract is investigated; do not assume the donor's Korean-language dependency remains the final port dependency.
 - Do not invent or replace a locale header without confirming how the active dependency loads it.
 - Preserve the expected key form, such as `KEY:0 "Text"`, unless the project has a verified alternative.

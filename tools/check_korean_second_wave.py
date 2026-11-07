@@ -34,6 +34,7 @@ from source_snapshot import (
     shipbuilding_update_lock, read_shipbuilding_source, remove_shipbuilding_update as _remove_shipbuilding_update,
     feature_update_lock, remove_feature_update, verify_feature_snapshot,
     democratic_layout_lock, remove_democratic_layout_update, verify_democratic_layout_snapshot,
+    remove_prospecting_focus,
 )
 
 
@@ -2197,7 +2198,7 @@ def run_democratic_layout_checks() -> None:
     lock = democratic_layout_lock()
     require(set(lock["runtime_text"]) == {FOCUS_PATH}, "democratic layout must change only the Korean focus source")
     record = lock["runtime_text"][FOCUS_PATH]
-    current_bytes = (ROOT / FOCUS_PATH).read_bytes()
+    current_bytes = remove_prospecting_focus((ROOT / FOCUS_PATH).read_bytes())
     require(hashlib.sha256(current_bytes).hexdigest().upper() == record["output_sha256"].upper(),
             "democratic layout final output differs from its reviewed merge")
     ancestor_bytes = remove_democratic_layout_update(FOCUS_PATH, current_bytes)

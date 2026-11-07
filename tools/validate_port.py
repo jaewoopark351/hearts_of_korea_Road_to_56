@@ -44,6 +44,7 @@ GENERATOR_CHECKS = (
     ("Korean DLC feature contracts", "check_korean_second_wave.py", "--feature-check"),
     #20261101_kpopmodder: Enforce the independent placement-only compaction without changing historical gameplay contracts.
     ("Korean democratic layout contracts", "check_korean_second_wave.py", "--democratic-layout-check"),
+    ("Korean resource prospecting", "build_integration_manifest.py", "--check", "--resource-prospecting-only"),
     # [2026-09-23]_kpopmodder: Include the selected second-wave files and their immutable provenance.
     #20261003_kpopmodder: Include the six reviewed material-cycle additions in the provenance gate.
     ("audited integration manifest", "build_integration_manifest.py", "--check"),

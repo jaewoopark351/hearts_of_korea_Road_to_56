@@ -3,10 +3,10 @@
 #20260926_kpopmodder: Use escaped ASCII dialogue quotes and compact decision UI text; preserve gameplay and explicit lifecycle warnings.
 #20260926_kpopmodder: Compact new focus descriptions for the fixed-height UI; preserve gameplay and non-focus localisation.
 #20260925_kpopmodder: Rewrite focus, decision and event prose with grounded voices; preserve keys, gameplay rules and paired Korean text.
-#20260923_kpopmodder: 공직 감찰 정비와 상위 공개 결산 제도의 매일 정치력 +1.0을 설명에 반영합니다.
-#20260923_kpopmodder: 요청한 반복 디시전 7종의 민간공장 비용을 제거하고 정치력 150 비용에 맞춰 설명을 동기화합니다.
-#20260921_kpopmodder: 승인된 보상 강화에 맞춰 최종 교체값·영구 효과·반복 사업 조건과 협정 설명을 두 언어 채널에 동기화합니다.
-#20260921_kpopmodder: 바닐라 제도·원조·협정 구조를 한국 후속 중점에 맞춰 번안하고 신규 효과와 비용을 영문·한국어 채널에 함께 표시합니다.
+#20260923_kpopmodder: Update the descriptions for Reform Public Service Oversight and the upgraded Public Accounts System, including its daily +1.0 political power.
+#20260923_kpopmodder: Remove the civilian factory cost from the seven requested repeatable decisions and update their descriptions to reflect the political power cost of 150.
+#20260921_kpopmodder: Synchronise the final replacement values, permanent effects, repeatable project requirements and agreement descriptions across both languages to reflect the approved reward increases.
+#20260921_kpopmodder: Adapt vanilla institutions, aid and agreements for Korea's follow-up focuses and show the new effects and costs in both languages.
  HOK_KOR_parliamentary_committee:0 "National Policy Consultative Committee"
  HOK_KOR_parliamentary_committee_desc:0 "While parliament argues over responsibility, livelihoods outside its doors cannot wait. Representatives of each political group and the administration will sit down together and begin with what they can agree to carry out."
  HOK_KOR_civil_service_audit:0 "Reform Public Service Oversight"
