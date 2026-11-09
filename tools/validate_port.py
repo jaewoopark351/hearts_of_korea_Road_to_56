@@ -18,6 +18,14 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_COMPAT_REMOTE_FILE_ID = "3796816200"
 
 GENERATOR_CHECKS = (
+    #20261108_kpopmodder: Audit the current Steam host separately from immutable older HOK contracts.
+    ("RT56 November host transition", "rt56_host_update.py", "--check"),
+    ("RT56 November host preservation", "check_rt56_host_update.py", "--check"),
+    #20261108_kpopmodder: Validate raw new content before exact historical reversals hide it from prior contracts.
+    ("November HOK content outputs", "upstream_content_update.py", "--check"),
+    ("November HOK content contracts", "check_upstream_content.py", "--check"),
+    #20261107_kpopmodder: Verify raw final split outputs before auditing historical contracts through exact reversal.
+    ("Korean 15-state integration", "korean_state_split.py", "--check"),
     # [2026-09-22]_kpopmodder: Audit the immutable donor overlay before any derived output gate.
     ("audited HOK source snapshot", "source_snapshot.py", "--check"),
     ("map synthesis", "build_rt56_map.py", "--check"),
@@ -45,6 +53,7 @@ GENERATOR_CHECKS = (
     #20261101_kpopmodder: Enforce the independent placement-only compaction without changing historical gameplay contracts.
     ("Korean democratic layout contracts", "check_korean_second_wave.py", "--democratic-layout-check"),
     ("Korean resource prospecting", "build_integration_manifest.py", "--check", "--resource-prospecting-only"),
+    ("Korean state-split provenance", "build_integration_manifest.py", "--check", "--state-split-only"),
     # [2026-09-23]_kpopmodder: Include the selected second-wave files and their immutable provenance.
     #20261003_kpopmodder: Include the six reviewed material-cycle additions in the provenance gate.
     ("audited integration manifest", "build_integration_manifest.py", "--check"),
@@ -78,13 +87,16 @@ EXPECTED_COMPAT_STATE_IDS = {
     1145,
     1146,
     1147,
+    #20261107_kpopmodder: Reserve the six collision-audited Korean successor IDs.
+    1148, 1149, 1150, 1151, 1152, 1153,
 }
 
 RT56_MANCHURIA_SPLIT_STATE_IDS = frozenset(range(941, 948))
 MANCHURIA_STATE_IDS = frozenset((716, 745, 328, 717, 714, 761, 715, 610)) | (
     RT56_MANCHURIA_SPLIT_STATE_IDS
 )
-KOREA_CONTROL_STATE_IDS = frozenset((919, 918, 525, 1144, 1145, 920, 527, 917))
+#20261107_kpopmodder: Preserve the mainland acquisition predicate across both children of each split region.
+KOREA_CONTROL_STATE_IDS = frozenset((919, 918, 525, 1144, 1145, 920, 527, 917, 1148, 1149, 1150, 1151, 1152, 1153))
 ACQUISITION_CONTROL_STATE_IDS = MANCHURIA_STATE_IDS | KOREA_CONTROL_STATE_IDS
 
 LEGACY_HOK_STATE_IDS = (1028, 1029, 1030, 1031, 1082, 1083, 1084, 1085)
@@ -356,8 +368,9 @@ def check_banned_tokens(result: Validation) -> None:
     # Old HOK state IDs are valid RT56 IDs elsewhere in the world, so this
     # assertion is intentionally limited to non-map compat scripts.  Pinned
     # host-rebased files and map topology receive their own generator checks.
+    #20261107_kpopmodder: HOK_KOR_STATE_<donor ID> is an opaque localisation key, not a retired numeric scope.
     state_pattern = re.compile(
-        r"(?<![0-9])(?:" + "|".join(map(str, LEGACY_HOK_STATE_IDS)) + r")(?![0-9])"
+        r"(?<![A-Za-z0-9_])(?:" + "|".join(map(str, LEGACY_HOK_STATE_IDS)) + r")(?![A-Za-z0-9_])"
     )
     for path in iter_script_files():
         if relative(path).startswith("map/"):
@@ -722,6 +735,14 @@ def assignment_blocks_at_depth(block: str, key: str, depth: int) -> list[str]:
         opening = clean.find("{", match.start(), match.end())
         found.append(block[match.start():matching_brace(block, opening)])
     return found
+
+
+#20261107_kpopmodder: Count mandatory successor predicates through AND only; OR and NOT never satisfy full-region acquisition.
+def conjunctive_numeric_values(block: str, key: str) -> list[int]:
+    values = numeric_values_at_depth(block, key, 1)
+    for conjunction in assignment_blocks_at_depth(block, "AND", 1):
+        values.extend(conjunctive_numeric_values(conjunction, key))
+    return values
 
 
 def unique_nested_block(block: str, key: str, depth: int, label: str) -> str:
@@ -1190,7 +1211,7 @@ def _check_manchuria_state_coverage(result: Validation) -> None:
     checks = (
         (
             "Manchuria triumph control condition",
-            numeric_values_at_depth(triumph_available, "controls_state", 1),
+            conjunctive_numeric_values(triumph_available, "controls_state"),
             ACQUISITION_CONTROL_STATE_IDS,
         ),
         (
@@ -1217,9 +1238,7 @@ def _check_manchuria_state_coverage(result: Validation) -> None:
         ),
         (
             "Defeat Japan control condition",
-            numeric_values_at_depth(
-                defeat_available, "has_full_control_of_state", 1
-            ),
+            conjunctive_numeric_values(defeat_available, "has_full_control_of_state"),
             ACQUISITION_CONTROL_STATE_IDS,
         ),
         (

@@ -1,0 +1,29 @@
+#20261107_kpopmodder: Split Korean states while preserving regional starting totals and dated history.
+state={
+	id=1083
+	name="HOK_KOR_STATE_1083"
+	provinces={
+		1003 4107 7155 13438 13440 13441
+	}
+
+	history={
+		owner = KOR
+		buildings = {
+			infrastructure = 1
+		}
+		victory_points = {
+			13438 1
+		}
+		add_core_of = KOR
+
+		1939.3.14 = {
+			owner = JAP
+			controller = JAP
+		}
+
+	}
+	manpower=1470817
+	buildings_max_level_factor=1.000
+	state_category=town
+	local_supplies=0.000
+}

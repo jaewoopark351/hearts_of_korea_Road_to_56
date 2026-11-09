@@ -1,0 +1,14 @@
+﻿l_english:
+#20261107_kpopmodder: Split Korean states while preserving regional starting totals and dated history.
+ HOK_KOR_STATE_1030:0 "North Gyeongsang"
+ HOK_KOR_STATE_1086:0 "South Gyeongsang"
+ HOK_KOR_STATE_1031:0 "South Chungcheong"
+ HOK_KOR_STATE_1087:0 "North Chungcheong"
+ HOK_KOR_STATE_1082:0 "North Jeolla"
+ HOK_KOR_STATE_1088:0 "South Jeolla"
+ HOK_KOR_STATE_527:0 "South Pyeongan"
+ HOK_KOR_STATE_1089:0 "North Pyeongan"
+ HOK_KOR_STATE_1028:0 "South Hamgyeong"
+ HOK_KOR_STATE_1090:0 "North Hamgyeong"
+ HOK_KOR_STATE_1083:0 "South Hwanghae"
+ HOK_KOR_STATE_1091:0 "North Hwanghae"

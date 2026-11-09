@@ -26,6 +26,12 @@ CONTENT_COMMIT = "da815305e3ce00186a487b3a378bf8536ff59146"
 UPDATE_COMMIT = "118d7b53dfdbc120fcfe4b9d6792e66b2b519be7"
 AI_PATH = "common/ai_strategy_plans/KOR_historical_strategy_plan.txt"
 
+
+#20261107_kpopmodder: Project only a verified final split output before enforcing unchanged historical layer locks.
+def _historical_runtime(relative: str | Path, data: bytes) -> bytes:
+    from korean_state_split import historical_bytes
+    return historical_bytes(Path(relative).as_posix(), data)
+
 # [2026-09-22]_kpopmodder: Keep uncommitted artwork provenance separate from the immutable gameplay base.
 ICON_LOCK_PATH = Path(__file__).with_name("hok_icon_lock.json")
 ICON_ROOT = SOURCE_CACHE_ROOT / "hok-icons-20260922"
@@ -151,6 +157,8 @@ def apply_focus_tooltip_update(data: bytes) -> bytes:
 
 def remove_focus_tooltip_update(data: bytes) -> bytes:
     #20261005_kpopmodder: Check historical contracts against the exact ancestor without accepting unrelated focus edits.
+    #20261107_kpopmodder: Keep the historical tooltip pin strict below the separate split layer.
+    data = _historical_runtime(SECOND_WAVE_FOCUS_PATH, data)
     lock = focus_tooltip_update_lock()
     if sha256(data) != lock["output_sha256"]:
         raise ValueError("unreviewed current focus decision-tooltip output")
@@ -248,6 +256,8 @@ def apply_focus_prerequisite_update(data: bytes) -> bytes:
 
 def remove_focus_prerequisite_update(data: bytes) -> bytes:
     #20261010_kpopmodder: Recover the byte-exact tooltip ancestor for existing preservation gates.
+    #20261107_kpopmodder: Keep the historical prerequisite pin strict below the separate split layer.
+    data = _historical_runtime(SECOND_WAVE_FOCUS_PATH, data)
     lock = prerequisite_update_lock()
     if sha256(data) != lock["output_sha256"]:
         raise ValueError("unreviewed current focus prerequisite output")
@@ -380,6 +390,8 @@ def apply_royal_update(relative: str | Path, data: bytes) -> bytes:
 def remove_royal_update(relative: str | Path, data: bytes) -> bytes:
     #20261010_kpopmodder: Recover byte-exact prior outputs for every unchanged historical preservation gate.
     relative = Path(relative).as_posix()
+    #20261107_kpopmodder: Verify final split bytes before comparing the unchanged royal ancestor.
+    data = _historical_runtime(relative, data)
     record = royal_update_lock()["runtime_text"][relative]
     if sha256(data) != record["output_sha256"]:
         raise ValueError(f"unreviewed current royal output: {relative}")
@@ -567,6 +579,8 @@ def apply_civic_update(relative: str | Path, data: bytes) -> bytes:
 def remove_civic_update(relative: str | Path, data: bytes) -> bytes:
     #20261012_kpopmodder: Recover exact historical outputs for preservation checks without admitting unrelated edits.
     relative = Path(relative).as_posix()
+    #20261107_kpopmodder: Verify final split bytes before comparing the unchanged civic ancestor.
+    data = _historical_runtime(relative, data)
     if relative not in CIVIC_UPDATE_MODIFIED_PATHS:
         raise ValueError(f"civic reversal may only restore its two reviewed existing outputs: {relative}")
     record = civic_update_lock()["runtime_text"][relative]
@@ -1243,6 +1257,8 @@ def apply_shipbuilding_update(relative: str, data: bytes) -> bytes:
 
 def remove_shipbuilding_update(relative: str, data: bytes) -> bytes:
     relative = Path(relative).as_posix()
+    #20261107_kpopmodder: Keep existing naval output hashes beneath a verified state-split reversal.
+    data = _historical_runtime(relative, data)
     record = shipbuilding_update_lock()["runtime_text"].get(relative, {})
     if "previous_output_sha256" not in record:
         return data
@@ -1349,6 +1365,8 @@ def apply_feature_update(relative: str, data: bytes) -> bytes:
 
 def remove_feature_update(relative: str, data: bytes) -> bytes:
     name = Path(relative).as_posix()
+    #20261107_kpopmodder: Preserve all feature hashes after recovering the exact pre-split output.
+    data = _historical_runtime(name, data)
     #20261101_kpopmodder: Verify and reverse the placement-only overlay before checking the historical feature ancestor.
     data = remove_democratic_layout_update(name, data)
     record = feature_update_lock()["runtime_text"].get(name, {})
@@ -1476,6 +1494,8 @@ def apply_democratic_layout_update(relative: str, data: bytes) -> bytes:
 def remove_democratic_layout_update(relative: str, data: bytes) -> bytes:
     if Path(relative).as_posix() != SECOND_WAVE_FOCUS_PATH:
         return data
+    #20261107_kpopmodder: Recover the exact preceding tree before the strictly pinned layout reversal.
+    data = _historical_runtime(SECOND_WAVE_FOCUS_PATH, data)
     data = remove_prospecting_focus(data)
     record = democratic_layout_lock()["runtime_text"][SECOND_WAVE_FOCUS_PATH]
     if sha256(data) == record["previous_output_sha256"]:
@@ -1562,6 +1582,8 @@ def apply_prospecting_focus(data: bytes) -> bytes:
 
 
 def remove_prospecting_focus(data: bytes) -> bytes:
+    #20261107_kpopmodder: Recover the exact existing prospecting tree before checking its immutable notice hash.
+    data = _historical_runtime(SECOND_WAVE_FOCUS_PATH, data)
     notice = _prospecting_notice()
     if notice not in data:
         return data
@@ -1747,6 +1769,8 @@ def apply_english_translation(relative: str, data: bytes) -> bytes:
 def remove_english_translation(relative: str, data: bytes) -> bytes:
     """Recover a byte-exact historical contract only after checking the final translation."""
     relative = Path(relative).as_posix()
+    #20261107_kpopmodder: Verify only the new split layer before enforcing the unchanged English translation bytes.
+    data = _historical_runtime(relative, data)
     record = english_translation_lock()["runtime_text"].get(relative)
     if record is None:
         return data
@@ -1766,8 +1790,20 @@ def verify_english_translation() -> None:
     feature_english = {p: r for p, r in feature_update_lock()["runtime_text"].items() if p.startswith("localisation/english/")}
     prospecting_locales = {p.as_posix(): data for p, data in prospecting_additions().items() if p.suffix == ".yml"}
     prospecting_english = {p for p in prospecting_locales if p.startswith("localisation/english/")}
-    if paths != expected_paths | additions.keys() | feature_english.keys() | prospecting_english:
+    #20261107_kpopmodder: Admit exactly one new English state-name file; retain every older file/key contract.
+    from korean_state_split_content import additions as state_split_additions
+    split_locales = state_split_additions()
+    split_english = {"localisation/english/HOK_KOR_state_split_l_english.yml"}
+    if set(split_locales) != split_english | {"localisation/korean/HOK_KOR_state_split_l_korean.yml"}:
+        raise ValueError("state-split localisation pair allowlist changed")
+    #20261108_kpopmodder: Admit only locked new English files; the separate content gate checks their actual bilingual contracts.
+    from upstream_content_update import addition_paths as content_addition_paths, build_outputs as content_outputs
+    content_english = {p for p in content_addition_paths('focus') if p.startswith('localisation/english/')}
+    if paths != expected_paths | additions.keys() | feature_english.keys() | prospecting_english | split_english | content_english:
         raise ValueError("English output file inventory differs from the reviewed translation layers")
+    for relative in content_english:
+        if (REPO_ROOT/relative).read_bytes() != content_outputs()[relative]:
+            raise ValueError(f'new CNDP English output drift: {relative}')
     hangul = re.compile(r"[\u1100-\u11ff\u302e-\u302f\u3130-\u318f\ua960-\ua97f\uac00-\ud7ff\uffa0-\uffdc]")
     for relative in sorted(paths):
         if hangul.search((REPO_ROOT / relative).read_text(encoding="utf-8-sig")):
@@ -1776,10 +1812,11 @@ def verify_english_translation() -> None:
     if len(changed) != 25 or len(added) != 27 or changed & added or changed | added != lock["adapted_values"].keys():
         raise ValueError("English RT56-specific translation allowlist drift")
     for relative, record in lock["runtime_text"].items():
-        actual = (REPO_ROOT / relative).read_bytes()
+        #20261107_kpopmodder: Preserve historical translation and Korean-source hashes under exact split reversal.
+        actual = _historical_runtime(relative, (REPO_ROOT / relative).read_bytes())
         remove_english_translation(relative, actual)
         korean_path = relative.replace("/english/", "/korean/").replace("_l_english.yml", "_l_korean.yml")
-        korean = (REPO_ROOT / korean_path).read_bytes()
+        korean = _historical_runtime(korean_path, (REPO_ROOT / korean_path).read_bytes())
         if sha256(korean) != lock["preserved_korean"][korean_path]:
             raise ValueError(f"English import changed its Korean source: {korean_path}")
         previous = _english_archive(record["previous_snapshot_path"], record["previous_output_sha256"])
@@ -1829,10 +1866,11 @@ def verify_english_translation() -> None:
             expected_english, expected_korean = prospecting_locales[relative], prospecting_locales[korean_path]
         else:
             expected_english, expected_korean = feature_addition(relative), feature_addition(korean_path)
-        data = (REPO_ROOT / relative).read_bytes()
+        #20261107_kpopmodder: Restore only a hash-verified final split layer before enforcing the original feature/prospecting locale bytes.
+        data = _historical_runtime(relative, (REPO_ROOT / relative).read_bytes())
         if data != expected_english:
             raise ValueError(f"new Korean English output drift: {relative}")
-        korean = (REPO_ROOT / korean_path).read_bytes()
+        korean = _historical_runtime(korean_path, (REPO_ROOT / korean_path).read_bytes())
         if korean != expected_korean:
             raise ValueError(f"new Korean Korean output drift: {korean_path}")
         en_rows, ko_rows = english_entries(data), english_entries(korean)
@@ -1845,6 +1883,26 @@ def verify_english_translation() -> None:
                 raise ValueError(f"new Korean English protected text drift: {key}")
         new_keys.update(en_rows)
     print(f"PASS Korean feature and prospecting English: {len(new_english_paths)} files, {len(new_keys)} additional translated keys")
+    #20261107_kpopmodder: Check the separately scoped new names without changing the historical key totals.
+    for relative in split_english:
+        korean_path = relative.replace("/english/", "/korean/").replace("_l_english.yml", "_l_korean.yml")
+        data, korean = (REPO_ROOT / relative).read_bytes(), (REPO_ROOT / korean_path).read_bytes()
+        if data != split_locales[relative] or korean != split_locales[korean_path]:
+            raise ValueError("state-split bilingual state-name output drift")
+        en_rows, ko_rows = english_entries(data), english_entries(korean)
+        if len(en_rows) != 12 or en_rows.keys() != ko_rows.keys() or (keys | extra_keys | new_keys) & en_rows.keys():
+            raise ValueError("state-split state-name key count or collision")
+        if any(not key.startswith("HOK_KOR_STATE_") for key in en_rows):
+            raise ValueError("state-split introduced a shared foreign-state localisation key")
+    print("PASS Korean state-split English: one separate English file, twelve stable HOK-specific names; historical inventories preserved")
+    #20261107_kpopmodder: Check the actual port-only successor-name substitutions as well as the unchanged historical feature contract.
+    from korean_state_split import compat_before as split_compat_before
+    from korean_state_split_content import port_localisation_outputs
+    research_locales = port_localisation_outputs(split_compat_before)
+    for relative, expected in research_locales.items():
+        if (REPO_ROOT / relative).read_bytes() != expected:
+            raise ValueError(f"state-split research-location locale drift: {relative}")
+    print("PASS Korean research-location tooltips: two locale files; naval South Gyeongsang and nuclear South Hamgyeong; historical feature bytes preserved")
 
 
 def main() -> int:

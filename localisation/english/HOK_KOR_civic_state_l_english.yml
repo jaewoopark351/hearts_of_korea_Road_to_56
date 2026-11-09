@@ -1,4 +1,5 @@
 ﻿l_english:
+#20261108_kpopmodder: Name civic values and evidence while preserving all numeric conditions, effects and saved state.
 #20261011_kpopmodder: Localise independent industrial policies, procurement scandals and the fictional prosecutor-coup chain with exact costs and deadlines.
  HOK_KOR_chaebol_established:0 "Chaebol Industrial Networks"
  HOK_KOR_chaebol_established_desc:0 "Chaebol Influence: 25–49. Corporate investment and supply networks provide a foundation for industrial mobilisation."
@@ -108,3 +109,18 @@
  HOK_KOR_chaebol_interfering_desc:0 "Chaebol Influence: 50–74. The chaebol have gained enough influence to intervene in industrial contracts and supply networks."
  HOK_KOR_civic_interfering:0 "Civil Society Participation in Policy"
  HOK_KOR_civic_interfering_desc:0 "Civil Society Influence: 50–74. Workplace consultation and public scrutiny have a sustained influence on the implementation of policy."
+ HOK_KOR_chaebol_influence:0 "Chaebol Influence"
+ HOK_KOR_civic_influence:0 "Civil Society Influence"
+ HOK_KOR_institutional_capture:0 "Institutional Capture"
+ HOK_KOR_procurement_corruption:0 "Procurement Corruption"
+ HOK_KOR_prosecutor_defence_prepared:0 "Evidence preservation completed"
+ HOK_KOR_chaebol_influence_below_tt:0 "$HOK_KOR_chaebol_influence$ is below §Y$RIGHT|0$§! (currently [?HOK_KOR_chaebol_influence|Y0])"
+ HOK_KOR_chaebol_influence_above_tt:0 "$HOK_KOR_chaebol_influence$ is above §Y$RIGHT|0$§! (currently [?HOK_KOR_chaebol_influence|Y0])"
+ HOK_KOR_chaebol_influence_at_least_tt:0 "$HOK_KOR_chaebol_influence$ is at least §Y$RIGHT|0$§! (currently [?HOK_KOR_chaebol_influence|Y0])"
+ HOK_KOR_civic_influence_below_tt:0 "$HOK_KOR_civic_influence$ is below §Y$RIGHT|0$§! (currently [?HOK_KOR_civic_influence|Y0])"
+ HOK_KOR_civic_influence_above_tt:0 "$HOK_KOR_civic_influence$ is above §Y$RIGHT|0$§! (currently [?HOK_KOR_civic_influence|Y0])"
+ HOK_KOR_civic_influence_at_least_tt:0 "$HOK_KOR_civic_influence$ is at least §Y$RIGHT|0$§! (currently [?HOK_KOR_civic_influence|Y0])"
+ HOK_KOR_institutional_capture_below_tt:0 "$HOK_KOR_institutional_capture$ is below §Y$RIGHT|0$§! (currently [?HOK_KOR_institutional_capture|Y0])"
+ HOK_KOR_civic_influence_change_tt:0 "$HOK_KOR_civic_influence$: $RIGHT|+=0$"
+ HOK_KOR_institutional_capture_change_tt:0 "$HOK_KOR_institutional_capture$: $RIGHT|-=0$"
+ HOK_KOR_procurement_corruption_change_tt:0 "$HOK_KOR_procurement_corruption$: $RIGHT|-=0$"

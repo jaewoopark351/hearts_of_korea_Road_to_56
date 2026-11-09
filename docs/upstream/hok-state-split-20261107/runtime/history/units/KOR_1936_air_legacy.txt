@@ -1,0 +1,14 @@
+﻿air_wings = {
+	525 = {
+		fighter_equipment_0 =  { owner = "KOR" amount = 30 }
+		fighter_equipment_0 =  { owner = "KOR" amount = 30 }
+	}
+	527 = {
+		fighter_equipment_0 =  { owner = "KOR" amount = 30 }
+		CAS_equipment_1 =  { owner = "KOR" amount = 30 }
+	}
+	#20261107_kpopmodder: Keep starting wings at the successor containing the original airbase position.
+	1088 = {
+		CAS_equipment_1 =  { owner = "KOR" amount = 30 }
+	}
+}

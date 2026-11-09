@@ -1,0 +1,35 @@
+﻿l_english:
+#20261108_kpopmodder: Integrate the independent CNDP projects with RT56 geography and English localisation.
+#20261108_kpopmodder: Shorten the shared CNDP player guidance without changing project rules.
+#20261108_kpopmodder: Localise the completion status while preserving the original flag and project rules.
+#20261108_kpopmodder: Describe the independent CNDP state projects and their cancellation and completion rules.
+ HOK_KOR_cndp_project_rules:0 "Cancelled projects can be restarted, but Political Power is not refunded. Completion rewards are granted once per state."
+ HOK_KOR_cndp_meaningful_space:0 "There must be room to expand factory construction capacity."
+ HOK_KOR_cndp_developed_v1:0 "The state's national development project is complete"
+
+ HOK_KOR_cndp_develop_jeollabuk:0 "Develop North Jeolla"
+ HOK_KOR_cndp_develop_jeollabuk_desc:0 "Support the growth of Gunsan and inland centres to strengthen North Jeolla's development base.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_jeollanam:0 "Develop South Jeolla"
+ HOK_KOR_cndp_develop_jeollanam_desc:0 "Support coastal centres, including Mokpo, to lay the foundations for South Jeolla's growth.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_gyeongsangbuk:0 "Develop North Gyeongsang"
+ HOK_KOR_cndp_develop_gyeongsangbuk_desc:0 "Support industrial centres, including Pohang, to expand North Gyeongsang's development capacity.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_gyeongsangnam:0 "Develop South Gyeongsang"
+ HOK_KOR_cndp_develop_gyeongsangnam_desc:0 "Promote development around Masan and Ulsan to support South Gyeongsang's growing towns.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_chungcheongnam:0 "Develop South Chungcheong"
+ HOK_KOR_cndp_develop_chungcheongnam_desc:0 "Support inland centres, including Jochiwon, to expand South Chungcheong's development capacity.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_chungcheongbuk:0 "Develop North Chungcheong"
+ HOK_KOR_cndp_develop_chungcheongbuk_desc:0 "Promote development around Cheongju to strengthen North Chungcheong's urban foundations.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_hwanghaenam:0 "Develop South Hwanghae"
+ HOK_KOR_cndp_develop_hwanghaenam_desc:0 "Expand development capacity around Haeju to support South Hwanghae's growth. This project cannot begin unless additional capacity can be demonstrated within the factory construction limits.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_hwanghaebuk:0 "Develop North Hwanghae"
+ HOK_KOR_cndp_develop_hwanghaebuk_desc:0 "Promote development around Sariwon to strengthen North Hwanghae's urban foundations.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_pyeongannam:0 "Develop South Pyeongan"
+ HOK_KOR_cndp_develop_pyeongannam_desc:0 "Support industrial centres, including Anju, to strengthen South Pyeongan's development base.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_pyeonganbuk:0 "Develop North Pyeongan"
+ HOK_KOR_cndp_develop_pyeonganbuk_desc:0 "Develop Unsan and industrial centres in the northern interior to expand North Pyeongan's development capacity. This project cannot begin unless additional capacity can be demonstrated within the factory construction limits.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_hamgyeongnam:0 "Develop South Hamgyeong"
+ HOK_KOR_cndp_develop_hamgyeongnam_desc:0 "Support industrial growth around Hamhung to strengthen South Hamgyeong's development base. This project cannot begin unless additional capacity can be demonstrated within the factory construction limits.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_hamgyeongbuk:0 "Develop North Hamgyeong"
+ HOK_KOR_cndp_develop_hamgyeongbuk_desc:0 "Support Najin and northern industrial centres to strengthen North Hamgyeong's development base.\n\n$HOK_KOR_cndp_project_rules$"
+ HOK_KOR_cndp_develop_gangwon:0 "Develop Gangwon"
+ HOK_KOR_cndp_develop_gangwon_desc:0 "Support east-coast towns and inland resource centres to expand Gangwon's development capacity.\n\n$HOK_KOR_cndp_project_rules$"

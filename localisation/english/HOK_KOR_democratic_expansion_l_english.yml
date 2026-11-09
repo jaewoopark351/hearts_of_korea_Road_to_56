@@ -1,4 +1,5 @@
 ﻿l_english:
+#20261108_kpopmodder: Align descriptions with current recipient states and whole-region requirements; preserve rewards and lifecycle.
 #20261003_kpopmodder: Explain new decision and spirit policies through concrete circumstances; preserve gameplay and lifecycle rules.
 #20260926_kpopmodder: Use escaped ASCII dialogue quotes and compact decision UI text; preserve gameplay and explicit lifecycle warnings.
 #20260926_kpopmodder: Compact new focus descriptions for the fixed-height UI; preserve gameplay and non-focus localisation.
@@ -12,7 +13,7 @@
  HOK_KOR_civil_service_audit:0 "Reform Public Service Oversight"
  HOK_KOR_civil_service_audit_desc:0 "\"Do I still have to follow the procedure when I come on his recommendation?\"\nThe answer must not differ from office to office. Records of appointments, spending and requests for favours will hold the public service to account."
  HOK_KOR_technical_civic_schools:0 "Expand Vocational and Civic Education"
- HOK_KOR_technical_civic_schools_desc:0 "We will teach people to read a machine's gauges and understand their rights as citizens.\nRequires ownership, full control and construction space in Gyeonggi, Jeolla and Chungcheong. Each state receives two building slots and two civilian factories, alongside one 25% electronics research bonus."
+ HOK_KOR_technical_civic_schools_desc:0 "We will teach people to read a machine's gauges and understand their rights as citizens.\nRequires ownership and full control of Gyeonggi, both Jeolla states and both Chungcheong states. Gyeonggi, North Jeolla and South Chungcheong need building space; each gains two building slots and two civilian factories. Grants one 25% electronics research bonus."
  HOK_KOR_rural_education_missions:0 "Rural Teaching Missions"
  HOK_KOR_rural_education_missions_desc:0 "One villager brings the teacher a letter; another brings a broken farm implement. Lessons will begin with the village's own questions. The +10% research speed benefit has no time limit."
  HOK_KOR_public_accounts_committee:0 "Parliamentary Public Accounts Committee"

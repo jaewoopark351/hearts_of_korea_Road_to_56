@@ -785,10 +785,23 @@ def build_all() -> dict[str, bytes]:
         if match:
             raise BuildError(f"{relative}: stale HOK state ID remains: {match.group(0)}")
         outputs[relative] = encode_text(text, fmt)
-    return outputs
+    #20261107_kpopmodder: Finish shared Korean references with the independently pinned 15-state integration.
+    from korean_state_split import finalize_outputs
+    return finalize_outputs(outputs, owner="east-asia")
+
+
+def _preflight_content_outputs(outputs: dict) -> None:
+    #20261108_kpopmodder: Reject independent edits before a whole run or an individual writer can replace them.
+    from upstream_content_update import preflight_outputs
+    try:
+        preflight_outputs(outputs)
+    except ValueError as exc:
+        raise BuildError(str(exc)) from exc
 
 
 def write_if_changed(relative: str, data: bytes, apply: bool) -> str:
+    if apply:
+        _preflight_content_outputs({relative: data})
     path = (REPO_ROOT / Path(relative)).resolve()
     try:
         path.relative_to(REPO_ROOT)
@@ -814,6 +827,8 @@ def main() -> int:
     try:
         verify_inputs()
         outputs = build_all()
+        if args.apply:
+            _preflight_content_outputs(outputs)
         messages = [write_if_changed(path, data, args.apply) for path, data in sorted(outputs.items())]
         if args.check and any(message.startswith("would-write") for message in messages):
             print("Generated-output mismatches:", file=sys.stderr)

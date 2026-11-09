@@ -1,0 +1,45 @@
+
+state={
+	id=919
+	name="STATE_919"
+
+	history={
+		owner = KOR
+		buildings = {
+			infrastructure = 1
+			industrial_complex = 1
+			air_base = 1
+			10110 = {
+				naval_base = 1
+				coastal_bunker = 1
+			}
+			13550 = {
+				naval_base = 1
+				coastal_bunker = 1
+			}
+		}
+		victory_points = {
+			13551 1 
+		}
+		add_to_array = { state_victory_points = 13551 }
+		victory_points = {
+			13545 10
+		}
+		add_to_array = { state_victory_points = 13545 }
+		add_core_of = KOR
+		
+		1939.3.14 = {
+			owner = JAP
+			controller = JAP
+		}
+
+	}
+
+	provinces={
+		4126 10110 11948 12085 13545 13546 13547 13548 13549 13550 13551 13552
+	}
+	manpower=4077292
+	buildings_max_level_factor=1.000
+	state_category=town
+	local_supplies=0.000
+}

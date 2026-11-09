@@ -1,0 +1,441 @@
+{
+  "format": 1,
+  "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+  "before_commit": "0d73d49726abbfa435c73f1bf8cc24d4a5af014b",
+  "runtime": {
+    "common/decisions/HOK_KOR_civic_decisions.txt": {
+      "sha256": "E5D46F0E03B33F91DB325A18F7EC8C15B79C5FBFC99544532B388843A58A61DA",
+      "size": 14381,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\decisions\\HOK_KOR_civic_decisions.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\decisions\\HOK_KOR_civic_decisions.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "145d450c94b4ab07acc08b829a32b305ba96d09e",
+      "git_sha256": "5FD38E8F6B79BBEBCB5413E5C917854A4625C1AD7C3FBC038C1CA1A5209AA8CE",
+      "before_sha256": "65958AB0D5CA22AAB617447E42AB29BB176ECEDEA4F54916E57FD2C5BAA93419"
+    },
+    "common/decisions/KOR_decision.txt": {
+      "sha256": "9A22D108DC50533BFF5E9DED621B4DB826A1D29709F9996CFC629A3E6E7EC9E4",
+      "size": 78352,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\decisions\\KOR_decision.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\decisions\\KOR_decision.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "6fcb028b8400442e74bb35eac31190603bfe4e0e",
+      "git_sha256": "DA54CC6DF14FF27CD1EE222918A520A5AF8093AB9E1CAB654B159842636F9A89",
+      "before_sha256": "9B9D5AA7A8AC1A45C89CFB557CF4D40461DA9391A3D7C4C2EE1209A331BD18A4"
+    },
+    "common/national_focus/china_shared_TSR.txt": {
+      "sha256": "158B5BFCCF20AAA779FCD787E960C677B4E01FE14680EAAE8D26AEF570DC2222",
+      "size": 88102,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\national_focus\\china_shared_TSR.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\national_focus\\china_shared_TSR.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "2e7c7ff8adc674980c9c6275b2f3d9ea43140b95",
+      "git_sha256": "75D000C2F9701B183D9AB4AE42C880A50BEB751BFD8898DF05FBFB63421AD0CE",
+      "before_sha256": "CA376A6498F46748B785FBD425C31B96E99E1EE9C6F70E11C197D58A9A3CA0BA"
+    },
+    "common/national_focus/japan.txt": {
+      "sha256": "1A9E1135F0123E752D206A82420F716227402DD49EB0E8BF369931FA57423DAE",
+      "size": 692704,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\national_focus\\japan.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\national_focus\\japan.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "483724e86179b20005bd99f400fc27784fbaafd0",
+      "git_sha256": "B195B001D4C940F7FC0E77F16560A46BDBF04126226F3CC23629E202B5C6BD49",
+      "before_sha256": "78D6E32C9D5F45DEB300922D023A61F8442F0BB6E3D1EE108CBC466AAB4829B1"
+    },
+    "common/national_focus/korea.txt": {
+      "sha256": "1E465973FC220C227F91DCEF7DAE1E30D99E811C462F00198CEA30CCF0CB5365",
+      "size": 505129,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\national_focus\\korea.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\national_focus\\korea.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "1a6189e391978df2ffe1fafa3e45c322a8dd15a8",
+      "git_sha256": "009F2E65B85212D6BADB1D021DA010DA580E9665FD3A2565809444ECC68B717E",
+      "before_sha256": "E899301DF8ADC3D376AFED8C570A287BD68285EA82350FAAE8BED682CE336457"
+    },
+    "common/on_actions/mongppong_on_actions.txt": {
+      "sha256": "3391C322B29D9AE71BF5EF8B4585AA17D8C4D1B44E021BC60F9763D610F23E7C",
+      "size": 18493,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\on_actions\\mongppong_on_actions.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\on_actions\\mongppong_on_actions.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "04b92ae7088314d7f5151b886f3e6ff29152d7fe",
+      "git_sha256": "8A1E19DF4A349885B0CD8F7107CB7D3FF91F1650744FBA7F1D95A6AA5AB8A943",
+      "before_sha256": "641D22883F988F276985758F00C15C152EFCDD357A83E6E732CC134B311EDE1F"
+    },
+    "common/script_constants/zzzz_HOK_KOR_state_reference_constants.txt": {
+      "sha256": "F0C0D7C645E2C8381B96C77FF986DF03908874E791E535851253E4F6F5B8F72F",
+      "size": 1311,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\script_constants\\zzzz_HOK_KOR_state_reference_constants.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\script_constants\\zzzz_HOK_KOR_state_reference_constants.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "dfad5a1e7d95ab0c658520b9009ee2bd80dffaa1",
+      "git_sha256": "7ADD70BAA28D808F703AC23FC919F148B5CF6681EFE8D9313221A3A65B9B33C9"
+    },
+    "common/scripted_effects/00_HOK_KOR_state_reference_effects.txt": {
+      "sha256": "5210AC742976AADC47D2B75CACB8F5FE01D4E544F2244959F167A6E1C8757B74",
+      "size": 552,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\scripted_effects\\00_HOK_KOR_state_reference_effects.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\scripted_effects\\00_HOK_KOR_state_reference_effects.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "737a9675747255a0aa03ae05f80c01fa0124a1d9",
+      "git_sha256": "5210AC742976AADC47D2B75CACB8F5FE01D4E544F2244959F167A6E1C8757B74"
+    },
+    "common/scripted_triggers/HOK_KOR_civic_triggers.txt": {
+      "sha256": "19B00FDD3C42398F9DD32A9966A2295CA44F7D98399AFB59F81A2809B3D3E4B9",
+      "size": 2314,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\scripted_triggers\\HOK_KOR_civic_triggers.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\scripted_triggers\\HOK_KOR_civic_triggers.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "5e2d46dd6eb7415d81b0ca4f9f13b58ced285530",
+      "git_sha256": "DAFA368AA51AC8B674EE18A624888DF2B1C5981AA8BD662804C5B95D9A4D977E",
+      "before_sha256": "9112E1395C0A0AF74B7663AA36CF1276D19CAAADD0319DB65C9FBC826FFDAA69"
+    },
+    "common/scripted_triggers/HOK_KOR_cndp_triggers.txt": {
+      "sha256": "4C3CFA90C6201A32EB18B7ABF2872D8461F365E7811E534B0CD24DE5BDAE4FD7",
+      "size": 16846,
+      "source": "C:\\hoi\\hearts_of_korea\\common\\scripted_triggers\\HOK_KOR_cndp_triggers.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\common\\scripted_triggers\\HOK_KOR_cndp_triggers.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "6e45b26520e41386e2c9396d0008be04b58db414",
+      "git_sha256": "4C0AACCB34C603AF60C49BF0B0E1E00498908A48F0C4D07D9608F69D5DC7EC85"
+    },
+    "events/HOK_KOR_civic_events.txt": {
+      "sha256": "CB0916510505C5F77F977712A6671ABA50DD6AE5CC76BEF92FA61B2CE75186F7",
+      "size": 10846,
+      "source": "C:\\hoi\\hearts_of_korea\\events\\HOK_KOR_civic_events.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\events\\HOK_KOR_civic_events.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "68b4bb7f3b3b42a72c524f85a3dca8e89d089276",
+      "git_sha256": "C299AB32A34572B21570E233507DB1E2A3D8F8B660EE465C081CD12758A93A38",
+      "before_sha256": "891DBD408AF6BEF80B4ABDB1A0325904A1992A15BE5E23452F51606A3B95D6BB"
+    },
+    "events/korea.txt": {
+      "sha256": "ABE66AF64D6FB0BF15FB18FCBB7BCBAC50306EB6B60E79D77B486401CA398206",
+      "size": 52005,
+      "source": "C:\\hoi\\hearts_of_korea\\events\\korea.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\events\\korea.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "c31331b3c0655b3f8f7ecf829f1013ab2cec40bc",
+      "git_sha256": "156998DCAE6AD4B049B2059473F2683F8ED4F18296B8092137B241C4B98DBFDF",
+      "before_sha256": "3E3AFB823D459712F82C9CA05F7361E11FB0DC65C0897EC5BFA08BA15F605620"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_chungcheongbuk.dds": {
+      "sha256": "9F794DD2CDC5BB5E0AAF5B9D39100CEB1C986A5658037711399A8CBD6FA7E31F",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_chungcheongbuk.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_chungcheongbuk.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "87dabf06c051e53b4eedc3cbd682ff3e9eacb4f5",
+      "git_sha256": "9F794DD2CDC5BB5E0AAF5B9D39100CEB1C986A5658037711399A8CBD6FA7E31F"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_chungcheongnam.dds": {
+      "sha256": "CAA750E58D7CDAF3C4B0692E37B3164631EDA914981F050F8412E6B9D146AE51",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_chungcheongnam.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_chungcheongnam.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "b5e2c2fb05d1e5b10cbee0110537709f379ef0d8",
+      "git_sha256": "CAA750E58D7CDAF3C4B0692E37B3164631EDA914981F050F8412E6B9D146AE51"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_gangwon.dds": {
+      "sha256": "CADEA36836E910BD9B4538B113EA304A320B72665615D3983A4F585A53BEAF72",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_gangwon.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_gangwon.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "e66e974ad5da948e3056e6f6c03eb551e1020c3a",
+      "git_sha256": "CADEA36836E910BD9B4538B113EA304A320B72665615D3983A4F585A53BEAF72"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_gyeongsangbuk.dds": {
+      "sha256": "A36411DF71CD73783D299E550E0D2758429C14A9C85ECAFE64776696F541DD9A",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_gyeongsangbuk.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_gyeongsangbuk.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "45197d50595526c872f10e987b0e853196628cd1",
+      "git_sha256": "A36411DF71CD73783D299E550E0D2758429C14A9C85ECAFE64776696F541DD9A"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_gyeongsangnam.dds": {
+      "sha256": "A359930CA0E5B5EA1EFE192456B21D7D3C7E8E51DB74D7A599D715891820D31F",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_gyeongsangnam.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_gyeongsangnam.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "7e2468b7e6c113ef1214c9245269abdad8b80d42",
+      "git_sha256": "A359930CA0E5B5EA1EFE192456B21D7D3C7E8E51DB74D7A599D715891820D31F"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_hamgyeongbuk.dds": {
+      "sha256": "B0F840288B6B29F3D6E8AB55661FC61D32C2F00066BC102C1795482A9F218385",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_hamgyeongbuk.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_hamgyeongbuk.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "87d8add5c8e3be896065ebc659ad1a385f0dfe39",
+      "git_sha256": "B0F840288B6B29F3D6E8AB55661FC61D32C2F00066BC102C1795482A9F218385"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_hamgyeongnam.dds": {
+      "sha256": "C885E9508FF761059CDB86D7471FBE5F4BCA4174252E2AE9407AC92BF74C0362",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_hamgyeongnam.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_hamgyeongnam.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "66cb336ebe7b3e9edd8c15f86e17c22c22c29f7f",
+      "git_sha256": "C885E9508FF761059CDB86D7471FBE5F4BCA4174252E2AE9407AC92BF74C0362"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_hwanghaebuk.dds": {
+      "sha256": "9E912C3212D8E24890A90444458202DFACED7EC3ADBAA1413255DEFEA71836EC",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_hwanghaebuk.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_hwanghaebuk.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "1c2db7c165983a0b5f14e1a4c9a7ab0083dc3e30",
+      "git_sha256": "9E912C3212D8E24890A90444458202DFACED7EC3ADBAA1413255DEFEA71836EC"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_hwanghaenam.dds": {
+      "sha256": "CE19D9BFFE3F4B145F0FEFBED79CCD0234DEAECE38D263CE3A33963528AEF6E5",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_hwanghaenam.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_hwanghaenam.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "53408e44db3c56dac770def409f4d44028c9364f",
+      "git_sha256": "CE19D9BFFE3F4B145F0FEFBED79CCD0234DEAECE38D263CE3A33963528AEF6E5"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_jeollabuk.dds": {
+      "sha256": "72A47BC6B646F10C56EA7EEDB645605AE6FF3D2AE86E6ACB331F61B8D7406700",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_jeollabuk.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_jeollabuk.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "208c8bb10b71d65313cad814afa94ee6226db7d0",
+      "git_sha256": "72A47BC6B646F10C56EA7EEDB645605AE6FF3D2AE86E6ACB331F61B8D7406700"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_jeollanam.dds": {
+      "sha256": "7FEC6868C9A98DA269AD890CCD4DBBE9D6EE2C155E91D3EC1E5113AD9F440484",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_jeollanam.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_jeollanam.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "fdd889c4e78a349bad1b09c1bc38e557a9cb7be6",
+      "git_sha256": "7FEC6868C9A98DA269AD890CCD4DBBE9D6EE2C155E91D3EC1E5113AD9F440484"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_pyeonganbuk.dds": {
+      "sha256": "40EFEC4C73F1BEA55A15B6786E33AD68BC1F903F5AE5535230950F37D0F27831",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_pyeonganbuk.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_pyeonganbuk.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "d44f3658169129355685d0c7d57b5fed639672ec",
+      "git_sha256": "40EFEC4C73F1BEA55A15B6786E33AD68BC1F903F5AE5535230950F37D0F27831"
+    },
+    "gfx/interface/decisions/HOK_KOR/cndp/cndp_pyeongannam.dds": {
+      "sha256": "A0220B8323D55AD42937CDF5D4F569A75E454CB2B903A30AE3128B5BDE42BAAB",
+      "size": 4224,
+      "source": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_pyeongannam.dds",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\gfx\\interface\\decisions\\HOK_KOR\\cndp\\cndp_pyeongannam.dds",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "0c826c0922c9b53a85dc466ab13036fec50a772e",
+      "git_sha256": "A0220B8323D55AD42937CDF5D4F569A75E454CB2B903A30AE3128B5BDE42BAAB"
+    },
+    "history/countries/KCH - Korean China.txt": {
+      "sha256": "D2C3846411A246DED91481DFE8931B64CC6D4CBB56219EA6EF363944118B1984",
+      "size": 3598,
+      "source": "C:\\hoi\\hearts_of_korea\\history\\countries\\KCH - Korean China.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\history\\countries\\KCH - Korean China.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "8f423f68b7ed35c508519fa562c0d03cf72ec424",
+      "git_sha256": "39D34AFF9D4DF4773AEEC4638FBB28D2906132E8F4B11B14F8F8ECAB1388BE22",
+      "before_sha256": "24502EA1BAD55C9157B89C8461BF3291A77924C3864FBF9A5B8134FC35C924A3"
+    },
+    "history/countries/KOR - Korea.txt": {
+      "sha256": "9D5C020A438CBB0B2A09CD4F22386743823671C8C53383E18CD7E41F62130863",
+      "size": 12262,
+      "source": "C:\\hoi\\hearts_of_korea\\history\\countries\\KOR - Korea.txt",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\history\\countries\\KOR - Korea.txt",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "d50c887f30f8367d0e5f725d92985ff1799a00ab",
+      "git_sha256": "87DA607B1C79E613300BEA0B310767FB05926E8111A31A3354ECED5D20C47B94",
+      "before_sha256": "2E30A82720609D282BC0D3553D4C3B726D9191A5C401ED221BAC057DD9354E76"
+    },
+    "interface/HOK_KOR_cndp_icons.gfx": {
+      "sha256": "0582BE3643ED3DD644EA7E0B677D9A34779AAFF3B26A388C2F626BE322F9E4D1",
+      "size": 2291,
+      "source": "C:\\hoi\\hearts_of_korea\\interface\\HOK_KOR_cndp_icons.gfx",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\interface\\HOK_KOR_cndp_icons.gfx",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "9f410043e4816e99471a7ca45c25a0550f98e4a9",
+      "git_sha256": "D1730CBC6F1835563095030786B7905E73FCCD6A635EAED533EB232AC313ECEE"
+    },
+    "localisation/english/HOK_KOR_civic_state_l_english.yml": {
+      "sha256": "05E5D17C92CED86C35E689814740FC658CEC6CC665CF9DC64D52C0F4022E0BDB",
+      "size": 20452,
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HOK_KOR_civic_state_l_english.yml",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\localisation\\english\\HOK_KOR_civic_state_l_english.yml",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "e6cca8c514863bd097dc4e077e0cf1c1da8e5f3a",
+      "git_sha256": "94F1FF56F7E6C4C009F17478205A643291E291E2D45D86656B057650C3B37D08",
+      "before_sha256": "FFAB6CE9762A7D252F6CC09F0E6163C90E6E94B7A733977FB6B4615C53213D4B"
+    },
+    "localisation/english/HOK_KOR_cndp_state_development_l_english.yml": {
+      "sha256": "CE66C8429B76A2A947049F406D79B20F5A5364027F4146001140AD682A9817F7",
+      "size": 4140,
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HOK_KOR_cndp_state_development_l_english.yml",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\localisation\\english\\HOK_KOR_cndp_state_development_l_english.yml",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "1dbf12b086dc8318e1869508b675ba6d8f3eff40",
+      "git_sha256": "BF35175636373707E0E49FA9B291DB10437A6B9925C667B1B0155BA621ED91D3"
+    },
+    "localisation/english/HOK_KOR_democratic_expansion_l_english.yml": {
+      "sha256": "C08DE03445453C30E79CF690EC59FE9A7E8A07C7F2D8543119029EEE3D6522F8",
+      "size": 20558,
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HOK_KOR_democratic_expansion_l_english.yml",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\localisation\\english\\HOK_KOR_democratic_expansion_l_english.yml",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "f1a0dd269c8e388869c51039ceab504d916a6fdd",
+      "git_sha256": "15A667EE06B5B27965E0477082AE1E5894073E7089FC8D947D1CBAB1F6615D76",
+      "before_sha256": "86A57B8E6E77BADF8D9E1DC1C562C7A8C062DC82780ED1BFCB43A05B8A54577E"
+    },
+    "localisation/english/HOK_KOR_research_network_l_english.yml": {
+      "sha256": "6CCA8D2CA29CC6AA0E7DAFF69CBCAD82DB59A8C783623C9CEF7C922946DE6C3E",
+      "size": 2469,
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HOK_KOR_research_network_l_english.yml",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\localisation\\english\\HOK_KOR_research_network_l_english.yml",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "a9cba8e21c83e21c0130c6b43ce3b250bd55d9b7",
+      "git_sha256": "E0624D250AB1C46C0E274F840DC77692EEB752345A12C0633B529591681FA9A4",
+      "before_sha256": "46F83F15640B65E2B449B853C18F853A9F492462AA36DE6DCD8399828DD4594D"
+    },
+    "localisation/korean/HOK_KOR_civic_state_l_korean.yml": {
+      "sha256": "546845E0B1F2F997DCDC4EF22EDAE77F6C3024C1A4898B1187DE251346EFC8F7",
+      "size": 20451,
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HOK_KOR_civic_state_l_korean.yml",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\localisation\\korean\\HOK_KOR_civic_state_l_korean.yml",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "ab089868745352276066cf5a83dee4de81180f42",
+      "git_sha256": "1B112321A1C3900FBF46C52B69E586701E1DAFDA9C18C2AE97D1872D6F2EB1AF",
+      "before_sha256": "9FACE6A6AB1B92EDC7B77CC4BFDAF1979AE56BB1E532964308364852A53D8180"
+    },
+    "localisation/korean/HOK_KOR_cndp_state_development_l_korean.yml": {
+      "sha256": "C6DD458CA87026E80FD4805806892DE27F3F9F79DBBD2C70A57D9843A3941496",
+      "size": 4139,
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HOK_KOR_cndp_state_development_l_korean.yml",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\localisation\\korean\\HOK_KOR_cndp_state_development_l_korean.yml",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "ee45c58109a3f990a9d25e77a7ae634a599a9cb0",
+      "git_sha256": "D9483041E52FA7C45B59989F6E155685EED20BD566DAF839CAE7EBF9F1E6EB44"
+    },
+    "localisation/korean/HOK_KOR_democratic_expansion_l_korean.yml": {
+      "sha256": "68F132901E34DD4A5BD2FD3CCDAAE3EBB60F0AE504DFB41DCAEF843934F40D40",
+      "size": 20557,
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HOK_KOR_democratic_expansion_l_korean.yml",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\localisation\\korean\\HOK_KOR_democratic_expansion_l_korean.yml",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "b61fa0392fab35f37c527a014c76bee9453113e3",
+      "git_sha256": "FFD8D26830E08C7A095647779A868CB5E141CE7B425B9FCDB270F6EFC8010421",
+      "before_sha256": "8F1CDEF72DD478E19F52C7D4A27069D3519C2F6CEDCA727884039E729EC1EB37"
+    },
+    "localisation/korean/HOK_KOR_research_network_l_korean.yml": {
+      "sha256": "DF9BFB2A027A9A2211A2713FF8EED9CDBD38BBA259D32A53D0F1C9B177437BE3",
+      "size": 2468,
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HOK_KOR_research_network_l_korean.yml",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\runtime\\localisation\\korean\\HOK_KOR_research_network_l_korean.yml",
+      "commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+      "git_blob": "efd15d7188ae4b1f5cdab4161b6e2a14c3748add",
+      "git_sha256": "BA7C455327F224E5A72D1BE0469A2FAD8B203BDE0F9295E1E94DE0DC73BC2831",
+      "before_sha256": "DE1E8BCE20CF056520925124AE718680B795880398A215C5D621DE25616BBEF1"
+    }
+  },
+  "documents": {
+    "AGENTS.md": {
+      "sha256": "A9AE0C8A006D352CDCD0B32EEDB5DECA352E5C937D8C8587EDC9062A794E8103",
+      "size": 83675,
+      "source": "C:\\hoi\\hearts_of_korea\\AGENTS.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\AGENTS.md"
+    },
+    "README.md": {
+      "sha256": "70504F0194ABBADA19480C14EF91161ACBE521188221951D15BF240D99A6A984",
+      "size": 16057,
+      "source": "C:\\hoi\\hearts_of_korea\\README.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\README.md"
+    },
+    "docs/HOK_CHANGE_COVERAGE_REVIEW.md": {
+      "sha256": "473F662FE4F7E92E523F20F85B7D21351A3FAB8E14E35C32130DCDC405EC2E70",
+      "size": 10307,
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\HOK_CHANGE_COVERAGE_REVIEW.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\docs\\HOK_CHANGE_COVERAGE_REVIEW.md"
+    },
+    "docs/HOK_KOREAN_CNDP_STATE_DEVELOPMENT_PLAN.md": {
+      "sha256": "BBC57BBF3D69752820FB726583CAE4CDDA5C50CB52E9EC360B95E67B92161A53",
+      "size": 27160,
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\HOK_KOREAN_CNDP_STATE_DEVELOPMENT_PLAN.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\docs\\HOK_KOREAN_CNDP_STATE_DEVELOPMENT_PLAN.md"
+    },
+    "docs/HOK_KOREAN_CNDP_ARTWORK.md": {
+      "sha256": "565CB1DEBADC1152683FFB8542C0CA2A1C6D71823198BBBD5B89299B85E0E732",
+      "size": 5108,
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\HOK_KOREAN_CNDP_ARTWORK.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\docs\\HOK_KOREAN_CNDP_ARTWORK.md"
+    },
+    "docs/data/HOK_KOREAN_CNDP_STATE_PROJECTS.json": {
+      "sha256": "958EEF57239D4CEF3DAC44DFDAB2A72983416CBCF431518A33614F5D305C5729",
+      "size": 6650,
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\data\\HOK_KOREAN_CNDP_STATE_PROJECTS.json",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\docs\\data\\HOK_KOREAN_CNDP_STATE_PROJECTS.json"
+    },
+    "docs/data/HOK_KOREAN_CNDP_ICON_MANIFEST.json": {
+      "sha256": "392C724366B30001214ED9D38361ED9CDF0C2912F36ED3DC276D510C3C4AF529",
+      "size": 37109,
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\data\\HOK_KOREAN_CNDP_ICON_MANIFEST.json",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\docs\\data\\HOK_KOREAN_CNDP_ICON_MANIFEST.json"
+    },
+    "docs/incidents/2026-11-08-korean-cndp-state-development.md": {
+      "sha256": "98CA23F9A1879EFD42D0E5E4DBE01CE22B98F414B011403A45B551272D7949C7",
+      "size": 17161,
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\incidents\\2026-11-08-korean-cndp-state-development.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\docs\\incidents\\2026-11-08-korean-cndp-state-development.md"
+    },
+    "docs/incidents/2026-11-08-localisation-display-implementation.md": {
+      "sha256": "C143D0CE661893AFF1BE37EFDC7796D52FD57CE53FED4039E82DD8C19BB2FF2B",
+      "size": 51009,
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\incidents\\2026-11-08-localisation-display-implementation.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\docs\\incidents\\2026-11-08-localisation-display-implementation.md"
+    },
+    "docs/incidents/2026-11-08-state-reference-alignment.md": {
+      "sha256": "CD9754113B75C3662CD1D9F89822F8892AC1360F83936D22BC8B950109380BF3",
+      "size": 31649,
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\incidents\\2026-11-08-state-reference-alignment.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\docs\\incidents\\2026-11-08-state-reference-alignment.md"
+    },
+    ".agents/skills/hok-localisation-review/SKILL.md": {
+      "sha256": "2D2C5A2AD4DF4BAB1A1527CB7CCB9B185D5BC4D53DF66F4829E0C6CFFCC4D7F9",
+      "size": 10160,
+      "source": "C:\\hoi\\hearts_of_korea\\.agents\\skills\\hok-localisation-review\\SKILL.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\.agents\\skills\\hok-localisation-review\\SKILL.md"
+    },
+    ".agents/skills/hok-state-reference-review/SKILL.md": {
+      "sha256": "A70D97336597C2FE5585DA5FD2BB6D58ADDD02B1B9D05D3E16CED585A418BA92",
+      "size": 8113,
+      "source": "C:\\hoi\\hearts_of_korea\\.agents\\skills\\hok-state-reference-review\\SKILL.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\.agents\\skills\\hok-state-reference-review\\SKILL.md"
+    },
+    ".agents/skills/hok-log-review/SKILL.md": {
+      "sha256": "C1D4C4443604294A88CC383176B02A3C870F5EC9AC62E9B5EC99B844D8D6281C",
+      "size": 7143,
+      "source": "C:\\hoi\\hearts_of_korea\\.agents\\skills\\hok-log-review\\SKILL.md",
+      "copy": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\upstream\\hok-content-update-20261108\\documents\\.agents\\skills\\hok-log-review\\SKILL.md"
+    }
+  },
+  "notes": "Audited immutable source inputs; not test outputs or active runtime files.",
+  "host": {
+    "rt56/common/scripted_effects/SOV_scripted_effects.txt": {
+      "sha256": "B9D5AC00450D561069C15E664A78DBCFF38D7D43F2F441F3CCE5572586BC82CD",
+      "snapshot_path": "host/rt56/common/scripted_effects/SOV_scripted_effects.txt",
+      "original": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\common\\scripted_effects\\SOV_scripted_effects.txt"
+    },
+    "vanilla/common/script_constants/state_groups.txt": {
+      "sha256": "7B920231ED30F856E4BF8503C50115BBD961176E72465DEB2859FAC6EC4757B9",
+      "snapshot_path": "host/vanilla/common/script_constants/state_groups.txt",
+      "original": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\script_constants\\state_groups.txt"
+    }
+  }
+}

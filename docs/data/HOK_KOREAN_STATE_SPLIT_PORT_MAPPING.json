@@ -1,0 +1,1195 @@
+{
+  "schema_version": 1,
+  "record_kind": "maintained semantic mapping and source provenance; not a test report or runtime loader",
+  "date": "2026-11-07",
+  "timezone": "Asia/Seoul",
+  "implementation_state": "implemented; runtime evidence is maintained separately in the implementation record",
+  "save_policy": "new-game-only; no backward-save migration implemented",
+  "repository_relative_path_convention": "Source/runtime/tool paths are relative to the compatibility repository root unless absolute. Guidance links are relative to this JSON document in docs/data.",
+  "guidance": {
+    "read_before_modifying_mapping": "../decisions/0006-korean-state-split-integration.md",
+    "read_before_reusing_inputs": "../upstream/hok-state-split-20261107/README.md",
+    "actual_validation_and_runtime": "../implementation/2026-11-07-korean-state-split-port.md"
+  },
+  "provenance": {
+    "donor_original_root": "C:\\hoi\\hearts_of_korea",
+    "donor_branch": "feat/korean-focus-expansion-ai",
+    "donor_head": "0d73d49726abbfa435c73f1bf8cc24d4a5af014b",
+    "donor_input_kind": "reviewed-working-tree-snapshot",
+    "compatibility_branch": "feat/korean-focus-update-20260922",
+    "compatibility_base_commit": "3d9355b70152794ed974dcf183323c24206d900a",
+    "source_snapshot_root": "docs/upstream/hok-state-split-20261107",
+    "snapshot_roles": {
+      "before": "34 existing donor HEAD inputs; not previous port output",
+      "runtime": "42 selected donor working-tree source files; not the active runtime directory",
+      "compat_before": "48 frozen previous compatibility inputs for generation/reversal",
+      "documents": "three frozen donor specification/history documents; donor runtime claims stay donor-specific"
+    },
+    "source_mapping_path": "docs/upstream/hok-state-split-20261107/documents/docs/data/HOK_KOREAN_STATE_SPLIT_MAPPING.json",
+    "source_mapping_sha256": "53F3B824AB4349F74C5635F49FCD3E3FB1847FDC624E90FC367A7A26CB8EB373",
+    "source_and_output_hash_manifest": "tools/hok_state_split_lock.json",
+    "manifest_hash_roles": {
+      "sources.before_sha256": "donor HEAD bytes",
+      "sources.after_sha256": "selected donor working-tree bytes",
+      "outputs.previous_sha256": "previous physical compatibility output, when present",
+      "outputs.host_base_sha256": "physical current RT56/vanilla file identified by host_provider",
+      "outputs.host_intermediate_sha256": "derived current host plus previously reviewed HOK glue",
+      "outputs.sha256": "final generated compatibility runtime bytes"
+    },
+    "generator_owner": "tools/korean_state_split.py",
+    "rt56_workshop_id": "820260968",
+    "rt56_manifest": "7553774178744855191",
+    "hoi4_version": "1.19.4.2.2da5",
+    "steam_build": "26409260",
+    "host_1939_support_observation": {
+      "physical_source": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\common\\bookmarks\\blitzkrieg.txt",
+      "source_lines": "3-4 support warning; date at line10",
+      "sha256": "325D97BF530947CE6E07713CE5548DB07FD13DDBB90515661570424BBB3CDBD1",
+      "configured_date": "1939.8.14.12",
+      "support": "explicitly unsupported by current RT56; do not claim a supported1939 bookmark",
+      "ui_availability": "observed in C0-02 Single Player > New Game > The Scenario: only 1 January1936 card; no1939 card; no CLI/date forcing performed",
+      "role": "read-only support-contract observation outside the existing generator current_inputs set; static dated-history preservation is not bookmark support"
+    },
+    "current_physical_input_count": 1193,
+    "preserved_active_source_cache": "C:\\hoi\\test\\hok-rt56-source-cache\\sources",
+    "external_task_artifacts": "C:\\hoi\\test\\hok-rt56-state-split-20261107-01"
+  },
+  "state_id_mapping": {
+    "527": 527,
+    "1028": 918,
+    "1029": 1144,
+    "1030": 920,
+    "1031": 1145,
+    "1082": 919,
+    "1083": 917,
+    "1084": 1146,
+    "1085": 1147,
+    "1086": 1148,
+    "1087": 1149,
+    "1088": 1150,
+    "1089": 1151,
+    "1090": 1152,
+    "1091": 1153
+  },
+  "province_id_mapping": {
+    "13414": 13535,
+    "13415": 13536,
+    "13416": 13537,
+    "13417": 13538,
+    "13418": 13539,
+    "13419": 13540,
+    "13420": 13541,
+    "13421": 13542,
+    "13422": 13543,
+    "13423": 13544,
+    "13424": 13545,
+    "13425": 13546,
+    "13426": 13547,
+    "13427": 13548,
+    "13428": 13549,
+    "13429": 13550,
+    "13430": 13551,
+    "13431": 13552,
+    "13432": 13553,
+    "13433": 13554,
+    "13434": 13555,
+    "13435": 13556,
+    "13436": 13557,
+    "13437": 13558,
+    "13438": 13559,
+    "13439": 13560,
+    "13440": 13561,
+    "13441": 13562,
+    "13442": 13563,
+    "13443": 13564,
+    "13444": 13565,
+    "13445": 13566,
+    "13446": 13567,
+    "13447": 13568
+  },
+  "display_key_policy": "HOK_KOR_STATE_<donorID> names are opaque stable logical IDs; do not remap numeric suffixes.",
+  "families": [
+    {
+      "donor_parent_id": 1030,
+      "compat_retained_id": 920,
+      "donor_before_runtime_path": "history/states/1030 - Gyeongsang.txt",
+      "donor_head_before_sha256": "4EE5219EA4927EE05D2D7BA0153EC86693A273F7D62C29CE6112FD2F8CC18C30",
+      "donor_original_name_key": "STATE_1030",
+      "parent_manpower_total": 4811479,
+      "retained_population_percent": 52,
+      "population_allocation_role": "integer game-design weights; remainder assigned to new child; not census reconstruction",
+      "whole_region_condition_ids": [
+        920,
+        1148
+      ],
+      "whole_region_connector": "AND for whole-region territorial predicates; OR for candidate membership and failure cancellation",
+      "children": [
+        {
+          "donor_state_id": 1030,
+          "compat_state_id": 920,
+          "korean_name": "경상북도",
+          "display_name_key": "HOK_KOR_STATE_1030",
+          "donor_runtime_path": "history/states/1030 - Gyeongsang.txt",
+          "compat_runtime_path": "history/states/920-Gyeongsang.txt",
+          "donor_after_sha256": "35DBE055FB9C8955ADCA8100209544375D2F4F0CBE629CBE62DF93A18445B361",
+          "compat_output_sha256": "5C38702762ECB67552A7E770F5182CC1A8D2DA3986ED2866D475BAD3D2FF234C",
+          "donor_provinces": [
+            1081,
+            4103,
+            7121,
+            10115,
+            11912,
+            12089,
+            13436,
+            13437
+          ],
+          "compat_provinces": [
+            1081,
+            4103,
+            7121,
+            10115,
+            11912,
+            12089,
+            13557,
+            13558
+          ],
+          "manpower": 2501969,
+          "state_category": "large_town",
+          "resources": {
+            "tungsten": 5
+          },
+          "buildings": {
+            "infrastructure": 2,
+            "industrial_complex": 1,
+            "arms_factory": 1
+          },
+          "province_buildings": {},
+          "victory_points": {
+            "13557": 15
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            13557
+          ]
+        },
+        {
+          "donor_state_id": 1086,
+          "compat_state_id": 1148,
+          "korean_name": "경상남도",
+          "display_name_key": "HOK_KOR_STATE_1086",
+          "donor_runtime_path": "history/states/1086 - Gyeongsangnam.txt",
+          "compat_runtime_path": "history/states/1148-Gyeongsangnam.txt",
+          "donor_after_sha256": "B0705E2B6445C2454ED975626AF35F386592D57AF356F86A127D52B28690958F",
+          "compat_output_sha256": "329A1F169EA75B67C1042F221325BC2FE2541C6073A7926EBE9821C6CED57492",
+          "donor_provinces": [
+            1054,
+            4056,
+            4086,
+            10085,
+            12060,
+            13432,
+            13433,
+            13434,
+            13435
+          ],
+          "compat_provinces": [
+            1054,
+            4056,
+            4086,
+            10085,
+            12060,
+            13553,
+            13554,
+            13555,
+            13556
+          ],
+          "manpower": 2309510,
+          "state_category": "large_town",
+          "resources": {},
+          "buildings": {
+            "infrastructure": 2,
+            "industrial_complex": 1,
+            "dockyard": 1,
+            "air_base": 1
+          },
+          "province_buildings": {
+            "4056": {
+              "naval_base": 5,
+              "coastal_bunker": 1
+            }
+          },
+          "victory_points": {
+            "4056": 20
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            4056
+          ]
+        }
+      ]
+    },
+    {
+      "donor_parent_id": 1031,
+      "compat_retained_id": 1145,
+      "donor_before_runtime_path": "history/states/1031 - Chungcheong Jeolla.txt",
+      "donor_head_before_sha256": "519A076648462C8D7A202CEE77879E2FCB31BC322A35F788F53702BCA12EBA67",
+      "donor_original_name_key": "STATE_1031",
+      "parent_manpower_total": 2486315,
+      "retained_population_percent": 65,
+      "population_allocation_role": "integer game-design weights; remainder assigned to new child; not census reconstruction",
+      "whole_region_condition_ids": [
+        1145,
+        1149
+      ],
+      "whole_region_connector": "AND for whole-region territorial predicates; OR for candidate membership and failure cancellation",
+      "children": [
+        {
+          "donor_state_id": 1031,
+          "compat_state_id": 1145,
+          "korean_name": "충청남도",
+          "display_name_key": "HOK_KOR_STATE_1031",
+          "donor_runtime_path": "history/states/1031 - Chungcheong Jeolla.txt",
+          "compat_runtime_path": "history/states/1145-Chungcheong.txt",
+          "donor_after_sha256": "AD4401BDB8343E21AAC41F850D4B723F308478B4DCC5D4878AD07D024A6AAF15",
+          "compat_output_sha256": "E69EB8485498F0EC21EAA797E011ACC273C95C7926933720DFF1B30CC74A4C1E",
+          "donor_provinces": [
+            7175,
+            7204,
+            11977,
+            11992,
+            13442,
+            13443,
+            13444
+          ],
+          "compat_provinces": [
+            7175,
+            7204,
+            11977,
+            11992,
+            13563,
+            13564,
+            13565
+          ],
+          "manpower": 1616104,
+          "state_category": "town",
+          "resources": {},
+          "buildings": {
+            "infrastructure": 2,
+            "arms_factory": 1
+          },
+          "province_buildings": {},
+          "victory_points": {
+            "11977": 10
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            11977
+          ]
+        },
+        {
+          "donor_state_id": 1087,
+          "compat_state_id": 1149,
+          "korean_name": "충청북도",
+          "display_name_key": "HOK_KOR_STATE_1087",
+          "donor_runtime_path": "history/states/1087 - Chungcheongbuk.txt",
+          "compat_runtime_path": "history/states/1149-Chungcheongbuk.txt",
+          "donor_after_sha256": "C7FC34CEEC8A1F4D758376EE88B77E20EAF06C804C1CF9A0DC86A0AC8A13A4EC",
+          "compat_output_sha256": "C017B1F0E63CD5629BB34F2D0DA9D291A6EFCC20EEEBF046D6587AA24E2DE0F2",
+          "donor_provinces": [
+            1100,
+            13445,
+            13446,
+            13447
+          ],
+          "compat_provinces": [
+            1100,
+            13566,
+            13567,
+            13568
+          ],
+          "manpower": 870211,
+          "state_category": "town",
+          "resources": {},
+          "buildings": {
+            "infrastructure": 2
+          },
+          "province_buildings": {},
+          "victory_points": {},
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": []
+        }
+      ]
+    },
+    {
+      "donor_parent_id": 1082,
+      "compat_retained_id": 919,
+      "donor_before_runtime_path": "history/states/1082 - Jeolla.txt",
+      "donor_head_before_sha256": "42BED2B37CCE3109A5E71F03BDDFE1B3A3C08F5A79CA103F4A2CBA61C643AE7D",
+      "donor_original_name_key": "STATE_1082",
+      "parent_manpower_total": 4077292,
+      "retained_population_percent": 40,
+      "population_allocation_role": "integer game-design weights; remainder assigned to new child; not census reconstruction",
+      "whole_region_condition_ids": [
+        919,
+        1150
+      ],
+      "whole_region_connector": "AND for whole-region territorial predicates; OR for candidate membership and failure cancellation",
+      "children": [
+        {
+          "donor_state_id": 1082,
+          "compat_state_id": 919,
+          "korean_name": "전라북도",
+          "display_name_key": "HOK_KOR_STATE_1082",
+          "donor_runtime_path": "history/states/1082 - Jeolla.txt",
+          "compat_runtime_path": "history/states/919-Jeolla.txt",
+          "donor_after_sha256": "2DF0262E4B6A3D3E30EA39C95C7E8702350E3B8796EB4130BEEA8F38890DEA51",
+          "compat_output_sha256": "3CF3C1CAC70879AA7FD11989309560A3D16E294EEC5BFD9B3BCB4F7AC611A258",
+          "donor_provinces": [
+            4126,
+            13427,
+            13428,
+            13429,
+            13430,
+            13431
+          ],
+          "compat_provinces": [
+            4126,
+            13548,
+            13549,
+            13550,
+            13551,
+            13552
+          ],
+          "manpower": 1630916,
+          "state_category": "town",
+          "resources": {},
+          "buildings": {
+            "infrastructure": 1
+          },
+          "province_buildings": {
+            "13550": {
+              "naval_base": 1,
+              "coastal_bunker": 1
+            }
+          },
+          "victory_points": {
+            "13551": 1
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            13551
+          ]
+        },
+        {
+          "donor_state_id": 1088,
+          "compat_state_id": 1150,
+          "korean_name": "전라남도",
+          "display_name_key": "HOK_KOR_STATE_1088",
+          "donor_runtime_path": "history/states/1088 - Jeollanam.txt",
+          "compat_runtime_path": "history/states/1150-Jeollanam.txt",
+          "donor_after_sha256": "B6A37F635C72727DBE0185C48657E3796CB19DED041D9247495D082525AAE066",
+          "compat_output_sha256": "5934C1CFD44F8AACC7CCC679287BFED862BC161F3DFC3E299C93FA1CC665C4F2",
+          "donor_provinces": [
+            10110,
+            11948,
+            12085,
+            13424,
+            13425,
+            13426
+          ],
+          "compat_provinces": [
+            10110,
+            11948,
+            12085,
+            13545,
+            13546,
+            13547
+          ],
+          "manpower": 2446376,
+          "state_category": "town",
+          "resources": {},
+          "buildings": {
+            "infrastructure": 1,
+            "industrial_complex": 1,
+            "air_base": 1
+          },
+          "province_buildings": {
+            "10110": {
+              "naval_base": 1,
+              "coastal_bunker": 1
+            }
+          },
+          "victory_points": {
+            "13545": 10
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            13545
+          ]
+        }
+      ]
+    },
+    {
+      "donor_parent_id": 527,
+      "compat_retained_id": 527,
+      "donor_before_runtime_path": "history/states/527-North Korea.txt",
+      "donor_head_before_sha256": "10910C113D3411E38105BAD3A23E242E5BEFDC34BB86C2B36A2237A3A742A636",
+      "donor_original_name_key": "STATE_527",
+      "parent_manpower_total": 4179983,
+      "retained_population_percent": 55,
+      "population_allocation_role": "integer game-design weights; remainder assigned to new child; not census reconstruction",
+      "whole_region_condition_ids": [
+        527,
+        1151
+      ],
+      "whole_region_connector": "AND for whole-region territorial predicates; OR for candidate membership and failure cancellation",
+      "children": [
+        {
+          "donor_state_id": 527,
+          "compat_state_id": 527,
+          "korean_name": "평안남도",
+          "display_name_key": "HOK_KOR_STATE_527",
+          "donor_runtime_path": "history/states/527-North Korea.txt",
+          "compat_runtime_path": "history/states/527-North Korea.txt",
+          "donor_after_sha256": "46021DC78DB5399F52DAE60A326B97088844E6E4369D2DA7C36B47A820F65A30",
+          "compat_output_sha256": "78E9E98E5E921B7E1B17D0C13F5B8A985D00292255F877F98E60A266494F1351",
+          "donor_provinces": [
+            978,
+            3912,
+            4052,
+            7171,
+            9790,
+            13415
+          ],
+          "compat_provinces": [
+            978,
+            3912,
+            4052,
+            7171,
+            9790,
+            13536
+          ],
+          "manpower": 2298990,
+          "state_category": "large_town",
+          "resources": {
+            "aluminium": 2,
+            "coal": 5
+          },
+          "buildings": {
+            "infrastructure": 2,
+            "industrial_complex": 1,
+            "air_base": 1
+          },
+          "province_buildings": {
+            "13536": {
+              "naval_base": 2,
+              "coastal_bunker": 1
+            }
+          },
+          "victory_points": {
+            "4052": 20,
+            "13536": 1
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            4052,
+            13536
+          ]
+        },
+        {
+          "donor_state_id": 1089,
+          "compat_state_id": 1151,
+          "korean_name": "평안북도",
+          "display_name_key": "HOK_KOR_STATE_1089",
+          "donor_runtime_path": "history/states/1089 - Pyeonganbuk.txt",
+          "compat_runtime_path": "history/states/1151-Pyeonganbuk.txt",
+          "donor_after_sha256": "B2CBD2AECFBE2DEA9A3A88D32EB50EC9763236CE5696B5A7678CADCD5EDFF4D1",
+          "compat_output_sha256": "D0CFD17CA0E4FC91E624C0CD6BD3800F9D9C829E05C9BD7C1A2E0C7D96E0B313",
+          "donor_provinces": [
+            912,
+            6963,
+            9795,
+            9918,
+            11775,
+            11828,
+            11835,
+            11896
+          ],
+          "compat_provinces": [
+            912,
+            6963,
+            9795,
+            9918,
+            11775,
+            11828,
+            11835,
+            11896
+          ],
+          "manpower": 1880993,
+          "state_category": "large_town",
+          "resources": {
+            "aluminium": 3
+          },
+          "buildings": {
+            "infrastructure": 2,
+            "industrial_complex": 1,
+            "arms_factory": 1
+          },
+          "province_buildings": {},
+          "victory_points": {
+            "11835": 3,
+            "6963": 3
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            11835,
+            6963
+          ]
+        }
+      ]
+    },
+    {
+      "donor_parent_id": 1028,
+      "compat_retained_id": 918,
+      "donor_before_runtime_path": "history/states/1028 - Hamgyong.txt",
+      "donor_head_before_sha256": "AA78EBB97BE029CA741CD41AC60F7B47974EC05B7DE702CE199404EF453CF759",
+      "donor_original_name_key": "STATE_1028",
+      "parent_manpower_total": 2574500,
+      "retained_population_percent": 55,
+      "population_allocation_role": "integer game-design weights; remainder assigned to new child; not census reconstruction",
+      "whole_region_condition_ids": [
+        918,
+        1152
+      ],
+      "whole_region_connector": "AND for whole-region territorial predicates; OR for candidate membership and failure cancellation",
+      "children": [
+        {
+          "donor_state_id": 1028,
+          "compat_state_id": 918,
+          "korean_name": "함경남도",
+          "display_name_key": "HOK_KOR_STATE_1028",
+          "donor_runtime_path": "history/states/1028 - Hamgyong.txt",
+          "compat_runtime_path": "history/states/918-Hamgyong.txt",
+          "donor_after_sha256": "4A0049F8F2A591EDF79FE86008E1B7C07D0999CB619D0780698C04F465DA8A9D",
+          "compat_output_sha256": "443F774810F07F9B676C10B27D850041B4962D02F628931EB6A2FB640E36BFD9",
+          "donor_provinces": [
+            848,
+            852,
+            906,
+            3852,
+            3904,
+            3981,
+            6928,
+            9899,
+            10083,
+            11770
+          ],
+          "compat_provinces": [
+            848,
+            852,
+            906,
+            3852,
+            3904,
+            3981,
+            6928,
+            9899,
+            10083,
+            11770
+          ],
+          "manpower": 1415975,
+          "state_category": "rural",
+          "resources": {
+            "tungsten": 14,
+            "coal": 10
+          },
+          "buildings": {
+            "infrastructure": 1,
+            "industrial_complex": 1
+          },
+          "province_buildings": {
+            "848": {
+              "naval_base": 3,
+              "coastal_bunker": 1
+            }
+          },
+          "victory_points": {
+            "6928": 3,
+            "848": 10
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            6928,
+            848
+          ]
+        },
+        {
+          "donor_state_id": 1090,
+          "compat_state_id": 1152,
+          "korean_name": "함경북도",
+          "display_name_key": "HOK_KOR_STATE_1090",
+          "donor_runtime_path": "history/states/1090 - Hamgyeongbuk.txt",
+          "compat_runtime_path": "history/states/1152-Hamgyeongbuk.txt",
+          "donor_after_sha256": "344682E78111D6F339D8C4EF05AD854AF90E46014632C346F4A1F52E68218052",
+          "compat_output_sha256": "3D2FB3584C24C1E60F7BDEB03F292275D776A4CEB029DEB873E1E129C5A6AFB0",
+          "donor_provinces": [
+            898,
+            959,
+            3803,
+            3860,
+            6822,
+            6922,
+            6944,
+            11878
+          ],
+          "compat_provinces": [
+            898,
+            959,
+            3803,
+            3860,
+            6822,
+            6922,
+            6944,
+            11878
+          ],
+          "manpower": 1158525,
+          "state_category": "rural",
+          "resources": {
+            "steel": 15,
+            "tungsten": 14,
+            "coal": 10,
+            "chromium": 4
+          },
+          "buildings": {
+            "infrastructure": 1
+          },
+          "province_buildings": {},
+          "victory_points": {
+            "6822": 3,
+            "6944": 1
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            6822,
+            6944
+          ]
+        }
+      ]
+    },
+    {
+      "donor_parent_id": 1083,
+      "compat_retained_id": 917,
+      "donor_before_runtime_path": "history/states/1083 - Hwanghae.txt",
+      "donor_head_before_sha256": "3830F398FE1D316A70B719FCCA445EC9F94658F1230BCBFB059BA753C85E04FB",
+      "donor_original_name_key": "STATE_1083",
+      "parent_manpower_total": 2674214,
+      "retained_population_percent": 55,
+      "population_allocation_role": "integer game-design weights; remainder assigned to new child; not census reconstruction",
+      "whole_region_condition_ids": [
+        917,
+        1153
+      ],
+      "whole_region_connector": "AND for whole-region territorial predicates; OR for candidate membership and failure cancellation",
+      "children": [
+        {
+          "donor_state_id": 1083,
+          "compat_state_id": 917,
+          "korean_name": "황해남도",
+          "display_name_key": "HOK_KOR_STATE_1083",
+          "donor_runtime_path": "history/states/1083 - Hwanghae.txt",
+          "compat_runtime_path": "history/states/917-Hwanghae.txt",
+          "donor_after_sha256": "AB48B3BC05B284F557BC9D0B2C345BB680377EBB755EA70FEE509EA77782A6CA",
+          "compat_output_sha256": "6864D0E762BDECA2056454749CEFF94EBA25FE7E782901861602E3CD2332ED5B",
+          "donor_provinces": [
+            1003,
+            4107,
+            7155,
+            13438,
+            13440,
+            13441
+          ],
+          "compat_provinces": [
+            1003,
+            4107,
+            7155,
+            13559,
+            13561,
+            13562
+          ],
+          "manpower": 1470817,
+          "state_category": "town",
+          "resources": {},
+          "buildings": {
+            "infrastructure": 1
+          },
+          "province_buildings": {},
+          "victory_points": {
+            "13559": 1
+          },
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": [
+            13559
+          ]
+        },
+        {
+          "donor_state_id": 1091,
+          "compat_state_id": 1153,
+          "korean_name": "황해북도",
+          "display_name_key": "HOK_KOR_STATE_1091",
+          "donor_runtime_path": "history/states/1091 - Hwanghaebuk.txt",
+          "compat_runtime_path": "history/states/1153-Hwanghaebuk.txt",
+          "donor_after_sha256": "E89006A43F9DD5678570EF32D8041873E5E2173BE717097504263DF40DB751E5",
+          "compat_output_sha256": "D477A60E4245BEF92E6C3A27D2D0CFD5B4460B007B56C5ECEBB8745F335A7561",
+          "donor_provinces": [
+            7070,
+            10065,
+            11915,
+            13439
+          ],
+          "compat_provinces": [
+            7070,
+            10065,
+            11915,
+            13560
+          ],
+          "manpower": 1203397,
+          "state_category": "town",
+          "resources": {
+            "steel": 8
+          },
+          "buildings": {
+            "infrastructure": 1
+          },
+          "province_buildings": {},
+          "victory_points": {},
+          "owner_1936": "KOR",
+          "core_countries": [
+            "KOR"
+          ],
+          "dated_history": {
+            "1939.3.14": {
+              "owner": "JAP",
+              "controller": "JAP"
+            }
+          },
+          "rt56_state_victory_points_hook": []
+        }
+      ]
+    }
+  ],
+  "territorial_sets": {
+    "korea_all_15": [
+      525,
+      527,
+      917,
+      918,
+      919,
+      920,
+      1144,
+      1145,
+      1146,
+      1148,
+      1149,
+      1150,
+      1151,
+      1152,
+      1153
+    ],
+    "north_6": [
+      527,
+      1151,
+      918,
+      1152,
+      917,
+      1153
+    ],
+    "south_9": [
+      525,
+      1144,
+      1145,
+      1149,
+      920,
+      1148,
+      919,
+      1150,
+      1146
+    ],
+    "korea_without_jeju_14": [
+      525,
+      527,
+      917,
+      918,
+      919,
+      920,
+      1144,
+      1145,
+      1148,
+      1149,
+      1150,
+      1151,
+      1152,
+      1153
+    ],
+    "sea_civil_war_northern_group_plus_gyeonggi_7": [
+      527,
+      1151,
+      918,
+      1152,
+      917,
+      1153,
+      525
+    ],
+    "sea_civil_war_southern_group_without_gyeonggi_8": [
+      1144,
+      1145,
+      1149,
+      920,
+      1148,
+      919,
+      1150,
+      1146
+    ],
+    "kor_events_2_korean_subset_12": [
+      525,
+      527,
+      917,
+      918,
+      919,
+      1144,
+      1145,
+      1149,
+      1150,
+      1151,
+      1152,
+      1153
+    ],
+    "kor_events_3_korean_subset_13": [
+      527,
+      917,
+      918,
+      919,
+      920,
+      1144,
+      1145,
+      1148,
+      1149,
+      1150,
+      1151,
+      1152,
+      1153
+    ],
+    "civil_war_non_korean_lists": "retain each previous port event list and exceptions; do not add Manchurian states simply because Korea split",
+    "japan_original_gyeonggi_pyeongan_gate": [
+      525,
+      527,
+      1151
+    ],
+    "china_pyeongan_wargoal_generator": [
+      527,
+      1151
+    ],
+    "china_controller_target_and_identity_proxy": 527,
+    "japan_soviet_border_conflict_attacker": 1152,
+    "excluded_from_korean_15_count": [
+      528,
+      1147
+    ]
+  },
+  "single_reward_and_site_recipients": {
+    "pohang_steel_focus_and_repeatable_decision": 920,
+    "busan_and_namdong_industry": 1148,
+    "unsan_factory": 1151,
+    "hamgyeong_steel_15": 1152,
+    "hamgyeong_tungsten_5": 918,
+    "regional_industry_projects": {
+      "pyeongan": 527,
+      "chungcheong": 1145,
+      "gyeongsang_shipbuilding": 1148
+    },
+    "peninsula_dockyard_four_recipients": [
+      527,
+      917,
+      1145,
+      1150
+    ],
+    "original_jeolla_cas_airbase": 1150,
+    "middle_power_gyeongsang_airbase": 1148,
+    "naval_research_preferred_state": 1148,
+    "nuclear_research_preferred_state": 918,
+    "jamboree_achievement_single_state": 919,
+    "communist_daegu_capital": {
+      "state": 920,
+      "province": 13557
+    },
+    "southern_civil_war_busan_capital": {
+      "state": 1148,
+      "province": 4056
+    }
+  },
+  "conserved_and_intentional_totals": {
+    "population": 25899038,
+    "starting_civilian_military_dockyards": [
+      9,
+      4,
+      1
+    ],
+    "base_resources": {
+      "aluminium": 14,
+      "steel": 27,
+      "tungsten": 56,
+      "coal": 29,
+      "chromium": 4
+    },
+    "base_state_category_slots": {
+      "before": 33,
+      "after": 57
+    },
+    "initial_infrastructure_level_sum": {
+      "before": 14,
+      "after": 23
+    },
+    "airbase_level_sum": 6,
+    "global_shared_or_building_type_limits": "unchanged; do not infer engine behavior from source totals"
+  },
+  "map_field_policy": {
+    "geometry": "preserve previous compatibility province bitmap/definition and split-external map data",
+    "genuine_source_display_additions": 172,
+    "selected_new_source_display_rows": 170,
+    "previous_korean_placements_non_id_fields_preserved": 546,
+    "source_reparented_209_rows": "not newly added rows; do not blanket restore",
+    "allowed_building_id_fields": [
+      0,
+      6
+    ],
+    "non_id_fields": "preserve all source bytes, including signed decimals and precision, except the one recorded X adaptation",
+    "coordinate_adaptations": [
+      {
+        "source": "1090;industrial_complex;4834.00;10.95;1372.50;4.24;0",
+        "output": "1152;industrial_complex;4836.50;10.95;1372.50;4.24;0",
+        "reason": "same donor province6944 interior under RT56 geometry; old donor coordinate samples RT56province944/state942",
+        "coordinate_delta_pixels": [
+          2.5,
+          0
+        ]
+      }
+    ],
+    "two_bounded_southern_site_restorations": [
+      {
+        "source": "1086;air_base;4810.00;11.45;1239.00;4.32;0",
+        "output": "1148;air_base;4810.00;11.45;1239.00;4.32;0"
+      },
+      {
+        "source": "1086;rocket_site_spawn;4817.00;9.90;1237.00;4.79;0",
+        "output": "1148;rocket_site_spawn;4817.00;9.90;1237.00;4.79;0"
+      }
+    ],
+    "southern_site_reason": "retained RT56 Gyeongsang sites lie in the northern successor; require unique exact donor rows, southern land membership, and per-state site uniqueness"
+  },
+  "output_inventory": {
+    "runtime_path_count": 47,
+    "new_runtime_paths": [
+      "history/states/1148-Gyeongsangnam.txt",
+      "history/states/1149-Chungcheongbuk.txt",
+      "history/states/1150-Jeollanam.txt",
+      "history/states/1151-Pyeonganbuk.txt",
+      "history/states/1152-Hamgyeongbuk.txt",
+      "history/states/1153-Hwanghaebuk.txt",
+      "localisation/english/HOK_KOR_state_split_l_english.yml",
+      "localisation/korean/HOK_KOR_state_split_l_korean.yml",
+      "common/national_focus/japan.txt"
+    ],
+    "modified_existing_path_count": 38,
+    "additional_port_consumers": [
+      "events/WTT_PRC.txt",
+      "events/r56_japan.txt"
+    ],
+    "bounded_preexisting_display_fix": {
+      "path": "history/states/1147-Tsushima.txt",
+      "before": "STATE_1088",
+      "after": "STATE_1147",
+      "scope": "display reference only; separate from Jeollanam logical keys"
+    },
+    "bounded_existing_research_tooltip_fix": {
+      "paths": {
+        "localisation/english/HOK_KOR_research_network_l_english.yml": {
+          "previous_sha256": "CB99E3AA06453DF9A0B8AD4898AAED21220B314314A8F7A7037F725719A757C6",
+          "sha256": "19A3F7547811E2945C5B69A563B67F627FB0ECFA6973D7C4106950DF07098C06"
+        },
+        "localisation/korean/HOK_KOR_research_network_l_korean.yml": {
+          "previous_sha256": "F410C77B3BB37053736B2A5262FFFB2A62EF3AF44AF484C075CC26A607BABAC6",
+          "sha256": "722645B04632E29C7ED1A4A8C6A3225573E9ED9ACD68B08D112F1C4849D79DCE"
+        }
+      },
+      "scope": "two existing locale files; successor-name references only; no new runtime paths, keys, conditions or rewards",
+      "naval_tooltip": {
+        "key": "HOK_KOR_naval_research_network_tt",
+        "before": "$STATE_920$",
+        "after": "$HOK_KOR_STATE_1086$",
+        "preferred_state": 1148
+      },
+      "nuclear_tooltip": {
+        "key": "HOK_KOR_nuclear_research_network_tt",
+        "before": "$STATE_918$",
+        "after": "$HOK_KOR_STATE_1028$",
+        "preferred_state": 918
+      }
+    },
+    "current_ledger": {
+      "path": "docs/audits/2026-09-06-production-file-classification.csv",
+      "sha256": "A36C138B7CD70371928DC33CBE978B04707E5AAF05058C957733FB2E0CDC408B"
+    },
+    "final_paths": [
+      "history/states/920-Gyeongsang.txt",
+      "history/states/1148-Gyeongsangnam.txt",
+      "history/states/1145-Chungcheong.txt",
+      "history/states/1149-Chungcheongbuk.txt",
+      "history/states/919-Jeolla.txt",
+      "history/states/1150-Jeollanam.txt",
+      "history/states/527-North Korea.txt",
+      "history/states/1151-Pyeonganbuk.txt",
+      "history/states/918-Hamgyong.txt",
+      "history/states/1152-Hamgyeongbuk.txt",
+      "history/states/917-Hwanghae.txt",
+      "history/states/1153-Hwanghaebuk.txt",
+      "map/buildings.txt",
+      "common/achievements/HoK_achievements.txt",
+      "common/ai_strategy/KOR.txt",
+      "common/decisions/HOK_KOR_industry_expansion.txt",
+      "common/decisions/HOK_KOR_resource_prospecting.txt",
+      "common/decisions/KOR_decision.txt",
+      "common/national_focus/korea.txt",
+      "common/on_actions/gookppong_middle_power_on_actions.txt",
+      "common/on_actions/gookppong_on_actions.txt",
+      "common/scripted_effects/HOK_KOR_research_network_effects.txt",
+      "events/korea.txt",
+      "history/units/KOR_1936_air_bba.txt",
+      "history/units/KOR_1936_air_legacy.txt",
+      "history/units/gookppong_middle_power_KOR_air_bba.txt",
+      "history/units/gookppong_middle_power_KOR_air_legacy.txt",
+      "localisation/english/HOK_KOR_industry_expansion_l_english.yml",
+      "localisation/korean/HOK_KOR_industry_expansion_l_korean.yml",
+      "localisation/english/HOK_KOR_state_split_l_english.yml",
+      "localisation/korean/HOK_KOR_state_split_l_korean.yml",
+      "common/scripted_triggers/JAP_scripted_triggers.txt",
+      "events/WTT_Japan.txt",
+      "events/SEA_Japan.txt",
+      "common/decisions/JAP.txt",
+      "common/national_focus/china_shared_TSR.txt",
+      "common/on_actions/14_sea_on_actions.txt",
+      "events/WTT_PRC.txt",
+      "events/r56_japan.txt",
+      "history/countries/JAP - Japan.txt",
+      "common/peace_conference/ai_peace/USA.txt",
+      "common/decisions/KOR.txt",
+      "common/national_focus/japan.txt",
+      "common/peace_conference/ai_peace/SOV.txt",
+      "history/states/1147-Tsushima.txt",
+      "localisation/english/HOK_KOR_research_network_l_english.yml",
+      "localisation/korean/HOK_KOR_research_network_l_korean.yml"
+    ]
+  },
+  "separately_preserved_legacy_issues": [
+    "Saemangeum reward remains in Chungcheong; no new geographic redesign",
+    "noncoastal donor province13419 maps to13540; parent alignment does not repair coastal-fort eligibility",
+    "Japanese fort province1003 old-region mismatch remains separate",
+    "noncoastal floating-harbor land anchor10065 remains separate"
+  ]
+}

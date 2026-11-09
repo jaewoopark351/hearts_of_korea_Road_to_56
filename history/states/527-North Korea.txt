@@ -1,20 +1,20 @@
+#20261107_kpopmodder: Split Korean states while preserving regional starting totals and dated history.
 state={
 	id=527
-	name="STATE_527"
-	resources={
-		aluminium=5.000
-		coal=5.000#20260903_kpopmodder
-	}
+	name="HOK_KOR_STATE_527"
 	provinces={
-		912 978 3912 4052 6963 7171 9790 9795 9918 11775 11828 11835 11896 13536
+		978 3912 4052 7171 9790 13536
+	}
+	resources={
+		aluminium=2.000
+		coal=5.000#20260903_kpopmodder
 	}
 
 	history={
 		owner = KOR
 		buildings = {
 			infrastructure = 2
-			industrial_complex = 2
-			arms_factory = 1
+			industrial_complex = 1
 			air_base = 1
 			13536 = {
 				naval_base = 2
@@ -26,27 +26,18 @@ state={
 		}
 		add_to_array = { state_victory_points = 4052 }
 		victory_points = {
-			11835 3
-		}
-		add_to_array = { state_victory_points = 11835 }
-		victory_points = {
-			6963 3
-		}
-		add_to_array = { state_victory_points = 6963 }
-		victory_points = {
 			13536 1
 		}
 		add_to_array = { state_victory_points = 13536 }
 		add_core_of = KOR
-		
+
 		1939.3.14 = {
 			owner = JAP
 			controller = JAP
 		}
 
 	}
-
-	manpower=4179983
+	manpower=2298990
 	buildings_max_level_factor=1.000
 	state_category=large_town
 	local_supplies=0.000

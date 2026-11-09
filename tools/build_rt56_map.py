@@ -1059,9 +1059,20 @@ def build_all(*, buildings_only: bool = False) -> tuple[dict[str, bytes], Counte
     validate_map_references(outputs)
     if buildings_only:
         companions = {path: data for path, data in outputs.items() if path != "map/buildings.txt"}
-        mismatches = [path for path, data in companions.items() if not (REPO_ROOT / path).is_file() or (REPO_ROOT / path).read_bytes() != data]
+        #20261107_kpopmodder: Audit unchanged historical companions through the exact verified split reversal.
+        from korean_state_split import historical_bytes
+        mismatches = [path for path, data in companions.items() if not (REPO_ROOT / path).is_file() or historical_bytes(path, (REPO_ROOT / path).read_bytes()) != data]
         if len(companions) != 17 or mismatches:
             raise BuildError(f"buildings-only mode requires 17 unchanged map companions: {mismatches}")
+    #20261107_kpopmodder: Preserve the reviewed split as the final layer over historical map synthesis.
+    from korean_state_split import finalize_outputs
+    outputs = finalize_outputs(outputs, owner="map")
+    if buildings_only:
+        #20261108_kpopmodder: Require the complete final map before limiting placement-only writes.
+        companions = {path: data for path, data in outputs.items() if path != "map/buildings.txt"}
+        mismatches = [path for path, data in companions.items() if not (REPO_ROOT / path).is_file() or (REPO_ROOT / path).read_bytes() != data]
+        if len(companions) != 23 or mismatches:
+            raise BuildError(f"buildings-only mode requires 23 unchanged final map companions: {mismatches}")
         outputs = {"map/buildings.txt": outputs["map/buildings.txt"]}
     return outputs, pixel_counts, overlay_pixels
 
@@ -1072,7 +1083,7 @@ def main() -> int:
     mode.add_argument("--apply", action="store_true", help="write generated files under the repository")
     mode.add_argument("--check", action="store_true", help="verify that repository files match generated output")
     #20261011_kpopmodder: Offer bounded placement generation while preserving the full source-drift gate.
-    parser.add_argument("--buildings-only", action="store_true", help="generate/check buildings only; require 17 unchanged companion outputs")
+    parser.add_argument("--buildings-only", action="store_true", help="generate/check buildings only; require 23 unchanged final companion outputs")
     args = parser.parse_args()
 
     try:

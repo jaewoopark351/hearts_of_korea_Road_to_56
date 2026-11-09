@@ -511,10 +511,15 @@ def build_outputs() -> dict[Path, bytes]:
     }
     for relative, payload in outputs.items():
         validate_balanced(payload.decode("utf-8"), relative)
-    return outputs
+    #20261107_kpopmodder: Keep core-recovery state membership aligned with the final Korean split layer.
+    from korean_state_split import finalize_outputs
+    return finalize_outputs(outputs, owner="shared")
 
 
 def apply(outputs: dict[Path, bytes]) -> None:
+    #20261108_kpopmodder: Check every content-owned target before stale-file removal or any output write.
+    from upstream_content_update import preflight_outputs
+    preflight_outputs(outputs)
     for relative in STALE_WHOLE_FILES:
         path = COMPAT_ROOT / relative
         if path.exists():

@@ -1,4 +1,5 @@
-﻿capital = 613 # Nanjing
+﻿#20261108_kpopmodder: Keep the intended Nanjing capital at its actual RT56 state parent.
+capital = 1114 # Nanjing
 
 # Starting tech
 set_technology = {

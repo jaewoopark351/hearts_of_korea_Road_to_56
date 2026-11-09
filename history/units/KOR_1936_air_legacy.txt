@@ -7,7 +7,8 @@
 		fighter_equipment_0 =  { owner = "KOR" amount = 30 }
 		CAS_equipment_1 =  { owner = "KOR" amount = 30 }
 	}
-	919 = {
+	#20261107_kpopmodder: Keep starting wings at the successor containing the original airbase position.
+	1150 = {
 		CAS_equipment_1 =  { owner = "KOR" amount = 30 }
 	}
 }

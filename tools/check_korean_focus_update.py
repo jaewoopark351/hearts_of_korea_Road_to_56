@@ -103,9 +103,24 @@ def parse(text: str) -> Block:
     return consume()
 
 
+#20261107_kpopmodder: Recover only locked pre-split text for historical contracts; the new split gate checks actual output.
+def read_check_payload(path: Path) -> bytes:
+    data = path.read_bytes()
+    try:
+        relative = path.relative_to(ROOT)
+    except ValueError:
+        return data
+    if relative.suffix not in {".txt", ".yml"} or relative.parts[0] not in {
+        "common", "events", "history", "localisation", "map"
+    }:
+        return data
+    from korean_state_split import historical_bytes
+    return historical_bytes(relative.as_posix(), data)
+
+
 def read(path: Path) -> Block:
     try:
-        return parse(path.read_bytes().decode("utf-8-sig"))
+        return parse(read_check_payload(path).decode("utf-8-sig"))
     except ValueError as exc:
         raise ValueError(f"{path}: {exc}") from exc
 
@@ -117,7 +132,8 @@ def read_historical(path: Path) -> Block:
     record = civic_update_lock()["runtime_text"].get(relative, {})
     #20261020_kpopmodder: Verify and reverse the final shipbuilding layer before checking exact older ancestors.
     #20261031_kpopmodder: Recover the exact pre-feature tree before enforcing the older naval and civic contracts.
-    data = remove_shipbuilding_update(relative, remove_feature_update(relative, path.read_bytes()))
+    #20261107_kpopmodder: Verify the split layer before reversing the unchanged historical feature/civic contracts.
+    data = remove_shipbuilding_update(relative, remove_feature_update(relative, read_check_payload(path)))
     if "previous_output_sha256" in record:
         data = remove_civic_update(relative, data)
     return parse(data.decode("utf-8-sig"))
@@ -632,7 +648,8 @@ def check_reference_closure(focuses: dict[str, Block], added: set[str], ideas: d
         payloads = []
         for locale in ("english", "korean"):
             path = ROOT / f"localisation/{locale}/HOK_KOR_{part}_l_{locale}.yml"
-            raw = path.read_bytes()
+            #20261107_kpopmodder: Compare paired historical text after the exact state-split projection.
+            raw = read_check_payload(path)
             require(raw.startswith(b"\xef\xbb\xbf"), f"new localisation lacks BOM: {path}")
             lines = raw.decode("utf-8-sig").splitlines()
             require(lines[0].strip() == f"l_{locale}:", f"new localisation header changed: {path}")

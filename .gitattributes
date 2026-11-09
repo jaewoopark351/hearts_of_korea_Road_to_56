@@ -191,3 +191,45 @@ common/decisions/HOK_KOR_resource_prospecting.txt text eol=crlf
 interface/HOK_KOR_resource_prospecting_icons.gfx text eol=crlf
 localisation/english/HOK_KOR_resource_prospecting_l_english.yml text eol=crlf
 localisation/korean/HOK_KOR_resource_prospecting_l_korean.yml text eol=crlf
+
+#20261109_kpopmodder: Preserve the November source capsules and locked output bytes across Git checkouts.
+docs/upstream/hok-state-split-20261107/** -text
+docs/upstream/hok-content-update-20261108/** -text
+docs/upstream/rt56-host-update-20261108/** -text
+tools/hok_state_split_lock.json text eol=crlf
+tools/hok_upstream_content_lock.json text eol=crlf
+tools/rt56_host_update_lock.json text eol=crlf
+common/script_constants/state_groups.txt text eol=lf
+history/states/1148-Gyeongsangnam.txt text eol=lf
+history/states/1149-Chungcheongbuk.txt text eol=lf
+history/states/1150-Jeollanam.txt text eol=lf
+history/states/1151-Pyeonganbuk.txt text eol=lf
+history/states/1152-Hamgyeongbuk.txt text eol=lf
+history/states/1153-Hwanghaebuk.txt text eol=lf
+common/achievements/HoK_achievements.txt text eol=crlf
+common/ai_strategy/KOR.txt text eol=crlf
+common/bookmarks/the_gathering_storm.txt text eol=crlf
+common/decisions/JAP.txt text eol=crlf
+common/military_industrial_organization/organizations/00_generic_organization.txt text eol=crlf
+common/national_focus/china_shared_TSR.txt text eol=crlf
+common/national_focus/japan.txt text eol=crlf
+common/on_actions/14_sea_on_actions.txt text eol=crlf
+common/on_actions/gookppong_middle_power_on_actions.txt text eol=crlf
+common/on_actions/gookppong_on_actions.txt text eol=crlf
+common/scripted_effects/SOV_scripted_effects.txt text eol=crlf
+common/scripted_triggers/HOK_KOR_cndp_triggers.txt text eol=crlf
+events/SEA_Japan.txt text eol=crlf
+events/WTT_Japan.txt text eol=crlf
+events/WTT_PRC.txt text eol=crlf
+events/r56_japan.txt text eol=crlf
+"history/countries/JAP - Japan.txt" text eol=crlf
+"history/countries/KCH - Korean China.txt" text eol=crlf
+"history/countries/KOR - Korea.txt" text eol=crlf
+history/units/KOR_1936_air_bba.txt text eol=crlf
+history/units/KOR_1936_air_legacy.txt text eol=crlf
+history/units/gookppong_middle_power_KOR_air_bba.txt text eol=crlf
+history/units/gookppong_middle_power_KOR_air_legacy.txt text eol=crlf
+interface/HOK_KOR_cndp_icons.gfx text eol=crlf
+localisation/korean/HOK_KOR_cndp_state_development_l_korean.yml text eol=crlf
+localisation/korean/HOK_KOR_state_split_l_korean.yml text eol=crlf
+map/buildings.txt text eol=crlf

@@ -4,6 +4,10 @@
 
 ## 현재 상태
 
+- 2026-11-09 RT56 자동 갱신 대응 마감: 승인된 manifest `1963361040482473746`의 호스트4개와 HOK32개를 연결하고 지도24·기존 source pins·승인된 회복 수선을 보존했다. 실제 CNDP 비용/타이머·선택 저장·한영 회복 UI와 refs6을 각 한계 안에서 관측했고, 세션 종료·수집·프로필 복구 및 파일 보존 감사 **68/0**을 완료했다. 최종 aggregate는 **23 PASS / 0 WARNING / 11 기존 ERROR**다. PRC 경고군은 RT56 단독 재로드에서도 재현됐으며 근본 원인은 미확정이다. 첫 watcher 실패와 수선 전 overflow 등 과거 실패도 보존한다. [실제 상태·남은 한계](implementation/2026-11-08-hok-upstream-content-port.md), [ADR-0008](decisions/0008-november-rt56-host-update.md), [새 호스트 입력](upstream/rt56-host-update-20261108/README.md)을 읽는다.
+- 2026-11-08 원본 `596b221` 후속 구현: **CNDP13·표시·한국/외국 참조32출력(기존13+신규19) 소스 통합과 선택 범위 실행·복구 완료**. 초기913/0/1 runtime UNVERIFIED와 aggregate21/0/11은 수선·새 호스트 대응 전 계층의 과거 기록이다. 현재의 확인 범위와 미검증 동작을 전체 호환성·무오류로 확대하지 않는다. FRI 인도차이나·Singapore·KCH1114·SOV/코민테른1152의 결정은 [ADR-0007](decisions/0007-november-content-integration.md), 실제 결과·증거·복구는 [구현 기록](implementation/2026-11-08-hok-upstream-content-port.md)을 따른다. 이 계층 수정·재생성·검증 전 해당 기록과 [선택 입력 안내](upstream/hok-content-update-20261108/README.md)를 읽는다.
+- 2026-11-08 최초 문서화 이력: 기존 분할 donor42입력 중37개 동일·5개 추가 변경, 동결밖31개를 합친36경로를 검토 후보로 기록했다. [최초 이식 계획](plans/2026-11-08-hok-upstream-content-port-plan.md)은 당시 문서화 전용 결과이며 이후 승인된 구현·실행 결과와 구분한다. 후보36개 전체 복사나 지침 파일 동기화를 수행한 것으로 해석하지 않는다.
+- 2026-11-07 한국 9→15주 분할과 연결 콘텐츠: **47출력·신규 경로9개 구현 및 이번 범위 검증·환경 복구 완료**(11월8일 KST). 전체 정적 **19 PASS / 0 WARNING / 11 기존 ERROR**, 지도/주 독립 정적 **7,180/0**, final suite **190 PASS / 0 MISMATCH / 10 UNVERIFIED**다. 영어 새 저장 cold reload·한국어 C1·국뽕 두 옵션과 보상/부분 상실/슬롯/반복/활성 저장 인게임 재로드를 각 범위로 확인했다. 미검증10개는 BASE 재로드 뒤 startup marker·fresh Verify 재클릭이며 모든 런타임 통과를 주장하지 않는다. 사후 원본42·host/schema1,193·출력47 지문은 일치했고 원래 프로필20개·저장43개를 복구/보존했다. 현재 RT56의 1939 미지원과 실제1936 카드만의 UI, 기존11개 정적 부채·새 게임 한정·배포 언어 계약 미확정은 유지한다. 주 분할을 수정하거나 검증하기 전에 [전체 계획](plans/2026-11-07-korean-state-split-port-plan.md), [ADR-0006](decisions/0006-korean-state-split-integration.md), [구현·검증 기록](implementation/2026-11-07-korean-state-split-port.md)을 읽는다.
 - 2026-11-07 원본 업데이트 **강원·포항 반복 자원 확장과 신아리랑 44.1kHz 이식**. RT56 실제 게임에서 두 사업의 90일 완료 두 회차, 취소, 저장 재로드와 신아리랑 재생을 확인했다. [선택 이식 계획](plans/2026-11-07-hok-upstream-delta-port-plan.md) · [구현·검증 기록](implementation/2026-11-07-hok-resource-prospecting-port.md)
 - 2026-10-12 원본 d4031aa 재벌·시민사회: **한국 runtime31개 선택 이식, playable472개·신규13중점·20정신·13결정/mission·11사건·영향력패널 반영**. 이전 생성 출력405개·RT56 지역 병합·historical lock10개 보존. Civic scoped 정적/회귀26개와 기존 royal/선행57개 통과, aggregate **18 PASS / 0 WARNING / 5 기존 ERROR**, 현재 실행 미검증. 기존 host drift·descriptor pin은 아래 [구현 기록](implementation/2026-10-12-korean-civic-update-port.md)에 구분했다. [472개 좌표 명세](HOK_KOREAN_CIVIC_LAYOUT_COORDINATES.md).
 - 2026-10-11 미사일 기지: **함경918·충청1145의 HoK 우선 배치와 정적 검증 완료, 실제 UI 검증 대기**. RT56 위치3행 제외·HoK 함경1행 복원, buildings-only에서 철도 포함 동반 지도17개 보존. 외부 회귀34 PASS·독립 과거 정규화12개 변형 거부; aggregate 작업 전16/0/5 → 작업 후17/0/5(같은 기존 host drift4·descriptor pin1). 전체 지도·철도 source drift와 실행 증거는 별도 미완료다. 최초 문서화 전용 요청과 수정 전 지문을 [수정 계획](plans/2026-10-11-korean-rocket-site-fix-plan.md)에 보존하고, 후속 구현 승인·검사 결과를 [구현 기록](implementation/2026-10-11-korean-rocket-site-fix.md)에 구분했다.
@@ -31,6 +35,12 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 구현·결정 | [11월8일 콘텐츠 이식](implementation/2026-11-08-hok-upstream-content-port.md) / [ADR-0007](decisions/0007-november-content-integration.md) | 32출력·신규19경로 통합, 선택 범위 실제 실행·복구 및 미검증 한계 기록. 이 계층 수정·재생성·검증 전 읽음 |
+| 원본 입력 | [11월8일 선택 입력·host·기존 포트](upstream/hok-content-update-20261108/README.md) | donor36·문서13·compat16+보호1·host2·이전 원장. 재현/출처/그림 재사용 전 읽음 |
+| 계획·검토 | [11월8일 원본 추가 콘텐츠 이식](plans/2026-11-08-hok-upstream-content-port-plan.md) | 문서화만. CNDP13·표시·참조36후보의 반영/유지/제외/미확인, 주별 보상·저장 계약·생성 소유권·후속 검증 구분. 추가 내용 구현·검증 전 읽음 |
+| 구현 | [한국 15주·연결 콘텐츠 이식](implementation/2026-11-07-korean-state-split-port.md) | 47출력·신규9경로·범위 구현/검증/복구 완료. 정적19 PASS/기존11 ERROR, final suite190 PASS/0 MISMATCH/10 UNVERIFIED. 새 게임 한정·1939 host미지원·출시 제약과 개별 증거 범위 구별 |
+| 결정·대응표 | [ADR-0006](decisions/0006-korean-state-split-integration.md) / [포트 대응 JSON](data/HOK_KOREAN_STATE_SPLIT_PORT_MAPPING.json) | 신규 ID·기존 유지 ID·프로빈스·이름 키·배분·영토 예외. 분할 참조/생성기를 변경하기 전에 읽음 |
+| 계획 | [한국 주 분할·연결 콘텐츠 전체 이식](plans/2026-11-07-korean-state-split-port-plan.md) | 최초 문서화 시점의 설계·순서·보존/변경 수치·검증 계약. 후속 구현·검증 결과는 별도 구현 기록 |
 | 구현 | [2026-10-12 재벌·시민사회 이식](implementation/2026-10-12-korean-civic-update-port.md) | donor d4031aa·runtime31개·생성436개·원장1,446개; scoped static/회귀26개 통과, 실행 미검증 |
 | 배치 | [재벌·시민사회 좌표](HOK_KOREAN_CIVIC_LAYOUT_COORDINATES.md) / [472개 JSON](data/HOK_KOREAN_CIVIC_LAYOUT_COORDINATES.json) | 13개 신규·2개 기존 이동·457개 위치 보존, 10개 SHOW/HIDE 상태 정적 기록 |
 | 원본 기록 | [d4031aa 모듈·문서·소재](upstream/hok-civic-update-20261012/README.md) | runtime31개·문서/소재23개 immutable source, 기존 source pins 보존 |

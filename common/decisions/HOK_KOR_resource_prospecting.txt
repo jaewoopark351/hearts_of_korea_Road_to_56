@@ -70,16 +70,27 @@ prospect_for_resources = {
 	HOK_KOR_expand_pohang_steelworks = {
 		icon = GFX_HOK_KOR_decision_expand_pohang_steelworks
 		allowed = { original_tag = KOR }
-		visible = { owns_state = 920 }
+		#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+		visible = {
+			owns_state = 920
+			owns_state = 1148
+		}
 		available = {
 			#20261107_kpopmodder: Require the Pohang focus before repeatable steelworks expansion.
 			has_completed_focus = KOR_pohang_iron__steel_company
 			has_capitulated = no
 			has_tech = construction2
 			num_of_civilian_factories_available_for_projects > 8
-			920 = {
-				is_owned_by = ROOT
-				is_fully_controlled_by = ROOT
+			#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+			AND = {
+				920 = {
+					is_owned_by = ROOT
+					is_fully_controlled_by = ROOT
+				}
+				1148 = {
+					is_owned_by = ROOT
+					is_fully_controlled_by = ROOT
+				}
 			}
 		}
 		highlight_states = { highlight_state_targets = { state = 920 } }
@@ -91,10 +102,19 @@ prospect_for_resources = {
 		cancel_trigger = {
 			OR = {
 				has_capitulated = yes
-				920 = {
-					OR = {
-						NOT = { is_owned_by = ROOT }
-						NOT = { is_fully_controlled_by = ROOT }
+				#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+				OR = {
+					920 = {
+						OR = {
+							NOT = { is_owned_by = ROOT }
+							NOT = { is_fully_controlled_by = ROOT }
+						}
+					}
+					1148 = {
+						OR = {
+							NOT = { is_owned_by = ROOT }
+							NOT = { is_fully_controlled_by = ROOT }
+						}
 					}
 				}
 			}
@@ -105,9 +125,16 @@ prospect_for_resources = {
 			if = {
 				limit = {
 					has_capitulated = no
-					920 = {
-						is_owned_by = ROOT
-						is_fully_controlled_by = ROOT
+					#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+					AND = {
+						920 = {
+							is_owned_by = ROOT
+							is_fully_controlled_by = ROOT
+						}
+						1148 = {
+							is_owned_by = ROOT
+							is_fully_controlled_by = ROOT
+						}
 					}
 				}
 				920 = {

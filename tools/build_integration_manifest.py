@@ -446,12 +446,18 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest().upper()
 
 
+#20261107_kpopmodder: Keep historical audit layers on exact pre-split bytes without changing their source pins.
+def pre_state_split_bytes(relative: str | Path, data: bytes) -> bytes:
+    from korean_state_split import historical_bytes
+    return historical_bytes(relative, data)
+
+
 #20261020_kpopmodder: Audit earlier integration layers against their frozen pre-translation bytes.
 #20261020_kpopmodder: Undo the bounded shipbuilding overlay before auditing earlier English and gameplay layers.
 def pre_shipbuilding_bytes(relative: str | Path, data: bytes) -> bytes:
     #20261031_kpopmodder: Require the exact feature output before restoring the independently pinned earlier layers.
     name = Path(relative).as_posix()
-    return remove_shipbuilding_update(name, remove_feature_update(name, data))
+    return remove_shipbuilding_update(name, remove_feature_update(name, pre_state_split_bytes(name, data)))
 
 
 def historical_output_bytes(relative: str) -> bytes:
@@ -963,7 +969,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
             payload = read_shipbuilding_source(relative)
             if hashlib.sha256(payload).hexdigest().upper() != record["sha256"]:
                 raise RuntimeError(f"shipbuilding frozen source hash differs from its lock: {relative}")
-            current = remove_feature_update(relative, (REPO_ROOT / relative).read_bytes())
+            current = remove_feature_update(relative, pre_state_split_bytes(relative, (REPO_ROOT / relative).read_bytes()))
             current_hash = hashlib.sha256(current).hexdigest().upper()
             if current_hash != record["output_sha256"]:
                 raise RuntimeError(f"shipbuilding output differs from its reviewed merge: {relative}")
@@ -1035,7 +1041,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     for group in ("runtime_text", "runtime_assets"):
         for relative, record in feature[group].items():
             #20261101_kpopmodder: Attribute the unchanged feature ancestor before recording the separate placement-only overlay.
-            current = remove_democratic_layout_update(relative, (REPO_ROOT / relative).read_bytes())
+            current = remove_democratic_layout_update(relative, pre_state_split_bytes(relative, (REPO_ROOT / relative).read_bytes()))
             current_hash = hashlib.sha256(current).hexdigest().upper()
             if current_hash != record["output_sha256"].upper():
                 raise RuntimeError(f"feature output differs from its reviewed merge: {relative}")
@@ -1087,7 +1093,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
         raise RuntimeError("unreviewed democratic layout runtime or integration inventory")
     relative = SECOND_WAVE_FOCUS_PATH
     record = layout["runtime_text"][relative]
-    current = remove_prospecting_focus((REPO_ROOT / relative).read_bytes())
+    current = remove_prospecting_focus(pre_state_split_bytes(relative, (REPO_ROOT / relative).read_bytes()))
     current_hash = hashlib.sha256(current).hexdigest().upper()
     previous = remove_democratic_layout_update(relative, current)
     previous_hash = hashlib.sha256(previous).hexdigest().upper()
@@ -1112,6 +1118,7 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     row["reason"] += "; 2026-11-01 democratic layout: 32 direct placement blocks compact the 95-focus sector, preserving gameplay, all anchors, offsets and preceding source layers"
 
     counts.update(update_prospecting_rows(rows))
+    counts.update(update_state_split_rows(rows))
 
     stream = io.StringIO(newline="")
     writer = csv.DictWriter(
@@ -1171,7 +1178,15 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     )
     writer.writeheader()
     writer.writerows(rows)
-    return stream.getvalue().encode("utf-8"), counts, collision_count
+    #20261108_kpopmodder: Keep the November final ledger on the default rebuild path as well as scoped updates.
+    # The content layer rejects a non-identical historical ledger predecessor.
+    from upstream_content_update import ledger_bytes as content_ledger_bytes
+    from rt56_host_update import ledger_bytes as host_ledger_bytes
+    final = host_ledger_bytes(content_ledger_bytes(stream.getvalue().encode("utf-8")))
+    final_rows = list(csv.DictReader(io.StringIO(final.decode("utf-8"), newline="")))
+    final_counts = Counter(row["integration_class"] for row in final_rows)
+    final_collisions = sum(row["exact_path_rt56_collision"] == "yes" for row in final_rows)
+    return final, final_counts, final_collisions
 
 
 #20261106_kpopmodder: Refresh the documentation fingerprint without rewriting unrelated runtime-byte audit rows.
@@ -1219,14 +1234,21 @@ def update_prospecting_rows(rows: list[dict[str, str]]) -> Counter[str]:
     lock = prospecting_lock()
     for group, root in (("host_files", RT56_ROOT), ("vanilla_files", VANILLA_ROOT)):
         for relative, digest in lock[group].items():
-            if sha256(root / relative) != digest:
-                raise ValueError(f"prospecting {group} drift: {relative}")
+            actual = sha256(root / relative)
+            if actual != digest:
+                #20261108_kpopmodder: Inherit the audited current host's three unchanged-purpose shared labels without altering old prospecting pins.
+                from rt56_host_update import approved_input_transition
+                inherited_locale = (group == "host_files"
+                    and relative == "localisation/english/wtt_decisions_l_english.yml"
+                    and approved_input_transition("RT56", relative, digest, actual))
+                if not inherited_locale:
+                    raise ValueError(f"prospecting {group} drift: {relative}")
 
     indexed = {row["source_path"]: row for row in rows}
     if len(indexed) != len(rows):
         raise ValueError("prospecting ledger requires unique source paths")
     focus = indexed[SECOND_WAVE_FOCUS_PATH]
-    current_focus = (REPO_ROOT / SECOND_WAVE_FOCUS_PATH).read_bytes()
+    current_focus = pre_state_split_bytes(SECOND_WAVE_FOCUS_PATH, (REPO_ROOT / SECOND_WAVE_FOCUS_PATH).read_bytes())
     focus_lock = lock["focus"]
     if (focus["output_path"] != SECOND_WAVE_FOCUS_PATH
             or focus["output_sha256"] not in {focus_lock["previous_output_sha256"], focus_lock["output_sha256"]}
@@ -1257,7 +1279,7 @@ def update_prospecting_rows(rows: list[dict[str, str]]) -> Counter[str]:
     counts: Counter[str] = Counter()
     for path, data in prospecting_additions().items():
         relative = path.as_posix()
-        if (RT56_ROOT / path).exists() or (VANILLA_ROOT / path).exists() or (REPO_ROOT / path).read_bytes() != data:
+        if (RT56_ROOT / path).exists() or (VANILLA_ROOT / path).exists() or pre_state_split_bytes(relative, (REPO_ROOT / path).read_bytes()) != data:
             raise ValueError(f"prospecting runtime output drift or path collision: {relative}")
         record = lock["additions"][relative]
         classification = "ASSET_COPY" if path.suffix == ".dds" else "ADD"
@@ -1278,6 +1300,15 @@ def update_prospecting_rows(rows: list[dict[str, str]]) -> Counter[str]:
 
 
 def build_prospecting_csv() -> bytes:
+    #20261107_kpopmodder: Validate the old prospecting contract on frozen historical rows, then retain the exact final split ledger.
+    from korean_state_split import LOCK_PATH, lock as state_split_lock
+    if LOCK_PATH.exists() and state_split_lock().get("outputs"):
+        _, _, baseline, _ = state_split_baseline()
+        historical_rows = [dict(row) for row in baseline]
+        update_prospecting_rows(historical_rows)
+        if historical_rows != baseline:
+            raise ValueError("prospecting contract changed the pinned pre-split ledger")
+        return build_state_split_csv()
     reader = csv.DictReader(io.StringIO(OUTPUT.read_text(encoding="utf-8"), newline=""))
     rows = list(reader)
     update_prospecting_rows(rows)
@@ -1286,6 +1317,158 @@ def build_prospecting_csv() -> bytes:
     writer.writeheader()
     writer.writerows(rows)
     return stream.getvalue().encode("utf-8")
+
+
+#20261107_kpopmodder: Freeze the pre-split ledger instead of using the mutable target CSV as its own authority.
+STATE_SPLIT_LEDGER_SHA256 = "3F124CD9CD99A3949F35E537562710DA4330D9AF3E38E2E351368B128091BAEE"
+STATE_SPLIT_REASON = "; 2026-11-07 Korean state split: "
+
+
+def state_split_baseline() -> tuple[bytes, list[str], list[dict[str, str]], list[bytes]]:
+    from korean_state_split import SNAPSHOT, lock
+    data = (SNAPSHOT / "ledger_before.csv").read_bytes()
+    config = lock()
+    recorded = config.get("ledger_before_sha256", STATE_SPLIT_LEDGER_SHA256)
+    if recorded != STATE_SPLIT_LEDGER_SHA256 or hashlib.sha256(data).hexdigest().upper() != STATE_SPLIT_LEDGER_SHA256:
+        raise ValueError("state-split historical ledger baseline drift")
+    reader = csv.DictReader(io.StringIO(data.decode("utf-8"), newline=""))
+    fields = reader.fieldnames
+    if fields is None or len(fields) != 49:
+        raise ValueError("state-split ledger requires the reviewed 49-column schema")
+    lines = data.splitlines(keepends=True)
+    start = reader.line_num
+    raw_rows: list[bytes] = []
+    rows: list[dict[str, str]] = []
+    for row in reader:
+        rows.append(row)
+        raw_rows.append(b"".join(lines[start:reader.line_num]))
+        start = reader.line_num
+    if len(rows) != 1511 or len({r["source_path"] for r in rows}) != len(rows):
+        raise ValueError("state-split historical ledger inventory drift")
+    return b"".join(lines[:1]), fields, rows, raw_rows
+
+
+def update_state_split_rows(rows: list[dict[str, str]], *, output_root: Path = REPO_ROOT) -> Counter[str]:
+    """Apply only hash-pinned final output records, preserving older donor history."""
+    from korean_state_split import LOCK_PATH, SNAPSHOT, lock, sha, verify_inputs
+    if not LOCK_PATH.exists():
+        return Counter()
+    config = lock()
+    outputs = config.get("outputs", {})
+    if not outputs:
+        raise ValueError("state-split ledger has no reviewed final outputs")
+    verify_inputs()
+    source_paths = {r["source_path"] for r in rows}
+    if len(source_paths) != len(rows):
+        raise ValueError("state-split ledger requires unique source paths")
+    counts: Counter[str] = Counter()
+    for relative, record in sorted(outputs.items()):
+        digest = record["sha256"]
+        actual_path = output_root / relative
+        #20261108_kpopmodder: Check the unchanged split ancestor only after exact verification of the new content bytes.
+        from upstream_content_update import historical_bytes as content_historical
+        from rt56_host_update import historical_bytes as host_historical
+        if not actual_path.is_file() or sha(content_historical(relative,host_historical(relative,actual_path.read_bytes()))) != digest:
+            raise ValueError(f"state-split ledger final output drift: {relative}")
+        source = record["source_path"]
+        source_hash = record["source_sha256"]
+        classification = record["classification"]
+        if classification not in {"ADD", "ASSET_COPY", "OVERRIDE", "BINARY_MERGE", "THREE_WAY_MERGE"}:
+            raise ValueError(f"state-split ledger has invalid classification: {relative}")
+        matches = [r for r in rows if relative in r["output_path"].split(" | ")]
+        if not matches:
+            matches = [r for r in rows if r["source_path"] == source]
+        if len(matches) > 1:
+            raise ValueError(f"state-split output has ambiguous ledger ownership: {relative}")
+        previous = record.get("previous_sha256") or ""
+        host_hash = record.get("host_base_sha256") or ""
+        host_provider = ""
+        if host_hash:
+            if (RT56_ROOT / relative).is_file() and sha256(RT56_ROOT / relative) == host_hash:
+                host_provider = "RT56"
+            elif (VANILLA_ROOT / relative).is_file() and sha256(VANILLA_ROOT / relative) == host_hash:
+                host_provider = "vanilla"
+            else:
+                from rt56_host_update import approved_input_transition
+                if (RT56_ROOT / relative).is_file() and approved_input_transition('RT56',relative,host_hash,sha256(RT56_ROOT / relative)):
+                    host_provider = "RT56"
+                else:
+                    raise ValueError(f"state-split current host base is not its pinned physical file: {relative}")
+        if matches:
+            row = matches[0]
+            old_class = row["integration_class"]
+            old_hash = row["output_sha256"]
+            if row["output_path"] != relative or old_hash not in {previous, digest}:
+                raise ValueError(f"state-split ledger lost its exact prior output: {relative}")
+            old_host = row["rt56_base_sha256"]
+            row["reason"] = row["reason"].split(STATE_SPLIT_REASON, 1)[0]
+            row.update({"integration_class": classification, "output_sha256": digest,
+                        "status": "GENERATED" if classification in {"THREE_WAY_MERGE", "BINARY_MERGE"} else "SHIPPED"})
+            if host_provider == "RT56":
+                row["rt56_base_sha256"] = host_hash
+            if old_class != classification:
+                counts[old_class] -= 1
+                counts[classification] += 1
+        else:
+            if source in source_paths:
+                raise ValueError(f"state-split new ledger row duplicates a historical source: {source}")
+            source_record = config["sources"].get(source)
+            is_donor = source_record is not None
+            if is_donor and source_record["after_sha256"] != source_hash:
+                raise ValueError(f"state-split donor provenance mismatch: {relative}")
+            row = {"source_path": source, "output_path": relative, "integration_class": classification,
+                   "status": "GENERATED" if classification in {"THREE_WAY_MERGE", "BINARY_MERGE"} else "SHIPPED",
+                   "exact_path_rt56_collision": "yes" if (RT56_ROOT / relative).is_file() else "no",
+                   "reason": "Korean state-split integration" if is_donor else "Existing RT56 integration output; provenance indexed with the Korean state split",
+                   "donor_sha256": source_hash if is_donor else "", "output_sha256": digest,
+                   "donor_source_commit": config["source_commit"] if is_donor else "", "donor_source_blob": "",
+                   "donor_source_sha256": source_hash if is_donor else "",
+                   "donor_source_checkout": "reviewed-working-tree-snapshot" if is_donor else "",
+                   "rt56_base_sha256": host_hash if host_provider == "RT56" else ""}
+            rows.append(row)
+            source_paths.add(source)
+            counts[classification] += 1
+            old_host = ""
+        provenance = [f"lock=tools/hok_state_split_lock.json", f"source_base={config['source_commit']}+working-tree",
+                      f"source_path={source}", f"source_sha256={source_hash}", f"previous_output_sha256={previous}",
+                      f"class={classification}"]
+        if record.get("source_kind") == "bounded-existing-port-presentation-fix":
+            #20261107_kpopmodder: Attribute port-only tooltip edits to their frozen port ancestor, not a donor working-tree delta.
+            provenance[1] = f"source_base={config['compatibility_base_commit']}"
+            provenance.extend(("source_kind=bounded-existing-port-presentation-fix",
+                               f"source_snapshot=docs/upstream/hok-state-split-20261107/compat_before/{source}"))
+        if source in config["sources"]:
+            provenance.append(f"source_snapshot=docs/upstream/hok-state-split-20261107/runtime/{source}")
+        if old_host:
+            provenance.append(f"previous_rt56_base_sha256={old_host}")
+        if host_hash:
+            provenance.extend((f"current_host_provider={host_provider}", f"current_host_sha256={host_hash}"))
+        if record.get("host_intermediate_sha256"):
+            provenance.append(f"host_intermediate_sha256={record['host_intermediate_sha256']}")
+        if previous and not matches:
+            provenance.append("existing_runtime_output_newly_indexed=yes")
+        row["reason"] += STATE_SPLIT_REASON + "; ".join(provenance)
+    return counts
+
+
+def build_state_split_csv(*, output_root: Path = REPO_ROOT) -> bytes:
+    """Keep every unaffected CSV row byte-identical to the frozen pre-split source."""
+    header, fields, baseline, raw_rows = state_split_baseline()
+    rows = [dict(row) for row in baseline]
+    update_state_split_rows(rows, output_root=output_root)
+    chunks = [header]
+    for index, row in enumerate(rows):
+        if index < len(baseline) and row == baseline[index]:
+            chunks.append(raw_rows[index])
+            continue
+        stream = io.StringIO(newline="")
+        writer = csv.DictWriter(stream, fieldnames=fields, lineterminator="\n")
+        writer.writerow(row)
+        chunks.append(stream.getvalue().encode("utf-8"))
+    #20261108_kpopmodder: Preserve the prior ledger and append the independently pinned November provenance.
+    from upstream_content_update import ledger_bytes as content_ledger_bytes
+    from rt56_host_update import ledger_bytes as host_ledger_bytes
+    return host_ledger_bytes(content_ledger_bytes(b"".join(chunks)))
 
 
 def main() -> int:
@@ -1298,9 +1481,14 @@ def main() -> int:
                        help="Refresh/check only AGENTS.md output_sha256; other rows are retained without validation")
     scope.add_argument("--resource-prospecting-only", action="store_true",
                        help="Refresh/check only the Korean prospecting and Sinarirang rows")
+    scope.add_argument("--state-split-only", action="store_true",
+                       help="Replay only the pinned Korean state-split rows over the frozen pre-split ledger")
     args = parser.parse_args()
 
-    if args.documentation_only:
+    if args.state_split_only:
+        expected = build_state_split_csv()
+        summary = "Korean state split: reviewed runtime outputs; unrelated historical rows retained byte-for-byte"
+    elif args.documentation_only:
         expected = build_documentation_csv()
         summary = "documentation-only: AGENTS.md output_sha256; other rows retained without validation"
     elif args.resource_prospecting_only:

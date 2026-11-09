@@ -13,7 +13,7 @@ from pathlib import Path
 from check_korean_focus_update import (
     Block, Entry, FOCUS_PATH, PREFIX, SHINE_EFFECT, SHINE_OVERLAY,
     ROOT, RT56_ROOT, VANILLA_ROOT, children, effective_files, focus_blocks,
-    check_new_id_collisions, check_pp_only_project, named, one, parse, read, replace_entry,
+    check_new_id_collisions, check_pp_only_project, named, one, parse, read, read_check_payload, replace_entry,
     require, scalar, walk,
 )
 from validate_port import localisation_keys, mask_comments, top_level_block_keys
@@ -523,7 +523,8 @@ def documents() -> tuple[dict[str, Block], dict[str, Block]]:
         if Path(relative).suffix not in (".txt", ".gfx"):
             continue
         expected[relative] = expected_script(relative)
-        current[relative] = parse(historical_civic_payload(relative, (ROOT / relative).read_bytes()).decode("utf-8-sig"))
+        #20261107_kpopmodder: Preserve the exact earlier source contracts beneath the separately checked split layer.
+        current[relative] = parse(historical_civic_payload(relative, read_check_payload(ROOT / relative)).decode("utf-8-sig"))
     return current, expected
 
 
@@ -725,7 +726,8 @@ def check_assets(groups: dict[str, dict[str, Block]], added: set[str], payloads:
 
 
 def localisation_payloads() -> dict[str, bytes]:
-    return {Path(path).as_posix(): (ROOT / path).read_bytes() for path in SECOND_WAVE_RUNTIME_PATHS if Path(path).suffix == ".yml"}
+    #20261107_kpopmodder: Audit old localisation pairs only after verified state-split reversal.
+    return {Path(path).as_posix(): read_check_payload(ROOT / path) for path in SECOND_WAVE_RUNTIME_PATHS if Path(path).suffix == ".yml"}
 
 
 def check_localisation(payloads: dict[str, bytes], groups: dict[str, dict[str, Block]], added: set[str]) -> None:
@@ -795,7 +797,8 @@ def check_material_cycle(groups: dict[str, dict[str, Block]], payloads: dict[str
     require(FOCUS_PATH in lock["preserved_runtime"], "material-cycle update must pin the pre-tooltip focus tree")
     for relative, digest in lock["preserved_runtime"].items():
         #20261010_kpopmodder: Reverse both strict overlays before checking the original material-cycle preservation pins.
-        data = historical_civic_payload(relative, (ROOT / relative).read_bytes())
+        #20261107_kpopmodder: Keep immutable material-cycle preservation pins under the split layer.
+        data = historical_civic_payload(relative, read_check_payload(ROOT / relative))
         #20261010_kpopmodder: Recover both the focus and royal-idea ancestors before testing unchanged historical pins.
         if relative in (FOCUS_PATH, ROYAL_IDEA_PATH):
             data = remove_royal_update(relative, data)
@@ -958,7 +961,8 @@ def check_prose_update(payloads: dict[str, bytes] | None = None) -> None:
     for relative, digest in preserved.items():
         #20261005_kpopmodder: Preserve the prose import's historical pins underneath the later decision notice.
         #20261010_kpopmodder: Reverse the six prerequisite edits before applying the historical tooltip reversal.
-        data = historical_civic_payload(relative, (ROOT / relative).read_bytes())
+        #20261107_kpopmodder: Keep immutable prose preservation pins under the split layer.
+        data = historical_civic_payload(relative, read_check_payload(ROOT / relative))
         #20261010_kpopmodder: Recover both the focus and royal-idea ancestors before testing unchanged historical pins.
         if relative in (FOCUS_PATH, ROYAL_IDEA_PATH):
             data = remove_royal_update(relative, data)
@@ -970,7 +974,8 @@ def check_prose_update(payloads: dict[str, bytes] | None = None) -> None:
         require(hashlib.sha256(data).hexdigest().upper() == digest.upper(),
                 f"prose update changed preserved gameplay/presentation: {relative}")
     allowed = prose_description_keys()
-    payloads = {relative: (ROOT / relative).read_bytes() for relative in PROSE_PATHS} if payloads is None else payloads
+    #20261107_kpopmodder: The split descriptions must recover their exact previous English/prose ancestors.
+    payloads = {relative: read_check_payload(ROOT / relative) for relative in PROSE_PATHS} if payloads is None else payloads
     require(set(payloads) == PROSE_PATHS, "actual prose localisation inventory changed")
     changed_by_language = {language: set() for language in ("english", "korean")}
     for relative, record in lock["runtime_text"].items():
@@ -1113,6 +1118,9 @@ CIVIC_BUTTONS = tuple("HOK_KOR_" + suffix for suffix in ("support_chaebol", "sup
 
 
 def historical_civic_payload(relative: str, data: bytes) -> bytes:
+    #20261107_kpopmodder: Reject split drift before invoking strict older layer reversals.
+    from korean_state_split import historical_bytes
+    data = historical_bytes(relative, data)
     #20261020_kpopmodder: The new naval policy must project to the exact previously audited source first.
     data = remove_shipbuilding_update(relative, data)
     #20261020_kpopmodder: Undo only the exact approved translation before checking older preservation contracts.
@@ -1122,7 +1130,8 @@ def historical_civic_payload(relative: str, data: bytes) -> bytes:
 
 
 def civic_documents() -> tuple[dict[str, bytes], dict[str, Block]]:
-    payloads = {relative: (ROOT / relative).read_bytes() for relative in CIVIC_UPDATE_RUNTIME_PATHS}
+    #20261107_kpopmodder: Keep the civic comparison on its exact pre-split output.
+    payloads = {relative: read_check_payload(ROOT / relative) for relative in CIVIC_UPDATE_RUNTIME_PATHS}
     return payloads, {relative: parse(remove_shipbuilding_update(relative, data).decode("utf-8-sig")) for relative, data in payloads.items()
                       if Path(relative).suffix in (".txt", ".gfx", ".gui")}
 
@@ -1170,7 +1179,8 @@ def check_civic_source(payloads: dict[str, bytes], documents: dict[str, Block]) 
             expected_docs[relative] = parse(expected.decode("utf-8-sig"))
     # Every historical generated output and the three separately shipped sources stay byte-exact.
     for relative, digest in {**lock["preserved_outputs"], **lock["preserved_runtime"]}.items():
-        data = remove_english_translation(relative, remove_shipbuilding_update(relative, (ROOT / relative).read_bytes()))
+        #20261107_kpopmodder: Preserve civic non-selection hashes underneath the exact split projection.
+        data = remove_english_translation(relative, remove_shipbuilding_update(relative, read_check_payload(ROOT / relative)))
         require(hashlib.sha256(data).hexdigest().upper() == digest,
                 f"civic update changed an unselected output: {relative}")
     require(documents.keys() == expected_docs.keys(), "civic ordered script inventory changed")
@@ -1692,7 +1702,8 @@ def run_self_tests() -> None:
     rejects("missing one language key", lambda: check_localisation(missing_key, groups, added))
     english = next(relative for relative in local if relative.startswith("localisation/english/"))
     rejects("English translation drift", lambda: check_localisation({**local, english: local[english] + b"# unexpected English mutation\n"}, groups, added))
-    prose = {relative: (ROOT / relative).read_bytes() for relative in PROSE_PATHS}
+    #20261107_kpopmodder: Mutate the verified previous prose layer in this historical self-test.
+    prose = {relative: read_check_payload(ROOT / relative) for relative in PROSE_PATHS}
     english_prose = "localisation/english/HOK_KOR_industry_expansion_l_english.yml"
     rejects("English prose translation drift", lambda: check_prose_update({**prose, english_prose: prose[english_prose] + b"# unexpected English mutation\n"}))
     rejects("DDS exact-case mismatch", lambda: exact_case("gfx/interface/goals/HOK_KOR/Missing.dds", {Path(path).as_posix() for path in SECOND_WAVE_ASSET_PATHS}))
@@ -1753,7 +1764,8 @@ SHIPBUILDING_SPRITES = {
 
 def shipbuilding_documents() -> tuple[dict[str, bytes], dict[str, Block], dict[str, Block]]:
     lock = shipbuilding_update_lock()
-    payloads = {relative: remove_feature_update(relative, (ROOT / relative).read_bytes())
+    #20261107_kpopmodder: Preserve the naval module's exact prior bytes beneath the state split.
+    payloads = {relative: remove_feature_update(relative, read_check_payload(ROOT / relative))
                 for relative in (*lock["runtime_text"], *lock["runtime_assets"])}
     documents = {relative: parse(data.decode("utf-8-sig")) for relative, data in payloads.items()
                  if Path(relative).suffix in (".txt", ".gfx")}
@@ -1784,7 +1796,8 @@ def check_shipbuilding_source(payloads: dict[str, bytes]) -> None:
             require(data == read_shipbuilding_source(relative), f"shipbuilding source copy differs: {relative}")
     # Retain the exact preceding English and civic outputs, rather than projecting away arbitrary edits.
     for relative, digest in lock.get("preserved_outputs", {}).items():
-        require(hashlib.sha256(remove_feature_update(relative, (ROOT / relative).read_bytes())).hexdigest().upper() == digest.upper(),
+        #20261107_kpopmodder: Compare unselected naval outputs to the verified pre-split ancestor.
+        require(hashlib.sha256(remove_feature_update(relative, read_check_payload(ROOT / relative))).hexdigest().upper() == digest.upper(),
                 f"shipbuilding changed an unselected generated output: {relative}")
 
 
@@ -1999,7 +2012,8 @@ def run_feature_checks() -> None:
             and sum("previous_output_sha256" in record for record in records.values()) == 5,
             "feature runtime inventory must remain thirty text files, twenty-eight assets and five existing-file overlays")
     #20261101_kpopmodder: Preserve the exact feature ancestor beneath the separate democratic placement overlay.
-    payloads = {relative: remove_democratic_layout_update(relative, (ROOT / relative).read_bytes()) for relative in records}
+    #20261107_kpopmodder: The feature contract remains strict against its verified pre-split output.
+    payloads = {relative: remove_democratic_layout_update(relative, read_check_payload(ROOT / relative)) for relative in records}
     for relative, data in payloads.items():
         require(hashlib.sha256(data).hexdigest().upper() == records[relative]["output_sha256"].upper(),
                 f"feature final output hash differs: {relative}")
@@ -2198,7 +2212,8 @@ def run_democratic_layout_checks() -> None:
     lock = democratic_layout_lock()
     require(set(lock["runtime_text"]) == {FOCUS_PATH}, "democratic layout must change only the Korean focus source")
     record = lock["runtime_text"][FOCUS_PATH]
-    current_bytes = remove_prospecting_focus((ROOT / FOCUS_PATH).read_bytes())
+    #20261107_kpopmodder: Recover the exact pre-split tree before the separate prospecting/layout reversals.
+    current_bytes = remove_prospecting_focus(read_check_payload(ROOT / FOCUS_PATH))
     require(hashlib.sha256(current_bytes).hexdigest().upper() == record["output_sha256"].upper(),
             "democratic layout final output differs from its reviewed merge")
     ancestor_bytes = remove_democratic_layout_update(FOCUS_PATH, current_bytes)

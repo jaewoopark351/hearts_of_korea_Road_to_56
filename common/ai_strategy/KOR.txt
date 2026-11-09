@@ -310,15 +310,17 @@ KOR_buffer_in_mainland = {
 	
 	ai_strategy = {
 		type = put_unit_buffers
+		#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+		#20261107_kpopmodder: Preserve the old Korean region across its split successors.
 		states = {
-			919
-			918
+			919 1150
+			918 1152
 			525
 			1144
-			1145
-			920
-			527
-			917
+			1145 1149
+			920 1148
+			527 1151
+			917 1153
 		}
 		ratio = 0.8
 		area = korea_and_manchuria
@@ -339,15 +341,17 @@ KOR_buffer_in_mainland_after_manschulus = {
 	
 	ai_strategy = {
 		type = put_unit_buffers
+		#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+		#20261107_kpopmodder: Preserve the old Korean region across its split successors.
 		states = {
-			919
-			918
+			919 1150
+			918 1152
 			525
 			1144
-			1145
-			920
-			527
-			917
+			1145 1149
+			920 1148
+			527 1151
+			917 1153
 		}
 		ratio = 0.4
 		area = korea_and_manchuria

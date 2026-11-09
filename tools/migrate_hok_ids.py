@@ -982,6 +982,30 @@ def repair_korea_events(data: bytes) -> bytes:
     return (b"\xef\xbb\xbf" if bom else b"") + payload
 
 
+#20261107_kpopmodder: Keep the legacy migration comparison below exact civic, naval, feature and state-split reversals.
+def _migration_ancestor(relative: str, data: bytes) -> bytes:
+    current = remove_shipbuilding_update(relative, remove_feature_update(relative, data))
+    if relative == "common/decisions/KOR_decision.txt":
+        from source_snapshot import civic_update_lock, remove_civic_update
+        civic_hash = civic_update_lock()["runtime_text"][relative]["output_sha256"]
+        if hashlib.sha256(current).hexdigest().upper() == civic_hash:
+            current = remove_civic_update(relative, current)
+    return current
+
+
+def _finalize_migration(relative: str, migrated: bytes) -> bytes:
+    from korean_state_split import compat_before, finalize_one, lock
+    record = lock().get("outputs", {}).get(relative, {})
+    if record.get("previous_sha256"):
+        previous = compat_before(relative)
+        # Preserve the existing migration contract's newline-only equivalence;
+        # the immutable compatibility snapshot itself remains byte/hash checked.
+        if canonical_text_bytes(_migration_ancestor(relative, previous)) != canonical_text_bytes(migrated):
+            raise ValueError(f"state-split prior output changed its strict ID-migration ancestor: {relative}")
+        migrated = previous
+    return finalize_one(relative, migrated)
+
+
 def source_targets() -> list[tuple[str, bytes, bytes]]:
     mapping = {**PROVINCE_ID_MAP, **STATE_ID_MAP}
     targets: list[tuple[str, bytes, bytes]] = []
@@ -1011,7 +1035,9 @@ def source_targets() -> list[tuple[str, bytes, bytes]]:
                 if relative.startswith("localisation/english/"):
                     migrated = migrated.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")
                 #20261020_kpopmodder: ID-migration rebuilds must retain the exact approved English output.
-                targets.append((relative, original, apply_english_translation(relative, migrated)))
+                #20261107_kpopmodder: Verify the exact migrated ancestor, then retain the reviewed final split output.
+                expected = _finalize_migration(relative, apply_english_translation(relative, migrated))
+                targets.append((relative, original, expected))
     return sorted(targets)
 
 
@@ -1028,20 +1054,11 @@ def main() -> int:
     for relative, original, migrated in targets:
         destination = (REPO_ROOT / Path(relative)).resolve()
         destination.relative_to(REPO_ROOT)
-        #20261020_kpopmodder: Preserve the generator-owned naval overlay while auditing its exact migrated ancestor.
-        #20261031_kpopmodder: Check the migrated ancestor after verifying and reversing the new Korean feature merge.
-        current = remove_shipbuilding_update(relative, remove_feature_update(relative, destination.read_bytes()))
-        #20261012_kpopmodder: Audit the exact pre-civic ancestor without undoing the generator-owned gameplay overlay.
-        if relative == "common/decisions/KOR_decision.txt" and current != migrated:
-            from source_snapshot import civic_update_lock, remove_civic_update
-            civic_output_hash = civic_update_lock()["runtime_text"][relative]["output_sha256"]
-            if hashlib.sha256(current).hexdigest().upper() == civic_output_hash:
-                projected = remove_civic_update(relative, current)
-            else:
-                projected = current
-            if projected != current and projected != migrated:
-                raise ValueError("civic decision overlay changed the historical ID-migration ancestor")
-            current = projected
+        #20261107_kpopmodder: Compare strict old ancestors while keeping all production writes on the final split layer.
+        final_migrated = migrated
+        migrated = _migration_ancestor(relative, final_migrated)
+        raw_current = destination.read_bytes()
+        current = _migration_ancestor(relative, raw_current)
         legacy_migrated = replace_tokens(original, {**PROVINCE_ID_MAP, **STATE_ID_MAP})
         if relative.endswith("HoK_state_name_l_english.yml") or relative.endswith(
             "HoK_state_name_l_korean.yml"
@@ -1049,11 +1066,19 @@ def main() -> int:
             legacy_migrated = legacy_migrated.replace(b"STATE_1088", b"STATE_1147")
         if current == migrated:
             status = "already-migrated"
+            if raw_current != final_migrated and final_migrated != migrated:
+                status = "would-finalize"
+                if args.apply:
+                    temporary = destination.with_name(destination.name + ".hok-id.tmp")
+                    temporary.write_bytes(final_migrated)
+                    temporary.replace(destination)
+                    status = "finalized"
+                    changed += 1
         elif canonical_text_bytes(current) == canonical_text_bytes(migrated):
             status = "would-normalize"
             if args.apply:
                 temporary = destination.with_name(destination.name + ".hok-id.tmp")
-                temporary.write_bytes(migrated)
+                temporary.write_bytes(final_migrated)
                 temporary.replace(destination)
                 status = "normalized"
                 changed += 1
@@ -1063,7 +1088,7 @@ def main() -> int:
             status = "would-finish-migration"
             if args.apply:
                 temporary = destination.with_name(destination.name + ".hok-id.tmp")
-                temporary.write_bytes(migrated)
+                temporary.write_bytes(final_migrated)
                 temporary.replace(destination)
                 status = "migration-finished"
                 changed += 1
@@ -1071,7 +1096,7 @@ def main() -> int:
             status = "would-migrate"
             if args.apply:
                 temporary = destination.with_name(destination.name + ".hok-id.tmp")
-                temporary.write_bytes(migrated)
+                temporary.write_bytes(final_migrated)
                 temporary.replace(destination)
                 status = "migrated"
                 changed += 1

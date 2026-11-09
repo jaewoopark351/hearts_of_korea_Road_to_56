@@ -175,7 +175,8 @@ country_event = {
 				size = 0.5
 				navy_ratio = 0.01
 				capital = 525
-				states = { 525 919 918 1144 1145 527 917 716 745 328 717 714 761 715 }
+				#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+				states = { 525 919 1150 918 1152 1144 1145 1149 527 1151 917 1153 716 745 328 717 714 761 715 }
 			}
 			division_template = {
 				name = "Nonong-jeokwi-Sadan"
@@ -311,14 +312,18 @@ country_event = {
 		name = kor_events.3.a
 		hidden_effect = {
 
-			set_capital = { state = 920 }
+			#20261107_kpopmodder: Keep the southern fallback capital at Busan after splitting Gyeongsang.
+			set_capital = { state = 1148 }
 			start_civil_war = {
 				ruling_party = fascism
 				ideology = democratic
 				size = 0.5
 				navy_ratio = 0.01
-				capital = 920
-				states = { 919 918 1144 1145 920 527 917 716 745 328 717 714 761 715 }
+				#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+				capital = 1148
+				#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+				#20261107_kpopmodder: Preserve the old Korean region across its split successors.
+				states = { 919 1150 918 1152 1144 1145 1149 920 1148 527 1151 917 1153 716 745 328 717 714 761 715 }
 			}
 			
 			division_template = {
@@ -2052,24 +2057,169 @@ country_event = {
 			factor = 60
 		}
 		
-		VIN = {
-			transfer_state = 671
-			transfer_state = 286
-			transfer_state = 741
-			transfer_state = 670
-			
-			670 = { add_core_of = VIN }
-			741 = { add_core_of = VIN }
-			
-			set_cosmetic_tag = VIN_indochina_democratic
-			
-			add_timed_idea = {
-				idea = KOR_democrat_sponsored_by_korea
-				days = 720
+		#20261108_kpopmodder: Recheck colonial ownership, full control and the French subject relation before transferring the region.
+		trigger = {
+			OR = {
+				FRA = {
+					owns_state = 670
+					has_full_control_of_state = 670
+					owns_state = 671
+					has_full_control_of_state = 671
+					owns_state = 286
+					has_full_control_of_state = 286
+					owns_state = 741
+					has_full_control_of_state = 741
+					owns_state = 924
+					has_full_control_of_state = 924
+					owns_state = 925
+					has_full_control_of_state = 925
+					owns_state = 926
+					has_full_control_of_state = 926
+					owns_state = 927
+					has_full_control_of_state = 927
+					owns_state = 928
+					has_full_control_of_state = 928
+				}
+				VIN = {
+					is_subject_of = FRA
+					owns_state = 670
+					has_full_control_of_state = 670
+					owns_state = 671
+					has_full_control_of_state = 671
+					owns_state = 286
+					has_full_control_of_state = 286
+					owns_state = 741
+					has_full_control_of_state = 741
+					owns_state = 924
+					has_full_control_of_state = 924
+					owns_state = 925
+					has_full_control_of_state = 925
+					owns_state = 926
+					has_full_control_of_state = 926
+					owns_state = 927
+					has_full_control_of_state = 927
+					owns_state = 928
+					has_full_control_of_state = 928
+				}
+				FRI = {
+					is_subject_of = FRA
+					owns_state = 670
+					has_full_control_of_state = 670
+					owns_state = 671
+					has_full_control_of_state = 671
+					owns_state = 286
+					has_full_control_of_state = 286
+					owns_state = 741
+					has_full_control_of_state = 741
+					owns_state = 924
+					has_full_control_of_state = 924
+					owns_state = 925
+					has_full_control_of_state = 925
+					owns_state = 926
+					has_full_control_of_state = 926
+					owns_state = 927
+					has_full_control_of_state = 927
+					owns_state = 928
+					has_full_control_of_state = 928
+				}
 			}
 		}
-		
-		KOR = { country_event = { id = kor_events.66 days = 1 }  puppet = VIN }
+		if = {
+			limit = {
+				OR = {
+					FRA = {
+						owns_state = 670
+						has_full_control_of_state = 670
+						owns_state = 671
+						has_full_control_of_state = 671
+						owns_state = 286
+						has_full_control_of_state = 286
+						owns_state = 741
+						has_full_control_of_state = 741
+						owns_state = 924
+						has_full_control_of_state = 924
+						owns_state = 925
+						has_full_control_of_state = 925
+						owns_state = 926
+						has_full_control_of_state = 926
+						owns_state = 927
+						has_full_control_of_state = 927
+						owns_state = 928
+						has_full_control_of_state = 928
+					}
+					VIN = {
+						is_subject_of = FRA
+						owns_state = 670
+						has_full_control_of_state = 670
+						owns_state = 671
+						has_full_control_of_state = 671
+						owns_state = 286
+						has_full_control_of_state = 286
+						owns_state = 741
+						has_full_control_of_state = 741
+						owns_state = 924
+						has_full_control_of_state = 924
+						owns_state = 925
+						has_full_control_of_state = 925
+						owns_state = 926
+						has_full_control_of_state = 926
+						owns_state = 927
+						has_full_control_of_state = 927
+						owns_state = 928
+						has_full_control_of_state = 928
+					}
+					FRI = {
+						is_subject_of = FRA
+						owns_state = 670
+						has_full_control_of_state = 670
+						owns_state = 671
+						has_full_control_of_state = 671
+						owns_state = 286
+						has_full_control_of_state = 286
+						owns_state = 741
+						has_full_control_of_state = 741
+						owns_state = 924
+						has_full_control_of_state = 924
+						owns_state = 925
+						has_full_control_of_state = 925
+						owns_state = 926
+						has_full_control_of_state = 926
+						owns_state = 927
+						has_full_control_of_state = 927
+						owns_state = 928
+						has_full_control_of_state = 928
+					}
+				}
+			}
+			VIN = {
+				transfer_state = 671
+				transfer_state = 286
+				transfer_state = 741
+				transfer_state = 670
+				#20261108_kpopmodder: Include the reviewed RT56 successor states in the same regional path.
+				transfer_state = 924
+				transfer_state = 925
+				transfer_state = 926
+				transfer_state = 927
+				transfer_state = 928
+				
+				670 = { add_core_of = VIN }
+				741 = { add_core_of = VIN }
+				#20261108_kpopmodder: Preserve the existing regional core policy on its RT56 successors.
+				924 = { add_core_of = VIN }
+				925 = { add_core_of = VIN }
+				926 = { add_core_of = VIN }
+				
+				set_cosmetic_tag = VIN_indochina_democratic
+				
+				add_timed_idea = {
+					idea = KOR_democrat_sponsored_by_korea
+					days = 720
+				}
+			}
+			
+			KOR = { country_event = { id = kor_events.66 days = 1 }  puppet = VIN }
+		}
 	}
 	
 	option = { #refuse
@@ -2098,6 +2248,11 @@ country_event = {
 		}
 		
 		MAL = {
+						#20261108_kpopmodder: Transfer only the British-controlled RT56 Singapore state; Penang is already in MAL-owned Kedah.
+			if = {
+				limit = { 336 = { is_owned_by = ENG is_core_of = MAL is_fully_controlled_by = ENG } }
+				transfer_state = 336
+			}
 			set_cosmetic_tag = MAL_democratic
 			
 			add_timed_idea = {
