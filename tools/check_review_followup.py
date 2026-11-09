@@ -1,8 +1,8 @@
 """Independently check the bounded 2026-11-09 review follow-up.
 
-Only standard-library code is used. No generator or transformation module is
-imported, and historical projection accepts only the exact registered final
-bytes after independently checking the permitted delta.
+The review delta uses only standard-library code and does not import its own
+generator or transformation modules. A later English terminology revision is
+projected only after its exact-byte proof, before this independent repair check.
 """
 
 from __future__ import annotations
@@ -274,6 +274,9 @@ def historical_bytes(relative: str | Path, payload: bytes) -> bytes:
     Unknown and already-ancestral bytes pass through unchanged so the calling
     historical gate retains its own strict mismatch handling.
     """
+    #20261109_kpopmodder: Verify the later terminology delta before inspecting the unchanged repair ancestor.
+    from english_terminology import historical_bytes as terminology_historical
+    payload = terminology_historical(relative, payload)
     name = _name(relative)
     if name not in PATHS or not (ROOT / LOCK_RELATIVE).is_file():
         return payload
@@ -315,10 +318,11 @@ def _check_current_geography() -> None:
 
 def verify_current() -> dict[str, int]:
     """Read and check the actual four outputs; do not write or launch anything."""
+    from english_terminology import historical_bytes as terminology_historical
     config = _load_lock()
     for name, record in config["outputs"].items():
         before = _frozen_before(name, record)
-        after = (ROOT / name).read_bytes()
+        after = terminology_historical(name, (ROOT / name).read_bytes())
         _require(_sha(after) == record["sha256"], f"follow-up current output hash mismatch: {name}")
         verify_pair(name, before, after)
     _check_current_geography()

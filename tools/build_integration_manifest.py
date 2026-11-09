@@ -1184,7 +1184,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     from rt56_host_update import ledger_bytes as host_ledger_bytes
     #20261109_kpopmodder: Retain inherited provenance and append only the four registered review output revisions.
     from review_followup import ledger_bytes as review_ledger_bytes
-    final = review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(stream.getvalue().encode("utf-8"))))
+    #20261109_kpopmodder: Append the narrow English terminology revision after every unchanged provenance layer.
+    from english_terminology import ledger_bytes as terminology_ledger_bytes
+    final = terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(stream.getvalue().encode("utf-8")))))
     final_rows = list(csv.DictReader(io.StringIO(final.decode("utf-8"), newline="")))
     final_counts = Counter(row["integration_class"] for row in final_rows)
     final_collisions = sum(row["exact_path_rt56_collision"] == "yes" for row in final_rows)
@@ -1192,8 +1194,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
 
 
 #20261106_kpopmodder: Refresh the documentation fingerprint without rewriting unrelated runtime-byte audit rows.
-def build_documentation_csv() -> bytes:
-    current = OUTPUT.read_bytes()
+def build_documentation_csv(current: bytes | None = None) -> bytes:
+    #20261109_kpopmodder: Apply the same bounded AGENTS hash refresh to a generated ledger as to the existing one.
+    current = OUTPUT.read_bytes() if current is None else current
     reader = csv.DictReader(io.StringIO(current.decode("utf-8"), newline=""))
     rows = list(reader)
     fieldnames = reader.fieldnames
@@ -1474,7 +1477,9 @@ def build_state_split_csv(*, output_root: Path = REPO_ROOT) -> bytes:
     from rt56_host_update import ledger_bytes as host_ledger_bytes
     #20261109_kpopmodder: Keep scoped ledger regeneration on the same terminal review contract as the full builder.
     from review_followup import ledger_bytes as review_ledger_bytes
-    return review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(b"".join(chunks))))
+    #20261109_kpopmodder: Scoped rebuilds retain the same final English terminology hashes and attribution.
+    from english_terminology import ledger_bytes as terminology_ledger_bytes
+    return build_documentation_csv(terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(b"".join(chunks))))))
 
 
 def main() -> int:

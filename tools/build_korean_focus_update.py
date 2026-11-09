@@ -481,6 +481,10 @@ def build_all() -> dict[Path, bytes]:
 def preflight(outputs: dict[Path, bytes]) -> None:
     if set(outputs) != set(OUTPUT_PATHS):
         raise ValueError(f"Korean update outputs must match the {len(OUTPUT_PATHS)} reviewed source paths")
+    #20261109_kpopmodder: Protect terminal English bytes and admit only their exact registered immediate ancestor.
+    from english_terminology import lock as terminology_lock, preflight_outputs as terminology_preflight
+    terminology_preflight(outputs)
+    terminology_outputs = terminology_lock()["outputs"]
     errors = []
     for relative, expected in outputs.items():
         destination = (REPO_ROOT / relative).resolve()
@@ -498,6 +502,9 @@ def preflight(outputs: dict[Path, bytes]) -> None:
             continue
         accepted = ACCEPTED_PRIOR_OUTPUT_HASHES.get(relative)
         accepted_hashes = {accepted, CHECKOUT_RESTORATION_HASHES.get(relative)}
+        terminology_record = terminology_outputs.get(relative.as_posix())
+        if terminology_record:
+            accepted_hashes.add(terminology_record["previous_sha256"])
         #20261107_kpopmodder: Permit only the frozen immediate pre-split output as the new overlay's source.
         from korean_state_split import lock as state_split_lock
         split_record = state_split_lock().get("outputs", {}).get(relative.as_posix(), {})

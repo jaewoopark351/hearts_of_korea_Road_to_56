@@ -547,10 +547,12 @@ def outputs() -> dict[str, bytes]:
         ),
     }
     #20261020_kpopmodder: Preserve the pinned English layer after the historical Korea-only pruning.
-    return {
+    #20261109_kpopmodder: Keep the terminal terminology revision when this owner rebuilds the Korean event text.
+    from review_followup import finalize_outputs
+    return finalize_outputs({
         relative: apply_english_translation(relative, data)
         for relative, data in generated.items()
-    }
+    })
 
 
 def safe_path(relative: str) -> Path:
@@ -570,6 +572,9 @@ def main() -> int:
     args = parser.parse_args()
 
     generated = outputs()
+    #20261109_kpopmodder: Refuse independent changes to the protected English output before any pruning writer runs.
+    from english_terminology import preflight_outputs as terminology_preflight
+    terminology_preflight(generated)
     mismatches = False
     for relative, expected in generated.items():
         path = safe_path(relative)

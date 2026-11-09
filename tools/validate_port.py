@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_COMPAT_REMOTE_FILE_ID = "3796816200"
 
 GENERATOR_CHECKS = (
+    #20261109_kpopmodder: Prove final English terminology before older contracts project its exact ancestor.
+    ("English terminology contracts", "english_terminology.py", "--check"),
     #20261109_kpopmodder: Check raw repaired bytes independently before older contracts use exact historical projection.
     ("review follow-up raw contracts", "check_review_followup.py", "--check"),
     ("review follow-up deterministic outputs", "review_followup.py", "--check"),

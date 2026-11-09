@@ -88,6 +88,9 @@ def build_outputs() -> dict[str, bytes]:
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
     """Reverse only the registered final bytes; unrelated/unknown bytes stay raw."""
+    #20261109_kpopmodder: Prove the later English terminology revision before enforcing this unchanged repair contract.
+    from english_terminology import historical_bytes as terminology_historical
+    data = terminology_historical(relative, data)
     name = canonical_name(relative)
     if not LOCK_PATH.is_file() or name not in PATHS:
         return data
@@ -100,13 +103,16 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 
 
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
+    #20261109_kpopmodder: Keep the independent English terminology revision terminal for every existing output owner.
+    from english_terminology import finalize_one as terminology_finalize, historical_bytes as terminology_historical
+    data = terminology_historical(relative, data)
     name = canonical_name(relative)
     if not LOCK_PATH.is_file() or name not in PATHS:
-        return data
+        return terminology_finalize(relative, data)
     record = lock()['outputs'][name]
     if sha(data) not in (record['previous_sha256'], record['sha256']):
         raise ValueError(f'unreviewed follow-up predecessor: {name}')
-    return build_outputs()[name]
+    return terminology_finalize(relative, build_outputs()[name])
 
 
 def finalize_outputs(outputs: dict) -> dict:
@@ -114,6 +120,8 @@ def finalize_outputs(outputs: dict) -> dict:
 
 
 def preflight_outputs(outputs: dict) -> None:
+    from english_terminology import preflight_outputs as terminology_preflight, historical_bytes as terminology_historical
+    terminology_preflight(outputs)
     root = ROOT.resolve()
     seen = set()
     for relative, data in outputs.items():
@@ -125,14 +133,15 @@ def preflight_outputs(outputs: dict) -> None:
         record = lock()['outputs'].get(name)
         if not record:
             continue
-        if data != build_outputs()[name]:
+        if terminology_historical(name, data) != build_outputs()[name]:
             raise ValueError(f'unreviewed proposed follow-up bytes: {name}')
-        if not path.is_file() or sha(path.read_bytes()) not in (record['previous_sha256'], record['sha256']):
+        if not path.is_file() or sha(terminology_historical(name, path.read_bytes())) not in (record['previous_sha256'], record['sha256']):
             raise ValueError(f'independently changed follow-up runtime: {name}')
 
 
 def ledger_bytes(previous: bytes) -> bytes:
     """Change exactly four output cells/reasons; retain inherited attribution."""
+    from english_terminology import historical_bytes as terminology_historical
     lines = previous.splitlines(keepends=True)
     reader = csv.DictReader(io.StringIO(previous.decode('utf-8'), newline=''))
     fields = reader.fieldnames
@@ -155,7 +164,7 @@ def ledger_bytes(previous: bytes) -> bytes:
                   f'previous_output_sha256={record["previous_sha256"]}; '
                   'civic numeric display or one inland floating-harbor marker; original authorship retained')
         #20261109_kpopmodder: An idempotent ledger call must still reject independently changed runtime bytes.
-        if sha((ROOT / name).read_bytes()) != record['sha256']:
+        if sha(terminology_historical(name, (ROOT / name).read_bytes())) != record['sha256']:
             raise ValueError(f'follow-up ledger runtime differs: {name}')
         if row['output_sha256'] == record['sha256'] and row['reason'].endswith(reason):
             chunks.append(raw)
@@ -179,7 +188,8 @@ def main() -> int:
     mode.add_argument('--apply', action='store_true')
     args = parser.parse_args()
     try:
-        outputs = build_outputs()
+        #20261109_kpopmodder: This older CLI must preserve the separately reviewed terminal English output.
+        outputs = finalize_outputs(build_outputs())
         preflight_outputs(outputs)
         pending = [(ROOT / name, data) for name, data in outputs.items() if (ROOT / name).read_bytes() != data]
         if pending and not args.apply:

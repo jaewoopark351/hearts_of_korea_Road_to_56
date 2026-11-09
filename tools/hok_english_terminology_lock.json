@@ -1,0 +1,294 @@
+{
+  "format": 1,
+  "revision": "2026-11-09-chaebol-english-v1",
+  "base_commit": "95d801fddf8f98fe3641860c2cffa976fb91f5b5",
+  "game_version": "Operation Postern v1.19.4.2.2da5 (0bdb)",
+  "workshop_manifest": "1963361040482473746",
+  "rt56_root": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968",
+  "vanilla_root": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV",
+  "scope": "English display values only: corporate oligarchs are the power-holders, conglomerates are companies; all saved IDs, tokens and Korean values retained.",
+  "outputs": {
+    "localisation/english/HOK_KOR_civic_focus_l_english.yml": {
+      "classification": "ADD",
+      "previous_sha256": "C75367BD1C8F56E160B48D3194D838EF9D1E6B3F4851D0FF728698D95BBD5C80",
+      "sha256": "1B14F26FEBAF373B4C8299014D044CD048393F87DF37479FA4873A9BC06B4472",
+      "previous_size": 5293,
+      "size": 5300,
+      "previous_snapshot": "docs/upstream/hok-english-terminology-20261109/before/localisation/english/HOK_KOR_civic_focus_l_english.yml",
+      "preserved_korean_path": "localisation/korean/HOK_KOR_civic_focus_l_korean.yml",
+      "preserved_korean_sha256": "44EF7A411F13F42D675B62AEB61B23E3C2DBE0CCCADF362C5CF232523CBD93F6",
+      "edits": {
+        "HOK_KOR_civic_chaebol_cooperation": {
+          "before": "Industrial Cooperation with the Chaebol",
+          "after": "Industrial Cooperation with the Corporate Oligarchs"
+        },
+        "HOK_KOR_civic_chaebol_cooperation_desc": {
+          "before": "Building new facilities requires money, technology and supply networks to be brought together. We shall link investment by the chaebol business conglomerates to the national production plan. The immediate increase in output is tempting, but the preferential treatment and concealment surrounding these contracts will also become our burden.",
+          "after": "Building new facilities requires money, technology and supply networks to be brought together. We shall link investment by the corporate oligarchs to the national production plan. The immediate increase in output is tempting, but the preferential treatment and concealment surrounding these contracts will also become our burden."
+        },
+        "HOK_KOR_civic_nationalization": {
+          "before": "Bring the Chaebol into Public Ownership",
+          "after": "Bring the Conglomerates into Public Ownership"
+        }
+      }
+    },
+    "localisation/english/HOK_KOR_civic_state_l_english.yml": {
+      "classification": "ADD",
+      "previous_sha256": "C905815621AB3DAC5E48F7372314DC80B2634201A0634D48CDAC46EA11C55779",
+      "sha256": "2F7E32070D41FD35C23B5034580CD5F9736DC79E5EC505F960C404616BC0A0E9",
+      "previous_size": 23181,
+      "size": 23292,
+      "previous_snapshot": "docs/upstream/hok-english-terminology-20261109/before/localisation/english/HOK_KOR_civic_state_l_english.yml",
+      "preserved_korean_path": "localisation/korean/HOK_KOR_civic_state_l_korean.yml",
+      "preserved_korean_sha256": "E711FAAD10B71C1A74EF4AB0C201C4306596FD5BECB7DB2565C85925C0448829",
+      "edits": {
+        "HOK_KOR_chaebol_established": {
+          "before": "Chaebol Industrial Networks",
+          "after": "Oligarchic Industrial Networks"
+        },
+        "HOK_KOR_chaebol_established_desc": {
+          "before": "Chaebol Influence: 25–49. Corporate investment and supply networks provide a foundation for industrial mobilisation.",
+          "after": "Oligarchic Influence: 25–49. Corporate investment and supply networks provide a foundation for industrial mobilisation."
+        },
+        "HOK_KOR_chaebol_dominant": {
+          "before": "Chaebol-led Industrial Mobilisation",
+          "after": "Oligarch-led Industrial Mobilisation"
+        },
+        "HOK_KOR_chaebol_dominant_desc": {
+          "before": "Chaebol Influence of 75 or above gives access to powerful production networks. Under the cooperation policy, corruption and institutional capture also accumulate every month.",
+          "after": "Oligarchic Influence of 75 or above gives access to powerful production networks. Under the cooperation policy, corruption and institutional capture also accumulate every month."
+        },
+        "HOK_KOR_chaebol_cooperation": {
+          "before": "Industrial Cooperation with the Chaebol",
+          "after": "Industrial Cooperation with the Corporate Oligarchs"
+        },
+        "HOK_KOR_chaebol_cooperation_desc": {
+          "before": "Rapid factory expansion and production come at a price: when Chaebol Influence is 75 or above, Corruption increases by 2 and Institutional Capture by 1 every month.",
+          "after": "Rapid factory expansion and production come at a price: when Oligarchic Influence is 75 or above, Corruption increases by 2 and Institutional Capture by 1 every month."
+        },
+        "HOK_KOR_support_chaebol_tt": {
+          "before": "Chaebol Influence +10, Accumulated Corruption +5, Institutional Capture +3. Costs 50 Political Power and applies a shared 90-day cooldown to all support and restraint actions.",
+          "after": "Oligarchic Influence +10, Accumulated Corruption +5, Institutional Capture +3. Costs 50 Political Power and applies a shared 90-day cooldown to all support and restraint actions."
+        },
+        "HOK_KOR_suppress_chaebol_tt": {
+          "before": "Chaebol Influence -10, Accumulated Corruption -3. Resistance from vested interests increases Institutional Capture by 4. Costs 50 Political Power and applies a shared 90-day cooldown to all support and restraint actions.",
+          "after": "Oligarchic Influence -10, Accumulated Corruption -3. Resistance from vested interests increases Institutional Capture by 4. Costs 50 Political Power and applies a shared 90-day cooldown to all support and restraint actions."
+        },
+        "HOK_KOR_civic_balance": {
+          "before": "Chaebol and Civil Society",
+          "after": "Corporate Oligarchs and Civil Society"
+        },
+        "HOK_KOR_procurement_integrity_desc": {
+          "before": "The chaebol's industrial networks allow aircraft and propellant contracts to be fast-tracked. The two contracts share a 365-day cooldown and a single active contract slot. No new fast-track contract can begin during an investigation or recovery. Investigating a warning means giving up the benefits and spending 60 days on verification. Ignoring it causes an accident 45–90 days after the contract begins. This procurement scandal is an alternate-history event.",
+          "after": "The corporate oligarchs' industrial networks allow aircraft and propellant contracts to be fast-tracked. The two contracts share a 365-day cooldown and a single active contract slot. No new fast-track contract can begin during an investigation or recovery. Investigating a warning means giving up the benefits and spending 60 days on verification. Ignoring it causes an accident 45–90 days after the contract begins. This procurement scandal is an alternate-history event."
+        },
+        "HOK_KOR_support_chaebol": {
+          "before": "Support the Chaebol",
+          "after": "Support the Corporate Oligarchs"
+        },
+        "HOK_KOR_support_chaebol_desc": {
+          "before": "Chaebol Influence +10, Accumulated Corruption +5, Institutional Capture +3. Costs 50 Political Power and applies a shared 90-day cooldown to all support and restraint actions.",
+          "after": "Oligarchic Influence +10, Accumulated Corruption +5, Institutional Capture +3. Costs 50 Political Power and applies a shared 90-day cooldown to all support and restraint actions."
+        },
+        "HOK_KOR_suppress_chaebol": {
+          "before": "Restrain the Chaebol",
+          "after": "Restrain the Corporate Oligarchs"
+        },
+        "HOK_KOR_suppress_chaebol_desc": {
+          "before": "Chaebol Influence -10, Accumulated Corruption -3. Resistance from vested interests increases Institutional Capture by 4. Costs 50 Political Power and applies a shared 90-day cooldown to all support and restraint actions.",
+          "after": "Oligarchic Influence -10, Accumulated Corruption -3. Resistance from vested interests increases Institutional Capture by 4. Costs 50 Political Power and applies a shared 90-day cooldown to all support and restraint actions."
+        },
+        "HOK_KOR_fast_track_air_contracts_desc": {
+          "before": "Requires Chaebol Influence of at least 40. Costs 75 Political Power. Grants fast-track benefits for the sector, with Accumulated Corruption +10 and Institutional Capture +5. The benefits last for a maximum of 180 days, but a defect warning arrives after 30–45 days, and an investigation or accident ends them immediately. Ignoring the warning causes an accident 45–90 days after the contract begins. Aircraft and rocket contracts share a single active contract slot and a 365-day cooldown. No new fast-track contract can begin while an investigation or recovery is under way, or while the effects of an accident remain.",
+          "after": "Requires Oligarchic Influence of at least 40. Costs 75 Political Power. Grants fast-track benefits for the sector, with Accumulated Corruption +10 and Institutional Capture +5. The benefits last for a maximum of 180 days, but a defect warning arrives after 30–45 days, and an investigation or accident ends them immediately. Ignoring the warning causes an accident 45–90 days after the contract begins. Aircraft and rocket contracts share a single active contract slot and a 365-day cooldown. No new fast-track contract can begin while an investigation or recovery is under way, or while the effects of an accident remain."
+        },
+        "HOK_KOR_fast_track_rocket_contracts_desc": {
+          "before": "Requires Chaebol Influence of at least 40. Costs 75 Political Power. Grants fast-track benefits for the sector, with Accumulated Corruption +10 and Institutional Capture +5. The benefits last for a maximum of 180 days, but a defect warning arrives after 30–45 days, and an investigation or accident ends them immediately. Ignoring the warning causes an accident 45–90 days after the contract begins. Aircraft and rocket contracts share a single active contract slot and a 365-day cooldown. No new fast-track contract can begin while an investigation or recovery is under way, or while the effects of an accident remain.",
+          "after": "Requires Oligarchic Influence of at least 40. Costs 75 Political Power. Grants fast-track benefits for the sector, with Accumulated Corruption +10 and Institutional Capture +5. The benefits last for a maximum of 180 days, but a defect warning arrives after 30–45 days, and an investigation or accident ends them immediately. Ignoring the warning causes an accident 45–90 days after the contract begins. Aircraft and rocket contracts share a single active contract slot and a 365-day cooldown. No new fast-track contract can begin while an investigation or recovery is under way, or while the effects of an accident remain."
+        },
+        "HOK_KOR_chaebol_interfering": {
+          "before": "Chaebol Interference in Industry",
+          "after": "Oligarchic Interference in Industry"
+        },
+        "HOK_KOR_chaebol_interfering_desc": {
+          "before": "Chaebol Influence: 50–74. The chaebol have gained enough influence to intervene in industrial contracts and supply networks.",
+          "after": "Oligarchic Influence: 50–74. The corporate oligarchs have gained enough influence to intervene in industrial contracts and supply networks."
+        },
+        "HOK_KOR_chaebol_influence": {
+          "before": "Chaebol Influence",
+          "after": "Oligarchic Influence"
+        }
+      }
+    },
+    "localisation/english/HOK_KOR_civic_ui_l_english.yml": {
+      "classification": "ADD",
+      "previous_sha256": "5DCE7D02F7BAFC37E3C25A8801F50897B4349D6A951F7B2F549DC4A85DCA3EB8",
+      "sha256": "D5830053C32F869D00D75D3689198DD6F206960D01F71CCE4A3E006A250477B1",
+      "previous_size": 6365,
+      "size": 6401,
+      "previous_snapshot": "docs/upstream/hok-english-terminology-20261109/before/localisation/english/HOK_KOR_civic_ui_l_english.yml",
+      "preserved_korean_path": "localisation/korean/HOK_KOR_civic_ui_l_korean.yml",
+      "preserved_korean_sha256": "2D50AD780D816AC6447F9A403E53B1E6659A2CB0CA6D5D1A32B4F0AED1A0B1A1",
+      "edits": {
+        "HOK_KOR_civic_ui_chaebol_name": {
+          "before": "Chaebol",
+          "after": "Oligarchs"
+        },
+        "HOK_KOR_civic_ui_chaebol_tt": {
+          "before": "The chaebol business conglomerates influence the running of the state through investment, production and supply contracts. Their influence and the procurement corruption already accumulated are tracked separately.",
+          "after": "The corporate oligarchs influence the running of the state through investment, production and supply contracts. Their influence and the procurement corruption already accumulated are tracked separately."
+        },
+        "HOK_KOR_civic_ui_capture_tt": {
+          "before": "Institutional capture measures the extent to which power networks colluding with the chaebol can interfere with administration and investigations. It can persist even after chaebol influence falls, and is linked to the risk of a coup against a reforming government.",
+          "after": "Institutional capture measures the extent to which power networks colluding with the corporate oligarchs can interfere with administration and investigations. It can persist even after oligarchic influence falls, and is linked to the risk of a coup against a reforming government."
+        },
+        "HOK_KOR_civic_ui_support_chaebol_tt": {
+          "before": "Spend 50 Political Power to raise Chaebol Influence by up to 10. Support is unavailable at 100 influence. Reliance on preferential treatment increases Procurement Corruption and Institutional Capture. All support and restraint actions share a 90-day cooldown.",
+          "after": "Spend 50 Political Power to raise Oligarchic Influence by up to 10. Support is unavailable at 100 influence. Reliance on preferential treatment increases Procurement Corruption and Institutional Capture. All support and restraint actions share a 90-day cooldown."
+        },
+        "HOK_KOR_civic_ui_suppress_chaebol_tt": {
+          "before": "Spend 50 Political Power to reduce Chaebol Influence by up to 10. Restraint is unavailable at 0 influence. Stronger oversight reduces corruption but may provoke a backlash from vested interests. All support and restraint actions share a 90-day cooldown.",
+          "after": "Spend 50 Political Power to reduce Oligarchic Influence by up to 10. Restraint is unavailable at 0 influence. Stronger oversight reduces corruption but may provoke a backlash from vested interests. All support and restraint actions share a 90-day cooldown."
+        },
+        "HOK_KOR_policy_cooperation": {
+          "before": "Chaebol industrial cooperation policy selected",
+          "after": "Industrial cooperation with the corporate oligarchs has been selected."
+        }
+      }
+    },
+    "localisation/english/HOK_KOR_fascist_procurement_l_english.yml": {
+      "classification": "ADD",
+      "previous_sha256": "D4ED2B89FDB7BEAD72A43618E1B7E5613BFC23F4BAF740775B739D80BC488299",
+      "sha256": "BB5B0C1355DBE0E7EE961D5E6BFA38E227188B55C91390363D86C9D404B5D7B3",
+      "previous_size": 7583,
+      "size": 7612,
+      "previous_snapshot": "docs/upstream/hok-english-terminology-20261109/before/localisation/english/HOK_KOR_fascist_procurement_l_english.yml",
+      "preserved_korean_path": "localisation/korean/HOK_KOR_fascist_procurement_l_korean.yml",
+      "preserved_korean_sha256": "FFC52A54DCCACC82AB357EA43EB8B08CC611F2BCB738AB35DD0E04CBC7752950",
+      "edits": {
+        "HOK_KOR_nrsc_supply_contracts_desc": {
+          "before": "\\\"Every document has a different explanation, but the person responsible is the same.\\\"\\nWe shall integrate oversight of costs, delivery dates and materials to improve output and our response to shortages. Existing chaebol orders remain.",
+          "after": "\\\"Every document has a different explanation, but the person responsible is the same.\\\"\\nWe shall integrate oversight of costs, delivery dates and materials to improve output and our response to shortages. Existing orders placed with individual conglomerates remain."
+        }
+      }
+    },
+    "localisation/english/korea_event_l_english.yml": {
+      "classification": "ADD",
+      "previous_sha256": "9BE2F8C209686095B1BFC6F5E63E8D06F44C8F3500556637EC501775DC289566",
+      "sha256": "F5DC935B70977D9BE7E0E8A70A27D95BC4CC35177D31B25370916F2145FC0A12",
+      "previous_size": 65951,
+      "size": 65962,
+      "previous_snapshot": "docs/upstream/hok-english-terminology-20261109/before/localisation/english/korea_event_l_english.yml",
+      "preserved_korean_path": "localisation/korean/korea_event_l_korean.yml",
+      "preserved_korean_sha256": "DC1992C494224A5C60FFAB31928E9750C8BF274CA5C2FA70BE32FB3C55C4D352",
+      "edits": {
+        "kor_events.0.d": {
+          "before": "In 1906, after the Korean-Japanese-Russian War had left the entire peninsula in ruins, the Republic of Korea was born on the corpse of the old empire: the first democratic republic in Korean history, and in Asia. For the past thirty years, it has continued to develop.\\n\\nAs we walked a precarious tightrope between the great powers, modernisation and economic growth greatly improved our people's lives. When the Great War broke out in Europe, we remained neutral. While white men spilled one another's blood, we made money selling them supplies and sending them workers. Most of the unequal treaties were revised, and the first chaebol business conglomerates and an embryonic capitalist economy emerged. Economic growth, modernisation and democracy also nourished vigorous movements for civil rights, women's rights and the abolition of oppressive feudal customs.\\n\\nThe Great Depression changed everything. The Seoul Stock Exchange was forced to close early, countless companies and factories went bankrupt, and many citizens found themselves suddenly unemployed. All the republic's prosperity vanished like a mirage.\\n\\nAmid the mounting social turmoil, a non-violent civil disobedience movement erupted on 18 May 1931 in Daegu, a city known for its strong socialist sympathies as \\\"Joseon's Moscow\\\". The demonstrators demanded food, jobs, doctors and Syngman Rhee's resignation. Rhee's government sent tanks to crush these 200,000 \\\"reds\\\" demanding the president's departure, sparing neither men nor women, young nor old.\\n\\nAfter the bloody suppression of the Daegu Socialisation Movement, Lyuh Woon-hyung's Korean Social Democratic Party and Pak Hon-yong's Workers' Party of Joseon were blamed for organising the protests and forcibly dissolved. Democracy has withered and public life has grown increasingly repressive. Democrats have rallied under the Liberal–Independence Party Coalition to defend democracy, but containing extremist political forces now seems beyond them.\\n\\nMeanwhile, Japan has invaded Manchuria through its leased territory at Dalian and established a puppet state there. Invoking Hakko Ichiu, the ideal of bringing the world under one roof, and the Greater East Asia Co-Prosperity Sphere, it makes no secret of its desire to avenge the Korean-Japanese-Russian War and conquer us. Yet the League of Nations does nothing. The Europeans are preoccupied with their own problems, the Chinese are busy fighting one another, and the Americans continue their isolationist course. No one seems likely to help us.\\n\\nWill the Republic of Korea still be independent ten years from now?",
+          "after": "In 1906, after the Korean-Japanese-Russian War had left the entire peninsula in ruins, the Republic of Korea was born on the corpse of the old empire: the first democratic republic in Korean history, and in Asia. For the past thirty years, it has continued to develop.\\n\\nAs we walked a precarious tightrope between the great powers, modernisation and economic growth greatly improved our people's lives. When the Great War broke out in Europe, we remained neutral. While white men spilled one another's blood, we made money selling them supplies and sending them workers. Most of the unequal treaties were revised, and the first corporate oligarchs and an embryonic capitalist economy emerged. Economic growth, modernisation and democracy also nourished vigorous movements for civil rights, women's rights and the abolition of oppressive feudal customs.\\n\\nThe Great Depression changed everything. The Seoul Stock Exchange was forced to close early, countless companies and factories went bankrupt, and many citizens found themselves suddenly unemployed. All the republic's prosperity vanished like a mirage.\\n\\nAmid the mounting social turmoil, a non-violent civil disobedience movement erupted on 18 May 1931 in Daegu, a city known for its strong socialist sympathies as \\\"Joseon's Moscow\\\". The demonstrators demanded food, jobs, doctors and Syngman Rhee's resignation. Rhee's government sent tanks to crush these 200,000 \\\"reds\\\" demanding the president's departure, sparing neither men nor women, young nor old.\\n\\nAfter the bloody suppression of the Daegu Socialisation Movement, Lyuh Woon-hyung's Korean Social Democratic Party and Pak Hon-yong's Workers' Party of Joseon were blamed for organising the protests and forcibly dissolved. Democracy has withered and public life has grown increasingly repressive. Democrats have rallied under the Liberal–Independence Party Coalition to defend democracy, but containing extremist political forces now seems beyond them.\\n\\nMeanwhile, Japan has invaded Manchuria through its leased territory at Dalian and established a puppet state there. Invoking Hakko Ichiu, the ideal of bringing the world under one roof, and the Greater East Asia Co-Prosperity Sphere, it makes no secret of its desire to avenge the Korean-Japanese-Russian War and conquer us. Yet the League of Nations does nothing. The Europeans are preoccupied with their own problems, the Chinese are busy fighting one another, and the Americans continue their isolationist course. No one seems likely to help us.\\n\\nWill the Republic of Korea still be independent ten years from now?"
+        },
+        "kor_events.70.d": {
+          "before": "The day has finally come for the presidential election held every five years since Philip Jaisohn founded the Republic of Korea in 1906. No president has yet served four consecutive terms. Citing the unstable world situation and recent events, President Syngman Rhee has nevertheless broken with tradition once again and insisted on running for a fourth term. His challenger is Ahn Chang-ho of the Independence Party. Formerly a Liberal, Ahn publicly denounced the incumbent as 'a damned dictator blinded by power' over his fourth-term bid, the bloody suppression of the Daegu Socialisation Movement in 1931 and his pro-chaebol policies. He then left the Liberals, joined the Independence Party and became its presidential candidate.\\n\\nWe can choose whether the Liberal Party wins or the Independence Party brings a change of government.",
+          "after": "The day has finally come for the presidential election held every five years since Philip Jaisohn founded the Republic of Korea in 1906. No president has yet served four consecutive terms. Citing the unstable world situation and recent events, President Syngman Rhee has nevertheless broken with tradition once again and insisted on running for a fourth term. His challenger is Ahn Chang-ho of the Independence Party. Formerly a Liberal, Ahn publicly denounced the incumbent as 'a damned dictator blinded by power' over his fourth-term bid, the bloody suppression of the Daegu Socialisation Movement in 1931 and his policies favouring the corporate oligarchs. He then left the Liberals, joined the Independence Party and became its presidential candidate.\\n\\nWe can choose whether the Liberal Party wins or the Independence Party brings a change of government."
+        }
+      }
+    },
+    "localisation/english/korea_focus_l_english.yml": {
+      "classification": "ADD",
+      "previous_sha256": "9555D5CF6760B9548847A2C97F80E4D09A4C4EEFF45726D9ED3C550B0E99F430",
+      "sha256": "471285BCE6195DDEBBD9868D98C72BC5658D464D1706EC20EDB1EDB485FFCB0E",
+      "previous_size": 109432,
+      "size": 109519,
+      "previous_snapshot": "docs/upstream/hok-english-terminology-20261109/before/localisation/english/korea_focus_l_english.yml",
+      "preserved_korean_path": "localisation/korean/korea_focus_l_korean.yml",
+      "preserved_korean_sha256": "809F507550542AF5646D5FE6564A7420804A884AFB50253A96B25959FBDA07CD",
+      "edits": {
+        "KOR_agitate_the_union_desc": {
+          "before": "Under the security crackdown that followed the Great Depression, the freedom to form trade unions guaranteed by Article 33 of the Republic's constitution has become a dead letter. Unions are collapsing one after another under repression by the police and hired thugs employed by the chaebol business conglomerates. We must give them weapons and invite them to join our cause.",
+          "after": "Under the security crackdown that followed the Great Depression, the freedom to form trade unions guaranteed by Article 33 of the Republic's constitution has become a dead letter. Unions are collapsing one after another under repression by the police and hired thugs employed by the corporate oligarchs. We must give them weapons and invite them to join our cause."
+        },
+        "KOR_confiscation_of_chaebol_assets": {
+          "before": "Nationalise Chaebol Assets",
+          "after": "Nationalise the Oligarchs' Assets"
+        },
+        "KOR_confiscation_of_chaebol_assets_desc": {
+          "before": "The chaebol have amassed their fortunes by sucking the blood of workers and peasants. Even the Great Depression did nothing to curb their insatiable greed. Their property will now be confiscated by the workers' and peasants' republic, and every last part of their accumulated wealth will be redistributed.",
+          "after": "The corporate oligarchs have amassed their fortunes by sucking the blood of workers and peasants. Even the Great Depression did nothing to curb their insatiable greed. Their property will now be confiscated by the workers' and peasants' republic, and every last part of their accumulated wealth will be redistributed."
+        },
+        "KOR_purge_reactionarist_desc": {
+          "before": "During the Korean Revolutionary War, we arrested great numbers of Liberal-Independence Party politicians, collaborators in Syngman Rhee's army, police officers, landowners and chaebol magnates, together with every member of their families. They are enemies of the revolution, subversives with no place in the new workers' and peasants' republic. Fair trials before the people's courts will establish their guilt or innocence and deliver 'appropriate' punishment...",
+          "after": "During the Korean Revolutionary War, we arrested great numbers of Liberal-Independence Party politicians, collaborators in Syngman Rhee's army, police officers, landowners and corporate oligarchs, together with every member of their families. They are enemies of the revolution, subversives with no place in the new workers' and peasants' republic. Fair trials before the people's courts will establish their guilt or innocence and deliver 'appropriate' punishment..."
+        },
+        "KOR_cooperation_with_the_jaebeol": {
+          "before": "Cooperate with the Chaebol",
+          "after": "Cooperate with the Corporate Oligarchs"
+        },
+        "KOR_cooperation_with_the_jaebeol_desc": {
+          "before": "Although the Great Depression bankrupted most businesses and factories, some chaebol business conglomerates managed to weather its effects. We should grant them modest privileges, encouraging them to put their capabilities to work for our country.",
+          "after": "Although the Great Depression bankrupted most businesses and factories, some conglomerates controlled by the corporate oligarchs managed to weather its effects. We should grant them modest privileges, encouraging them to put their capabilities to work for our country."
+        },
+        "KOR_taming_the_jaebeol": {
+          "before": "Tame the Chaebol",
+          "after": "Tame the Corporate Oligarchs"
+        },
+        "KOR_taming_the_jaebeol_desc": {
+          "before": "The chaebol have long clung to civilian politicians, enriching themselves by exploiting ordinary decent people through collusion between business and politics. During the coup, however, we seized all their Seoul headquarters, and their chairmen are now detained in Intelligence Command safe houses. We will summon them all and demand loyalty to the military regime. They can come aboard with us, or go to Samcheong Re-education Camp.",
+          "after": "The corporate oligarchs have long clung to civilian politicians, enriching themselves by exploiting ordinary decent people through collusion between business and politics. During the coup, however, we seized all the Seoul headquarters of their conglomerates, and the chairmen are now detained in Intelligence Command safe houses. We will summon them all and demand loyalty to the military regime. They can come aboard with us, or go to Samcheong Re-education Camp."
+        }
+      }
+    },
+    "localisation/english/korea_ideas_l_english.yml": {
+      "classification": "ADD",
+      "previous_sha256": "C8796229BBE99E89CCECFE6E5FFD23E18A1F02B1BCDF0A3D0049D653785E2687",
+      "sha256": "28E367477C66FC2A8684FDC6D440070FF3CB724065E01FC016DC58E4C6D7679F",
+      "previous_size": 7453,
+      "size": 7469,
+      "previous_snapshot": "docs/upstream/hok-english-terminology-20261109/before/localisation/english/korea_ideas_l_english.yml",
+      "preserved_korean_path": "localisation/korean/korea_ideas_l_korean.yml",
+      "preserved_korean_sha256": "76C846FEF1EEAF5FF5DC899B25F2600E2610BCF0C27199365E6E763AADC92C9B",
+      "edits": {
+        "KOR_great_depression_desc": {
+          "before": "Beginning with the American stock market crash of 1929, the Great Depression has spread across the world and dealt a severe blow to the Korean economy. Unemployment has soared and tax revenues have plummeted. Almost every business except a handful of chaebol conglomerates and their affiliates has gone bankrupt. Even now, our streets are filled with long queues of unemployed people at soup kitchens and the sight of gaunt women and children begging.",
+          "after": "Beginning with the American stock market crash of 1929, the Great Depression has spread across the world and dealt a severe blow to the Korean economy. Unemployment has soared and tax revenues have plummeted. Almost every business except a handful of family-controlled conglomerates and their affiliates has gone bankrupt. Even now, our streets are filled with long queues of unemployed people at soup kitchens and the sight of gaunt women and children begging."
+        },
+        "KOR_jaebeol": {
+          "before": "Nationalised Chaebol",
+          "after": "Nationalised Conglomerates"
+        }
+      }
+    },
+    "localisation/english/replace/korea_decisions_l_english.yml": {
+      "classification": "ADD",
+      "previous_sha256": "302D08067FA7483D2171DE26EAA581AE4BE9000C8CF725ADED4DFC0874C24033",
+      "sha256": "738D11C26743C78285182C9E573012F774233ADCB6DEFB4477B25E4FFFEA640B",
+      "previous_size": 7528,
+      "size": 7555,
+      "previous_snapshot": "docs/upstream/hok-english-terminology-20261109/before/localisation/english/replace/korea_decisions_l_english.yml",
+      "preserved_korean_path": "localisation/korean/replace/korea_decisions_l_korean.yml",
+      "preserved_korean_sha256": "8149A354728DADBD0DD99B798E4FF73557A909FB6B6B7481D16CC3D21AC20950",
+      "edits": {
+        "KOR_jaebeol_category": {
+          "before": "Chaebol",
+          "after": "Corporate Oligarchs"
+        },
+        "KOR_jaebeol_category_desc": {
+          "before": "Chaebol are family-controlled business conglomerates whose senior management is drawn from the same extended family. They wield enormous influence over this country's economy. By granting them favourable treatment, we can secure their help in developing it.",
+          "after": "The corporate oligarchs control family-owned business conglomerates whose senior management is drawn from the same extended family. They wield enormous influence over this country's economy. By granting them favourable treatment, we can secure their help in developing it."
+        }
+      }
+    }
+  },
+  "revision_history": [
+    {
+      "date": "2026-11-09",
+      "scope": "One approved British-English sentence correction; all other 42 wording edits retained",
+      "path": "localisation/english/HOK_KOR_civic_ui_l_english.yml",
+      "key": "HOK_KOR_policy_cooperation",
+      "previous_text": "Industrial cooperation policy with corporate oligarchs selected",
+      "text": "Industrial cooperation with the corporate oligarchs has been selected.",
+      "previous_output_sha256": "0B14441C19CC535DB59C647144B78C7B6A0F887D5923A8F36AD9DA86FFE0FDC6",
+      "output_sha256": "D5830053C32F869D00D75D3689198DD6F206960D01F71CCE4A3E006A250477B1",
+      "previous_lock_sha256": "CBDBF62F77B869038911C0BE838DA4E7381B4AA47B67AD82F041DAAB6015F97E",
+      "evidence": "C:/hoi/test/hok-rt56-chaebol-ui-proofread-20261109-01/lock-before.json"
+    }
+  ]
+}

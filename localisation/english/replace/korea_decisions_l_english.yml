@@ -6,8 +6,8 @@
  rename_manchuria:0 "Rename Manchurian Places"
  rename_manchuria_desc:0 "Now that Manchuria is entirely ours, its existing place names will be replaced with Korean ones."
 
- KOR_jaebeol_category:0 "Chaebol"
- KOR_jaebeol_category_desc:0 "Chaebol are family-controlled business conglomerates whose senior management is drawn from the same extended family. They wield enormous influence over this country's economy. By granting them favourable treatment, we can secure their help in developing it."
+ KOR_jaebeol_category:0 "Corporate Oligarchs"
+ KOR_jaebeol_category_desc:0 "The corporate oligarchs control family-owned business conglomerates whose senior management is drawn from the same extended family. They wield enormous influence over this country's economy. By granting them favourable treatment, we can secure their help in developing it."
  KOR_order_to_samsung:0 "Issue Orders to Samsung"
  KOR_order_to_hyundai:0 "Issue Orders to Hyundai"
  KOR_order_to_sk:0 "Issue Orders to Sunkyong"

@@ -2,9 +2,9 @@
 #20261011_kpopmodder: Add Korean corporate and civic focus prose while preserving existing localisation keys.
  HOK_KOR_civic_industrial_compact:0 "Industrial and Social Compact"
  HOK_KOR_civic_industrial_compact_desc:0 "Factories and banks, trade unions and civic groups are asking what course the nation will take. We can rely on corporate investment, break up monopolies or bring industry into public ownership. We shall decide on an industrial and social compact, weighing each group's influence and the price of procurement."
- HOK_KOR_civic_chaebol_cooperation:0 "Industrial Cooperation with the Chaebol"
- HOK_KOR_civic_chaebol_cooperation_desc:0 "Building new facilities requires money, technology and supply networks to be brought together. We shall link investment by the chaebol business conglomerates to the national production plan. The immediate increase in output is tempting, but the preferential treatment and concealment surrounding these contracts will also become our burden."
- HOK_KOR_civic_nationalization:0 "Bring the Chaebol into Public Ownership"
+ HOK_KOR_civic_chaebol_cooperation:0 "Industrial Cooperation with the Corporate Oligarchs"
+ HOK_KOR_civic_chaebol_cooperation_desc:0 "Building new facilities requires money, technology and supply networks to be brought together. We shall link investment by the corporate oligarchs to the national production plan. The immediate increase in output is tempting, but the preferential treatment and concealment surrounding these contracts will also become our burden."
+ HOK_KOR_civic_nationalization:0 "Bring the Conglomerates into Public Ownership"
  HOK_KOR_civic_nationalization_desc:0 "We shall transfer factories and contracts into public ownership. Keeping the machinery running means retaining technicians and trading networks before taking down the old company signs. Existing procurement corruption and institutional collusion will not disappear with a single change of title."
  HOK_KOR_civic_break_monopolies:0 "Break Up Monopolies and Pursue Civic Reform"
  HOK_KOR_civic_break_monopolies_desc:0 "There is no reason to reserve state orders for a handful of companies. We shall break up monopolies and give workers and citizens a role in production and oversight. In return for bearing the cost to people's livelihoods, we shall build skills and trust, while preparing for pressure from institutions opposed to reform."
