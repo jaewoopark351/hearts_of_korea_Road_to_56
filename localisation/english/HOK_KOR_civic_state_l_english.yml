@@ -1,4 +1,5 @@
 ﻿l_english:
+#20261109_kpopmodder: Name the signed chaebol influence change without assigning a positive or negative policy judgement.
 #20261108_kpopmodder: Name civic values and evidence while preserving all numeric conditions, effects and saved state.
 #20261011_kpopmodder: Localise independent industrial policies, procurement scandals and the fictional prosecutor-coup chain with exact costs and deadlines.
  HOK_KOR_chaebol_established:0 "Chaebol Industrial Networks"
@@ -124,3 +125,4 @@
  HOK_KOR_civic_influence_change_tt:0 "$HOK_KOR_civic_influence$: $RIGHT|+=0$"
  HOK_KOR_institutional_capture_change_tt:0 "$HOK_KOR_institutional_capture$: $RIGHT|-=0$"
  HOK_KOR_procurement_corruption_change_tt:0 "$HOK_KOR_procurement_corruption$: $RIGHT|-=0$"
+ HOK_KOR_chaebol_influence_change_tt:0 "$HOK_KOR_chaebol_influence$: $RIGHT|=0$"

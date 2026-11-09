@@ -111,6 +111,9 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
     if not LOCK_PATH.exists():
         return data
+    #20261109_kpopmodder: Nested older finalizers inspect the proven ancestor of a later review-final payload.
+    from review_followup import historical_bytes as review_historical
+    data=review_historical(relative,data)
     name = Path(relative).as_posix()
     record = lock().get('outputs',{}).get(name)
     if not record:
@@ -164,20 +167,24 @@ def preflight_outputs(outputs: dict) -> None:
         record = records_by_name.get(name.casefold())
         if not record:
             continue
-        if sha(data) != record['sha256']:
+        #20261109_kpopmodder: Admit only exact review-final bytes after proving their unchanged November ancestor.
+        from review_followup import historical_bytes as review_historical
+        if sha(review_historical(name,data)) != record['sha256']:
             errors.append(f'refusing unreviewed November output bytes: {name}')
             continue
         if destination.exists() and not destination.is_file():
             errors.append(f'November output is not a regular file: {name}')
             continue
         current = destination.read_bytes() if destination.is_file() else None
-        digest = sha(current) if current is not None else None
+        digest = sha(review_historical(name,current)) if current is not None else None
         #20261109_kpopmodder: Accept only recorded prior generated revisions when advancing a reviewed parser or display repair.
         accepted={record['sha256'],record.get('previous_sha256'),*record.get('accepted_previous_outputs',[])}
         if digest not in accepted:
             errors.append(f'refusing independently changed runtime: {name}')
     if errors:
         raise ValueError('\n'.join(errors))
+    from review_followup import preflight_outputs as review_preflight
+    review_preflight(outputs)
     #20261108_kpopmodder: Protect the separate current-host outputs in every existing writer as well.
     from rt56_host_update import preflight_outputs as host_preflight
     host_preflight(outputs)
@@ -205,6 +212,9 @@ def ledger_bytes(previous: bytes) -> bytes:
     originals=[dict(row) for row in rows]
     for relative,record in config['outputs'].items():
         actual=(ROOT/relative).read_bytes()
+        #20261109_kpopmodder: Keep the November provenance layer on its exact ancestor before the later ledger delta.
+        from review_followup import historical_bytes as review_historical
+        actual=review_historical(relative,actual)
         if sha(actual)!=record['sha256']:
             raise ValueError(f'November ledger output drift: {relative}')
         matches=[row for row in rows if relative in row['output_path'].split(' | ')]
@@ -255,6 +265,9 @@ def main() -> int:
     args=parser.parse_args()
     try:
         outputs=build_outputs()
+        #20261109_kpopmodder: Preserve the explicit terminal review repair when this older writer is invoked directly.
+        from review_followup import finalize_outputs as review_finalize_outputs
+        outputs=review_finalize_outputs(outputs)
         preflight_outputs(outputs)
         pending=[]
         for relative,data in outputs.items():

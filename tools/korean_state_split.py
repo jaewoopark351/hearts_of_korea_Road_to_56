@@ -64,6 +64,9 @@ def compat_before(relative: str) -> bytes:
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
     """Undo only a hash-verified final update for independent older contracts."""
+    #20261109_kpopmodder: Reverse only the registered review repair before unchanged split/content/host ancestry.
+    from review_followup import historical_bytes as review_historical
+    data=review_historical(relative,data)
     #20261108_kpopmodder: Reverse the separately reviewed Steam host layer before older content contracts.
     from rt56_host_update import historical_bytes as host_historical
     data=host_historical(relative,data)
@@ -85,8 +88,11 @@ def finalize_one(relative: str | Path, data: bytes) -> bytes:
     #20261108_kpopmodder: Preserve the new final content layer even for inherited files outside the split allowlist.
     from upstream_content_update import finalize_one as content_finalize
     from rt56_host_update import finalize_one as host_finalize, historical_generator_input
+    #20261109_kpopmodder: Keep the bounded review repair last and idempotent for every existing owner.
+    from review_followup import finalize_one as review_finalize, historical_bytes as review_historical
     def finish(payload: bytes) -> bytes:
-        return host_finalize(relative,content_finalize(relative,payload))
+        return review_finalize(relative,host_finalize(relative,content_finalize(relative,payload)))
+    data=review_historical(relative,data)
     data=historical_generator_input(relative,data)
     name=Path(relative).as_posix()
     if not LOCK_PATH.exists(): return finish(data)
@@ -118,7 +124,9 @@ def finalize_outputs(outputs: dict, *, owner: str) -> dict:
         result[Path(name) if path_keys else name]=_verified_final(name)
     #20261108_kpopmodder: Add only owner-scoped new content outputs after the prior split layer.
     from upstream_content_update import finalize_outputs as content_finalize_outputs
-    return content_finalize_outputs(result,owner=owner)
+    #20261109_kpopmodder: Reapply the exact review layer after content-owned additions and replacements.
+    from review_followup import finalize_outputs as review_finalize_outputs
+    return review_finalize_outputs(content_finalize_outputs(result,owner=owner))
 
 def remap(data: bytes) -> bytes:
     mapping=state_mapping()
@@ -333,6 +341,9 @@ def main() -> int:
             data=content_finalize(name,data)
             from rt56_host_update import finalize_one as host_finalize
             data=host_finalize(name,data)
+            #20261109_kpopmodder: Check/write final review bytes without changing the historical split output pin.
+            from review_followup import finalize_one as review_finalize
+            data=review_finalize(name,data)
             path=ROOT/name
             current=path.read_bytes() if path.is_file() else None
             if current==data: continue

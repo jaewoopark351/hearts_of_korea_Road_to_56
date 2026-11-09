@@ -18,8 +18,15 @@ Apply these rules at the start of every task and consult the detailed sections b
 - When authorized work changes a recorded location, update the relevant project document with the old and new paths, original/copy/active-cache roles, manifest locations, historical mapping, and the actual verification performed. Keep earlier results distinguishable from later checks. If a guidance document moves, update its required-reading link as part of the same documentation change.
 - Keep actual tests and intermediate outputs under `C:\hoi\test\<task-or-run-id>\`; only their maintained location/provenance index belongs in project documentation. Preserve the separate active source cache and its pinned inputs. Documentation links do not authorize executing scripts, modifying archives or caches, or expanding the requested task.
 
-| Read before this work | Required project document |
+- When reviewing or changing localisation, player-facing flag/variable use, or state/province references, read the relevant local skill below and use [the change-coverage procedure](docs/HOK_CHANGE_COVERAGE_REVIEW.md). Define affected features, IDs, callers and branches; scale the inventory to the change.
+- Trace relevant shared helpers, alternative paths, active translation overrides and inherited RT56/vanilla references beyond the edited files. Record each candidate as **changed, intentionally retained, excluded, or unresolved**, with its expected meaning and evidence. A valid ID or matching key set does not prove the intended region or actual display.
+- Select the required verification for the authorized scope before claiming completion. Keep source, UI, executed effects and save evidence separate; carry unresolved required items into the result. Earlier observations apply only to their recorded source and conditions. Review/documentation requests do not authorize tests, launches or gameplay edits.
+
+| Read before this work | Required project document or skill |
 |---|---|
+| Adding or changing player-facing localisation or flag/variable display paths, or reviewing missing/incorrect tooltip text | [Compatibility localisation review skill](docs/skills/hok-rt56-localisation-review/SKILL.md) |
+| Adding or changing state/province references, aligning code after HOK or RT56 map changes, or reviewing geographic targets even without map edits | [Compatibility state-reference review skill](docs/skills/hok-rt56-state-reference-review/SKILL.md) |
+| Reviewing the affected callers/branches, deciding treatment, or reporting completion for either area above | [Change-coverage procedure and adoption provenance](docs/HOK_CHANGE_COVERAGE_REVIEW.md) |
 | Creating or revising images, reusing historical image inputs/recipes, resolving old `.local-artifacts` references, or changing recorded artifact/source-cache locations | [Development artifact archive and image-source lookup](docs/HOK_DEVELOPMENT_ARTIFACT_ARCHIVE.md) |
 
 ## Scope and mission
@@ -198,6 +205,10 @@ Additional instruction sync recorded on 2026-11-06:
 - A documentation-only follow-up on 2026-11-06 records that the compatibility `.local-artifacts` still exists while its designated external archive/cache paths were not found. Before using those inputs or planning a move, read the current observations and prospective procedure in [the local development artifact guide](docs/HOK_DEVELOPMENT_ARTIFACT_ARCHIVE.md); the 2026-11-05 completion statements above remain historical records. The guide also records the donor's separately reported 20261106 archive. No relocation, removal, hash revalidation, tests, or code changes are performed by this documentation update.
 
 - A separately authorized 2026-11-06 relocation on the PC used for that operation preserved 2,076 files in the external artifact archive and fixed active source cache, verified exact paths, sizes, SHA-256 and directories before and after removing that PC's repository `.local-artifacts` root. Use the locations and evidence in [the development artifact guide](docs/HOK_DEVELOPMENT_ARTIFACT_ARCHIVE.md), sections 1.2–1.3; earlier observations and 2026-11-05 records remain historical. These machine-local observations do not verify another PC: Git checkout transfers neither external caches nor archives. Source pins and runtime files are preserved; no gameplay validation or Git publication actions were performed.
+
+Additional instruction adaptation recorded on 2026-11-09:
+
+- This documentation-only adaptation adds local localisation/state-reference review skills and the change-coverage procedure from donor `596b221bb994d93fce552d3ee1ba70fa9b5640f1`. Read [the adoption record](docs/HOK_CHANGE_COVERAGE_REVIEW.md#2026-11-09-지침-도입-기록) when tracing the source hashes, local adaptations, or verification scope. The compatibility English-language policy, current RT56 integration base, approved ID migrations, source pins and generated-file ownership remain in force. No runtime edits, tests, cleanup, Git mutations or publication are performed by this instruction update.
 
 Treat the continuation mandate and the compatibility-port request as established project context. Do not require another original-author approval for work the user has already authorized; escalate only concrete contradictory evidence, a specific third-party restriction, or a required user decision.
 
@@ -579,6 +590,10 @@ HOI4 localisation files are not ordinary YAML. Do not run a generic YAML formatt
 
 Missing text may be a reference or load-order failure rather than a missing string. Trace the caller, key, language header, loaded file, and dependency order.
 
+- For localisation work, use the local review skill linked above to cover names, descriptions, conditions, effects, cancellation, choices and decision-unlock notices, including shared consumers and dynamic keys. Distinguish needed player-facing information, already-explained internal conditions and confirmed non-displayed internals.
+- Preserve the compatibility English/Korean language roles and compare meaning, keys and tokens; do not import the donor's Korean-body English-channel contract or require identical translated bodies. Check active translation overrides and `replace_path` against the actual loaded configuration. Read [ADR-0003](docs/decisions/0003-localisation-contract.md) before changing the language contract; its dated historical results do not establish the current release dependency.
+- Before an authorized implementation changes generated localisation, identify its owning source/lock and generator from the relevant implementation record. Preserve historical inputs and pins; a direct output edit or a relaxed hash gate is not a reproducible repair.
+
 The 2026-09-06 baseline has `Korean Language` installed but not active, while `The Road to 56 Korean Translation` is active and declares `replace_path="localisation"`. Before choosing a release dependency, test the HOK `l_english`/`l_korean` contract and whether that replacement hides compatibility localisation. Do not assume the two localisation mods are interchangeable.
 
 ### National-spirit and decision description prose
@@ -598,6 +613,8 @@ Map work includes province definitions/bitmaps, terrain and height data, states,
 Required rules:
 
 - Use the fingerprinted current RT56 world map as the canonical integration base. Vanilla remains a schema reference, not the content base for an RT56-owned map.
+- Whenever HOK or RT56 changes states/provinces, review affected code against the composed current RT56 map plus approved HOK delta, even if this task leaves map files intact. Use the local state-reference skill to trace conditions, bypass/highlights, rewards, transfers, cores, capitals and alternative/inherited paths; distinguish state, province and localisation-key numbers.
+- Preserve geographic intent and fixed reward totals when aligning references; do not blindly replace numbers or duplicate a reward into every split successor. Before changing mapped/generated definitions, read the relevant migration/split decision and current integration record identified by the skill, and preserve historical mappings, source pins and generator ownership.
 - Extract the intended HOK Korean-map delta from the donor and, where possible, its historical base. Do not treat every donor-versus-RT56 difference as an HOK design requirement.
 - Never ship the donor `definition.csv` or `provinces.bmp` unchanged. If the engine requires a monolithic file, synthesize it from the current RT56 file plus the reviewed HOK delta.
 - Preserve every RT56 province, state, strategic region, RGB, and non-Korean geometry unless a specific integration decision says otherwise.
@@ -787,6 +804,7 @@ A compatibility fix is complete only when:
 - affected IDs, scopes, localisation, dependencies, and load-order effects are reviewed
 - diff contains no unrelated cleanup or mass formatting
 - runtime validation status is stated honestly
+- the applicable change-coverage inventory is reconciled, with evidence for retained/excluded references and an explicit result for each required verification item; unresolved required items limit the completion claim
 
 A compatibility release is ready only when:
 

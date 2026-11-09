@@ -220,9 +220,10 @@ HOK_KOR_legacy_cooperation_adjustment = {
 	HOK_KOR_initialize_civic_system = yes
 	if = {
 		limit = { tag = KOR NOT = { has_country_flag = HOK_KOR_legacy_cooperation_registered } }
-		add_to_variable = { HOK_KOR_chaebol_influence = 10 }
-		add_to_variable = { HOK_KOR_procurement_corruption = 5 }
-		add_to_variable = { HOK_KOR_institutional_capture = 5 }
+		#20261109_kpopmodder: Display guarded legacy civic changes without changing values, order or once-only registration.
+		add_to_variable = { HOK_KOR_chaebol_influence = 10 tooltip = HOK_KOR_chaebol_influence_change_tt }
+		add_to_variable = { HOK_KOR_procurement_corruption = 5 tooltip = HOK_KOR_procurement_corruption_change_tt }
+		add_to_variable = { HOK_KOR_institutional_capture = 5 tooltip = HOK_KOR_institutional_capture_change_tt }
 		set_country_flag = HOK_KOR_legacy_cooperation_registered
 		HOK_KOR_sync_civic_state = yes
 	}
@@ -233,9 +234,10 @@ HOK_KOR_legacy_taming_adjustment = {
 	HOK_KOR_initialize_civic_system = yes
 	if = {
 		limit = { tag = KOR NOT = { has_country_flag = HOK_KOR_legacy_taming_registered } }
-		add_to_variable = { HOK_KOR_chaebol_influence = -10 }
-		add_to_variable = { HOK_KOR_civic_influence = 5 }
-		add_to_variable = { HOK_KOR_procurement_corruption = -5 }
+		#20261109_kpopmodder: Display guarded legacy civic changes without changing values, order or once-only registration.
+		add_to_variable = { HOK_KOR_chaebol_influence = -10 tooltip = HOK_KOR_chaebol_influence_change_tt }
+		add_to_variable = { HOK_KOR_civic_influence = 5 tooltip = HOK_KOR_civic_influence_change_tt }
+		add_to_variable = { HOK_KOR_procurement_corruption = -5 tooltip = HOK_KOR_procurement_corruption_change_tt }
 		set_country_flag = HOK_KOR_legacy_taming_registered
 		HOK_KOR_sync_civic_state = yes
 	}

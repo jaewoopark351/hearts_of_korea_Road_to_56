@@ -18,6 +18,9 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_COMPAT_REMOTE_FILE_ID = "3796816200"
 
 GENERATOR_CHECKS = (
+    #20261109_kpopmodder: Check raw repaired bytes independently before older contracts use exact historical projection.
+    ("review follow-up raw contracts", "check_review_followup.py", "--check"),
+    ("review follow-up deterministic outputs", "review_followup.py", "--check"),
     #20261108_kpopmodder: Audit the current Steam host separately from immutable older HOK contracts.
     ("RT56 November host transition", "rt56_host_update.py", "--check"),
     ("RT56 November host preservation", "check_rt56_host_update.py", "--check"),

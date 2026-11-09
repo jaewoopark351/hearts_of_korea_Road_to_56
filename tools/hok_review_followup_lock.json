@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "revision": "2026-11-09-review-followup-v1",
+  "base_commit": "f8fdd821cf80dd291b02a59b55e8d85fe558a9b3",
+  "workshop_manifest": "1963361040482473746",
+  "game_version": "Operation Postern v1.19.4.2.2da5 (0bdb)",
+  "rt56_root": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968",
+  "vanilla_root": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV",
+  "outputs": {
+    "common/scripted_effects/HOK_KOR_civic_effects.txt": {
+      "previous_sha256": "A114ABEEA79AC284CDEF5D62E0D88DDB232EF5B43BEDA94E4E991923742151DB",
+      "sha256": "91F8B01BD60230433F94020F36E445FCF60F384DF400DF72D742BFDB0BB6FEC8",
+      "previous_size": 14051,
+      "size": 14579,
+      "previous_snapshot": "before/common/scripted_effects/HOK_KOR_civic_effects.txt",
+      "classification": "ADD",
+      "base_git_blob": "dc0ba40bcd0976017a82863db26c72989b80e80e",
+      "base_git_blob_sha256": "439456828BC2AE9EE8770107718630D7D1E5EF81F9BD5705DFED9DE1EF7686FC",
+      "source_role": "Byte-exact current port ancestor; historical HOK/RT56/translation attribution retained in integration ledger"
+    },
+    "localisation/english/HOK_KOR_civic_state_l_english.yml": {
+      "previous_sha256": "4FFA106AF26D078432DEA853C4B341BE33D3A5E547D63B47A1024274FC1C9EE1",
+      "sha256": "C905815621AB3DAC5E48F7372314DC80B2634201A0634D48CDAC46EA11C55779",
+      "previous_size": 22976,
+      "size": 23181,
+      "previous_snapshot": "before/localisation/english/HOK_KOR_civic_state_l_english.yml",
+      "classification": "ADD",
+      "base_git_blob": "65a7b956167578c9eb6193f9db720d356becc5e5",
+      "base_git_blob_sha256": "8A8764C00C469FD6482F63F926F9D96E0A57850B6E14B52F0B9B3D1B2D189CBE",
+      "source_role": "Byte-exact current port ancestor; historical HOK/RT56/translation attribution retained in integration ledger"
+    },
+    "localisation/korean/HOK_KOR_civic_state_l_korean.yml": {
+      "previous_sha256": "546845E0B1F2F997DCDC4EF22EDAE77F6C3024C1A4898B1187DE251346EFC8F7",
+      "sha256": "E711FAAD10B71C1A74EF4AB0C201C4306596FD5BECB7DB2565C85925C0448829",
+      "previous_size": 20451,
+      "size": 20656,
+      "previous_snapshot": "before/localisation/korean/HOK_KOR_civic_state_l_korean.yml",
+      "classification": "ADD",
+      "base_git_blob": "ab089868745352276066cf5a83dee4de81180f42",
+      "base_git_blob_sha256": "1B112321A1C3900FBF46C52B69E586701E1DAFDA9C18C2AE97D1872D6F2EB1AF",
+      "source_role": "Byte-exact current port ancestor; historical HOK/RT56/translation attribution retained in integration ledger"
+    },
+    "map/buildings.txt": {
+      "previous_sha256": "0CB4A2ABA190F42D31F732159C77A48732C41B7CFAD5F7E94816242E2D62835D",
+      "sha256": "FC70C7C85B9FD8CD9567477C648A80E8F29454EB88D270DE6D189EDB3124BEFA",
+      "previous_size": 3604814,
+      "size": 3604759,
+      "previous_snapshot": "before/map/buildings.txt",
+      "classification": "THREE_WAY_MERGE",
+      "base_git_blob": "e7917ffe361caa9239dfb49e0225ba21f81800cc",
+      "base_git_blob_sha256": "44742D3CE5124B732ADB5E758CE029EAE61E09369149C3859B5A35FA84B0CF16",
+      "source_role": "Byte-exact current port ancestor; historical HOK/RT56/translation attribution retained in integration ledger"
+    }
+  }
+}

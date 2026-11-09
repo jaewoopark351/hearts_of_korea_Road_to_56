@@ -1182,7 +1182,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     # The content layer rejects a non-identical historical ledger predecessor.
     from upstream_content_update import ledger_bytes as content_ledger_bytes
     from rt56_host_update import ledger_bytes as host_ledger_bytes
-    final = host_ledger_bytes(content_ledger_bytes(stream.getvalue().encode("utf-8")))
+    #20261109_kpopmodder: Retain inherited provenance and append only the four registered review output revisions.
+    from review_followup import ledger_bytes as review_ledger_bytes
+    final = review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(stream.getvalue().encode("utf-8"))))
     final_rows = list(csv.DictReader(io.StringIO(final.decode("utf-8"), newline="")))
     final_counts = Counter(row["integration_class"] for row in final_rows)
     final_collisions = sum(row["exact_path_rt56_collision"] == "yes" for row in final_rows)
@@ -1368,7 +1370,9 @@ def update_state_split_rows(rows: list[dict[str, str]], *, output_root: Path = R
         #20261108_kpopmodder: Check the unchanged split ancestor only after exact verification of the new content bytes.
         from upstream_content_update import historical_bytes as content_historical
         from rt56_host_update import historical_bytes as host_historical
-        if not actual_path.is_file() or sha(content_historical(relative,host_historical(relative,actual_path.read_bytes()))) != digest:
+        #20261109_kpopmodder: Prove the bounded review revision before checking the unchanged split ledger ancestor.
+        from review_followup import historical_bytes as review_historical
+        if not actual_path.is_file() or sha(content_historical(relative,host_historical(relative,review_historical(relative,actual_path.read_bytes())))) != digest:
             raise ValueError(f"state-split ledger final output drift: {relative}")
         source = record["source_path"]
         source_hash = record["source_sha256"]
@@ -1468,7 +1472,9 @@ def build_state_split_csv(*, output_root: Path = REPO_ROOT) -> bytes:
     #20261108_kpopmodder: Preserve the prior ledger and append the independently pinned November provenance.
     from upstream_content_update import ledger_bytes as content_ledger_bytes
     from rt56_host_update import ledger_bytes as host_ledger_bytes
-    return host_ledger_bytes(content_ledger_bytes(b"".join(chunks)))
+    #20261109_kpopmodder: Keep scoped ledger regeneration on the same terminal review contract as the full builder.
+    from review_followup import ledger_bytes as review_ledger_bytes
+    return review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(b"".join(chunks))))
 
 
 def main() -> int:

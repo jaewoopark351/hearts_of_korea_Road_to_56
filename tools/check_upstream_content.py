@@ -180,7 +180,10 @@ class Inspector:
 
     def read(self, relative: str) -> bytes:
         key = self._payload_keys.get(relative.replace("\\", "/").casefold())
-        return self.payloads[key] if key is not None else (self.root / relative).read_bytes()
+        raw = self.payloads[key] if key is not None else (self.root / relative).read_bytes()
+        #20261109_kpopmodder: Independently prove exact review deltas before auditing unchanged historical contracts.
+        from check_review_followup import historical_bytes as review_historical
+        return review_historical(relative, raw)
 
     def effective_sources(self, directory: str) -> Iterator[tuple[str, str, bytes]]:
         """Inventory the recorded vanilla -> RT56 -> port relative-path shadow.

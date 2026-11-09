@@ -233,3 +233,7 @@ interface/HOK_KOR_cndp_icons.gfx text eol=crlf
 localisation/korean/HOK_KOR_cndp_state_development_l_korean.yml text eol=crlf
 localisation/korean/HOK_KOR_state_split_l_korean.yml text eol=crlf
 map/buildings.txt text eol=crlf
+
+#20261109_kpopmodder: Preserve the exact four review-followup ancestors and the independent revision lock across checkouts.
+docs/upstream/hok-review-followup-20261109/** -text
+tools/hok_review_followup_lock.json text eol=lf

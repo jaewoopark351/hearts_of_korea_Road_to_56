@@ -2,8 +2,11 @@
 
 이 폴더는 Hearts of Korea × The Road to 56 신규 호환 포트의 설계, 결정, 구현, 감사와 검증 기록을 보관한다.
 
+현지화·표식/변수 표시 또는 주·프로빈스 참조를 검토하거나 변경하기 전에는 [변경 영향 검토 절차](HOK_CHANGE_COVERAGE_REVIEW.md)와 그 절차에서 연결하는 분야별 로컬 스킬을 읽는다. 2026-11-09 지침 도입은 문서 전용이며 기존 콘텐츠의 전수 감사나 추가 런타임 검증 결과가 아니다.
+
 ## 현재 상태
 
+- 2026-11-09 검토 후속 수선 **구현 적용 / 실제 UI 검증 차단 / 사용자 프로필 복구 완료 / OSK 창 잔존**: civic 수치 metadata6곳·한영 새 키1쌍과 내륙 부유항1행 제외를 네 출력에 반영했다. aggregate는 **25 PASS / 0 WARNING / 11 기존 ERROR**이며 최초 원장 실패와 저장 덮어쓰기 사건도 보존한다. R0/C0 smoke와 새 BASE raw16/0은 실제 CIV 효과·저장 왕복 완료가 아니다. UI 차단 뒤 사용자의 판단 위임에 따라 소유 게임에 `/F` 없는 종료 요청을 보내 PID 부재를 확인·수집했으며 정상 UI 메뉴 종료는 관측하지 않았다. 원래 metadata18개·저장75개·선택과 시험 `.mod` 부재를 복구하고 runtime1,476개 중 네 변경만 남김을 확인했다. 접근 거부로 OSK 창은 남았고 CIV 실제 표시·지급·guard/clamp·저장과 LOC-02/03은 미검증·후자 코드 유지다. 재개 전 [계획의 현재 상태](plans/2026-11-09-localisation-state-review-followup-plan.md)와 [구현·실행·사건·종료/복구 기록](implementation/2026-11-09-review-followup-repairs.md)을 읽는다. 최초 문서 전용 단계와 저장 사건을 뒤의 차이0으로 덮지 않는다.
 - 2026-11-09 RT56 자동 갱신 대응 마감: 승인된 manifest `1963361040482473746`의 호스트4개와 HOK32개를 연결하고 지도24·기존 source pins·승인된 회복 수선을 보존했다. 실제 CNDP 비용/타이머·선택 저장·한영 회복 UI와 refs6을 각 한계 안에서 관측했고, 세션 종료·수집·프로필 복구 및 파일 보존 감사 **68/0**을 완료했다. 최종 aggregate는 **23 PASS / 0 WARNING / 11 기존 ERROR**다. PRC 경고군은 RT56 단독 재로드에서도 재현됐으며 근본 원인은 미확정이다. 첫 watcher 실패와 수선 전 overflow 등 과거 실패도 보존한다. [실제 상태·남은 한계](implementation/2026-11-08-hok-upstream-content-port.md), [ADR-0008](decisions/0008-november-rt56-host-update.md), [새 호스트 입력](upstream/rt56-host-update-20261108/README.md)을 읽는다.
 - 2026-11-08 원본 `596b221` 후속 구현: **CNDP13·표시·한국/외국 참조32출력(기존13+신규19) 소스 통합과 선택 범위 실행·복구 완료**. 초기913/0/1 runtime UNVERIFIED와 aggregate21/0/11은 수선·새 호스트 대응 전 계층의 과거 기록이다. 현재의 확인 범위와 미검증 동작을 전체 호환성·무오류로 확대하지 않는다. FRI 인도차이나·Singapore·KCH1114·SOV/코민테른1152의 결정은 [ADR-0007](decisions/0007-november-content-integration.md), 실제 결과·증거·복구는 [구현 기록](implementation/2026-11-08-hok-upstream-content-port.md)을 따른다. 이 계층 수정·재생성·검증 전 해당 기록과 [선택 입력 안내](upstream/hok-content-update-20261108/README.md)를 읽는다.
 - 2026-11-08 최초 문서화 이력: 기존 분할 donor42입력 중37개 동일·5개 추가 변경, 동결밖31개를 합친36경로를 검토 후보로 기록했다. [최초 이식 계획](plans/2026-11-08-hok-upstream-content-port-plan.md)은 당시 문서화 전용 결과이며 이후 승인된 구현·실행 결과와 구분한다. 후보36개 전체 복사나 지침 파일 동기화를 수행한 것으로 해석하지 않는다.
@@ -35,6 +38,8 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 검토 절차 | [변경 영향·누락 방지와 지침 출처](HOK_CHANGE_COVERAGE_REVIEW.md) | 현지화·주 참조 검토/변경 전 읽음. 호환판 한영 정책·RT56 지도 기준·사용처별 처리·검증 단계 구분 |
+| 수선 계획·후속 구현 | [현지화·주 참조 검토 후속](plans/2026-11-09-localisation-state-review-followup-plan.md) / [수선·UI 차단·실제 복구 checkpoint](implementation/2026-11-09-review-followup-repairs.md) | 구현·재생성·검증/재개 전 읽음. 네 출력·정적25/0/11·저장 충돌 이력·BASE raw16/0·미검증 UI/효과·프로필 복구 완료와 OSK 창 잔존 구분 |
 | 구현·결정 | [11월8일 콘텐츠 이식](implementation/2026-11-08-hok-upstream-content-port.md) / [ADR-0007](decisions/0007-november-content-integration.md) | 32출력·신규19경로 통합, 선택 범위 실제 실행·복구 및 미검증 한계 기록. 이 계층 수정·재생성·검증 전 읽음 |
 | 원본 입력 | [11월8일 선택 입력·host·기존 포트](upstream/hok-content-update-20261108/README.md) | donor36·문서13·compat16+보호1·host2·이전 원장. 재현/출처/그림 재사용 전 읽음 |
 | 계획·검토 | [11월8일 원본 추가 콘텐츠 이식](plans/2026-11-08-hok-upstream-content-port-plan.md) | 문서화만. CNDP13·표시·참조36후보의 반영/유지/제외/미확인, 주별 보상·저장 계약·생성 소유권·후속 검증 구분. 추가 내용 구현·검증 전 읽음 |

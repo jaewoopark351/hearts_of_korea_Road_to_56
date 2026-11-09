@@ -236,7 +236,9 @@ def verify_inputs() -> None:
             raise ValueError(f'removed RT56 input reappeared: {name}')
     for group in ('preserved_content_hashes', 'preserved_map_hashes', 'preserved_runtime_hashes'):
         for name, digest in lock()[group].items():
-            actual = sha((ROOT / name).read_bytes())
+            #20261109_kpopmodder: Prove the exact later repair before comparing every original protected runtime pin.
+            from review_followup import historical_bytes as review_historical
+            actual = sha(review_historical(name,(ROOT / name).read_bytes()))
             if actual != digest and not (group == 'preserved_content_hashes'
                                          and approved_runtime_revision(name, digest, actual)):
                 raise ValueError(f'host adaptation changed protected runtime: {name}')
