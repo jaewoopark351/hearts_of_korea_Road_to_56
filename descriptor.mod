@@ -9,7 +9,6 @@ name="하츠 오브 코리아 Hearts of Korea[Road to 56 호환]"
 dependencies={
 	"The Road to 56"
 	"Korean Language"
-	#20261110_kpopmodder: Keep compatibility localisation after the active RT56 Korean translation.
 	"The Road to 56 Korean Translation"
 }
 supported_version="1.19.*"
