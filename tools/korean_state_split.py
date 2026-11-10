@@ -344,11 +344,17 @@ def main() -> int:
             #20261109_kpopmodder: Check/write final review bytes without changing the historical split output pin.
             from review_followup import finalize_one as review_finalize
             data=review_finalize(name,data)
+            #20261110_kpopmodder: Protect and admit only exact registered industry ancestors when this older CLI advances them.
+            from upstream_industry_update import lock as industry_lock, preflight_outputs as industry_preflight
+            industry_preflight({name:data})
             path=ROOT/name
             current=path.read_bytes() if path.is_file() else None
             if current==data: continue
             if args.apply:
                 allowed={record['sha256'],record.get('previous_sha256'),*record.get('accepted_previous_outputs',[])}
+                industry_record=industry_lock()['outputs'].get(name)
+                if industry_record:
+                    allowed.add(industry_record['previous_sha256'])
                 if current is not None and sha(current) not in allowed:
                     raise ValueError(f'refusing independently modified output: {name}')
                 pending.append((path,data))

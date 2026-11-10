@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-10",
+  "timezone": "Asia/Seoul",
+  "source_root": "C:\\hoi\\hearts_of_korea",
+  "source_commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+  "source_status": " M common/decisions/HOK_KOR_industry_expansion.txt\n M common/national_focus/korea.txt\n M docs/HOK_KOREAN_RESEARCH_NETWORK_SPEC.md\n M docs/HOK_KOREAN_STATE_SPLIT_PLAN.md\n M localisation/english/HOK_KOR_industry_expansion_l_english.yml\n M localisation/english/HOK_KOR_research_network_l_english.yml\n M localisation/korean/HOK_KOR_industry_expansion_l_korean.yml\n M localisation/korean/HOK_KOR_research_network_l_korean.yml\n",
+  "sources": {
+    "common/national_focus/korea.txt": {
+      "source": "C:\\hoi\\hearts_of_korea\\common\\national_focus\\korea.txt",
+      "git_blob": "1a6189e391978df2ffe1fafa3e45c322a8dd15a8",
+      "before_sha256": "009F2E65B85212D6BADB1D021DA010DA580E9665FD3A2565809444ECC68B717E",
+      "after_sha256": "FCAB533936D55625692B6A58422C6556713A45E0DBDB344B0004262D0E9EB85B",
+      "size": 506101
+    },
+    "common/decisions/HOK_KOR_industry_expansion.txt": {
+      "source": "C:\\hoi\\hearts_of_korea\\common\\decisions\\HOK_KOR_industry_expansion.txt",
+      "git_blob": "8b4436ec9d4fa8a6f0842dea53a240119096ef13",
+      "before_sha256": "D58F50BCEC3E4588584AC98B22523DD554096F18026B1C06921B28D885139212",
+      "after_sha256": "AAB341BA5E0E4F47CF083C40EEF13F709E756A3B455C9A47387108197D485CC1",
+      "size": 12640
+    },
+    "localisation/english/HOK_KOR_industry_expansion_l_english.yml": {
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HOK_KOR_industry_expansion_l_english.yml",
+      "git_blob": "75ec3567ef9e7955ff531deb65c05c202c619f5c",
+      "before_sha256": "7560447EB22C224BCFE882F333FC43BA477F912FE87393DC471AE86874F9A323",
+      "after_sha256": "A8CC4B69BA96A5CE89B5C4E77987251FEE19717D22ECB1376B19D415A72C7E51",
+      "size": 21076
+    },
+    "localisation/korean/HOK_KOR_industry_expansion_l_korean.yml": {
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HOK_KOR_industry_expansion_l_korean.yml",
+      "git_blob": "0034a6c742d967e67775e87a483740b6fe32f1d1",
+      "before_sha256": "D3E52663C69D172851B87268E827A77030C65A6143A3DF05DB6B041E07CCDDA5",
+      "after_sha256": "FB2F94CE5740D00CE5E8201F6143C1957781CF216BD4CAE8CC8F6F17E54F322A",
+      "size": 21075
+    },
+    "localisation/english/HOK_KOR_research_network_l_english.yml": {
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HOK_KOR_research_network_l_english.yml",
+      "git_blob": "a9cba8e21c83e21c0130c6b43ce3b250bd55d9b7",
+      "before_sha256": "E0624D250AB1C46C0E274F840DC77692EEB752345A12C0633B529591681FA9A4",
+      "after_sha256": "6C4F9F927A4D4640ED1F64EAA358E87A2EEB9F5BE253EBD03F60ADD97B988D7C",
+      "size": 2571
+    },
+    "localisation/korean/HOK_KOR_research_network_l_korean.yml": {
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HOK_KOR_research_network_l_korean.yml",
+      "git_blob": "efd15d7188ae4b1f5cdab4161b6e2a14c3748add",
+      "before_sha256": "BA7C455327F224E5A72D1BE0469A2FAD8B203BDE0F9295E1E94DE0DC73BC2831",
+      "after_sha256": "B2DEC32207278F22CF0ED2962359D34C4D2A613FB44B554ACF90A7592074B17F",
+      "size": 2570
+    },
+    "docs/HOK_KOREAN_RESEARCH_NETWORK_SPEC.md": {
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\HOK_KOREAN_RESEARCH_NETWORK_SPEC.md",
+      "git_blob": "a5ec3d72abaa28136055652f6eeb5aa05f605aaf",
+      "before_sha256": "7BFBD0D6EFA8F21E0022D9E87EB75F51AFAD84EDC6784166D02A350C6AAC6D38",
+      "after_sha256": "05B2B21B3CC00BFC52F7EA5984DA86A9E66FC5503DF5A0AAD01BF920977B2F00",
+      "size": 27168
+    },
+    "docs/HOK_KOREAN_STATE_SPLIT_PLAN.md": {
+      "source": "C:\\hoi\\hearts_of_korea\\docs\\HOK_KOREAN_STATE_SPLIT_PLAN.md",
+      "git_blob": "da5afcb249f205e12e6e8c4790189b566390555e",
+      "before_sha256": "B0BE352D37D3C55CC4419FD4DEF7CD5DC45F3AD414CE13DAA07DCECDAB0526D8",
+      "after_sha256": "93A9FD5A51C11BCFD0D3982EB8D9C170358F4F219B10503D33B3B4B92BB1A980",
+      "size": 52696
+    }
+  },
+  "ancestors": {
+    "common/national_focus/korea.txt": {
+      "sha256": "6D98EBB26EDA579D0A00ABCEA97D15E78164335A5C1D9FE65B0F894F9D6A53AC",
+      "size": 519338,
+      "source": "C:\\hoi\\hearts_of_korea_Road_to_56\\common\\national_focus\\korea.txt"
+    },
+    "common/decisions/HOK_KOR_industry_expansion.txt": {
+      "sha256": "1F1ACDAE198CC70C5D5A11653D3F843ABD2EFA9CE08F32864EACFB782093DB5D",
+      "size": 8318,
+      "source": "C:\\hoi\\hearts_of_korea_Road_to_56\\common\\decisions\\HOK_KOR_industry_expansion.txt"
+    },
+    "localisation/english/HOK_KOR_industry_expansion_l_english.yml": {
+      "sha256": "6DB0F3DC4DFC4295C61FF9D2A93FB6E19D4B2A8F482BE402BCBA5C17E81AB7A3",
+      "size": 18290,
+      "source": "C:\\hoi\\hearts_of_korea_Road_to_56\\localisation\\english\\HOK_KOR_industry_expansion_l_english.yml"
+    },
+    "localisation/korean/HOK_KOR_industry_expansion_l_korean.yml": {
+      "sha256": "A82C0B718F7EB636FEFEA289336FC1B913244DBE8665D0247C8F084ACAA2E40B",
+      "size": 17762,
+      "source": "C:\\hoi\\hearts_of_korea_Road_to_56\\localisation\\korean\\HOK_KOR_industry_expansion_l_korean.yml"
+    }
+  },
+  "translation_sources": {
+    "localisation/english/HOK_KOR_industry_expansion_l_english.yml": {
+      "source": "C:\\hoi\\Hearts of Korea English Translation Anime Modder's Edition\\localisation\\english\\HOK_KOR_industry_expansion_l_english.yml",
+      "copy": "translation_source/localisation/english/HOK_KOR_industry_expansion_l_english.yml",
+      "sha256": "884B849616397E3DCB48745B1D00C99CA71FB505B7BDE4D01FBFC66152A5A2F9",
+      "size": 21248,
+      "commit": "34f1c7740f2b152c97c9993413202bd3d14d8fe4",
+      "status": "M localisation/english/HOK_KOR_industry_expansion_l_english.yml\n M localisation/english/HOK_KOR_research_network_l_english.yml",
+      "role": "working-tree English source; only selected industry values, regional labels adapted"
+    }
+  }
+}

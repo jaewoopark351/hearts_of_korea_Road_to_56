@@ -6,6 +6,8 @@
 
 ## 현재 상태
 
+- 2026-11-10 원본 지역 산업 업데이트: **기존4출력 선택 구현·범위 정적 확인 완료 / 실행 검증 대기**. 5중점 보상 강화·남북 독립 투자3개 추가·한영 각16값을 반영하고 연구망 함남 표시는 이미 적용돼 유지했다. 독립 정적219/0, aggregate **27 PASS / 0 WARNING / 11 기존 ERROR**로 사전과 오류 본문이 같다. 이번 계층 수정·재생성·검증 전 [변경 범위·처리 대장·실제 확인 상태](implementation/2026-11-10-korean-industry-update-port.md)와 [선택 입력 안내](upstream/hok-industry-update-20261110/README.md)를 읽는다. 기존 실행 결과를 새 업데이트의 검증으로 사용하지 않는다.
+
 - 2026-11-09 재벌 영어 표현: 영어 8파일·43개 값을 `corporate oligarchs`/`conglomerates`로 문맥에 맞게 수정하고 AGENTS·현지화 스킬에 의미·논조 번역 지침을 추가했다. 기존 식별자·한국어·게임플레이와 과거 입력은 유지한다. 해당 문구 수정·재생성 전 [구현·소스/검사 기록](implementation/2026-11-09-chaebol-english-terminology.md)과 [유지 입력 안내](upstream/hok-english-terminology-20261109/README.md)를 읽는다. 이번 작업은 새 게임 실행이나 기존 미검증 UI 항목의 통과가 아니다.
 
 - 2026-11-09 검토 후속 수선 **구현 적용 / 실제 UI 검증 차단 / 사용자 프로필 복구 완료 / OSK 창 잔존**: civic 수치 metadata6곳·한영 새 키1쌍과 내륙 부유항1행 제외를 네 출력에 반영했다. aggregate는 **25 PASS / 0 WARNING / 11 기존 ERROR**이며 최초 원장 실패와 저장 덮어쓰기 사건도 보존한다. R0/C0 smoke와 새 BASE raw16/0은 실제 CIV 효과·저장 왕복 완료가 아니다. UI 차단 뒤 사용자의 판단 위임에 따라 소유 게임에 `/F` 없는 종료 요청을 보내 PID 부재를 확인·수집했으며 정상 UI 메뉴 종료는 관측하지 않았다. 원래 metadata18개·저장75개·선택과 시험 `.mod` 부재를 복구하고 runtime1,476개 중 네 변경만 남김을 확인했다. 접근 거부로 OSK 창은 남았고 CIV 실제 표시·지급·guard/clamp·저장과 LOC-02/03은 미검증·후자 코드 유지다. 재개 전 [계획의 현재 상태](plans/2026-11-09-localisation-state-review-followup-plan.md)와 [구현·실행·사건·종료/복구 기록](implementation/2026-11-09-review-followup-repairs.md)을 읽는다. 최초 문서 전용 단계와 저장 사건을 뒤의 차이0으로 덮지 않는다.

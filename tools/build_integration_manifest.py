@@ -1186,7 +1186,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     from review_followup import ledger_bytes as review_ledger_bytes
     #20261109_kpopmodder: Append the narrow English terminology revision after every unchanged provenance layer.
     from english_terminology import ledger_bytes as terminology_ledger_bytes
-    final = terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(stream.getvalue().encode("utf-8")))))
+    #20261110_kpopmodder: Append the reviewed industry provenance after the unchanged historical ledger layers.
+    from upstream_industry_update import ledger_bytes as industry_ledger_bytes
+    final = industry_ledger_bytes(terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(stream.getvalue().encode("utf-8"))))))
     final_rows = list(csv.DictReader(io.StringIO(final.decode("utf-8"), newline="")))
     final_counts = Counter(row["integration_class"] for row in final_rows)
     final_collisions = sum(row["exact_path_rt56_collision"] == "yes" for row in final_rows)
@@ -1479,7 +1481,9 @@ def build_state_split_csv(*, output_root: Path = REPO_ROOT) -> bytes:
     from review_followup import ledger_bytes as review_ledger_bytes
     #20261109_kpopmodder: Scoped rebuilds retain the same final English terminology hashes and attribution.
     from english_terminology import ledger_bytes as terminology_ledger_bytes
-    return build_documentation_csv(terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(b"".join(chunks))))))
+    #20261110_kpopmodder: Scoped rebuilds retain the same terminal industry hashes and attribution as the full builder.
+    from upstream_industry_update import ledger_bytes as industry_ledger_bytes
+    return build_documentation_csv(industry_ledger_bytes(terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(b"".join(chunks)))))))
 
 
 def main() -> int:

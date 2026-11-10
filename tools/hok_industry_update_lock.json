@@ -1,0 +1,224 @@
+{
+  "format": 1,
+  "revision": "2026-11-10-industry-v1",
+  "base_commit": "287c5a22f264075bac65505e0a3e9d8a29ff24f3",
+  "source_commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+  "source_kind": "reviewed-working-tree-snapshot",
+  "source_manifest_sha256": "AF964A29CE6380BF5E18C69F26D67E0E74A032F3538CD2A453F815A7A89934DA",
+  "rt56_root": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968",
+  "vanilla_root": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV",
+  "workshop_manifest": "1963361040482473746",
+  "game_version": "Operation Postern v1.19.4.2.2da5 (0bdb)",
+  "focus_ids": [
+    "KOR_northern_development",
+    "KOR_southern_development",
+    "KOR_central_region_development",
+    "KOR_gyeongbu_expressway",
+    "KOR_gyeongui_expressway",
+    "HOK_KOR_pyeongan_machine_workshops",
+    "HOK_KOR_chungcheong_supplier_network",
+    "HOK_KOR_gyeongsang_export_workshops"
+  ],
+  "state_mapping": {
+    "1028": 918,
+    "1029": 1144,
+    "1030": 920,
+    "1031": 1145,
+    "1082": 919,
+    "1083": 917,
+    "1084": 1146,
+    "1085": 1147,
+    "1086": 1148,
+    "1087": 1149,
+    "1088": 1150,
+    "1089": 1151,
+    "1090": 1152,
+    "1091": 1153
+  },
+  "locale_edits": {
+    "localisation/english/HOK_KOR_industry_expansion_l_english.yml": {
+      "HOK_KOR_pyeongan_machine_workshops_desc": {
+        "before": "We shall put Pyeongan's machining skills to work in arms production. Spending 150 Political Power on the subsequent investment project builds a military factory. No civilian factories are occupied.",
+        "after": "We shall put Pyeongan's machining skills to work in arms production. Separate investment projects in South Pyeongan and North Pyeongan each build a military factory. Each project costs 150 Political Power and occupies no civilian factories."
+      },
+      "HOK_KOR_chungcheong_supplier_network_desc": {
+        "before": "Even a large factory waits for small components. We shall prepare Chungcheong's component supply network, then build civilian factories through subsequent investment projects to link production across the country.",
+        "after": "Even a large factory waits for small components. We shall prepare Chungcheong's component supply network, then build civilian factories through separate investment projects in South Chungcheong and North Chungcheong to link production across the country."
+      },
+      "HOK_KOR_gyeongsang_export_workshops_desc": {
+        "before": "Alongside export cargo, we need ships to carry it. We shall link Gyeongsang's ports and industrial base, then expand construction capacity through subsequent dockyard investment projects.",
+        "after": "Alongside export cargo, we need ships to carry it. We shall link Gyeongsang's ports and industrial base, then expand construction capacity through separate dockyard investment projects in South Gyeongsang and North Gyeongsang."
+      },
+      "HOK_KOR_regional_industry_projects_desc": {
+        "before": "Turning a drawing into a factory requires further investment. Machining, electrical equipment, component supply and shipbuilding each require different facilities in different regions. We shall turn the plans prepared by subsequent regional focuses into actual construction and deliveries.\\n\\nEach project costs 150 Political Power, occupies no civilian factories and takes 90 days. The same region cannot run duplicate projects simultaneously. After completion or cancellation, projects can be repeated without limit, provided their conditions are met and the cost is paid again.",
+        "after": "Turning a drawing into a factory requires further investment. Machining, electrical equipment, component supply and shipbuilding each require different facilities in different regions. We shall turn the plans prepared by subsequent regional focuses into actual construction and deliveries.\\n\\nEach project costs 150 Political Power, occupies no civilian factories and takes 90 days. Only one instance of a project can run in its state at a time. After completion or cancellation, projects can be repeated without limit, provided their conditions are met and the cost is paid again."
+      },
+      "HOK_KOR_pyeongan_industry_project": {
+        "before": "Invest in Pyeongan Machine Factories",
+        "after": "Invest in South Pyeongan Machine Factories"
+      },
+      "HOK_KOR_pyeongan_industry_project_desc": {
+        "before": "Growing arms orders will not turn Pyeongan's drawings into deliveries without enough machine tools and workshops. We shall expand machining facilities and workshops in Pyeongan, turning designs into arms production.\\n\\nCosts §Y150§! Political Power and occupies no civilian factories. After §Y90 days§!, adds §G1§! building slot and §G1§! military factory in South Pyeongan.\\n\\nCancelled if ownership or full control of either North or South Pyeongan is lost, if no building slots remain in South Pyeongan or if Korea capitulates. Costs are not refunded. Can be repeated after completion or cancellation if the conditions are met and the cost is paid again.",
+        "after": "Growing arms orders will not turn drawings into deliveries without enough machine tools and workshops. We shall expand machining facilities and workshops in South Pyeongan, turning designs into arms production.\\n\\nCosts §Y150§! Political Power and occupies no civilian factories. Requires ownership and full control of South Pyeongan and room to build a military factory there. After §Y90 days§!, adds §G1§! building slot and §G1§! military factory in South Pyeongan.\\n\\nCancelled if ownership or full control of the project state is lost, if there is no longer room for a military factory or if Korea capitulates. Costs are not refunded. Can be repeated after completion or cancellation if the conditions are met and the cost is paid again."
+      },
+      "HOK_KOR_pyeonganbuk_industry_project": {
+        "before": null,
+        "after": "Invest in North Pyeongan Machine Factories"
+      },
+      "HOK_KOR_pyeonganbuk_industry_project_desc": {
+        "before": null,
+        "after": "Growing arms orders will not turn drawings into deliveries without enough machine tools and workshops. We shall expand machining facilities and workshops in North Pyeongan, turning designs into arms production.\\n\\nCosts §Y150§! Political Power and occupies no civilian factories. Requires ownership and full control of North Pyeongan and room to build a military factory there. After §Y90 days§!, adds §G1§! building slot and §G1§! military factory in North Pyeongan.\\n\\nCancelled if ownership or full control of the project state is lost, if there is no longer room for a military factory or if Korea capitulates. Costs are not refunded. Can be repeated after completion or cancellation if the conditions are met and the cost is paid again."
+      },
+      "HOK_KOR_chungcheong_industry_project": {
+        "before": "Invest in Chungcheong Component Factories",
+        "after": "Invest in South Chungcheong Component Factories"
+      },
+      "HOK_KOR_chungcheong_industry_project_desc": {
+        "before": "Even a large factory's assembly line stops when one small component is late. We shall expand machining and delivery facilities in Chungcheong, making the parts that must arrive before the finished products can.\\n\\nCosts §Y150§! Political Power and occupies no civilian factories. After §Y90 days§!, adds §G1§! building slot and §G1§! civilian factory in South Chungcheong.\\n\\nCancelled if ownership or full control of either North or South Chungcheong is lost, if no building slots remain in South Chungcheong or if Korea capitulates. Costs are not refunded. Can be repeated after completion or cancellation if the conditions are met and the cost is paid again.",
+        "after": "Even a large factory's assembly line stops when one small component is late. We shall expand machining and delivery facilities in South Chungcheong, making the parts that must arrive before the finished products can.\\n\\nCosts §Y150§! Political Power and occupies no civilian factories. Requires ownership and full control of South Chungcheong and room to build a civilian factory there. After §Y90 days§!, adds §G1§! building slot and §G1§! civilian factory in South Chungcheong.\\n\\nCancelled if ownership or full control of the project state is lost, if there is no longer room for a civilian factory or if Korea capitulates. Costs are not refunded. Can be repeated after completion or cancellation if the conditions are met and the cost is paid again."
+      },
+      "HOK_KOR_chungcheongbuk_industry_project": {
+        "before": null,
+        "after": "Invest in North Chungcheong Component Factories"
+      },
+      "HOK_KOR_chungcheongbuk_industry_project_desc": {
+        "before": null,
+        "after": "Even a large factory's assembly line stops when one small component is late. We shall expand machining and delivery facilities in North Chungcheong, making the parts that must arrive before the finished products can.\\n\\nCosts §Y150§! Political Power and occupies no civilian factories. Requires ownership and full control of North Chungcheong and room to build a civilian factory there. After §Y90 days§!, adds §G1§! building slot and §G1§! civilian factory in North Chungcheong.\\n\\nCancelled if ownership or full control of the project state is lost, if there is no longer room for a civilian factory or if Korea capitulates. Costs are not refunded. Can be repeated after completion or cancellation if the conditions are met and the cost is paid again."
+      },
+      "HOK_KOR_gyeongsang_shipbuilding_project": {
+        "before": "Invest in Gyeongsang Export Dockyards",
+        "after": "Invest in South Gyeongsang Export Dockyards"
+      },
+      "HOK_KOR_gyeongsang_shipbuilding_project_desc": {
+        "before": "A shipbuilding contract remains merely paperwork awaiting delivery if there is no room to assemble the hull. We shall provide space in Gyeongsang to build the ships described in those contracts.\\n\\nCosts §Y150§! Political Power and occupies no civilian factories. Requires building space in coastal South Gyeongsang. After §Y90 days§!, adds §G1§! building slot and §G1§! dockyard in South Gyeongsang.\\n\\nCancelled if ownership or full control of either North or South Gyeongsang is lost, if no building slots remain in South Gyeongsang or if Korea capitulates. Costs are not refunded. Can be repeated after completion or cancellation if the conditions are met and the cost is paid again.",
+        "after": "A shipbuilding contract remains merely paperwork awaiting delivery if there is no room to assemble the hull. We shall provide space in South Gyeongsang to build the ships described in those contracts.\\n\\nCosts §Y150§! Political Power and occupies no civilian factories. Requires ownership and full control of South Gyeongsang, a coastal state, and room to build a dockyard there. After §Y90 days§!, adds §G1§! building slot and §G1§! dockyard in South Gyeongsang.\\n\\nCancelled if ownership or full control of the project state is lost, if there is no longer room for a dockyard or if Korea capitulates. Costs are not refunded. Can be repeated after completion or cancellation if the conditions are met and the cost is paid again."
+      },
+      "HOK_KOR_gyeongsangbuk_shipbuilding_project": {
+        "before": null,
+        "after": "Invest in North Gyeongsang Export Dockyards"
+      },
+      "HOK_KOR_gyeongsangbuk_shipbuilding_project_desc": {
+        "before": null,
+        "after": "A shipbuilding contract remains merely paperwork awaiting delivery if there is no room to assemble the hull. We shall provide space in North Gyeongsang to build the ships described in those contracts.\\n\\nCosts §Y150§! Political Power and occupies no civilian factories. Requires ownership and full control of North Gyeongsang, a coastal state, and room to build a dockyard there. After §Y90 days§!, adds §G1§! building slot and §G1§! dockyard in North Gyeongsang.\\n\\nCancelled if ownership or full control of the project state is lost, if there is no longer room for a dockyard or if Korea capitulates. Costs are not refunded. Can be repeated after completion or cancellation if the conditions are met and the cost is paid again."
+      }
+    },
+    "localisation/korean/HOK_KOR_industry_expansion_l_korean.yml": {
+      "HOK_KOR_pyeongan_machine_workshops_desc": {
+        "before": "평안의 가공 기술을 병기 생산으로 잇겠습니다. 후속 투자 사업에 정치력 150을 쓰면 군수공장을 건설합니다. 민간공장은 점유하지 않습니다.",
+        "after": "평안의 가공 기술을 병기 생산으로 잇겠습니다. 평안남도와 평안북도에서 각각 투자 사업을 열어 군수공장을 건설합니다. 각 사업은 정치력 150을 쓰며 민간공장은 점유하지 않습니다."
+      },
+      "HOK_KOR_chungcheong_supplier_network_desc": {
+        "before": "큰 공장도 작은 부품을 기다립니다. 충청의 부품공급망을 준비하고, 후속 투자 사업으로 민간공장을 세워 각지의 생산을 잇겠습니다.",
+        "after": "큰 공장도 작은 부품을 기다립니다. 충청의 부품공급망을 준비하고, 충청남도와 충청북도의 별도 투자 사업으로 민간공장을 세워 각지의 생산을 잇겠습니다."
+      },
+      "HOK_KOR_gyeongsang_export_workshops_desc": {
+        "before": "수출할 화물 곁에는 그것을 실을 배도 필요합니다. 경상의 항만·공업 기반을 잇고, 후속 조선소 투자 사업으로 건조 능력을 넓히겠습니다.",
+        "after": "수출할 화물 곁에는 그것을 실을 배도 필요합니다. 경상의 항만·공업 기반을 잇고, 경상남도와 경상북도의 별도 조선소 투자 사업으로 건조 능력을 넓히겠습니다."
+      },
+      "HOK_KOR_regional_industry_projects_desc": {
+        "before": "도면이 공장이 되려면 다음 투자가 필요합니다. 기계 가공, 전기기기, 부품 공급과 선박 건조는 지역마다 필요한 설비가 다릅니다. 후속 지역 중점에서 준비한 계획을 실제 공사와 납품으로 이어 갑니다.\\n\\n사업당 정치력 150, 민간공장 점유 없음, 공사 90일입니다. 같은 지역의 동시 중복은 불가합니다. 완료하거나 취소된 뒤에는 조건을 갖추고 비용을 다시 내면 횟수 제한 없이 반복할 수 있습니다.",
+        "after": "도면이 공장이 되려면 다음 투자가 필요합니다. 기계 가공, 전기기기, 부품 공급과 선박 건조는 지역마다 필요한 설비가 다릅니다. 후속 지역 중점에서 준비한 계획을 실제 공사와 납품으로 이어 갑니다.\\n\\n사업당 정치력 150, 민간공장 점유 없음, 공사 90일입니다. 한 주에서 같은 사업은 한 번에 한 건만 진행할 수 있습니다. 완료하거나 취소된 뒤에는 조건을 갖추고 비용을 다시 내면 횟수 제한 없이 반복할 수 있습니다."
+      },
+      "HOK_KOR_pyeongan_industry_project": {
+        "before": "평안 기계공장 투자",
+        "after": "평안남도 기계공장 투자"
+      },
+      "HOK_KOR_pyeongan_industry_project_desc": {
+        "before": "병기 주문이 늘어도 가공할 기계와 작업장이 부족하면 평안의 도면은 납품으로 이어지지 못합니다. 평안의 가공 설비와 작업장을 늘려 도면이 병기 생산으로 이어지게 합니다.\\n\\n정치력 §Y150§!을 소모하며 민간공장은 점유하지 않습니다. §Y90일§! 후 평안남도에 슬롯 §G1개§!와 군수공장 §G1개§!를 추가합니다.\\n\\n평안남북도 중 어느 한 주의 소유권이나 완전통제를 잃거나 평안남도의 건설 슬롯이 없어지거나 한국이 항복하면 취소되며 비용은 환급되지 않습니다. 완료 또는 취소 후 조건을 갖추고 비용을 다시 내면 반복할 수 있습니다.",
+        "after": "병기 주문이 늘어도 가공할 기계와 작업장이 부족하면 도면은 납품으로 이어지지 못합니다. 평안남도의 가공 설비와 작업장을 늘려 도면이 병기 생산으로 이어지게 합니다.\\n\\n정치력 §Y150§!을 소모하며 민간공장은 점유하지 않습니다. 평안남도를 소유하고 완전히 통제해야 합니다. 군수공장 건설 여유가 필요합니다. §Y90일§! 후 평안남도에 건설 슬롯 §G1개§!와 군수공장 §G1개§!를 추가합니다.\\n\\n사업 대상 주의 소유권이나 완전 통제를 잃거나 군수공장 건설 여유가 없어지거나 한국이 항복하면 취소되며 비용은 환급되지 않습니다. 완료 또는 취소 후 조건을 갖추고 비용을 다시 내면 반복할 수 있습니다."
+      },
+      "HOK_KOR_pyeonganbuk_industry_project": {
+        "before": null,
+        "after": "평안북도 기계공장 투자"
+      },
+      "HOK_KOR_pyeonganbuk_industry_project_desc": {
+        "before": null,
+        "after": "병기 주문이 늘어도 가공할 기계와 작업장이 부족하면 도면은 납품으로 이어지지 못합니다. 평안북도의 가공 설비와 작업장을 늘려 도면이 병기 생산으로 이어지게 합니다.\\n\\n정치력 §Y150§!을 소모하며 민간공장은 점유하지 않습니다. 평안북도를 소유하고 완전히 통제해야 합니다. 군수공장 건설 여유가 필요합니다. §Y90일§! 후 평안북도에 건설 슬롯 §G1개§!와 군수공장 §G1개§!를 추가합니다.\\n\\n사업 대상 주의 소유권이나 완전 통제를 잃거나 군수공장 건설 여유가 없어지거나 한국이 항복하면 취소되며 비용은 환급되지 않습니다. 완료 또는 취소 후 조건을 갖추고 비용을 다시 내면 반복할 수 있습니다."
+      },
+      "HOK_KOR_chungcheong_industry_project": {
+        "before": "충청 부품공장 투자",
+        "after": "충청남도 부품공장 투자"
+      },
+      "HOK_KOR_chungcheong_industry_project_desc": {
+        "before": "큰 공장의 조립선도 작은 부품 하나가 늦으면 멈춥니다. 완성품보다 먼저 도착할 부품을 충청에서 만들도록 가공과 납품의 기반을 늘립니다.\\n\\n정치력 §Y150§!을 소모하며 민간공장은 점유하지 않습니다. §Y90일§! 후 충청남도에 슬롯 §G1개§!와 민간공장 §G1개§!를 추가합니다.\\n\\n충청남북도 중 어느 한 주의 소유권이나 완전통제를 잃거나 충청남도의 건설 슬롯이 없어지거나 한국이 항복하면 취소되며 비용은 환급되지 않습니다. 완료 또는 취소 후 조건을 갖추고 비용을 다시 내면 반복할 수 있습니다.",
+        "after": "큰 공장의 조립선도 작은 부품 하나가 늦으면 멈춥니다. 완성품보다 먼저 도착할 부품을 충청남도에서 만들도록 가공과 납품의 기반을 늘립니다.\\n\\n정치력 §Y150§!을 소모하며 민간공장은 점유하지 않습니다. 충청남도를 소유하고 완전히 통제해야 합니다. 민간공장 건설 여유가 필요합니다. §Y90일§! 후 충청남도에 건설 슬롯 §G1개§!와 민간공장 §G1개§!를 추가합니다.\\n\\n사업 대상 주의 소유권이나 완전 통제를 잃거나 민간공장 건설 여유가 없어지거나 한국이 항복하면 취소되며 비용은 환급되지 않습니다. 완료 또는 취소 후 조건을 갖추고 비용을 다시 내면 반복할 수 있습니다."
+      },
+      "HOK_KOR_chungcheongbuk_industry_project": {
+        "before": null,
+        "after": "충청북도 부품공장 투자"
+      },
+      "HOK_KOR_chungcheongbuk_industry_project_desc": {
+        "before": null,
+        "after": "큰 공장의 조립선도 작은 부품 하나가 늦으면 멈춥니다. 완성품보다 먼저 도착할 부품을 충청북도에서 만들도록 가공과 납품의 기반을 늘립니다.\\n\\n정치력 §Y150§!을 소모하며 민간공장은 점유하지 않습니다. 충청북도를 소유하고 완전히 통제해야 합니다. 민간공장 건설 여유가 필요합니다. §Y90일§! 후 충청북도에 건설 슬롯 §G1개§!와 민간공장 §G1개§!를 추가합니다.\\n\\n사업 대상 주의 소유권이나 완전 통제를 잃거나 민간공장 건설 여유가 없어지거나 한국이 항복하면 취소되며 비용은 환급되지 않습니다. 완료 또는 취소 후 조건을 갖추고 비용을 다시 내면 반복할 수 있습니다."
+      },
+      "HOK_KOR_gyeongsang_shipbuilding_project": {
+        "before": "경상 수출조선소 투자",
+        "after": "경상남도 수출조선소 투자"
+      },
+      "HOK_KOR_gyeongsang_shipbuilding_project_desc": {
+        "before": "선박 주문을 받아도 선체를 조립할 자리가 모자라면 항만의 계약서는 납기를 기다리는 서류로 남습니다. 계약서 속 선박을 건조할 자리를 경상에 마련합니다.\\n\\n정치력 §Y150§!을 소모하며 민간공장은 점유하지 않습니다. 경상남도의 해안에 건설 부지가 필요하며, §Y90일§! 후 경상남도에 슬롯 §G1개§!와 조선소 §G1개§!를 추가합니다.\\n\\n경상남북도 중 어느 한 주의 소유권이나 완전통제를 잃거나 경상남도의 건설 슬롯이 없어지거나 한국이 항복하면 취소되며 비용은 환급되지 않습니다. 완료 또는 취소 후 조건을 갖추고 비용을 다시 내면 반복할 수 있습니다.",
+        "after": "선박 주문을 받아도 선체를 조립할 자리가 모자라면 항만의 계약서는 납기를 기다리는 서류로 남습니다. 계약서 속 선박을 건조할 자리를 경상남도에 마련합니다.\\n\\n정치력 §Y150§!을 소모하며 민간공장은 점유하지 않습니다. 경상남도를 소유하고 완전히 통제해야 합니다. 경상남도에 해안과 조선소 건설 여유가 필요합니다. §Y90일§! 후 경상남도에 건설 슬롯 §G1개§!와 조선소 §G1개§!를 추가합니다.\\n\\n사업 대상 주의 소유권이나 완전 통제를 잃거나 조선소 건설 여유가 없어지거나 한국이 항복하면 취소되며 비용은 환급되지 않습니다. 완료 또는 취소 후 조건을 갖추고 비용을 다시 내면 반복할 수 있습니다."
+      },
+      "HOK_KOR_gyeongsangbuk_shipbuilding_project": {
+        "before": null,
+        "after": "경상북도 수출조선소 투자"
+      },
+      "HOK_KOR_gyeongsangbuk_shipbuilding_project_desc": {
+        "before": null,
+        "after": "선박 주문을 받아도 선체를 조립할 자리가 모자라면 항만의 계약서는 납기를 기다리는 서류로 남습니다. 계약서 속 선박을 건조할 자리를 경상북도에 마련합니다.\\n\\n정치력 §Y150§!을 소모하며 민간공장은 점유하지 않습니다. 경상북도를 소유하고 완전히 통제해야 합니다. 경상북도에 해안과 조선소 건설 여유가 필요합니다. §Y90일§! 후 경상북도에 건설 슬롯 §G1개§!와 조선소 §G1개§!를 추가합니다.\\n\\n사업 대상 주의 소유권이나 완전 통제를 잃거나 조선소 건설 여유가 없어지거나 한국이 항복하면 취소되며 비용은 환급되지 않습니다. 완료 또는 취소 후 조건을 갖추고 비용을 다시 내면 반복할 수 있습니다."
+      }
+    }
+  },
+  "host_inputs": {
+    "interface/decisions.gfx": {
+      "provider": "vanilla",
+      "sha256": "2B643E92154AF5C0F4A33DA4E19E3209815A9FCD670D3959F7D8B799B4BFE673"
+    },
+    "common/national_focus/germany.txt": {
+      "provider": "vanilla",
+      "sha256": "AC730BE5CCC9095FB400E58B2F7D44501288A94186BEB148DBBB0B32CF8EA03C"
+    },
+    "common/national_focus/sweden.txt": {
+      "provider": "vanilla",
+      "sha256": "0F58201EA786C4ECAA8405B4A81E2AF420F4EB977F64D8AF5C1F56383FB3171A"
+    },
+    "descriptor.mod": {
+      "provider": "rt56",
+      "sha256": "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61"
+    }
+  },
+  "outputs": {
+    "common/decisions/HOK_KOR_industry_expansion.txt": {
+      "previous_snapshot": "compat_before/common/decisions/HOK_KOR_industry_expansion.txt",
+      "previous_sha256": "1F1ACDAE198CC70C5D5A11653D3F843ABD2EFA9CE08F32864EACFB782093DB5D",
+      "previous_size": 8318,
+      "classification": "THREE_WAY_MERGE",
+      "sha256": "11A6207EAD45CAF6EC4ECF185CDB4A3A3F95B1005EFEA3DE168C4C73CC9EE6A1",
+      "size": 12350
+    },
+    "common/national_focus/korea.txt": {
+      "previous_snapshot": "compat_before/common/national_focus/korea.txt",
+      "previous_sha256": "6D98EBB26EDA579D0A00ABCEA97D15E78164335A5C1D9FE65B0F894F9D6A53AC",
+      "previous_size": 519338,
+      "classification": "THREE_WAY_MERGE",
+      "sha256": "488C4B4A95ABC02EB63DDC07D727D623B07D614043100EEE42C73907DF30AA52",
+      "size": 520220
+    },
+    "localisation/english/HOK_KOR_industry_expansion_l_english.yml": {
+      "previous_snapshot": "compat_before/localisation/english/HOK_KOR_industry_expansion_l_english.yml",
+      "previous_sha256": "6DB0F3DC4DFC4295C61FF9D2A93FB6E19D4B2A8F482BE402BCBA5C17E81AB7A3",
+      "previous_size": 18290,
+      "classification": "THREE_WAY_MERGE",
+      "sha256": "2987120F22AE649C8E08CD738579291A36F551E94CD3D81D8D6DC4047C41420E",
+      "size": 21418
+    },
+    "localisation/korean/HOK_KOR_industry_expansion_l_korean.yml": {
+      "previous_snapshot": "compat_before/localisation/korean/HOK_KOR_industry_expansion_l_korean.yml",
+      "previous_sha256": "A82C0B718F7EB636FEFEA289336FC1B913244DBE8665D0247C8F084ACAA2E40B",
+      "previous_size": 17762,
+      "classification": "THREE_WAY_MERGE",
+      "sha256": "FB2F94CE5740D00CE5E8201F6143C1957781CF216BD4CAE8CC8F6F17E54F322A",
+      "size": 21075
+    }
+  }
+}

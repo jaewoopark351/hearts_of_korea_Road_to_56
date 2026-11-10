@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_COMPAT_REMOTE_FILE_ID = "3796816200"
 
 GENERATOR_CHECKS = (
+    #20261110_kpopmodder: Validate the raw industry update before older gates project its exact historical ancestor.
+    ("November regional industry update", "upstream_industry_update.py", "--check"),
     #20261109_kpopmodder: Prove final English terminology before older contracts project its exact ancestor.
     ("English terminology contracts", "english_terminology.py", "--check"),
     #20261109_kpopmodder: Check raw repaired bytes independently before older contracts use exact historical projection.

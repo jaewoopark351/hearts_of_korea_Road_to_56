@@ -2,6 +2,8 @@
 
 날짜: 2026-11-07, Asia/Seoul. 상태: **채택·구현·이번 범위 검증·환경 복구 완료**(2026-11-08 KST). 실제 관측·최종 suite 190 PASS / 0 MISMATCH / 10 UNVERIFIED·기존 정적 오류와 출시 제약은 구현 기록을 따른다.
 
+2026-11-10 후속: 원본의 지역 개발 보상·남북 산업 투자를 수정하거나 재생성할 때 [선택 산업 업데이트 기록](../implementation/2026-11-10-korean-industry-update-port.md)을 함께 읽는다. 그 업데이트는 기존 지도/ID를 유지하면서 5중점의 총량을 의도적으로 늘리고 3지역의 투자를 남북 독립 사업으로 나누는 명시적 예외다. 아래의 최초 분할 총량 보존과 실행 결과는 당시 소스의 역사 기록으로 유지한다.
+
 ## 조건과 근거
 
 한국 주 분할·영토 조건·보상·이름 키 또는 관련 생성기를 변경하기 전에 이 결정을 읽는다. 실제 파일·검사와 잔여 범위는 [구현 기록](../implementation/2026-11-07-korean-state-split-port.md), [대응표](../data/HOK_KOREAN_STATE_SPLIT_PORT_MAPPING.json), [분할 잠금](../../tools/hok_state_split_lock.json)을 함께 읽는다. donor 입력을 재사용할 때는 [출처 안내](../upstream/hok-state-split-20261107/README.md)를 먼저 확인한다.

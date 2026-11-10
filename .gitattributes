@@ -242,3 +242,8 @@ tools/hok_review_followup_lock.json text eol=lf
 docs/upstream/hok-english-terminology-20261109/** -text
 tools/hok_english_terminology_lock.json text eol=lf
 tools/english_terminology.py text eol=lf
+
+#20261110_kpopmodder: Preserve the selected industry update inputs and deterministic layer across checkouts.
+docs/upstream/hok-industry-update-20261110/** -text
+tools/hok_industry_update_lock.json text eol=lf
+tools/upstream_industry_update.py text eol=lf

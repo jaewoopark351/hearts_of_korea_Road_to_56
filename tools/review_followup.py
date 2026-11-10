@@ -88,6 +88,9 @@ def build_outputs() -> dict[str, bytes]:
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
     """Reverse only the registered final bytes; unrelated/unknown bytes stay raw."""
+    #20261110_kpopmodder: Prove and reverse the later industry revision before checking unchanged repair ancestry.
+    from upstream_industry_update import historical_bytes as industry_historical
+    data = industry_historical(relative, data)
     #20261109_kpopmodder: Prove the later English terminology revision before enforcing this unchanged repair contract.
     from english_terminology import historical_bytes as terminology_historical
     data = terminology_historical(relative, data)
@@ -103,16 +106,19 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 
 
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
+    #20261110_kpopmodder: Retain the exact terminal industry revision across every inherited output owner.
+    from upstream_industry_update import finalize_one as industry_finalize, historical_bytes as industry_historical
+    data = industry_historical(relative, data)
     #20261109_kpopmodder: Keep the independent English terminology revision terminal for every existing output owner.
     from english_terminology import finalize_one as terminology_finalize, historical_bytes as terminology_historical
     data = terminology_historical(relative, data)
     name = canonical_name(relative)
     if not LOCK_PATH.is_file() or name not in PATHS:
-        return terminology_finalize(relative, data)
+        return industry_finalize(relative, terminology_finalize(relative, data))
     record = lock()['outputs'][name]
     if sha(data) not in (record['previous_sha256'], record['sha256']):
         raise ValueError(f'unreviewed follow-up predecessor: {name}')
-    return terminology_finalize(relative, build_outputs()[name])
+    return industry_finalize(relative, terminology_finalize(relative, build_outputs()[name]))
 
 
 def finalize_outputs(outputs: dict) -> dict:
@@ -120,6 +126,9 @@ def finalize_outputs(outputs: dict) -> dict:
 
 
 def preflight_outputs(outputs: dict) -> None:
+    #20261110_kpopmodder: Refuse unregistered industry payloads or independent runtime edits before any older writer runs.
+    from upstream_industry_update import preflight_outputs as industry_preflight
+    industry_preflight(outputs)
     from english_terminology import preflight_outputs as terminology_preflight, historical_bytes as terminology_historical
     terminology_preflight(outputs)
     root = ROOT.resolve()

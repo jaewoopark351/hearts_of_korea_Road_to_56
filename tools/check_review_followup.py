@@ -274,6 +274,9 @@ def historical_bytes(relative: str | Path, payload: bytes) -> bytes:
     Unknown and already-ancestral bytes pass through unchanged so the calling
     historical gate retains its own strict mismatch handling.
     """
+    #20261110_kpopmodder: Project only the exact proven industry output before this independent historical content audit.
+    from upstream_industry_update import historical_bytes as industry_historical
+    payload = industry_historical(relative, payload)
     #20261109_kpopmodder: Verify the later terminology delta before inspecting the unchanged repair ancestor.
     from english_terminology import historical_bytes as terminology_historical
     payload = terminology_historical(relative, payload)

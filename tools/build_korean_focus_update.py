@@ -485,6 +485,10 @@ def preflight(outputs: dict[Path, bytes]) -> None:
     from english_terminology import lock as terminology_lock, preflight_outputs as terminology_preflight
     terminology_preflight(outputs)
     terminology_outputs = terminology_lock()["outputs"]
+    #20261110_kpopmodder: Accept only the independently proven old/new bytes for the final industry update.
+    from upstream_industry_update import lock as industry_lock, preflight_outputs as industry_preflight
+    industry_preflight(outputs)
+    industry_outputs = industry_lock()["outputs"]
     errors = []
     for relative, expected in outputs.items():
         destination = (REPO_ROOT / relative).resolve()
@@ -505,6 +509,9 @@ def preflight(outputs: dict[Path, bytes]) -> None:
         terminology_record = terminology_outputs.get(relative.as_posix())
         if terminology_record:
             accepted_hashes.add(terminology_record["previous_sha256"])
+        industry_record = industry_outputs.get(relative.as_posix())
+        if industry_record:
+            accepted_hashes.add(industry_record["previous_sha256"])
         #20261107_kpopmodder: Permit only the frozen immediate pre-split output as the new overlay's source.
         from korean_state_split import lock as state_split_lock
         split_record = state_split_lock().get("outputs", {}).get(relative.as_posix(), {})
