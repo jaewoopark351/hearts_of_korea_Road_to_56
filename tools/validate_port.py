@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_COMPAT_REMOTE_FILE_ID = "3796816200"
 
 GENERATOR_CHECKS = (
+    #20261110_kpopmodder: Verify the bounded bilingual equipment overrides before accepting their exact duplicate pairs.
+    ("Korean equipment localisation overrides", "korean_equipment_localisation.py", "--check"),
     #20261110_kpopmodder: Validate the raw industry update before older gates project its exact historical ancestor.
     ("November regional industry update", "upstream_industry_update.py", "--check"),
     #20261109_kpopmodder: Prove final English terminology before older contracts project its exact ancestor.
@@ -328,7 +330,11 @@ def check_descriptor(result: Validation) -> None:
     text = read_utf8(path)
     dependencies = re.search(r"(?s)dependencies\s*=\s*\{(.*?)\}", text)
     names = re.findall(r'"([^"]+)"', dependencies.group(1)) if dependencies else []
-    expected_dependencies = ["The Road to 56", "Korean Language"]
+    #20261110_kpopmodder: Require the reviewed ordering edge without relaxing the descriptor's other byte contracts.
+    from korean_equipment_localisation import descriptor_bytes
+    expected_dependencies = ["The Road to 56", "Korean Language", "The Road to 56 Korean Translation"]
+    if path.read_bytes() != descriptor_bytes():
+        result.error("descriptor.mod: differs from the exact registered dependency-edge output")
     if names != expected_dependencies:
         result.error(
             "descriptor.mod: expected the recorded development dependencies "
@@ -349,7 +355,7 @@ def check_descriptor(result: Validation) -> None:
             result.error(f"descriptor.mod: forbidden active field {forbidden}")
     if not any(error.startswith("descriptor.mod:") for error in result.errors):
         result.passed(
-            "descriptor: RT56 + recorded Korean Language dependency; "
+            "descriptor: retained RT56/Korean Language plus recorded RTK ordering edge; "
             f"compatibility item {EXPECTED_COMPAT_REMOTE_FILE_ID}; no path/replace_path"
         )
 
@@ -446,6 +452,13 @@ def check_localisation(result: Validation) -> None:
         for key, locations in sorted(keys.items()):
             unique_files = {location[0] for location in locations}
             if len(unique_files) > 1:
+                #20261110_kpopmodder: Permit only hash-verified equipment source/override pairs, never arbitrary replace-folder duplicates.
+                from korean_equipment_localisation import intentional_duplicate
+                try:
+                    if intentional_duplicate(locale, key, unique_files):
+                        continue
+                except (OSError, KeyError, ValueError) as exc:
+                    result.error(f"localisation/{locale}: equipment override contract: {exc}")
                 rendered = ", ".join(f"{path}:{line}" for path, line in locations[:4])
                 result.error(
                     f"localisation/{locale}: key {key!r} defined in multiple compat files: {rendered}"
@@ -453,7 +466,7 @@ def check_localisation(result: Validation) -> None:
 
     if len(result.errors) == before:
         result.passed(
-            f"localisation: {file_count} files, {key_count} keys; BOM/header/uniqueness pass"
+            f"localisation: {file_count} files, {key_count} keys; BOM/header/unique keys or registered equipment override pairs pass"
         )
 
 

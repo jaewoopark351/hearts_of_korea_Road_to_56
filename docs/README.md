@@ -6,6 +6,8 @@
 
 ## 현재 상태
 
+- 2026-11-10 연구·장비 일본식 이름: **v6 구현·선택한 한영 구성의 범위 UI·수집·임시 설정 복구와 별도 승인된 외부 등록파일 영구 동기화 완료**. 자체 정적39/0·독립35/0, aggregate28 PASS·0 WARNING·기존11 ERROR(exit1)다. KO07과 EN04에서 각각 수정15/17문구·3guard·JAP 대표7표시 불일치0,99수집 사본·3출력 무결·기존82저장 차이0·새 저장0을 확인했다. EN03 중단은 정상 종료 미관측·장비명 검증0의 별도 이력으로 보존한다. 영어17키·RTK 동일 경로 한국어1,308키 병합·저장소 RTK 의존성을 사용하며 대상17값 외1,291키·나머지 원문 바이트와 기존3guard·장비 성능·기술을 보존한다. 1953년형2키는 한영 모두 소스 전용이고 광범위한 replace_path는 추가하지 않았다. 임시 시험 종료 후 원본304바이트·사용자 metadata6개를 복구한 뒤, 별도 영구 승인으로 외부 `.mod`에 시험과 같은 RTK 의존성37바이트만 다시 반영했다. 현재 외부 파일은341바이트이며 그 파일 외 metadata는 원본이다. RTK 없는 한국어·모든 번역 조합과 최종 Workshop 의존성·재배포 계약은 확정하지 않는다. 이 계층 조사·수정·재생성·검증 전 [구현·실패 이력·실제 확인 상태](implementation/2026-11-10-korean-equipment-localisation-repair.md)와 [최초 계획](plans/2026-11-10-korean-equipment-localisation-repair-plan.md)을 읽는다. v1–v5 실패·EN2 화면 유실·기존11오류를 후속 결과로 덮지 않는다.
+
 - 2026-11-10 원본 지역 산업 업데이트: **기존4출력 선택 구현·범위 정적 확인 완료 / 실행 검증 대기**. 5중점 보상 강화·남북 독립 투자3개 추가·한영 각16값을 반영하고 연구망 함남 표시는 이미 적용돼 유지했다. 독립 정적219/0, aggregate **27 PASS / 0 WARNING / 11 기존 ERROR**로 사전과 오류 본문이 같다. 이번 계층 수정·재생성·검증 전 [변경 범위·처리 대장·실제 확인 상태](implementation/2026-11-10-korean-industry-update-port.md)와 [선택 입력 안내](upstream/hok-industry-update-20261110/README.md)를 읽는다. 기존 실행 결과를 새 업데이트의 검증으로 사용하지 않는다.
 
 - 2026-11-09 재벌 영어 표현: 영어 8파일·43개 값을 `corporate oligarchs`/`conglomerates`로 문맥에 맞게 수정하고 AGENTS·현지화 스킬에 의미·논조 번역 지침을 추가했다. 기존 식별자·한국어·게임플레이와 과거 입력은 유지한다. 해당 문구 수정·재생성 전 [구현·소스/검사 기록](implementation/2026-11-09-chaebol-english-terminology.md)과 [유지 입력 안내](upstream/hok-english-terminology-20261109/README.md)를 읽는다. 이번 작업은 새 게임 실행이나 기존 미검증 UI 항목의 통과가 아니다.
@@ -43,6 +45,7 @@
 | 분류 | 문서 | 상태 |
 |---|---|---|
 | 검토 절차 | [변경 영향·누락 방지와 지침 출처](HOK_CHANGE_COVERAGE_REVIEW.md) | 현지화·주 참조 검토/변경 전 읽음. 호환판 한영 정책·RT56 지도 기준·사용처별 처리·검증 단계 구분 |
+| 계획·구현 | [한국 연구·장비 이름 한영 수선](plans/2026-11-10-korean-equipment-localisation-repair-plan.md) / [현재 구현·확인 기록](implementation/2026-11-10-korean-equipment-localisation-repair.md) | 해당 계층 수정·재생성·검증 전 읽음. 최초 문서 전용·v1–v5 실패 이력과 v6 병합+의존성의 실제 정적/UI/복구 결과를 구분 |
 | 수선 계획·후속 구현 | [현지화·주 참조 검토 후속](plans/2026-11-09-localisation-state-review-followup-plan.md) / [수선·UI 차단·실제 복구 checkpoint](implementation/2026-11-09-review-followup-repairs.md) | 구현·재생성·검증/재개 전 읽음. 네 출력·정적25/0/11·저장 충돌 이력·BASE raw16/0·미검증 UI/효과·프로필 복구 완료와 OSK 창 잔존 구분 |
 | 구현·결정 | [11월8일 콘텐츠 이식](implementation/2026-11-08-hok-upstream-content-port.md) / [ADR-0007](decisions/0007-november-content-integration.md) | 32출력·신규19경로 통합, 선택 범위 실제 실행·복구 및 미검증 한계 기록. 이 계층 수정·재생성·검증 전 읽음 |
 | 원본 입력 | [11월8일 선택 입력·host·기존 포트](upstream/hok-content-update-20261108/README.md) | donor36·문서13·compat16+보호1·host2·이전 원장. 재현/출처/그림 재사용 전 읽음 |

@@ -11,7 +11,8 @@ tools/hok_prose_update_lock.json text eol=lf
 #20261005_kpopmodder: Preserve the independent tooltip source fingerprint on Windows checkouts.
 tools/hok_focus_tooltip_update_lock.json text eol=lf
 #20261005_kpopmodder: Keep the descriptor checkout identical to both historical preservation locks.
-descriptor.mod text eol=crlf
+#20261110_kpopmodder: Reproduce the observed raw-LF descriptor under its new deterministic dependency owner.
+descriptor.mod text eol=lf
 tools/hok_icon_lock.json text eol=crlf
 
 # Byte-exact upstream evidence includes historical mixed line endings.
@@ -247,3 +248,10 @@ tools/english_terminology.py text eol=lf
 docs/upstream/hok-industry-update-20261110/** -text
 tools/hok_industry_update_lock.json text eol=lf
 tools/upstream_industry_update.py text eol=lf
+
+#20261110_kpopmodder: Preserve the exact equipment-name inputs and bilingual generated override bytes.
+docs/upstream/hok-equipment-localisation-20261110/** -text
+tools/korean_equipment_localisation.py text eol=lf
+tools/hok_equipment_localisation_lock.json text eol=lf
+localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml text eol=crlf
+localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml text eol=lf

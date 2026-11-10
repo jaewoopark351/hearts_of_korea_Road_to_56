@@ -88,6 +88,9 @@ def build_outputs() -> dict[str, bytes]:
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
     """Reverse only the registered final bytes; unrelated/unknown bytes stay raw."""
+    #20261110_kpopmodder: Preserve old descriptor pins only after proving the exact dependency-edge output.
+    from korean_equipment_localisation import descriptor_historical_bytes
+    data = descriptor_historical_bytes(relative, data)
     #20261110_kpopmodder: Prove and reverse the later industry revision before checking unchanged repair ancestry.
     from upstream_industry_update import historical_bytes as industry_historical
     data = industry_historical(relative, data)

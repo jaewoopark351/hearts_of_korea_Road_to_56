@@ -1799,8 +1799,16 @@ def verify_english_translation() -> None:
     #20261108_kpopmodder: Admit only locked new English files; the separate content gate checks their actual bilingual contracts.
     from upstream_content_update import addition_paths as content_addition_paths, build_outputs as content_outputs
     content_english = {p for p in content_addition_paths('focus') if p.startswith('localisation/english/')}
-    if paths != expected_paths | additions.keys() | feature_english.keys() | prospecting_english | split_english | content_english:
+    #20261110_kpopmodder: Admit one exact equipment override file without changing the historical translation inventory or source pins.
+    from korean_equipment_localisation import build_outputs as equipment_outputs
+    equipment_english = {p: data for p, data in equipment_outputs().items() if p.startswith('localisation/english/')}
+    if set(equipment_english) != {'localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml'}:
+        raise ValueError('equipment override English file allowlist changed')
+    if paths != expected_paths | additions.keys() | feature_english.keys() | prospecting_english | split_english | content_english | equipment_english.keys():
         raise ValueError("English output file inventory differs from the reviewed translation layers")
+    for relative, expected in equipment_english.items():
+        if (REPO_ROOT / relative).read_bytes() != expected:
+            raise ValueError(f'equipment override English output drift: {relative}')
     for relative in content_english:
         if (REPO_ROOT/relative).read_bytes() != content_outputs()[relative]:
             raise ValueError(f'new CNDP English output drift: {relative}')

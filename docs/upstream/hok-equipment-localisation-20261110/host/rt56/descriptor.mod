@@ -1,0 +1,17 @@
+version="1.19.*"
+tags={
+	"Alternative History"
+	"Balance"
+	"Events"
+	"Gameplay"
+	"Graphics"
+	"Historical"
+	"Ideologies"
+	"National Focuses"
+	"Technologies"
+}
+name="The Road to 56"
+replace_path="history/states"
+replace_path="map/strategicregions"
+supported_version="1.19.*"
+remote_file_id="820260968"

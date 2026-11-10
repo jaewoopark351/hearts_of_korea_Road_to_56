@@ -1,0 +1,343 @@
+{
+  "format": 1,
+  "revision": "2026-11-10-equipment-localisation-v6-host-merge-dependency",
+  "base_commit": "2523bf455514c79a3538f0475dc922329afb185d",
+  "source_manifest_sha256": "16F933C2F5ED2C04983DF279B82B81A42FCE196C7720C5B3819ED0444F2E7E5C",
+  "roots": {
+    "compat": "C:\\hoi\\hearts_of_korea_Road_to_56",
+    "donor": "C:\\hoi\\hearts_of_korea",
+    "rt56": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968",
+    "translation": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\2769576030",
+    "vanilla": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV"
+  },
+  "workshop_manifests": {
+    "820260968": "1963361040482473746",
+    "2769576030": "3192804258057474440"
+  },
+  "game_version": "Operation Postern v1.19.4.2.2da5 (0bdb)",
+  "conflict_keys": [
+    "KOR_motorized_equipment_1",
+    "KOR_mechanized_equipment_1",
+    "KOR_mechanized_equipment_1_short",
+    "KOR_mechanized_equipment_2",
+    "KOR_mechanized_equipment_2_short",
+    "KOR_mechanized_equipment_3",
+    "KOR_mechanized_equipment_3_short",
+    "KOR_amphibious_mechanized_equipment_1",
+    "KOR_amphibious_mechanized_equipment_1_short",
+    "KOR_amphibious_mechanized_equipment_2",
+    "KOR_amphibious_mechanized_equipment_2_short",
+    "KOR_motorized_rocket_equipment_1",
+    "KOR_motorized_rocket_equipment_1_short"
+  ],
+  "additional_keys": [
+    "KOR_mechanized_equipment_x",
+    "KOR_mechanized_equipment_x_short",
+    "KOR_mechanized_equipment_x_2",
+    "KOR_mechanized_equipment_x_2_short"
+  ],
+  "guard_keys": [
+    "KOR_motorized_equipment_0",
+    "KOR_motorized_equipment_0_short",
+    "KOR_motorized_equipment_1_short"
+  ],
+  "originals": {
+    "english": {
+      "snapshot": "compat_before/localisation/english/korea_equipment_l_english.yml",
+      "sha256": "A16E9093B1019657EA9FDB6BD8E1475FEFD0271801242D9371061518F1A9B062"
+    },
+    "korean": {
+      "snapshot": "compat_before/localisation/korean/korea_equipment_l_korean.yml",
+      "sha256": "AE477E1CDF7E70CADABB794AEAF97D27C98C105FCF1691980991E24B3CCFA021"
+    }
+  },
+  "physical_inputs": {
+    "rt56/localisation/english/replace/r56e_equip_motor_mech_l_english.yml": {
+      "provider": "rt56",
+      "relative": "localisation/english/replace/r56e_equip_motor_mech_l_english.yml",
+      "sha256": "329F1A7AD9FEB8EF88155A52B4361A9103081EDE3A28D81E013C134E9DF5D0A5"
+    },
+    "translation/localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml": {
+      "provider": "translation",
+      "relative": "localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml",
+      "sha256": "322541C886E096ECDC4C6F9EEA9DCE36EDA29911010EEE3B7B4AB482C0072974"
+    },
+    "rt56/common/technologies/r56_vechicles.txt": {
+      "provider": "rt56",
+      "relative": "common/technologies/r56_vechicles.txt",
+      "sha256": "65E523637AE9A305135BAEFF67443EBA20A372ECCC202D50CA87B2E626D19B98"
+    },
+    "rt56/common/units/equipment/mechanized.txt": {
+      "provider": "rt56",
+      "relative": "common/units/equipment/mechanized.txt",
+      "sha256": "F0828C3E0D7F8A255CBC6DF1BF5EB617F482649DD8197982AEC1ACA19FAFEA95"
+    },
+    "translation/descriptor.mod": {
+      "provider": "translation",
+      "relative": "descriptor.mod",
+      "sha256": "A0508F4A91AF911917AD3A84BF829CB38ED1557DD8F9643A010F1AEE36F48D6C"
+    },
+    "rt56/descriptor.mod": {
+      "provider": "rt56",
+      "relative": "descriptor.mod",
+      "sha256": "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61"
+    }
+  },
+  "new_values": {
+    "english": {
+      "KOR_mechanized_equipment_x": "KAPC-1 (1949) Infantry Armoured Vehicle",
+      "KOR_mechanized_equipment_x_short": "KAPC-1 (1949)",
+      "KOR_mechanized_equipment_x_2": "KAPC-1 (1953) Infantry Armoured Vehicle",
+      "KOR_mechanized_equipment_x_2_short": "KAPC-1 (1953)"
+    },
+    "korean": {
+      "KOR_mechanized_equipment_x": "KAPC-1 1949년형 보병장갑차",
+      "KOR_mechanized_equipment_x_short": "KAPC-1 1949년형",
+      "KOR_mechanized_equipment_x_2": "KAPC-1 1953년형 보병장갑차",
+      "KOR_mechanized_equipment_x_2_short": "KAPC-1 1953년형"
+    }
+  },
+  "outputs": {
+    "localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml": {
+      "classification": "ADD",
+      "sha256": "F1C4044B30BBE48D1702AF4D4757963601C6427AC1CE10FF6D4ACFFE17EAF967",
+      "size": 1072,
+      "locale": "english"
+    },
+    "localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml": {
+      "classification": "THREE_WAY_MERGE",
+      "sha256": "DF40639AF64C8C307CD6CEBE5327CBFE2228B0B4C79B82D33F83C96450376F8A",
+      "size": 82181,
+      "locale": "korean",
+      "source_provider": "RT56 Korean Translation",
+      "source_sha256": "322541C886E096ECDC4C6F9EEA9DCE36EDA29911010EEE3B7B4AB482C0072974",
+      "source_snapshot": "host/translation/localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml"
+    },
+    "descriptor.mod": {
+      "classification": "OVERRIDE",
+      "sha256": "A3A75B5F463DE4548062E152F464E403F4B14D3371A2CE233F1B7D2E3C203386",
+      "size": 397,
+      "previous_sha256": "AA150D6CE82A7779C3D4C3FCDC962A82FA269327F005330B565723CA87BBE247",
+      "previous_size": 263,
+      "source_kind": "immutable-compat-Git-object-plus-exact-dependency-insertion"
+    }
+  },
+  "ledger_before_sha256": "B570CDFF9F5375151230FBCEA7AFD73B64AD835959DB1A6FB5DB440034B2CD39",
+  "new_name_provenance": "Compatibility-authored year-qualified KAPC-1 names; inherited HOK mechanized3 name and RT56 parent/year chain, no equipment/technology changes",
+  "normal_research_access": {
+    "mechanized_equipment_x": "mechanised_infantry_a, year1949",
+    "mechanized_equipment_x_2": "no explicit current technology unlock found; display name only"
+  },
+  "superseded_outputs": {
+    "localisation/english/replace/HOK_KOR_equipment_overrides_l_english.yml": {
+      "classification": "ADD",
+      "sha256": "F1C4044B30BBE48D1702AF4D4757963601C6427AC1CE10FF6D4ACFFE17EAF967",
+      "size": 1072,
+      "locale": "english"
+    },
+    "localisation/korean/replace/HOK_KOR_equipment_overrides_l_korean.yml": {
+      "classification": "ADD",
+      "sha256": "0BF14E0FEF7CEA851156D5B3AF59CE505EAD0DFFF800E89CC2CFA03B0376CE4A",
+      "size": 1057,
+      "locale": "korean"
+    },
+    "localisation/replace/zz_HOK_KOR_equipment_overrides_l_korean.yml": {
+      "classification": "ADD",
+      "sha256": "0BF14E0FEF7CEA851156D5B3AF59CE505EAD0DFFF800E89CC2CFA03B0376CE4A",
+      "size": 1057,
+      "locale": "korean"
+    },
+    "localisation/korean/replace/zz_HOK_KOR_equipment_overrides_l_korean.yml": {
+      "classification": "ADD",
+      "sha256": "0BF14E0FEF7CEA851156D5B3AF59CE505EAD0DFFF800E89CC2CFA03B0376CE4A",
+      "size": 1057,
+      "locale": "korean"
+    }
+  },
+  "filename_candidate": {
+    "previous_ledger_sha256": "8B5C7E14A5180610D0042CD16B5FE00068D438B5A4A37FFCD5063D78A4F4D3F2",
+    "status": "exact-v4-korean-merge-plus-registered-dependency-awaiting-v6-cold-UI",
+    "reason": "KO06 narrow v5 failed the Korean amphibious2 full/enable display despite the RTK dependency. Restore the exact v4 host-merge bytes used by the successful KO05 nine-observable descriptor-only control; retain unchanged English output and dependency descriptor. Final v6 Korean and RTK-free English cold UI remain required."
+  },
+  "revision_history": [
+    {
+      "revision": "2026-11-10-equipment-localisation-v1",
+      "previous_lock_sha256": "6D6677BD0CB0810ADC0AC9BFE03BC0271C1F9DF4FFE9206EF7F235BF063FBD42",
+      "previous_generator_sha256": "216AA9FF2CD48E2C35151B330DAEB2BB5466C2A3EA1D046A0A2FC028837F9B47",
+      "outputs": {
+        "localisation/english/replace/HOK_KOR_equipment_overrides_l_english.yml": {
+          "classification": "ADD",
+          "sha256": "F1C4044B30BBE48D1702AF4D4757963601C6427AC1CE10FF6D4ACFFE17EAF967",
+          "size": 1072,
+          "locale": "english"
+        },
+        "localisation/korean/replace/HOK_KOR_equipment_overrides_l_korean.yml": {
+          "classification": "ADD",
+          "sha256": "0BF14E0FEF7CEA851156D5B3AF59CE505EAD0DFFF800E89CC2CFA03B0376CE4A",
+          "size": 1057,
+          "locale": "korean"
+        }
+      },
+      "ui_result": "FAILED English vehicle tree and equipment details in en-01",
+      "evidence": "C:/hoi/test/hok-rt56-equipment-localisation-20261110-01/runtime-session/en-01/screenshots/01-vehicle-tree-failed.png",
+      "backup_root": "C:\\hoi\\test\\hok-rt56-equipment-localisation-20261110-01\\filename-candidate-v2\\before"
+    },
+    {
+      "revision": "2026-11-10-equipment-localisation-v2-filename-candidate",
+      "previous_lock_sha256": "1AA78CF552C8735EF7BA3F3F2B752A8E833C0B6F52145476AE0B379E00554D9A",
+      "previous_generator_sha256": "B419F8B0AC79F33EB4CE3F0B15570F25D438DFDF28D103F2B1778C320D19C5F2",
+      "outputs": {
+        "localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml": {
+          "classification": "ADD",
+          "sha256": "F1C4044B30BBE48D1702AF4D4757963601C6427AC1CE10FF6D4ACFFE17EAF967",
+          "size": 1072,
+          "locale": "english"
+        },
+        "localisation/korean/replace/zz_HOK_KOR_equipment_overrides_l_korean.yml": {
+          "classification": "ADD",
+          "sha256": "0BF14E0FEF7CEA851156D5B3AF59CE505EAD0DFFF800E89CC2CFA03B0376CE4A",
+          "size": 1057,
+          "locale": "korean"
+        }
+      },
+      "ledger_sha256": "7C507D6BF4E4FD0304061F6711A23485895BCE042B1655D1189C3060D774EC77",
+      "ui_result": "English en-02 passed15/17 edited strings and3guards; Korean ko-01 retained Japanese names for at least amphibious2 full and1949short",
+      "evidence": "C:/hoi/test/hok-rt56-equipment-localisation-20261110-01/runtime-session/ko-01/",
+      "backup_root": "C:\\hoi\\test\\hok-rt56-equipment-localisation-20261110-01\\folder-candidate-v3\\before"
+    },
+    {
+      "revision": "2026-11-10-equipment-localisation-v3-korean-folder-candidate",
+      "previous_lock_sha256": "DFA09CDA7652D6F59D24C41F8BCEBD327A5EC89E49BAB3520600936C2AF0C089",
+      "previous_generator_sha256": "32A4BCDC493713579695D5235C27843B64E3844895538E6D2FDFC1FC7F56DFEF",
+      "outputs": {
+        "localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml": {
+          "classification": "ADD",
+          "sha256": "F1C4044B30BBE48D1702AF4D4757963601C6427AC1CE10FF6D4ACFFE17EAF967",
+          "size": 1072,
+          "locale": "english"
+        },
+        "localisation/replace/zz_HOK_KOR_equipment_overrides_l_korean.yml": {
+          "classification": "ADD",
+          "sha256": "0BF14E0FEF7CEA851156D5B3AF59CE505EAD0DFFF800E89CC2CFA03B0376CE4A",
+          "size": 1057,
+          "locale": "korean"
+        }
+      },
+      "ledger_sha256": "58AC0D552EF271E4C16F815AE31529EF9588ED5B95B9BFBE1615E6ED5BE85811",
+      "ui_result": "Korean ko-02 root-replace candidate retained Japanese amphibious2 full/enable labels while shortKLVT2 remained",
+      "evidence": "C:/hoi/test/hok-rt56-equipment-localisation-20261110-01/runtime-session/ko-02/",
+      "backup_root": "C:\\hoi\\test\\hok-rt56-equipment-localisation-20261110-01\\samepath-candidate-v4\\before"
+    },
+    {
+      "revision": "2026-11-10-equipment-localisation-v4-korean-exact-path-merge",
+      "previous_lock_sha256": "F32F7B3FD9D83693923676DD45B60AFB7F7C3645D5CAFF68B60563D91495C2FF",
+      "previous_generator_sha256": "C3AA7022734DC82DF2CF5205ABB73741BD0D0390A450B695A9CD28FBCB2FC8BE",
+      "outputs": {
+        "localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml": {
+          "classification": "ADD",
+          "sha256": "F1C4044B30BBE48D1702AF4D4757963601C6427AC1CE10FF6D4ACFFE17EAF967",
+          "size": 1072,
+          "locale": "english"
+        },
+        "localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml": {
+          "classification": "THREE_WAY_MERGE",
+          "sha256": "DF40639AF64C8C307CD6CEBE5327CBFE2228B0B4C79B82D33F83C96450376F8A",
+          "size": 82181,
+          "locale": "korean",
+          "source_provider": "RT56 Korean Translation",
+          "source_sha256": "322541C886E096ECDC4C6F9EEA9DCE36EDA29911010EEE3B7B4AB482C0072974",
+          "source_snapshot": "host/translation/localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml"
+        }
+      },
+      "ledger_sha256": "20C81600A57CD58A6B4181786E3B90FEA54EB4BEC707E32BC52DB683886FCD2E",
+      "retired_host_merge": {
+        "provider": "RT56 Korean Translation",
+        "relative": "localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml",
+        "snapshot": "host/translation/localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml",
+        "sha256": "322541C886E096ECDC4C6F9EEA9DCE36EDA29911010EEE3B7B4AB482C0072974",
+        "entry_count": 1308,
+        "changed_kor_count": 17,
+        "preserved_non_kor_count": 1291,
+        "supported_configuration": "l_korean with RT56 + RT56 Korean Translation + compatibility port",
+        "excluded_configuration": "Korean without RTK would additionally receive1291 foreign Korean translation records and is outside this preservation claim",
+        "attribution": "Original RTK translation contributors retain authorship; local compatibility merge is not a blanket redistribution permission; no publication authorized"
+      },
+      "ui_result": "KO03 andKO04 v4 failed; unchangedv4 with external RTKdependency-only KO05 passed9observables; v5 minimalpair requires its own coldUI",
+      "evidence": "C:/hoi/test/hok-rt56-equipment-localisation-20261110-01/runtime-session/",
+      "backup_root": "C:\\hoi\\test\\hok-rt56-equipment-localisation-20261110-01\\v5-narrow-dependency\\before"
+    },
+    {
+      "revision": "2026-11-10-equipment-localisation-v5-narrow-dependency",
+      "previous_lock_sha256": "71D563FC61F9A994CEFED94318674CADF30DCAF5932FB018E2641757495D1963",
+      "previous_generator_sha256": "6B9B67C62D91029FE59C161AFB346481B10110D7F841406B105A16A11C2B56F2",
+      "outputs": {
+        "localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml": {
+          "classification": "ADD",
+          "sha256": "F1C4044B30BBE48D1702AF4D4757963601C6427AC1CE10FF6D4ACFFE17EAF967",
+          "size": 1072,
+          "locale": "english"
+        },
+        "localisation/korean/replace/zz_HOK_KOR_equipment_overrides_l_korean.yml": {
+          "classification": "ADD",
+          "sha256": "0BF14E0FEF7CEA851156D5B3AF59CE505EAD0DFFF800E89CC2CFA03B0376CE4A",
+          "size": 1057,
+          "locale": "korean"
+        },
+        "descriptor.mod": {
+          "classification": "OVERRIDE",
+          "sha256": "A3A75B5F463DE4548062E152F464E403F4B14D3371A2CE233F1B7D2E3C203386",
+          "size": 397,
+          "previous_sha256": "AA150D6CE82A7779C3D4C3FCDC962A82FA269327F005330B565723CA87BBE247",
+          "previous_size": 263,
+          "source_kind": "immutable-compat-Git-object-plus-exact-dependency-insertion"
+        }
+      },
+      "ledger_sha256": "8B5C7E14A5180610D0042CD16B5FE00068D438B5A4A37FFCD5063D78A4F4D3F2",
+      "descriptor_input": {
+        "commit": "2523bf455514c79a3538f0475dc922329afb185d",
+        "relative": "descriptor.mod",
+        "blob": "4c1fd9af7d752bef207285980fe9854a4f4086bd",
+        "object_sha256": "AA150D6CE82A7779C3D4C3FCDC962A82FA269327F005330B565723CA87BBE247",
+        "object_size": 263,
+        "checkout": "raw",
+        "before_sha256": "AA150D6CE82A7779C3D4C3FCDC962A82FA269327F005330B565723CA87BBE247",
+        "before_size": 263
+      },
+      "descriptor_projected_ledger_sha256": "49A3EB2B8294C43E58BA8D8A68CD7DF1B572683064E68C6D4F6D9A0F24ECE341",
+      "ui_result": "KO06 narrow v5 failed the amphibious2 full/enable display; its 33/0 independent source QA and4/0 historical checks remain source-only results.",
+      "collection_sha256": "9818BB0DBC6E52A6BE58305A853241111A8B2081F4BB39D6A7B9F8CF25BA9201",
+      "evidence": "C:/hoi/test/hok-rt56-equipment-localisation-20261110-01/runtime-session/ko-06",
+      "backup_root": "C:\\hoi\\test\\hok-rt56-equipment-localisation-20261110-01\\v6-host-merge-dependency\\before"
+    }
+  ],
+  "accepted_previous_ledger_sha256": [
+    "45C2532953970A0EA5F6245349ABE6CECDECB4A9EBA3D4677761980B5B88DAE1",
+    "7C507D6BF4E4FD0304061F6711A23485895BCE042B1655D1189C3060D774EC77",
+    "58AC0D552EF271E4C16F815AE31529EF9588ED5B95B9BFBE1615E6ED5BE85811",
+    "20C81600A57CD58A6B4181786E3B90FEA54EB4BEC707E32BC52DB683886FCD2E",
+    "8B5C7E14A5180610D0042CD16B5FE00068D438B5A4A37FFCD5063D78A4F4D3F2"
+  ],
+  "descriptor_input": {
+    "commit": "2523bf455514c79a3538f0475dc922329afb185d",
+    "relative": "descriptor.mod",
+    "blob": "4c1fd9af7d752bef207285980fe9854a4f4086bd",
+    "object_sha256": "AA150D6CE82A7779C3D4C3FCDC962A82FA269327F005330B565723CA87BBE247",
+    "object_size": 263,
+    "checkout": "raw",
+    "before_sha256": "AA150D6CE82A7779C3D4C3FCDC962A82FA269327F005330B565723CA87BBE247",
+    "before_size": 263
+  },
+  "descriptor_projected_ledger_sha256": "49A3EB2B8294C43E58BA8D8A68CD7DF1B572683064E68C6D4F6D9A0F24ECE341",
+  "korean_host_merge": {
+    "provider": "RT56 Korean Translation",
+    "relative": "localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml",
+    "snapshot": "host/translation/localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml",
+    "sha256": "322541C886E096ECDC4C6F9EEA9DCE36EDA29911010EEE3B7B4AB482C0072974",
+    "entry_count": 1308,
+    "changed_kor_count": 17,
+    "preserved_non_kor_count": 1291,
+    "supported_configuration": "l_korean with RT56 + RT56 Korean Translation + compatibility port",
+    "excluded_configuration": "Korean without RTK would additionally receive1291 foreign Korean translation records and is outside this preservation claim",
+    "attribution": "Original RTK translation contributors retain authorship; local compatibility merge is not a blanket redistribution permission; no publication authorized"
+  }
+}

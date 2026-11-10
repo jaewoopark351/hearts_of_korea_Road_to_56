@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-10",
+  "timezone": "Asia/Seoul",
+  "role": "maintained frozen generator inputs; not diagnostics or runtime folder",
+  "compat_branch": "feat/korean-focus-update-20260922",
+  "compat_commit": "2523bf455514c79a3538f0475dc922329afb185d",
+  "donor_commit": "596b221bb994d93fce552d3ee1ba70fa9b5640f1",
+  "files": {
+    "compat/localisation/english/korea_equipment_l_english.yml": {
+      "provider": "compat",
+      "relative": "localisation/english/korea_equipment_l_english.yml",
+      "source": "C:\\hoi\\hearts_of_korea_Road_to_56\\localisation\\english\\korea_equipment_l_english.yml",
+      "snapshot": "compat_before/localisation/english/korea_equipment_l_english.yml",
+      "sha256": "A16E9093B1019657EA9FDB6BD8E1475FEFD0271801242D9371061518F1A9B062",
+      "size": 15826
+    },
+    "compat/localisation/korean/korea_equipment_l_korean.yml": {
+      "provider": "compat",
+      "relative": "localisation/korean/korea_equipment_l_korean.yml",
+      "source": "C:\\hoi\\hearts_of_korea_Road_to_56\\localisation\\korean\\korea_equipment_l_korean.yml",
+      "snapshot": "compat_before/localisation/korean/korea_equipment_l_korean.yml",
+      "sha256": "AE477E1CDF7E70CADABB794AEAF97D27C98C105FCF1691980991E24B3CCFA021",
+      "size": 15778
+    },
+    "donor/localisation/korean/korea_equipment_l_korean.yml": {
+      "provider": "donor",
+      "relative": "localisation/korean/korea_equipment_l_korean.yml",
+      "source": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\korea_equipment_l_korean.yml",
+      "snapshot": "donor/localisation/korean/korea_equipment_l_korean.yml",
+      "sha256": "AE477E1CDF7E70CADABB794AEAF97D27C98C105FCF1691980991E24B3CCFA021",
+      "size": 15778
+    },
+    "rt56/localisation/english/replace/r56e_equip_motor_mech_l_english.yml": {
+      "provider": "rt56",
+      "relative": "localisation/english/replace/r56e_equip_motor_mech_l_english.yml",
+      "source": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\localisation\\english\\replace\\r56e_equip_motor_mech_l_english.yml",
+      "snapshot": "host/rt56/localisation/english/replace/r56e_equip_motor_mech_l_english.yml",
+      "sha256": "329F1A7AD9FEB8EF88155A52B4361A9103081EDE3A28D81E013C134E9DF5D0A5",
+      "size": 84633
+    },
+    "translation/localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml": {
+      "provider": "translation",
+      "relative": "localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml",
+      "source": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\2769576030\\localisation\\korean\\replace\\r56e_equip_motor_mech_l_korean.yml",
+      "snapshot": "host/translation/localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml",
+      "sha256": "322541C886E096ECDC4C6F9EEA9DCE36EDA29911010EEE3B7B4AB482C0072974",
+      "size": 82113
+    },
+    "rt56/common/technologies/r56_vechicles.txt": {
+      "provider": "rt56",
+      "relative": "common/technologies/r56_vechicles.txt",
+      "source": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\common\\technologies\\r56_vechicles.txt",
+      "snapshot": "host/rt56/common/technologies/r56_vechicles.txt",
+      "sha256": "65E523637AE9A305135BAEFF67443EBA20A372ECCC202D50CA87B2E626D19B98",
+      "size": 24807
+    },
+    "rt56/common/units/equipment/mechanized.txt": {
+      "provider": "rt56",
+      "relative": "common/units/equipment/mechanized.txt",
+      "source": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\common\\units\\equipment\\mechanized.txt",
+      "snapshot": "host/rt56/common/units/equipment/mechanized.txt",
+      "sha256": "F0828C3E0D7F8A255CBC6DF1BF5EB617F482649DD8197982AEC1ACA19FAFEA95",
+      "size": 3508
+    },
+    "translation/descriptor.mod": {
+      "provider": "translation",
+      "relative": "descriptor.mod",
+      "source": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\2769576030\\descriptor.mod",
+      "snapshot": "host/translation/descriptor.mod",
+      "sha256": "A0508F4A91AF911917AD3A84BF829CB38ED1557DD8F9643A010F1AEE36F48D6C",
+      "size": 223
+    },
+    "rt56/descriptor.mod": {
+      "provider": "rt56",
+      "relative": "descriptor.mod",
+      "source": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\descriptor.mod",
+      "snapshot": "host/rt56/descriptor.mod",
+      "sha256": "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61",
+      "size": 299
+    },
+    "compat/docs/audits/2026-09-06-production-file-classification.csv": {
+      "provider": "compat",
+      "relative": "docs/audits/2026-09-06-production-file-classification.csv",
+      "source": "C:\\hoi\\hearts_of_korea_Road_to_56\\docs\\audits\\2026-09-06-production-file-classification.csv",
+      "snapshot": "ledger_before.csv",
+      "sha256": "B570CDFF9F5375151230FBCEA7AFD73B64AD835959DB1A6FB5DB440034B2CD39",
+      "size": 940044
+    }
+  }
+}
