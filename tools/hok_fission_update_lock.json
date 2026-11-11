@@ -1,0 +1,43 @@
+{
+  "format": 1,
+  "revision": "2026-11-11-fission-v1",
+  "base_commit": "6931151ff3009127bf35564cd39eb9b2df88f508",
+  "source_kind": "immutable-git-predecessor-plus-reviewed-working-tree-delta",
+  "donor_root": "C:\\hoi\\hearts_of_korea",
+  "source_commit": "1c2e5423c08677228fa89c0181535bc30fc5764d",
+  "source_blob": "af90f80d2228961e869eca7615aed6bce579d80c",
+  "source_object_sha256": "9E35EEA7657E78FDD0B62DC068214C11A8B5C1CD1625EB4CA7173EDD3FCEB958",
+  "source_before_sha256": "FCAB533936D55625692B6A58422C6556713A45E0DBDB344B0004262D0E9EB85B",
+  "source_sha256": "F2A26C497CE1D7BAD49410F7E6C66D88BA1A72C942477F18EA36AAB1658F5C26",
+  "checkout": "crlf",
+  "path": "common/national_focus/korea.txt",
+  "focus_id": "HOK_KOR_fission_chain_reaction_experiments",
+  "anchor": "\t\t\t\tname = HOK_KOR_fission_chain_reaction_experiments\r\n\t\t\t\tahead_reduction = 2\r\n",
+  "added_lines": "\t\t\t\t#20261111_kpopmodder: Add a 150% research bonus while preserving the two-year ahead-of-time reduction.\r\n\t\t\t\tbonus = 1.5\r\n",
+  "previous_sha256": "488C4B4A95ABC02EB63DDC07D727D623B07D614043100EEE42C73907DF30AA52",
+  "sha256": "E283260E2BBA048C4D5E800DFB42D79F2E73963A11E8428C38158FF272180C0B",
+  "size": 520345,
+  "classification": "THREE_WAY_MERGE",
+  "documents": {
+    "documents/docs/HOK_KOREAN_CIVIL_NUCLEAR_RESEARCH_SPEC.md": "7B882272848240B8F6D7900BF259BCBC414568CD1300512C48ACDDC14565B589",
+    "documents/docs/incidents/2026-10-31-korean-civil-nuclear-research.md": "6C0493FC3D5F079C333CDA858D71FC06C4D8E854BF68DDDBD75901E803E2EED1"
+  },
+  "host_inputs": {
+    "common/national_focus/toa_shared_military_branch.txt": {
+      "provider": "vanilla",
+      "sha256": "8E447DAEE47D955F9265C06EB3B5DD855880C62B40C4CF4ADFFE5F49CA23F9E4"
+    },
+    "localisation/english/effects_l_english.yml": {
+      "provider": "vanilla",
+      "sha256": "EBAB64068F6F3F1A808F2209599727E8366A69A18E5577508433847FFF3179FE"
+    },
+    "localisation/korean/effects_l_korean.yml": {
+      "provider": "vanilla",
+      "sha256": "1230FF348401450F8E5FB9C71D1ABF6D760A43277B74A981136F447731CB1EC6"
+    },
+    "common/national_focus/australia.txt": {
+      "provider": "rt56",
+      "sha256": "124FAFB1144A8B5E520A287D8BC4021C33D1A878E051AF5AFC379EEE47FE89FB"
+    }
+  }
+}

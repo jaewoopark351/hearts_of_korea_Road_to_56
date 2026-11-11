@@ -1190,7 +1190,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     from upstream_industry_update import ledger_bytes as industry_ledger_bytes
     #20261110_kpopmodder: Apply the exact descriptor projection and two locked equipment-localisation rows after historical provenance.
     from korean_equipment_localisation import ledger_bytes as equipment_ledger_bytes
-    final = equipment_ledger_bytes(industry_ledger_bytes(terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(stream.getvalue().encode("utf-8")))))))
+    #20261111_kpopmodder: Keep the two-line nuclear reward provenance after every immutable ledger predecessor.
+    from upstream_industry_update import fission_ledger_bytes
+    final = fission_ledger_bytes(equipment_ledger_bytes(industry_ledger_bytes(terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(stream.getvalue().encode("utf-8"))))))))
     final_rows = list(csv.DictReader(io.StringIO(final.decode("utf-8"), newline="")))
     final_counts = Counter(row["integration_class"] for row in final_rows)
     final_collisions = sum(row["exact_path_rt56_collision"] == "yes" for row in final_rows)
@@ -1487,7 +1489,9 @@ def build_state_split_csv(*, output_root: Path = REPO_ROOT) -> bytes:
     from upstream_industry_update import ledger_bytes as industry_ledger_bytes
     #20261110_kpopmodder: Refresh the historical AGENTS fingerprint before enforcing the exact equipment-ledger predecessor.
     from korean_equipment_localisation import ledger_bytes as equipment_ledger_bytes
-    return equipment_ledger_bytes(build_documentation_csv(industry_ledger_bytes(terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(b"".join(chunks))))))))
+    #20261111_kpopmodder: Scoped rebuilds retain the same terminal nuclear reward provenance as full builds.
+    from upstream_industry_update import fission_ledger_bytes
+    return fission_ledger_bytes(equipment_ledger_bytes(build_documentation_csv(industry_ledger_bytes(terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(b"".join(chunks)))))))))
 
 
 def main() -> int:

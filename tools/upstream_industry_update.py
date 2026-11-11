@@ -10,6 +10,7 @@ import io
 import json
 from pathlib import Path
 import re
+import subprocess
 import sys
 
 #20261110_kpopmodder: Keep the author's separate provincial investments and reward update above immutable earlier merges.
@@ -29,6 +30,73 @@ STATE_MAP = {1028:918, 1029:1144, 1030:920, 1031:1145, 1082:919, 1083:917,
              1084:1146, 1085:1147, 1086:1148, 1087:1149, 1088:1150,
              1089:1151, 1090:1152, 1091:1153}
 ROW = re.compile(r'(?m)^([ \t]*([A-Za-z0-9_.-]+):\d*[ \t]+")((?:[^"\\\r\n]|\\[^\r\n])*)("[^\r\n]*)$')
+
+#20261111_kpopmodder: Keep the subsequent two-line nuclear reward separate from the immutable industry contract.
+FISSION_LOCK_PATH = ROOT / 'tools/hok_fission_update_lock.json'
+FISSION_SNAPSHOT = ROOT / 'docs/upstream/hok-fission-update-20261111'
+
+
+@lru_cache(maxsize=1)
+def fission_lock() -> dict:
+    config = json.loads(FISSION_LOCK_PATH.read_text(encoding='utf-8'))
+    if (config.get('format') != 1 or config.get('revision') != '2026-11-11-fission-v1'
+            or config.get('base_commit') != '6931151ff3009127bf35564cd39eb9b2df88f508'
+            or config.get('source_commit') != '1c2e5423c08677228fa89c0181535bc30fc5764d'
+            or config.get('path') != FOCUS
+            or config.get('focus_id') != 'HOK_KOR_fission_chain_reaction_experiments'
+            or config.get('checkout') != 'crlf'
+            or config.get('previous_sha256') != lock()['outputs'][FOCUS]['sha256']
+            or config.get('classification') != 'THREE_WAY_MERGE'):
+        raise ValueError('unreviewed fission source, target or predecessor')
+    command = ['git', '-C', config['donor_root']]
+    blob = subprocess.check_output(command + ['rev-parse', config['source_commit'] + ':' + FOCUS]).decode().strip()
+    source = subprocess.check_output(command + ['cat-file', 'blob', blob])
+    anchor = ('\t\t\t\tname = HOK_KOR_fission_chain_reaction_experiments\r\n'
+              '\t\t\t\tahead_reduction = 2\r\n')
+    addition = ('\t\t\t\t#20261111_kpopmodder: Add a 150% research bonus while preserving the two-year ahead-of-time reduction.\r\n'
+                '\t\t\t\tbonus = 1.5\r\n')
+    if (blob != config['source_blob'] or sha(source) != config['source_object_sha256']
+            or b'\r' in source or config['anchor'] != anchor or config['added_lines'] != addition):
+        raise ValueError('fission immutable source or two-line delta drift')
+    before = source.replace(b'\n', b'\r\n')
+    if (sha(before) != config['source_before_sha256'] or before.count(anchor.encode()) != 1
+            or sha(before.replace(anchor.encode(), (anchor + addition).encode(), 1)) != config['source_sha256']):
+        raise ValueError('fission reviewed donor delta drift')
+    for relative, expected in config['documents'].items():
+        path = (FISSION_SNAPSHOT / relative).resolve()
+        path.relative_to(FISSION_SNAPSHOT.resolve())
+        if sha(path.read_bytes()) != expected:
+            raise ValueError(f'fission source-document drift: {relative}')
+    for relative, record in config['host_inputs'].items():
+        path = Path(lock()[record['provider'] + '_root']) / relative
+        if sha(path.read_bytes()) != record['sha256']:
+            raise ValueError(f'fission host/schema drift: {relative}')
+    return config
+
+
+@lru_cache(maxsize=1)
+def current_outputs() -> dict[str, bytes]:
+    outputs = dict(build_outputs())
+    config = fission_lock()
+    before = outputs[FOCUS]
+    anchor, addition = config['anchor'].encode(), config['added_lines'].encode()
+    start, end = reward(before.decode('utf-8'), config['focus_id'])
+    if (sha(before) != config['previous_sha256'] or before.count(anchor) != 1
+            or anchor.decode() not in before.decode('utf-8')[start:end]):
+        raise ValueError('fission bonus is outside the reviewed focus reward')
+    after = before.replace(anchor, anchor + addition, 1)
+    if sha(after) != config['sha256'] or len(after) != config['size']:
+        raise ValueError('fission final-output drift')
+    outputs[FOCUS] = after
+    return outputs
+
+
+def fission_historical(relative: str | Path, data: bytes) -> bytes:
+    if canonical_name(relative) == FOCUS and sha(data) == fission_lock()['sha256']:
+        if data != current_outputs()[FOCUS]:
+            raise ValueError('fission final-output proof failed')
+        return build_outputs()[FOCUS]
+    return data
 
 
 def sha(data: bytes) -> str:
@@ -222,6 +290,7 @@ def build_outputs() -> dict[str, bytes]:
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
     name = canonical_name(relative)
+    data = fission_historical(name, data)
     if name in PATHS and sha(data) == lock()['outputs'][name]['sha256']:
         if data != build_outputs()[name]: raise ValueError(f'industry final-output proof failed: {name}')
         return previous_bytes(name)
@@ -232,9 +301,11 @@ def finalize_one(relative: str | Path, data: bytes) -> bytes:
     name = canonical_name(relative)
     if name not in PATHS: return data
     record = lock()['outputs'][name]
-    if sha(data) not in (record['previous_sha256'], record['sha256']):
+    allowed = {record['previous_sha256'], record['sha256']}
+    if name == FOCUS: allowed.add(fission_lock()['sha256'])
+    if sha(data) not in allowed:
         raise ValueError(f'unreviewed industry predecessor: {name}')
-    return build_outputs()[name]
+    return current_outputs()[name]
 
 
 def preflight_outputs(outputs: dict) -> None:
@@ -246,8 +317,10 @@ def preflight_outputs(outputs: dict) -> None:
         seen.add(path)
         if name not in PATHS: continue
         record = lock()['outputs'][name]
-        if data != build_outputs()[name]: raise ValueError(f'unreviewed proposed industry bytes: {name}')
-        if not path.is_file() or sha(path.read_bytes()) not in (record['previous_sha256'], record['sha256']):
+        if data != current_outputs()[name]: raise ValueError(f'unreviewed proposed industry bytes: {name}')
+        allowed = {record['previous_sha256'], record['sha256']}
+        if name == FOCUS: allowed.add(fission_lock()['sha256'])
+        if not path.is_file() or sha(path.read_bytes()) not in allowed:
             raise ValueError(f'independently changed industry runtime: {name}')
 
 
@@ -270,7 +343,7 @@ def ledger_bytes(previous: bytes) -> bytes:
         reason = ('; 2026-11-10 selected donor industry update: tools/hok_industry_update_lock.json; '
                   f'previous_output_sha256={record["previous_sha256"]}; '
                   'independent provincial investments and selected successor-state rewards; original authorship retained')
-        if (ROOT / name).read_bytes() != build_outputs()[name]:
+        if fission_historical(name, (ROOT / name).read_bytes()) != build_outputs()[name]:
             raise ValueError(f'industry ledger runtime differs: {name}')
         if row['output_sha256'] == record['sha256'] and row['reason'].endswith(reason):
             chunks.append(raw)
@@ -286,6 +359,41 @@ def ledger_bytes(previous: bytes) -> bytes:
     return b''.join(chunks)
 
 
+#20261111_kpopmodder: Append one provenance revision after the unchanged equipment ledger, preserving every other row.
+def fission_ledger_bytes(previous: bytes) -> bytes:
+    config = fission_lock()
+    if (ROOT / FOCUS).read_bytes() != current_outputs()[FOCUS]:
+        raise ValueError('fission ledger runtime mismatch')
+    lines = previous.splitlines(keepends=True)
+    reader = csv.DictReader(io.StringIO(previous.decode('utf-8'), newline=''))
+    fields = reader.fieldnames
+    start, chunks, touched = reader.line_num, [lines[0]], 0
+    reason = ('; 2026-11-11 selected donor nuclear research bonus: tools/hok_fission_update_lock.json; '
+              f'previous_output_sha256={config["previous_sha256"]}; '
+              'one 150% nuclear research bonus with existing two-year ahead reduction; original HOK authorship retained')
+    for row in reader:
+        raw = b''.join(lines[start:reader.line_num])
+        start = reader.line_num
+        if row['output_path'] != FOCUS:
+            chunks.append(raw)
+            continue
+        touched += 1
+        if row['integration_class'] != config['classification']:
+            raise ValueError('fission ledger ownership drift')
+        if row['output_sha256'] == config['sha256'] and row['reason'].endswith(reason):
+            chunks.append(raw)
+            continue
+        if row['output_sha256'] != config['previous_sha256'] or reason in row['reason']:
+            raise ValueError('fission ledger predecessor drift')
+        row['output_sha256'] = config['sha256']
+        row['reason'] += reason
+        stream = io.StringIO(newline='')
+        csv.DictWriter(stream, fieldnames=fields, lineterminator='\n').writerow(row)
+        chunks.append(stream.getvalue().encode('utf-8'))
+    if touched != 1: raise ValueError('fission ledger target is not unique')
+    return b''.join(chunks)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     mode = parser.add_mutually_exclusive_group(required=True)
@@ -293,12 +401,12 @@ def main() -> int:
     mode.add_argument('--apply', action='store_true')
     args = parser.parse_args()
     try:
-        outputs = build_outputs()
+        outputs = current_outputs()
         preflight_outputs(outputs)
         pending = [(ROOT / name, data) for name, data in outputs.items() if (ROOT / name).read_bytes() != data]
         if pending and not args.apply: raise ValueError('industry runtime mismatches: ' + ', '.join(str(p) for p,_ in pending))
         for path, data in pending: path.write_bytes(data)
-        print(f'PASS industry update: 4 exact outputs; 8 focus rewards/unlocks, 7 decisions, 16 values per locale; {len(pending)} written')
+        print(f'PASS industry/fission updates: 4 exact outputs; preserved industry delta plus one 150% nuclear research bonus; {len(pending)} written')
         return 0
     except (ValueError, KeyError, FileNotFoundError) as exc:
         print(f'ERROR: {exc}', file=sys.stderr)
