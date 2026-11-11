@@ -126,7 +126,9 @@ def finalize_outputs(outputs: dict, *, owner: str) -> dict:
     from upstream_content_update import finalize_outputs as content_finalize_outputs
     #20261109_kpopmodder: Reapply the exact review layer after content-owned additions and replacements.
     from review_followup import finalize_outputs as review_finalize_outputs
-    return review_finalize_outputs(content_finalize_outputs(result,owner=owner))
+    #20261111_kpopmodder: Add the new bilateral module only to its Korean focus owner after every historical overlay.
+    from upstream_us_defense import finalize_outputs as defense_finalize_outputs
+    return defense_finalize_outputs(review_finalize_outputs(content_finalize_outputs(result,owner=owner)),owner=owner)
 
 def remap(data: bytes) -> bytes:
     mapping=state_mapping()
@@ -355,6 +357,11 @@ def main() -> int:
                 industry_record=industry_lock()['outputs'].get(name)
                 if industry_record:
                     allowed.add(industry_record['previous_sha256'])
+                #20261111_kpopmodder: Advance only the exact pre-defense payload when this older writer regenerates the reviewed module.
+                from upstream_us_defense import lock as defense_lock
+                defense_record=defense_lock()['outputs'].get(name)
+                if defense_record and defense_record['previous_sha256']:
+                    allowed.add(defense_record['previous_sha256'])
                 if current is not None and sha(current) not in allowed:
                     raise ValueError(f'refusing independently modified output: {name}')
                 pending.append((path,data))

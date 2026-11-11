@@ -255,3 +255,16 @@ tools/korean_equipment_localisation.py text eol=lf
 tools/hok_equipment_localisation_lock.json text eol=lf
 localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml text eol=crlf
 localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml text eol=lf
+
+#20261111_kpopmodder: Preserve selected bilateral-defense sources and exact generated runtime bytes across checkouts.
+docs/upstream/hok-us-defense-update-20261111/** -text
+tools/hok_us_defense_update_lock.json text eol=lf
+tools/upstream_us_defense.py text eol=lf
+common/ideas/HOK_KOR_us_defense_ideas.txt text eol=crlf
+common/scripted_effects/HOK_KOR_us_defense_effects.txt text eol=crlf
+common/scripted_triggers/HOK_KOR_us_defense_triggers.txt text eol=lf
+events/HOK_KOR_us_defense_events.txt text eol=crlf
+interface/HOK_KOR_us_defense_event_pictures.gfx text eol=lf
+interface/HOK_KOR_us_defense_ideas.gfx text eol=lf
+localisation/english/HOK_KOR_us_defense_l_english.yml text eol=crlf
+localisation/korean/HOK_KOR_us_defense_l_korean.yml text eol=crlf

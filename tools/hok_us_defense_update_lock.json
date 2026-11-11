@@ -1,0 +1,139 @@
+{
+  "format": 1,
+  "revision": "2026-11-11-us-defense-v1",
+  "base_commit": "39e8e7e5bc3dbdcf52d8c8acc04a92c97cd0b2f5",
+  "source_commit": "e2009b635d79c80a67fed0370d5fe36a823b656f",
+  "source_manifest_sha256": "BF51203AA4E88EDF6E61C547D3FE46CD25C566BD1DE481CBC170AFA8C606F29C",
+  "workshop_manifest": "1963361040482473746",
+  "game_version": "Operation Postern v1.19.4.2.2da5 (0bdb)",
+  "rt56_root": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968",
+  "vanilla_root": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV",
+  "outputs": {
+    "common/ideas/HOK_KOR_us_defense_ideas.txt": {
+      "sha256": "19149F3D23AA2290BFAA8446AB195BEDF0CF7E54FBA15B4758EE02D01D50A01E",
+      "size": 1293,
+      "classification": "ADD",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "common/national_focus/korea.txt": {
+      "sha256": "DD808875F78707B60C30DC77674309D2A63E6CA5467F2EC7FF0E55D78E63EDED",
+      "size": 520173,
+      "classification": "THREE_WAY_MERGE",
+      "previous_sha256": "E283260E2BBA048C4D5E800DFB42D79F2E73963A11E8428C38158FF272180C0B",
+      "previous_snapshot": "compat_before/common/national_focus/korea.txt"
+    },
+    "common/scripted_effects/HOK_KOR_us_defense_effects.txt": {
+      "sha256": "AC2C89A840E61A9A804041C1185705F730DE76DCB3A88154A9815BBB7519D218",
+      "size": 4949,
+      "classification": "ADD",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "common/scripted_triggers/HOK_KOR_us_defense_triggers.txt": {
+      "sha256": "67CA5E773DCE4635356CF608FF758D2A72CFF0736D326182C4285B2736394965",
+      "size": 393,
+      "classification": "ADD",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "events/HOK_KOR_us_defense_events.txt": {
+      "sha256": "3B7000286571ED55CFDEFDB574B25BF916FDCFDE0483FC31EB7A95C1C52B4F7E",
+      "size": 2356,
+      "classification": "ADD",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "events/korea.txt": {
+      "sha256": "6E0323A5166B548953052E6D66DB0E2773116032DB363603DB03C4868C17E767",
+      "size": 57173,
+      "classification": "THREE_WAY_MERGE",
+      "previous_sha256": "4A955AEE3AA00759FBBD0A8FC0411342B7E01A7FE6B103C09B80798F3B5BA78E",
+      "previous_snapshot": "compat_before/events/korea.txt"
+    },
+    "gfx/event_pictures/HOK_KOR/us_defense/us_defense_agreement_news.dds": {
+      "sha256": "453FFC5867B00200EAA53F142DE539E133EA6B85FE24152EDF182653BD4C66AC",
+      "size": 243092,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/event_pictures/HOK_KOR/us_defense/us_defense_dominion.dds": {
+      "sha256": "8B13E50096E50F72103296D193ED4ABCFA680435A7CB25ACDDDA1F2EDB1DFA69",
+      "size": 147968,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/event_pictures/HOK_KOR/us_defense/us_defense_dominion_news.dds": {
+      "sha256": "510BA0E1FC4E0EAA7323C5BC71EA7676DFD331E5F06DB267F52930A681B2A2A5",
+      "size": 243092,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/event_pictures/HOK_KOR/us_defense/us_defense_talks.dds": {
+      "sha256": "11EDFFFB5588C9ED4319244984DA8AD4447207412513C440193F5A75B91ED650",
+      "size": 147968,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/interface/ideas/HOK_KOR/us_defense/HOK_KOR_korean_defense_contribution_1.dds": {
+      "sha256": "3D840300F6FE23C8585DC3A68842460F7E92F836EF68870EDE5A4A3F5B74F391",
+      "size": 16448,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/interface/ideas/HOK_KOR/us_defense/HOK_KOR_korean_defense_contribution_2.dds": {
+      "sha256": "188A7AC2840354F33382B9FC2AF39F0D0B913F8BC09CF070090A60371EF358DE",
+      "size": 16448,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/interface/ideas/HOK_KOR/us_defense/HOK_KOR_us_defense_cost_sharing_1.dds": {
+      "sha256": "2946E53D923C42DB60D333CE494495DA261C287C7ACF31CC9CB98B2D3D21DFFA",
+      "size": 16448,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/interface/ideas/HOK_KOR/us_defense/HOK_KOR_us_defense_cost_sharing_2.dds": {
+      "sha256": "CBFF7B3B7C07C76137673948DABC575F5DE33FF66A03D19FEE1E1D097EA14AF6",
+      "size": 16448,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "interface/HOK_KOR_us_defense_event_pictures.gfx": {
+      "sha256": "35B05B84672A41C417A823A9A3DA3340B5DDBBFCF33D2012A6CBCA18539F7CAC",
+      "size": 727,
+      "classification": "ADD",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "interface/HOK_KOR_us_defense_ideas.gfx": {
+      "sha256": "039199D12B6F67D2E4DD05A37532F6C23A38FE169997159B99D62426141BD0A6",
+      "size": 799,
+      "classification": "ADD",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "localisation/english/HOK_KOR_us_defense_l_english.yml": {
+      "sha256": "4FE1DF153A3E2FEA9A0BF56C903E1299C508563E655EB78F6BA7E2071A84CD2E",
+      "size": 9600,
+      "classification": "ADD",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "localisation/korean/HOK_KOR_us_defense_l_korean.yml": {
+      "sha256": "B90B62621F66017762A95AAD1197020F462D14D01D189C3B5CAAEA1244865D48",
+      "size": 9338,
+      "classification": "ADD",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    }
+  }
+}

@@ -289,6 +289,9 @@ def build_outputs() -> dict[str, bytes]:
 
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
+    #20261111_kpopmodder: Prove the later bilateral-defense delta before enforcing unchanged industry and fission ancestry.
+    from upstream_us_defense import historical_bytes as defense_historical
+    data = defense_historical(relative, data)
     name = canonical_name(relative)
     data = fission_historical(name, data)
     if name in PATHS and sha(data) == lock()['outputs'][name]['sha256']:
@@ -298,17 +301,23 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 
 
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
+    #20261111_kpopmodder: Retain the approved defense module after every earlier generated output owner.
+    from upstream_us_defense import finalize_one as defense_finalize, historical_bytes as defense_historical
+    data = defense_historical(relative, data)
     name = canonical_name(relative)
-    if name not in PATHS: return data
+    if name not in PATHS: return defense_finalize(relative, data)
     record = lock()['outputs'][name]
     allowed = {record['previous_sha256'], record['sha256']}
     if name == FOCUS: allowed.add(fission_lock()['sha256'])
     if sha(data) not in allowed:
         raise ValueError(f'unreviewed industry predecessor: {name}')
-    return current_outputs()[name]
+    return defense_finalize(relative, current_outputs()[name])
 
 
 def preflight_outputs(outputs: dict) -> None:
+    #20261111_kpopmodder: Reject unknown defense bytes before earlier writers inspect their exact historical projection.
+    from upstream_us_defense import preflight_outputs as defense_preflight, historical_bytes as defense_historical
+    defense_preflight(outputs)
     seen = set()
     for relative, data in outputs.items():
         path = (ROOT / relative).resolve()
@@ -317,14 +326,16 @@ def preflight_outputs(outputs: dict) -> None:
         seen.add(path)
         if name not in PATHS: continue
         record = lock()['outputs'][name]
-        if data != current_outputs()[name]: raise ValueError(f'unreviewed proposed industry bytes: {name}')
+        if defense_historical(name, data) != current_outputs()[name]: raise ValueError(f'unreviewed proposed industry bytes: {name}')
         allowed = {record['previous_sha256'], record['sha256']}
         if name == FOCUS: allowed.add(fission_lock()['sha256'])
-        if not path.is_file() or sha(path.read_bytes()) not in allowed:
+        if not path.is_file() or sha(defense_historical(name, path.read_bytes())) not in allowed:
             raise ValueError(f'independently changed industry runtime: {name}')
 
 
 def ledger_bytes(previous: bytes) -> bytes:
+    #20261111_kpopmodder: Preserve this historical ledger contract under the exact later bilateral-defense output.
+    from upstream_us_defense import historical_bytes as defense_historical
     lines = previous.splitlines(keepends=True)
     reader = csv.DictReader(io.StringIO(previous.decode('utf-8'), newline=''))
     fields = reader.fieldnames
@@ -343,7 +354,7 @@ def ledger_bytes(previous: bytes) -> bytes:
         reason = ('; 2026-11-10 selected donor industry update: tools/hok_industry_update_lock.json; '
                   f'previous_output_sha256={record["previous_sha256"]}; '
                   'independent provincial investments and selected successor-state rewards; original authorship retained')
-        if fission_historical(name, (ROOT / name).read_bytes()) != build_outputs()[name]:
+        if fission_historical(name, defense_historical(name, (ROOT / name).read_bytes())) != build_outputs()[name]:
             raise ValueError(f'industry ledger runtime differs: {name}')
         if row['output_sha256'] == record['sha256'] and row['reason'].endswith(reason):
             chunks.append(raw)
@@ -362,7 +373,9 @@ def ledger_bytes(previous: bytes) -> bytes:
 #20261111_kpopmodder: Append one provenance revision after the unchanged equipment ledger, preserving every other row.
 def fission_ledger_bytes(previous: bytes) -> bytes:
     config = fission_lock()
-    if (ROOT / FOCUS).read_bytes() != current_outputs()[FOCUS]:
+    #20261111_kpopmodder: Enforce the old fission provenance before the new defense row revision is appended.
+    from upstream_us_defense import historical_bytes as defense_historical
+    if defense_historical(FOCUS, (ROOT / FOCUS).read_bytes()) != current_outputs()[FOCUS]:
         raise ValueError('fission ledger runtime mismatch')
     lines = previous.splitlines(keepends=True)
     reader = csv.DictReader(io.StringIO(previous.decode('utf-8'), newline=''))
@@ -401,7 +414,8 @@ def main() -> int:
     mode.add_argument('--apply', action='store_true')
     args = parser.parse_args()
     try:
-        outputs = current_outputs()
+        from upstream_us_defense import finalize_one as defense_finalize
+        outputs = {name:defense_finalize(name,data) for name,data in current_outputs().items()}
         preflight_outputs(outputs)
         pending = [(ROOT / name, data) for name, data in outputs.items() if (ROOT / name).read_bytes() != data]
         if pending and not args.apply: raise ValueError('industry runtime mismatches: ' + ', '.join(str(p) for p,_ in pending))

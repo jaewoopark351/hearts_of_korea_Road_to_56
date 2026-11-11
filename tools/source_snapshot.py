@@ -1804,7 +1804,13 @@ def verify_english_translation() -> None:
     equipment_english = {p: data for p, data in equipment_outputs().items() if p.startswith('localisation/english/')}
     if set(equipment_english) != {'localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml'}:
         raise ValueError('equipment override English file allowlist changed')
-    if paths != expected_paths | additions.keys() | feature_english.keys() | prospecting_english | split_english | content_english | equipment_english.keys():
+    #20261111_kpopmodder: Admit the exact new bilateral translation without weakening any historical file or key inventory.
+    from upstream_us_defense import build_outputs as defense_outputs
+    defense_locales = {p:data for p,data in defense_outputs().items() if p.startswith('localisation/')}
+    defense_english = {'localisation/english/HOK_KOR_us_defense_l_english.yml'}
+    if set(defense_locales) != defense_english | {'localisation/korean/HOK_KOR_us_defense_l_korean.yml'}:
+        raise ValueError('bilateral defence localisation pair allowlist changed')
+    if paths != expected_paths | additions.keys() | feature_english.keys() | prospecting_english | split_english | content_english | equipment_english.keys() | defense_english:
         raise ValueError("English output file inventory differs from the reviewed translation layers")
     for relative, expected in equipment_english.items():
         if (REPO_ROOT / relative).read_bytes() != expected:
@@ -1812,6 +1818,19 @@ def verify_english_translation() -> None:
     for relative in content_english:
         if (REPO_ROOT/relative).read_bytes() != content_outputs()[relative]:
             raise ValueError(f'new CNDP English output drift: {relative}')
+    for relative, expected in defense_locales.items():
+        if (REPO_ROOT/relative).read_bytes() != expected:
+            raise ValueError(f'bilateral defence localisation output drift: {relative}')
+    en_defense = english_entries(defense_locales[next(iter(defense_english))])
+    ko_defense = english_entries(defense_locales['localisation/korean/HOK_KOR_us_defense_l_korean.yml'])
+    if len(en_defense) != 36 or en_defense.keys() != ko_defense.keys():
+        raise ValueError('bilateral defence bilingual key inventory drift')
+    for key, (version, value) in en_defense.items():
+        ko_version, ko_value = ko_defense[key]
+        if (version != ko_version or Counter(ENGLISH_TOKENS.findall(value)) != Counter(ENGLISH_TOKENS.findall(ko_value))
+                or value.count(r'\n') != ko_value.count(r'\n')):
+            raise ValueError(f'bilateral defence protected translation token drift: {key}')
+    print('PASS Korean-American defence English: one separate English file, 36 bilingual keys; historical inventories preserved')
     hangul = re.compile(r"[\u1100-\u11ff\u302e-\u302f\u3130-\u318f\ua960-\ua97f\uac00-\ud7ff\uffa0-\uffdc]")
     for relative in sorted(paths):
         if hangul.search((REPO_ROOT / relative).read_text(encoding="utf-8-sig")):

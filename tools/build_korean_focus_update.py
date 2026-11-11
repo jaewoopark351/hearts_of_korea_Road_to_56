@@ -38,6 +38,8 @@ from korean_second_wave_geography import apply_second_wave_geography, verify_geo
 from korean_state_split_content import locale_paths as state_split_locale_paths
 #20261108_kpopmodder: Keep new CNDP files under the existing Korean generator's explicit ownership.
 from upstream_content_update import addition_paths as content_addition_paths
+#20261111_kpopmodder: Keep the sixteen new bilateral-defense paths in the explicit Korean generator allowlist.
+from upstream_us_defense import lock as defense_lock
 
 
 # [2026-09-22]_kpopmodder: Pin the approved Korean update separately from the historical donor base.
@@ -97,7 +99,8 @@ OUTPUT_PATHS = tuple(dict.fromkeys(GAMEPLAY_PATHS + ICON_ASSET_PATHS + tuple(Pat
                                  + tuple(Path(p) for group in ("runtime_text", "runtime_assets") for p in feature_update_lock()[group])
                                  + tuple(Path(p) for p in prospecting_lock()["additions"])
                                  + tuple(Path(p) for p in state_split_locale_paths())
-                                 + tuple(Path(p) for p in content_addition_paths('focus'))))
+                                 + tuple(Path(p) for p in content_addition_paths('focus'))
+                                 + tuple(Path(p) for p,record in defense_lock()['outputs'].items() if record['previous_sha256'] is None)))
 SOURCE_COMMITS = {
     relative: AI_COMMIT if relative.parts[1] == "ai_strategy_plans" else FOCUS_COMMIT
     for relative in GAMEPLAY_PATHS
@@ -512,6 +515,10 @@ def preflight(outputs: dict[Path, bytes]) -> None:
         industry_record = industry_outputs.get(relative.as_posix())
         if industry_record:
             accepted_hashes.add(industry_record["previous_sha256"])
+        #20261111_kpopmodder: Advance only the exact previous bilateral-defense inputs when an older writer applies this module.
+        defense_record = defense_lock()['outputs'].get(relative.as_posix())
+        if defense_record and defense_record['previous_sha256']:
+            accepted_hashes.add(defense_record['previous_sha256'])
         #20261107_kpopmodder: Permit only the frozen immediate pre-split output as the new overlay's source.
         from korean_state_split import lock as state_split_lock
         split_record = state_split_lock().get("outputs", {}).get(relative.as_posix(), {})
