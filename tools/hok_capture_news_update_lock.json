@@ -1,0 +1,21 @@
+{
+  "format": 1,
+  "revision": "2026-11-12-capture-news-v1",
+  "base_commit": "180ffad37821835be3338e66e27c755982a16468",
+  "source_commit": "cdc022eee15fbf7404d4cb30cf2d0102d29e550c",
+  "ancestor_commit": "424e4d962803b5cc7a3667a7df4604fbd128733a",
+  "source_manifest_sha256": "10600892A25BF411DE97BF58EF5B0C81936A4EC9AE80EB3865B5F991185DE453",
+  "workshop_manifest": "1963361040482473746",
+  "game_version": "Operation Postern v1.19.4.2.2da5 (0bdb)",
+  "rt56_root": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968",
+  "vanilla_root": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV",
+  "outputs": {
+    "events/NewsEvents_KOR.txt": {
+      "sha256": "4C3331C7AB9DC0782DD90210780CF7710787325ED7418DEE0FD3748C0398A5F7",
+      "size": 14032,
+      "classification": "ADD",
+      "previous_sha256": "10E07D6B7469C9853EAAAE77837A1EDFC4DC95B8BBF9EFDCF37CD7186983DB64",
+      "previous_snapshot": "compat_before/events/NewsEvents_KOR.txt"
+    }
+  }
+}

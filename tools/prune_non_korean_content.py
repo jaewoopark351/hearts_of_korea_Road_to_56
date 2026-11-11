@@ -572,6 +572,9 @@ def main() -> int:
     args = parser.parse_args()
 
     generated = outputs()
+    #20261112_kpopmodder: Protect the terminal city-news revision before the historical pruning writer runs.
+    from upstream_capture_news import preflight_outputs as capture_preflight
+    capture_preflight(generated)
     #20261109_kpopmodder: Refuse independent changes to the protected English output before any pruning writer runs.
     from english_terminology import preflight_outputs as terminology_preflight
     terminology_preflight(generated)

@@ -1,0 +1,130 @@
+{
+  "format": 1,
+  "recorded_date": "2026-11-12",
+  "donor_root": "C:\\hoi\\hearts_of_korea",
+  "source_commit": "cdc022eee15fbf7404d4cb30cf2d0102d29e550c",
+  "ancestor_commit": "424e4d962803b5cc7a3667a7df4604fbd128733a",
+  "compatibility_base_commit": "180ffad37821835be3338e66e27c755982a16468",
+  "sources": {
+    "donor_before": {
+      "snapshot": "before/events/NewsEvents_KOR.txt",
+      "sha256": "4B7755DAC52F607387929B243E4F5FFE33DAF19C980CC56D559230FA59EAD95C",
+      "size": 14986,
+      "role": "read-only donor ancestor Git blob",
+      "source_kind": "git_blob",
+      "source_commit": "424e4d962803b5cc7a3667a7df4604fbd128733a",
+      "source_blob": "e51b56a0e92c33df1f3646129e154d4743c55d70",
+      "original_path": "C:\\hoi\\hearts_of_korea\\events\\NewsEvents_KOR.txt"
+    },
+    "donor_after": {
+      "snapshot": "runtime/events/NewsEvents_KOR.txt",
+      "sha256": "5D59C4797CC5EC732465F5E637DA4113D23152D8C3F6A94EEA5AF95FA2075BDE",
+      "size": 16633,
+      "role": "exact read-only donor checkout",
+      "source_kind": "clean_checkout",
+      "source_commit": "cdc022eee15fbf7404d4cb30cf2d0102d29e550c",
+      "source_blob": "33e644953d16ae7f0903b3548091f370b11f7887",
+      "original_path": "C:\\hoi\\hearts_of_korea\\events\\NewsEvents_KOR.txt"
+    },
+    "compat_before": {
+      "snapshot": "compat_before/events/NewsEvents_KOR.txt",
+      "sha256": "10E07D6B7469C9853EAAAE77837A1EDFC4DC95B8BBF9EFDCF37CD7186983DB64",
+      "size": 13495,
+      "role": "active compatibility output before selected update",
+      "source_commit": "180ffad37821835be3338e66e27c755982a16468",
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\events\\NewsEvents_KOR.txt"
+    },
+    "alignment_document": {
+      "snapshot": "documents/docs/HOK_STATE_REFERENCE_ALIGNMENT_PLAN.md",
+      "sha256": "270B2075EBD44E931AAC4D31A89D2CED65E510A79702380EA842AF8B0B696A79",
+      "size": 52547,
+      "role": "donor specification and donor-only prior evidence; not RT56 validation",
+      "source_commit": "cdc022eee15fbf7404d4cb30cf2d0102d29e550c",
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\HOK_STATE_REFERENCE_ALIGNMENT_PLAN.md"
+    }
+  },
+  "host_inputs": {
+    "history/states/608-Beijing.txt": {
+      "snapshot": "host/rt56/history/states/608-Beijing.txt",
+      "sha256": "C5EA93A51A6EB3FC8DCA7276AD945AC84ABB8F29A71ED9990B86BC32AD976FA2",
+      "size": 1206,
+      "provider": "rt56",
+      "role": "current target city parent",
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\608-Beijing.txt",
+      "state_id": 608,
+      "city_province": 9843
+    },
+    "history/states/1114-Nanjing.txt": {
+      "snapshot": "host/rt56/history/states/1114-Nanjing.txt",
+      "sha256": "2029B97714CAD4B3613DB1DFE3753D78065FAB1D8B355733863A6C4385007111",
+      "size": 848,
+      "provider": "rt56",
+      "role": "current target city parent",
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1114-Nanjing.txt",
+      "state_id": 1114,
+      "city_province": 11913
+    },
+    "history/states/1116-Chongqing.txt": {
+      "snapshot": "host/rt56/history/states/1116-Chongqing.txt",
+      "sha256": "5316FBCD1DE19D058D007364934D8B0491CCF8F37F6E29C4444328307A0731CF",
+      "size": 980,
+      "provider": "rt56",
+      "role": "current target city parent",
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1116-Chongqing.txt",
+      "state_id": 1116,
+      "city_province": 6999
+    },
+    "history/states/1035-Finnmark.txt": {
+      "snapshot": "host/rt56/history/states/1035-Finnmark.txt",
+      "sha256": "3BC7BD72A96AF8D1CA5CD9CE0D5035010CC1679263FB7CBA05F31581DE5F512C",
+      "size": 564,
+      "provider": "rt56",
+      "role": "unrelated host state occupying the donor number",
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1035-Finnmark.txt",
+      "state_id": 1035,
+      "city_province": null
+    },
+    "history/states/1037-Hame.txt": {
+      "snapshot": "host/rt56/history/states/1037-Hame.txt",
+      "sha256": "A2144D845E1F0125748E2DDB810D3E2E422918891AD0CCED2AEEA266792C3631",
+      "size": 649,
+      "provider": "rt56",
+      "role": "unrelated host state occupying the donor number",
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1037-Hame.txt",
+      "state_id": 1037,
+      "city_province": null
+    }
+  },
+  "game": {
+    "snapshot": "host/vanilla/launcher-settings.json",
+    "sha256": "D844392E7391EFE103EFC96B089910ADBA66605BC41FE43D5BC663F4C4A7FBA6",
+    "size": 1462,
+    "role": "read-only installed engine version metadata",
+    "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\launcher-settings.json",
+    "version": "Operation Postern v1.19.4.2.2da5 (0bdb)"
+  },
+  "workshop": {
+    "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\appworkshop_394360.acf",
+    "item_id": "820260968",
+    "manifest": "1963361040482473746",
+    "role": "Steam-managed host identity; metadata is not a runtime test"
+  },
+  "schema_inputs": {
+    "documentation/triggers_documentation.md": {
+      "provider": "vanilla",
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\documentation\\triggers_documentation.md",
+      "role": "installed controls_province country-trigger documentation",
+      "sha256": "7D27ED77DADAF3A213A4B3E2C624BF9C02DAE495317ABE8EEE833B27C2D1DE29",
+      "size": 180523,
+      "frozen_copy": false
+    },
+    "common/national_focus/soviet.txt": {
+      "provider": "vanilla",
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\national_focus\\soviet.txt",
+      "role": "installed country-scope controls_province example; no donor or RT56 gameplay import",
+      "sha256": "759F18704CD4EF72633637958AB240315BF7B81AD3FB9771B534CCC8B4B4E602",
+      "size": 471145,
+      "frozen_copy": false
+    }
+  }
+}

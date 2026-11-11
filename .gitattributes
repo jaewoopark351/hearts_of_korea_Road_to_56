@@ -268,3 +268,8 @@ interface/HOK_KOR_us_defense_event_pictures.gfx text eol=lf
 interface/HOK_KOR_us_defense_ideas.gfx text eol=lf
 localisation/english/HOK_KOR_us_defense_l_english.yml text eol=crlf
 localisation/korean/HOK_KOR_us_defense_l_korean.yml text eol=crlf
+
+#20261112_kpopmodder: Preserve the exact city-news inputs and deterministic RT56 revision across checkouts.
+docs/upstream/hok-capture-news-update-20261112/** -text
+tools/hok_capture_news_update_lock.json text eol=lf
+tools/upstream_capture_news.py text eol=lf

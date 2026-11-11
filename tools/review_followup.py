@@ -88,6 +88,9 @@ def build_outputs() -> dict[str, bytes]:
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
     """Reverse only the registered final bytes; unrelated/unknown bytes stay raw."""
+    #20261112_kpopmodder: Prove the city-news revision before checking unchanged historical output contracts.
+    from upstream_capture_news import historical_bytes as capture_historical
+    data = capture_historical(relative, data)
     #20261110_kpopmodder: Preserve old descriptor pins only after proving the exact dependency-edge output.
     from korean_equipment_localisation import descriptor_historical_bytes
     data = descriptor_historical_bytes(relative, data)
@@ -109,6 +112,8 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 
 
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
+    #20261112_kpopmodder: Keep the reviewed city-news triggers after every inherited output owner.
+    from upstream_capture_news import finalize_one as capture_finalize
     #20261110_kpopmodder: Retain the exact terminal industry revision across every inherited output owner.
     from upstream_industry_update import finalize_one as industry_finalize, historical_bytes as industry_historical
     data = industry_historical(relative, data)
@@ -117,11 +122,11 @@ def finalize_one(relative: str | Path, data: bytes) -> bytes:
     data = terminology_historical(relative, data)
     name = canonical_name(relative)
     if not LOCK_PATH.is_file() or name not in PATHS:
-        return industry_finalize(relative, terminology_finalize(relative, data))
+        return capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, data)))
     record = lock()['outputs'][name]
     if sha(data) not in (record['previous_sha256'], record['sha256']):
         raise ValueError(f'unreviewed follow-up predecessor: {name}')
-    return industry_finalize(relative, terminology_finalize(relative, build_outputs()[name]))
+    return capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, build_outputs()[name])))
 
 
 def finalize_outputs(outputs: dict) -> dict:
@@ -129,6 +134,9 @@ def finalize_outputs(outputs: dict) -> dict:
 
 
 def preflight_outputs(outputs: dict) -> None:
+    #20261112_kpopmodder: Refuse independent news edits before an older writer can replace them.
+    from upstream_capture_news import preflight_outputs as capture_preflight
+    capture_preflight(outputs)
     #20261110_kpopmodder: Refuse unregistered industry payloads or independent runtime edits before any older writer runs.
     from upstream_industry_update import preflight_outputs as industry_preflight
     industry_preflight(outputs)

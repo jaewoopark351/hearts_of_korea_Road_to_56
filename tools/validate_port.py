@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_COMPAT_REMOTE_FILE_ID = "3796816200"
 
 GENERATOR_CHECKS = (
+    #20261112_kpopmodder: Verify the raw RT56 city-news targets before projecting their historical ancestor.
+    ("Korean city capture news", "upstream_capture_news.py", "--check"),
     #20261111_kpopmodder: Check the bilateral module before exact historical projections preserve all previous gates.
     ("Korean-American defense sharing", "upstream_us_defense.py", "--check"),
     #20261110_kpopmodder: Verify the bounded bilingual equipment overrides before accepting their exact duplicate pairs.
