@@ -1199,6 +1199,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     #20261112_kpopmodder: Append the reviewed city-news provenance after the unchanged historical ledger.
     from upstream_capture_news import ledger_bytes as capture_ledger_bytes
     final = capture_ledger_bytes(final)
+    #20261112_kpopmodder: Index the selected scientist assets and one-name exclusion after immutable prior provenance.
+    from upstream_scientists import ledger_bytes as scientist_ledger_bytes
+    final = scientist_ledger_bytes(final)
     final_rows = list(csv.DictReader(io.StringIO(final.decode("utf-8"), newline="")))
     final_counts = Counter(row["integration_class"] for row in final_rows)
     final_collisions = sum(row["exact_path_rt56_collision"] == "yes" for row in final_rows)
@@ -1502,7 +1505,9 @@ def build_state_split_csv(*, output_root: Path = REPO_ROOT) -> bytes:
     final = defense_ledger_bytes(fission_ledger_bytes(equipment_ledger_bytes(build_documentation_csv(industry_ledger_bytes(terminology_ledger_bytes(review_ledger_bytes(host_ledger_bytes(content_ledger_bytes(b"".join(chunks))))))))))
     #20261112_kpopmodder: Scoped regeneration retains the same final city-news provenance as full builds.
     from upstream_capture_news import ledger_bytes as capture_ledger_bytes
-    return capture_ledger_bytes(final)
+    #20261112_kpopmodder: Keep scoped regeneration on the same selected scientist provenance as the full builder.
+    from upstream_scientists import ledger_bytes as scientist_ledger_bytes
+    return scientist_ledger_bytes(capture_ledger_bytes(final))
 
 
 def main() -> int:

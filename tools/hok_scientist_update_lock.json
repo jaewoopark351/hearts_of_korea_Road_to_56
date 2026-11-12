@@ -1,0 +1,131 @@
+{
+  "format": 1,
+  "revision": "2026-11-12-scientists-v2",
+  "base_commit": "51ac53cbe8c25eeb203b6f6914ce53b0a5cc2c58",
+  "source_commit": "cdc022eee15fbf7404d4cb30cf2d0102d29e550c",
+  "source_kind": "reviewed-working-tree-snapshot",
+  "source_manifest_sha256": "47E296C2ED93A084A9F076C23467F0B9A0FBA7B82C62E2178A5532B0A1896D8C",
+  "workshop_manifest": "1963361040482473746",
+  "game_version": "Operation Postern v1.19.4.2.2da5 (0bdb)",
+  "rt56_root": "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968",
+  "vanilla_root": "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV",
+  "outputs": {
+    "common/names/zz_hok_rt56_names.txt": {
+      "sha256": "67A034FD66369E8EB6A4B02DE173C174F33E1C50A1EAE7335B05930FD8185F5B",
+      "size": 4682,
+      "classification": "THREE_WAY_MERGE",
+      "previous_sha256": "2AD30F7678937B3B68219E0ED4A21AF160654263F72A6C8C552B01639ED7B0F8",
+      "previous_snapshot": "compat_before/common/names/zz_hok_rt56_names.txt",
+      "previous_size": 4647
+    },
+    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_01.dds": {
+      "sha256": "8CE30A7A681ABB1CCA6CC9F9E83F17AFEEBE8AC778CA140B1A9C4CBEB4C59DE4",
+      "size": 131168,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_02.dds": {
+      "sha256": "1C7E12F9802656CC0F61CCBE0F0CEAB04F98A82A6DAA48BA927BA01260FE7C47",
+      "size": 131168,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_03.dds": {
+      "sha256": "97416574E0AE690D3E40387EB8C61433E30269774C718C5E85D5EAF72B4962FD",
+      "size": 131168,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_04.dds": {
+      "sha256": "E93BB2E51DFA3ED7150583A2A6E117CB32C93F2963B9FE9EB038B5E4F5004B21",
+      "size": 131168,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_01.dds": {
+      "sha256": "99C67C13BFDC1FBA4E85C3FF7D4A07D7337395F08981F17CFB54E5A4943903A9",
+      "size": 131168,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_02.dds": {
+      "sha256": "68C821857BE50F8A47F1DDADB1FF26529DBCA5ED0C7AAF5AA4381EF695C540DB",
+      "size": 131168,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_03.dds": {
+      "sha256": "DED6BFA82A2B0F05683C18CB0569F3D2763A40DC0F7F2712CD568438D8DF7831",
+      "size": 131168,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_04.dds": {
+      "sha256": "5D195D8F31A0BF7E2EC2DA383E5575F8D864DA31A279E4F0873ED602E0EAF38B",
+      "size": 131168,
+      "classification": "ASSET_COPY",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "interface/HOK_KOR_scientist_portraits.gfx": {
+      "sha256": "1EFADE94088E08B0EE8F0AE072DACCC2E78FC543827AF3B932042E88987B3745",
+      "size": 1316,
+      "classification": "ADD",
+      "previous_sha256": null,
+      "previous_snapshot": null
+    },
+    "portraits/00_portraits_KOR.txt": {
+      "sha256": "5E13A8CED8ECEDD70DE77614739C6C2315D98498DE16471ED8BF6363CC2746CC",
+      "size": 1051,
+      "classification": "ADD",
+      "previous_sha256": "513A9C1492AD4A70572BDFFB8FF58F89A35E96D5C336BCF48D375594201E7FD3",
+      "previous_snapshot": "compat_before/portraits/00_portraits_KOR.txt",
+      "previous_size": 597
+    }
+  },
+  "name_exclusions": {
+    "snapshot_root": "docs/upstream/hok-scientist-name-exclusions-20261112",
+    "source_manifest_sha256": "F99C540CAA814BC78AE390F2447C7F8EBDE1C6E793A967EAA447324569D2898E",
+    "previous_source_manifest_sha256": "47E296C2ED93A084A9F076C23467F0B9A0FBA7B82C62E2178A5532B0A1896D8C",
+    "intermediate_output_sha256": "F06C9DE9A35C43A86BA7B76AD447A7E511060A035B2F396C659F8459A320F781",
+    "intermediate_output_size": 4733,
+    "excluded_names": {
+      "male": [
+        "Gun",
+        "Woong",
+        "Yoon-Gi",
+        "Yoongi",
+        "Jaeyoung",
+        "Jinho",
+        "Jiwon",
+        "Jungho",
+        "Junghoon",
+        "Minseok",
+        "Minsoo",
+        "Sanghoon",
+        "Sungho",
+        "Sunghoon",
+        "Sungmin"
+      ],
+      "female": [
+        "Bora",
+        "Ji-young",
+        "Kyung-hee",
+        "Jiyoung",
+        "Kyunghee"
+      ]
+    },
+    "final_counts": {
+      "male": 56,
+      "female": 11,
+      "surnames": 14
+    }
+  }
+}

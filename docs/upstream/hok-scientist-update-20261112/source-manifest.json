@@ -1,0 +1,251 @@
+{
+    "schema_version":  1,
+    "date":  "2026-11-12",
+    "source_root":  "C:/hoi/hearts_of_korea",
+    "source_branch":  "feat/korean-focus-expansion-ai",
+    "source_commit":  "cdc022eee15fbf7404d4cb30cf2d0102d29e550c",
+    "source_worktree_status":  [
+                                   " M AGENTS.md",
+                                   " M common/names/00_names.txt",
+                                   " M portraits/00_portraits_KOR.txt",
+                                   "?? docs/HOK_KOREAN_SCIENTIST_PORTRAIT_PLAN.md",
+                                   "?? docs/data/HOK_KOREAN_RANDOM_NAME_LOCALISATION_MANIFEST.json",
+                                   "?? docs/data/HOK_KOREAN_SCIENTIST_PORTRAIT_ASSET_MANIFEST.json",
+                                   "?? docs/incidents/2026-11-12-korean-random-name-localisation.md",
+                                   "?? docs/incidents/2026-11-12-korean-scientist-portraits.md",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_01.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_02.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_03.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_04.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_01.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_02.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_03.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_04.dds",
+                                   "?? interface/HOK_KOR_scientist_portraits.gfx"
+                               ],
+    "compatibility_baseline":  {
+                                   "branch":  "feat/korean-focus-update-20260922",
+                                   "commit":  "51ac53cbe8c25eeb203b6f6914ce53b0a5cc2c58",
+                                   "worktree":  "clean before authorized implementation",
+                                   "external_task_directory":  "C:/hoi/test/hok-rt56-scientist-update-20261112-01",
+                                   "baseline_record":  "C:/hoi/test/hok-rt56-scientist-update-20261112-01/baseline.json",
+                                   "prior_outputs_role":  "Root-owned compat_before predecessor copies retained separately in this capsule"
+                               },
+    "sources":  {
+                    "common/names/00_names.txt":  {
+                                                      "snapshot":  "source/common/names/00_names.txt",
+                                                      "source_path":  "C:/hoi/hearts_of_korea/common/names/00_names.txt",
+                                                      "sha256":  "08C6CAD04DED79DFD18DD49AE32E8D68570D77FF78DB0BEE3E1DED17D6745C8D",
+                                                      "size":  481894,
+                                                      "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                  },
+                    "portraits/00_portraits_KOR.txt":  {
+                                                           "snapshot":  "source/portraits/00_portraits_KOR.txt",
+                                                           "source_path":  "C:/hoi/hearts_of_korea/portraits/00_portraits_KOR.txt",
+                                                           "sha256":  "5E13A8CED8ECEDD70DE77614739C6C2315D98498DE16471ED8BF6363CC2746CC",
+                                                           "size":  1051,
+                                                           "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                       },
+                    "interface/HOK_KOR_scientist_portraits.gfx":  {
+                                                                      "snapshot":  "source/interface/HOK_KOR_scientist_portraits.gfx",
+                                                                      "source_path":  "C:/hoi/hearts_of_korea/interface/HOK_KOR_scientist_portraits.gfx",
+                                                                      "sha256":  "1EFADE94088E08B0EE8F0AE072DACCC2E78FC543827AF3B932042E88987B3745",
+                                                                      "size":  1316,
+                                                                      "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                                  },
+                    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_01.dds":  {
+                                                                                                    "snapshot":  "source/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_01.dds",
+                                                                                                    "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_01.dds",
+                                                                                                    "sha256":  "8CE30A7A681ABB1CCA6CC9F9E83F17AFEEBE8AC778CA140B1A9C4CBEB4C59DE4",
+                                                                                                    "size":  131168,
+                                                                                                    "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                                                                },
+                    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_02.dds":  {
+                                                                                                    "snapshot":  "source/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_02.dds",
+                                                                                                    "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_02.dds",
+                                                                                                    "sha256":  "1C7E12F9802656CC0F61CCBE0F0CEAB04F98A82A6DAA48BA927BA01260FE7C47",
+                                                                                                    "size":  131168,
+                                                                                                    "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                                                                },
+                    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_03.dds":  {
+                                                                                                    "snapshot":  "source/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_03.dds",
+                                                                                                    "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_03.dds",
+                                                                                                    "sha256":  "97416574E0AE690D3E40387EB8C61433E30269774C718C5E85D5EAF72B4962FD",
+                                                                                                    "size":  131168,
+                                                                                                    "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                                                                },
+                    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_04.dds":  {
+                                                                                                    "snapshot":  "source/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_04.dds",
+                                                                                                    "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_04.dds",
+                                                                                                    "sha256":  "E93BB2E51DFA3ED7150583A2A6E117CB32C93F2963B9FE9EB038B5E4F5004B21",
+                                                                                                    "size":  131168,
+                                                                                                    "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                                                                },
+                    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_01.dds":  {
+                                                                                                  "snapshot":  "source/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_01.dds",
+                                                                                                  "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_01.dds",
+                                                                                                  "sha256":  "99C67C13BFDC1FBA4E85C3FF7D4A07D7337395F08981F17CFB54E5A4943903A9",
+                                                                                                  "size":  131168,
+                                                                                                  "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                                                              },
+                    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_02.dds":  {
+                                                                                                  "snapshot":  "source/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_02.dds",
+                                                                                                  "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_02.dds",
+                                                                                                  "sha256":  "68C821857BE50F8A47F1DDADB1FF26529DBCA5ED0C7AAF5AA4381EF695C540DB",
+                                                                                                  "size":  131168,
+                                                                                                  "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                                                              },
+                    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_03.dds":  {
+                                                                                                  "snapshot":  "source/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_03.dds",
+                                                                                                  "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_03.dds",
+                                                                                                  "sha256":  "DED6BFA82A2B0F05683C18CB0569F3D2763A40DC0F7F2712CD568438D8DF7831",
+                                                                                                  "size":  131168,
+                                                                                                  "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                                                              },
+                    "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_04.dds":  {
+                                                                                                  "snapshot":  "source/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_04.dds",
+                                                                                                  "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_04.dds",
+                                                                                                  "sha256":  "5D195D8F31A0BF7E2EC2DA383E5575F8D864DA31A279E4F0873ED602E0EAF38B",
+                                                                                                  "size":  131168,
+                                                                                                  "role":  "Byte-exact copy of selected dirty donor runtime input"
+                                                                                              }
+                },
+    "documents":  {
+                      "AGENTS.md":  {
+                                        "snapshot":  "documents/AGENTS.md",
+                                        "source_path":  "C:/hoi/hearts_of_korea/AGENTS.md",
+                                        "sha256":  "BD9232F4C2616669108988847E9F3AC0D8F76FFDCCB4A7E4361902926DDC5EF0",
+                                        "size":  83894,
+                                        "role":  "Byte-exact donor maintained provenance document, source-specific historical results"
+                                    },
+                      "docs/HOK_KOREAN_SCIENTIST_PORTRAIT_PLAN.md":  {
+                                                                         "snapshot":  "documents/docs/HOK_KOREAN_SCIENTIST_PORTRAIT_PLAN.md",
+                                                                         "source_path":  "C:/hoi/hearts_of_korea/docs/HOK_KOREAN_SCIENTIST_PORTRAIT_PLAN.md",
+                                                                         "sha256":  "90D7D84AB8A005B4DF0C161975871067EDAF43DF51AC8C4260D4914A453F726D",
+                                                                         "size":  11290,
+                                                                         "role":  "Byte-exact donor maintained provenance document, source-specific historical results"
+                                                                     },
+                      "docs/data/HOK_KOREAN_SCIENTIST_PORTRAIT_ASSET_MANIFEST.json":  {
+                                                                                          "snapshot":  "documents/docs/data/HOK_KOREAN_SCIENTIST_PORTRAIT_ASSET_MANIFEST.json",
+                                                                                          "source_path":  "C:/hoi/hearts_of_korea/docs/data/HOK_KOREAN_SCIENTIST_PORTRAIT_ASSET_MANIFEST.json",
+                                                                                          "sha256":  "B40FE18286F4E2B0D71C776D42E60D31449BE6034F17B2D2A52C733C96D27821",
+                                                                                          "size":  35639,
+                                                                                          "role":  "Byte-exact donor maintained provenance document, source-specific historical results"
+                                                                                      },
+                      "docs/data/HOK_KOREAN_RANDOM_NAME_LOCALISATION_MANIFEST.json":  {
+                                                                                          "snapshot":  "documents/docs/data/HOK_KOREAN_RANDOM_NAME_LOCALISATION_MANIFEST.json",
+                                                                                          "source_path":  "C:/hoi/hearts_of_korea/docs/data/HOK_KOREAN_RANDOM_NAME_LOCALISATION_MANIFEST.json",
+                                                                                          "sha256":  "6A13CCD8531AD69D8DEB5432D2765FD79F9F5FC7E688AFD52306695D70D1A145",
+                                                                                          "size":  42409,
+                                                                                          "role":  "Byte-exact donor maintained provenance document, source-specific historical results"
+                                                                                      },
+                      "docs/incidents/2026-11-12-korean-scientist-portraits.md":  {
+                                                                                      "snapshot":  "documents/docs/incidents/2026-11-12-korean-scientist-portraits.md",
+                                                                                      "source_path":  "C:/hoi/hearts_of_korea/docs/incidents/2026-11-12-korean-scientist-portraits.md",
+                                                                                      "sha256":  "4941B15285EE9F7533F838E82984863C81D3595DD643BC474B1F368E2FE1A708",
+                                                                                      "size":  16222,
+                                                                                      "role":  "Byte-exact donor maintained provenance document, source-specific historical results"
+                                                                                  },
+                      "docs/incidents/2026-11-12-korean-random-name-localisation.md":  {
+                                                                                           "snapshot":  "documents/docs/incidents/2026-11-12-korean-random-name-localisation.md",
+                                                                                           "source_path":  "C:/hoi/hearts_of_korea/docs/incidents/2026-11-12-korean-random-name-localisation.md",
+                                                                                           "sha256":  "4275843A012CFF17BAB0FF9CABA63F9421687F8A04BBC92CDC4D1D0BF434A1EC",
+                                                                                           "size":  19536,
+                                                                                           "role":  "Byte-exact donor maintained provenance document, source-specific historical results"
+                                                                                       }
+                  },
+    "references":  {
+                       "RT56/descriptor.mod":  {
+                                                   "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/descriptor.mod",
+                                                   "sha256":  "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61",
+                                                   "size":  299,
+                                                   "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                               },
+                       "RT56/common/names/00_names.txt":  {
+                                                              "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/common/names/00_names.txt",
+                                                              "sha256":  "DC13429A7508AA3289EED32C09066D379F65DD11564FC740B64042F20CB7C0EF",
+                                                              "size":  478081,
+                                                              "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                                          },
+                       "RT56/portraits/00_portraits.txt":  {
+                                                               "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/portraits/00_portraits.txt",
+                                                               "sha256":  "9D70A2B9F9C2709EA9215EA4ED1C57FE1FD8F14ED12ABEE6BE92A63848C39EFA",
+                                                               "size":  24203,
+                                                               "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                                           },
+                       "RT56/portraits/r56_portraits.txt":  {
+                                                                "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/portraits/r56_portraits.txt",
+                                                                "sha256":  "FBE2F6ED8391EFDF38805B95A3E2CEC73BB21E8B039CC6D478846D5370E11FB9",
+                                                                "size":  537016,
+                                                                "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                                            },
+                       "RT56/portraits/02_tiger_portraits.txt":  {
+                                                                     "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/portraits/02_tiger_portraits.txt",
+                                                                     "sha256":  "6D576CBCD07EC9A0BBB71F3E7B8983559C7A1330C6DF39414248E6C4142EAA56",
+                                                                     "size":  5425,
+                                                                     "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                                                 },
+                       "RT56/portraits/00_portraits_operatives.txt":  {
+                                                                          "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/portraits/00_portraits_operatives.txt",
+                                                                          "sha256":  "FE076002BF4B4126D9A04F6A6DFDA3A399FEB851D0C45FAEA468537E46B1B0D5",
+                                                                          "size":  34693,
+                                                                          "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                                                      },
+                       "VANILLA/launcher-settings.json":  {
+                                                              "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/launcher-settings.json",
+                                                              "sha256":  "D844392E7391EFE103EFC96B089910ADBA66605BC41FE43D5BC663F4C4A7FBA6",
+                                                              "size":  1462,
+                                                              "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                                          },
+                       "VANILLA/common/names/00_names.txt":  {
+                                                                 "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/common/names/00_names.txt",
+                                                                 "sha256":  "E7692DD67E6CF5C3CBE3D647D7F23149ECC5C5239370B8AE3537A6C3AB29399E",
+                                                                 "size":  468955,
+                                                                 "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                                             },
+                       "VANILLA/portraits/998_scientist_portraits.txt":  {
+                                                                             "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/portraits/998_scientist_portraits.txt",
+                                                                             "sha256":  "9D9F26C23D03FB525E1A3DDAAD5AE4FB43691F3E9925612AB61A46AD2765E1D5",
+                                                                             "size":  17310,
+                                                                             "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                                                         },
+                       "VANILLA/interface/_scientists_portraits.gfx":  {
+                                                                           "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/interface/_scientists_portraits.gfx",
+                                                                           "sha256":  "A4442B054A692B125ABB745710EB8E577EB077D779AFEA3B2DCD70A5609E5FDD",
+                                                                           "size":  33489,
+                                                                           "role":  "Read-only installed host or engine-schema reference, no copy in capsule"
+                                                                       }
+                   },
+    "environment_reference":  {
+                                  "hoi4_version":  "Operation Postern v1.19.4.2.2da5 (0bdb)",
+                                  "steam_build":  "26409260",
+                                  "rt56_workshop_id":  "820260968",
+                                  "rt56_manifest":  "1963361040482473746",
+                                  "observation_role":  "Installed metadata and read-only source fingerprints, no current compatibility runtime result"
+                              },
+    "final_name_contract":  {
+                                "method":  "Original Romanized literal KOR name lists with Geunhye removed",
+                                "male":  71,
+                                "female":  16,
+                                "surnames":  14,
+                                "total":  101,
+                                "removed_value":  "Geunhye",
+                                "affected_consumers":  "New Korean scientists and other generated Korean characters using the KOR name pool",
+                                "active_name_localisation_files":  [
+
+                                                                   ],
+                                "historical_hangul_name_counts_role":  "Superseded donor trial records, excluded from current implementation",
+                                "final_exclusion_runtime":  "Not run after donor single-name exclusion"
+                            },
+    "artwork_provenance":  {
+                               "classification":  "Eight upstream AI-generated fictional scientist portraits reused byte-exactly",
+                               "donor_manifest_snapshot":  "documents/docs/data/HOK_KOREAN_SCIENTIST_PORTRAIT_ASSET_MANIFEST.json",
+                               "selected_original_directory":  "C:/hoi/test/hok-scientist-portraits-20261112-01/art/generated",
+                               "selected_original_role":  "Existing donor selected generation originals retained externally, not moved or regenerated",
+                               "prompt_record":  "C:/hoi/test/hok-scientist-portraits-20261112-01/art/prompts.json",
+                               "generation_provenance_record":  "C:/hoi/test/hok-scientist-portraits-20261112-01/art/generation-provenance.json",
+                               "conversion_record":  "C:/hoi/test/hok-scientist-portraits-20261112-01/art/final-dds/conversion-manifest.json",
+                               "format_from_donor_record":  "156x210 uncompressed BGRA32 DDS, one mip level, 131168 bytes each",
+                               "source_specific_runtime":  "Donor HOK plus anime-submod sample observations only, no compatibility-port runtime proof"
+                           }
+}

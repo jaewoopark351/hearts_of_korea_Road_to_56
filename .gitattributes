@@ -273,3 +273,14 @@ localisation/korean/HOK_KOR_us_defense_l_korean.yml text eol=crlf
 docs/upstream/hok-capture-news-update-20261112/** -text
 tools/hok_capture_news_update_lock.json text eol=lf
 tools/upstream_capture_news.py text eol=lf
+
+#20261112_kpopmodder: Preserve selected scientist sources and exact generated portrait/name bytes across checkouts.
+docs/upstream/hok-scientist-update-20261112/** -text
+tools/hok_scientist_update_lock.json text eol=lf
+tools/upstream_scientists.py text eol=lf
+common/names/zz_hok_rt56_names.txt text eol=lf
+portraits/00_portraits_KOR.txt text eol=crlf
+interface/HOK_KOR_scientist_portraits.gfx text eol=lf
+
+#20261112_kpopmodder: Preserve the separately audited follow-up name exclusions after source drift.
+docs/upstream/hok-scientist-name-exclusions-20261112/** -text

@@ -1,0 +1,834 @@
+# AGENTS.md
+
+## Mandatory checks before acting
+
+Apply these rules at the start of every task and consult the detailed sections below for the relevant work:
+
+- Establish the authorized mode first. Review-only means reading and reporting; documentation-only means editing only the requested documentation. Neither authorizes gameplay changes, tests, packaging, cleanup, or uploads.
+- Before creating test or diagnostic files, select `C:\hoi\test\<task-or-run-id>\` and configure all helper outputs and backups there. Do not create them in this repository, `.local-artifacts`, or an upload package. Game-generated originals remain in the actual HOI4 user-data directory; evidence copies go to the external test directory.
+- Report existing test artifacts found in the repository as outstanding cleanup. Move or delete them only within an explicitly authorized cleanup scope; honor an existing authorization without asking again. Finding old files or reading this rule does not authorize cleanup.
+- For authorized release preparation, build a separate clean staging directory from an explicit public/runtime allowlist. Exclude Git data, agent instructions, test artifacts, private records, and development intermediates; preserve required public credits and licence notices. Check the actual staged file list before upload. `.gitignore` does not define the Workshop package contents.
+- Preserve the original authorship, stable IDs, and gameplay outside explicitly scoped changes. Use the repository as the working source; keep base-game and Workshop-managed copies read-only. Original Workshop ID `2898629778` is provenance only.
+- Git history changes, commit, push, and external publication require authorization for the specific action. Implementation, documentation, cleanup, and release preparation do not themselves authorize those actions.
+
+## Persistent records and required reading
+
+- Keep material file locations and source/provenance references in maintained project documentation so later work can resume without conversation memory. Put detailed inventories, archive mappings, verification history, and task procedures in a relevant document under `docs/`; keep the common rules and required-reading links in `AGENTS.md` concise.
+- Link internal guidance using paths relative to the referring document. State the task condition that requires reading each linked document; a bare link is insufficient. Read the relevant guidance before the dependent work. If it is missing or inconsistent, report the issue and continue only independent authorized work.
+- When authorized work changes a recorded location, update the relevant project document with the old and new paths, original/copy roles, manifest locations, historical mapping, and the actual verification performed. Keep earlier results distinguishable from later checks. If a guidance document moves, update its required-reading link as part of the same documentation change.
+- Keep actual tests and intermediate outputs under `C:\hoi\test\<task-or-run-id>\`; only their maintained location/provenance index belongs in project documentation. Documentation links do not authorize executing scripts, modifying archives, or expanding the requested task.
+
+- When reviewing or changing localisation, player-facing flag/variable use, or state/province references, first read the relevant skill below and use [the change-coverage procedure](docs/HOK_CHANGE_COVERAGE_REVIEW.md). Define affected features, IDs, callers and branches; scale the inventory to the change rather than requiring a repository-wide audit for a wording-only edit.
+- Trace relevant shared helpers, alternative paths, active translation overrides and inherited vanilla references beyond the edited files. Record each discovered candidate as **changed, intentionally retained, excluded, or unresolved**, with its expected meaning and supporting evidence. A valid ID or matching key set does not prove the intended region or actual display.
+- Select the required verification for the authorized scope before claiming completion. Keep source, UI, executed effects and save evidence separate; carry unresolved required items into the result. Earlier observations apply only to their recorded source and conditions. Review/documentation requests do not authorize additional tests, gameplay edits or launches; a coverage ledger does not grant that permission.
+
+Before reviewing HOK runtime logs or attributing an error to HOK, read the project [HOK log-review skill](.agents/skills/hok-log-review/SKILL.md).
+
+| Read before this work | Required project document or skill |
+|---|---|
+| Adding or changing player-facing content/localisation, flag/variable display paths, or reviewing missing or incorrect tooltip text | [Localisation coverage review skill](.agents/skills/hok-localisation-review/SKILL.md) |
+| Adding or changing state/province references, migrating content after a split, or reviewing geographic targets, including code-only changes that leave the map intact | [State-reference coverage review skill](.agents/skills/hok-state-reference-review/SKILL.md) |
+| Reviewing or repairing raw internal flag/variable names in continuation-content tooltips | [Continuation localisation display review](docs/audits/2026-11-08-continuation-localisation-display-review.md) |
+| Repairing state/province references against the current map without changing the map, or separating recent Korean-split regressions from older defects | [Current-map reference alignment plan](docs/HOK_STATE_REFERENCE_ALIGNMENT_PLAN.md) |
+| Splitting Korean states into northern/southern successors or reviewing the associated construction-slot and content migration | [Korean state split and industrial construction-space plan](docs/HOK_KOREAN_STATE_SPLIT_PLAN.md) |
+| Creating or revising images, reusing historical image inputs/recipes, or resolving old `.local-artifacts` references | [Development artifact archive and image-source lookup](docs/HOK_DEVELOPMENT_ARTIFACT_ARCHIVE.md) |
+| Reviewing or implementing Korean-only portraits for newly recruited scientists, including anime-submod integration | [Korean scientist portrait plan and source evidence](docs/HOK_KOREAN_SCIENTIST_PORTRAIT_PLAN.md) |
+| Comparing current logs against the 2026-11-06 compatibility repairs | [Runtime compatibility implementation and evidence](docs/incidents/2026-11-06-hok-runtime-compatibility-implementation.md) |
+| Locating or relocating the HOK log-review skill | [Skill location and migration record](docs/HOK_LOG_REVIEW_SKILL.md) |
+
+## Scope and mission
+
+This file applies to the repository root and all descendant directories unless a closer `AGENTS.md` or `AGENTS.override.md` provides more specific instructions.
+
+This repository is the authorized successor, restoration, and continued-development project for **하츠 오브 코리아 / Hearts of Korea**.
+
+Project facts:
+
+- Original Steam Workshop item: `2898629778`
+- The original creator has passed away, so ordinary upstream maintenance cannot resume.
+- The continuation team has been asked to preserve, repair, continue, and publish the mod as a new Steam Workshop item.
+- The original item and ID are historical source and credit references only, never this project's upload identity.
+
+Primary objectives:
+
+1. Restore compatibility with the explicitly selected HOI4 version.
+2. Preserve the original mod's identity, authorship, intended content, stable IDs, balance, and gameplay behavior during restoration.
+3. Fix confirmed defects and recover update-broken content.
+4. Continue development, modernization, redesign, or rebalance only when explicitly scoped.
+5. Prepare and publish a separately identified successor release when the user explicitly authorizes the concrete publication action.
+
+This is not merely a private maintenance fork, but restoration remains the default priority. Keep compatibility fixes, bug fixes, refactors, balance changes, and new successor content as distinct workstreams. Do not silently turn an update repair into a redesign. More specific instructions may add constraints, but must not weaken the safety, evidence, attribution, or validation rules in this file.
+
+---
+
+## 1. Obey the requested operating mode
+
+Determine the task mode from the user's request before using tools or changing files.
+
+### Review-only
+
+When asked only for review, analysis, planning, comparison, or a verdict:
+
+- Do not edit files or generate patches.
+- Do not launch HOI4 or run tests, validators, formatters, or scripts unless requested.
+- Do not change Git state, commit, push, publish, or upload.
+- Report findings with evidence, file paths, and line numbers where available.
+
+### Documentation-only
+
+When explicitly asked to document or update documentation, edit only the requested documentation. Read relevant sources as needed, but do not change game code, assets, runtime configuration, or Git state; do not generate artwork, launch HOI4, or run gameplay validators/tests. Describe proposed behavior and previously observed results separately. Documentation of a future implementation does not authorize that implementation.
+
+### Diagnostics-only
+
+When diagnostics are authorized but behavior changes are forbidden:
+
+- Preserve gameplay behavior.
+- Add only the minimum bounded instrumentation needed to distinguish concrete hypotheses.
+- Do not refactor surrounding systems.
+- Do not convert a suspected failure directly into a speculative fix.
+- Mark temporary diagnostics and state how they should be removed or disabled.
+
+### Implementation
+
+When implementation is explicitly authorized:
+
+- For compatibility or bug repair, make the smallest patch that addresses the demonstrated cause.
+- For explicitly requested continuation development, state the intended behavior change and keep it separate from restoration work.
+- Keep unrelated cleanup, formatting, and unrequested balance changes out of the diff.
+- Preserve IDs, namespaces, filenames, load order, attribution, and save behavior whenever possible; document deliberate migrations.
+- Validate the modified subsystem and expand testing according to risk.
+
+### Continuing authorized focus development
+
+- Interpret follow-up requests together with the active task and the latest explicit scope. When implementation is already authorized, requests such as "하던 거 계속해줘" or "AGENTS.md, /docs 읽고 구현해줘" continue that work through specification, implementation, integration, appropriate validation, and recording. Do not repeatedly ask whether to stop at documentation when that choice has already been settled. A quoted plan or status question alone is not new implementation authorization.
+- Explicit limits such as "문서화 작업만", "설명만", or "코드 수정하지 말고" take precedence. Follow the requested mode and do not silently resume implementation while answering a review or documentation request.
+- Establish the current source, branch/commit, working-tree changes, implemented modules, and remaining validation from the latest records. Preserve existing work and resume the next unfinished task within scope; do not restart an old baseline merely because an earlier plan is quoted again.
+- Follow [the second-wave working sequence](docs/HOK_KOREAN_SECOND_WAVE_PLAN.md#작업-순서와-요청-범위). Specify and complete coherent policy modules, usually around 3-5 focuses, including their needed ideas, decisions, localisation, artwork, layout, and AI integration. This is a delivery unit, not a quota or a reason to leave an explicitly requested larger scope unfinished. Candidate counts and the final tree-size target do not authorize applying draft content wholesale.
+- Resolve routine design and integration details within the authorized scope. Ask only when missing information or a material unresolved choice prevents a sound decision, and continue independent work while waiting. Existing authorization remains valid within its stated scope.
+- Record static checks, forced-effect diagnostics, actual UI observations, normal progression, and long-term/save/DLC/multiplayer validation separately. Finish the validation required for the scoped change; if an actual blocker prevents it, record the blocker and unverified cases without claiming completion. Commit, push, and publication remain separate actions requiring explicit authorization.
+
+### Release preparation
+
+When asked to prepare a release:
+
+- Prepare only the package, descriptors, metadata, credits, changelog, dependency list, and validation record requested.
+- Build the package in a separate clean staging directory outside the repository, base-game installation, and Workshop-managed downloads. Populate it from an explicit allowlist of runtime files and intended public release materials. Keep the development source intact.
+- Exclude `.git`, `.local-artifacts`, agent instructions, editor state, test/diagnostic scripts and reports, logs, saves, crash dumps, caches, credentials, private records, and image-generation intermediates. Select required public credits and licence notices explicitly; do not discard them merely because their source is under `docs/`.
+- Before upload, inspect the actual staged file list, file count, total bytes, descriptors, and excluded-file categories. Record the source state, staging path, intended Workshop target, and remaining limitations. Stop release progression if unintended files remain; report the affected paths without deleting source files outside the authorized scope.
+- Verify that the uploader's content path points to the reviewed staging directory. A clean Git status, `.gitignore`, or successful earlier upload does not establish package cleanliness. These preparation checks apply only when release preparation or publication is authorized.
+- Keep original Workshop ID `2898629778` as provenance only and remove stale upstream upload identity from the active successor package.
+- Stop before any external upload unless that exact action is explicitly requested.
+
+### Publication
+
+Publishing a new successor item is an intended project outcome. When publication or an update is explicitly requested:
+
+- First publication must create a **new** Workshop item.
+- Never upload to, overwrite, impersonate, or reuse original Workshop item `2898629778`.
+- Later updates may target only the recorded successor item after verifying its ID.
+- Credit the original creator and identify the release as a continuation/restoration.
+- Do not call it “official” unless the user approves that wording and project records support it.
+- Record the source state, release version, dependency set, target HOI4 version, resulting successor item ID, and external actions performed.
+
+Never commit, amend, rebase, merge, reset, clean, push, tag, publish, or upload merely because implementation or preparation was requested. Each Git-changing or external action requires explicit authorization for that action.
+
+---
+
+## 2. Project baseline
+
+Historical upstream baseline:
+
+- Mod: `하츠 오브 코리아 Hearts of Korea`
+- Original Workshop ID: `2898629778` (historical reference only)
+- Last known upstream version: `1.0.9(1) '강계'`
+- Last declared HOI4 compatibility: `1.16`
+- Declared required dependency: `Korean Language`
+- Scope includes map changes, national focuses, events, decisions, characters, equipment/assets, localisation, and multiplayer-conscious balance.
+
+Successor baseline:
+
+- Project type: authorized continuation, restoration, and new publication project
+- Successor Workshop ID: unassigned until first publication; never assume or copy the original ID
+- Repository/local development copy: authoritative working source
+- Original Workshop copy: read-only historical input
+- Original authorship and third-party credits: retained; continuation contributions recorded separately
+
+Treat this continuation mandate as established project context. Do not block routine work by demanding approval from the unavailable original maintainer; escalate only concrete contradictory evidence or a specific third-party restriction.
+
+Do not infer the current target version from memory or from `supported_version` alone. Before compatibility work, record when available:
+
+- exact HOI4 version and build/checksum
+- enabled DLC
+- launcher playset
+- required and optional mods in load order
+- language/localisation setup
+- operating system and actual HOI4 user-data directory
+- repository branch, commit, and working-tree state
+
+When the target version is unknown, perform non-destructive inventory work only and state that version-dependent conclusions remain unproven.
+
+---
+
+## 3. Evidence hierarchy
+
+Use this source order:
+
+1. Exact target-version vanilla files and observed engine behavior.
+
+2. A clean reproduction using the recorded playset.
+
+3. Current runtime logs and crash data.
+
+4. The mod and dependency sources actually loaded by the launcher.
+
+5. Current HOI4 documentation for the target version.
+
+6. Historical examples, forum posts, or model memory.
+
+The installed target-version vanilla files are the canonical syntax and schema reference. Do not import syntax from EU4, CK3, Victoria 3, Stellaris, or another HOI4 era merely because it looks similar.
+
+Classify conclusions:
+
+- `CONFIRMED`: directly demonstrated by source, log, or reproduction.
+- `STRONGLY_SUPPORTED`: multiple pieces of evidence agree, but runtime proof is incomplete.
+- `UNPROVEN`: plausible hypothesis requiring more evidence.
+- `DISPROVEN`: contradicted by observed evidence.
+
+Never present an inference as a confirmed engine fact.
+
+---
+
+## 4. Required inspection before production edits
+
+Before editing a production mod file:
+
+1. Read the task and identify explicit prohibitions.
+
+2. Locate all applicable agent instruction files.
+
+3. Record Git branch, commit, and working-tree state.
+
+4. Inspect `descriptor.mod` and the launcher `.mod` file when available.
+
+5. Identify `supported_version`, dependencies, `replace_path`, and `remote_file_id` entries.
+
+6. Confirm which physical mod copy the launcher loads.
+
+7. Distinguish the repository, local development mod, and Workshop download.
+
+8. Preserve relevant baseline logs before a new launch overwrites them.
+
+9. Reproduce the failure with the smallest valid playset when runtime access is authorized.
+
+10. Find the target-version vanilla counterpart or a known working target-version example.
+
+11. Identify the earliest failure, not merely the largest cluster of cascading errors.
+
+12. When the cause is unclear, form competing hypotheses and define the observation that distinguishes them.
+
+Do not edit the Steam Workshop directory or base-game installation directly. Work in the repository and, when necessary, a separate local development-mod copy.
+
+---
+
+## 5. Root-cause classification
+
+Classify the failure before choosing a fix. Typical categories:
+
+- parser or syntax error
+- illegal trigger/effect for the current scope
+- changed, removed, or renamed engine key
+- missing referenced ID
+- duplicate ID or silent override
+- file load-order collision
+- unsafe `replace_path`
+- descriptor, dependency, language-mod, or DLC-gating error
+- localisation encoding, header, key, or load-order error
+- map, state, province, strategic-region, railway, supply, or adjacency error
+- country history, OOB, equipment, technology, character, or bookmark error
+- GFX, model, animation, sound, or interface path error
+- AI weight, strategy, or evaluation error
+- performance or event-spam loop
+- save incompatibility
+- original upstream bug unrelated to the HOI4 update
+
+Many later errors may be cascades from one early load failure. Fix and retest the earliest proven cause before mass-editing downstream references.
+
+---
+
+## 6. Paradox Script rules
+
+Treat Paradox Script as context-sensitive game logic, not generic configuration text.
+
+### Language and evaluation model
+
+Paradox Script is a family of directory- and context-specific declarative DSLs, not a single general-purpose language. Syntax that works in one database, block, or game version is not evidence that it is legal or equivalent in another. Before introducing, moving, or generating syntax, verify the target directory's root schema, loader and merge behavior, lifecycle, and a target-version vanilla example from the same context.
+
+- Treat a script block as an ordered multi-map, not a JSON/YAML object or programming-language dictionary. Repeated keys can be meaningful, and effect order can change behavior. Do not sort, deduplicate, merge, or generically round-trip blocks unless that exact transformation is proven semantics-preserving for that file type.
+- Do not import C, C++, or Java operators, statement syntax, or comment syntax. `=` is context-dependent; do not substitute `==`, `&&`, `||`, `!`, semicolons, `//`, or `/* ... */`. Use `#` comments and only syntax demonstrated for the target HOI4 version.
+- In ordinary trigger contexts, sibling conditions form a declarative condition set. Do not rely on left-to-right evaluation or short-circuit behavior to make a later condition safe. In effect contexts, earlier commands can change the state or scope used by later commands, so preserve and test command order. A `limit` block remains trigger context even when nested inside an effect construct.
+- Brace nesting alone does not prove a scope change. Identify the enclosing command's actual scope contract. Treat `any_*`, `all_*`, `every_*`, and `random_*` constructs as distinct engine operations rather than interchangeable loop forms.
+- Treat scripted trigger/effect parameters as context-sensitive expansion, not statically typed function arguments. At every caller, verify required parameters, resulting tokens, entry scope, and the meaning of `ROOT`, `THIS`, `PREV`, and `FROM`.
+- Distinguish runtime variables, flags, event targets, saved scopes, and scripted parameters. For state-bearing constructs, verify owning scope, lifetime, unset or default behavior, save persistence, and multiplayer implications. Do not assume lexical block scope or automatic initialization.
+- Do not infer numeric semantics from notation alone. For modifiers, weights, costs, durations, and cadences, verify units, additive versus multiplicative behavior, defaults, clamps, and legal ranges against target-version evidence.
+
+### Load and runtime model
+
+Paradox Script has no Java/C++-style compile, type-check, and link barrier. A brace checker, parser, external schema, or linter proves only the conditions it actually checks and may not match the target game version.
+
+- Validate separately that the intended physical file was discovered and loaded, the definition parsed and registered, the block evaluated in the intended runtime scope, and the observable game behavior occurred. A clean parser result or quiet log does not prove all four stages.
+- Before splitting, renaming, or duplicating files, determine the target directory's actual accumulation, filename precedence, duplicate-ID, dependency-order, and `replace_path` behavior. Do not assume a later file inherits from or extends an earlier definition.
+- Classify the relevant lifecycle: load-time definition, new-game or history initialization, repeated trigger/AI/UI evaluation, sequential effect execution, or localisation/UI rendering. Do not infer runtime execution order merely from file order.
+- Before changing a high-frequency trigger, AI weight, decision visibility/availability block, scripted GUI, or `on_action`, identify its call cadence and worst-case scope count. Do not assume caching or short-circuit evaluation without target-version evidence.
+- Treat console reload and hot reload as exploratory diagnostics only. Final validation must use a full process restart and a clean run appropriate to the changed subsystem.
+- Treat changes to random-selection sites, weights, and ordering as behavior changes rather than harmless refactors. When multiplayer compatibility is claimed, validate synchronized runtime behavior and inspect out-of-sync evidence in addition to comparing checksums.
+
+### Scope correctness
+
+For every changed trigger or effect, determine:
+
+- expected input scope
+- scope produced by each iterator or scope switch
+- meaning of `ROOT`, `THIS`, `PREV`, `FROM`, event targets, saved scopes, and variables at that location
+- whether the trigger/effect is legal for that scope in the target version
+
+Do not hide a scope error by deleting the condition, adding `always = yes`, changing the target arbitrarily, or wrapping the block in a broad existence check unless that exact change is proven to preserve intent.
+
+### Stable IDs and namespaces
+
+Preserve existing identifiers unless an explicit migration is required, including:
+
+- country tags and cosmetic tags
+- event namespaces and IDs
+- focus, decision, mission, idea, character, technology, and equipment IDs
+- scripted trigger/effect/localisation names
+- OOB, template, ship, variant, modifier, flag, variable, and event-target names
+- sprite/asset names
+- state, province, strategic-region, and supply-network IDs
+- localisation keys
+
+Before adding an ID, discover and follow the existing project prefix. If no convention exists, propose one rather than silently polluting the global namespace.
+
+Duplicate definitions may silently override earlier content. Search the mod, required dependencies, and relevant vanilla files before declaring an ID unique.
+
+### Preserve behavior
+
+Do not casually alter:
+
+- `ai_will_do` factors and modifiers
+- random-list weights
+- focus prerequisites, bypasses, cancellation, mutual exclusion, or rewards
+- event cadence, triggers, options, or follow-up chains
+- decision visibility, availability, cost, duration, cooldown, cancel, or remove rules
+- national spirit and dynamic modifier values
+- equipment statistics
+- state resources, factories, infrastructure, supply, ownership, cores, or claims
+- starting OOB, research, politics, laws, stability, or war support
+- shared scripted constants
+
+Compatibility repair, refactoring, rebalance, and successor development are separate tasks. Intentional changes require explicit scope and documentation; a parser-clean file can still be a gameplay regression.
+
+### Focus reward design for continuation content
+
+- For authorized new focus development and reward strengthening, design strong, noticeable rewards that make the focus worth its time and branch commitment. Do not default to token bonuses merely because a focus takes 35 days. Follow [the Korean focus reward guidelines](docs/HOK_KOREAN_FOCUS_REWARD_GUIDELINES.md).
+- Preserve existing benefits unless their change is explicitly scoped. Increasing a headline modifier must not silently remove research bonuses, experience, political power, decision unlocks, DLC alternatives, or other secondary effects.
+- Treat user-specified reward numbers as final values unless explicitly described as additions. Distinguish flat daily political power, percentage modifiers, research bonus magnitude and uses, and permanent versus temporary benefits.
+- Recent approved examples include one industry research bonus of 150%, one electronics research bonus of 100%, factory construction speed of +15%, military factory output of +10%, and flat daily political power of +0.5 or +1.2. These are concrete design references, not a mandatory minimum or a bundle granted to every focus.
+- Carry strengthened lower-tier benefits into the matching upper-tier national spirit, preserve its other benefits, and check every mutually exclusive path. Replacing a spirit must not accidentally weaken the selected policy or stack obsolete tiers.
+- Evaluate decision costs and opportunity costs against the benefit actually available to the player. When factory costs are explicitly removed, also review availability gates, AI gates, and descriptions; do not extend that removal to unrelated decisions.
+- Record branch timing, cumulative rewards, and validation limits. This preference applies within authorized continuation or rebalance work; it does not authorize blanket changes to existing focuses during restoration, compatibility repair, or documentation-only tasks.
+
+### Editing discipline
+
+- Do not apply broad search-and-replace without reviewing every affected context.
+- Do not reformat an entire file for a local fix.
+- Preserve comments explaining historical intent or engine quirks.
+- Any modified production text-code file must include a nearby contributor note in the exact form `#YYYYMMDD_kpopmodder: <brief reason/intent>`. Put it immediately above or at the end of the changed statement or block, keep one note per coherent change, preserve earlier notes, and do not add it to binary, generated, byte-exact, or documentation files.
+- For paired localisation files, put the identical contributor note immediately after each locale header and preserve UTF-8 BOM.
+- Except for the required contributor note above, add explanatory comments only for non-obvious compatibility constraints.
+- Do not delete an unknown key merely to quiet `error.log`; determine whether it was renamed, moved, DLC-gated, or replaced.
+- Preserve exact filename and path casing, including on Windows.
+- Check braces, quotes, list structure, and block placement after edits.
+
+---
+
+## 7. File-specific critical rules
+
+### Descriptors
+
+For `descriptor.mod` and launcher `.mod` files:
+
+- Changing `supported_version` is not a compatibility fix.
+- Preserve dependencies unless migration is explicitly requested.
+- Audit every `replace_path`; it can unload broad vanilla databases and cause distant failures.
+- Never add `replace_path` merely to hide duplicate or stale content.
+- Treat original Workshop ID `2898629778` as provenance only; a successor release must never inherit or target its `remote_file_id`.
+- Do not invent a successor `remote_file_id`; record it only after first publication assigns one.
+- Do not change successor upload identity or Workshop metadata without an explicit release task.
+- Keep launcher, repository, staging, and release descriptors logically consistent while respecting their different path fields.
+
+### `common/`
+
+- Check global ID uniqueness and overwrite behavior.
+- Compare changed definitions with the target-version vanilla schema.
+- Verify DLC-dependent types and modifiers.
+- Trace scripted triggers/effects transitively, not only the immediate caller.
+- Treat `on_actions` as high risk because small errors can cause global repeated execution or silently remove callbacks.
+
+### Events, decisions, and focuses
+
+- Preserve namespaces and IDs.
+- Verify receiving scope and every scope transition.
+- Verify focus prerequisites, bypass, cancel, mutual exclusion, rewards, and AI selection.
+- Verify decision visibility separately from availability and completion/removal.
+- Check recurring content for accidental daily firing or unbounded event chains.
+
+#### Focus effects must explain decision unlocks
+
+- When completing a focus unlocks a decision or decision category, the focus's effects must explicitly name it and state that it is unlocked. This also applies when the actual unlock is driven by decision visibility/availability conditions such as `has_completed_focus`, a flag, or a national spirit.
+- Display the decision-unlock notice with `unlock_decision_tooltip = <decision_id>` in the focus's `completion_reward`. When a decision category itself is unlocked, display its notice with `unlock_decision_category_tooltip = <category_id>`. Reuse the existing localised name; use an accurate localised effect tooltip if the standard notice cannot describe a conditional unlock.
+- Keep the actual unlock logic, costs, durations, and other usage requirements unchanged when adding this notice. Describe the content as unlocked without promising immediate use when separate requirements remain. Do not describe an individual decision unlock as unlocking its entire category.
+
+#### Focus placement, x/y, and relative coordinates
+
+Before adding or moving Korean focuses, read [the layout plan](docs/HOK_KOREAN_FOCUS_LAYOUT_PLAN.md), [the coordinate specification](docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md), and [the compact-layout incident record](docs/incidents/2026-09-21-korean-focus-compact.md). These record the earlier distant parent/child placements, conditional movement mismatches, and the subsequent layout that became excessively wide. Use the current source and latest specification together; do not reuse historical coordinates as current positions.
+
+Current continuation state (2026-09-23): F4-F6 add 12 focuses to the 366-focus baseline, for **378 focuses, 7 absolute anchors and 371 relative placements**. Existing 366 blocks, coordinates, seven offsets and bounds x0-204/y0-24 are preserved. F4 intentionally follows F2 staff regulations; F5 and F6 remain independent and retain their political completion gates. Follow [the F4-F6 specification](docs/HOK_KOREAN_FASCIST_FOLLOWUP_SPEC.md) and [its validation record](docs/incidents/2026-09-23-korean-fascist-followup.md). The 326/362/366 counts and tests below describe earlier source states, not verification of the new 378-focus build.
+
+- Use a small set of stable absolute anchors and `relative_position_id` with relative `x`, `y` for related focuses. A sector root may itself be relative to another anchor; do not require every sector root to be absolute or create dummy focuses solely as anchors. Follow the documented vanilla Japan structure without copying its IDs, coordinates, offsets, or political conditions.
+- Declare a relative-position anchor before every focus that references it. An existing ID later in the same file is insufficient: the 2026-09-22 HOI4 1.19.3 baseline logged “Relative focus must be scripted before this” for two Korean focuses. Check declaration order in addition to existence and cycles; if changing anchors, recalculate relative values to preserve the intended base position. See [the second-wave record](docs/HOK_KOREAN_SECOND_WAVE_PLAN.md).
+- Focus `x`, `y` values use the focus grid, not screen pixels. Without `relative_position_id`, they specify the base absolute position; with it, they specify displacement from the referenced focus. Resolve the entire anchor chain: `base_position(focus) = base_position(anchor) + (x, y)`. Keep this base position separate from conditional final display positions.
+- When converting absolute coordinates to relative coordinates, calculate `relative_xy = desired_base_position - resolved_anchor_base_position`. Do not retain the old absolute numbers or mistake an anchor's own relative numbers for its resolved position. Record the anchor ID, source x/y, resolved base position, and relevant conditional offsets in the layout specification.
+- Keep placement references separate from progression. `relative_position_id` does not replace `prerequisite` and need not identify a prerequisite. A focus with several prerequisites still uses one placement anchor; retain all prerequisite groups and their AND/OR structure. For placement-only work, preserve IDs, costs, rewards, mutual exclusions, bypass/cancel/start/visibility conditions, and AI behavior. Do not delete connections or hide branches to conceal layout defects.
+- Verify that each anchor ID exists uniquely, no focus references itself, no reference cycle exists, and every chain reaches an absolute anchor. When moving an anchor, inspect every dependent focus, all affected prerequisite and mutual-exclusion connections, and adjacent sectors. Include states where the anchor is hidden or its mutually exclusive alternative was chosen.
+- Place new modules near their actual parents within recognizable policy/ideology sectors. Avoid collecting new focuses on distant lower rows or inflating spacing across the whole tree. Account for all parents of a merge, Korean title plates, icon borders, mutual-exclusion marks, and space for connecting lines. Relative coordinates alone do not prevent overlaps or excessive width; compare the overall bounds and scrolling burden before and after the change.
+- Trace each `offset` condition and which anchor handles movement. Do not automatically duplicate a parent's offset on its children or bulk-delete offsets. Compare final positions before and after the full conditions become true under both SHOW and HIDE; HIDE alone does not imply that a completion-dependent offset already applies. Check double movement, leftover compensation, and collisions with neighboring sectors. Distinguish hidden focuses from visible but unavailable focuses, which still occupy space.
+- Follow [the political-route compaction plan](docs/HOK_KOREAN_POLITICAL_COMPACTION_PLAN.md) and [its implementation record](docs/incidents/2026-09-22-korean-political-compaction.md) for the applied communist, democratic, fascist, and non-aligned compaction. Under HIDE, movement begins only after the route-defining focus is completed; initial, in-progress, and SHOW states retain base positions. Existing hiding rules, gameplay, internal parallel modules, and common industry/military/Manchuria positions are preserved. The earlier 366-focus source retained 7 absolute anchors, 359 relative placements and base bounds x0-204/y0-24; the current 378-focus count and validation are recorded above. It uses 7 direct offset blocks: 3 route-specific blocks on the shared republican entry and 4 political-root blocks. The political shifts are communist -5x, democratic -35x, fascist -84x and royal -101x, with no y shift. The shared republican entry resolves to x79/x92/x83 for the first three routes and stays hidden on the royal route. Apply movement once through the documented anchor chains; do not duplicate it on descendants. Source and static coordinate review do not prove engine-rendered positions, hiding, connections, or click areas. A clean paused Korea new-game load completed without new normalized errors; route-completion movement and visual verification remain pending. The paused-load result above belongs to the pre-F3 362-focus compaction source; follow [the F3 mobilization specification](docs/HOK_KOREAN_FASCIST_MOBILIZATION_SPEC.md) for the four added focuses. The earlier F3 layout source passed 130/0 revised forced-reward checks and received a partial initial-HIDE icon inspection. A later zoomed, completed-route HIDE view revealed the F3 entry line coinciding with the F2 merge line. The final four-focus F3 branch now starts from KOR_gathering_the_farright_in_the_military at base (174,4), with middle focuses at (173,5)/(175,5) and the merge at (174,6). The completed-coup availability gate, rewards, 140-day module and existing 362 focuses remain unchanged; only the new module no longer requires the later world focus. The final source passed 44 additional static checks and 130 forced-reward checks; a diagnostic-free paused Korea load (53b0) completed with no new normalized errors. On 2026-09-23, the final upper branch was observed in HIDE and its manpower-register root was started through the normal UI, progressed for 35 days and completed. The affected upper region was also inspected under SHOW in a separate paused new game. HIDE and SHOW observations used separate synthetic route-complete games: the four F3 focuses, parent, coup and adjacent F2 connections/icons/nameplates were clear, as was the neighboring royal sector under SHOW. This does not prove the initial-to-completed-route transition. The other three focuses, final AND blocking, full 140-day sequence and long-term AI remain unverified; follow the F3 implementation record for the evidence and limits. Static box/line/collinearity models do not establish engine-rendered separation, normal progression or all icon states. The 326-focus zero-offset record below is historical.
+- Treat `continuous_focus_position` as a separate panel coordinate setting, not the ordinary focus grid. Check panel clearance, shortcut destinations, scroll limits, and access to the full branch after a layout change.
+- Check the actual icon/title rectangles and the engine-rendered connections, not just duplicate center coordinates or a straight-line approximation. Prevent unrelated lines from obscuring focuses, minimize unnecessary line crossings, and retain legitimate shared branch/merge lines. Judge spacing at the recorded resolution and GUI scale; a previously successful grid gap is not a universal pixel or font guarantee.
+- Update the coordinate documentation and [current machine-readable layout specification](docs/data/HOK_KOREAN_SECOND_WAVE_COORDINATES.json) for implemented changes. Separate static reference/position checks from in-game visual validation. When runtime execution is authorized, inspect affected sectors and their neighbors in initial and post-choice SHOW/HIDE states, including hidden anchors, panels, and shortcuts. Record the states, resolution, GUI scale, and remaining limitations; initial-state screenshots do not prove every later state.
+
+The documented 2026-09-21 compact baseline contains 326 focuses, 7 absolute anchors and 319 relative placements, spanning x0-194 and y0-24. Its four direct offset blocks retain their conditions with movement `(0, 0)`. These are baseline facts, not permanent limits on authorized expansion. Preserve this baseline unless the scoped layout change deliberately updates it. The compact version was visually checked in the initial HIDE state; post-ideology HIDE transitions and SHOW runtime were not rerun, so do not describe them as already validated.
+
+#### Avoid long serial policy branches in future expansions
+
+- Apply the communist parallel-branch lesson to future fascist and non-aligned content, including constitutional monarchy, absolute monarchy, and Hwan Empire follow-ups. Do not append every new policy module to the previous module's final focus in one long column. Plan independent policy modules beside an appropriate shared entry point before implementation. Use roughly 3-5 focuses per coherent module as a design guide, not an engine limit or a quota; justify longer serial dependencies in the specification.
+- Parallel policy modules within the selected political route should normally remain independently accessible and jointly completable. Preserve genuine internal prerequisites, national-spirit upgrade order, formation/territory gates, and existing political-route exclusions. Do not add mutual exclusions merely to create a fork, or replace a long vertical chain with the same dependency chain snaking sideways. Distinguish new-content design from changes to existing prerequisites; this documentation rule does not authorize changing existing progression or rewards outside the implementation scope.
+- For every proposed fork, record its entry requirements, longest required chain, resolved width/height, earliest major rewards and decision unlocks, and total completion time. Check both module orders, shared category visibility versus individual decision unlocks, spirit replacement, shared project limits, and AI timing. A module must not silently require completion of its sibling unless that dependency is explicitly designed and documented.
+- Follow [the future-branch layout rules](docs/HOK_KOREAN_FOCUS_LAYOUT_PLAN.md#46-후속-정치-확장의-긴-직렬-가지-방지) and [the second-wave policy groups](docs/HOK_KOREAN_SECOND_WAVE_PLAN.md). Keep each route compact without trading excessive depth for excessive width or distant merge lines. The [communist parallel layout](docs/incidents/2026-09-22-korean-communist-parallel.md) is a structural example, not fixed coordinates or proof of future in-game layout quality.
+
+### History, OOB, characters, and bookmarks
+
+- Preserve date blocks and supported start dates.
+- Verify ownership, control, cores, claims, buildings, resources, and victory points.
+- Verify character definition, recruitment, roles, traits, portraits, assignment, and retirement/death rules.
+- Verify OOB references to templates, equipment, technologies, variants, leaders, states, and provinces.
+- Do not solve a missing reference by deleting starting content unless removal is the intended design.
+
+### AI
+
+- Separate “the AI can parse/evaluate this” from “the AI behaves as intended.”
+- Inspect the combination of focus weights, strategy plans, templates, equipment, research, diplomacy, and other competing priorities.
+- Do not infer final behavior from one isolated factor.
+- Avoid unbounded logging in high-frequency AI evaluation paths.
+
+### GFX, interface, models, and sound
+
+- Verify exact asset name, file path, extension, casing, frame count, texture format, and referenced entity.
+- Do not mass-convert or recompress binary assets.
+- Do not replace missing art with placeholders unless requested.
+- Keep asset compatibility changes separate from gameplay changes unless evidence connects them.
+
+#### Images must be stored in this project and referenced by relative path
+
+- Every image explicitly used by this project's content must exist as a physical file inside the repository's runtime asset directories. This includes focus and national-spirit icons, portraits, interface textures, image masks, and image overlays.
+- When using an image from vanilla HOI4, a Workshop mod, a dependency, a public asset pack, or any other external location, first copy the selected image into the appropriate project directory, such as `gfx/interface/goals/HOK_KOR/` or `gfx/interface/ideas/HOK_KOR/`. Reference the project copy; do not rely on the external image at runtime. Keep the source installation and Workshop files read-only, and copy only the assets needed for the scoped task.
+- Set `texturefile`, `animationmaskfile`, `animationtexturefile`, and equivalent image references to mod-root-relative paths such as `gfx/interface/goals/HOK_KOR/example.dds`. Do not use absolute filesystem paths, external URLs, paths that escape the repository with `..`, or links that resolve to files outside the project.
+- Focus `icon = GFX_...` and idea `picture = ...` references must resolve through project-owned sprite definitions to images stored in this project. Merely selecting an existing vanilla or dependency sprite name without a local image and sprite mapping does not satisfy this rule. A relative-looking `gfx/...` path is also insufficient if the file is supplied only by vanilla or another mod.
+- Follow the existing `HOK_KOR_` sprite naming convention for new mappings, check for collisions, and avoid overriding a global vanilla sprite merely to redirect one icon. Preserve gameplay IDs and keep image-reference changes separate from behavior changes.
+- Preserve the copied image's format, dimensions, alpha, frame layout, and exact path casing unless an intentional asset conversion is part of the task. Record the original source path, applicable reuse basis, original credits, and any subsequent edits; copying an image does not change its authorship or grant additional rights.
+- Verify the complete sprite-to-image reference chain, including image masks and overlays: each relative path must resolve to an existing file inside this repository with exact casing. Treat missing project copies as incomplete asset integration, even if the game can find an external fallback.
+
+#### Create and integrate artwork when adding content
+
+When an authorized implementation adds focuses, national spirits, decisions, or other content that needs an image, include suitable artwork creation and integration in that implementation. The user permits both newly drawn/generated artwork (including AI image generation) and copying/adapting open-source or explicitly reusable public artwork; combining the two is also allowed. Choose the method per asset based on subject fit, visual consistency, readability, and effort. External-source research and the existing source-component composer are options, not mandatory prerequisites for new artwork. Save the final assets inside this project and connect them through project-owned GFX and relative paths. Routine drawing/generation, permitted source research/downloads, composition, and integration within authorized implementation do not require a separate artwork request. Review-only and documentation-only requests do not authorize image generation, downloads, asset edits, or game-code changes. Follow [the current artwork policy](docs/HOK_KOREAN_FOCUS_SPIRIT_ICON_PLAN.md).
+
+1. Identify the content's meaning, branch or policy field, central motif, linked focus/spirit relationship, and genuine upgrade stages before selecting artwork. Follow the background-color rules below. Avoid repeating one generic icon for unrelated policies merely because it already exists.
+2. For new artwork, draw or generate the needed illustration directly. For reused artwork, search suitable open-source or explicitly reusable public image packs and creators' repositories; the documented Ultimate HOI4 GFX components are one available source, not a required first step. Existing downloaded materials may be reused when their recorded terms cover the use. Use a mixed approach when a new central illustration fits an existing reusable frame or background.
+3. For every external image or component reused or adapted, verify that its actual licence or explicit permission covers the intended reuse, modification, and distribution. Public visibility or availability for download alone is not permission. A repository's code licence does not automatically cover its artwork; check artwork-specific terms and third-party exceptions. Keep permission limited to the identified pack/files; do not infer permission for an entire mod or invent a licence. If a candidate cannot be used, select a permitted alternative or create new artwork. Generating or redrawing from a third-party image does not erase that source or its restrictions.
+4. Keep selected source files and final selected generated originals in a project-local working directory. Compose or refine them as needed, managing background, frame, central illustration, and stage marks separately where practical. Match the agreed colors, metal treatment, proportions, and small-size readability across directly generated and reused assets. The existing composer remains suitable for component work and background-only recoloring; the earlier choice of that method for the 60-focus/29-spirit recolor does not restrict future new artwork to external components. Preserve source attribution and distinguish new drawing/generation from selection, composition, recoloring, and added marks.
+5. Export the finished image to the appropriate runtime directory inside the repository, using the dimensions, alpha, frame layout, and DDS format required by the target-version UI. Keep source downloads and temporary working files separate from runtime outputs. Add or update project-owned sprite mappings, including required local image masks and overlays, and connect the content using the internal relative-path rules above. Do not leave delivery at external sprite references, unintegrated previews, or unrequested placeholders.
+6. Record whether each asset is newly drawn/generated, reused, or mixed. For reused parts, retain the source URL/path, fixed revision when available, reuse evidence, contributors, and source hash. For AI-generated parts, record the generation tool, actual model if exposed, date, prompt, reference images if any, and selected original path/hash; label them as AI-generated rather than an open-source download or a named artist's work. For every method, record the content ID, subsequent edits, final project path, sprite reference, and output hash in the relevant documentation and asset manifest. Reuse [the current icon manifest](docs/data/HOK_KOREAN_FOCUS_ICON_MANIFEST.json) pattern where applicable; preserve historical attribution and do not record proposed artwork as already integrated.
+7. Inspect the finished artwork at actual display size, compare related focuses and spirits, and check background contrast, central motifs, stage readability, transparency, exact paths, file format, and sprite collisions. Validate in-game states when runtime execution is authorized and record untested states honestly. Keep gameplay logic, existing legacy artwork, and unrelated assets outside the image change unless the task explicitly includes them.
+
+#### Decisions must use dedicated small artwork
+
+When adding or replacing decision-row or decision-category header icons, create a separate small image for the decision UI. Follow the [decision icon size repair](docs/incidents/2026-09-22-korean-decision-icon-size.md) and [small-icon manifest](docs/data/HOK_KOREAN_SMALL_DECISION_ICON_MANIFEST.json).
+
+- Do not point decision/category sprites directly at large focus or national-spirit textures, such as the 100×88 focus DDS. Do not assume the decision UI automatically scales them down. Keep the original focus and spirit images unchanged and export dedicated small DDS files.
+- Use **32×32 for individual decision-row icons** and **51×40 for decision-category header icons** as the current project baseline. These sizes fit the inspected HOI4 1.19.3 UI; verify the target UI's row/header bounds, icon anchor, title position, and scaling before using different dimensions or adapting to a changed UI. Keep category description pictures and other UI artwork at their separately verified dimensions. Do not enlarge rows or replace the global decision GUI just to accommodate an oversized icon.
+- Recompose the central motif for small-size readability. Preserve the linked content's branch/field colors, recognizable symbols, component aspect ratios, and alpha; simplify large wreaths and ribbons, and retain a visible metal border and transparent margins. Do not merely shrink a detailed focus icon until its subject becomes unreadable, or add I/II/III marks without actual upgrade stages.
+- Store the finished assets under `gfx/interface/decisions/HOK_KOR/<module>/` and reference them through project-owned `GFX_HOK_KOR_decision_*` sprites with mod-root-relative paths. Preserve existing sprite names when replacing artwork; keep decision IDs, costs, rewards, durations, unlocks, and AI unchanged during image-only work.
+- Record the source, reuse permission or generation method, composition changes, dimensions, sprite mapping, and final hash in the asset documentation. Check DDS format, alpha, exact paths, and actual-size previews against the header/row and nearby text. When runtime validation is authorized, check category, available/unavailable, and active decision displays after a full restart; distinguish static bounds checks from actual game-screen verification.
+
+#### Focus and national-spirit background colors
+
+Use the following background color families for focus and national-spirit artwork. Color represents the focus's political branch or policy field, not the country's current ruling ideology. Shared industry and military icons must not change color when the government changes.
+
+| Political branch or policy field | Background and ornament direction |
+|---|---|
+| Democracy | Muted deep blue |
+| Communism | Deep red rather than vivid primary red |
+| Fascism | Brown with black ornaments, or charcoal with bronze ornaments |
+| Non-aligned | Light gray and silver rather than pure white |
+| Industry and production | Neutral gray with bronze or gold ornaments |
+| Education and research | Light gray and silver |
+| Army, ordnance, logistics, and staff | Dark green and olive |
+| Navy | Navy blue and slate blue-gray |
+| Air force | Silver and pale blue |
+
+- Apply political-branch color first to content belonging to a political route. For example, democratic civic/rural education, medical aid, volunteer support, and economic or armaments agreements remain blue. Foreign agreement participant spirits retain the originating branch's color regardless of the recipient's ideology; do not add ideology conditions to implement artwork choices.
+- For shared content, use its policy field. Schools, research, and maintenance belonging to a military service retain that service's color. Resolve overlaps from the actual branch, policy, and linked spirit, and record the assignment explicitly; do not infer color solely from an asset recipe's `family` or `category`. The regional Gyeongsang shipbuilding-industry focus uses industry colors.
+- Keep linked focuses and national spirits in the same color family and preserve their shared central motif. Use the existing `I`, `II`, and `III` marks for genuine upgrade chains; preserve intentional badge omissions and do not invent stages for unrelated content.
+- Edit the background as a separate layer. Preserve the central illustration, metal border, ornaments, stage marks, alpha, and recognizable symbols; do not apply a hue filter to the entire finished icon. Color must complement the central image and shape rather than serve as the only identifier.
+- Keep dark backgrounds outlined so they remain visible against the game UI. Preserve shading, contrast, and metallic texture in light gray/silver backgrounds so they do not resemble disabled icons. Distinguish overlapping color families through motifs and frame shapes, including democracy versus navy and education versus air force.
+- Record exact palette values, per-ID assignments, original sources, color-processing details, and output hashes in the asset documentation and manifest. Follow [the color plan and applied palette](docs/HOK_KOREAN_FOCUS_ICON_COLOR_PLAN.md) and [the icon manifest](docs/data/HOK_KOREAN_FOCUS_ICON_MANIFEST.json). Check actual-size previews; report in-game locked, available, active, completed, shine, and spirit-display validation separately from static inspection.
+- The applied color-work scope is the new 60 focuses and 29 national-spirit definitions. Existing original communist, fascist, and non-aligned focuses and existing spirits remain outside that work. Their palette entries are standards for future explicitly scoped artwork, not authorization to recolor legacy content or change gameplay.
+
+---
+
+## 8. Localisation and encoding
+
+HOI4 localisation files are not ordinary YAML. Do not run a generic YAML formatter on them.
+
+- Preserve UTF-8 with BOM for localisation `.yml` files.
+- Preserve the project's established language header and its contract with the required Korean language mod.
+- Do not invent or replace a locale header without confirming how the active dependency loads it.
+- Preserve the expected key form, such as `KEY:0 "Text"`, unless the project has a verified alternative.
+- Preserve `$KEY$` substitution, scripted tokens, colour codes, icon tokens, newline escapes, and quote escaping.
+- Check duplicate keys and exact casing.
+- Keep keys stable for translation and compatibility submods.
+- Do not mass-normalize BOMs, encoding, line endings, whitespace, or Unicode.
+- Verify Korean text in game, not only in an editor.
+
+Missing text may be a reference or load-order failure rather than a missing string. Trace the caller, key, language header, loaded file, and dependency order.
+
+### National-spirit and decision description prose
+
+- For national spirits, describe the concrete circumstances they represent and explain why any associated policy or institution is needed. Do not unnecessarily repeat numeric effects already shown automatically in the tooltip.
+- For decisions, describe the background and purpose of the action. Keep costs, duration, reuse restrictions, cancellation and refund rules clear in a short separate paragraph when the automatic tooltip does not adequately explain them.
+- Use concrete workplaces, people and situations to convey the policy's necessity. Avoid bureaucratic boilerplate and lists of rewards in narrative prose.
+
+#### HOI4 voice for fascist and communist national-spirit and decision descriptions
+
+- When writing or explicitly revising Korean fascist or communist national-spirit and decision descriptions, use the branch flavour below within HOI4's broader in-world voice. This includes associated decision-category descriptions. Determine the voice from the policy branch, not merely the country's current ruling ideology. This rule does not authorize rewriting inherited content or changing gameplay.
+- Understand that broader voice by reading varied actual HOI4 national-spirit and decision descriptions across countries and policy fields, including positive and negative institutions, economics, diplomacy, military affairs and social policy. Focuses, events and options can inform the voice without becoming edit targets. Do not restrict research to keywords or passages resembling the two examples below, or treat developer-diary jokes and community memes as interchangeable with in-game prose.
+- Write from the viewpoint of the country, regime, institution or people involved. Establish what they want, the predicament they face, the public justification and the practical interest behind it. The speaker may sincerely believe their own propaganda or casually reveal its contradiction. Draw on HOI4's range of historical explanation, resolve, national pride, solidarity, grand promises, political bargaining, anxiety, self-justification, understatement, irony and black comedy. A national declaration, institutional account, field conversation, speech or propaganda passage can each fit; dialogue and a punchline are not compulsory formats.
+- **Fascist descriptions:** retain the attitude behind **“병무청 와버렸다구^^”**: overfamiliar confidence, friendly or reassuring words concealing an unavoidable demand, and power treating its own wishes as obvious common sense. Express this through the actual policy's national prestige, order, modernisation, military ambition, economic necessity, loyalty or promised generosity. Use pompous certainty, cheerful imposition, officious absurdity, veiled threats or a deadpan reversal as the situation warrants. Conscription is one possible scene; recruiting officials, delivery inspections and manpower lists are not a required cast or subject. Preserve the fictional 구국군 identity where it belongs.
+- **Communist descriptions:** retain the attitude behind **“형벌부대에 끌려갈 시간 이라우 동무”**: comradely familiarity combined with the weight of the collective, party or state. Draw on solidarity, liberation, equality, production, education, revolutionary ambition, official optimism, political suspicion or competing claims to serve the people. Let the actual scene reveal the gap between the promise and what is demanded. “동무” and occasional “이라우”-style endings can carry the voice, but do not make every speaker or sentence identical. Preserve differences between cooperative solidarity and central planning's pressure while maintaining the requested comic flavour. Penal units, quotas and punishment are possible devices, not compulsory subjects for every communist policy.
+- Build the humour and tension from the policy itself: who benefits, whose consent is assumed, what the official promises, what the workshop can actually deliver, or what the reader understands behind a reassuring statement. Industry, research, trade, diplomacy, military doctrine, welfare, occupation and reconstruction each offer their own scenes. Do not attach a stock joke to a generic administrative summary or force every description back to conscription, punishment or reporting. National spirits must still explain the institution's ongoing circumstances and necessity; decisions must explain the intended action. Preserve good existing prose and jokes.
+- The two quoted phrases are the user's broad attitude references, not templates to repeat or a claim that all vanilla HOI4 text uses their exact wording. Vary the speaker, rhetorical form, emotional register and degree of overt humour. Colloquial phrasing or an occasional “^^” can support the requested flavour without becoming a mandatory suffix. Do not invent penal-unit creation, purges, manpower losses or other mechanics to make a joke work.
+- Apply this voice only to the narrative part of these descriptions. Keep costs, effects, durations, eligibility, cancellation, refunds, cooldowns, replacement and removal rules precise and plainly worded in their separate explanatory paragraph. Humour must not obscure a condition or promise an effect absent from the source.
+- Do not extend this instruction to focus descriptions, event text or options, names, standalone effect/condition tooltips (`_tt`), scripted localisation, UI labels, other ideological branches, or common policies simply because a fascist or communist government currently holds them. Those remain governed by their own explicitly requested scope and existing prose.
+
+---
+
+## 9. Map and state work is high risk
+
+Do not modify map-related files unless the task explicitly concerns the map or evidence proves a map definition is the root cause.
+
+Map work includes province definitions/bitmaps, terrain and height data, states, strategic regions, supply nodes, railways, adjacencies, buildings, unit positions, victory points, and ownership.
+
+Required rules:
+
+- Preserve globally unique province IDs and colours.
+- Do not renumber state or province IDs casually.
+- Verify province-to-state and province-to-strategic-region membership.
+- Verify land/sea/lake/coastal classification and adjacency consistency.
+- Verify supply, railway, naval-base, and building references after topology changes.
+- Verify unit and building positions after geometry changes.
+- Nudger output may be written to the HOI4 user-data directory, not the repository. Inspect and copy only intended output.
+- Never copy a whole vanilla map folder or add broad `replace_path` as a bandage.
+- Main-menu load is insufficient. When authorized, load a country, enter the map, unpause, and inspect affected regions.
+
+---
+
+## 10. Diagnostics and logs
+
+### Test-file storage
+
+- Store all newly created test and diagnostic files under `C:\hoi\test\<task-or-run-id>\`. This includes test scripts, fixtures, generated reports, copied logs, screenshots, crash dumps, test saves, and save backups.
+- Before generating artifacts or starting an authorized test, resolve the external task directory and inspect the helper's output, log, report, screenshot, save, and backup destinations. Correct any destination inside the repository or an upload package before running the helper. If the helper cannot use the required destination, report that blocker and continue only independent authorized work.
+- Do not store new test files in this repository, including `.local-artifacts`, or in a Steam Workshop upload/package directory. Historical records referencing `.local-artifacts` do not authorize reusing it for new tests. `.gitignore` controls Git tracking; it does not relocate files or exclude them from a Workshop upload.
+- Keep production mod files and maintained documentation in their normal repository locations. Game-generated originals remain in the actual HOI4 user-data directory; place any test/evidence copies in `C:\hoi\test`. This storage rule does not itself authorize moving or deleting existing files, changing game settings, or running tests.
+- When existing artifacts are discovered, report their location, type, and approximate size separately from any newly generated files. Treat them as pending external archival/cleanup; their presence alone does not establish when or by whom they were created. In review-only or documentation-only work, leave them untouched.
+- When cleanup is explicitly authorized, copy only the scoped artifacts to an identified directory under `C:\hoi\test\<task-or-run-id>\`, preserve their relative paths, and verify the copies before removing any source files covered by that authorization. Record the old and new locations. Preserve historical evidence references; document the archival mapping instead of bulk-rewriting old paths. Retain unique evidence and artwork sources needed for provenance.
+- At the end of an authorized test or diagnostic task, report the external artifact directory, any remaining artifacts in the repository/package, and any storage blocker. Acknowledge and report storage violations; do not describe this mandatory rule as optional advice or treat completion of the gameplay check as completion of artifact cleanup.
+
+### Runtime evidence
+
+The common Windows user-data location is:
+
+`\<Documents>/Paradox Interactive/Hearts of Iron IV/`
+
+The actual path may be redirected through OneDrive or a custom user directory. Resolve the directory used by the running game.
+
+Relevant evidence may include:
+
+- `logs/error.log`
+- `logs/game.log`
+- `logs/setup.log`
+- `logs/system.log`
+- exception and crash logs when present
+- launcher logs when discovery or loading fails
+- crash dumps
+- reproduction-specific saves
+
+Rules:
+
+- Copy or rotate logs before a clean reproduction so stale output is not mistaken for current output.
+- Compare against a vanilla or dependency-only control run when possible.
+- Separate pre-existing vanilla/DLC/dependency warnings from mod-introduced failures.
+- Inspect surrounding and preceding lines; the final message may be a cascade symptom.
+- Use `-debug` only when runtime execution is authorized.
+- Add script logging only to answer a stated diagnostic question.
+- Prefix temporary messages consistently, for example `[HOK][FOCUS][scenario-id]`.
+- Log stable identifiers and state transitions, not every daily evaluation.
+- Rate-limit or cap repeated diagnostics.
+- Remove or disable noisy temporary logging before release unless permanent observability is requested.
+
+Never claim a root cause merely because deleting content made an error disappear.
+
+### Test-session cleanup
+
+- After authorized HOI4 runtime testing, preserve the required test saves and logs, then close the game instance and test-owned launcher/helper processes started for that session before reporting completion. No further confirmation is needed unless the user explicitly asks to leave the game open. Identify the session's processes; do not close a pre-existing user game or indiscriminately terminate processes.
+- Verify that the test game processes have exited. If Steam tracked the session, also verify that HOI4 no longer shows Running or Stopping and its normal Play button has returned. A closed game window alone is insufficient; do not launch Steam solely for this check when it was not involved.
+- If the game processes are gone but Steam retains a stale Running/Stopping state, use Steam's normal Stop action. If it remains stuck, a normal Steam exit and restart is permitted without another confirmation after checking that no other active game, download, or important operation will be interrupted. Recheck the HOI4 Play button afterward. Do not force-kill unrelated applications; if cleanup cannot be completed without interrupting other work, report the remaining state accurately.
+- Restore and verify temporary settings and mod selection under section 14 after the test game has exited, and record the cleanup result. Closing the test game or restarting Steam does not authorize shutting down or restarting Windows; that requires an explicit user request.
+
+---
+
+## 11. Compatibility workflow
+
+For each compatibility problem:
+
+1. **Reproduce** using the exact target version and smallest valid playset.
+
+2. **Capture** the earliest relevant log evidence and visible behavior.
+
+3. **Locate** the affected definition and all referenced IDs.
+
+4. **Compare** with a target-version vanilla or known-working example.
+
+5. **Classify** the failure and competing hypotheses.
+
+6. **Patch** the smallest proven incompatibility.
+
+7. **Retest** the exact reproduction before broad smoke testing.
+
+8. **Compare logs** with the baseline/control.
+
+9. **Check behavior**, not merely parsing or launch success.
+
+10. **Review the diff** for accidental ID, balance, encoding, or unrelated changes.
+
+11. **Record uncertainty** and untested paths.
+
+Do not jump from “old mod” to “rewrite with current syntax.” Old syntax may still be valid, and newer syntax may have different semantics.
+
+---
+
+## 12. Validation requirements
+
+Use the smallest relevant subset first, then expand according to risk.
+
+### Static checks
+
+- no unintended additions or deletions
+- valid braces, quotes, and block placement
+- no newly introduced duplicate IDs
+- no broken event/focus/decision/character/idea/equipment/technology/map/asset/localisation references
+- descriptor and dependency consistency
+- localisation BOM/header/key integrity
+- no accidental whole-file encoding or line-ending conversion
+
+### Launcher and load checks
+
+- launcher detects the intended local mod copy
+- exact playset and load order are recorded
+- the correct physical source is loaded
+- main menu loads without a new relevant fatal error
+- declared `supported_version` is not confused with demonstrated compatibility
+
+### New-game smoke checks
+
+For every supported bookmark relevant to the change:
+
+- Korea loads in the intended state
+- leader, government, parties, laws, ideas, research, and resources load
+- focus tree opens and key branches remain connected
+- decisions and events appear under intended conditions
+- starting OOB and equipment load
+- custom states, ownership, cores, claims, supply, and victory points are correct
+- portraits, icons, models, names, and localisation resolve
+- unpausing does not immediately produce a crash, event spam, or severe error growth
+
+### Targeted and regression checks
+
+- demonstrate the pre-patch failure when possible
+- demonstrate the intended post-patch behavior
+- test a positive path and an important blocked/negative path
+- inspect AI runtime behavior when AI logic changes
+- inspect save/load when persistent IDs, flags, variables, history, or map data changes
+- Distinguish a new-save round trip from backward compatibility. To claim existing-save compatibility, load a representative pre-change save in the patched build, advance the game, save again, and reload it. Any one-time migration must be version-gated and idempotent.
+- check multiplayer checksum/synchronization only when multiplayer compatibility is claimed
+
+Risk examples:
+
+- focus: prerequisites, bypass, cancel, mutual exclusion, rewards, AI path
+- event: trigger, scope, options, repeat firing, localisation, follow-up chain
+- decision: visibility, availability, cost, duration, cancel/remove, target scope
+- character: recruitment, role, portrait, traits, advisor/leader assignment
+- map/state: load, unpause, supply, railway, adjacency, ownership, buildings, positions
+- equipment/OOB: production, deployment, templates, variants, starting stockpile
+- localisation: active language setup and translation-submod key stability
+
+A successful launch is not sufficient evidence that the mod is repaired.
+
+---
+
+## 13. Definition of done
+
+A compatibility fix is complete only when:
+
+- target HOI4 version and test playset are recorded
+- original failure is precisely described
+- root cause is confirmed, or remaining uncertainty is explicitly bounded
+- patch is limited to the demonstrated cause
+- intended behavior is preserved, or intentional changes are documented
+- the exact reproduction no longer fails
+- no new relevant errors appear compared with the baseline/control
+- affected IDs, scopes, localisation, dependencies, and load-order effects are reviewed
+- diff contains no unrelated cleanup or mass formatting
+- runtime validation status is stated honestly
+- the applicable change-coverage inventory is reconciled, with evidence for retained/excluded references and an explicit result for every required verification item; necessary unresolved items limit the completion claim
+
+A successor release is ready only when:
+
+- the source commit or immutable source snapshot is recorded
+- the staged package contains only intended public/runtime files
+- no upload configuration targets original Workshop item `2898629778`
+- original authorship, original-item provenance, third-party credits, and continuation contributors are represented accurately
+- the description identifies the item as a continuation/restoration without impersonating the original upload
+- target version, dependencies, changelog, known limitations, and actual validation status are documented
+- first publication remains a new item; later updates target only the recorded successor ID
+
+Not sufficient by itself:
+
+- updating `supported_version`
+- reaching the main menu
+- reducing raw log-line count
+- deleting content until `error.log` becomes quieter
+- passing a text parser
+- observing one happy path
+- renaming and uploading an unverified copy
+- inheriting the original `remote_file_id`
+
+---
+
+## 14. File, Git, attribution, and publication safety
+
+- Never modify the base-game installation or use a Workshop-managed copy as the authoritative working tree.
+- Never overwrite existing user saves or unrelated settings without explicit authorization and backup.
+- During authorized implementation or runtime diagnostics, temporary HOI4 playset/mod-selection changes needed for validation are permitted without a separate confirmation. This includes the active mod list in `dlc_load.json` and directly necessary test settings. Before changing them, back up the exact current files outside the repository, record the original selection/load order and relevant settings, and use separate test saves. Restore the original files and selection after validation unless the user explicitly asks to retain the test configuration; verify and record the restoration. Do not delete existing playsets, alter DLC ownership, or make unrelated or permanent configuration changes under this permission. Review-only and documentation-only restrictions still apply.
+- Do not commit logs, crash dumps, saves, caches, credentials, account data, or personal launcher data unless requested as sanitized fixtures.
+- Do not use destructive Git commands such as `git reset --hard`, `git clean`, forced checkout, or force-push.
+- Do not discard pre-existing user changes, rename large trees for aesthetics, or mass-convert binary assets.
+- All Git commit messages MUST be written in English, including both the subject and body. Do not use Korean or mixed-language prose in commit messages.
+- Commit or push only when explicitly requested and within the requested scope; a completed earlier commit/push request is not standing authorization for later work.
+- Do not add tools, dependencies, generators, or formatters unless approved and materially useful.
+- Keep restoration patches small; keep intentional successor changes separately attributable whenever practical.
+- Publication of a new continuation item is permitted when explicitly directed.
+- Original Workshop item `2898629778` remains a historical reference, never an upload target.
+- Do not impersonate the original creator or present inherited code, writing, art, audio, research, or design as newly authored.
+- Preserve original names, credits, notices, and third-party attributions; do not invent or remove a licence.
+- Mention the creator's death publicly only with user-approved wording, respectfully and never as marketing copy.
+- Never expose credentials or perform an upload, update, visibility change, deletion, or metadata mutation without an explicit instruction for that exact target and action.
+
+---
+
+## 15. Reporting format
+
+For implementation or diagnostics work, report:
+
+1. **Scope**: what was and was not authorized.
+
+2. **Baseline**: branch/commit, target version, playset, dependencies, and reproduction.
+
+3. **Evidence**: relevant logs, source locations, and observed behavior.
+
+4. **Root cause**: confirmed fact versus inference.
+
+5. **Changes**: files and logic changed.
+
+6. **Behavior impact**: preserved behavior and intentional differences.
+
+7. **Validation**: checks actually run and results.
+
+8. **Remaining risk**: untested DLC, bookmarks, branches, submods, multiplayer, saves, or map paths.
+
+9. **Git state**: working-tree changes and whether any commit/push occurred.
+
+For release-preparation or publication work, additionally report:
+
+- preparation only, first successor publication, or successor-item update
+- source state, package path/hash when practical, release version, and target HOI4 version
+- original historical ID and successor target ID, clearly distinguished
+- dependency, metadata, credit, changelog, and validation status
+- external account/Workshop actions actually performed
+
+For review-only work:
+
+- Put findings first, ordered by severity.
+- Cite paths and line numbers where possible.
+- Explain concrete failure modes, not style preferences.
+- Separate confirmed defects from suggestions.
+- State when runtime evidence is missing.
+- Do not claim “no issues” when only a subset was inspected.
+
+---
+
+## 16. Hearts of Korea preservation and continuation rules
+
+- Preserve the original vanilla-friendly, multiplayer-conscious balance during restoration unless rebalance is explicitly requested.
+- Preserve the Korean identity, alternate-history premise, ideological routes, formables, leaders, names, custom assets, comments, credits, and design history.
+- Treat the custom Korean map/state layout as a high-risk subsystem.
+- Preserve localisation keys used by translation and compatibility submods whenever possible.
+- Preserve the Korean-language-mod contract until a deliberate migration is designed and tested.
+- Do not remove content merely because vanilla or a DLC changed; identify the target-version replacement mechanism first.
+- Do not collapse custom content into vanilla placeholders merely to make the mod load.
+- Distinguish inherited content, restoration fixes, intentional redesigns, and new continuation content in history and release notes.
+- Do not imply that inherited work was created by the continuation team or that the original Workshop identity transferred to the new item.
+- New content, modernization, and rebalance are allowed when explicitly requested, but must preserve attribution and be tested independently from restoration claims.
+
+---
+
+## 17. Safe stopping conditions
+
+Stop modifying and report the evidence instead of guessing when:
+
+- the exact target version materially affects the fix but cannot be determined
+- the launcher loads a different copy than the repository under review
+- unknown dependency/load order directly affects the failure
+- multiple root causes remain equally plausible
+- a fix requires renumbering persistent map IDs
+- a `replace_path` migration would unload broad vanilla content
+- required binary source/format information is unavailable
+- save compatibility needs an explicit migration decision
+- an upload command or descriptor would target original Workshop item `2898629778`
+- the intended successor item/account/action is unresolved at the external-action boundary
+- a concrete third-party licence or attribution conflict is discovered
+- the staged package contains credentials, personal data, or files whose publication status cannot be determined safely
+
+Do not stop merely because this is a successor project, a new Workshop item is required, or the original maintainer is unavailable; those are established project conditions.
+
+When blocked, make the safest non-destructive progress possible: inventory the subsystem, identify missing evidence, and provide the next concrete diagnostic or release-preparation step. Do not manufacture certainty to keep moving.

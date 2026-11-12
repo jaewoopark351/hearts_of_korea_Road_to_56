@@ -6,6 +6,8 @@
 
 ## 현재 상태
 
+- 2026-11-12 한국 신규 과학자·이름 업데이트는 남녀 초상화 각4장과 이름 후보 제외를 기존 2개·신규 9개에 반영했다. **독립 72/0·전환 계약 36/0·생성 경로 19/0, 전체 정적 26 PASS·0 WARNING·기존 16 ERROR이며 신규 오류는 0개다.** 초기 `Geunhye`1개 제외 구현 중 확인한 donor의 추가20개 제외를 새 capsule에 동결해 최종 로마자 남성56·여성11·성14개를 채택했다. 초기 source11개·문서6개와 후속 이름1개·문서2개, 두 시점의 원본 이력·source pins를 함께 보존한다. 해당 계층의 검토·수정·재생성·검증 전 [구현·범위·실제 확인 상태](implementation/2026-11-12-korean-scientist-update-port.md), [초기 선택 입력](upstream/hok-scientist-update-20261112/README.md), [최신 이름 제외 입력](upstream/hok-scientist-name-exclusions-20261112/README.md)을 읽는다. 실제 RT56 모집·UI·저장은 미검증이다.
+
 - 2026-11-12 중국 도시 함락 뉴스 조건을 단일 출력에 반영했다. 베이핑·난징·충칭의 도시 통제와 소유국/전쟁 짝을 확인하고 RT56의 부모 주608·1114·1116에 연결한다. 이 계층 수정·재생성·검증 전 변경 영향·실제 정적 결과·실행 상태를 확인한다. [구현 기록](implementation/2026-11-12-korean-capture-news-port.md), [선택 입력 안내](upstream/hok-capture-news-update-20261112/README.md)
 
 - 2026-11-11 원본 한미 방위비·주둔 협상: **18출력 구현 반영·독립119/생성8/통합35 정적 확인 통과 / 전체24 PASS·0 WARNING·기존16 ERROR·실제 실행 미검증**. 미국의 협정/자치령/거부 선택,4국민정신·6사건·한영36키와 그림8개를 가져왔다. 기존 중점 배치·편제·소문자 사건 호출·지도/descriptor를 보존한다. 이 계층 수정·재생성·검증 전 [구현·범위·미검증 기록](implementation/2026-11-11-korean-us-defense-port.md)과 [선택 입력 안내](upstream/hok-us-defense-update-20261111/README.md)를 읽는다.

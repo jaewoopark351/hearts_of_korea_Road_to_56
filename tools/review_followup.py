@@ -88,6 +88,9 @@ def build_outputs() -> dict[str, bytes]:
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
     """Reverse only the registered final bytes; unrelated/unknown bytes stay raw."""
+    #20261112_kpopmodder: Prove the scientist portraits and name exclusion before checking their historical inputs.
+    from upstream_scientists import historical_bytes as scientist_historical
+    data = scientist_historical(relative, data)
     #20261112_kpopmodder: Prove the city-news revision before checking unchanged historical output contracts.
     from upstream_capture_news import historical_bytes as capture_historical
     data = capture_historical(relative, data)
@@ -112,6 +115,9 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 
 
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
+    #20261112_kpopmodder: Keep the reviewed Korean scientist and random-name revision terminal for inherited writers.
+    from upstream_scientists import finalize_one as scientist_finalize, historical_bytes as scientist_historical
+    data = scientist_historical(relative, data)
     #20261112_kpopmodder: Keep the reviewed city-news triggers after every inherited output owner.
     from upstream_capture_news import finalize_one as capture_finalize
     #20261110_kpopmodder: Retain the exact terminal industry revision across every inherited output owner.
@@ -122,11 +128,11 @@ def finalize_one(relative: str | Path, data: bytes) -> bytes:
     data = terminology_historical(relative, data)
     name = canonical_name(relative)
     if not LOCK_PATH.is_file() or name not in PATHS:
-        return capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, data)))
+        return scientist_finalize(relative, capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, data))))
     record = lock()['outputs'][name]
     if sha(data) not in (record['previous_sha256'], record['sha256']):
         raise ValueError(f'unreviewed follow-up predecessor: {name}')
-    return capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, build_outputs()[name])))
+    return scientist_finalize(relative, capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, build_outputs()[name]))))
 
 
 def finalize_outputs(outputs: dict) -> dict:
@@ -134,6 +140,9 @@ def finalize_outputs(outputs: dict) -> dict:
 
 
 def preflight_outputs(outputs: dict) -> None:
+    #20261112_kpopmodder: Reject independent edits to the reviewed scientist and name outputs before inherited writes.
+    from upstream_scientists import preflight_outputs as scientist_preflight
+    scientist_preflight(outputs)
     #20261112_kpopmodder: Refuse independent news edits before an older writer can replace them.
     from upstream_capture_news import preflight_outputs as capture_preflight
     capture_preflight(outputs)

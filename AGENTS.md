@@ -27,6 +27,7 @@ Apply these rules at the start of every task and consult the detailed sections b
 | Adding or changing player-facing localisation or flag/variable display paths, or reviewing missing/incorrect tooltip text | [Compatibility localisation review skill](docs/skills/hok-rt56-localisation-review/SKILL.md) |
 | Adding or changing state/province references, aligning code after HOK or RT56 map changes, or reviewing geographic targets even without map edits | [Compatibility state-reference review skill](docs/skills/hok-rt56-state-reference-review/SKILL.md) |
 | Reviewing the affected callers/branches, deciding treatment, or reporting completion for either area above | [Change-coverage procedure and adoption provenance](docs/HOK_CHANGE_COVERAGE_REVIEW.md) |
+| Reviewing, changing, regenerating, or validating Korean-only portraits for newly recruited scientists or the selected Korean random-name exclusion | [Scientist integration, source ownership, and actual verification record](docs/implementation/2026-11-12-korean-scientist-update-port.md) |
 | Creating or revising images, reusing historical image inputs/recipes, resolving old `.local-artifacts` references, or changing recorded artifact/source-cache locations | [Development artifact archive and image-source lookup](docs/HOK_DEVELOPMENT_ARTIFACT_ARCHIVE.md) |
 
 ## Scope and mission
@@ -209,6 +210,10 @@ Additional instruction sync recorded on 2026-11-06:
 Additional instruction adaptation recorded on 2026-11-09:
 
 - This documentation-only adaptation adds local localisation/state-reference review skills and the change-coverage procedure from donor `596b221bb994d93fce552d3ee1ba70fa9b5640f1`. Read [the adoption record](docs/HOK_CHANGE_COVERAGE_REVIEW.md#2026-11-09-지침-도입-기록) when tracing the source hashes, local adaptations, or verification scope. The compatibility English-language policy, current RT56 integration base, approved ID migrations, source pins and generated-file ownership remain in force. No runtime edits, tests, cleanup, Git mutations or publication are performed by this instruction update.
+
+Additional instruction adaptation recorded on 2026-11-12
+
+- The authorized Korean scientist update adapts the donor's new conditional required-reading entry to the local compatibility integration record. The source is `C:\hoi\hearts_of_korea\AGENTS.md` at donor HEAD `cdc022eee15fbf7404d4cb30cf2d0102d29e550c`, including its uncommitted instruction change, with source SHA-256 `BD9232F4C2616669108988847E9F3AC0D8F76FFDCCB4A7E4361902926DDC5EF0`. Read [the local scientist integration record](docs/implementation/2026-11-12-korean-scientist-update-port.md) before reviewing, changing, regenerating, or validating this selected portrait/name layer. The [source capsule](docs/upstream/hok-scientist-update-20261112/README.md) preserves the exact donor instructions and source-specific plan, manifests, and incidents. The local record defines RT56 ownership, generated-file ownership, the final Romanized name pool with `Geunhye` excluded, and the actual compatibility verification status. Existing source pins, English/Korean language roles, fixed-character IDs, authorship, and publication boundaries remain in force.
 
 Treat the continuation mandate and the compatibility-port request as established project context. Do not require another original-author approval for work the user has already authorized; escalate only concrete contradictory evidence, a specific third-party restriction, or a required user decision.
 

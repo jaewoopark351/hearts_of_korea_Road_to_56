@@ -1,0 +1,130 @@
+{
+    "schema_version":  1,
+    "date":  "2026-11-12",
+    "source_root":  "C:/hoi/hearts_of_korea",
+    "source_branch":  "feat/korean-focus-expansion-ai",
+    "source_commit":  "cdc022eee15fbf7404d4cb30cf2d0102d29e550c",
+    "source_worktree_status":  [
+                                   " M AGENTS.md",
+                                   " M common/names/00_names.txt",
+                                   " M portraits/00_portraits_KOR.txt",
+                                   "?? docs/HOK_KOREAN_SCIENTIST_PORTRAIT_PLAN.md",
+                                   "?? docs/data/HOK_KOREAN_RANDOM_NAME_LOCALISATION_MANIFEST.json",
+                                   "?? docs/data/HOK_KOREAN_SCIENTIST_PORTRAIT_ASSET_MANIFEST.json",
+                                   "?? docs/incidents/2026-11-12-korean-random-name-localisation.md",
+                                   "?? docs/incidents/2026-11-12-korean-scientist-portraits.md",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_01.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_02.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_03.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_04.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_01.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_02.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_03.dds",
+                                   "?? gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_04.dds",
+                                   "?? interface/HOK_KOR_scientist_portraits.gfx"
+                               ],
+    "sources":  {
+                    "common/names/00_names.txt":  {
+                                                      "snapshot":  "source/common/names/00_names.txt",
+                                                      "source_path":  "C:/hoi/hearts_of_korea/common/names/00_names.txt",
+                                                      "sha256":  "32AA863816EE3EACC02AA448E9CCBF0A4FCDB1AF92809CE23BDF2CC5DD096B9F",
+                                                      "size":  481844,
+                                                      "role":  "Byte-exact copy of latest dirty donor name source after additional twenty exclusions"
+                                                  }
+                },
+    "documents":  {
+                      "docs/data/HOK_KOREAN_RANDOM_NAME_LOCALISATION_MANIFEST.json":  {
+                                                                                          "snapshot":  "documents/docs/data/HOK_KOREAN_RANDOM_NAME_LOCALISATION_MANIFEST.json",
+                                                                                          "source_path":  "C:/hoi/hearts_of_korea/docs/data/HOK_KOREAN_RANDOM_NAME_LOCALISATION_MANIFEST.json",
+                                                                                          "sha256":  "0A9D67F7681ED956A5EC59B4D425085F91985E9F11EE95F2F8EB984A82C11968",
+                                                                                          "size":  47032,
+                                                                                          "role":  "Byte-exact maintained donor final-name provenance document with earlier stages preserved as history"
+                                                                                      },
+                      "docs/incidents/2026-11-12-korean-random-name-localisation.md":  {
+                                                                                           "snapshot":  "documents/docs/incidents/2026-11-12-korean-random-name-localisation.md",
+                                                                                           "source_path":  "C:/hoi/hearts_of_korea/docs/incidents/2026-11-12-korean-random-name-localisation.md",
+                                                                                           "sha256":  "E2652745672EAE130BCA47FDC2B876A7A223F4D49317CB18E366006E1C368A96",
+                                                                                           "size":  24716,
+                                                                                           "role":  "Byte-exact maintained donor final-name provenance document with earlier stages preserved as history"
+                                                                                       }
+                  },
+    "predecessor":  {
+                        "capsule":  "docs/upstream/hok-scientist-update-20261112",
+                        "source_manifest":  "docs/upstream/hok-scientist-update-20261112/source-manifest.json",
+                        "source_manifest_sha256":  "47E296C2ED93A084A9F076C23467F0B9A0FBA7B82C62E2178A5532B0A1896D8C",
+                        "source_manifest_role":  "Immutable initial portrait and Geunhye-only name capture, retained unchanged",
+                        "donor_name_sha256":  "08C6CAD04DED79DFD18DD49AE32E8D68570D77FF78DB0BEE3E1DED17D6745C8D",
+                        "donor_name_counts":  {
+                                                  "male":  71,
+                                                  "female":  16,
+                                                  "surnames":  14,
+                                                  "total":  101
+                                              }
+                    },
+    "selected_output":  {
+                            "path":  "common/names/zz_hok_rt56_names.txt",
+                            "sha256":  "F06C9DE9A35C43A86BA7B76AD447A7E511060A035B2F396C659F8459A320F781",
+                            "size":  4733,
+                            "role":  "Intermediate v1 compatibility selected output with only Geunhye excluded, predecessor to this follow-up",
+                            "final_followup_output":  "Owned and fingerprinted separately by tools/hok_scientist_update_lock.json after generation"
+                        },
+    "final_name_contract":  {
+                                "method":  "Romanized literal KOR lists with documented modern-politician full-name overlap candidates excluded",
+                                "male":  56,
+                                "female":  11,
+                                "surnames":  14,
+                                "total":  81,
+                                "previously_removed":  [
+                                                           "Geunhye"
+                                                       ],
+                                "additional_male_removed":  [
+                                                                "Gun",
+                                                                "Woong",
+                                                                "Yoon-Gi",
+                                                                "Yoongi",
+                                                                "Jaeyoung",
+                                                                "Jinho",
+                                                                "Jiwon",
+                                                                "Jungho",
+                                                                "Junghoon",
+                                                                "Minseok",
+                                                                "Minsoo",
+                                                                "Sanghoon",
+                                                                "Sungho",
+                                                                "Sunghoon",
+                                                                "Sungmin"
+                                                            ],
+                                "additional_female_removed":  [
+                                                                  "Bora",
+                                                                  "Ji-young",
+                                                                  "Kyung-hee",
+                                                                  "Jiyoung",
+                                                                  "Kyunghee"
+                                                              ],
+                                "additional_removed_counts":  {
+                                                                  "male":  15,
+                                                                  "female":  5,
+                                                                  "total":  20
+                                                              },
+                                "affected_consumers":  "All newly generated Korean characters consuming the shared KOR name pool",
+                                "behavior_scope":  "Removing a first-name token excludes its combinations with every retained surname",
+                                "preserved":  "Fourteen surnames and remaining entry order/spelling/quoting, fixed scientists and all non-KOR name blocks",
+                                "runtime":  "Not run after latest donor exclusions or in the compatibility port",
+                                "audit_limit":  "Adopt documented identified overlaps without claiming exhaustive coverage of every modern politician"
+                            },
+    "chronology":  [
+                       "Initial external baseline and immutable capsule captured Geunhye-only donor stage.",
+                       "Donor name source and two maintained records changed concurrently during compatibility implementation.",
+                       "This separate capsule captures all three updated files without rewriting the initial capsule or baseline.",
+                       "Current scoped implementation adopts the documented additional twenty exclusions from the latest selected donor state."
+                   ],
+    "evidence_roles":  {
+                           "compatibility_task_directory":  "C:/hoi/test/hok-rt56-scientist-update-20261112-01",
+                           "initial_baseline_record":  "C:/hoi/test/hok-rt56-scientist-update-20261112-01/baseline.json",
+                           "initial_baseline_drift":  "Three concurrent donor input changes, not global donor-byte preservation",
+                           "donor_followup_evidence":  "C:/hoi/test/hok-scientist-modern-name-exclusions-20261112-01",
+                           "previous_capsule_references":  "Host/schema/portrait references remain recorded in initial source-manifest, this follow-up changes names only",
+                           "original_and_copies":  "Donor originals remain at source_path, exact selected copies are active follow-up inputs at snapshot, no originals moved",
+                           "donor_records_role":  "Source-specific historical tests and official-source links preserved exactly, no new runtime or external political-source verification performed here"
+                       }
+}
