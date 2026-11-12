@@ -88,7 +88,7 @@ def build_outputs() -> dict[str, bytes]:
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
     """Reverse only the registered final bytes; unrelated/unknown bytes stay raw."""
-    #20261112_kpopmodder: Prove the scientist portraits and name exclusion before checking their historical inputs.
+    #20261112_kpopmodder: Prove the Korean recruitment portraits and name exclusions before checking their historical inputs.
     from upstream_scientists import historical_bytes as scientist_historical
     data = scientist_historical(relative, data)
     #20261112_kpopmodder: Prove the city-news revision before checking unchanged historical output contracts.
@@ -115,7 +115,7 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 
 
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
-    #20261112_kpopmodder: Keep the reviewed Korean scientist and random-name revision terminal for inherited writers.
+    #20261112_kpopmodder: Keep the reviewed Korean recruitment portraits and name exclusions terminal for inherited writers.
     from upstream_scientists import finalize_one as scientist_finalize, historical_bytes as scientist_historical
     data = scientist_historical(relative, data)
     #20261112_kpopmodder: Keep the reviewed city-news triggers after every inherited output owner.
@@ -140,7 +140,7 @@ def finalize_outputs(outputs: dict) -> dict:
 
 
 def preflight_outputs(outputs: dict) -> None:
-    #20261112_kpopmodder: Reject independent edits to the reviewed scientist and name outputs before inherited writes.
+    #20261112_kpopmodder: Reject independent edits to the reviewed recruitment portraits and name outputs before inherited writes.
     from upstream_scientists import preflight_outputs as scientist_preflight
     scientist_preflight(outputs)
     #20261112_kpopmodder: Refuse independent news edits before an older writer can replace them.

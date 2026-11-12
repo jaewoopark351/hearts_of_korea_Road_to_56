@@ -6,6 +6,8 @@
 
 ## 현재 상태
 
+- 2026-11-12 최신 원본 첩보원 업데이트를 선택 반영했다. **독립 72/0·전환 계약 46/0·생성 경로 33/0, 전체 정적 전후 26 PASS·0 WARNING·같은 기존 16 ERROR, 신규 오류 0개다.** 현재 복장·배경 revision의 남녀 전용 그림8개와 KOR 목록·GFX를 가져와 기존 이름·과학자 소유 계층을 11→20출력으로 확장했다. 검은 중절모·정장·코트와 불투명 회색 배경을 채택하고 기존 로마자 이름56/11/14·고정 인물·RT56 외국 현지 모집을 보존한다. source10·문서5·선조1개를 동결했으며 관련 조건부 읽기와 HOK 소유 콘텐츠의 역사적 이름 지침을 적응한다. 해당 계층의 검토·수정·재생성·검증 전 [구현·범위·실제 확인 상태](implementation/2026-11-12-korean-operative-portrait-port.md)와 [선택 입력 안내](upstream/hok-operative-portraits-20261112/README.md)를 읽는다. 실제 RT56 모집·UI·저장은 미검증이다.
+
 - 2026-11-12 한국 신규 과학자·이름 업데이트는 남녀 초상화 각4장과 이름 후보 제외를 기존 2개·신규 9개에 반영했다. **독립 72/0·전환 계약 36/0·생성 경로 19/0, 전체 정적 26 PASS·0 WARNING·기존 16 ERROR이며 신규 오류는 0개다.** 초기 `Geunhye`1개 제외 구현 중 확인한 donor의 추가20개 제외를 새 capsule에 동결해 최종 로마자 남성56·여성11·성14개를 채택했다. 초기 source11개·문서6개와 후속 이름1개·문서2개, 두 시점의 원본 이력·source pins를 함께 보존한다. 해당 계층의 검토·수정·재생성·검증 전 [구현·범위·실제 확인 상태](implementation/2026-11-12-korean-scientist-update-port.md), [초기 선택 입력](upstream/hok-scientist-update-20261112/README.md), [최신 이름 제외 입력](upstream/hok-scientist-name-exclusions-20261112/README.md)을 읽는다. 실제 RT56 모집·UI·저장은 미검증이다.
 
 - 2026-11-12 중국 도시 함락 뉴스 조건을 단일 출력에 반영했다. 베이핑·난징·충칭의 도시 통제와 소유국/전쟁 짝을 확인하고 RT56의 부모 주608·1114·1116에 연결한다. 이 계층 수정·재생성·검증 전 변경 영향·실제 정적 결과·실행 상태를 확인한다. [구현 기록](implementation/2026-11-12-korean-capture-news-port.md), [선택 입력 안내](upstream/hok-capture-news-update-20261112/README.md)

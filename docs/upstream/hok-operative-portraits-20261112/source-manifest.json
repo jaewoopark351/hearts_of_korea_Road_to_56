@@ -1,0 +1,515 @@
+{
+    "schema_version":  1,
+    "date":  "2026-11-12",
+    "source_root":  "C:/hoi/hearts_of_korea",
+    "source_branch":  "feat/korean-focus-expansion-ai",
+    "source_commit":  "f1282d701bc47e47c119ca31faa6082e9e6ed1e6",
+    "source_worktree_status":  [
+                                   " M AGENTS.md",
+                                   " M portraits/00_portraits_KOR.txt",
+                                   "?? docs/HOK_KOREAN_OPERATIVE_PORTRAIT_PLAN.md",
+                                   "?? docs/data/HOK_KOREAN_OPERATIVE_PORTRAIT_ASSET_MANIFEST.json",
+                                   "?? docs/incidents/2026-11-12-korean-operative-outfit-background.md",
+                                   "?? docs/incidents/2026-11-12-korean-operative-portraits.md",
+                                   "?? gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_01.dds",
+                                   "?? gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_02.dds",
+                                   "?? gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_03.dds",
+                                   "?? gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_04.dds",
+                                   "?? gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_01.dds",
+                                   "?? gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_02.dds",
+                                   "?? gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_03.dds",
+                                   "?? gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_04.dds",
+                                   "?? interface/HOK_KOR_operative_portraits.gfx"
+                               ],
+    "compatibility_baseline":  {
+                                   "branch":  "feat/korean-focus-update-20260922",
+                                   "commit":  "7e29ce80158dfad1635d427f61e5c8b964088adf",
+                                   "worktree":  "clean before authorized operative implementation",
+                                   "external_task_directory":  "C:/hoi/test/hok-rt56-operative-update-20261112-01",
+                                   "baseline_record":  "C:/hoi/test/hok-rt56-operative-update-20261112-01/baseline.json"
+                               },
+    "sources":  {
+                    "portraits/00_portraits_KOR.txt":  {
+                                                           "snapshot":  "source/portraits/00_portraits_KOR.txt",
+                                                           "source_path":  "C:/hoi/hearts_of_korea/portraits/00_portraits_KOR.txt",
+                                                           "sha256":  "9825E25CD274449311AB43CE75DA29B15EA4DA98455164D5C8E0DE3B36F29181",
+                                                           "size":  1505,
+                                                           "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                           "text_format":  {
+                                                                               "encoding":  "UTF-8",
+                                                                               "bom":  false,
+                                                                               "crlf_count":  55,
+                                                                               "lone_lf_count":  0,
+                                                                               "lone_cr_count":  0,
+                                                                               "ends_with_newline":  false
+                                                                           }
+                                                       },
+                    "interface/HOK_KOR_operative_portraits.gfx":  {
+                                                                      "snapshot":  "source/interface/HOK_KOR_operative_portraits.gfx",
+                                                                      "source_path":  "C:/hoi/hearts_of_korea/interface/HOK_KOR_operative_portraits.gfx",
+                                                                      "sha256":  "8FA84E7F71D52C6D8684153EDC4E636840E83FA7730C4306E8C7C6A0B956342B",
+                                                                      "size":  1351,
+                                                                      "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                                      "text_format":  {
+                                                                                          "encoding":  "UTF-8",
+                                                                                          "bom":  false,
+                                                                                          "crlf_count":  35,
+                                                                                          "lone_lf_count":  0,
+                                                                                          "lone_cr_count":  0,
+                                                                                          "ends_with_newline":  true
+                                                                                      }
+                                                                  },
+                    "gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_01.dds":  {
+                                                                                                    "snapshot":  "source/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_01.dds",
+                                                                                                    "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_01.dds",
+                                                                                                    "sha256":  "47996CC711660057D09FFEC53176A55DDF24BFB4AAF79B56940703F41B646A4E",
+                                                                                                    "size":  131168,
+                                                                                                    "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                                                                    "asset_format":  {
+                                                                                                                         "width":  156,
+                                                                                                                         "height":  210,
+                                                                                                                         "format":  "Uncompressed BGRA32",
+                                                                                                                         "rgb_bit_count":  32,
+                                                                                                                         "mipmap_header_count":  0,
+                                                                                                                         "alpha_minimum":  255,
+                                                                                                                         "alpha_maximum":  255,
+                                                                                                                         "alpha_role":  "All actual DDS alpha bytes inspected as opaque before capture",
+                                                                                                                         "current_revision":  "2026-11-12-outfit-and-opaque-background"
+                                                                                                                     }
+                                                                                                },
+                    "gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_02.dds":  {
+                                                                                                    "snapshot":  "source/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_02.dds",
+                                                                                                    "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_02.dds",
+                                                                                                    "sha256":  "866CB4BBCDDB399548968B48D80B9A409D451CB716623E16F2A8EBA71E66B2C2",
+                                                                                                    "size":  131168,
+                                                                                                    "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                                                                    "asset_format":  {
+                                                                                                                         "width":  156,
+                                                                                                                         "height":  210,
+                                                                                                                         "format":  "Uncompressed BGRA32",
+                                                                                                                         "rgb_bit_count":  32,
+                                                                                                                         "mipmap_header_count":  0,
+                                                                                                                         "alpha_minimum":  255,
+                                                                                                                         "alpha_maximum":  255,
+                                                                                                                         "alpha_role":  "All actual DDS alpha bytes inspected as opaque before capture",
+                                                                                                                         "current_revision":  "2026-11-12-outfit-and-opaque-background"
+                                                                                                                     }
+                                                                                                },
+                    "gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_03.dds":  {
+                                                                                                    "snapshot":  "source/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_03.dds",
+                                                                                                    "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_03.dds",
+                                                                                                    "sha256":  "A8299A6A934A6FCAC6F1F1226541BE69E8E57043DE4A4F7542B547C6490EBA84",
+                                                                                                    "size":  131168,
+                                                                                                    "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                                                                    "asset_format":  {
+                                                                                                                         "width":  156,
+                                                                                                                         "height":  210,
+                                                                                                                         "format":  "Uncompressed BGRA32",
+                                                                                                                         "rgb_bit_count":  32,
+                                                                                                                         "mipmap_header_count":  0,
+                                                                                                                         "alpha_minimum":  255,
+                                                                                                                         "alpha_maximum":  255,
+                                                                                                                         "alpha_role":  "All actual DDS alpha bytes inspected as opaque before capture",
+                                                                                                                         "current_revision":  "2026-11-12-outfit-and-opaque-background"
+                                                                                                                     }
+                                                                                                },
+                    "gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_04.dds":  {
+                                                                                                    "snapshot":  "source/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_04.dds",
+                                                                                                    "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_female_04.dds",
+                                                                                                    "sha256":  "CCD02D8CC9773A4B2B2F5930A9D7E879242872AEFC4727426BE2C0B13A8FAC16",
+                                                                                                    "size":  131168,
+                                                                                                    "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                                                                    "asset_format":  {
+                                                                                                                         "width":  156,
+                                                                                                                         "height":  210,
+                                                                                                                         "format":  "Uncompressed BGRA32",
+                                                                                                                         "rgb_bit_count":  32,
+                                                                                                                         "mipmap_header_count":  0,
+                                                                                                                         "alpha_minimum":  255,
+                                                                                                                         "alpha_maximum":  255,
+                                                                                                                         "alpha_role":  "All actual DDS alpha bytes inspected as opaque before capture",
+                                                                                                                         "current_revision":  "2026-11-12-outfit-and-opaque-background"
+                                                                                                                     }
+                                                                                                },
+                    "gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_01.dds":  {
+                                                                                                  "snapshot":  "source/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_01.dds",
+                                                                                                  "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_01.dds",
+                                                                                                  "sha256":  "9D39EE382ACB5C741F7884E354C2D8334723CB57374D3A0178E04D8E883A2816",
+                                                                                                  "size":  131168,
+                                                                                                  "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                                                                  "asset_format":  {
+                                                                                                                       "width":  156,
+                                                                                                                       "height":  210,
+                                                                                                                       "format":  "Uncompressed BGRA32",
+                                                                                                                       "rgb_bit_count":  32,
+                                                                                                                       "mipmap_header_count":  0,
+                                                                                                                       "alpha_minimum":  255,
+                                                                                                                       "alpha_maximum":  255,
+                                                                                                                       "alpha_role":  "All actual DDS alpha bytes inspected as opaque before capture",
+                                                                                                                       "current_revision":  "2026-11-12-outfit-and-opaque-background"
+                                                                                                                   }
+                                                                                              },
+                    "gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_02.dds":  {
+                                                                                                  "snapshot":  "source/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_02.dds",
+                                                                                                  "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_02.dds",
+                                                                                                  "sha256":  "4FE52A0D447C5F1D858EC7D1E51A5B24FF78E375F827F620EB55EEB8D25338C2",
+                                                                                                  "size":  131168,
+                                                                                                  "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                                                                  "asset_format":  {
+                                                                                                                       "width":  156,
+                                                                                                                       "height":  210,
+                                                                                                                       "format":  "Uncompressed BGRA32",
+                                                                                                                       "rgb_bit_count":  32,
+                                                                                                                       "mipmap_header_count":  0,
+                                                                                                                       "alpha_minimum":  255,
+                                                                                                                       "alpha_maximum":  255,
+                                                                                                                       "alpha_role":  "All actual DDS alpha bytes inspected as opaque before capture",
+                                                                                                                       "current_revision":  "2026-11-12-outfit-and-opaque-background"
+                                                                                                                   }
+                                                                                              },
+                    "gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_03.dds":  {
+                                                                                                  "snapshot":  "source/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_03.dds",
+                                                                                                  "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_03.dds",
+                                                                                                  "sha256":  "1E5B5C3E2A4ED41F0641A2C84DB076D5BE1AEA112557630EE06ECCA8490DBDF1",
+                                                                                                  "size":  131168,
+                                                                                                  "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                                                                  "asset_format":  {
+                                                                                                                       "width":  156,
+                                                                                                                       "height":  210,
+                                                                                                                       "format":  "Uncompressed BGRA32",
+                                                                                                                       "rgb_bit_count":  32,
+                                                                                                                       "mipmap_header_count":  0,
+                                                                                                                       "alpha_minimum":  255,
+                                                                                                                       "alpha_maximum":  255,
+                                                                                                                       "alpha_role":  "All actual DDS alpha bytes inspected as opaque before capture",
+                                                                                                                       "current_revision":  "2026-11-12-outfit-and-opaque-background"
+                                                                                                                   }
+                                                                                              },
+                    "gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_04.dds":  {
+                                                                                                  "snapshot":  "source/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_04.dds",
+                                                                                                  "source_path":  "C:/hoi/hearts_of_korea/gfx/leaders/operatives/HOK_KOR/portrait_HOK_KOR_operative_male_04.dds",
+                                                                                                  "sha256":  "DA123B2A25149229756746AF5881BE4D5794CB63BDCF8E251FFDD77ADE328DC0",
+                                                                                                  "size":  131168,
+                                                                                                  "role":  "Byte-exact selected dirty donor runtime input from latest opaque-gray outfit revision",
+                                                                                                  "asset_format":  {
+                                                                                                                       "width":  156,
+                                                                                                                       "height":  210,
+                                                                                                                       "format":  "Uncompressed BGRA32",
+                                                                                                                       "rgb_bit_count":  32,
+                                                                                                                       "mipmap_header_count":  0,
+                                                                                                                       "alpha_minimum":  255,
+                                                                                                                       "alpha_maximum":  255,
+                                                                                                                       "alpha_role":  "All actual DDS alpha bytes inspected as opaque before capture",
+                                                                                                                       "current_revision":  "2026-11-12-outfit-and-opaque-background"
+                                                                                                                   }
+                                                                                              }
+                },
+    "documents":  {
+                      "AGENTS.md":  {
+                                        "snapshot":  "documents/AGENTS.md",
+                                        "source_path":  "C:/hoi/hearts_of_korea/AGENTS.md",
+                                        "sha256":  "F80ACF2E2F32D68DA006D8DE44D2A2A8154340AFEBBA1D734B9A7711193E2F5D",
+                                        "size":  85632,
+                                        "role":  "Byte-exact donor maintained provenance document preserving both historical stages",
+                                        "text_format":  {
+                                                            "encoding":  "UTF-8",
+                                                            "bom":  false,
+                                                            "crlf_count":  842,
+                                                            "lone_lf_count":  0,
+                                                            "lone_cr_count":  0,
+                                                            "ends_with_newline":  true
+                                                        }
+                                    },
+                      "docs/HOK_KOREAN_OPERATIVE_PORTRAIT_PLAN.md":  {
+                                                                         "snapshot":  "documents/docs/HOK_KOREAN_OPERATIVE_PORTRAIT_PLAN.md",
+                                                                         "source_path":  "C:/hoi/hearts_of_korea/docs/HOK_KOREAN_OPERATIVE_PORTRAIT_PLAN.md",
+                                                                         "sha256":  "27746E852C0F18DB45BAE20DA5B28E918BCAA15BAFC5823C75BDFFDCB19E4FF9",
+                                                                         "size":  16585,
+                                                                         "role":  "Byte-exact donor maintained provenance document preserving both historical stages",
+                                                                         "text_format":  {
+                                                                                             "encoding":  "UTF-8",
+                                                                                             "bom":  false,
+                                                                                             "crlf_count":  0,
+                                                                                             "lone_lf_count":  129,
+                                                                                             "lone_cr_count":  0,
+                                                                                             "ends_with_newline":  true
+                                                                                         }
+                                                                     },
+                      "docs/data/HOK_KOREAN_OPERATIVE_PORTRAIT_ASSET_MANIFEST.json":  {
+                                                                                          "snapshot":  "documents/docs/data/HOK_KOREAN_OPERATIVE_PORTRAIT_ASSET_MANIFEST.json",
+                                                                                          "source_path":  "C:/hoi/hearts_of_korea/docs/data/HOK_KOREAN_OPERATIVE_PORTRAIT_ASSET_MANIFEST.json",
+                                                                                          "sha256":  "023A07CC9A61817EC65ED7932DE0E598CF1B114A3725BF45C64296455F42E6D0",
+                                                                                          "size":  58303,
+                                                                                          "role":  "Byte-exact donor maintained provenance document preserving both historical stages",
+                                                                                          "text_format":  {
+                                                                                                              "encoding":  "UTF-8",
+                                                                                                              "bom":  false,
+                                                                                                              "crlf_count":  878,
+                                                                                                              "lone_lf_count":  0,
+                                                                                                              "lone_cr_count":  0,
+                                                                                                              "ends_with_newline":  true
+                                                                                                          }
+                                                                                      },
+                      "docs/incidents/2026-11-12-korean-operative-portraits.md":  {
+                                                                                      "snapshot":  "documents/docs/incidents/2026-11-12-korean-operative-portraits.md",
+                                                                                      "source_path":  "C:/hoi/hearts_of_korea/docs/incidents/2026-11-12-korean-operative-portraits.md",
+                                                                                      "sha256":  "F1427DCDB7256150E8B6158CCF8C87C62073C1EAE310EA709C5B2C2865F981DB",
+                                                                                      "size":  22434,
+                                                                                      "role":  "Byte-exact donor maintained provenance document preserving both historical stages",
+                                                                                      "text_format":  {
+                                                                                                          "encoding":  "UTF-8",
+                                                                                                          "bom":  false,
+                                                                                                          "crlf_count":  157,
+                                                                                                          "lone_lf_count":  0,
+                                                                                                          "lone_cr_count":  0,
+                                                                                                          "ends_with_newline":  true
+                                                                                                      }
+                                                                                  },
+                      "docs/incidents/2026-11-12-korean-operative-outfit-background.md":  {
+                                                                                              "snapshot":  "documents/docs/incidents/2026-11-12-korean-operative-outfit-background.md",
+                                                                                              "source_path":  "C:/hoi/hearts_of_korea/docs/incidents/2026-11-12-korean-operative-outfit-background.md",
+                                                                                              "sha256":  "F5BEFD6D2EF70B33C0AD6146201114C4CF9FF8E14F287807AA3C0D865F9974AE",
+                                                                                              "size":  9097,
+                                                                                              "role":  "Byte-exact donor maintained provenance document preserving both historical stages",
+                                                                                              "text_format":  {
+                                                                                                                  "encoding":  "UTF-8",
+                                                                                                                  "bom":  false,
+                                                                                                                  "crlf_count":  0,
+                                                                                                                  "lone_lf_count":  53,
+                                                                                                                  "lone_cr_count":  0,
+                                                                                                                  "ends_with_newline":  true
+                                                                                                              }
+                                                                                          }
+                  },
+    "predecessors":  {
+                         "portraits/00_portraits_KOR.txt":  {
+                                                                "snapshot":  "compat_before/portraits/00_portraits_KOR.txt",
+                                                                "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/portraits/00_portraits_KOR.txt",
+                                                                "sha256":  "5E13A8CED8ECEDD70DE77614739C6C2315D98498DE16471ED8BF6363CC2746CC",
+                                                                "size":  1051,
+                                                                "role":  "Exact current compatibility scientist portrait output used as the operative extension predecessor",
+                                                                "text_format":  {
+                                                                                    "encoding":  "UTF-8",
+                                                                                    "bom":  false,
+                                                                                    "crlf_count":  39,
+                                                                                    "lone_lf_count":  0,
+                                                                                    "ends_with_newline":  false
+                                                                                }
+                                                            }
+                     },
+    "prior_scientist_contract":  {
+                                     "lock_path":  "tools/hok_scientist_update_lock.json",
+                                     "lock_source_path":  "C:/hoi/hearts_of_korea_Road_to_56/tools/hok_scientist_update_lock.json",
+                                     "lock_sha256":  "0AAF49DBCAA34D60DBF63EF063EA11FD2854D0C041CF6C76A7A59DA127738AA3",
+                                     "lock_size":  5004,
+                                     "revision":  "2026-11-12-scientists-v2",
+                                     "source_manifest_sha256":  "47E296C2ED93A084A9F076C23467F0B9A0FBA7B82C62E2178A5532B0A1896D8C",
+                                     "name_exclusions_manifest_sha256":  "F99C540CAA814BC78AE390F2447C7F8EBDE1C6E793A967EAA447324569D2898E",
+                                     "outputs":  {
+                                                     "common/names/zz_hok_rt56_names.txt":  {
+                                                                                                "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/common/names/zz_hok_rt56_names.txt",
+                                                                                                "sha256":  "67A034FD66369E8EB6A4B02DE173C174F33E1C50A1EAE7335B05930FD8185F5B",
+                                                                                                "size":  4682,
+                                                                                                "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                            },
+                                                     "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_01.dds":  {
+                                                                                                                                     "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_01.dds",
+                                                                                                                                     "sha256":  "8CE30A7A681ABB1CCA6CC9F9E83F17AFEEBE8AC778CA140B1A9C4CBEB4C59DE4",
+                                                                                                                                     "size":  131168,
+                                                                                                                                     "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                                                                 },
+                                                     "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_02.dds":  {
+                                                                                                                                     "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_02.dds",
+                                                                                                                                     "sha256":  "1C7E12F9802656CC0F61CCBE0F0CEAB04F98A82A6DAA48BA927BA01260FE7C47",
+                                                                                                                                     "size":  131168,
+                                                                                                                                     "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                                                                 },
+                                                     "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_03.dds":  {
+                                                                                                                                     "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_03.dds",
+                                                                                                                                     "sha256":  "97416574E0AE690D3E40387EB8C61433E30269774C718C5E85D5EAF72B4962FD",
+                                                                                                                                     "size":  131168,
+                                                                                                                                     "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                                                                 },
+                                                     "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_04.dds":  {
+                                                                                                                                     "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_female_04.dds",
+                                                                                                                                     "sha256":  "E93BB2E51DFA3ED7150583A2A6E117CB32C93F2963B9FE9EB038B5E4F5004B21",
+                                                                                                                                     "size":  131168,
+                                                                                                                                     "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                                                                 },
+                                                     "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_01.dds":  {
+                                                                                                                                   "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_01.dds",
+                                                                                                                                   "sha256":  "99C67C13BFDC1FBA4E85C3FF7D4A07D7337395F08981F17CFB54E5A4943903A9",
+                                                                                                                                   "size":  131168,
+                                                                                                                                   "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                                                               },
+                                                     "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_02.dds":  {
+                                                                                                                                   "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_02.dds",
+                                                                                                                                   "sha256":  "68C821857BE50F8A47F1DDADB1FF26529DBCA5ED0C7AAF5AA4381EF695C540DB",
+                                                                                                                                   "size":  131168,
+                                                                                                                                   "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                                                               },
+                                                     "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_03.dds":  {
+                                                                                                                                   "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_03.dds",
+                                                                                                                                   "sha256":  "DED6BFA82A2B0F05683C18CB0569F3D2763A40DC0F7F2712CD568438D8DF7831",
+                                                                                                                                   "size":  131168,
+                                                                                                                                   "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                                                               },
+                                                     "gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_04.dds":  {
+                                                                                                                                   "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/scientists/HOK_KOR/portrait_HOK_KOR_scientist_male_04.dds",
+                                                                                                                                   "sha256":  "5D195D8F31A0BF7E2EC2DA383E5575F8D864DA31A279E4F0873ED602E0EAF38B",
+                                                                                                                                   "size":  131168,
+                                                                                                                                   "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                                                               },
+                                                     "interface/HOK_KOR_scientist_portraits.gfx":  {
+                                                                                                       "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/interface/HOK_KOR_scientist_portraits.gfx",
+                                                                                                       "sha256":  "1EFADE94088E08B0EE8F0AE072DACCC2E78FC543827AF3B932042E88987B3745",
+                                                                                                       "size":  1316,
+                                                                                                       "role":  "Existing name/scientist output preserved byte-exactly by operative update"
+                                                                                                   },
+                                                     "portraits/00_portraits_KOR.txt":  {
+                                                                                            "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/portraits/00_portraits_KOR.txt",
+                                                                                            "sha256":  "5E13A8CED8ECEDD70DE77614739C6C2315D98498DE16471ED8BF6363CC2746CC",
+                                                                                            "size":  1051,
+                                                                                            "role":  "Scientist registry predecessor extended with operative block"
+                                                                                        }
+                                                 },
+                                     "extension_role":  "Extend existing scientist owner from eleven to twenty outputs, retaining historical science/name inputs and pins"
+                                 },
+    "references":  {
+                       "RT56/descriptor.mod":  {
+                                                   "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/descriptor.mod",
+                                                   "sha256":  "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61",
+                                                   "size":  299,
+                                                   "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                               },
+                       "RT56/portraits/00_portraits.txt":  {
+                                                               "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/portraits/00_portraits.txt",
+                                                               "sha256":  "9D70A2B9F9C2709EA9215EA4ED1C57FE1FD8F14ED12ABEE6BE92A63848C39EFA",
+                                                               "size":  24203,
+                                                               "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                           },
+                       "RT56/portraits/r56_portraits.txt":  {
+                                                                "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/portraits/r56_portraits.txt",
+                                                                "sha256":  "FBE2F6ED8391EFDF38805B95A3E2CEC73BB21E8B039CC6D478846D5370E11FB9",
+                                                                "size":  537016,
+                                                                "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                            },
+                       "RT56/portraits/02_tiger_portraits.txt":  {
+                                                                     "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/portraits/02_tiger_portraits.txt",
+                                                                     "sha256":  "6D576CBCD07EC9A0BBB71F3E7B8983559C7A1330C6DF39414248E6C4142EAA56",
+                                                                     "size":  5425,
+                                                                     "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                 },
+                       "RT56/portraits/00_portraits_operatives.txt":  {
+                                                                          "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/portraits/00_portraits_operatives.txt",
+                                                                          "sha256":  "FE076002BF4B4126D9A04F6A6DFDA3A399FEB851D0C45FAEA468537E46B1B0D5",
+                                                                          "size":  34693,
+                                                                          "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                      },
+                       "RT56/common/decisions/lar_agent_recruitment_decisions.txt":  {
+                                                                                         "source_path":  "C:/Program Files (x86)/Steam/steamapps/workshop/content/394360/820260968/common/decisions/lar_agent_recruitment_decisions.txt",
+                                                                                         "sha256":  "2DCD27B48EC2BB22B507663013C428B1230264E21E3FC641274A432DE9F4E662",
+                                                                                         "size":  18692,
+                                                                                         "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                                     },
+                       "VANILLA/launcher-settings.json":  {
+                                                              "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/launcher-settings.json",
+                                                              "sha256":  "D844392E7391EFE103EFC96B089910ADBA66605BC41FE43D5BC663F4C4A7FBA6",
+                                                              "size":  1462,
+                                                              "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                          },
+                       "VANILLA/dlc/dlc028_la_resistance/portraits/027_lar_portraits.txt":  {
+                                                                                                "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/dlc/dlc028_la_resistance/portraits/027_lar_portraits.txt",
+                                                                                                "sha256":  "82F680363B133CA89E6110C1D41519A20FA6F49542646DAD79516C58B19A3CD8",
+                                                                                                "size":  11612,
+                                                                                                "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                                            },
+                       "VANILLA/dlc/dlc028_la_resistance/interface/lar_portraits.gfx":  {
+                                                                                            "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/dlc/dlc028_la_resistance/interface/lar_portraits.gfx",
+                                                                                            "sha256":  "265DD6A9E235B51C4D794B288C08124BDE50A41A10298F278225ADD0453830DD",
+                                                                                            "size":  52337,
+                                                                                            "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                                        },
+                       "VANILLA/documentation/effects_documentation.md":  {
+                                                                              "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/documentation/effects_documentation.md",
+                                                                              "sha256":  "2CDC93D26775990468EED167442F7A416B13059FB8FE07D139B54250B79209AF",
+                                                                              "size":  222533,
+                                                                              "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                          },
+                       "VANILLA/common/decisions/lar_agent_recruitment_decisions.txt":  {
+                                                                                            "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/common/decisions/lar_agent_recruitment_decisions.txt",
+                                                                                            "sha256":  "9A39DF3B1892FF09DCA85DB2F4544D42B7D229C4D7FE8E3B1A2004D0387A7B96",
+                                                                                            "size":  19293,
+                                                                                            "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                                        },
+                       "VANILLA/gfx/interface/naval_leader_selection_entry_bg.dds":  {
+                                                                                         "source_path":  "C:/Program Files (x86)/Steam/steamapps/common/Hearts of Iron IV/gfx/interface/naval_leader_selection_entry_bg.dds",
+                                                                                         "sha256":  "64901016AF0E35965FC02907B6EF83AC672DA3743CD30F57B5728360D2794797",
+                                                                                         "size":  200048,
+                                                                                         "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                                     },
+                       "COMPAT/history/countries/KOR - Korea.txt":  {
+                                                                        "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/history/countries/KOR - Korea.txt",
+                                                                        "sha256":  "E6D2488E2A894AF9C3FA478815669175FAEA537B1A5BE7D09C61FCF1578C7068",
+                                                                        "size":  12194,
+                                                                        "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                    },
+                       "COMPAT/interface/leader_portraits_HoK.gfx":  {
+                                                                         "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/interface/leader_portraits_HoK.gfx",
+                                                                         "sha256":  "A68A6B001EE4DA424FAE2D2471F8E0C425605EFE84F880E3D0C4002CCF0FDC32",
+                                                                         "size":  294,
+                                                                         "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                     },
+                       "COMPAT/gfx/leaders/KOR/portrait_KOR_operative_Bonggil_Yoon.dds":  {
+                                                                                              "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/KOR/portrait_KOR_operative_Bonggil_Yoon.dds",
+                                                                                              "sha256":  "ECBEAC0ACB265DA8E2DDFB1B6C32A721E1AAA431D949D833EDCD06EDB36024EC",
+                                                                                              "size":  131168,
+                                                                                              "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                                          },
+                       "COMPAT/gfx/leaders/KOR/portrait_KOR_operative_Bongchang_Lee.dds":  {
+                                                                                               "source_path":  "C:/hoi/hearts_of_korea_Road_to_56/gfx/leaders/KOR/portrait_KOR_operative_Bongchang_Lee.dds",
+                                                                                               "sha256":  "0B46EA800DFC7B37FAC3A889F644BD465A3E91F5CB8722B39A9780106357BCDB",
+                                                                                               "size":  131168,
+                                                                                               "role":  "Read-only source or installed host/schema/fixed-character preservation reference, not copied to capsule"
+                                                                                           }
+                   },
+    "environment_reference":  {
+                                  "hoi4_version":  "Operation Postern v1.19.4.2.2da5 (0bdb)",
+                                  "steam_build":  "26409260",
+                                  "rt56_workshop_id":  "820260968",
+                                  "rt56_manifest":  "1963361040482473746",
+                                  "observation_role":  "Read-only metadata and physical source fingerprints, no compatibility operative runtime result"
+                              },
+    "artwork_provenance":  {
+                               "current_revision":  "2026-11-12-outfit-and-opaque-background",
+                               "classification":  "AI-edited from upstream generated fictional Korean identities",
+                               "selected_style":  "Black fedora, black suit and overcoat, white shirt and black tie, opaque neutral gray studio gradient",
+                               "transparent_background":  false,
+                               "original_manifest_snapshot":  "documents/docs/data/HOK_KOREAN_OPERATIVE_PORTRAIT_ASSET_MANIFEST.json",
+                               "current_record_snapshot":  "documents/docs/incidents/2026-11-12-korean-operative-outfit-background.md",
+                               "initial_record_snapshot":  "documents/docs/incidents/2026-11-12-korean-operative-portraits.md",
+                               "selected_original_directory":  "C:/hoi/test/hok-operative-outfit-background-20261112-01/art/generated",
+                               "selected_original_role":  "Existing donor selected edited PNGs retained externally, not moved or regenerated",
+                               "initial_identity_directory":  "C:/hoi/test/hok-operative-portraits-20261112-01/art/generated",
+                               "initial_identity_role":  "Historical initial generated identity inputs to current image edits",
+                               "prompt_record":  "C:/hoi/test/hok-operative-outfit-background-20261112-01/art/prompts.json",
+                               "generation_provenance_record":  "C:/hoi/test/hok-operative-outfit-background-20261112-01/art/generation-provenance.json",
+                               "conversion_record":  "C:/hoi/test/hok-operative-outfit-background-20261112-01/art/final-dds/conversion-manifest.json",
+                               "native_contact_sheet":  "C:/hoi/test/hok-operative-outfit-background-20261112-01/art/final-dds/native-contact-sheet.png",
+                               "visual_inspection":  "Existing current native contact sheet inspected read-only for all eight portraits",
+                               "donor_runtime_role":  "Current edited-art main donor UI and historical initial recruitment/tag/anime/save observations have different source conditions; neither is RT56 port runtime proof",
+                               "runtime_limits":  "No current revision anime rerun, no natural foreign local recruitment/political route progression, no new save during current art revision, multiplayer unverified"
+                           },
+    "integration_contract":  {
+                                 "source_runtime_count":  10,
+                                 "source_document_count":  5,
+                                 "predecessor_count":  1,
+                                 "existing_owner_output_count":  11,
+                                 "final_owner_output_count":  20,
+                                 "changed_existing_output":  "portraits/00_portraits_KOR.txt",
+                                 "new_outputs":  "interface/HOK_KOR_operative_portraits.gfx and eight gfx/leaders/operatives/HOK_KOR DDS",
+                                 "foreign_recruitment":  "Preserve current RT56 FROM.OWNER portrait_tag_override and nationality behavior at all eight host recruitment creation sites",
+                                 "fixed_operatives":  "Preserve HOK Bonggil Yoon and Bongchang Lee GFX, nationalities, traits, DLC gate and recruitment settings",
+                                 "unchanged_names":  "Final Romanized KOR name pool 56 male,11 female,14 surnames remains under prior scientist/name owner"
+                             }
+}

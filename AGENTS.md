@@ -28,6 +28,7 @@ Apply these rules at the start of every task and consult the detailed sections b
 | Adding or changing state/province references, aligning code after HOK or RT56 map changes, or reviewing geographic targets even without map edits | [Compatibility state-reference review skill](docs/skills/hok-rt56-state-reference-review/SKILL.md) |
 | Reviewing the affected callers/branches, deciding treatment, or reporting completion for either area above | [Change-coverage procedure and adoption provenance](docs/HOK_CHANGE_COVERAGE_REVIEW.md) |
 | Reviewing, changing, regenerating, or validating Korean-only portraits for newly recruited scientists or the selected Korean random-name exclusion | [Scientist integration, source ownership, and actual verification record](docs/implementation/2026-11-12-korean-scientist-update-port.md) |
+| Reviewing, changing, regenerating, or validating Korean-only portraits for newly recruited operatives, including foreign recruitment or cosmetic/anime integration | [Operative integration, current artwork sources, and actual verification record](docs/implementation/2026-11-12-korean-operative-portrait-port.md) |
 | Creating or revising images, reusing historical image inputs/recipes, resolving old `.local-artifacts` references, or changing recorded artifact/source-cache locations | [Development artifact archive and image-source lookup](docs/HOK_DEVELOPMENT_ARTIFACT_ARCHIVE.md) |
 
 ## Scope and mission
@@ -214,6 +215,10 @@ Additional instruction adaptation recorded on 2026-11-09:
 Additional instruction adaptation recorded on 2026-11-12
 
 - The authorized Korean scientist update adapts the donor's new conditional required-reading entry to the local compatibility integration record. The source is `C:\hoi\hearts_of_korea\AGENTS.md` at donor HEAD `cdc022eee15fbf7404d4cb30cf2d0102d29e550c`, including its uncommitted instruction change, with source SHA-256 `BD9232F4C2616669108988847E9F3AC0D8F76FFDCCB4A7E4361902926DDC5EF0`. Read [the local scientist integration record](docs/implementation/2026-11-12-korean-scientist-update-port.md) before reviewing, changing, regenerating, or validating this selected portrait/name layer. The [source capsule](docs/upstream/hok-scientist-update-20261112/README.md) preserves the exact donor instructions and source-specific plan, manifests, and incidents. The local record defines RT56 ownership, generated-file ownership, the final Romanized name pool with `Geunhye` excluded, and the actual compatibility verification status. Existing source pins, English/Korean language roles, fixed-character IDs, authorship, and publication boundaries remain in force.
+
+Additional instruction adaptation recorded on 2026-11-12 for the operative update
+
+- The authorized latest-upstream integration adapts the donor's Korean operative required-reading entry to [the local operative source, ownership, and verification record](docs/implementation/2026-11-12-korean-operative-portrait-port.md). Read it before reviewing, changing, regenerating, or validating this operative layer or its foreign-recruitment/cosmetic/anime connections. Donor HEAD `f1282d701bc47e47c119ca31faa6082e9e6ed1e6` contains the newly committed historical-naming rule. The operative required-reading row is an additional uncommitted instruction. The current combined donor `AGENTS.md` source SHA-256 is `F80ACF2E2F32D68DA006D8DE44D2A2A8154340AFEBBA1D734B9A7711193E2F5D`, preserved exactly in [the operative source capsule](docs/upstream/hok-operative-portraits-20261112/README.md). The naming rule below applies within HOK ownership and authorized scope while preserving RT56 shared/world ownership. The already selected Romanized Korean name pool remains 56 male, 11 female, and 14 surnames. This instruction adaptation adds no further runtime name deletion. Existing historical source pins, attribution, language roles, fixed IDs, and publication boundaries remain in force.
 
 Treat the continuation mandate and the compatibility-port request as established project context. Do not require another original-author approval for work the user has already authorized; escalate only concrete contradictory evidence, a specific third-party restriction, or a required user decision.
 
@@ -925,6 +930,14 @@ For review-only work:
 
 ---
 
+### Historical naming for HOK-owned content
+
+- Do not use verified real names of 21st-century politicians in HOK-owned World War II-era game content, regardless of nationality, party, or political orientation. This includes fixed and generated characters, scientist or operative recruitment, name pools, localisation, narrative text, and political jokes or Easter eggs.
+- Apply the rule to native-script names, Romanizations, and spelling/hyphenation variants corresponding to the verified person. An inherited HOK or vanilla source does not by itself justify retaining a verified overlap in the scoped HOK content. Preserve RT56-owned shared/world definitions and apply changes only within the user's authorized scope.
+- When adding or changing HOK generated-name pools, check the full names formed by given-name and surname combinations. Exclude confirmed politician-name overlaps and corresponding spelling variants. If the engine cannot exclude a single combination, remove the affected given-name component and record every shared consumer. Use names appropriate to the period.
+- Before reviewing or changing Korean generated-name pools, read [the local name integration and exclusion record](docs/implementation/2026-11-12-korean-scientist-update-port.md) and [the selected exclusion inputs](docs/upstream/hok-scientist-name-exclusions-20261112/README.md). Distinguish verified full-name overlaps from assumptions about common names or political intent. Evidence, audits, and maintenance documents may retain names solely to record sources, verified overlaps, or exclusion reasons. Keep those records outside player-facing game content.
+
+---
 ## 17. Safe stopping conditions
 
 Stop modifying and report the evidence instead of guessing when:

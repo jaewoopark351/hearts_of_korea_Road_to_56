@@ -284,3 +284,7 @@ interface/HOK_KOR_scientist_portraits.gfx text eol=lf
 
 #20261112_kpopmodder: Preserve the separately audited follow-up name exclusions after source drift.
 docs/upstream/hok-scientist-name-exclusions-20261112/** -text
+
+#20261112_kpopmodder: Preserve operative source bytes and the actual CRLF portrait registry across checkouts.
+docs/upstream/hok-operative-portraits-20261112/** -text
+interface/HOK_KOR_operative_portraits.gfx text eol=crlf
