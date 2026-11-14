@@ -1,4 +1,5 @@
 ﻿l_english:
+#20261114_kpopmodder: Move the three commanders' unlock notice to the next-war focus.
  #History bookmark
  KOR_GATHERING_STORM_DESC:0 "The Korean-Japanese-Russian War left the entire Korean peninsula in ruins. From the corpse of the old empire arose the Republic of Korea, the first democratic republic in Korean history and in Asia. Yet all the glory it had built has vanished like a mirage in the wake of the Great Depression.\n\nThe economy is collapsing, democracy is in retreat, and extremist movements stand ready to overthrow the country. Japan's expansionist ambitions make no secret of its hostility towards us.\n\nKorea managed to stay out of the Great War, but escaping the next one seems impossible..."
 
@@ -21,7 +22,7 @@
  GOOKPPONG_STATUS:0 "Super-Korea"
  RULE_OPTION_DEFAULT_GOOKPPONG_DESC:0 "Do not enable Super-Korea."
  GOOKPPONG_ENABLED_TEXT:0 "Enable Super-Korea"
- GOOKPPONG_ENABLED_TEXT_DESC:0 "Korea begins in control of Manchuria, with starting technology, factories, army units, warships, air wings and supply provision on a par with the seven great powers. It also gains the capable generals Hong Beom-do, Kim Jwa-jin and Ahn Jung-geun, who are unavailable in the normal Korean start.\n\nPlay Korea as a great power rather than the minor power of the standard HoK start. Recommended for newcomers to HOI4."
+ GOOKPPONG_ENABLED_TEXT_DESC:0 "Korea begins in control of Manchuria, with starting technology, factories, army units, warships, air wings and supply provision on a par with the seven great powers.\n\nPlay Korea as a great power rather than the minor power of the standard HoK start. Recommended for newcomers to HOI4."
  GOOKPPONG_MIDDLE_POWER_ENABLED_TEXT:0 "Enable Middle-Power Korea"
  GOOKPPONG_MIDDLE_POWER_ENABLED_TEXT_DESC:0 "Unlike Super-Korea, this option leaves Korea with only the Korean peninsula at the start. However, it provides starting technology, factories, army units, warships, air wings, supply provision, resources and extra building slots on a par with Poland, all more generous than the standard Korean start.\n\nPlay Korea as a middle power comparable to Poland, Sweden or Brazil rather than the minor power of the standard HoK start. Recommended for multiplayer."
  

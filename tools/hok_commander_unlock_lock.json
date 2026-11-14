@@ -1,0 +1,54 @@
+{
+  "format": 1,
+  "revision": "2026-11-14-commander-unlock-v1",
+  "base_commit": "b5308a027385cc021243a443ff49b728707e081e",
+  "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+  "ancestor_commit": "065b5550448d6415901456503ef28b27f4530cc1",
+  "workshop_manifest": "1963361040482473746",
+  "game_version": "Operation Postern v1.19.5.0.7c6c (c184)",
+  "rt56_root": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968",
+  "vanilla_root": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV",
+  "outputs": {
+    "common/characters/KOR.txt": {
+      "sha256": "A8908A052E432DA681DEBAA505F59DD8F4DD648CB99F481B2A55DAC338A01DF2",
+      "size": 31462,
+      "classification": "THREE_WAY_MERGE",
+      "previous_sha256": "53B0C839A1FC188C8D3AE062B4A5CF795574ABA41123B6E3333ED6028DDC5E0B",
+      "previous_size": 30634,
+      "previous_snapshot": "compat_before/common/characters/KOR.txt"
+    },
+    "common/national_focus/korea.txt": {
+      "sha256": "EF979199A8A71E28A30ABFEDC5632012095B54D474C886626E778C91E9A19066",
+      "size": 520397,
+      "classification": "THREE_WAY_MERGE",
+      "previous_sha256": "DD808875F78707B60C30DC77674309D2A63E6CA5467F2EC7FF0E55D78E63EDED",
+      "previous_size": 520173,
+      "previous_snapshot": "compat_before/common/national_focus/korea.txt"
+    },
+    "history/countries/KOR - Korea.txt": {
+      "sha256": "68F9298E2EC6644F1AEF49F29E214AECB70437C6F5DFEC71C74263D1374F179E",
+      "size": 12353,
+      "classification": "OVERRIDE",
+      "previous_sha256": "E6D2488E2A894AF9C3FA478815669175FAEA537B1A5BE7D09C61FCF1578C7068",
+      "previous_size": 12194,
+      "previous_snapshot": "compat_before/history/countries/KOR - Korea.txt"
+    },
+    "localisation/english/HoK_start_game_setup_l_english.yml": {
+      "sha256": "9055E522138BD777D106A78C6AB6486290930851BF7CF3709221B7B81FFE970E",
+      "size": 5059,
+      "classification": "ADD",
+      "previous_sha256": "24151BC2945510620F32C7044A5FE72A4D3264CCD2EC7DF9760B10960E3AD613",
+      "previous_size": 5101,
+      "previous_snapshot": "compat_before/localisation/english/HoK_start_game_setup_l_english.yml"
+    },
+    "localisation/korean/HoK_start_game_setup_l_korean.yml": {
+      "sha256": "E8E5EFE2A9659FD0BBA248B5499EB70F9E10D9F96DCD3407B8E89E0DA622CA66",
+      "size": 5801,
+      "classification": "ADD",
+      "previous_sha256": "63A438DEC315C5D46A761BB32A4FF9015937E655FE4DF5E45BD045B65DBA319D",
+      "previous_size": 5819,
+      "previous_snapshot": "compat_before/localisation/korean/HoK_start_game_setup_l_korean.yml"
+    }
+  },
+  "source_manifest_sha256": "35AF8D7E1202F8B29095A31A8CF032FC87EAFB97320717627737807354BA1B2D"
+}

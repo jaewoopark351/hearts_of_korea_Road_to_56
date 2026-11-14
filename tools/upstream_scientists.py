@@ -321,6 +321,10 @@ def operative_manifest() -> dict:
         path = (root / relative).resolve()
         path.relative_to(root)
         data = path.read_bytes()
+        #20261114_kpopmodder: Keep fixed-operative history pins after proving the separate commander-only history delta.
+        if provider == "COMPAT":
+            from upstream_commanders import historical_bytes as commander_historical
+            data = commander_historical(relative, data)
         if (Path(record["source_path"]).resolve() != path or sha(data) != record["sha256"]
                 or len(data) != record["size"]):
             raise ValueError(f"operative fixed-content or installed reference drift: {name}")

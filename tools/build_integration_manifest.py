@@ -1202,6 +1202,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     #20261112_kpopmodder: Index the selected scientist assets and one-name exclusion after immutable prior provenance.
     from upstream_scientists import ledger_bytes as scientist_ledger_bytes
     final = scientist_ledger_bytes(final)
+    #20261114_kpopmodder: Append five exact commander revisions without changing earlier provenance or multi-output siblings.
+    from upstream_commanders import ledger_bytes as commander_ledger_bytes
+    final = commander_ledger_bytes(final)
     final_rows = list(csv.DictReader(io.StringIO(final.decode("utf-8"), newline="")))
     final_counts = Counter(row["integration_class"] for row in final_rows)
     final_collisions = sum(row["exact_path_rt56_collision"] == "yes" for row in final_rows)
@@ -1507,7 +1510,9 @@ def build_state_split_csv(*, output_root: Path = REPO_ROOT) -> bytes:
     from upstream_capture_news import ledger_bytes as capture_ledger_bytes
     #20261112_kpopmodder: Keep scoped regeneration on the same selected scientist provenance as the full builder.
     from upstream_scientists import ledger_bytes as scientist_ledger_bytes
-    return scientist_ledger_bytes(capture_ledger_bytes(final))
+    #20261114_kpopmodder: Keep scoped regeneration on the same terminal commander provenance as full builds.
+    from upstream_commanders import ledger_bytes as commander_ledger_bytes
+    return commander_ledger_bytes(scientist_ledger_bytes(capture_ledger_bytes(final)))
 
 
 def main() -> int:

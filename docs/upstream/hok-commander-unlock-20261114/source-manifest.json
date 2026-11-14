@@ -1,0 +1,319 @@
+{
+  "format": 1,
+  "recorded_date": "2026-11-14",
+  "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+  "ancestor_commit": "065b5550448d6415901456503ef28b27f4530cc1",
+  "compatibility_base_commit": "b5308a027385cc021243a443ff49b728707e081e",
+  "donor_root": "C:\\hoi\\hearts_of_korea",
+  "sources": {
+    "common/characters/KOR.txt": {
+      "before": {
+        "snapshot": "before/common/characters/KOR.txt",
+        "sha256": "D67C0A9393116C894DE755BD62F330D5377E7D996E1F8537065E6A211F201ED0",
+        "size": 26502,
+        "crlf": 0,
+        "bare_lf": 1533,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\characters\\KOR.txt",
+        "source_commit": "065b5550448d6415901456503ef28b27f4530cc1",
+        "source_blob": "769129ce1d6563366e66f8e312a8b3af06a6da40",
+        "role": "immutable donor ancestor Git blob"
+      },
+      "after": {
+        "snapshot": "runtime/common/characters/KOR.txt",
+        "sha256": "32E3A82B841B52AC80F01C7D73D089053E314CBE36A9DA0FA6CC663B22BA32F9",
+        "size": 28863,
+        "crlf": 1554,
+        "bare_lf": 0,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\characters\\KOR.txt",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "8211df04d573372233e230ec2ed4700ad55c8088",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "common/national_focus/korea.txt": {
+      "before": {
+        "snapshot": "before/common/national_focus/korea.txt",
+        "sha256": "00E56E1D9C43D6C33BDF7B744444443A2899E40D25E672B2BB759A9912F66B85",
+        "size": 491121,
+        "crlf": 0,
+        "bare_lf": 14933,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\national_focus\\korea.txt",
+        "source_commit": "065b5550448d6415901456503ef28b27f4530cc1",
+        "source_blob": "a568fd4bc7030653c69ce4bdcb47b0002d2512a3",
+        "role": "immutable donor ancestor Git blob"
+      },
+      "after": {
+        "snapshot": "runtime/common/national_focus/korea.txt",
+        "sha256": "6B8A4BE2082719B338D7368C4C0192AA091DBCB4627CBBA67D6E052955BB31DD",
+        "size": 506278,
+        "crlf": 14937,
+        "bare_lf": 0,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\national_focus\\korea.txt",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "6855e284025bbdb92f32f5a132c11e885e51b13d",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "history/countries/KOR - Korea.txt": {
+      "before": {
+        "snapshot": "before/history/countries/KOR - Korea.txt",
+        "sha256": "87DA607B1C79E613300BEA0B310767FB05926E8111A31A3354ECED5D20C47B94",
+        "size": 11804,
+        "crlf": 0,
+        "bare_lf": 458,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\history\\countries\\KOR - Korea.txt",
+        "source_commit": "065b5550448d6415901456503ef28b27f4530cc1",
+        "source_blob": "d50c887f30f8367d0e5f725d92985ff1799a00ab",
+        "role": "immutable donor ancestor Git blob"
+      },
+      "after": {
+        "snapshot": "runtime/history/countries/KOR - Korea.txt",
+        "sha256": "18BC2387F373863A5933C43815ECDBC0EEB9525C1BABEAE28AF1D9A162CAE1A7",
+        "size": 12421,
+        "crlf": 461,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\history\\countries\\KOR - Korea.txt",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "07bb040dcc61c34bdd21f057c338385bf4ccc6cb",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "localisation/english/HoK_start_game_setup_l_english.yml": {
+      "before": {
+        "snapshot": "before/localisation/english/HoK_start_game_setup_l_english.yml",
+        "sha256": "F12C97A6ACE9BB59E60DBF3AA79DC423239D38F702AF946C47EB0EA08E32A44C",
+        "size": 7596,
+        "crlf": 0,
+        "bare_lf": 68,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HoK_start_game_setup_l_english.yml",
+        "source_commit": "065b5550448d6415901456503ef28b27f4530cc1",
+        "source_blob": "ed53a68499c46d6e041bfca6b2fe02b416e13d19",
+        "role": "immutable donor ancestor Git blob"
+      },
+      "after": {
+        "snapshot": "runtime/localisation/english/HoK_start_game_setup_l_english.yml",
+        "sha256": "ADB910D0DD0DC7E9948DC690BB9D1FC870D4DEB0C02427F16219FE6CBD716F04",
+        "size": 7647,
+        "crlf": 69,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HoK_start_game_setup_l_english.yml",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "4481831fdab2920492e5a91693a267abdc19e4ec",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "localisation/korean/HoK_start_game_setup_l_korean.yml": {
+      "before": {
+        "snapshot": "before/localisation/korean/HoK_start_game_setup_l_korean.yml",
+        "sha256": "5867CDC8315EE2A24840E6F359D0F95D8CC5EE1B6E6E12EAD37B345F5C0084F6",
+        "size": 7595,
+        "crlf": 0,
+        "bare_lf": 68,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HoK_start_game_setup_l_korean.yml",
+        "source_commit": "065b5550448d6415901456503ef28b27f4530cc1",
+        "source_blob": "16a8aa69cbace1d725e63d36ed7e00104681f69a",
+        "role": "immutable donor ancestor Git blob"
+      },
+      "after": {
+        "snapshot": "runtime/localisation/korean/HoK_start_game_setup_l_korean.yml",
+        "sha256": "19776BA224720682626D196C8B01A1A6947A58AEC491573DCE58A7E0BD95819D",
+        "size": 7646,
+        "crlf": 69,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HoK_start_game_setup_l_korean.yml",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "b9ab14ac88842d0956a8df99d4edb4b03a084fd6",
+        "role": "exact read-only clean donor checkout"
+      }
+    }
+  },
+  "predecessors": {
+    "common/characters/KOR.txt": {
+      "snapshot": "compat_before/common/characters/KOR.txt",
+      "sha256": "53B0C839A1FC188C8D3AE062B4A5CF795574ABA41123B6E3333ED6028DDC5E0B",
+      "size": 30634,
+      "crlf": 1661,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\common\\characters\\KOR.txt",
+      "source_commit": "b5308a027385cc021243a443ff49b728707e081e",
+      "role": "exact active compatibility predecessor"
+    },
+    "common/national_focus/korea.txt": {
+      "snapshot": "compat_before/common/national_focus/korea.txt",
+      "sha256": "DD808875F78707B60C30DC77674309D2A63E6CA5467F2EC7FF0E55D78E63EDED",
+      "size": 520173,
+      "crlf": 14991,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\common\\national_focus\\korea.txt",
+      "source_commit": "b5308a027385cc021243a443ff49b728707e081e",
+      "role": "exact active compatibility predecessor"
+    },
+    "history/countries/KOR - Korea.txt": {
+      "snapshot": "compat_before/history/countries/KOR - Korea.txt",
+      "sha256": "E6D2488E2A894AF9C3FA478815669175FAEA537B1A5BE7D09C61FCF1578C7068",
+      "size": 12194,
+      "crlf": 455,
+      "bare_lf": 0,
+      "bom": true,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\history\\countries\\KOR - Korea.txt",
+      "source_commit": "b5308a027385cc021243a443ff49b728707e081e",
+      "role": "exact active compatibility predecessor"
+    },
+    "localisation/english/HoK_start_game_setup_l_english.yml": {
+      "snapshot": "compat_before/localisation/english/HoK_start_game_setup_l_english.yml",
+      "sha256": "24151BC2945510620F32C7044A5FE72A4D3264CCD2EC7DF9760B10960E3AD613",
+      "size": 5101,
+      "crlf": 0,
+      "bare_lf": 60,
+      "bom": true,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\localisation\\english\\HoK_start_game_setup_l_english.yml",
+      "source_commit": "b5308a027385cc021243a443ff49b728707e081e",
+      "role": "exact active compatibility predecessor"
+    },
+    "localisation/korean/HoK_start_game_setup_l_korean.yml": {
+      "snapshot": "compat_before/localisation/korean/HoK_start_game_setup_l_korean.yml",
+      "sha256": "63A438DEC315C5D46A761BB32A4FF9015937E655FE4DF5E45BD045B65DBA319D",
+      "size": 5819,
+      "crlf": 0,
+      "bare_lf": 60,
+      "bom": true,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\localisation\\korean\\HoK_start_game_setup_l_korean.yml",
+      "source_commit": "b5308a027385cc021243a443ff49b728707e081e",
+      "role": "exact active compatibility predecessor"
+    }
+  },
+  "documents": {
+    "docs/HOK_KOREAN_COMMANDER_UNLOCK_TRANSFER_PLAN.md": {
+      "snapshot": "documents/docs/HOK_KOREAN_COMMANDER_UNLOCK_TRANSFER_PLAN.md",
+      "sha256": "A84F6153518B2CA8BB08FA51CD8F91A3FABCEE2CEFA40F54172681277C8A52E0",
+      "size": 16574,
+      "crlf": 0,
+      "bare_lf": 115,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\HOK_KOREAN_COMMANDER_UNLOCK_TRANSFER_PLAN.md",
+      "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+      "role": "donor specification and donor-only runtime evidence; not compatibility verification"
+    },
+    "docs/HOK_KOREAN_SECOND_WAVE_PLAN.md": {
+      "snapshot": "documents/docs/HOK_KOREAN_SECOND_WAVE_PLAN.md",
+      "sha256": "360C44B815D1B89424F4A802B98A2C7EFB21EF06011FD07B191E999D06E8785B",
+      "size": 49048,
+      "crlf": 181,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\HOK_KOREAN_SECOND_WAVE_PLAN.md",
+      "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+      "role": "donor specification and donor-only runtime evidence; not compatibility verification"
+    },
+    "docs/incidents/2026-11-14-korean-commander-unlock-transfer.md": {
+      "snapshot": "documents/docs/incidents/2026-11-14-korean-commander-unlock-transfer.md",
+      "sha256": "CDCF5942E80942160498799CC3CFA2747914CAE15D7D470FB24F3622E1528A29",
+      "size": 50233,
+      "crlf": 0,
+      "bare_lf": 334,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\incidents\\2026-11-14-korean-commander-unlock-transfer.md",
+      "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+      "role": "donor specification and donor-only runtime evidence; not compatibility verification"
+    }
+  },
+  "references": {
+    "RT56/descriptor.mod": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\descriptor.mod",
+      "role": "read-only current host/schema reference",
+      "sha256": "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61",
+      "size": 299,
+      "crlf": 0,
+      "bare_lf": 16,
+      "bom": false
+    },
+    "RT56/common/characters/KOR.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\common\\characters\\KOR.txt",
+      "role": "read-only current host/schema reference",
+      "sha256": "979185140DA5A9CA57AC8399A47DA5EBFA9157C9FD2F2AACBD51E7E4E8C078CA",
+      "size": 18489,
+      "crlf": 963,
+      "bare_lf": 0,
+      "bom": false
+    },
+    "RT56/common/national_focus/korea.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\common\\national_focus\\korea.txt",
+      "role": "read-only current host/schema reference",
+      "sha256": "A80FBC767C21902FC56EBBCA35DC3C120700E527B52EA98F3CFDF5221EB0EF90",
+      "size": 79471,
+      "crlf": 3827,
+      "bare_lf": 0,
+      "bom": false
+    },
+    "VANILLA/launcher-settings.json": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\launcher-settings.json",
+      "role": "read-only current host/schema reference",
+      "sha256": "1DC5D1A666B8843268449376B2D6D7A2F70045086C4C02BABD5974847CE133D4",
+      "size": 1462,
+      "crlf": 0,
+      "bare_lf": 49,
+      "bom": false
+    },
+    "VANILLA/documentation/triggers_documentation.md": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\documentation\\triggers_documentation.md",
+      "role": "read-only current host/schema reference",
+      "sha256": "7D27ED77DADAF3A213A4B3E2C624BF9C02DAE495317ABE8EEE833B27C2D1DE29",
+      "size": 180523,
+      "crlf": 0,
+      "bare_lf": 7713,
+      "bom": false
+    },
+    "VANILLA/documentation/effects_documentation.md": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\documentation\\effects_documentation.md",
+      "role": "read-only current host/schema reference",
+      "sha256": "2CDC93D26775990468EED167442F7A416B13059FB8FE07D139B54250B79209AF",
+      "size": 222533,
+      "crlf": 0,
+      "bare_lf": 8603,
+      "bom": false
+    },
+    "VANILLA/common/characters/BEL.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\characters\\BEL.txt",
+      "role": "read-only current host/schema reference",
+      "sha256": "ECBDA6CD204D0A9227C2CFC83B64B078760247EF7585AEC394A98EB825BA5867",
+      "size": 36422,
+      "crlf": 0,
+      "bare_lf": 2097,
+      "bom": false
+    },
+    "VANILLA/common/characters/SPR.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\characters\\SPR.txt",
+      "role": "read-only current host/schema reference",
+      "sha256": "8734CBED277CA8369D646720618530EEDC2E4C06C5C866725E6744944606C6E5",
+      "size": 90720,
+      "crlf": 0,
+      "bare_lf": 4791,
+      "bom": false
+    },
+    "VANILLA/common/national_focus/belgium.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\national_focus\\belgium.txt",
+      "role": "read-only current host/schema reference",
+      "sha256": "AE4EA735A2CBC02AF70A82D1E39B06CBE90E01A9D521938F332497F36B0B5D5B",
+      "size": 169621,
+      "crlf": 0,
+      "bare_lf": 8789,
+      "bom": false
+    }
+  },
+  "evidence_root": "C:\\hoi\\test\\20261114-commander-unlock-port",
+  "source_kind": "clean donor checkout and immutable ancestor Git blobs",
+  "workshop_manifest": "1963361040482473746",
+  "game_version": "Operation Postern v1.19.5.0.7c6c (c184)"
+}

@@ -288,3 +288,9 @@ docs/upstream/hok-scientist-name-exclusions-20261112/** -text
 #20261112_kpopmodder: Preserve operative source bytes and the actual CRLF portrait registry across checkouts.
 docs/upstream/hok-operative-portraits-20261112/** -text
 interface/HOK_KOR_operative_portraits.gfx text eol=crlf
+
+#20261114_kpopmodder: Preserve commander source capsules and deterministic unlock outputs across checkouts.
+docs/upstream/hok-commander-unlock-20261114/** -text
+tools/hok_commander_unlock_lock.json text eol=lf
+tools/upstream_commanders.py text eol=lf
+common/characters/KOR.txt text eol=crlf

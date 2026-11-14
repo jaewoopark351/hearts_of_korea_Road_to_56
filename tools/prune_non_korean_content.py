@@ -572,6 +572,9 @@ def main() -> int:
     args = parser.parse_args()
 
     generated = outputs()
+    #20261114_kpopmodder: Protect the exact paired setup descriptions before an inherited pruning writer runs.
+    from upstream_commanders import preflight_outputs as commander_preflight
+    commander_preflight(generated)
     #20261112_kpopmodder: Protect the terminal city-news revision before the historical pruning writer runs.
     from upstream_capture_news import preflight_outputs as capture_preflight
     capture_preflight(generated)

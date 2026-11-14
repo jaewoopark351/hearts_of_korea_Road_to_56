@@ -362,6 +362,11 @@ def main() -> int:
                 defense_record=defense_lock()['outputs'].get(name)
                 if defense_record and defense_record['previous_sha256']:
                     allowed.add(defense_record['previous_sha256'])
+                #20261114_kpopmodder: Advance only the exact commander predecessor protected by industry preflight.
+                from upstream_commanders import lock as commander_lock
+                commander_record=commander_lock()['outputs'].get(name)
+                if commander_record:
+                    allowed.add(commander_record['previous_sha256'])
                 if current is not None and sha(current) not in allowed:
                     raise ValueError(f'refusing independently modified output: {name}')
                 pending.append((path,data))

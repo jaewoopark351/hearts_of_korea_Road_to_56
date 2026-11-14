@@ -280,6 +280,11 @@ def main() -> int:
             #20261108_kpopmodder: Retain fail-closed protection while accepting a specifically recorded prior generated revision.
             record=lock()['outputs'][relative]
             accepted={record.get('previous_sha256'),*record.get('accepted_previous_outputs',[])}
+            #20261114_kpopmodder: Admit only the verified immediate commander predecessor after the common preflight.
+            from upstream_commanders import lock as commander_lock
+            commander_record=commander_lock()['outputs'].get(relative)
+            if commander_record:
+                accepted.add(commander_record['previous_sha256'])
             if (sha(current) if current is not None else None) not in accepted:
                 raise ValueError(f'refusing independently changed runtime: {relative}')
             pending.append((path,data))

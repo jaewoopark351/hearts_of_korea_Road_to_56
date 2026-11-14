@@ -492,6 +492,10 @@ def preflight(outputs: dict[Path, bytes]) -> None:
     from upstream_industry_update import lock as industry_lock, preflight_outputs as industry_preflight
     industry_preflight(outputs)
     industry_outputs = industry_lock()["outputs"]
+    #20261114_kpopmodder: Admit only the exact commander predecessor after its independent raw-output guard.
+    from upstream_commanders import lock as commander_lock, preflight_outputs as commander_preflight
+    commander_preflight(outputs)
+    commander_outputs = commander_lock()["outputs"]
     errors = []
     for relative, expected in outputs.items():
         destination = (REPO_ROOT / relative).resolve()
@@ -519,6 +523,9 @@ def preflight(outputs: dict[Path, bytes]) -> None:
         defense_record = defense_lock()['outputs'].get(relative.as_posix())
         if defense_record and defense_record['previous_sha256']:
             accepted_hashes.add(defense_record['previous_sha256'])
+        commander_record = commander_outputs.get(relative.as_posix())
+        if commander_record:
+            accepted_hashes.add(commander_record["previous_sha256"])
         #20261107_kpopmodder: Permit only the frozen immediate pre-split output as the new overlay's source.
         from korean_state_split import lock as state_split_lock
         split_record = state_split_lock().get("outputs", {}).get(relative.as_posix(), {})

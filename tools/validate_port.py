@@ -18,6 +18,8 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_COMPAT_REMOTE_FILE_ID = "3796816200"
 
 GENERATOR_CHECKS = (
+    #20261114_kpopmodder: Check raw commander unlocks and legacy guards before any historical projection.
+    ("Korean commander focus unlocks", "upstream_commanders.py", "--check"),
     #20261112_kpopmodder: Check the raw Korean recruitment portraits and random-name pool before historical projection.
     ("Korean recruitment portraits and random names", "upstream_scientists.py", "--check"),
     #20261112_kpopmodder: Verify the raw RT56 city-news targets before projecting their historical ancestor.

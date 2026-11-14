@@ -88,6 +88,9 @@ def build_outputs() -> dict[str, bytes]:
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
     """Reverse only the registered final bytes; unrelated/unknown bytes stay raw."""
+    #20261114_kpopmodder: Prove the exact commander delta before enforcing every unchanged historical pin.
+    from upstream_commanders import historical_bytes as commander_historical
+    data = commander_historical(relative, data)
     #20261112_kpopmodder: Prove the Korean recruitment portraits and name exclusions before checking their historical inputs.
     from upstream_scientists import historical_bytes as scientist_historical
     data = scientist_historical(relative, data)
@@ -115,6 +118,9 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 
 
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
+    #20261114_kpopmodder: Restore the verified predecessor for older owners and reapply commander unlocks last.
+    from upstream_commanders import finalize_one as commander_finalize, historical_bytes as commander_historical
+    data = commander_historical(relative, data)
     #20261112_kpopmodder: Keep the reviewed Korean recruitment portraits and name exclusions terminal for inherited writers.
     from upstream_scientists import finalize_one as scientist_finalize, historical_bytes as scientist_historical
     data = scientist_historical(relative, data)
@@ -128,11 +134,11 @@ def finalize_one(relative: str | Path, data: bytes) -> bytes:
     data = terminology_historical(relative, data)
     name = canonical_name(relative)
     if not LOCK_PATH.is_file() or name not in PATHS:
-        return scientist_finalize(relative, capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, data))))
+        return commander_finalize(relative, scientist_finalize(relative, capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, data)))))
     record = lock()['outputs'][name]
     if sha(data) not in (record['previous_sha256'], record['sha256']):
         raise ValueError(f'unreviewed follow-up predecessor: {name}')
-    return scientist_finalize(relative, capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, build_outputs()[name]))))
+    return commander_finalize(relative, scientist_finalize(relative, capture_finalize(relative, industry_finalize(relative, terminology_finalize(relative, build_outputs()[name])))))
 
 
 def finalize_outputs(outputs: dict) -> dict:
@@ -140,6 +146,9 @@ def finalize_outputs(outputs: dict) -> dict:
 
 
 def preflight_outputs(outputs: dict) -> None:
+    #20261114_kpopmodder: Refuse unregistered commander outputs or independent edits before inherited writers.
+    from upstream_commanders import preflight_outputs as commander_preflight
+    commander_preflight(outputs)
     #20261112_kpopmodder: Reject independent edits to the reviewed recruitment portraits and name outputs before inherited writes.
     from upstream_scientists import preflight_outputs as scientist_preflight
     scientist_preflight(outputs)

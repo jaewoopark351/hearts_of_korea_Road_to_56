@@ -226,6 +226,9 @@ def build_outputs() -> dict[str, bytes]:
 
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
+    #20261114_kpopmodder: Verify the later commander delta before unchanged bilateral and industry ancestry.
+    from upstream_commanders import historical_bytes as commander_historical
+    data = commander_historical(relative, data)
     name = canonical_name(relative)
     if name in OLD and sha(data) == lock()['outputs'][name]['sha256']:
         if data != build_outputs()[name]: raise ValueError(f'US defence final proof failed: {name}')
@@ -234,12 +237,15 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 
 
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
+    #20261114_kpopmodder: Retain the commander delta when this owner is invoked after older finalizers.
+    from upstream_commanders import finalize_one as commander_finalize, historical_bytes as commander_historical
+    data = commander_historical(relative, data)
     name = canonical_name(relative)
-    if name not in PATHS: return data
+    if name not in PATHS: return commander_finalize(relative, data)
     record = lock()['outputs'][name]
     if sha(data) not in {record['sha256'], record.get('previous_sha256')}:
         raise ValueError(f'unreviewed US defence predecessor: {name}')
-    return build_outputs()[name]
+    return commander_finalize(relative, build_outputs()[name])
 
 
 def finalize_outputs(outputs: dict, *, owner: str) -> dict:
@@ -252,23 +258,28 @@ def finalize_outputs(outputs: dict, *, owner: str) -> dict:
 
 
 def preflight_outputs(outputs: dict) -> None:
+    #20261114_kpopmodder: Protect raw commander outputs while validating exact bilateral predecessor bytes.
+    from upstream_commanders import preflight_outputs as commander_preflight, historical_bytes as commander_historical
+    commander_preflight(outputs)
     seen = set()
     for relative, data in outputs.items():
         name = canonical_name(relative)
         if name not in PATHS: continue
         if name in seen: raise ValueError(f'duplicate US defence output: {name}')
         seen.add(name)
-        if data != build_outputs()[name]: raise ValueError(f'unregistered proposed US defence bytes: {name}')
+        if commander_historical(name, data) != build_outputs()[name]: raise ValueError(f'unregistered proposed US defence bytes: {name}')
         path, record = ROOT / name, lock()['outputs'][name]
-        if path.exists() and (not path.is_file() or sha(path.read_bytes()) not in
+        if path.exists() and (not path.is_file() or sha(commander_historical(name, path.read_bytes())) not in
                              {record['sha256'], record.get('previous_sha256')}):
             raise ValueError(f'independently changed US defence runtime: {name}')
         if name in OLD and not path.is_file(): raise ValueError(f'missing US defence predecessor: {name}')
 
 
 def ledger_bytes(previous: bytes) -> bytes:
+    #20261114_kpopmodder: Preserve the bilateral ledger pin beneath the proven later commander focus tooltip.
+    from upstream_commanders import historical_bytes as commander_historical
     outputs, config = build_outputs(), lock()
-    if any((ROOT / name).read_bytes() != data for name, data in outputs.items()):
+    if any(commander_historical(name, (ROOT / name).read_bytes()) != data for name, data in outputs.items()):
         raise ValueError('US defence ledger/runtime mismatch')
     reader = csv.DictReader(io.StringIO(previous.decode('utf-8'), newline=''))
     fields = reader.fieldnames
@@ -328,7 +339,9 @@ def main() -> int:
     mode.add_argument('--apply', action='store_true')
     args = parser.parse_args()
     try:
-        outputs = build_outputs()
+        #20261114_kpopmodder: Check and apply current commander tooltips even through the bilateral CLI.
+        from upstream_commanders import finalize_one as commander_finalize
+        outputs = {name:commander_finalize(name, data) for name,data in build_outputs().items()}
         preflight_outputs(outputs)
         pending = [(ROOT / name, data) for name, data in outputs.items() if not (ROOT / name).is_file() or (ROOT / name).read_bytes() != data]
         if pending and not args.apply: raise ValueError('US defence runtime mismatches: ' + ', '.join(str(p) for p,_ in pending))

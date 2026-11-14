@@ -6,6 +6,8 @@
 
 ## 현재 상태
 
+- 2026-11-14 원본 `0c19f58`의 한국 지휘관 해금 이관을 **runtime5파일에 선택 반영**했다. 홍범도·김좌진·안중근은 새 게임에서 「다음 전쟁의 준비」 완료로 해금하며, 표식 도입 전 일반 국뽕 저장의 사용을 유지하는 원본 조건과 한영 안내를 함께 가져왔다. 기존 능력·역할·모집·중점 보상·다른 국뽕 효과와 RT56 소유권을 보존한다. 독립 소스138/0·소유 계약76/0·격리 writer 전환9/9, 원장1,577행 중5행만 갱신했다. 전체 정적은 현재 게임1.19.5/번역 등의 기준 차이로 **수정 전8 PASS·0 WARNING·85 ERROR → 수정 후9 PASS·0 WARNING·같은 원인85 ERROR**, 신규 원인0이다. 이 계층의 검토·수정·재생성·검증 전 [구현·소유권·실제 확인 상태](implementation/2026-11-14-korean-commander-unlock-port.md)와 [선택 입력 안내](upstream/hok-commander-unlock-20261114/README.md)를 읽는다. 실제 RT56 UI·지휘·저장은 미검증이며 기존 지도 이관의 새 게임 전용 경계도 유지한다.
+
 - 2026-11-12 최신 원본 첩보원 업데이트를 선택 반영했다. **독립 72/0·전환 계약 46/0·생성 경로 33/0, 전체 정적 전후 26 PASS·0 WARNING·같은 기존 16 ERROR, 신규 오류 0개다.** 현재 복장·배경 revision의 남녀 전용 그림8개와 KOR 목록·GFX를 가져와 기존 이름·과학자 소유 계층을 11→20출력으로 확장했다. 검은 중절모·정장·코트와 불투명 회색 배경을 채택하고 기존 로마자 이름56/11/14·고정 인물·RT56 외국 현지 모집을 보존한다. source10·문서5·선조1개를 동결했으며 관련 조건부 읽기와 HOK 소유 콘텐츠의 역사적 이름 지침을 적응한다. 해당 계층의 검토·수정·재생성·검증 전 [구현·범위·실제 확인 상태](implementation/2026-11-12-korean-operative-portrait-port.md)와 [선택 입력 안내](upstream/hok-operative-portraits-20261112/README.md)를 읽는다. 실제 RT56 모집·UI·저장은 미검증이다.
 
 - 2026-11-12 한국 신규 과학자·이름 업데이트는 남녀 초상화 각4장과 이름 후보 제외를 기존 2개·신규 9개에 반영했다. **독립 72/0·전환 계약 36/0·생성 경로 19/0, 전체 정적 26 PASS·0 WARNING·기존 16 ERROR이며 신규 오류는 0개다.** 초기 `Geunhye`1개 제외 구현 중 확인한 donor의 추가20개 제외를 새 capsule에 동결해 최종 로마자 남성56·여성11·성14개를 채택했다. 초기 source11개·문서6개와 후속 이름1개·문서2개, 두 시점의 원본 이력·source pins를 함께 보존한다. 해당 계층의 검토·수정·재생성·검증 전 [구현·범위·실제 확인 상태](implementation/2026-11-12-korean-scientist-update-port.md), [초기 선택 입력](upstream/hok-scientist-update-20261112/README.md), [최신 이름 제외 입력](upstream/hok-scientist-name-exclusions-20261112/README.md)을 읽는다. 실제 RT56 모집·UI·저장은 미검증이다.
@@ -54,6 +56,7 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 구현·선택 입력 | [한국 지휘관 중점 해금](implementation/2026-11-14-korean-commander-unlock-port.md) / [원본·선조·참조](upstream/hok-commander-unlock-20261114/README.md) | 해당 조건·표식·툴팁·시작 안내의 검토·수정·재생성·검증 전 읽음. 최신5출력·기존 저장 분기·생성 소유권과 소스/실제 실행 결과 구분 |
 | 검토 절차 | [변경 영향·누락 방지와 지침 출처](HOK_CHANGE_COVERAGE_REVIEW.md) | 현지화·주 참조 검토/변경 전 읽음. 호환판 한영 정책·RT56 지도 기준·사용처별 처리·검증 단계 구분 |
 | 계획·구현 | [한국 연구·장비 이름 한영 수선](plans/2026-11-10-korean-equipment-localisation-repair-plan.md) / [현재 구현·확인 기록](implementation/2026-11-10-korean-equipment-localisation-repair.md) | 해당 계층 수정·재생성·검증 전 읽음. 최초 문서 전용·v1–v5 실패 이력과 v6 병합+의존성의 실제 정적/UI/복구 결과를 구분 |
 | 수선 계획·후속 구현 | [현지화·주 참조 검토 후속](plans/2026-11-09-localisation-state-review-followup-plan.md) / [수선·UI 차단·실제 복구 checkpoint](implementation/2026-11-09-review-followup-repairs.md) | 구현·재생성·검증/재개 전 읽음. 네 출력·정적25/0/11·저장 충돌 이력·BASE raw16/0·미검증 UI/효과·프로필 복구 완료와 OSK 창 잔존 구분 |
