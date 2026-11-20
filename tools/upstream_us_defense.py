@@ -254,7 +254,9 @@ def finalize_outputs(outputs: dict, *, owner: str) -> dict:
     if owner == 'focus':
         for name in sorted(PATHS - OLD):
             if not any(canonical_name(p) == name for p in result): result[Path(name) if path_keys else name] = build_outputs()[name]
-    return result
+    #20261120_kpopmodder: Add only the reviewed democratic assets and definitions to the Korean focus owner.
+    from upstream_democratic_support import finalize_outputs as democratic_finalize_outputs
+    return democratic_finalize_outputs(result, owner=owner)
 
 
 def preflight_outputs(outputs: dict) -> None:

@@ -1,0 +1,8 @@
+﻿l_english:
+#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
+#20261119_kpopmodder: Align the intelligence-service description with its shared military entry.
+#20261118_kpopmodder: Localise the Korean intelligence focus and permanent service without importing Britain's MI6 identity.
+ HOK_KOR_expand_secret_intelligence_service:0 "Expand the Secret Intelligence Service"
+ HOK_KOR_expand_secret_intelligence_service_desc:0 "Diplomatic reports and newspaper articles alone cannot tell us everything about events in Asia. We need contacts who understand local conditions and specialist departments for codebreaking, signals interception and covert operations. Our government will bring these scattered intelligence activities together in a secret intelligence service, identifying threats beyond our borders before they reach us and maintaining reliable networks overseas."
+ HOK_KOR_secret_intelligence_service_idea:0 "Secret Intelligence Service"
+ HOK_KOR_secret_intelligence_service_idea_desc:0 "Reports from overseas missions and local contacts pass through the desks of translators and analysts before informing the government's decisions. The Secret Intelligence Service brings together communications and cryptographic specialists, operatives who know local conditions, and the networks that carry their supplies. Dangerous operations can now be prepared more carefully, while reliable contact is maintained with those abroad who share our aims."

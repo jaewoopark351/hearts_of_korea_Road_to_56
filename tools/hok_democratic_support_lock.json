@@ -1,0 +1,736 @@
+{
+  "format": 1,
+  "revision": "2026-11-20-democratic-support-v1",
+  "base_commit": "9a01955785bcdd827c9c85522537a0bfc57ed654",
+  "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+  "ancestor_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+  "workshop_manifest": "1963361040482473746",
+  "game_version": "Operation Postern v1.20.0.0.8873 (0c4f)",
+  "rt56_root": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968",
+  "vanilla_root": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV",
+  "source_manifest_sha256": "7231250FD522A790C9D692CC710BF298314C0FD1C7C304188824E6B1625F46AC",
+  "mapping_sha256": "2672A5C295B2010D95B20013C69FB723DF474245CC0156A59DDA4A4EEED1480A",
+  "translation_sha256": "07EC0ACC5E688ACD861254F1A1F2DF32B3C7FF88B81E350DA5A1B70EAD39EF05",
+  "references": {
+    "VANILLA/common/autonomous_states/dominion.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\autonomous_states\\dominion.txt",
+      "sha256": "E55F4033C1BBD536538FB95BE6AC0A4F3DA12E78C74094A2E1B355E8FD1192E3",
+      "size": 3988
+    },
+    "VANILLA/common/country_tags/00_countries.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\country_tags\\00_countries.txt",
+      "sha256": "B3777A74B44BFB1B082817B2A1E9676F0C8CDA45A0CBEA75E55E2B703F3B73B6",
+      "size": 12401
+    },
+    "VANILLA/common/defines/00_defines.lua": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\common\\defines\\00_defines.lua",
+      "sha256": "E3429B0A5BCC0CC429CBA347D110ABE7D52CCF37E1923C97E7FD369564A0E4D8",
+      "size": 407960
+    },
+    "VANILLA/documentation/effects_documentation.md": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\documentation\\effects_documentation.md",
+      "sha256": "94D55FFB68041ABBB634366FBB39C542ADFD9F6BA03178084A4C90E490C77029",
+      "size": 222879
+    },
+    "VANILLA/documentation/triggers_documentation.md": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\documentation\\triggers_documentation.md",
+      "sha256": "A18EF0BEABE99ECF97B07E8BC38BC731E31716D42E0BB43F9C5EE94F13BF03E0",
+      "size": 182362
+    },
+    "VANILLA/launcher-settings.json": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV\\launcher-settings.json",
+      "sha256": "EB170C96258F972C27A1D1848D2A807ACBA3D2D0EC70BC6BA3E6966D2BB92C88",
+      "size": 1462
+    },
+    "RT56/common/autonomous_states/dominion.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\common\\autonomous_states\\dominion.txt",
+      "sha256": "490933E2B92238320548EACB165AF794919EE4319E41DA8132B8FB80D0902F71",
+      "size": 2418
+    },
+    "RT56/descriptor.mod": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\descriptor.mod",
+      "sha256": "5B323861ABD63E31CB896277E3EA58BA4BCD9FCEEDA957B50792065E42E03F61",
+      "size": 299
+    },
+    "RT56/history/countries/CHI - China.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\CHI - China.txt",
+      "sha256": "9A8A5214CB065122B2B9EE867AE526B0397CB2602024D6F952CEE8C35A0C7384",
+      "size": 28018
+    },
+    "RT56/history/countries/GDC - Guangdong.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\GDC - Guangdong.txt",
+      "sha256": "88A0AE24FB18F73A662EA192FBF1586531B97B45825D29402A24685654332740",
+      "size": 6086
+    },
+    "RT56/history/countries/GSM - Gansu Ma.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\GSM - Gansu Ma.txt",
+      "sha256": "F832619AE1B017946F8E37B78B057B8F2EDFAAD5254FD64DD9342EF503F36C2D",
+      "size": 2118
+    },
+    "RT56/history/countries/GXC - Guangxi.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\GXC - Guangxi.txt",
+      "sha256": "1983441F8E8DF3544F8576C08CACC9F242FB18BBA114262443574CEAB11C5D60",
+      "size": 4334
+    },
+    "RT56/history/countries/KHM - Khotan Ma.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\KHM - Khotan Ma.txt",
+      "sha256": "4B164198E357082D3E081495059E796ECC1DE07B7B961655CF3498CC2AFB5208",
+      "size": 3476
+    },
+    "RT56/history/countries/KUM - Kumul Khanate.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\KUM - Kumul Khanate.txt",
+      "sha256": "ADC7DC04EDB9D1978BBB331F6CDFF98CAB1A1422991A6DB64A487CA68134DCE7",
+      "size": 1704
+    },
+    "RT56/history/countries/NXM - Ningxia Ma.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\NXM - Ningxia Ma.txt",
+      "sha256": "275EAAA38217E90FEE34152F7373506445A31F71FCFDC4211904A24CC4A49919",
+      "size": 2022
+    },
+    "RT56/history/countries/PRC - ComChina.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\PRC - ComChina.txt",
+      "sha256": "4D0006C67987EAB6EB0B1C9ABE43E08CEE2E11E2ABDBF18A6CFE0744F05A612D",
+      "size": 11795
+    },
+    "RT56/history/countries/SHX - Shanxi.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\SHX - Shanxi.txt",
+      "sha256": "75062BF7BD8485C7202C574A03D9669DDFE422FB6288914B49DF9EF1F9466371",
+      "size": 2537
+    },
+    "RT56/history/countries/SIC - Sichuan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\SIC - Sichuan.txt",
+      "sha256": "5176D9866937763D7724D37BF1905ABC8283A49CCCEEB018D70EF208F31F0C09",
+      "size": 4190
+    },
+    "RT56/history/countries/SIK - Sinkiang.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\SIK - Sinkiang.txt",
+      "sha256": "1EB5E76D15F72D139D680373354E983EA6FF7681312F838AC79438764FB59190",
+      "size": 3397
+    },
+    "RT56/history/countries/SND - Shandong.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\SND - Shandong.txt",
+      "sha256": "BCD8353C9AB781A3958897F4A9319B6437BE4FDDC32BA6EA83AA6F641092A0EA",
+      "size": 3204
+    },
+    "RT56/history/countries/XIC - Xi'An.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\XIC - Xi'An.txt",
+      "sha256": "FB06720EB8BBE20570DAF21989ABD51DF761D99D80E723BAF51A077E0E24C0F7",
+      "size": 3533
+    },
+    "RT56/history/countries/XSM - Xibei San Ma.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\XSM - Xibei San Ma.txt",
+      "sha256": "65CCF1C812EC06ABD59E6561B4CE6FF6948471F93000D576941A29F544DD6321",
+      "size": 3827
+    },
+    "RT56/history/countries/YUN - Yunnan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\countries\\YUN - Yunnan.txt",
+      "sha256": "6E5B05F12AAFDD52291AAB9FFFFC44C2D75E27F76CC880E2590E7F2B6EA0AC77",
+      "size": 2794
+    },
+    "RT56/history/states/1075-Gyarong.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1075-Gyarong.txt",
+      "sha256": "B22EBAD70A6306433A0E73D8842EE4950C7BC0A2847A86D627931E7A01B9D0CF",
+      "size": 310
+    },
+    "RT56/history/states/1111-Yanan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1111-Yanan.txt",
+      "sha256": "684D71007D5A771544A27FE3BC2DBF9BDBD8F78A94C26E4A19763AE65C12998F",
+      "size": 620
+    },
+    "RT56/history/states/1112-Fangchenggang.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1112-Fangchenggang.txt",
+      "sha256": "E86D5054E10429E0FF395E14DE4AF4DAAC764EFC72DDA2693302327599FAAC9F",
+      "size": 972
+    },
+    "RT56/history/states/1113-Suzhou.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1113-Suzhou.txt",
+      "sha256": "CC5AED2C50148A9D97AB85C2A67A2D5EBA4395939211FD5F4AEB836E115C8A54",
+      "size": 581
+    },
+    "RT56/history/states/1114-Nanjing.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1114-Nanjing.txt",
+      "sha256": "2029B97714CAD4B3613DB1DFE3753D78065FAB1D8B355733863A6C4385007111",
+      "size": 848
+    },
+    "RT56/history/states/1115-Wuhan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1115-Wuhan.txt",
+      "sha256": "E98BF252B36CAA1E199AFAFC2815EB4657AF4C9024ED02A9D9B1471C859005C5",
+      "size": 1047
+    },
+    "RT56/history/states/1116-Chongqing.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1116-Chongqing.txt",
+      "sha256": "5316FBCD1DE19D058D007364934D8B0491CCF8F37F6E29C4444328307A0731CF",
+      "size": 980
+    },
+    "RT56/history/states/1117-Jinan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1117-Jinan.txt",
+      "sha256": "AD6532B4801B9B356B13E115EED22152412645C202E0BEDCB6A0356A325CE340",
+      "size": 1044
+    },
+    "RT56/history/states/1118-Hebei-Chahar.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1118-Hebei-Chahar.txt",
+      "sha256": "13531D200EEA948DFFFD991BB65B4EB525149877962A01ED6EF5F68ADFE561B3",
+      "size": 876
+    },
+    "RT56/history/states/1119-Alxa.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1119-Alxa.txt",
+      "sha256": "4641F2872A55C3BC7F9C3424DDDC19D1DDEAAED2312CAF12BCDD99AB0118A862",
+      "size": 645
+    },
+    "RT56/history/states/1120-Chengdu.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1120-Chengdu.txt",
+      "sha256": "1F54D6EE535E0E3E8AF56A69A3D602A8C75C34677CEE5B94AE7E2E2103920C5A",
+      "size": 1037
+    },
+    "RT56/history/states/1121-Khotan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1121-Khotan.txt",
+      "sha256": "2092034052A286208D6E6EA826F56960C09D8F99D2B3BE6972ADAB056615B2CD",
+      "size": 763
+    },
+    "RT56/history/states/1122-Pailingmiao.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1122-Pailingmiao.txt",
+      "sha256": "E1448C45BA36C1713EB4A89489729CA34CA89254B76317FA73EFD5776E6568FD",
+      "size": 552
+    },
+    "RT56/history/states/1123-Wuwei.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1123-Wuwei.txt",
+      "sha256": "CB9E5D0FA68335010F19866532B4F200A3F3F3DE0BBF13C61AE482218FB521E2",
+      "size": 660
+    },
+    "RT56/history/states/1124-Guyuan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1124-Guyuan.txt",
+      "sha256": "458A4D991A0063E9C14DF6090C7E96F19DE7A8FA61DF1AB4146935BF3D2DE59B",
+      "size": 704
+    },
+    "RT56/history/states/1125-Yulin.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\1125-Yulin.txt",
+      "sha256": "DD2A43AB6C2643844AA02F84CF3D2C522831F2F725F61B42B36E463526111578",
+      "size": 451
+    },
+    "RT56/history/states/283-China.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\283-China.txt",
+      "sha256": "38F04DF33778C473720DE0A8D8E66E5B56C9F4113004CC73DE413107E2CA4D0F",
+      "size": 822
+    },
+    "RT56/history/states/287-Sinkiang.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\287-Sinkiang.txt",
+      "sha256": "A4AF58F62E6631890AE37B67A1BF92A956F830D69493B1858227A125989B2667",
+      "size": 378
+    },
+    "RT56/history/states/325-Yunnan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\325-Yunnan.txt",
+      "sha256": "05B74524B55C88CFEF3AFEA1EE948A61638DD3DD3FB8E4435025F845849A3455",
+      "size": 890
+    },
+    "RT56/history/states/326-HongKong.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\326-HongKong.txt",
+      "sha256": "6246EABA8861F4D31E6569764E5CB70F9FCA2DF9C14ECEE834AB10B108761C00",
+      "size": 445
+    },
+    "RT56/history/states/328-Manchukuo.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\328-Manchukuo.txt",
+      "sha256": "046F0C560A4113FE4ECEBE7AF555223B30D6768721B63A59C4C1F1837481CBDC",
+      "size": 648
+    },
+    "RT56/history/states/524-Taiwan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\524-Taiwan.txt",
+      "sha256": "5DE1171F8843E1DD739737D29047F0B30C037FE7AEECB4FA2EA7A70E4C85305A",
+      "size": 680
+    },
+    "RT56/history/states/591-Hainan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\591-Hainan.txt",
+      "sha256": "7163D02B0F2210C43B9F316AF807DA660CED6A1D58D3552D7D6015D7352E9F93",
+      "size": 872
+    },
+    "RT56/history/states/592-Guangzhou.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\592-Guangzhou.txt",
+      "sha256": "28B6E0C96ED4E1680D20B3B7AC9B24E71E1CBEFE2708CFFBFFDD05C26CE6EE13",
+      "size": 1245
+    },
+    "RT56/history/states/593-Guangdong.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\593-Guangdong.txt",
+      "sha256": "C4F63A46E351EBB40A0E2C02B0A8613CA7274B15651260C8F4620F58B2526EFD",
+      "size": 1477
+    },
+    "RT56/history/states/594-Nanning.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\594-Nanning.txt",
+      "sha256": "216D02B6FF29383BD4FA32D945E13A5A932DC38235DA0199C8075004D5595F66",
+      "size": 697
+    },
+    "RT56/history/states/595-Fujian.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\595-Fujian.txt",
+      "sha256": "4A55DF1097769EBA2028BFFF4F007E127D48FFB01F1A554502682520FCA913BA",
+      "size": 868
+    },
+    "RT56/history/states/596-Zhejiang.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\596-Zhejiang.txt",
+      "sha256": "1CD60FCB198954F4C2C5CD4E3BEBCFC8103C45E83C334F22E10AE668470FBF1D",
+      "size": 1457
+    },
+    "RT56/history/states/597-Shandong.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\597-Shandong.txt",
+      "sha256": "E94D4CC32F787BC16EE1EED59FAE43901D243C42F97B10CCD8F57E1773B13170",
+      "size": 1105
+    },
+    "RT56/history/states/598-Jiansu.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\598-Jiansu.txt",
+      "sha256": "968093E2FE714D1B6D36F0F540F8759EF8F76F14773BB1981A5A18BB3B2365A5",
+      "size": 781
+    },
+    "RT56/history/states/599-Guanxi.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\599-Guanxi.txt",
+      "sha256": "A05616A907D850F69CF223599B4B0ABD1E44FB7E9998D9D3737C7C1A918A236C",
+      "size": 707
+    },
+    "RT56/history/states/600-Jiangxi.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\600-Jiangxi.txt",
+      "sha256": "F5E5DB05054EB662430E846FBB930AAFC37C6D7508B92DEFA3B092E0363BA07C",
+      "size": 1206
+    },
+    "RT56/history/states/601-China 1.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\601-China 1.txt",
+      "sha256": "E1757F314486A4B862F009AC3E157D4E7AE42BD262B98F4AB6AE735165178022",
+      "size": 601
+    },
+    "RT56/history/states/602-China 2.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\602-China 2.txt",
+      "sha256": "9311EBC0A731E59B62F7A4F5D99D538E42D84FF989C0AB8BB56481319954B20F",
+      "size": 884
+    },
+    "RT56/history/states/603-China 3.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\603-China 3.txt",
+      "sha256": "6CA3E52B0674E8915BA22BC427CD96638A620129B203871AE48B3AA3D0FDE10B",
+      "size": 676
+    },
+    "RT56/history/states/604-China 4.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\604-China 4.txt",
+      "sha256": "0E038B7E1D43A77B16DA5BBDFC7408E2C66B1FEF57D198CA488FD71608FB9992",
+      "size": 602
+    },
+    "RT56/history/states/605-China 5.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\605-China 5.txt",
+      "sha256": "E0E3054D5822B2C9C06DF0CB06901B3D546538D01626A1C88987BF79FE1D474C",
+      "size": 866
+    },
+    "RT56/history/states/606-China 6.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\606-China 6.txt",
+      "sha256": "B9BAD430EE904BC34362B7C070BC98F47E6C7AFFA656023B44B475D66F1657D4",
+      "size": 894
+    },
+    "RT56/history/states/607-China 7.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\607-China 7.txt",
+      "sha256": "32EE67F8A3EF4830696FB50A87CC293FDE7D1B1E138F6D66D696D13D14FBFADC",
+      "size": 1448
+    },
+    "RT56/history/states/608-Beijing.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\608-Beijing.txt",
+      "sha256": "C5EA93A51A6EB3FC8DCA7276AD945AC84ABB8F29A71ED9990B86BC32AD976FA2",
+      "size": 1206
+    },
+    "RT56/history/states/609-China 8.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\609-China 8.txt",
+      "sha256": "4DE1B89404CFD908D9643522CCF780A47B2029D8F105C924B8CA710BCFE8D5F4",
+      "size": 1050
+    },
+    "RT56/history/states/610-China 9.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\610-China 9.txt",
+      "sha256": "C3E4EAC51CA9353C54EA19D3D9A64050E10F8B519222D636E56F90A06FBC3336",
+      "size": 623
+    },
+    "RT56/history/states/611-China 10.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\611-China 10.txt",
+      "sha256": "D0B7735C500C403284775A59694D995CE3E37A97475A785FE733A20156C71B9B",
+      "size": 687
+    },
+    "RT56/history/states/612-China 11.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\612-China 11.txt",
+      "sha256": "BDDEE4FE412D1255427C2AD8660D49ED1E8296C178413CF314AB9E2929C783AE",
+      "size": 837
+    },
+    "RT56/history/states/613-China 12.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\613-China 12.txt",
+      "sha256": "2C4FAF0CDF6605B12109412009EBDC5EE1B2B40D38F22A140B2D2844AA948FFF",
+      "size": 841
+    },
+    "RT56/history/states/614-China 13.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\614-China 13.txt",
+      "sha256": "F58541910DD3F8E5A657E191CAECAE97D2127C4D3B718DB832F3E5E9D79A1E99",
+      "size": 767
+    },
+    "RT56/history/states/615-Shanxi.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\615-Shanxi.txt",
+      "sha256": "84C00709EB1FFA714AAF86743E4F1E76F5AD0EA7FEF40ED98EA842DC5A9B76D1",
+      "size": 744
+    },
+    "RT56/history/states/616-China 14.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\616-China 14.txt",
+      "sha256": "4DEF8096BEDD77D45F9512417F8F732678CA99BCBA3D607942851D8C3445B5AE",
+      "size": 983
+    },
+    "RT56/history/states/617-Xinjiang.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\617-Xinjiang.txt",
+      "sha256": "C4B89A1D84EAFCC8B8E2FC3A37B92687044B54E4CC31F2EEC47A65A83EA60BD6",
+      "size": 778
+    },
+    "RT56/history/states/618-China 15.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\618-China 15.txt",
+      "sha256": "52E3DA87F7CBFC11658B4535A16D14124103C99F97B5167AEEAF9481C0DCF2E1",
+      "size": 515
+    },
+    "RT56/history/states/619-China 16.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\619-China 16.txt",
+      "sha256": "6DA1A108312B3C1CD3957EA2347345FA902E92C33206558B93DCA158C0B325A2",
+      "size": 546
+    },
+    "RT56/history/states/620-China 17.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\620-China 17.txt",
+      "sha256": "AF7A149DC7DF0BCEA875A365FD38E9D2FE200886698AE0682990E50D9F608D1D",
+      "size": 936
+    },
+    "RT56/history/states/621-China 18.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\621-China 18.txt",
+      "sha256": "F2BF9E30D1417FE3679F7BD2CEAAC534D0C62E7AD6E835FBD60ADE52A0205C0A",
+      "size": 838
+    },
+    "RT56/history/states/622-China 19.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\622-China 19.txt",
+      "sha256": "C969E7CE0DAF1EEA9F7C6A4B34C8ACFD8E6C06F9B2011DA29CFB790EE762080D",
+      "size": 535
+    },
+    "RT56/history/states/714-Heilungkiang.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\714-Heilungkiang.txt",
+      "sha256": "8B3B5106D7905CD85900FE96E0EA58730D3244FD0E69CBA1483B33B609FEE492",
+      "size": 359
+    },
+    "RT56/history/states/715-Liaoning.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\715-Liaoning.txt",
+      "sha256": "36370D4CE0B756711757DB686B29247E3BB77541609B207E4591E984CD79268F",
+      "size": 596
+    },
+    "RT56/history/states/716-Liaotung.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\716-Liaotung.txt",
+      "sha256": "22227E0070197368526DFDE9966E210A06B504D22DF9809CFCBA44BF15FBFC0D",
+      "size": 812
+    },
+    "RT56/history/states/717-Chuho.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\717-Chuho.txt",
+      "sha256": "C0E36D7A29EC40FF3EE996F6F2F4CAF243F98641FD4494883E783B8FEB08C40A",
+      "size": 458
+    },
+    "RT56/history/states/728-Guangzhouwan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\728-Guangzhouwan.txt",
+      "sha256": "A77026FFCFD5A81BFF15374E18C11A8FA518A68A1CE768F19CC6971C2BD11629",
+      "size": 490
+    },
+    "RT56/history/states/729-Macau.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\729-Macau.txt",
+      "sha256": "9D6F10F3DD35312C61027DDCAB803E6B8678B5469B50BC7D3AC06D8CF1471362",
+      "size": 393
+    },
+    "RT56/history/states/743-Qingdao.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\743-Qingdao.txt",
+      "sha256": "02D8471857C5EEF667D7430BA8784E4007CA65DA511FE74C491C8786644ABE55",
+      "size": 675
+    },
+    "RT56/history/states/744-Xian.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\744-Xian.txt",
+      "sha256": "3C561D9D5688572AD4FA7D1A18626898B7682B110B53F6D40442D8BF07E0FD0C",
+      "size": 520
+    },
+    "RT56/history/states/745-Dalian.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\745-Dalian.txt",
+      "sha256": "FC117A18D0508CE7896444EB9610D4FD291E192AB32D4E97BD3B961B6A03356E",
+      "size": 588
+    },
+    "RT56/history/states/746-Ordos.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\746-Ordos.txt",
+      "sha256": "509229596972021F2BB667EB7D9DD93A0D39FE755D9FE28E2B86758E924095AD",
+      "size": 639
+    },
+    "RT56/history/states/747-Dali Bai.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\747-Dali Bai.txt",
+      "sha256": "45A23844392214E1575AD736B15EB554E3DE73A84D2328E4A0F793BFAF863F0E",
+      "size": 450
+    },
+    "RT56/history/states/748-Zunyi.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\748-Zunyi.txt",
+      "sha256": "5D0207B320395966A40BE90149320A3AB245C08F6057E60500ED51EE783247B1",
+      "size": 482
+    },
+    "RT56/history/states/749-Huangshan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\749-Huangshan.txt",
+      "sha256": "7E0F82042621775CAE6AF72CD78C64723BF07328D83A050FDF27C34400A98F30",
+      "size": 679
+    },
+    "RT56/history/states/750-Changde.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\750-Changde.txt",
+      "sha256": "3B9B9D899F2715438712EB2C6DFFBC5BE351B852A393C837D5E2EE4DBAB4D4AC",
+      "size": 649
+    },
+    "RT56/history/states/751-Liangshan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\751-Liangshan.txt",
+      "sha256": "351567F3C7E53C0FEA2B4C4C837237C40998309D920B12C0A64D039B1C34BA0C",
+      "size": 841
+    },
+    "RT56/history/states/752-Chamdo.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\752-Chamdo.txt",
+      "sha256": "2ED94AF530E5FBAE8BFC505FD75C1DBEABD8690B22FB1B56D4A7059DDB0D9625",
+      "size": 852
+    },
+    "RT56/history/states/753-Gannan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\753-Gannan.txt",
+      "sha256": "D0E4FB6A2182AB4BA5DACC90C014090F02AC5E85DD718C4364FF20C725793512",
+      "size": 675
+    },
+    "RT56/history/states/754-Golog.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\754-Golog.txt",
+      "sha256": "B34285D8B97E8D173CAA2877DF92C7CAD265CD30B2F8D3437A0A6C3CBFAB07CB",
+      "size": 567
+    },
+    "RT56/history/states/755-Haixi.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\755-Haixi.txt",
+      "sha256": "97F744F5EE8B90341583F9069732903BDA1C743BDFE2F46947A266BD837B1113",
+      "size": 510
+    },
+    "RT56/history/states/756-Jiuquan.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\756-Jiuquan.txt",
+      "sha256": "2A61CDB02A794F5A6788B70FBDA430843F1153E83360FD876C963B9B9D8B9276",
+      "size": 808
+    },
+    "RT56/history/states/759-Kunlun.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\759-Kunlun.txt",
+      "sha256": "7F73F0D47DB8E9E8AEE5BAEAC77599FC01D7742D2609F0C49D372DE2195EC4CD",
+      "size": 857
+    },
+    "RT56/history/states/760-Dabancheng.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\760-Dabancheng.txt",
+      "sha256": "6C09FB7DF26BBF762F182514EF40FAC38F7622FA887CC6309CB61C3A5F8A7EFA",
+      "size": 470
+    },
+    "RT56/history/states/761-Hulunbuir.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\761-Hulunbuir.txt",
+      "sha256": "DB15AB5D36745F029974BBC6E2E1C76557F3FE834940978FFF2265C974145826",
+      "size": 633
+    },
+    "RT56/history/states/941-Andong.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\941-Andong.txt",
+      "sha256": "8A8C80BBCF4B8BC84CDDBE053ED717662DECEFC4BFD563F280812DAAFFAD8708",
+      "size": 623
+    },
+    "RT56/history/states/942-Jiandao.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\942-Jiandao.txt",
+      "sha256": "518D44DE6ECA56DBC2CDF9D8D79E4BF6FCA24D65EC8500D19363D25E1A5316B3",
+      "size": 465
+    },
+    "RT56/history/states/943-Binjiang.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\943-Binjiang.txt",
+      "sha256": "021EAB70095A9905DA4D8E38CE08AA2D528F79477092B0D8F9962930E69524E1",
+      "size": 719
+    },
+    "RT56/history/states/944-Longjiang.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\944-Longjiang.txt",
+      "sha256": "DFA2C74B954ABC0E979B0B56019538B4D901D5304786E8C7D87703E781F5E40E",
+      "size": 633
+    },
+    "RT56/history/states/945-Heihe.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\945-Heihe.txt",
+      "sha256": "0A5E1954B5A1021CD6B4A029263AEED6AFAA5F418F35982474EBB74146FE1A0B",
+      "size": 478
+    },
+    "RT56/history/states/946-West Xing'an.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\946-West Xing'an.txt",
+      "sha256": "E6B59FE8F0D63D5E376F0B711D1774FA92A9A28B0F184CF077BCDE7DDDCB021F",
+      "size": 374
+    },
+    "RT56/history/states/947-Jinzhou.txt": {
+      "original_path": "C:\\Program Files (x86)\\Steam\\steamapps\\workshop\\content\\394360\\820260968\\history\\states\\947-Jinzhou.txt",
+      "sha256": "C3C799D6AF19BB54AFA1BA40BDC436C42DEE82A2ACCACB2012193214D7FEB5C5",
+      "size": 632
+    }
+  },
+  "outputs": {
+    "interface/HOK_KOR_democratic_support_intelligence.gfx": {
+      "classification": "ADD",
+      "sha256": "FC4FA99783FEDEAB254CB74D6DCBB4677A3166E3482117EDBC9F7E5F8E57B591",
+      "size": 1016,
+      "previous_sha256": null
+    },
+    "common/decisions/categories/HOK_KOR_democratic_support.txt": {
+      "classification": "ADD",
+      "sha256": "76D30368312BAB014F134114D9BA5D34338B3EDF5AF201C4212146A505BE7E9F",
+      "size": 421,
+      "previous_sha256": null
+    },
+    "gfx/interface/decisions/HOK_KOR/democratic_support/category.dds": {
+      "classification": "ASSET_COPY",
+      "sha256": "BAFBBC102E4DA51AB05CA9B15910DEA930DC1461994BEF4EB373A5A6381CD937",
+      "size": 8288,
+      "previous_sha256": null
+    },
+    "common/ai_strategy_plans/KOR_historical_strategy_plan.txt": {
+      "classification": "ADD",
+      "sha256": "DCDB00CBA8FBF552AA1E86DB40CD226FF31D5BD48D11829A8FA8AAF5766135A8",
+      "size": 10507,
+      "previous_sha256": "18C56A24FF5C93A944E58D71BB81AFFADC332601861D980EF243ACF028D2A3E8",
+      "previous_size": 10359,
+      "previous_snapshot": "compat_before/common/ai_strategy_plans/KOR_historical_strategy_plan.txt"
+    },
+    "history/countries/KCH - Korean China.txt": {
+      "classification": "ADD",
+      "sha256": "6DA12D896CD61ABF3118F4B1FC1A11B9921EABE5CB3464A8AEB4489CE0CD74B5",
+      "size": 3520,
+      "previous_sha256": "70121BECB2DEE233BEBB5A393C2DCBCA2982C1C8B04A090B3544E30FE5BE2DBD",
+      "previous_size": 3379,
+      "previous_snapshot": "compat_before/history/countries/KCH - Korean China.txt"
+    },
+    "common/scripted_triggers/HOK_KOR_chinese_democratic_support_triggers.txt": {
+      "classification": "ADD",
+      "sha256": "F68C3EA786FE95FA77CAE7D4A9283586874B37EEC1F4DB1790777FCAF336B316",
+      "size": 553,
+      "previous_sha256": null
+    },
+    "localisation/korean/HOK_KOR_democratic_intelligence_l_korean.yml": {
+      "classification": "ADD",
+      "sha256": "2FC119E0D90D6364D26ABE148809090D3115FBAC9196A6AAE1803218D0419FAD",
+      "size": 1462,
+      "previous_sha256": null
+    },
+    "common/ideas/HOK_KOR_democratic_intelligence.txt": {
+      "classification": "ADD",
+      "sha256": "6485BFC1FF809CBE4554C722F9BC26677D48032A95FFE456804CDF31C927B24A",
+      "size": 1169,
+      "previous_sha256": null
+    },
+    "common/scripted_triggers/HOK_KOR_chinese_government_state_triggers.txt": {
+      "classification": "ADD",
+      "sha256": "4CEFAB1FFD5FA1425B6C4E5AFFAC3D4CFBAA97ADA25725339E3439E02169DFDC",
+      "size": 3353,
+      "previous_sha256": null
+    },
+    "localisation/korean/korea_focus_l_korean.yml": {
+      "classification": "ADD",
+      "sha256": "6CE5122AC7B2511AAB78D87F87FDECD711B12E84F1E9C915F0BCC53D0676441D",
+      "size": 123002,
+      "previous_sha256": "809F507550542AF5646D5FE6564A7420804A884AFB50253A96B25959FBDA07CD",
+      "previous_size": 122055,
+      "previous_snapshot": "compat_before/localisation/korean/korea_focus_l_korean.yml"
+    },
+    "common/national_focus/korea.txt": {
+      "classification": "THREE_WAY_MERGE",
+      "sha256": "265D1E087E00ACEDAA12A4A4BBD3B573DB6919DA08196504874D0B49F3C53F48",
+      "size": 522588,
+      "previous_sha256": "EF979199A8A71E28A30ABFEDC5632012095B54D474C886626E778C91E9A19066",
+      "previous_size": 520397,
+      "previous_snapshot": "compat_before/common/national_focus/korea.txt"
+    },
+    "localisation/korean/HOK_KOR_chinese_government_l_korean.yml": {
+      "classification": "ADD",
+      "sha256": "8BFBB679DE0619C2DCDE08CCEEE514EE01DE3385F704B703BB4EBAA4C9040CC0",
+      "size": 2596,
+      "previous_sha256": null
+    },
+    "localisation/english/HOK_KOR_democratic_intelligence_l_english.yml": {
+      "classification": "ADD",
+      "sha256": "2AE53E05575F767BA079CEC3DCF381AFCCE88A8424D95ED21703A8415D0553AE",
+      "size": 1501,
+      "previous_sha256": null
+    },
+    "localisation/english/HOK_KOR_chinese_government_l_english.yml": {
+      "classification": "ADD",
+      "sha256": "2330CE821CD2657A9AF73851DC6EA4F1E7F4357322DFD4F4B723281448B460FD",
+      "size": 2598,
+      "previous_sha256": null
+    },
+    "localisation/english/HOK_KOR_democratic_support_l_english.yml": {
+      "classification": "ADD",
+      "sha256": "4458ABACD00AFC1F1E31583D695C36E56916434B0695FB8DB6C50E656D93EEB8",
+      "size": 3024,
+      "previous_sha256": null
+    },
+    "gfx/interface/goals/HOK_KOR/democratic_intelligence/shine_overlay.dds": {
+      "classification": "ASSET_COPY",
+      "sha256": "BB416649358C73D34AACD46BAD61BC44211FAC8111627B56E25F385AD98F4448",
+      "size": 30752,
+      "previous_sha256": null
+    },
+    "gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_china.dds": {
+      "classification": "ASSET_COPY",
+      "sha256": "C305D3C1C4A747E060F8ACA551678CEBF6A5986FD91467FB34161B0FCB7F19AB",
+      "size": 4224,
+      "previous_sha256": null
+    },
+    "common/scripted_effects/HOK_KOR_democratic_intelligence_effects.txt": {
+      "classification": "ADD",
+      "sha256": "8684B6498B3866B102676E1B995BBCAFE306984B708B7720777FB5472C2C8A5C",
+      "size": 1118,
+      "previous_sha256": null,
+      "source_adaptation": "2026-11-20-japanese-nonleader-faction-route-v1",
+      "integration_predecessor_sha256": "F2A255FB9AB4194B9E24AB908B0CD8F20BE6C1CE973AE0A4F4FF83D86D72D1F6",
+      "integration_predecessor_size": 851
+    },
+    "interface/HOK_KOR_democratic_support_intelligence_shine.gfx": {
+      "classification": "ADD",
+      "sha256": "6F04422BCBB68E8D3A7920841B4C8220AC8016E72C5075C529AB1D7F0ECFAFCB",
+      "size": 1366,
+      "previous_sha256": null
+    },
+    "localisation/english/korea_focus_l_english.yml": {
+      "classification": "ADD",
+      "sha256": "18843FABC93A4FC4CCB0AB52D11608053B756FC239E60B8AEA0BA626F4BE69C0",
+      "size": 110832,
+      "previous_sha256": "471285BCE6195DDEBBD9868D98C72BC5658D464D1706EC20EDB1EDB485FFCB0E",
+      "previous_size": 109519,
+      "previous_snapshot": "compat_before/localisation/english/korea_focus_l_english.yml"
+    },
+    "gfx/interface/ideas/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds": {
+      "classification": "ASSET_COPY",
+      "sha256": "7309968400A39EB3DB4AB309A34ACB393D0C66A728DBFF2F2793B7667FDE3249",
+      "size": 14744,
+      "previous_sha256": null
+    },
+    "common/decisions/KOR_decision.txt": {
+      "classification": "THREE_WAY_MERGE",
+      "sha256": "C140F0713F53DFDF0E95D9D9AAD73CBA3652F9C5B3AA0B6A3DD31920B882F47C",
+      "size": 78852,
+      "previous_sha256": "05AE155EB8394AB746FDB647258B4E884B58E14A4B56A634CD36A6983C7E5316",
+      "previous_size": 81352,
+      "previous_snapshot": "compat_before/common/decisions/KOR_decision.txt"
+    },
+    "common/scripted_effects/HOK_KOR_chinese_government_effects.txt": {
+      "classification": "ADD",
+      "sha256": "CDFE37068613F20248ECE6EF32EFF2C4FDFC60B3333EAE04938209F2715B66BE",
+      "size": 8534,
+      "previous_sha256": null
+    },
+    "common/decisions/HOK_KOR_democratic_support.txt": {
+      "classification": "ADD",
+      "sha256": "0C5F4B297608FDF411E87FA627C1FE28AB94B4523CFA631AFF6148FFFA7BC6CF",
+      "size": 2735,
+      "previous_sha256": null
+    },
+    "gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_japan.dds": {
+      "classification": "ASSET_COPY",
+      "sha256": "C305D3C1C4A747E060F8ACA551678CEBF6A5986FD91467FB34161B0FCB7F19AB",
+      "size": 4224,
+      "previous_sha256": null
+    },
+    "localisation/korean/HOK_KOR_democratic_support_l_korean.yml": {
+      "classification": "ADD",
+      "sha256": "09D4488D07DADC94099E5F17AC8D397BA3D3487C76E87A37CFEC216DB3C6C243",
+      "size": 3228,
+      "previous_sha256": null
+    },
+    "gfx/interface/goals/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds": {
+      "classification": "ASSET_COPY",
+      "sha256": "22EEEC2EDED697BDDA8396B98AE946590B1709E2C5963812EB309D50EB295C7A",
+      "size": 35328,
+      "previous_sha256": null
+    },
+    "common/characters/HOK_KCH_characters.txt": {
+      "classification": "ADD",
+      "sha256": "57163327308F0AB3DF25F480D3289E4DF91D3B7C2E39B6FFCDA01411FB8B352D",
+      "size": 356,
+      "previous_sha256": null
+    }
+  }
+}

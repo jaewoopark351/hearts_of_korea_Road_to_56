@@ -1,0 +1,717 @@
+{
+  "schema_version": 1,
+  "documented_on": "2026-11-18",
+  "status": "IMPLEMENTED_REARMAMENT_PARENT_AND_NO_KOREAN_UPRISING_LEADER_GATE_SOURCE_ONLY_LATEST_RUNTIME_UI_NOT_RUN",
+  "purpose": "Maintained partial delta for the four earlier democratic support nodes and one intelligence node now reparented to shared rearmament; not a full-tree snapshot or current runtime proof",
+  "is_complete_tree_snapshot": false,
+  "partial_node_count": 5,
+  "source": "common/national_focus/korea.txt",
+  "source_sha256_at_documentation": "5ce8aa0fe1aff5d2d4b59a330a69b6838d70d14edbc4381e360ce70e07a8a80d",
+  "baseline_branch": "feat/korean-focus-expansion-ai",
+  "baseline_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+  "target_reference": "Operation Postern v1.19.5.0.7c6c (c184)",
+  "current_tree_totals": {
+    "focuses": 475,
+    "absolute_anchors": 7,
+    "relative_nodes": 468,
+    "direct_offsets": 7,
+    "base_bounds": {
+      "x_min": 0,
+      "x_max": 211,
+      "y_min": 0,
+      "y_max": 24
+    }
+  },
+  "preserved_historical_snapshots": [
+    {
+      "path": "docs/data/HOK_KOREAN_SECOND_WAVE_COORDINATES.json",
+      "sha256": "52c29fc66e83f510d2cbc7b80f2e16e8b0c8cfee488b9536237c94743b8b1129",
+      "documented_on": "2026-11-01",
+      "count": 474,
+      "role": "Unchanged historical snapshot; not the current complete 475-focus layout"
+    },
+    {
+      "path": "docs/data/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.json",
+      "sha256": "3e23cfa927b03c80dfc7e97ee59dd9ccec3b9e0f950e2f8d3086d16ffbf50d26",
+      "documented_on": "2026-09-21",
+      "count": 326,
+      "role": "Unchanged historical snapshot; not the current complete 475-focus layout"
+    }
+  ],
+  "placement_rules": {
+    "offset_owner": "KOR_democracy_advance_forward",
+    "inherited_once": true,
+    "new_direct_offsets": 0,
+    "show_shift": [
+      0,
+      0
+    ],
+    "initial_hide_shift": [
+      0,
+      0
+    ],
+    "democratic_completed_hide_shift": [
+      -35,
+      0
+    ],
+    "unchanged": "Other existing coordinates, panel and shortcuts retained",
+    "applies_to": "Four democratic support/follow-up nodes only; the intelligence focus has its own fixed shared-military rule",
+    "node_ids": [
+      "KOR_support_for_democracy_in_china",
+      "KOR_overthrow_the_chinese_dictators",
+      "KOR_support_for_democracy_in_japan",
+      "KOR_minshu_ikki"
+    ],
+    "intelligence_focus": {
+      "offset_owner": null,
+      "inherited_offset": false,
+      "show_shift": [
+        0,
+        0
+      ],
+      "hide_shift_all_political_completion_states": [
+        0,
+        0
+      ],
+      "base_and_all_show_hide_positions": [
+        62,
+        1
+      ],
+      "reason": "Shared KOR_begin_rearmament anchor chain contains no political offset"
+    }
+  },
+  "anchors": [
+    {
+      "id": "KOR_the_vanguard_of_asian_democracy",
+      "base_absolute": [
+        116,
+        6
+      ]
+    },
+    {
+      "id": "KOR_begin_rearmament",
+      "base_absolute": [
+        54,
+        0
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "id": "KOR_support_for_democracy_in_china",
+      "name": "중국 민주인사 지원",
+      "change": "moved_existing",
+      "before": {
+        "anchor": "KOR_founding_of_the_asian_union",
+        "script_xy": [
+          -6,
+          2
+        ],
+        "base_absolute": [
+          113,
+          17
+        ]
+      },
+      "after": {
+        "anchor": "KOR_the_vanguard_of_asian_democracy",
+        "anchor_base": [
+          116,
+          6
+        ],
+        "script_xy": [
+          -6,
+          1
+        ],
+        "base_absolute": [
+          110,
+          7
+        ],
+        "democratic_completed_hide": [
+          75,
+          7
+        ]
+      },
+      "prerequisite_before": [
+        "KOR_founding_of_the_asian_union"
+      ],
+      "prerequisite_after": [
+        "KOR_the_vanguard_of_asian_democracy"
+      ]
+    },
+    {
+      "id": "KOR_overthrow_the_chinese_dictators",
+      "name": "중국 독재자 축출",
+      "change": "inherited_position_shift",
+      "before": {
+        "anchor": "KOR_support_for_democracy_in_china",
+        "script_xy": [
+          0,
+          2
+        ],
+        "base_absolute": [
+          113,
+          19
+        ]
+      },
+      "after": {
+        "anchor": "KOR_support_for_democracy_in_china",
+        "anchor_base": [
+          110,
+          7
+        ],
+        "script_xy": [
+          0,
+          2
+        ],
+        "base_absolute": [
+          110,
+          9
+        ],
+        "democratic_completed_hide": [
+          75,
+          9
+        ]
+      },
+      "prerequisite_before": [
+        "KOR_support_for_democracy_in_china"
+      ],
+      "prerequisite_after": [
+        "KOR_support_for_democracy_in_china"
+      ]
+    },
+    {
+      "id": "KOR_support_for_democracy_in_japan",
+      "name": "일본 민주인사 지원",
+      "change": "moved_existing",
+      "before": {
+        "anchor": "KOR_founding_of_the_asian_union",
+        "script_xy": [
+          4,
+          2
+        ],
+        "base_absolute": [
+          123,
+          17
+        ]
+      },
+      "after": {
+        "anchor": "KOR_the_vanguard_of_asian_democracy",
+        "anchor_base": [
+          116,
+          6
+        ],
+        "script_xy": [
+          -3,
+          1
+        ],
+        "base_absolute": [
+          113,
+          7
+        ],
+        "democratic_completed_hide": [
+          78,
+          7
+        ]
+      },
+      "prerequisite_before": [
+        "KOR_founding_of_the_asian_union"
+      ],
+      "prerequisite_after": [
+        "KOR_the_vanguard_of_asian_democracy"
+      ]
+    },
+    {
+      "id": "KOR_minshu_ikki",
+      "name": "민슈 잇키",
+      "change": "inherited_position_shift_and_reward_helper",
+      "before": {
+        "anchor": "KOR_support_for_democracy_in_japan",
+        "script_xy": [
+          0,
+          2
+        ],
+        "base_absolute": [
+          123,
+          19
+        ]
+      },
+      "after": {
+        "anchor": "KOR_support_for_democracy_in_japan",
+        "anchor_base": [
+          113,
+          7
+        ],
+        "script_xy": [
+          0,
+          2
+        ],
+        "base_absolute": [
+          113,
+          9
+        ],
+        "democratic_completed_hide": [
+          78,
+          9
+        ]
+      },
+      "prerequisite_before": [
+        "KOR_support_for_democracy_in_japan"
+      ],
+      "prerequisite_after": [
+        "KOR_support_for_democracy_in_japan"
+      ]
+    },
+    {
+      "id": "HOK_KOR_expand_secret_intelligence_service",
+      "name": "비밀 정보국 확장",
+      "change": "Added in prior phase, now reparented to shared rearmament",
+      "before": null,
+      "after": {
+        "anchor": "KOR_begin_rearmament",
+        "anchor_base": [
+          54,
+          0
+        ],
+        "script_xy": [
+          8,
+          1
+        ],
+        "base_absolute": [
+          62,
+          1
+        ],
+        "democratic_completed_hide": [
+          62,
+          1
+        ],
+        "other_political_completed_hide": [
+          62,
+          1
+        ],
+        "all_show_hide_positions_fixed": true,
+        "offset_owner": null
+      },
+      "prerequisite_after": [
+        "KOR_begin_rearmament"
+      ],
+      "cost": 5,
+      "nominal_days": 35,
+      "ai_will_do_factor": 1,
+      "allow_branch": "has_dlc = \"La Resistance\"",
+      "previous_independent_party_placement": {
+        "anchor": "KOR_independent_party_in_power",
+        "anchor_base": [
+          121,
+          4
+        ],
+        "script_xy": [
+          -1,
+          2
+        ],
+        "base_absolute": [
+          120,
+          6
+        ],
+        "democratic_completed_hide": [
+          85,
+          6
+        ]
+      },
+      "prerequisite_before_followup": [
+        "KOR_independent_party_in_power"
+      ],
+      "visibility": {
+        "dlc": "La Resistance",
+        "political_completion_hiding": "None; previous democratic HIDE guard removed",
+        "runtime_ui": "Not run for this reparenting"
+      }
+    }
+  ],
+  "coverage": {
+    "directly_changed_existing_focus_blocks": [
+      "KOR_invite_china",
+      "KOR_support_for_democracy_in_china",
+      "KOR_invite_japan",
+      "KOR_support_for_democracy_in_japan",
+      "KOR_minshu_ikki"
+    ],
+    "removed_reciprocal_exclusions": [
+      [
+        "KOR_invite_china",
+        "KOR_support_for_democracy_in_china"
+      ],
+      [
+        "KOR_invite_japan",
+        "KOR_support_for_democracy_in_japan"
+      ]
+    ],
+    "retained_exclusion": [
+      "KOR_liberation_of_the_europe",
+      "KOR_founding_of_the_asian_union"
+    ]
+  },
+  "verification": {
+    "source_review": {
+      "confirmed": 27,
+      "unresolved": 0,
+      "report": "source-review.json",
+      "initial_26_1": "source-review-initial-quoted-token-mismatch.json",
+      "initial_issue": "Quoted La Resistance token expected-value mismatch in audit, corrected without production-source changes"
+    },
+    "source_scope": "Exactly four of prior 20 runtime files changed: focus, AI and paired one-key description; other 474 focuses and IDs/order unchanged; costs/rewards/weights unchanged; no descendant, minimal-box collision 0, all political SHOW/HIDE positions fixed, offsets 7 and global bounds preserved",
+    "runtime": "Not run for the rearmament-parent source",
+    "ui": "Not observed for the rearmament-parent source",
+    "aggregation_note": "Previous B8/762d/c212/75/60/40 results are preserved under previous_independent_party_phase, not current-source engine evidence"
+  },
+  "documentation": "docs/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PLAN.md",
+  "runtime_record": "docs/incidents/2026-11-18-korean-democratic-support-intelligence.md",
+  "external_work": "C:/hoi/test/hok-intelligence-rearm-parent-20261119-01/",
+  "democratic_sector_bounds": {
+    "before_base": {
+      "x_min": 113,
+      "x_max": 151,
+      "y_min": 2,
+      "y_max": 24
+    },
+    "after_base": {
+      "x_min": 110,
+      "x_max": 151,
+      "y_min": 2,
+      "y_max": 24
+    },
+    "after_democratic_completed_hide": {
+      "x_min": 75,
+      "x_max": 116,
+      "y_min": 2,
+      "y_max": 24
+    }
+  },
+  "related_integration_source": {
+    "path": "common/ai_strategy_plans/KOR_historical_strategy_plan.txt",
+    "sha256_at_documentation": "177e6a33d63edfa4f2fc7539fe8ee8e04b5d155c4ab28a112ace1e71e4b0abee",
+    "change": "Move HOK_KOR_expand_secret_intelligence_service from immediately after independent-party to immediately after KOR_begin_rearmament; retain all other relative order and weights"
+  },
+  "updated_on": "2026-11-19",
+  "source_history": [
+    {
+      "date": "2026-11-18",
+      "sha256": "e30428b406f210ccef8b5d5e7db436a1103b832a65cc427d191451b713ef7aef",
+      "role": "Before matching the democratic parent HIDE visibility guard; engine support/revolt/AI progression results belong to this phase"
+    },
+    {
+      "date": "2026-11-19",
+      "sha256": "b8b427df8e8a73820156a6abcff6632b60c89e2fb68c317b96f24ef2e694584d",
+      "role": "Final focus source after visibility-only guard; effects, duration and placement unchanged; source review 60/0 and 762d paused fresh-game full restart/exit/restore confirmed"
+    },
+    {
+      "date": "2026-11-19",
+      "sha256": "3d17d626fda303f48ae3f5d4c7505f61eeab63518aa849057c7a3bc80135d032",
+      "role": "Rearmament-parent follow-up: anchor/parent KOR_begin_rearmament, 8/1 => 62/1 fixed all states, La Resistance only, AI moved and one paired description key changed; source-only review 27/0, no current runtime/UI"
+    },
+    {
+      "date": "2026-11-19",
+      "sha256": "5ce8aa0fe1aff5d2d4b59a330a69b6838d70d14edbc4381e360ce70e07a8a80d",
+      "role": "Remove Korean faction-leader availability condition from two uprising focuses only; all layout fields, rearmament parent and existing rewards unchanged. Latest source-only review12/0; no runtime/UI execution."
+    }
+  ],
+  "evidence_provenance": {
+    "root": "C:/hoi/test/hok-intelligence-rearm-parent-20261119-01/",
+    "baseline_runtime_copies": "baseline/",
+    "after_runtime_copies": "after/",
+    "before_document_copies": "baseline_docs/",
+    "source_review": "source-review.json",
+    "initial_audit_mismatch": "source-review-initial-quoted-token-mismatch.json",
+    "role": "Current source-only follow-up; old runtime evidence remains under previous_independent_party_phase; no game-generated evidence created for this change"
+  },
+  "previous_independent_party_phase": {
+    "preserved_on": "2026-11-19",
+    "source_sha256": "b8b427df8e8a73820156a6abcff6632b60c89e2fb68c317b96f24ef2e694584d",
+    "external_work": "C:/hoi/test/hok-democratic-support-intelligence-20261118-01/",
+    "node": {
+      "id": "HOK_KOR_expand_secret_intelligence_service",
+      "name": "비밀 정보국 확장",
+      "change": "added",
+      "before": null,
+      "after": {
+        "anchor": "KOR_independent_party_in_power",
+        "anchor_base": [
+          121,
+          4
+        ],
+        "script_xy": [
+          -1,
+          2
+        ],
+        "base_absolute": [
+          120,
+          6
+        ],
+        "democratic_completed_hide": [
+          85,
+          6
+        ]
+      },
+      "prerequisite_after": [
+        "KOR_independent_party_in_power"
+      ],
+      "cost": 5,
+      "nominal_days": 35,
+      "ai_will_do_factor": 1,
+      "allow_branch": "has_dlc = \"La Resistance\"; if obsolete_focus_branches_visibility = HIDE: NOT OR { KOR_urihwangsilsaranghoe, KOR_long_live_the_dictatorship_of_the_proletariat, KOR_empowering_the_nrsc } has_completed_focus",
+      "allow_branch_before_visibility_guard": "has_dlc = \"La Resistance\"",
+      "visibility_guard": {
+        "date": "2026-11-19",
+        "parent_contract": "Same ideology-completion HIDE guard as the democratic sector parent",
+        "dlc": "La Resistance",
+        "when_HIDE": {
+          "must_not_have_completed_any": [
+            "KOR_urihwangsilsaranghoe",
+            "KOR_long_live_the_dictatorship_of_the_proletariat",
+            "KOR_empowering_the_nrsc"
+          ]
+        },
+        "when_SHOW": "Only the DLC condition applies; no ideology-completion hiding",
+        "unchanged": [
+          "cost",
+          "rewards",
+          "coordinates",
+          "AI values"
+        ],
+        "runtime_ui": "Not observed"
+      }
+    },
+    "placement_rules": {
+      "offset_owner": "KOR_democracy_advance_forward",
+      "inherited_once": true,
+      "new_direct_offsets": 0,
+      "show_shift": [
+        0,
+        0
+      ],
+      "initial_hide_shift": [
+        0,
+        0
+      ],
+      "democratic_completed_hide_shift": [
+        -35,
+        0
+      ],
+      "unchanged": "Other existing coordinates, panel and shortcuts retained"
+    },
+    "anchors": [
+      {
+        "id": "KOR_the_vanguard_of_asian_democracy",
+        "base_absolute": [
+          116,
+          6
+        ]
+      },
+      {
+        "id": "KOR_independent_party_in_power",
+        "base_absolute": [
+          121,
+          4
+        ]
+      }
+    ],
+    "verification": {
+      "source_static": {
+        "reported_pass": 75,
+        "reported_fail": 0,
+        "previous_phase": {
+          "reported_pass": 72,
+          "reported_fail": 0,
+          "scope": "Before historical AI integration"
+        },
+        "source_stage": "Re-run after final 2026-11-19 visibility guard",
+        "prior_before_guard": {
+          "reported_pass": 75,
+          "reported_fail": 0,
+          "source_stage": "Before 2026-11-19 visibility guard"
+        }
+      },
+      "independent_focus_source": {
+        "reported_pass": 38,
+        "reported_fail": 0
+      },
+      "aggregation_note": "Final source 75/0, prior focus 38/0, final guard 60/0, AI 5/0, initial engine 20/0, revolt 13 observations and controlled expiry 40/0 have different scopes; do not sum or treat any as actual UI/universal compatibility proof",
+      "runtime": "Controlled support expiry/reexecution 40/0, bounded synthetic revolt comparison, pre-guard production-AI focus progression and final B8-source 762d paused fresh-game load observed. Earlier expected-absence 4 FAILs retained with AI repurchase evidence. Owned task processes exited, two settings exactly restored and 99 pre-existing saves unchanged. Actual UI, legacy save reload, exact expiry hour and actual operation timing remain unverified; final raw 9 errors remain.",
+      "ui": "Not observed: UI host unavailable",
+      "show_hide_click_shine": "Unverified in actual game UI",
+      "geometry_limit": "Static minimum rectangles 2.8 x 0.9 for the new/moved nodes report no collision; actual connecting lines, titleplates, click areas and UI were not observed",
+      "independent_ai_integration": {
+        "reported_pass": 5,
+        "reported_fail": 0,
+        "scope": "One focus inserted after independent-party focus; existing relative list order, other weights/plans unchanged"
+      },
+      "native_low_high_revolt": {
+        "observations": 13,
+        "preparation": "Separate fresh synthetic 20% and 70% support, helper invoked directly",
+        "democratic_country_tag": "D04",
+        "states": [
+          4,
+          12
+        ],
+        "army_divisions": [
+          12,
+          42
+        ],
+        "initial_japanese_army_divisions": 60,
+        "ships": [
+          83,
+          118
+        ],
+        "aircraft": [
+          141,
+          543
+        ],
+        "alliance_and_korean_intervention_observed": true,
+        "limits": "Not normal focus progression, exact area/population/industry or exact navy/air proportionality proof"
+      },
+      "final_hide_guard_independent_review": {
+        "passed": 60,
+        "failed": 0,
+        "source_sha256": "b8b427df8e8a73820156a6abcff6632b60c89e2fb68c317b96f24ef2e694584d",
+        "report": "validation/postguard-source-review.json",
+        "scope": "Source/model equivalence with democratic parent hiding; no actual HIDE/SHOW UI proof",
+        "previous_38_report_retained": true
+      },
+      "controlled_expiry": {
+        "pass": 40,
+        "fail": 0,
+        "checksum": "776a",
+        "process_id": 16468,
+        "process_state": "Exited",
+        "control": "AI 0 in external test copy only; production decision AI 1 unchanged",
+        "native_dates": [
+          "1936.1.2.1",
+          "1936.7.3.1",
+          "1936.7.5.1"
+        ],
+        "recipients": 8,
+        "each_timed_idea_count": [
+          1,
+          0,
+          1
+        ],
+        "each_remaining_days": [
+          179,
+          null,
+          179
+        ],
+        "each_decision_execution_count": [
+          1,
+          1,
+          2
+        ],
+        "reexecution_cost_each_political_power": 25,
+        "limits": [
+          "Exact 180-day hour boundary unmeasured",
+          "Actual decision UI clicks unobserved",
+          "Legacy save reload unverified"
+        ]
+      },
+      "production_ai_focus_progression": {
+        "checksum": "c212",
+        "process_id": 14000,
+        "source_stage": "Before HIDE visibility guard",
+        "preparation": "Parents synthetically completed; target focus not force-completed; production historical AI plan with no external AI plan",
+        "native_early_date": "1936.1.2.1",
+        "native_early_focus_progress": 2,
+        "native_completed_date": "1936.2.5.1",
+        "completed_focus_agency_spirit_observed": true,
+        "start_marker": "1936.1.1.24",
+        "completion_marker": "1936.2.4.24",
+        "limits": [
+          "Not an exact 840-hour measurement",
+          "Not user UI selection or full independent-party natural progression",
+          "Before final visibility guard"
+        ]
+      },
+      "final_production_only": {
+        "process_id": 24356,
+        "stage": "Completed full restart and paused fresh-game load; owned process exited; original profiles restored",
+        "source_sha256": "b8b427df8e8a73820156a6abcff6632b60c89e2fb68c317b96f24ef2e694584d",
+        "mod_order": [
+          "Repository Hearts of Korea",
+          "English Translation Anime Modders Edition"
+        ],
+        "language": "l_korean",
+        "speed": 0,
+        "final_load_exit_restore": "Confirmed; Steam Play/Running UI remains unverified",
+        "runtime_checksum": "762d",
+        "enabled_dlc_count": 37,
+        "paused_game_date": "1936.1.1.12",
+        "restore_device_objects_completed": true,
+        "scoped_new_parse_registration_errors": 0,
+        "raw_error_count": 9,
+        "raw_error_categories": {
+          "other_registered_mod_descriptors": 7,
+          "localisation_collision": 1,
+          "preexisting_buildings_line_66858_invalid_argument": 1
+        },
+        "all_errors_absent": false,
+        "owned_pid_exited": true,
+        "original_dlc_load_and_settings_sha256_restored": true,
+        "temporary_mod_pointer_removed": true,
+        "preexisting_save_count": 99,
+        "all_preexisting_save_sha256_unchanged": true,
+        "final_related_process_counts": {
+          "hoi4": 0,
+          "dowser": 0,
+          "ParadoxLauncher": 0,
+          "GameOverlayUI": 0,
+          "crash_reporter": 0
+        },
+        "preexisting_steam_pid_retained": 13492,
+        "steam_play_ui": "Unverified: UI host unavailable",
+        "final_process_profile_observed_utc": "2026-11-18T15:15:14Z"
+      }
+    },
+    "related_integration_source": {
+      "path": "common/ai_strategy_plans/KOR_historical_strategy_plan.txt",
+      "sha256_at_documentation": "b2fcb47c76e46a7ab52ed046e58ff3f6740b2ea72e842f4ed143bfd1605c32b0",
+      "change": "Insert HOK_KOR_expand_secret_intelligence_service immediately after KOR_independent_party_in_power in the existing focus list; no layout effect"
+    },
+    "evidence_provenance": {
+      "root": "C:/hoi/test/hok-democratic-support-intelligence-20261118-01/",
+      "original_runtime_data": "C:/Users/jaewo/OneDrive/문서/Paradox Interactive/Hearts of Iron IV",
+      "role": "Game-generated originals remain in actual user data; runs/capture logs and saves are evidence copies, not repository runtime assets",
+      "final_source_checks": "validation/source-checks.json",
+      "final_guard_source_review": "validation/postguard-source-review.json",
+      "controlled_expiry": "validation/support-expiry-controlled-summary.json",
+      "synthetic_revolt": "validation/uprising-low-high-comparison.json",
+      "pre_guard_ai_progression": "validation/focus-ai-production-summary.json",
+      "final_process_start": "runs/production/process.json",
+      "final_process_exit": "runs/production/process-exit.json",
+      "final_captures": [
+        "runs/production/capture-20261118T150605Z/",
+        "runs/production/capture-20261118T150609Z/"
+      ],
+      "baseline_profile_hashes": "baseline/profile-hashes.json",
+      "baseline_save_hashes": "baseline/save-hashes.json",
+      "restoration": "restoration.json",
+      "source_inventory": "final-inventory.json",
+      "inventory_note": "Root refreshes final file inventory after all documentation updates; do not substitute earlier doc hashes",
+      "final_process_profile_observation": "final-process-profile-observation.json"
+    },
+    "role": "Historical independent-party parent/anchor, democratic HIDE guard, B8 source/762d load and c212 AI results; not runtime proof for rearmament parent"
+  },
+  "current_followup_baseline_source_sha256": "b8b427df8e8a73820156a6abcff6632b60c89e2fb68c317b96f24ef2e694584d",
+  "runtime_record_scope": "Historical independent-party phase only; current rearmament-parent change has no runtime execution",
+  "latest_availability_followup": {
+    "targets": [
+      "KOR_overthrow_the_chinese_dictators",
+      "KOR_minshu_ikki"
+    ],
+    "removed_condition": "available/KOR/is_faction_leader = yes",
+    "baseline_source_sha256": "3d17d626fda303f48ae3f5d4c7505f61eeab63518aa849057c7a3bc80135d032",
+    "external_work": "C:/hoi/test/hok-uprising-no-faction-leader-20261119-01/",
+    "source_review": "source-review.json",
+    "confirmed": 12,
+    "unresolved_source_comparisons": 0,
+    "geometry_changed": false,
+    "runtime_ui": "Not run; non-leader/factionless faction joining and intervention remain unverified",
+    "documentation": "docs/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PLAN.md section12"
+  }
+}

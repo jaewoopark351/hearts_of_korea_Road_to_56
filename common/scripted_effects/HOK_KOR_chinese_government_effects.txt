@@ -1,0 +1,205 @@
+#20261119_kpopmodder: Give the Chinese alternative government the reviewed mainland cores without transferring their ownership.
+HOK_KOR_chinese_government_grant_mainland_cores = {
+	every_state = {
+		limit = { HOK_KOR_chinese_government_is_mainland = yes }
+		add_core_of = PREV
+	}
+}
+
+#20261119_kpopmodder: Select one state, charge its original owner, and keep the planned land frontier separate from ownership changes.
+HOK_KOR_chinese_government_select_state = {
+	set_state_flag = HOK_KOR_chinese_government_selected
+	owner = {
+		set_country_flag = HOK_KOR_chinese_government_participant
+		subtract_from_variable = { HOK_KOR_chinese_government_land_budget = 1 }
+	}
+	event_target:HOK_KOR_chinese_government_sponsor = {
+		set_variable = { HOK_KOR_chinese_government_progress = 1 }
+	}
+}
+
+#20261119_kpopmodder: Form one supervised democratic government from protected Shandong seeds and connected support-based defections, without starting wars.
+HOK_KOR_form_chinese_democratic_government = {
+	if = {
+		limit = { HOK_KOR_chinese_government_can_form = yes }
+		save_event_target_as = HOK_KOR_chinese_government_sponsor
+		every_country = {
+			limit = { HOK_KOR_chinese_government_is_donor = yes }
+			set_country_flag = HOK_KOR_chinese_government_snapshot
+			set_variable = { HOK_KOR_chinese_government_land_budget = 0 }
+			set_variable = { HOK_KOR_chinese_government_share = party_popularity@democratic }
+			clamp_variable = { var = HOK_KOR_chinese_government_share min = 0 max = 0.90 }
+			every_owned_state = {
+				limit = { HOK_KOR_chinese_government_can_transfer_state = yes }
+				set_state_flag = HOK_KOR_chinese_government_candidate
+				PREV = { add_to_variable = { HOK_KOR_chinese_government_land_budget = 1 } }
+			}
+			multiply_variable = { HOK_KOR_chinese_government_land_budget = HOK_KOR_chinese_government_share }
+		}
+		if = {
+			limit = { 597 = { has_state_flag = HOK_KOR_chinese_government_candidate } }
+			597 = { HOK_KOR_chinese_government_select_state = yes }
+		}
+		if = {
+			limit = { 743 = { has_state_flag = HOK_KOR_chinese_government_candidate } }
+			743 = { HOK_KOR_chinese_government_select_state = yes }
+		}
+		#20261119_kpopmodder: Integrate every eligible Shandong-owned mainland state as founding territory before support-based expansion.
+		every_state = {
+			limit = {
+				has_state_flag = HOK_KOR_chinese_government_candidate
+				NOT = { has_state_flag = HOK_KOR_chinese_government_selected }
+				owner = { tag = SND }
+			}
+			HOK_KOR_chinese_government_select_state = yes
+		}
+		set_variable = { HOK_KOR_chinese_government_progress = 1 }
+		set_variable = { HOK_KOR_chinese_government_passes = 64 }
+		while_loop_effect = {
+			limit = {
+				check_variable = { var = HOK_KOR_chinese_government_progress value = 0 compare = greater_than }
+				check_variable = { var = HOK_KOR_chinese_government_passes value = 0 compare = greater_than }
+			}
+			set_variable = { HOK_KOR_chinese_government_progress = 0 }
+			every_state = {
+				limit = {
+					has_state_flag = HOK_KOR_chinese_government_candidate
+					NOT = { has_state_flag = HOK_KOR_chinese_government_selected }
+					owner = {
+						check_variable = { var = HOK_KOR_chinese_government_land_budget value = 1 compare = greater_than_or_equals }
+					}
+					any_neighbor_state = { has_state_flag = HOK_KOR_chinese_government_selected }
+				}
+				HOK_KOR_chinese_government_select_state = yes
+			}
+			subtract_from_variable = { HOK_KOR_chinese_government_passes = 1 }
+		}
+		create_dynamic_country = {
+			original_tag = KCH
+			#20261119_kpopmodder: Carry the created country across its separate effect context and clear this target before returning.
+			save_global_event_target_as = HOK_KOR_chinese_democratic_government
+			set_politics = { ruling_party = democratic elections_allowed = yes }
+			#20261119_kpopmodder: Recruit and promote Shandong's separate Weng Wenhao in the actual newly created country.
+			#20261119_kpopmodder: Keep recruitment in startup history and transfer the dedicated character through its current owner at runtime.
+			every_possible_country = {
+				limit = { has_character = HOK_KCH_weng_wenhao }
+				HOK_KCH_weng_wenhao = {
+					set_nationality = PREV.PREV
+				}
+			}
+			promote_character = {
+				character = HOK_KCH_weng_wenhao
+				ideology = socialism
+			}
+			HOK_KOR_chinese_government_grant_mainland_cores = yes
+			if = {
+				limit = { 597 = { HOK_KOR_chinese_government_can_bootstrap_state = yes } }
+				transfer_state = 597
+				set_capital = { state = 597 remember_old_capital = no }
+			}
+			else = {
+				transfer_state = 743
+				set_capital = { state = 743 remember_old_capital = no }
+			}
+		}
+		#20261119_kpopmodder: Air defections require an owned airbase; use selected existing land first and provide one level only when needed.
+		if = {
+			limit = {
+				any_country = {
+					has_country_flag = HOK_KOR_chinese_government_participant
+					check_variable = { var = HOK_KOR_chinese_government_share value = 0 compare = greater_than }
+					check_variable = { var = num_deployed_planes value = 0 compare = greater_than }
+				}
+			}
+			every_state = {
+				limit = {
+					has_state_flag = HOK_KOR_chinese_government_selected
+					HOK_KOR_chinese_government_can_bootstrap_state = yes
+					air_base > 0
+					event_target:HOK_KOR_chinese_democratic_government = {
+						NOT = { any_owned_state = { air_base > 0 } }
+					}
+				}
+				event_target:HOK_KOR_chinese_democratic_government = { transfer_state = PREV }
+			}
+			event_target:HOK_KOR_chinese_democratic_government = {
+				if = {
+					limit = { NOT = { any_owned_state = { air_base > 0 } } }
+					capital_scope = {
+						add_building_construction = { type = air_base level = 1 instant_build = yes }
+					}
+				}
+			}
+		}
+		every_possible_country = {
+			limit = {
+				has_country_flag = HOK_KOR_chinese_government_participant
+				check_variable = { var = HOK_KOR_chinese_government_share value = 0 compare = greater_than }
+			}
+			#20261119_kpopmodder: Apply the approved common share to every service and stockpile, skipping zero-support transfers.
+			transfer_units_fraction = {
+				target = event_target:HOK_KOR_chinese_democratic_government
+				size = var:HOK_KOR_chinese_government_share
+				army_ratio = var:HOK_KOR_chinese_government_share
+				stockpile_ratio = var:HOK_KOR_chinese_government_share
+				navy_ratio = var:HOK_KOR_chinese_government_share
+				air_ratio = var:HOK_KOR_chinese_government_share
+				keep_unit_leaders_trigger = { always = yes }
+			}
+		}
+		#20261119_kpopmodder: Prevent automatic annexation loot from an expiring Shandong donor after its proportionate defections finish.
+		every_country = {
+			limit = {
+				tag = SND
+				has_country_flag = HOK_KOR_chinese_government_participant
+				any_owned_state = { always = yes }
+				NOT = {
+					any_owned_state = {
+						OR = {
+							NOT = { has_state_flag = HOK_KOR_chinese_government_selected }
+							NOT = { HOK_KOR_chinese_government_can_transfer_state = yes }
+						}
+					}
+				}
+			}
+			set_equipment_fraction = 0
+			set_fuel = 0
+			set_temp_variable = { HOK_KOR_chinese_government_convoy_remainder = num_equipment@convoy }
+			multiply_temp_variable = { HOK_KOR_chinese_government_convoy_remainder = -1 }
+			add_equipment_to_stockpile = {
+				type = convoy_1
+				amount = var:HOK_KOR_chinese_government_convoy_remainder
+			}
+		}
+		every_state = {
+			limit = {
+				has_state_flag = HOK_KOR_chinese_government_selected
+				HOK_KOR_chinese_government_can_transfer_state = yes
+			}
+			event_target:HOK_KOR_chinese_democratic_government = { transfer_state = PREV }
+		}
+		#20261119_kpopmodder: Establish Shandong as Korea's dominion while preserving its existing wars.
+		set_autonomy = {
+			target = event_target:HOK_KOR_chinese_democratic_government
+			autonomy_state = autonomy_dominion
+			end_wars = no
+			end_civil_wars = no
+		}
+		add_to_faction = event_target:HOK_KOR_chinese_democratic_government
+		every_state = {
+			limit = { HOK_KOR_chinese_government_is_mainland = yes }
+			clr_state_flag = HOK_KOR_chinese_government_candidate
+			clr_state_flag = HOK_KOR_chinese_government_selected
+		}
+		every_possible_country = {
+			limit = { has_country_flag = HOK_KOR_chinese_government_snapshot }
+			clr_country_flag = HOK_KOR_chinese_government_snapshot
+			clr_country_flag = HOK_KOR_chinese_government_participant
+			clear_variable = HOK_KOR_chinese_government_land_budget
+			clear_variable = HOK_KOR_chinese_government_share
+		}
+		clear_variable = HOK_KOR_chinese_government_progress
+		clear_variable = HOK_KOR_chinese_government_passes
+		clear_global_event_target = HOK_KOR_chinese_democratic_government
+	}
+}

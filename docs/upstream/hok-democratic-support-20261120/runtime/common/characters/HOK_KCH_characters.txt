@@ -1,0 +1,16 @@
+characters = {
+	#20261119_kpopmodder: Give the Shandong government its own Weng Wenhao without moving the original Chinese character.
+	HOK_KCH_weng_wenhao = {
+		name = CHI_weng_wenhao
+		portraits = {
+			civilian = {
+				large = GFX_portrait_chi_weng_wenhao
+			}
+		}
+		country_leader = {
+			ideology = socialism
+			expire = "1965.1.1.1"
+			id = -1
+		}
+	}
+}

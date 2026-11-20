@@ -1,0 +1,72 @@
+#20261118_kpopmodder: Replace automatic support with repeatable 180-day funding while preserving any existing support timers.
+HOK_KOR_democratic_support_category = {
+	#20261118_kpopmodder: Fund the seven inherited Chinese recipients together for 25 political power without refreshing partial legacy support.
+	HOK_KOR_support_democracy_in_china = {
+		icon = GFX_HOK_KOR_decision_support_democracy_in_china
+		allowed = { original_tag = KOR }
+		visible = { has_completed_focus = KOR_support_for_democracy_in_china }
+		available = {
+			has_government = democratic
+			is_subject = no
+			custom_trigger_tooltip = {
+				tooltip = HOK_KOR_democratic_support_china_recipient_exists_tt
+				#20261119_kpopmodder: Require an existing member of the shared sixteen-country target set.
+				any_country = {
+					HOK_KOR_is_chinese_democratic_support_target = yes
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = HOK_KOR_democratic_support_china_no_existing_support_tt
+				#20261119_kpopmodder: Preserve every existing target's support timer before another grouped purchase.
+				NOT = {
+					any_country = {
+						HOK_KOR_is_chinese_democratic_support_target = yes
+						has_idea = KOR_democrat_sponsored_by_korea
+					}
+				}
+			}
+		}
+		cost = 25
+		days_remove = 180
+		days_re_enable = 0
+		fire_only_once = no
+		complete_effect = {
+			custom_effect_tooltip = HOK_KOR_democratic_support_china_effect_tt
+			hidden_effect = {
+				#20261119_kpopmodder: Fund all currently existing shared targets together without reviving or retroactively adding countries.
+				every_country = {
+					limit = { HOK_KOR_is_chinese_democratic_support_target = yes }
+					add_timed_idea = { idea = KOR_democrat_sponsored_by_korea days = 180 }
+				}
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+
+	#20261118_kpopmodder: Fund Japan for 25 political power only after its inherited or new democratic support expires.
+	HOK_KOR_support_democracy_in_japan = {
+		icon = GFX_HOK_KOR_decision_support_democracy_in_japan
+		allowed = { original_tag = KOR }
+		visible = { has_completed_focus = KOR_support_for_democracy_in_japan }
+		available = {
+			has_government = democratic
+			is_subject = no
+			country_exists = JAP
+			custom_trigger_tooltip = {
+				tooltip = HOK_KOR_democratic_support_japan_no_existing_support_tt
+				JAP = { NOT = { has_idea = KOR_democrat_sponsored_by_korea } }
+			}
+		}
+		cost = 25
+		days_remove = 180
+		days_re_enable = 0
+		fire_only_once = no
+		complete_effect = {
+			custom_effect_tooltip = HOK_KOR_democratic_support_japan_effect_tt
+			hidden_effect = {
+				JAP = { add_timed_idea = { idea = KOR_democrat_sponsored_by_korea days = 180 } }
+			}
+		}
+		ai_will_do = { factor = 1 }
+	}
+}

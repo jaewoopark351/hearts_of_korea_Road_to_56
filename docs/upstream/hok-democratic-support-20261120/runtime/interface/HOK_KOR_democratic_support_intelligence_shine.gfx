@@ -1,0 +1,33 @@
+#20261118_kpopmodder: Preserve the selected British focus shine settings while using project-local texture, mask and overlay copies.
+spriteTypes = {
+	SpriteType = {
+		name = "GFX_HOK_KOR_focus_secret_intelligence_service_shine"
+		texturefile = "gfx/interface/goals/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds"
+		effectFile = "gfx/FX/buttonstate.lua"
+		animation = {
+			animationmaskfile = "gfx/interface/goals/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds"
+			animationtexturefile = "gfx/interface/goals/HOK_KOR/democratic_intelligence/shine_overlay.dds"
+			animationrotation = -90.0
+			animationlooping = no
+			animationtime = 0.75
+			animationdelay = 0
+			animationblendmode = "add"
+			animationtype = "scrolling"
+			animationrotationoffset = { x = 0.0 y = 0.0 }
+			animationtexturescale = { x = 2.0 y = 1.0 }
+		}
+		animation = {
+			animationmaskfile = "gfx/interface/goals/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds"
+			animationtexturefile = "gfx/interface/goals/HOK_KOR/democratic_intelligence/shine_overlay.dds"
+			animationrotation = 90.0
+			animationlooping = no
+			animationtime = 0.75
+			animationdelay = 0
+			animationblendmode = "add"
+			animationtype = "scrolling"
+			animationrotationoffset = { x = 0.0 y = 0.0 }
+			animationtexturescale = { x = 1.0 y = 1.0 }
+		}
+		legacy_lazy_load = no
+	}
+}

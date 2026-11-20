@@ -52,6 +52,8 @@ KOR_historical_plan = {
 		KOR_call_up_the_rokrf
 		KOR_homeland_defence_special_act
 		KOR_begin_rearmament
+		#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
+		HOK_KOR_expand_secret_intelligence_service
 		KOR_daehanminguk_yuggun
 		KOR_army_augmentation
 

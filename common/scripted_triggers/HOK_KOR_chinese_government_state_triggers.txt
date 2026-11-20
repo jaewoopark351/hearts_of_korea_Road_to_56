@@ -1,0 +1,119 @@
+#20261119_kpopmodder: Restrict government donors to existing Chinese countries outside direct or second-level Japanese rule.
+HOK_KOR_chinese_government_is_donor = {
+	HOK_KOR_is_chinese_democratic_support_target = yes
+	NOT = { is_subject_of = JAP }
+	#20261119_kpopmodder: Evaluate the overlord scope only for subjects; independent countries have no valid overlord.
+	if = {
+		limit = { is_subject = yes }
+		NOT = { overlord = { is_subject_of = JAP } }
+	}
+}
+
+#20261119_kpopmodder: Preserve the existing mainland core region while excluding Manchuria, islands, and foreign concessions.
+#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
+HOK_KOR_chinese_government_is_mainland = {
+	OR = {
+		state = 283
+		state = 287
+		state = 325
+		state = 592
+		state = 593
+		state = 594
+		state = 595
+		state = 596
+		state = 597
+		state = 598
+		state = 599
+		state = 600
+		state = 601
+		state = 602
+		state = 603
+		state = 604
+		state = 605
+		state = 606
+		state = 607
+		state = 608
+		state = 609
+		state = 611
+		state = 612
+		state = 613
+		state = 614
+		state = 615
+		state = 616
+		state = 617
+		state = 618
+		state = 619
+		state = 620
+		state = 621
+		state = 622
+		state = 743
+		state = 744
+		state = 746
+		state = 747
+		state = 748
+		state = 749
+		state = 750
+		state = 751
+		state = 752
+		state = 753
+		state = 754
+		state = 755
+		state = 756
+		state = 759
+		state = 760
+		state = 1075
+		state = 1111
+		state = 1112
+		state = 1113
+		state = 1114
+		state = 1115
+		state = 1116
+		state = 1117
+		state = 1118
+		state = 1119
+		state = 1120
+		state = 1121
+		state = 1122
+		state = 1123
+		state = 1124
+		state = 1125
+	}
+}
+
+#20261119_kpopmodder: Protect every Korean-owned or Korean-controlled state and require eligible Chinese ownership and control.
+HOK_KOR_chinese_government_can_transfer_state = {
+	HOK_KOR_chinese_government_is_mainland = yes
+	NOT = { is_owned_by = KOR }
+	NOT = { is_controlled_by = KOR }
+	#20261119_kpopmodder: A representative state controller can hide foreign-held provinces; exclude every mixed-control state.
+	is_fully_controlled_by = CONTROLLER
+	owner = { HOK_KOR_chinese_government_is_donor = yes }
+	controller = { HOK_KOR_chinese_government_is_donor = yes }
+}
+
+#20261119_kpopmodder: Keep the first land donor alive until proportionate unit and stockpile transfers finish.
+HOK_KOR_chinese_government_can_bootstrap_state = {
+	HOK_KOR_chinese_government_can_transfer_state = yes
+	owner = { check_variable = { num_owned_states > 1 } }
+}
+
+#20261119_kpopmodder: Share the inclusive CHI democratic-majority requirement between focus eligibility and formation.
+HOK_KOR_chinese_government_has_chi_democracy = {
+	CHI = {
+		exists = yes
+		NOT = { democratic < 0.50 }
+	}
+}
+
+#20261119_kpopmodder: Require supervised-state support and a protected-rule-compliant Shandong foothold before creating the government.
+HOK_KOR_chinese_government_can_form = {
+	#20261119_kpopmodder: Match the vanilla dominion requirement after replacing supervised-state status.
+	has_dlc = "Together for Victory"
+	#20261119_kpopmodder: Recheck CHI democratic support before any government-formation effects.
+	HOK_KOR_chinese_government_has_chi_democracy = yes
+	NOT = { country_exists = KCH }
+	OR = {
+		597 = { HOK_KOR_chinese_government_can_bootstrap_state = yes }
+		743 = { HOK_KOR_chinese_government_can_bootstrap_state = yes }
+	}
+}

@@ -1,0 +1,24 @@
+#20261119_kpopmodder: Share the sixteen existing formal Chinese targets without including dynamic civil-war clones or collaboration states.
+HOK_KOR_is_chinese_democratic_support_target = {
+	exists = yes
+	#20261119_kpopmodder: Exclude dynamic clones even when a missing original tag resolves to one.
+	is_dynamic_country = no
+	OR = {
+		tag = CHI
+		tag = PRC
+		tag = SHX
+		tag = GXC
+		tag = YUN
+		tag = XSM
+		tag = SIK
+		tag = GDC
+		tag = SND
+		tag = SIC
+		tag = NXM
+		tag = GSM
+		tag = XIC
+		tag = KHM
+		tag = KUM
+		tag = HBC
+	}
+}

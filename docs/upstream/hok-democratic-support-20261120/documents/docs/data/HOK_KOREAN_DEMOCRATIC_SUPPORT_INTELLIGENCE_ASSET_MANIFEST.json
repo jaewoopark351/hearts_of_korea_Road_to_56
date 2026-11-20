@@ -1,0 +1,274 @@
+{
+  "date": "2026-11-18",
+  "scope": "One new Korean intelligence focus/spirit and democratic-support decision icons",
+  "source_baseline": {
+    "branch": "feat/korean-focus-expansion-ai",
+    "commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+    "vanilla": "Operation Postern v1.19.5.0.7c6c (c184)",
+    "installation": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV",
+    "external_work": "C:\\hoi\\test\\hok-democratic-support-intelligence-20261118-01\\assets"
+  },
+  "method": "Selected existing art copied byte-for-byte to dedicated project runtime paths; no AI generation, creative image edits, recoloring or resampling",
+  "permissions": [
+    {
+      "source": "Paradox Interactive",
+      "url": "https://legal.paradoxplaza.com/eula",
+      "checked": "2026-11-18",
+      "section": "5. User Generated Content",
+      "document_update": "2026-01-21",
+      "basis": "Noncommercial HOI4 mod use of selected officially released game assets; original rights remain with Paradox or its licensors, no independent open-source licence claimed",
+      "usage_limit": "Within Hearts of Iron IV mod content; British-derived focus gated on La Resistance; not an independently licensed asset pack"
+    },
+    {
+      "source": "Globvs / Ultimate HOI4 GFX contributors",
+      "url": "https://github.com/Globvs/Ultimate-HOI4-GFX/blob/3626dc83c8573d6603fa497138090b04b64a15ba/CREDITS.txt",
+      "revision": "3626dc83c8573d6603fa497138090b04b64a15ba",
+      "preserved_terms": "docs/assets/korean-civic-decision-icons/sources/CREDITS.txt",
+      "terms_sha256": "cf220dc66463d75163f7690ad77b02b662d0c05ca5d53dc62d33ed504512a7f5",
+      "basis": "Preserved upstream credits explicitly state contributor consent and free use; applies to the identified existing civic compositions only",
+      "provenance_manifest": "docs/data/HOK_KOREAN_CIVIC_DECISION_ICON_MANIFEST.json",
+      "provenance_credits": "docs/HOK_KOREAN_CHAEBOL_CIVIL_SOCIETY_ASSET_CREDITS.md"
+    }
+  ],
+  "continuation_contribution": "kpopmodder: selection, byte-exact internal copies, new dedicated sprites and path integration; no original artwork authorship claimed",
+  "source_declarations": {
+    "focus": "vanilla common/national_focus/uk.txt:329; interface/goals.gfx:3399-3400",
+    "shine": "vanilla interface/goals_shine.gfx:21686-21714",
+    "idea": "vanilla common/ideas/britain.txt:675-678; interface/ideas.gfx:673-674"
+  },
+  "sprites": [
+    "interface/HOK_KOR_democratic_support_intelligence.gfx",
+    "interface/HOK_KOR_democratic_support_intelligence_shine.gfx"
+  ],
+  "assets": [
+    {
+      "kind": "focus",
+      "ids": [
+        "HOK_KOR_expand_secret_intelligence_service"
+      ],
+      "sprite": "GFX_HOK_KOR_focus_secret_intelligence_service",
+      "source_root": "vanilla",
+      "source": "gfx/interface/goals/focus_generic_secret_service_agency.dds",
+      "texture": "gfx/interface/goals/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds",
+      "expected_dimensions": [
+        100,
+        88
+      ],
+      "palette": "Selected British original; no recoloring",
+      "authorship": "Paradox Interactive; individual artist not identified",
+      "method": "Byte-exact copy of the user-selected British focus eye motif; source dimensions, alpha and all pixel values retained",
+      "source_sha256": "22eeec2eded697bdda8396b98ae946590b1709e2c5963812eb309d50eb295c7a",
+      "sha256": "22eeec2eded697bdda8396b98ae946590b1709e2c5963812eb309d50eb295c7a",
+      "bytes": 35328,
+      "metadata": {
+        "width": 100,
+        "height": 88,
+        "row_bytes": 400,
+        "stored_pitch_or_linear_size": 400,
+        "header_flags": "0x100f",
+        "mipmap_count": 0,
+        "format": "BGRA32 uncompressed DDS",
+        "frames": 1,
+        "alpha_min": 0,
+        "alpha_max": 255,
+        "nontransparent_pixels": 5652
+      },
+      "inspection_preview": "C:\\hoi\\test\\hok-democratic-support-intelligence-20261118-01\\assets\\previews\\focus-secret_intelligence_service.png"
+    },
+    {
+      "kind": "shine_overlay",
+      "ids": [
+        "HOK_KOR_expand_secret_intelligence_service"
+      ],
+      "sprite": "GFX_HOK_KOR_focus_secret_intelligence_service_shine",
+      "source_root": "vanilla",
+      "source": "gfx/interface/goals/shine_overlay.dds",
+      "texture": "gfx/interface/goals/HOK_KOR/democratic_intelligence/shine_overlay.dds",
+      "expected_dimensions": [
+        87,
+        88
+      ],
+      "palette": "Original vanilla overlay",
+      "authorship": "Paradox Interactive; individual artist not identified",
+      "method": "Byte-exact copy; both shine animations and the focus-mask relationship follow the original British sprite",
+      "source_sha256": "bb416649358c73d34aacd46bad61bc44211fac8111627b56e25f385ad98f4448",
+      "sha256": "bb416649358c73d34aacd46bad61bc44211fac8111627b56e25f385ad98f4448",
+      "bytes": 30752,
+      "metadata": {
+        "width": 87,
+        "height": 88,
+        "row_bytes": 348,
+        "stored_pitch_or_linear_size": 348,
+        "header_flags": "0x100f",
+        "mipmap_count": 0,
+        "format": "BGRA32 uncompressed DDS",
+        "frames": 1,
+        "alpha_min": 253,
+        "alpha_max": 255,
+        "nontransparent_pixels": 7656
+      },
+      "inspection_preview": "C:\\hoi\\test\\hok-democratic-support-intelligence-20261118-01\\assets\\previews\\shine_overlay-shine_overlay.png"
+    },
+    {
+      "kind": "idea",
+      "ids": [
+        "HOK_KOR_secret_intelligence_service_idea"
+      ],
+      "sprite": "GFX_idea_HOK_KOR_secret_intelligence_service",
+      "picture": "HOK_KOR_secret_intelligence_service",
+      "source_root": "vanilla",
+      "source": "gfx/interface/ideas/generic_spy_intel.dds",
+      "texture": "gfx/interface/ideas/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds",
+      "expected_dimensions": [
+        58,
+        63
+      ],
+      "palette": "Selected British MI6 original; no recoloring",
+      "authorship": "Paradox Interactive; individual artist not identified",
+      "method": "Byte-exact copy of the British ENG_mi6_ns picture; original 58x63 dimensions retained rather than resampling to the project-created 60x68 baseline",
+      "source_sha256": "7309968400a39eb3db4ab309a34acb393d0c66a728dbff2f2793b7667fde3249",
+      "sha256": "7309968400a39eb3db4ab309a34acb393d0c66a728dbff2f2793b7667fde3249",
+      "bytes": 14744,
+      "metadata": {
+        "width": 58,
+        "height": 63,
+        "row_bytes": 232,
+        "stored_pitch_or_linear_size": 14616,
+        "header_flags": "0x81007",
+        "mipmap_count": 0,
+        "format": "BGRA32 uncompressed DDS",
+        "frames": 1,
+        "alpha_min": 0,
+        "alpha_max": 255,
+        "nontransparent_pixels": 2255
+      },
+      "inspection_preview": "C:\\hoi\\test\\hok-democratic-support-intelligence-20261118-01\\assets\\previews\\idea-secret_intelligence_service.png"
+    },
+    {
+      "kind": "decision_category",
+      "ids": [
+        "HOK_KOR_democratic_support_category"
+      ],
+      "sprite": "GFX_HOK_KOR_decision_category_democratic_support",
+      "source_root": "repository",
+      "source": "gfx/interface/decisions/HOK_KOR/civic/category.dds",
+      "texture": "gfx/interface/decisions/HOK_KOR/democratic_support/category.dds",
+      "expected_dimensions": [
+        51,
+        40
+      ],
+      "palette": "Existing civic category industry gray; original retained for scoped asset reuse",
+      "authorship": "Globvs / Ultimate HOI4 GFX contributors; existing composition by kpopmodder",
+      "method": "Byte-exact copy of the existing dedicated civic header (Blueprints, Cog Wheel, Circular Arrows); no new drawing, recoloring or resizing",
+      "source_sha256": "bafbbc102e4da51ab05ca9b15910dea930dc1461994bef4eb373a5a6381cd937",
+      "sha256": "bafbbc102e4da51ab05ca9b15910dea930dc1461994bef4eb373a5a6381cd937",
+      "bytes": 8288,
+      "metadata": {
+        "width": 51,
+        "height": 40,
+        "row_bytes": 204,
+        "stored_pitch_or_linear_size": 204,
+        "header_flags": "0x100f",
+        "mipmap_count": 0,
+        "format": "BGRA32 uncompressed DDS",
+        "frames": 1,
+        "alpha_min": 0,
+        "alpha_max": 255,
+        "nontransparent_pixels": 1307
+      },
+      "inspection_preview": "C:\\hoi\\test\\hok-democratic-support-intelligence-20261118-01\\assets\\previews\\decision_category-category.png"
+    },
+    {
+      "kind": "decision",
+      "ids": [
+        "HOK_KOR_support_democracy_in_japan"
+      ],
+      "sprite": "GFX_HOK_KOR_decision_support_democracy_in_japan",
+      "source_root": "repository",
+      "source": "gfx/interface/decisions/HOK_KOR/civic/influence_blue.dds",
+      "texture": "gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_japan.dds",
+      "expected_dimensions": [
+        32,
+        32
+      ],
+      "palette": {
+        "democracy_reference_rgb": [
+          53,
+          91,
+          126
+        ],
+        "hex": "#355b7e"
+      },
+      "authorship": "Globvs / Ultimate HOI4 GFX contributors; existing small composition and blue background by kpopmodder",
+      "method": "Byte-exact copy of the existing scales/civic-influence icon; dedicated filename and sprite, no new image editing",
+      "source_sha256": "c305d3c1c4a747e060f8aca551678cebf6a5986fd91467fb34161b0fcb7f19ab",
+      "sha256": "c305d3c1c4a747e060f8aca551678cebf6a5986fd91467fb34161b0fcb7f19ab",
+      "bytes": 4224,
+      "metadata": {
+        "width": 32,
+        "height": 32,
+        "row_bytes": 128,
+        "stored_pitch_or_linear_size": 128,
+        "header_flags": "0x100f",
+        "mipmap_count": 0,
+        "format": "BGRA32 uncompressed DDS",
+        "frames": 1,
+        "alpha_min": 0,
+        "alpha_max": 255,
+        "nontransparent_pixels": 721
+      },
+      "inspection_preview": "C:\\hoi\\test\\hok-democratic-support-intelligence-20261118-01\\assets\\previews\\decision-support_democracy_in_japan.png"
+    },
+    {
+      "kind": "decision",
+      "ids": [
+        "HOK_KOR_support_democracy_in_china"
+      ],
+      "sprite": "GFX_HOK_KOR_decision_support_democracy_in_china",
+      "source_root": "repository",
+      "source": "gfx/interface/decisions/HOK_KOR/civic/influence_blue.dds",
+      "texture": "gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_china.dds",
+      "expected_dimensions": [
+        32,
+        32
+      ],
+      "palette": {
+        "democracy_reference_rgb": [
+          53,
+          91,
+          126
+        ],
+        "hex": "#355b7e"
+      },
+      "authorship": "Globvs / Ultimate HOI4 GFX contributors; existing small composition and blue background by kpopmodder",
+      "method": "Byte-exact copy of the same scales/civic-influence motif for the matching Chinese programme; no new image editing",
+      "source_sha256": "c305d3c1c4a747e060f8aca551678cebf6a5986fd91467fb34161b0fcb7f19ab",
+      "sha256": "c305d3c1c4a747e060f8aca551678cebf6a5986fd91467fb34161b0fcb7f19ab",
+      "bytes": 4224,
+      "metadata": {
+        "width": 32,
+        "height": 32,
+        "row_bytes": 128,
+        "stored_pitch_or_linear_size": 128,
+        "header_flags": "0x100f",
+        "mipmap_count": 0,
+        "format": "BGRA32 uncompressed DDS",
+        "frames": 1,
+        "alpha_min": 0,
+        "alpha_max": 255,
+        "nontransparent_pixels": 721
+      },
+      "inspection_preview": "C:\\hoi\\test\\hok-democratic-support-intelligence-20261118-01\\assets\\previews\\decision-support_democracy_in_china.png"
+    }
+  ],
+  "verification": {
+    "source_copy_byte_equality": true,
+    "dimensions_format_alpha": true,
+    "project_image_path_resolution": true,
+    "sprite_name_uniqueness_in_repository": true,
+    "paired_localisation_bom_and_body": true,
+    "actual_size_preview": "C:\\hoi\\test\\hok-democratic-support-intelligence-20261118-01\\assets\\previews\\actual-size-sheet.png",
+    "visual_inspection": "Actual-size PNG sheet inspected: eye, spy portrait, civic header and blue scales remain legible with original transparent margins",
+    "runtime": "Not run by asset subtask; locked/available/active/completed/shine/idea/decision UI unverified"
+  }
+}

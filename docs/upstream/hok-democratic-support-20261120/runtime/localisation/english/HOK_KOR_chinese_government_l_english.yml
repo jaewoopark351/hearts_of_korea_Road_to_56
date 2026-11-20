@@ -1,0 +1,10 @@
+﻿l_english:
+#20261119_kpopmodder: Explain the existing CHI country and inclusive 50 percent democratic-support requirement.
+#20261119_kpopmodder: Describe Shandong as a Korean dominion and require Together for Victory.
+#20261119_kpopmodder: Distinguish whole Shandong warlord land integration from support-scaled Chinese territory and military defections.
+#20261119_kpopmodder: Keep protected Shandong government requirements and effects visible across translation file overrides.
+ HOK_KOR_chinese_government_mtg_tt:0 "§YTogether for Victory§! DLC가 활성화되어 있음"
+ HOK_KOR_chinese_government_chi_democracy_tt:0 "§Y중국§!이 존재하며 민주주의 지지도가 §Y50% 이상§!임"
+ HOK_KOR_chinese_government_no_existing_tt:0 "산둥 자유 공화국이 아직 존재하지 않음"
+ HOK_KOR_chinese_government_seed_tt:0 "산둥 또는 칭다오에 §Y중국 세력이 완전히 통제하는 안전한 거점§!이 있음(한국·일본 측 소유·통제 지역 제외, 원소유국이 다른 주 1개 이상 보유)"
+ HOK_KOR_chinese_government_effect_tt:0 "산둥에 §Y한국의 자치령§!인 §Y산둥 자유 공화국§!을 수립하고 중국 본토에 핵심주를 부여합니다.\n편입 가능한 §Y산둥·칭다오 거점§!과 §Y산둥군벌이 소유한 중국 본토의 적격 영토 전부§!를 민주주의 지지도와 무관한 기본 영토로 확보합니다.\n다른 중국 국가에서는 중점 완료 시 민주주의 지지도(최대 §Y90%§!)에 따라 기본 영토와 육지로 연결된 주를 추가 편입합니다. 기존 산둥·칭다오 거점은 해당 원소유국의 영토 배분량에서 차감합니다.\n실제 영토가 편입된 대상국의 육군·해군·공군·비축 장비·연료에는 해당 국가의 지지도에 따른 같은 귀순 비율을 적용합니다. 기존 지휘관은 귀순 대상에서 제외합니다. 전면 편입으로 소멸하는 산둥군벌의 미귀순 장비·수송선·연료는 폐기됩니다.\n공군 귀순에 필요한 기존 비행장을 우선 확보하며, 편입 대상에 사용 가능한 비행장이 없으면 새 정부 거점에 비행장 1단계를 마련합니다.\n§Y한국 소유·통제 지역, 일본 및 일본 측 종속국 소유·통제 지역, 만주§!는 이전하지 않습니다.\n한국은 현존하는 중국·공산중국 및 14개 군벌에 대한 전쟁명분을 얻습니다. 전쟁 개시·참전은 일반 외교 규칙을 따릅니다."

@@ -1810,8 +1810,17 @@ def verify_english_translation() -> None:
     defense_english = {'localisation/english/HOK_KOR_us_defense_l_english.yml'}
     if set(defense_locales) != defense_english | {'localisation/korean/HOK_KOR_us_defense_l_korean.yml'}:
         raise ValueError('bilateral defence localisation pair allowlist changed')
-    if paths != expected_paths | additions.keys() | feature_english.keys() | prospecting_english | split_english | content_english | equipment_english.keys() | defense_english:
+    #20261120_kpopmodder: Admit only the three locked democratic English additions and check all eight current locale outputs.
+    from upstream_democratic_support import build_outputs as democratic_outputs, OLD as democratic_old
+    democratic_locales = {p:data for p,data in democratic_outputs().items() if p.startswith('localisation/')}
+    democratic_english = {p for p in democratic_locales if p.startswith('localisation/english/') and p not in democratic_old}
+    if democratic_english != {f'localisation/english/HOK_KOR_{topic}_l_english.yml' for topic in ('chinese_government','democratic_intelligence','democratic_support')}:
+        raise ValueError('democratic English file allowlist changed')
+    if paths != expected_paths | additions.keys() | feature_english.keys() | prospecting_english | split_english | content_english | equipment_english.keys() | defense_english | democratic_english:
         raise ValueError("English output file inventory differs from the reviewed translation layers")
+    for relative, expected in democratic_locales.items():
+        if (REPO_ROOT / relative).read_bytes() != expected:
+            raise ValueError(f'democratic locale output drift: {relative}')
     for relative, expected in equipment_english.items():
         if (REPO_ROOT / relative).read_bytes() != expected:
             raise ValueError(f'equipment override English output drift: {relative}')

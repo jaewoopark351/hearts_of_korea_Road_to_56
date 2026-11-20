@@ -1936,6 +1936,29 @@ focus_tree = {
 			add_offsite_building = { type = arms_factory level = 3 }
 		}
 	}
+	#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
+	focus = {
+		id = HOK_KOR_expand_secret_intelligence_service
+		icon = GFX_HOK_KOR_focus_secret_intelligence_service
+		#20261119_kpopmodder: Move the intelligence service beneath the shared rearmament entry with room between navy and air branches.
+		relative_position_id = KOR_begin_rearmament
+		x = 8
+		y = 1
+		cost = 5
+		available_if_capitulated = no
+		prerequisite = { focus = KOR_begin_rearmament }
+		#20261119_kpopmodder: Keep the DLC-specific child within the democratic sector's existing HIDE rules.
+		#20261119_kpopmodder: Supersede the former democratic HIDE gate after moving to the common military branch; retain the DLC requirement.
+		allow_branch = { has_dlc = "La Resistance" }
+		ai_will_do = { factor = 1 }
+		completion_reward = {
+			if = {
+				limit = { has_intelligence_agency = no }
+				create_intelligence_agency = yes
+			}
+			add_ideas = HOK_KOR_secret_intelligence_service_idea
+		}
+	}
 	#Focus for build the gyeryongdae
 	focus = {
 		id = KOR_build_the_gyeryongdae
@@ -6977,6 +7000,7 @@ focus_tree = {
 		}
 	}
 	#Focus for invite china
+	#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
 	focus = {
 		id = KOR_invite_china
 		icon = GFX_focus_chi_cooperation_with_the_nationalists
@@ -7001,7 +7025,7 @@ focus_tree = {
 		prerequisite = { 
 			focus = KOR_founding_of_the_asian_union
 		}
-		mutually_exclusive = { focus = KOR_support_for_democracy_in_china }
+		#20261118_kpopmodder: Keep invitations compatible with earlier democratic sponsorship.
 		ai_will_do = {
 			factor = 1
 		}
@@ -7011,15 +7035,17 @@ focus_tree = {
 		}
 	}
 	#Focus for support for democracy in china
+	#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
 	focus = {
 		id = KOR_support_for_democracy_in_china
 		icon = GFX_goal_generic_dangerous_deal
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
-		relative_position_id = KOR_founding_of_the_asian_union
+		relative_position_id = KOR_the_vanguard_of_asian_democracy
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
 		#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.
+		#20261118_kpopmodder: Place the support branch beside its earlier democratic entry.
 		x = -6
-		y = 2
+		y = 1
 		#20260921_kpopmodder: Shorten this existing focus from 70 to 35 days.
 		cost = 5
 		available_if_capitulated = no
@@ -7029,59 +7055,20 @@ focus_tree = {
 			}
 		}
 		prerequisite = { 
-			focus = KOR_founding_of_the_asian_union
+			focus = KOR_the_vanguard_of_asian_democracy
 		}
-		mutually_exclusive = { focus = KOR_invite_china }
+		#20261118_kpopmodder: Permit democratic sponsorship alongside the later invitation route.
 		ai_will_do = {
 			factor = 1
 		}
 		
+		#20261118_kpopmodder: Move automatic 280-day sponsorship to a paid repeatable decision.
 		completion_reward = {
-			CHI = {
-				add_timed_idea = {
-					idea = KOR_democrat_sponsored_by_korea
-					days = 280
-				}
-			}
-			PRC = {
-				add_timed_idea = {
-					idea = KOR_democrat_sponsored_by_korea
-					days = 280
-				}
-			}
-			SHX = {
-				add_timed_idea = {
-					idea = KOR_democrat_sponsored_by_korea
-					days = 280
-				}
-			}
-			GXC = {
-				add_timed_idea = {
-					idea = KOR_democrat_sponsored_by_korea
-					days = 280
-				}
-			}
-			YUN = {
-				add_timed_idea = {
-					idea = KOR_democrat_sponsored_by_korea
-					days = 280
-				}
-			}
-			XSM = {
-				add_timed_idea = {
-					idea = KOR_democrat_sponsored_by_korea
-					days = 280
-				}
-			}
-			SIK = {
-				add_timed_idea = {
-					idea = KOR_democrat_sponsored_by_korea
-					days = 280
-				}
-			}
+			unlock_decision_tooltip = HOK_KOR_support_democracy_in_china
 		}
 	}
 	#Focus for overthrow the chinese dictators
+	#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
 	focus = {
 		id = KOR_overthrow_the_chinese_dictators
 		icon = GFX_focus_kor_overthrow_the_chinese_dictators
@@ -7091,12 +7078,37 @@ focus_tree = {
 		x = 0
 		y = 2
 		#20260921_kpopmodder: Shorten this existing focus from 70 to 35 days.
-		cost = 5
+		#20261119_kpopmodder: Restore this focus to a nominal 70 days for the supported Chinese government formation.
+		cost = 10
 		available_if_capitulated = no
+		#20261119_kpopmodder: Cancel formation when no protected-rule-compliant Shandong foothold remains.
+		cancel_if_invalid = yes
+		continue_if_invalid = no
 		available = {
+			#20261119_kpopmodder: Match dominion support while retaining the existing DLC tooltip ID.
+			custom_trigger_tooltip = {
+				tooltip = HOK_KOR_chinese_government_mtg_tt
+				has_dlc = "Together for Victory"
+			}
+			#20261119_kpopmodder: Require at least 50 percent democratic support in the existing CHI country.
+			custom_trigger_tooltip = {
+				tooltip = HOK_KOR_chinese_government_chi_democracy_tt
+				HOK_KOR_chinese_government_has_chi_democracy = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = HOK_KOR_chinese_government_no_existing_tt
+				NOT = { country_exists = KCH }
+			}
+			custom_trigger_tooltip = {
+				tooltip = HOK_KOR_chinese_government_seed_tt
+				OR = {
+					597 = { HOK_KOR_chinese_government_can_bootstrap_state = yes }
+					743 = { HOK_KOR_chinese_government_can_bootstrap_state = yes }
+				}
+			}
 			KOR = { has_government = democratic 
 					is_subject = no
-					is_faction_leader = yes
+					#20261119_kpopmodder: Allow this uprising focus without requiring Korean faction leadership.
 			}
 			event_target:WTT_current_china_leader = {
 				exists = yes
@@ -7113,56 +7125,25 @@ focus_tree = {
 		}
 		
 		completion_reward = {
-			custom_effect_tooltip = KOR_overthrow_the_chinese_dictators_tt
+			custom_effect_tooltip = HOK_KOR_chinese_government_effect_tt
 			unlock_decision_tooltip = KOR_New_China_Government
-			hidden_effect = {
-				create_dynamic_country = {
-					original_tag = KCH
-					KCH = {
-						transfer_state = 597
-						transfer_state = 743
-						add_state_core = 597
-						add_state_core = 743
+			#20261119_kpopmodder: Form one supervised Chinese government using connected defections and protected territory.
+			hidden_effect = { HOK_KOR_form_chinese_democratic_government = yes }
+			#20261119_kpopmodder: Grant the Korean focus country puppet goals against the same existing sixteen-country support set.
+			every_country = {
+				limit = { HOK_KOR_is_chinese_democratic_support_target = yes }
+				ROOT = {
+					create_wargoal = {
+						type = puppet_wargoal_focus
+						target = PREV
 					}
-					KOR = {
-						add_to_faction = KCH
-					}
-				}
-			}
-			KOR = {
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = CHI
-				}
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = PRC
-				}
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = SHX
-				}
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = GXC
-				}
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = YUN
-				}
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = XSM
-				}
-				create_wargoal = {
-					type = puppet_wargoal_focus
-					target = SIK
 				}
 			}
 			
 		}
 	}
 	#Focus for invite japan
+	#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
 	focus = {
 		id = KOR_invite_japan
 		icon = GFX_focus_generic_handshake_with_democratic_japan
@@ -7188,7 +7169,7 @@ focus_tree = {
 		prerequisite = { 
 			focus = KOR_founding_of_the_asian_union
 		}
-		mutually_exclusive = { focus = KOR_support_for_democracy_in_japan }
+		#20261118_kpopmodder: Keep invitations compatible with earlier democratic sponsorship.
 		ai_will_do = {
 			factor = 1
 		}
@@ -7198,15 +7179,17 @@ focus_tree = {
 		}
 	}
 	#Focus for support for democracy in japan
+	#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
 	focus = {
 		id = KOR_support_for_democracy_in_japan
 		icon = GFX_goal_generic_dangerous_deal
 		#20260921_kpopmodder: Space this branch using the documented layout anchor; preserve focus gameplay.
-		relative_position_id = KOR_founding_of_the_asian_union
+		relative_position_id = KOR_the_vanguard_of_asian_democracy
 		#20260921_kpopmodder: Compact sector spacing while keeping focus and nameplate lanes clear.
 		#20261031_kpopmodder: Compact the democratic policy layout while preserving progression and rewards.
-		x = 4
-		y = 2
+		#20261118_kpopmodder: Place the support branch beside its earlier democratic entry.
+		x = -3
+		y = 1
 		#20260921_kpopmodder: Shorten this existing focus from 70 to 35 days.
 		cost = 5
 		available_if_capitulated = no
@@ -7221,23 +7204,20 @@ focus_tree = {
 			}
 		}
 		prerequisite = { 
-			focus = KOR_founding_of_the_asian_union
+			focus = KOR_the_vanguard_of_asian_democracy
 		}
-		mutually_exclusive = { focus = KOR_invite_japan }
+		#20261118_kpopmodder: Permit democratic sponsorship alongside the later invitation route.
 		ai_will_do = {
 			factor = 1
 		}
 		
+		#20261118_kpopmodder: Move automatic 280-day sponsorship to a paid repeatable decision.
 		completion_reward = {
-			JAP = {
-				add_timed_idea = {
-					idea = KOR_democrat_sponsored_by_korea
-					days = 280
-				}
-			}
+			unlock_decision_tooltip = HOK_KOR_support_democracy_in_japan
 		}
 	}
 	#Focus for minshu ikki
+	#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
 	focus = {
 		id = KOR_minshu_ikki
 		icon = GFX_focus_kor_republic_of_yamato
@@ -7252,10 +7232,10 @@ focus_tree = {
 		available = {
 			KOR = { has_government = democratic 
 					is_subject = no
-					is_faction_leader = yes
+					#20261119_kpopmodder: Allow this uprising focus without requiring Korean faction leadership.
 			}
 			JAP = {
-				is_ai = yes
+				#20261119_kpopmodder: Allow the Korean uprising focus against either AI- or human-controlled Japan.
 				NOT = {
 					has_government = democratic
 				}
@@ -7270,19 +7250,9 @@ focus_tree = {
 		
 		completion_reward = {
 			custom_effect_tooltip = KOR_minshu_ikki_tt
+			#20261118_kpopmodder: Scale the democratic revolt with Japanese support while retaining intervention.
 			hidden_effect = {
-				JAP = {
-					start_civil_war = {
-						ideology = democratic
-						set_cosmetic_tag = KJP_democratic
-						load_focus_tree = generic_focus
-						
-						KOR = {
-							add_to_faction = PREV
-							add_to_war = { targeted_alliance = PREV enemy = JAP hostility_reason = asked_to_join }
-						}
-					}
-				}
+				JAP = { HOK_KOR_japanese_democratic_uprising = yes }
 			}
 		}
 	}

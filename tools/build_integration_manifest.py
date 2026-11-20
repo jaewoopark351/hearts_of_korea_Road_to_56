@@ -1205,6 +1205,9 @@ def build_csv() -> tuple[bytes, Counter[str], int]:
     #20261114_kpopmodder: Append five exact commander revisions without changing earlier provenance or multi-output siblings.
     from upstream_commanders import ledger_bytes as commander_ledger_bytes
     final = commander_ledger_bytes(final)
+    #20261120_kpopmodder: Append the exact democratic successor and its selected source provenance after older layers.
+    from upstream_democratic_support import ledger_bytes as democratic_ledger_bytes
+    final = democratic_ledger_bytes(final)
     final_rows = list(csv.DictReader(io.StringIO(final.decode("utf-8"), newline="")))
     final_counts = Counter(row["integration_class"] for row in final_rows)
     final_collisions = sum(row["exact_path_rt56_collision"] == "yes" for row in final_rows)
@@ -1512,7 +1515,9 @@ def build_state_split_csv(*, output_root: Path = REPO_ROOT) -> bytes:
     from upstream_scientists import ledger_bytes as scientist_ledger_bytes
     #20261114_kpopmodder: Keep scoped regeneration on the same terminal commander provenance as full builds.
     from upstream_commanders import ledger_bytes as commander_ledger_bytes
-    return commander_ledger_bytes(scientist_ledger_bytes(capture_ledger_bytes(final)))
+    #20261120_kpopmodder: Keep scoped manifests on the same terminal democratic provenance as full generation.
+    from upstream_democratic_support import ledger_bytes as democratic_ledger_bytes
+    return democratic_ledger_bytes(commander_ledger_bytes(scientist_ledger_bytes(capture_ledger_bytes(final))))
 
 
 def main() -> int:

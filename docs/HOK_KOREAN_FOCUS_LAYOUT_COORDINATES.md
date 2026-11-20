@@ -1,5 +1,11 @@
 # 한국 중점 현행 배치 좌표와 이식 이력
 
+## 2026-11-20 민주인사 지원과 비밀 정보국
+
+상태: **STATIC_SPEC_RUNTIME_UNPROVEN**. 현재475개 중점의 좌표·기준 연쇄·선행/배타·18개 제한된 SHOW/HIDE/LaR 모델은 [최신 배치 기록](implementation/2026-11-20-democratic-support-layout.md)과 [475개 기계 명세](data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PORT_LAYOUT.json)를 따른다. 해당 가지를 수정·재생성·검증하기 전에 두 자료를 읽는다. 신규 정보국 `(62,1)`과 네 지원/봉기 중점의 민주 선봉 연결을 반영했으며 기존 초대·다른 중점·직접 offset·전체 범위는 유지한다. 실제 이름판·아이콘·연결선·숨김 전환·클릭/광택은 미검증이다.
+
+아래11월1일의474개와10월31일의472→474개 기록은 각각 당시 소스의 이력이다. 각 절의 “현행”·검사 수·해시를 위475개 최종 출력의 관측으로 재사용하지 않는다.
+
 ## 2026-11-01 민주주의 내부 간격 압축
 
 상태: **STATIC_SPEC_RUNTIME_UNPROVEN**. 현행 배치는 donor `07de265` 위의 미커밋 민주 압축 delta를 호환판 `656d9b425a66d95f55d8c86f1b976b2e094cc4d8` 이후에 선택 이식한 것이다. [이번 구현 기록](implementation/2026-11-01-korean-democratic-layout-port.md)과 [신규 전후 좌표 JSON](data/HOK_KOREAN_DEMOCRATIC_LAYOUT_COORDINATES.json)을 따른다. 기존 아래의 10월 31일 민간 핵 가지 기록과 그 JSON은 당시 소스의 이력으로 보존하며 현행 전체 배치의 해시로 사용하지 않는다.

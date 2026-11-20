@@ -1,0 +1,887 @@
+{
+  "schema_version": 1,
+  "updated_date": "2026-11-19",
+  "purpose": "Maintained geographic membership and source/provenance index for the KCH democratic-government formation and recognition helpers. This file is not a test report or a runtime distribution result.",
+  "read_before_changing_membership": {
+    "condition": "Read before changing these core or transfer-geometry groups, the Shandong seed policy, or Korean/Japanese territorial protection.",
+    "document": "../HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PLAN.md#19-shandong-warlord-integration-implementation"
+  },
+  "target_version": {
+    "installed_version": "Operation Postern v1.19.5.0.7c6c (c184)",
+    "version_source": "launcher-settings.json",
+    "sha256": "1dc5d1a666b8843268449376b2d6d7a2f70045086c4c02babd5974847ce133d4",
+    "limitation": "Installed-source version; this index does not assert a runtime checksum or online release status."
+  },
+  "source_roots": {
+    "repository": {
+      "path": "C:\\hoi\\hearts_of_korea",
+      "role": "Authoritative working source; runtime helpers reference the groups recorded here."
+    },
+    "installed_vanilla": {
+      "path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Hearts of Iron IV",
+      "role": "Read-only target-version state, map, localisation and schema source."
+    },
+    "external_geography": {
+      "path": "C:\\hoi\\test\\hok-shandong-democratic-government-20261119-01\\geography",
+      "role": "Task inventory and source evidence; helper scripts and diagnostic outputs remain outside the repository."
+    },
+    "external_full_integration": {
+      "path": "C:\\hoi\\test\\hok-shandong-full-integration-20261119-01",
+      "role": "Later SND founding-territory implementation baseline and evidence copies; separate from the original geographic inventory and earlier runtime results."
+    }
+  },
+  "runtime_references": {
+    "state_triggers": "../../common/scripted_triggers/HOK_KOR_chinese_government_state_triggers.txt",
+    "effects": "../../common/scripted_effects/HOK_KOR_chinese_government_effects.txt",
+    "focus": {
+      "path": "../../common/national_focus/korea.txt",
+      "id": "KOR_overthrow_the_chinese_dictators"
+    },
+    "recognition_decision": {
+      "path": "../../common/decisions/KOR_decision.txt",
+      "id": "KOR_New_China_Government"
+    }
+  },
+  "mainland_core_and_transfer_geometry": {
+    "count": 63,
+    "state_ids": [
+      283,
+      287,
+      325,
+      592,
+      593,
+      594,
+      595,
+      596,
+      597,
+      598,
+      599,
+      600,
+      601,
+      602,
+      603,
+      604,
+      605,
+      606,
+      607,
+      608,
+      609,
+      611,
+      612,
+      613,
+      614,
+      615,
+      616,
+      617,
+      618,
+      619,
+      620,
+      621,
+      622,
+      743,
+      744,
+      746,
+      747,
+      748,
+      749,
+      750,
+      751,
+      752,
+      753,
+      754,
+      755,
+      756,
+      759,
+      760,
+      1032,
+      1033,
+      1034,
+      1035,
+      1036,
+      1037,
+      1038,
+      1039,
+      1040,
+      1041,
+      1042,
+      1043,
+      1044,
+      1045,
+      1046
+    ],
+    "basis": "Union of the earlier KCH reconstruction core region and current CHI-core mainland coverage, excluding the Manchurian and island/concession groups below; retain state 601 from the earlier KCH region. Core membership alone does not authorize ownership transfer.",
+    "transfer_eligibility": "Apply owner/controller donor eligibility, require full control by the current Chinese state controller, and apply Korean/Japanese protection separately. Select eligible 597/743 seeds and every eligible SND-owned mainland state as founding territory, including disconnected SND conquests. Other donors expand from any selected founding territory under the existing support budget and land-neighbor rule.",
+    "changes_from_prior_kch_reconstruction": {
+      "prior_unique_count": 63,
+      "added_state_ids": [
+        283,
+        287,
+        743,
+        759,
+        760
+      ],
+      "removed_state_ids": [
+        326,
+        591,
+        610,
+        728,
+        729
+      ]
+    }
+  },
+  "excluded_manchurian_geometry": {
+    "count": 8,
+    "state_ids": [
+      328,
+      610,
+      714,
+      715,
+      716,
+      717,
+      745,
+      761
+    ],
+    "basis": "Explicit geographic exclusion, independent of current owner/controller. These eight target-version states carry MAN cores in their state source; exclusion includes Jehol and Dalian."
+  },
+  "excluded_islands_and_concessions": {
+    "count": 5,
+    "states": [
+      {
+        "id": 326,
+        "name": "Hong Kong",
+        "reason": "British concession; exclude from this mainland core/transfer group."
+      },
+      {
+        "id": 524,
+        "name": "Taiwan",
+        "reason": "Island; exclude irrespective of current ownership."
+      },
+      {
+        "id": 591,
+        "name": "Hainan",
+        "reason": "Island; exclude despite the special sea adjacency to state 1033."
+      },
+      {
+        "id": 728,
+        "name": "Guangzhouwan",
+        "reason": "French concession; exclude from this mainland core/transfer group."
+      },
+      {
+        "id": 729,
+        "name": "Macau",
+        "reason": "Portuguese concession; exclude from this mainland core/transfer group."
+      }
+    ]
+  },
+  "retained_state_601": {
+    "name": "참도",
+    "tibetan_name": "캄 지역",
+    "reason": "Preserve the existing KCH reconstruction core region; this is not a claim that state 601 is a CHI core.",
+    "initial_source_owner": "TIB",
+    "initial_source_has_chi_core": false,
+    "transfer_limit": "TIB is outside the fixed sixteen-country donor set, so the source-owner/controller donor requirement excludes Tibetan-owned or Tibetan-controlled state 601 from formation transfers."
+  },
+  "territory_protection": {
+    "korean_rule": "Never transfer a state if KOR owns OR controls it, including Chinese nominal ownership under Korean occupation. Require full state control by its eligible Chinese controller, so even partial Korean/Japanese province occupation excludes the whole state. Applies to seeds and additional states.",
+    "japanese_rule": "Require both owner and controller to be eligible Chinese donors. Exclude Japanese direct ownership/control and Chinese donors that are direct Japanese subjects or have an overlord that is a Japanese subject.",
+    "japanese_subject_filter_depth": "Direct and second-level subject relationships; deeper chains are not covered by the present helper.",
+    "donor_country_tags": [
+      "CHI",
+      "PRC",
+      "SHX",
+      "GXC",
+      "YUN",
+      "XSM",
+      "SIK",
+      "GDC",
+      "SND",
+      "SIC",
+      "NXM",
+      "GSM",
+      "XIC",
+      "KHM",
+      "KUM",
+      "HBC"
+    ],
+    "donor_source": "../../common/scripted_triggers/HOK_KOR_chinese_democratic_support_triggers.txt",
+    "donor_conditions": "Existing formal countries; dynamic clones excluded. Owner and controller each must pass the donor helper, and the controller must fully control the state.",
+    "scope_boundary": "These territorial groups and filters do not narrow the separate existing sixteen-country Korean puppet-wargoal target set."
+  },
+  "shandong_seed_and_land_adjacency": {
+    "seed_priority": [
+      597,
+      743
+    ],
+    "bootstrap_requirement": "The first seed owner must own more than one state, so it survives until unit transfer. Prefer eligible 597, otherwise eligible 743. If neither can bootstrap, block formation; other selected seed owners may lose their final state after unit transfer.",
+    "airbase_before_unit_transfer": "Only when a positive-share participant has deployed aircraft: transfer one already-selected existing airbase state before units if its current owner survives. Do not select extra land or debit its budget twice. If no such airbase can be acquired, provide exactly one airbase level at the already-owned government capital. No new airbase is added when existing acquired bases suffice or no positive-share deployed-air transfer is needed.",
+    "state_1038_role": "Jinan is founding territory without a support-budget requirement when owned by eligible SND and passing the existing mainland/full-control/protection filter; it is not an independent bootstrap seed. Under other owners it remains a support-based expansion candidate.",
+    "previous_state_1038_role": "Before the later SND integration implementation on 2026-11-19, adjacent Jinan was only an expansion candidate, not an unconditional fallback seed.",
+    "snd_founding_territory": "After selecting the existing eligible seeds, select every remaining eligible mainland candidate owned by SND, including disconnected conquered mainland states. Preserve all geographic and Korean/Japanese ownership/control exclusions. Other donors expand from any selected founding territory using the existing support budget and land-neighbor rule.",
+    "snd_absent_policy": "Keep the existing 597/743 bootstrap path when SND is absent. Do not add a 1038-only fallback or bypass the safe-first-owner-survival requirement.",
+    "snd_extinction_residue_policy": "After the approved proportional asset transfer, clear remaining equipment, convoys and fuel only for participant SND that still owns at least one state and whose every remaining state is selected and still passes the transfer predicate. Use the official convoy equipment getter and negative convoy_1 stockpile effect for the convoy remainder; the general equipment-fraction effect alone does not clear it. This prevents extra annexation loot when the last state moves. Do not clear other donors or SND that retains protected/excluded land. This policy does not guarantee exact proportional ship counts.",
+    "direct_land_neighbors": {
+      "597": [
+        598,
+        743,
+        1038
+      ],
+      "743": [
+        597
+      ],
+      "1038": [
+        597,
+        598,
+        607,
+        614
+      ]
+    },
+    "critical_connection": "Qingdao 743 has a land border only with Shandong 597; it does not directly touch Jinan 1038. Protected/excluded 597 cannot be transferred to connect 743 to 1038.",
+    "adjacency_basis": "Orthogonal land-province pixel borders in repository provinces.bmp, resolved through repository definition.csv and effective target-version state province membership. This is source geography, not an engine execution claim.",
+    "special_adjacency_note": "No sea-type special adjacency links two states in the 63-state group. The 1033-to-591 Hainan sea link terminates in an excluded state."
+  },
+  "map_and_localisation_sources": [
+    {
+      "source_root": "repository",
+      "relative_path": "map/provinces.bmp",
+      "sha256": "a00ec0e8c18e9f405fc7e7ea59a77848870f03c79e9e5f78cf6e12272d867600"
+    },
+    {
+      "source_root": "repository",
+      "relative_path": "map/definition.csv",
+      "sha256": "ca90847350f70ffcfd358bbab02612e86b20de3528327eb91a67c16419b377a6"
+    },
+    {
+      "source_root": "installed_vanilla",
+      "relative_path": "map/adjacencies.csv",
+      "sha256": "26a26c3f42a4b01fb905c99659024e857ffc05e3172fcd9953395321fb76ed64"
+    },
+    {
+      "source_root": "installed_vanilla",
+      "relative_path": "localisation/korean/state_names_l_korean.yml",
+      "sha256": "66a019402788bab5a383051adf028cb016af1eb81376cd8a9c7af602a5d401be"
+    }
+  ],
+  "historical_source_index": {
+    "prior_kch_reconstruction_copy": "C:\\hoi\\test\\hok-shandong-democratic-government-20261119-01\\baseline-source\\common\\decisions\\KOR_decision.txt",
+    "sha256": "9a22d108dc50533bff5e9ded621b4db826a1d29709f9996cfc629a3e6e7ec9e4",
+    "role": "Pre-change copy retaining the original 63 unique KCH reconstruction core IDs; original working file remains in the repository.",
+    "source_baseline_index": "C:\\hoi\\test\\hok-shandong-democratic-government-20261119-01\\source-baseline.json"
+  },
+  "state_definition_sources": [
+    {
+      "state_id": 283,
+      "localisation_key": "STATE_283",
+      "korean_name": "간쑤",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/283-China.txt",
+      "sha256": "eb6422245dddf7eb45482f06f5f2d0290d82373bde95471328d01386a0af33b7"
+    },
+    {
+      "state_id": 287,
+      "localisation_key": "STATE_287",
+      "korean_name": "타클라마칸",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/287-Sinkiang.txt",
+      "sha256": "6c0c9c391c4a307a60238a1e1b66bee5c17f4f11f5bf75bcc339c98e39aae0c4"
+    },
+    {
+      "state_id": 325,
+      "localisation_key": "STATE_325",
+      "korean_name": "윈난",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/325-Yunnan.txt",
+      "sha256": "108719fa587b0bf9150845199248b0b9a709d608dc5a2deffbd2fca1ad1e7066"
+    },
+    {
+      "state_id": 326,
+      "localisation_key": "STATE_326",
+      "korean_name": "홍콩",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/326-HongKong.txt",
+      "sha256": "670008cf4eb3b74d807a52a2a85a92c242e34c0df4242e7e96f3d0e2b39bb60f"
+    },
+    {
+      "state_id": 328,
+      "localisation_key": "STATE_328",
+      "korean_name": "지린",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/328-Manchukuo.txt",
+      "sha256": "921aef182c9d5fc8bd4da7798bf346ff33017adbd17cec4a5170aa4adf889f78"
+    },
+    {
+      "state_id": 524,
+      "localisation_key": "STATE_524",
+      "korean_name": "타이완",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/524-Taiwan.txt",
+      "sha256": "eda1d0f7734b92a843432016ff011aba2b4dcb379199e055f1f244f11a670507"
+    },
+    {
+      "state_id": 591,
+      "localisation_key": "STATE_591",
+      "korean_name": "하이난",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/591-Hainan.txt",
+      "sha256": "829bb731fff036156c325618dfdf4b2b555d2a2342d7716147ad351993116a48"
+    },
+    {
+      "state_id": 592,
+      "localisation_key": "STATE_592",
+      "korean_name": "광저우",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/592-Guangzhou.txt",
+      "sha256": "0648d04792b0f0899e6e2ecca35e3ef1dd540f4f3bd80f8a011dae706dd070a4"
+    },
+    {
+      "state_id": 593,
+      "localisation_key": "STATE_593",
+      "korean_name": "광둥",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/593-Guangdong.txt",
+      "sha256": "2b0b0b3a81e285e07728bd6c6cbff443aa5cf370ac329ed1764ef4d11614ec33"
+    },
+    {
+      "state_id": 594,
+      "localisation_key": "STATE_594",
+      "korean_name": "난닝",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/594-Nanning.txt",
+      "sha256": "361e0b56358f06e2d19d09a683c70132f6f18d5a9f46ec186318cd89a785f31e"
+    },
+    {
+      "state_id": 595,
+      "localisation_key": "STATE_595",
+      "korean_name": "푸젠",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/595-Fujian.txt",
+      "sha256": "235e53586df25bbfd57d677a5ea75c44f9180c3864875126495cb993dc8750c3"
+    },
+    {
+      "state_id": 596,
+      "localisation_key": "STATE_596",
+      "korean_name": "저장",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/596-Zhejiang.txt",
+      "sha256": "ded343d17d8612b18d36c93ceea891a1844bf40fab71c24327d80aac51c43162"
+    },
+    {
+      "state_id": 597,
+      "localisation_key": "STATE_597",
+      "korean_name": "산둥",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/597-Shandong.txt",
+      "sha256": "c6f191154158b93a27f079d7621ddc9e3e25b0edd353ce32c502253924990293"
+    },
+    {
+      "state_id": 598,
+      "localisation_key": "STATE_598",
+      "korean_name": "장쑤",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/598-Jiansu.txt",
+      "sha256": "8a12ce4fdb969fb6d015c953d6e4489547cd7b3edf36ef7eab88b5f16dfe3f54"
+    },
+    {
+      "state_id": 599,
+      "localisation_key": "STATE_599",
+      "korean_name": "광시",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/599-Guanxi.txt",
+      "sha256": "d44c7cd711d48c3929e05ae2dab1e50f911afff31f667681aa3fe7f3d76f0500"
+    },
+    {
+      "state_id": 600,
+      "localisation_key": "STATE_600",
+      "korean_name": "장시",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/600-Jiangxi.txt",
+      "sha256": "29efe05af62ac6f25be4442849d5b75338176abf16afb1d8e32a2ee95ffc59ba"
+    },
+    {
+      "state_id": 601,
+      "localisation_key": "STATE_601",
+      "korean_name": "참도",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/601-China 1.txt",
+      "sha256": "8ed2750a4af8890d449b756db6e5300708dd453053666d6a7877fbba3b0de686"
+    },
+    {
+      "state_id": 602,
+      "localisation_key": "STATE_602",
+      "korean_name": "후난",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/602-China 2.txt",
+      "sha256": "418738a52d90d35322a16c5f9fd2e36628827b45f0acc6f46ac0826d14d38a84"
+    },
+    {
+      "state_id": 603,
+      "localisation_key": "STATE_603",
+      "korean_name": "구이저우",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/603-China 3.txt",
+      "sha256": "870f7aaa71abb3440267b2bbea48a35279e2f0febfe4e3ff99b0b817c889e38c"
+    },
+    {
+      "state_id": 604,
+      "localisation_key": "STATE_604",
+      "korean_name": "칭하이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/604-China 4.txt",
+      "sha256": "9d5d6a9dcc7a32f4551e173314a812ccd2a8e520af9eab2db5531a79a3256be6"
+    },
+    {
+      "state_id": 605,
+      "localisation_key": "STATE_605",
+      "korean_name": "쓰촨",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/605-China 5.txt",
+      "sha256": "4c0302ceae5a486aea43a7fdb143700f62d71d6d5b5296026097895d8f591e72"
+    },
+    {
+      "state_id": 606,
+      "localisation_key": "STATE_606",
+      "korean_name": "안후이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/606-China 6.txt",
+      "sha256": "8695807de6f68e2012892e74da931d61d690e4b30b5dc7fac7f2f8360d153386"
+    },
+    {
+      "state_id": 607,
+      "localisation_key": "STATE_607",
+      "korean_name": "허난",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/607-China 7.txt",
+      "sha256": "d306120cf197d3dafb8d1d948a9ac7601acb3077bc2deaff25c5b152cb20c457"
+    },
+    {
+      "state_id": 608,
+      "localisation_key": "STATE_608",
+      "korean_name": "베이핑",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/608-Beijing.txt",
+      "sha256": "69d0c64dc14ae0e51d4dddbb46b5c35e01db7c7a83e27500c11fffb704146c89"
+    },
+    {
+      "state_id": 609,
+      "localisation_key": "STATE_609",
+      "korean_name": "동허베이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/609-China 8.txt",
+      "sha256": "b040eb4a9e381b5795f187d3e8fe0a61f2a070e539fe0d39f8caf6e5bbabe850"
+    },
+    {
+      "state_id": 610,
+      "localisation_key": "STATE_610",
+      "korean_name": "러허",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/610-China 9.txt",
+      "sha256": "aead28e96028163c7945c340e7bb28629f1f48003d1253a6f93ac897cae57bbc"
+    },
+    {
+      "state_id": 611,
+      "localisation_key": "STATE_611",
+      "korean_name": "차하얼",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/611-China 10.txt",
+      "sha256": "8204c474873d92b5f15d6ea76b2bbbab5a5a4971f00a4d1122002a56f9652e2c"
+    },
+    {
+      "state_id": 612,
+      "localisation_key": "STATE_612",
+      "korean_name": "시린골",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/612-China 11.txt",
+      "sha256": "bd3d7ceca93cca15b17677e5278f2c91af58b36a908cd7e69718126d8e8e0bce"
+    },
+    {
+      "state_id": 613,
+      "localisation_key": "STATE_613",
+      "korean_name": "상하이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/613-China 12.txt",
+      "sha256": "0dbf960c1def98a4ee9011cc092e52dec5477f1ecdb89a82b5a0f3cefdc31ae7"
+    },
+    {
+      "state_id": 614,
+      "localisation_key": "STATE_614",
+      "korean_name": "허베이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/614-China 13.txt",
+      "sha256": "e6b1e902b1e00de2765214d8cbb1919ebdc490de85bab264303832fad1d2ed48"
+    },
+    {
+      "state_id": 615,
+      "localisation_key": "STATE_615",
+      "korean_name": "산시(산서)",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/615-Shanxi.txt",
+      "sha256": "1649f82a27c2b4b84368e6b247fbb0eaa8650a4f7ebe72d742ee12bd6918ef5e"
+    },
+    {
+      "state_id": 616,
+      "localisation_key": "STATE_616",
+      "korean_name": "닝샤",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/616-China 14.txt",
+      "sha256": "acf3907026f606c721e0e2b3f8e1f4038497dc159ded5b635e8fdd03aeb60bb5"
+    },
+    {
+      "state_id": 617,
+      "localisation_key": "STATE_617",
+      "korean_name": "우루무치",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/617-Xinjiang.txt",
+      "sha256": "7c3d75abce0ec4d04cfa718e7e141399893775737a872cfa42e8ae29a5fe239a"
+    },
+    {
+      "state_id": 618,
+      "localisation_key": "STATE_618",
+      "korean_name": "중가리아",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/618-China 15.txt",
+      "sha256": "0bb50a00c7d595d91a21c7dc0e82220b265fcdaa83b207f43f127d15dd7ae2cb"
+    },
+    {
+      "state_id": 619,
+      "localisation_key": "STATE_619",
+      "korean_name": "야르칸드",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/619-China 16.txt",
+      "sha256": "de308c945c1eecaa33fcdba8671b16ae0c89248ddaa3e1e5d76129d986e02e04"
+    },
+    {
+      "state_id": 620,
+      "localisation_key": "STATE_620",
+      "korean_name": "후베이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/620-China 17.txt",
+      "sha256": "04ce2a63bd9a0072b359c23c539a04f246eef2139025d4fcfd46fc98e7a3266c"
+    },
+    {
+      "state_id": 621,
+      "localisation_key": "STATE_621",
+      "korean_name": "쑤이위안",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/621-China 18.txt",
+      "sha256": "9fac960aba273d8b57106f792633ee20c0ecbee080b7f3cc42e7371bd540e3dc"
+    },
+    {
+      "state_id": 622,
+      "localisation_key": "STATE_622",
+      "korean_name": "산베이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/622-China 19.txt",
+      "sha256": "f13ca35c3de4dc59e7e31c0da89f6150537faeef0446d9588065165194d17ace"
+    },
+    {
+      "state_id": 714,
+      "localisation_key": "STATE_714",
+      "korean_name": "헤이룽장",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/714-Heilungkiang.txt",
+      "sha256": "995ee98d4151f9fa4aa04c0f8ce949250a256c19bc4cbfcd39acb7e8f4674f00"
+    },
+    {
+      "state_id": 715,
+      "localisation_key": "STATE_715",
+      "korean_name": "랴오베이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/715-Liaoning.txt",
+      "sha256": "9f9f136867ca734bf45896c2590ae56920eaab4787aaa3088388d0e0cfba27ba"
+    },
+    {
+      "state_id": 716,
+      "localisation_key": "STATE_716",
+      "korean_name": "랴오닝",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/716-Liaotung.txt",
+      "sha256": "1ff3bbe697116617b9dc5ddd5bc7cd2513c7d8ae2d029b3dd71e17cb2a8b83e8"
+    },
+    {
+      "state_id": 717,
+      "localisation_key": "STATE_717",
+      "korean_name": "쑹장",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/717-Chuho.txt",
+      "sha256": "bae825bce6062e941f223ac29afcb18c00b193e34ee76a6a8c6798922e0822a2"
+    },
+    {
+      "state_id": 728,
+      "localisation_key": "STATE_728",
+      "korean_name": "광저우만",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/728-Guangzhouwan.txt",
+      "sha256": "b8b1248a446e67ef65856ecae35e966ea4ab214f93b7d9c552ff3bc8d1aa5658"
+    },
+    {
+      "state_id": 729,
+      "localisation_key": "STATE_729",
+      "korean_name": "마카오",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/729-Macau.txt",
+      "sha256": "a4b18c3e2d7642b02aea40055c3b3dd93549319a0afbf3f21e86fda4b4d97296"
+    },
+    {
+      "state_id": 743,
+      "localisation_key": "STATE_743",
+      "korean_name": "칭다오",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/743-Qingdao.txt",
+      "sha256": "295f58063563eafeab3fff3058310db9091f62bb05105cc04d6a5a07ed582559"
+    },
+    {
+      "state_id": 744,
+      "localisation_key": "STATE_744",
+      "korean_name": "시안",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/744-Xian.txt",
+      "sha256": "a82074fb34f3009f54290c4a568e20509ea43a7afce62e5dd52fe8f4e14eb1ab"
+    },
+    {
+      "state_id": 745,
+      "localisation_key": "STATE_745",
+      "korean_name": "다롄",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/745-Dalian.txt",
+      "sha256": "7a40919eaabc7acbcb3bba47dd10e11cf3467ea1d7ea5df27deac8b426fdaa10"
+    },
+    {
+      "state_id": 746,
+      "localisation_key": "STATE_746",
+      "korean_name": "오르도스",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/746-Ordos.txt",
+      "sha256": "af54758ca914811239a941fb81b9e1906ef7d09a614fa5c6e601cfc2df3aaf7a"
+    },
+    {
+      "state_id": 747,
+      "localisation_key": "STATE_747",
+      "korean_name": "다리",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/747-Dali Bai.txt",
+      "sha256": "ea707bd5ee845b4c7e41b28cc0dd03640faa30e605047324a8ae234c654b2f76"
+    },
+    {
+      "state_id": 748,
+      "localisation_key": "STATE_748",
+      "korean_name": "쭌이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/748-Zunyi.txt",
+      "sha256": "b7b1e8f4789af45d141383f968f1012875633665fcf026a1fac04b85041ece37"
+    },
+    {
+      "state_id": 749,
+      "localisation_key": "STATE_749",
+      "korean_name": "황산",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/749-Huangshan.txt",
+      "sha256": "d692ca3d12b197bf4508cca310b2d8f3bb142cf5dd856397f58c6ce946c35bbb"
+    },
+    {
+      "state_id": 750,
+      "localisation_key": "STATE_750",
+      "korean_name": "창더",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/750-Changde.txt",
+      "sha256": "1a149dff8b0b0855a1dcedf2bfaf14ff4bc7e70b85b20a0d242c47327738300f"
+    },
+    {
+      "state_id": 751,
+      "localisation_key": "STATE_751",
+      "korean_name": "량산",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/751-Liangshan.txt",
+      "sha256": "96eaa7a1ca5f4df75f3fea59c18615de3e53b294a70cf7ac740a6cfb9fb95433"
+    },
+    {
+      "state_id": 752,
+      "localisation_key": "STATE_752",
+      "korean_name": "간쯔",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/752-Chamdo.txt",
+      "sha256": "91a5e9748be710dd05de5149ae718b0dea5da727a252b5cdb6cbd29fee5dc69a"
+    },
+    {
+      "state_id": 753,
+      "localisation_key": "STATE_753",
+      "korean_name": "간난",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/753-Gannan.txt",
+      "sha256": "2d2a3970e11a9d53df0856c5d581dfe3ba395584e6ff1f91989326268178ae38"
+    },
+    {
+      "state_id": 754,
+      "localisation_key": "STATE_754",
+      "korean_name": "궈뤄",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/754-Golog.txt",
+      "sha256": "14b058439da256bf31c7a67ab556130d569f2fbbafb67c9b869e46899621700f"
+    },
+    {
+      "state_id": 755,
+      "localisation_key": "STATE_755",
+      "korean_name": "하이시",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/755-Haixi.txt",
+      "sha256": "e2062846bf38faaa68353743f6c2787f9268a4c8dec9689a886696ca790b4cc5"
+    },
+    {
+      "state_id": 756,
+      "localisation_key": "STATE_756",
+      "korean_name": "주취안",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/756-Jiuquan.txt",
+      "sha256": "fe98aba8067b90c3ab7c8f84d475e593eda08427ceb13b3cb482053f2a7a5f23"
+    },
+    {
+      "state_id": 759,
+      "localisation_key": "STATE_759",
+      "korean_name": "쿤룬산",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/759-Kunlun.txt",
+      "sha256": "73ea06c69431d07b79cea5802208cb7cee9d997cb943992333cb3a972ee036f5"
+    },
+    {
+      "state_id": 760,
+      "localisation_key": "STATE_760",
+      "korean_name": "다반청",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/760-Dabancheng.txt",
+      "sha256": "24c3090cc7c5f23476641897426e2aa031b24fd1592a4545459b3c3edceed547"
+    },
+    {
+      "state_id": 761,
+      "localisation_key": "STATE_761",
+      "korean_name": "후룬베이얼",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/761-Hulunbuir.txt",
+      "sha256": "7ca441ae866efacd714eb684a2dfb7205aa8edb9e016061b11bcc3bf4ac024b4"
+    },
+    {
+      "state_id": 1032,
+      "localisation_key": "STATE_1032",
+      "korean_name": "옌안",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1032 - Yanan.txt",
+      "sha256": "d9f4414571a48bc9c951d642a8d4ac6ca0bf96abdf30e9b470896160686acfe3"
+    },
+    {
+      "state_id": 1033,
+      "localisation_key": "STATE_1033",
+      "korean_name": "난루",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1033 - Fangchenggang.txt",
+      "sha256": "47f40e12ed78d14cbd36a73709049bf687fba7c13586844245044f65e6c7e8c8"
+    },
+    {
+      "state_id": 1034,
+      "localisation_key": "STATE_1034",
+      "korean_name": "쑤저우",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1034 - Suzhou.txt",
+      "sha256": "024b9f2f1ff0fc843a7f949ea7ef30bc56c48e80cab6fa76510a323b45c618d8"
+    },
+    {
+      "state_id": 1035,
+      "localisation_key": "STATE_1035",
+      "korean_name": "난징",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1035 - Nanjing.txt",
+      "sha256": "d894d9fb66e9882162802da89ae7251b63ffcb3beaf6b53417bceb67c118e2b7"
+    },
+    {
+      "state_id": 1036,
+      "localisation_key": "STATE_1036",
+      "korean_name": "우한",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1036 - Wuhan.txt",
+      "sha256": "d101c113c63f32f0fbf5363305aab6e75ed401053d3a2d071d477e06b7a8000a"
+    },
+    {
+      "state_id": 1037,
+      "localisation_key": "STATE_1037",
+      "korean_name": "충칭",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1037 - Chongqing.txt",
+      "sha256": "1b853d4a8823d9cbe1a9135a27a6cc6b5c5c1c78e7e50ff97c09edb898ccc856"
+    },
+    {
+      "state_id": 1038,
+      "localisation_key": "STATE_1038",
+      "korean_name": "지난",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1038 - Jinan.txt",
+      "sha256": "11b5c6c26d739e75018513add6618c8443eca5bd3237ce9b983eaa84147590c0"
+    },
+    {
+      "state_id": 1039,
+      "localisation_key": "STATE_1039",
+      "korean_name": "허베이-차하얼",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1039 - Hebei-Chahar.txt",
+      "sha256": "14cb44335e5b781cffdd7decedd6137663a24764c777ef81e323bba4db989d46"
+    },
+    {
+      "state_id": 1040,
+      "localisation_key": "STATE_1040",
+      "korean_name": "아라산",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1040 - Alxa.txt",
+      "sha256": "26cabc90e4476916fe21d050bcb4166808892113f3732b65d0ceb64c0b216ec3"
+    },
+    {
+      "state_id": 1041,
+      "localisation_key": "STATE_1041",
+      "korean_name": "청두",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1041 - Chengdu.txt",
+      "sha256": "d5f8f4e72eea238990053ad441f54e044e725efcda9ae153fb882ae5a7e88332"
+    },
+    {
+      "state_id": 1042,
+      "localisation_key": "STATE_1042",
+      "korean_name": "호탄",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1042 - Khotan.txt",
+      "sha256": "a19910856908aef6b2268184c07cc0c5b82382db4cfccb455e3d16e6a406a971"
+    },
+    {
+      "state_id": 1043,
+      "localisation_key": "STATE_1043",
+      "korean_name": "바이링먀오",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1043 - Pailingmiao.txt",
+      "sha256": "e5082fbee4f1c558eeea6ec49256f6987aeeee03c849c09b1373dc26a59c2dd9"
+    },
+    {
+      "state_id": 1044,
+      "localisation_key": "STATE_1044",
+      "korean_name": "우웨이",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1044 - Wuwei.txt",
+      "sha256": "2ac43127735fedb2f9f8294d1e14e879c25540099c394fd6bd68a86fd35a196b"
+    },
+    {
+      "state_id": 1045,
+      "localisation_key": "STATE_1045",
+      "korean_name": "구위안",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1045 - Guyuan.txt",
+      "sha256": "3444951a922168e5bf8bbd08f78caa3b3d9da234d545715935b6be1856f317b6"
+    },
+    {
+      "state_id": 1046,
+      "localisation_key": "STATE_1046",
+      "korean_name": "위린",
+      "source_root": "installed_vanilla",
+      "relative_path": "history/states/1046 - Yulin.txt",
+      "sha256": "9823b51376814888f97e8d11dc17e7757af623682c73f7862252819581117724"
+    }
+  ],
+  "external_evidence_index": {
+    "full_integration_source_baseline": "C:\\hoi\\test\\hok-shandong-full-integration-20261119-01\\source-baseline.json",
+    "full_integration_record": "../incidents/2026-11-19-shandong-full-integration.md",
+    "geography_inventory": "C:\\hoi\\test\\hok-shandong-democratic-government-20261119-01\\geography\\geography-inventory.json",
+    "independent_source_review": "C:\\hoi\\test\\hok-shandong-democratic-government-20261119-01\\geography\\independent-source-review.json",
+    "role": "External evidence locations only. Runtime observations and validation limits belong to the maintained plan/implementation record; this JSON does not reproduce test scripts or test reports."
+  }
+}

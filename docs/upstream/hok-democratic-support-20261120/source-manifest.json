@@ -1,0 +1,690 @@
+{
+  "format": 1,
+  "recorded_date": "2026-11-20",
+  "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+  "content_commit": "f2356e2",
+  "ancestor_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+  "compatibility_base_commit": "9a01955785bcdd827c9c85522537a0bfc57ed654",
+  "donor_root": "C:\\hoi\\hearts_of_korea",
+  "source_branch": "feat/korean-focus-expansion-ai",
+  "sources": {
+    "common/ai_strategy_plans/KOR_historical_strategy_plan.txt": {
+      "after": {
+        "snapshot": "runtime/common/ai_strategy_plans/KOR_historical_strategy_plan.txt",
+        "sha256": "177E6A33D63EDFA4F2FC7539FE8EE8E04B5D155C4AB28A112ACE1E71E4B0ABEE",
+        "size": 10641,
+        "crlf": 357,
+        "bare_lf": 0,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\ai_strategy_plans\\KOR_historical_strategy_plan.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "1ad324c485bf1f7e7c29aaf7e8d16b41196fcce0",
+        "role": "exact read-only clean donor checkout"
+      },
+      "before": {
+        "snapshot": "before/common/ai_strategy_plans/KOR_historical_strategy_plan.txt",
+        "sha256": "481697FA6C7EF71F7EC5058AF332B19F01261E7117E172415649BAD929437186",
+        "size": 10005,
+        "crlf": 0,
+        "bare_lf": 354,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\ai_strategy_plans\\KOR_historical_strategy_plan.txt",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "b201d4e1a691336f39a5ade6a30b99d650dd43cc",
+        "role": "immutable donor ancestor Git blob; not a checkout-normalised copy"
+      }
+    },
+    "common/characters/HOK_KCH_characters.txt": {
+      "after": {
+        "snapshot": "runtime/common/characters/HOK_KCH_characters.txt",
+        "sha256": "57163327308F0AB3DF25F480D3289E4DF91D3B7C2E39B6FFCDA01411FB8B352D",
+        "size": 356,
+        "crlf": 0,
+        "bare_lf": 16,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\characters\\HOK_KCH_characters.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "abafba9daa8022d9c8e01985da08e4047763dabf",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "common/decisions/HOK_KOR_democratic_support.txt": {
+      "after": {
+        "snapshot": "runtime/common/decisions/HOK_KOR_democratic_support.txt",
+        "sha256": "0C5F4B297608FDF411E87FA627C1FE28AB94B4523CFA631AFF6148FFFA7BC6CF",
+        "size": 2735,
+        "crlf": 72,
+        "bare_lf": 0,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\decisions\\HOK_KOR_democratic_support.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "8b3f9f59290a91f51bbef0bf4642773daa5bdbd7",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "common/decisions/KOR_decision.txt": {
+      "after": {
+        "snapshot": "runtime/common/decisions/KOR_decision.txt",
+        "sha256": "588C11DFFFDB6CD159127DEDE7320CCC7C069847870C6EAE84DB483D1F629D75",
+        "size": 75975,
+        "crlf": 2700,
+        "bare_lf": 0,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\decisions\\KOR_decision.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "8acde2cb42f9486b8128ba5bee0d2a9acf0a8c44",
+        "role": "exact read-only clean donor checkout"
+      },
+      "before": {
+        "snapshot": "before/common/decisions/KOR_decision.txt",
+        "sha256": "DA54CC6DF14FF27CD1EE222918A520A5AF8093AB9E1CAB654B159842636F9A89",
+        "size": 75578,
+        "crlf": 0,
+        "bare_lf": 2774,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\decisions\\KOR_decision.txt",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "6fcb028b8400442e74bb35eac31190603bfe4e0e",
+        "role": "immutable donor ancestor Git blob; not a checkout-normalised copy"
+      }
+    },
+    "common/decisions/categories/HOK_KOR_democratic_support.txt": {
+      "after": {
+        "snapshot": "runtime/common/decisions/categories/HOK_KOR_democratic_support.txt",
+        "sha256": "76D30368312BAB014F134114D9BA5D34338B3EDF5AF201C4212146A505BE7E9F",
+        "size": 421,
+        "crlf": 11,
+        "bare_lf": 0,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\decisions\\categories\\HOK_KOR_democratic_support.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "2f5e70e7e41eaa03b9a2b46f0b9224ee2629dd18",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "common/ideas/HOK_KOR_democratic_intelligence.txt": {
+      "after": {
+        "snapshot": "runtime/common/ideas/HOK_KOR_democratic_intelligence.txt",
+        "sha256": "6485BFC1FF809CBE4554C722F9BC26677D48032A95FFE456804CDF31C927B24A",
+        "size": 1169,
+        "crlf": 0,
+        "bare_lf": 30,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\ideas\\HOK_KOR_democratic_intelligence.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "f3a804d896c89069b9c26502808e137ef24e8793",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "common/national_focus/korea.txt": {
+      "after": {
+        "snapshot": "runtime/common/national_focus/korea.txt",
+        "sha256": "20C92CDD66E4863BF1C71375095DF4A5CA12828C16834E363C50F097C8598783",
+        "size": 507869,
+        "crlf": 14902,
+        "bare_lf": 0,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\national_focus\\korea.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "853fa38c89270ebe88c82f5ac9e171597ffde762",
+        "role": "exact read-only clean donor checkout"
+      },
+      "before": {
+        "snapshot": "before/common/national_focus/korea.txt",
+        "sha256": "610134E0B6907F84B61D2F018FD3B9F42F408D6904883706D8AC81E798C402FD",
+        "size": 491341,
+        "crlf": 0,
+        "bare_lf": 14937,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\national_focus\\korea.txt",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "6855e284025bbdb92f32f5a132c11e885e51b13d",
+        "role": "immutable donor ancestor Git blob; not a checkout-normalised copy"
+      }
+    },
+    "common/scripted_effects/HOK_KOR_chinese_government_effects.txt": {
+      "after": {
+        "snapshot": "runtime/common/scripted_effects/HOK_KOR_chinese_government_effects.txt",
+        "sha256": "D5A17EB6A4A0D8C008A4990BAEFA32DA4E5FFDA8A820B24C1E0D1BAB1CDF93BE",
+        "size": 8534,
+        "crlf": 0,
+        "bare_lf": 205,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\scripted_effects\\HOK_KOR_chinese_government_effects.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "4a7d46c16452f3684af7207df2c2586c76235359",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "common/scripted_effects/HOK_KOR_democratic_intelligence_effects.txt": {
+      "after": {
+        "snapshot": "runtime/common/scripted_effects/HOK_KOR_democratic_intelligence_effects.txt",
+        "sha256": "F2A255FB9AB4194B9E24AB908B0CD8F20BE6C1CE973AE0A4F4FF83D86D72D1F6",
+        "size": 851,
+        "crlf": 0,
+        "bare_lf": 22,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\scripted_effects\\HOK_KOR_democratic_intelligence_effects.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "d56e3f4499156750de63f94917cb9a6f1415bade",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "common/scripted_triggers/HOK_KOR_chinese_democratic_support_triggers.txt": {
+      "after": {
+        "snapshot": "runtime/common/scripted_triggers/HOK_KOR_chinese_democratic_support_triggers.txt",
+        "sha256": "F68C3EA786FE95FA77CAE7D4A9283586874B37EEC1F4DB1790777FCAF336B316",
+        "size": 553,
+        "crlf": 24,
+        "bare_lf": 0,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\scripted_triggers\\HOK_KOR_chinese_democratic_support_triggers.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "520a345cf92b874c55905ab39ce4711d5f8be9a1",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "common/scripted_triggers/HOK_KOR_chinese_government_state_triggers.txt": {
+      "after": {
+        "snapshot": "runtime/common/scripted_triggers/HOK_KOR_chinese_government_state_triggers.txt",
+        "sha256": "0C8BB27A9400C755C3053F6A896C9052F525F72412DD9E00CCC050CBAB722921",
+        "size": 3239,
+        "crlf": 0,
+        "bare_lf": 117,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\common\\scripted_triggers\\HOK_KOR_chinese_government_state_triggers.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "6addc45062f2ec07010149cf0e247410d317b44b",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "gfx/interface/decisions/HOK_KOR/democratic_support/category.dds": {
+      "after": {
+        "snapshot": "runtime/gfx/interface/decisions/HOK_KOR/democratic_support/category.dds",
+        "sha256": "BAFBBC102E4DA51AB05CA9B15910DEA930DC1461994BEF4EB373A5A6381CD937",
+        "size": 8288,
+        "crlf": 0,
+        "bare_lf": 17,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\democratic_support\\category.dds",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "26e68ad5e52e405a6c3c62fb43fc6b24bfc9ff47",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_china.dds": {
+      "after": {
+        "snapshot": "runtime/gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_china.dds",
+        "sha256": "C305D3C1C4A747E060F8ACA551678CEBF6A5986FD91467FB34161B0FCB7F19AB",
+        "size": 4224,
+        "crlf": 0,
+        "bare_lf": 4,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\democratic_support\\support_democracy_in_china.dds",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "4b7a49efcf3855129613eb838a30e84d0d0071cb",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_japan.dds": {
+      "after": {
+        "snapshot": "runtime/gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_japan.dds",
+        "sha256": "C305D3C1C4A747E060F8ACA551678CEBF6A5986FD91467FB34161B0FCB7F19AB",
+        "size": 4224,
+        "crlf": 0,
+        "bare_lf": 4,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\decisions\\HOK_KOR\\democratic_support\\support_democracy_in_japan.dds",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "4b7a49efcf3855129613eb838a30e84d0d0071cb",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "gfx/interface/goals/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds": {
+      "after": {
+        "snapshot": "runtime/gfx/interface/goals/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds",
+        "sha256": "22EEEC2EDED697BDDA8396B98AE946590B1709E2C5963812EB309D50EB295C7A",
+        "size": 35328,
+        "crlf": 0,
+        "bare_lf": 90,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\goals\\HOK_KOR\\democratic_intelligence\\secret_intelligence_service.dds",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "bef12e5f8e0416a8165bdfcbc0450603f0902a3f",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "gfx/interface/goals/HOK_KOR/democratic_intelligence/shine_overlay.dds": {
+      "after": {
+        "snapshot": "runtime/gfx/interface/goals/HOK_KOR/democratic_intelligence/shine_overlay.dds",
+        "sha256": "BB416649358C73D34AACD46BAD61BC44211FAC8111627B56E25F385AD98F4448",
+        "size": 30752,
+        "crlf": 0,
+        "bare_lf": 0,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\goals\\HOK_KOR\\democratic_intelligence\\shine_overlay.dds",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "bc5bd9259076e07b9cec4f4c387bd10732501dbf",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "gfx/interface/ideas/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds": {
+      "after": {
+        "snapshot": "runtime/gfx/interface/ideas/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds",
+        "sha256": "7309968400A39EB3DB4AB309A34ACB393D0C66A728DBFF2F2793B7667FDE3249",
+        "size": 14744,
+        "crlf": 1,
+        "bare_lf": 115,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\gfx\\interface\\ideas\\HOK_KOR\\democratic_intelligence\\secret_intelligence_service.dds",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "ebf9b3937c09f8d12861d39a51b34a9a7a18086a",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "history/countries/KCH - Korean China.txt": {
+      "after": {
+        "snapshot": "runtime/history/countries/KCH - Korean China.txt",
+        "sha256": "456DC618AB83CAF9FECD53F50ABE0A1295552D6304EBB3BA259602EC5DA1BC54",
+        "size": 3757,
+        "crlf": 184,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\history\\countries\\KCH - Korean China.txt",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "4c9b22793795851d3e9987f98f28c142f09bf4f3",
+        "role": "exact read-only clean donor checkout"
+      },
+      "before": {
+        "snapshot": "before/history/countries/KCH - Korean China.txt",
+        "sha256": "39D34AFF9D4DF4773AEEC4638FBB28D2906132E8F4B11B14F8F8ECAB1388BE22",
+        "size": 3416,
+        "crlf": 0,
+        "bare_lf": 182,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\history\\countries\\KCH - Korean China.txt",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "8f423f68b7ed35c508519fa562c0d03cf72ec424",
+        "role": "immutable donor ancestor Git blob; not a checkout-normalised copy"
+      }
+    },
+    "interface/HOK_KOR_democratic_support_intelligence.gfx": {
+      "after": {
+        "snapshot": "runtime/interface/HOK_KOR_democratic_support_intelligence.gfx",
+        "sha256": "FC4FA99783FEDEAB254CB74D6DCBB4677A3166E3482117EDBC9F7E5F8E57B591",
+        "size": 1016,
+        "crlf": 0,
+        "bare_lf": 23,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\interface\\HOK_KOR_democratic_support_intelligence.gfx",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "00d2a5411d7a574504e0cf7d7a42b02cf75d94a2",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "interface/HOK_KOR_democratic_support_intelligence_shine.gfx": {
+      "after": {
+        "snapshot": "runtime/interface/HOK_KOR_democratic_support_intelligence_shine.gfx",
+        "sha256": "6F04422BCBB68E8D3A7920841B4C8220AC8016E72C5075C529AB1D7F0ECFAFCB",
+        "size": 1366,
+        "crlf": 0,
+        "bare_lf": 33,
+        "bom": false,
+        "original_path": "C:\\hoi\\hearts_of_korea\\interface\\HOK_KOR_democratic_support_intelligence_shine.gfx",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "f0926da0fd265dda26fd118b2861a18c32e22cfa",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "localisation/english/HOK_KOR_chinese_government_l_english.yml": {
+      "after": {
+        "snapshot": "runtime/localisation/english/HOK_KOR_chinese_government_l_english.yml",
+        "sha256": "644975A07592202C7428F9C8A065413E70F2839220B977D77C39305A546D5B82",
+        "size": 2497,
+        "crlf": 10,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HOK_KOR_chinese_government_l_english.yml",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "2d60a49d65cc02dd61ba56a5c2a515429c02e38f",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "localisation/english/HOK_KOR_democratic_intelligence_l_english.yml": {
+      "after": {
+        "snapshot": "runtime/localisation/english/HOK_KOR_democratic_intelligence_l_english.yml",
+        "sha256": "6513FE33590667C85D159A60B146E6BEF9FB003B1233F90E7E9F596988BE2F5B",
+        "size": 1364,
+        "crlf": 0,
+        "bare_lf": 7,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HOK_KOR_democratic_intelligence_l_english.yml",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "5675a228d531bdbd275891889a0d01b920f7891c",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "localisation/english/HOK_KOR_democratic_support_l_english.yml": {
+      "after": {
+        "snapshot": "runtime/localisation/english/HOK_KOR_democratic_support_l_english.yml",
+        "sha256": "AAC6CF5F402840336172C445A481E549F510E483E6E380CA11574B099A5233C8",
+        "size": 3129,
+        "crlf": 15,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\english\\HOK_KOR_democratic_support_l_english.yml",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "2265a86ea61257b8d7be72cd2f0b8b8419662b4f",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "localisation/english/korea_focus_l_english.yml": {
+      "after": {
+        "snapshot": "runtime/localisation/english/korea_focus_l_english.yml",
+        "sha256": "8673F08523F643A7CAECF94D312EFCC1C75D3DAFA4CEAE66CF206A5AD43D2634",
+        "size": 123483,
+        "crlf": 587,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\english\\korea_focus_l_english.yml",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "15b675e30563f7d99cbc295395afed992202ba74",
+        "role": "exact read-only clean donor checkout"
+      },
+      "before": {
+        "snapshot": "before/localisation/english/korea_focus_l_english.yml",
+        "sha256": "AEF1294453500636DD802B57D737F2EA524EDB4E3B744F79FEDE4853300E7CAC",
+        "size": 121474,
+        "crlf": 0,
+        "bare_lf": 582,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\english\\korea_focus_l_english.yml",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "4a2045c57d5a690764208672d030535565a1b533",
+        "role": "immutable donor ancestor Git blob; not a checkout-normalised copy"
+      }
+    },
+    "localisation/korean/HOK_KOR_chinese_government_l_korean.yml": {
+      "after": {
+        "snapshot": "runtime/localisation/korean/HOK_KOR_chinese_government_l_korean.yml",
+        "sha256": "130D6A779B4225DBB859DCE002B4477EEA8F8A89384A5CAA6820F2F2EBE9639B",
+        "size": 2496,
+        "crlf": 10,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HOK_KOR_chinese_government_l_korean.yml",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "b472f0a3efec7ebb82723810c27a7b23d1e5896d",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "localisation/korean/HOK_KOR_democratic_intelligence_l_korean.yml": {
+      "after": {
+        "snapshot": "runtime/localisation/korean/HOK_KOR_democratic_intelligence_l_korean.yml",
+        "sha256": "6C1F3FDF3E40AD2A18A320C5E28B7A60A39B95412501320A80E5127888FA40A0",
+        "size": 1363,
+        "crlf": 0,
+        "bare_lf": 7,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HOK_KOR_democratic_intelligence_l_korean.yml",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "4fc5919495282178b44940542bec25a7ca31ae63",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "localisation/korean/HOK_KOR_democratic_support_l_korean.yml": {
+      "after": {
+        "snapshot": "runtime/localisation/korean/HOK_KOR_democratic_support_l_korean.yml",
+        "sha256": "19C940285E3976E46FB80D06723757099CE23748331011151AC5401935636189",
+        "size": 3128,
+        "crlf": 15,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\HOK_KOR_democratic_support_l_korean.yml",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "5497bc841d6cd925dd06e634573f7fb7c05cd41f",
+        "role": "exact read-only clean donor checkout"
+      }
+    },
+    "localisation/korean/korea_focus_l_korean.yml": {
+      "after": {
+        "snapshot": "runtime/localisation/korean/korea_focus_l_korean.yml",
+        "sha256": "B0EFD59B1DB0FC922E73B3B49850F845777D33C529150C23ACC1A94108963716",
+        "size": 123482,
+        "crlf": 587,
+        "bare_lf": 0,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\korea_focus_l_korean.yml",
+        "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+        "source_blob": "1648477d5520e4179e68f886b56fe9d3c58d465a",
+        "role": "exact read-only clean donor checkout"
+      },
+      "before": {
+        "snapshot": "before/localisation/korean/korea_focus_l_korean.yml",
+        "sha256": "FEDCECF6A981415E77AB179734F94AEDE9C7EFB60397CDD8B4D18291FCCABA09",
+        "size": 121473,
+        "crlf": 0,
+        "bare_lf": 582,
+        "bom": true,
+        "original_path": "C:\\hoi\\hearts_of_korea\\localisation\\korean\\korea_focus_l_korean.yml",
+        "source_commit": "0c19f58fa7a9ff898196dcdbe46edfd0ad5fdbbc",
+        "source_blob": "a5ead0142a1dd0a36d9f140276dbce5af00a5b77",
+        "role": "immutable donor ancestor Git blob; not a checkout-normalised copy"
+      }
+    }
+  },
+  "predecessors": {
+    "common/ai_strategy_plans/KOR_historical_strategy_plan.txt": {
+      "snapshot": "compat_before/common/ai_strategy_plans/KOR_historical_strategy_plan.txt",
+      "sha256": "18C56A24FF5C93A944E58D71BB81AFFADC332601861D980EF243ACF028D2A3E8",
+      "size": 10359,
+      "crlf": 354,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\common\\ai_strategy_plans\\KOR_historical_strategy_plan.txt",
+      "source_commit": "9a01955785bcdd827c9c85522537a0bfc57ed654",
+      "role": "exact compatibility checkout before this integration"
+    },
+    "common/decisions/KOR_decision.txt": {
+      "snapshot": "compat_before/common/decisions/KOR_decision.txt",
+      "sha256": "05AE155EB8394AB746FDB647258B4E884B58E14A4B56A634CD36A6983C7E5316",
+      "size": 81352,
+      "crlf": 2829,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\common\\decisions\\KOR_decision.txt",
+      "source_commit": "9a01955785bcdd827c9c85522537a0bfc57ed654",
+      "role": "exact compatibility checkout before this integration"
+    },
+    "common/national_focus/korea.txt": {
+      "snapshot": "compat_before/common/national_focus/korea.txt",
+      "sha256": "EF979199A8A71E28A30ABFEDC5632012095B54D474C886626E778C91E9A19066",
+      "size": 520397,
+      "crlf": 14995,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\common\\national_focus\\korea.txt",
+      "source_commit": "9a01955785bcdd827c9c85522537a0bfc57ed654",
+      "role": "exact compatibility checkout before this integration"
+    },
+    "history/countries/KCH - Korean China.txt": {
+      "snapshot": "compat_before/history/countries/KCH - Korean China.txt",
+      "sha256": "70121BECB2DEE233BEBB5A393C2DCBCA2982C1C8B04A090B3544E30FE5BE2DBD",
+      "size": 3379,
+      "crlf": 179,
+      "bare_lf": 0,
+      "bom": true,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\history\\countries\\KCH - Korean China.txt",
+      "source_commit": "9a01955785bcdd827c9c85522537a0bfc57ed654",
+      "role": "exact compatibility checkout before this integration"
+    },
+    "localisation/english/korea_focus_l_english.yml": {
+      "snapshot": "compat_before/localisation/english/korea_focus_l_english.yml",
+      "sha256": "471285BCE6195DDEBBD9868D98C72BC5658D464D1706EC20EDB1EDB485FFCB0E",
+      "size": 109519,
+      "crlf": 582,
+      "bare_lf": 0,
+      "bom": true,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\localisation\\english\\korea_focus_l_english.yml",
+      "source_commit": "9a01955785bcdd827c9c85522537a0bfc57ed654",
+      "role": "exact compatibility checkout before this integration"
+    },
+    "localisation/korean/korea_focus_l_korean.yml": {
+      "snapshot": "compat_before/localisation/korean/korea_focus_l_korean.yml",
+      "sha256": "809F507550542AF5646D5FE6564A7420804A884AFB50253A96B25959FBDA07CD",
+      "size": 122055,
+      "crlf": 582,
+      "bare_lf": 0,
+      "bom": true,
+      "original_path": "C:\\hoi\\hearts_of_korea_Road_to_56\\localisation\\korean\\korea_focus_l_korean.yml",
+      "source_commit": "9a01955785bcdd827c9c85522537a0bfc57ed654",
+      "role": "exact compatibility checkout before this integration"
+    }
+  },
+  "documents": {
+    "docs/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PLAN.md": {
+      "snapshot": "documents/docs/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PLAN.md",
+      "sha256": "27BB9CE21FB51275190DFB729DD0A9F8945C18FB8408BC3E5B664FCF505D76B2",
+      "size": 152473,
+      "crlf": 819,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PLAN.md",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "6212d0add9c5802cf7de21250c5f9c3432ae3d99",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_ASSET_CREDITS.md": {
+      "snapshot": "documents/docs/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_ASSET_CREDITS.md",
+      "sha256": "F9A83B53AC684C02A4D487399283EF3E72F376E827B3A5036972DDAD52CE0AE5",
+      "size": 7969,
+      "crlf": 0,
+      "bare_lf": 45,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_ASSET_CREDITS.md",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "d59331229d11de83eb87a4e569d7f8db6f3a00a5",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/data/HOK_KOREAN_CHINESE_GOVERNMENT_STATE_GROUPS.json": {
+      "snapshot": "documents/docs/data/HOK_KOREAN_CHINESE_GOVERNMENT_STATE_GROUPS.json",
+      "sha256": "712798CDCA29D6011BB9CB3E421D984CEC2AA71D8CAE0E8C58F91D73F5EAE556",
+      "size": 34770,
+      "crlf": 1,
+      "bare_lf": 886,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\data\\HOK_KOREAN_CHINESE_GOVERNMENT_STATE_GROUPS.json",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "c06fe12fed9396ab10013cd65c97d31925c0ea7d",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_ASSET_MANIFEST.json": {
+      "snapshot": "documents/docs/data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_ASSET_MANIFEST.json",
+      "sha256": "4869A2D7B0B20B4B7BD3940A6B3297815793CCF74DC21FD765CAAA5F2F5342A4",
+      "size": 12428,
+      "crlf": 274,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\data\\HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_ASSET_MANIFEST.json",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "bef914a44172fdfa393cd24a08753d0f253e77f7",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_LAYOUT.json": {
+      "snapshot": "documents/docs/data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_LAYOUT.json",
+      "sha256": "C835A7C69AF2FE6117E2D8921E7B39F508B869ED49DFBC4DBC7D6D48F1C6218D",
+      "size": 24897,
+      "crlf": 717,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\data\\HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_LAYOUT.json",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "7e6d4f2df14abd49d7d68c72565fd86278aea90a",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/incidents/2026-11-18-korean-democratic-support-intelligence.md": {
+      "snapshot": "documents/docs/incidents/2026-11-18-korean-democratic-support-intelligence.md",
+      "sha256": "AB1D35AE5175538336E14A2E91F2AFC15ADA2F16F6B2284C92D810653538A832",
+      "size": 19528,
+      "crlf": 0,
+      "bare_lf": 108,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\incidents\\2026-11-18-korean-democratic-support-intelligence.md",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "03bb2334882c514c410c9155e306ce0c464c3939",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/incidents/2026-11-19-shandong-democratic-government.md": {
+      "snapshot": "documents/docs/incidents/2026-11-19-shandong-democratic-government.md",
+      "sha256": "B549C17A5F560D55D7BE32A7CC38D06A29A33C05A7191E1550C25909D7728203",
+      "size": 70108,
+      "crlf": 327,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\incidents\\2026-11-19-shandong-democratic-government.md",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "295a2deb1fe45c48bc98557858d59b61e76bf9bb",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/incidents/2026-11-19-shandong-full-integration.md": {
+      "snapshot": "documents/docs/incidents/2026-11-19-shandong-full-integration.md",
+      "sha256": "EB0DAC16475426896699CD67DD156DE2E96534CA325DE758B69685CB62C9AFD5",
+      "size": 31597,
+      "crlf": 0,
+      "bare_lf": 142,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\incidents\\2026-11-19-shandong-full-integration.md",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "c34c37d9cf5035bf8b95d6b1b61a738a646642bb",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/incidents/2026-11-19-shandong-weng-wenhao.md": {
+      "snapshot": "documents/docs/incidents/2026-11-19-shandong-weng-wenhao.md",
+      "sha256": "D934393C85B9AE0CD397C677F5383551251B4E28B9381568250E0B627171098E",
+      "size": 17514,
+      "crlf": 0,
+      "bare_lf": 81,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\incidents\\2026-11-19-shandong-weng-wenhao.md",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "ec3be9774dc0a05925b7d912d3f95ffbb0bfbb80",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/HOK_KOREAN_CHAEBOL_CIVIL_SOCIETY_ASSET_CREDITS.md": {
+      "snapshot": "documents/docs/HOK_KOREAN_CHAEBOL_CIVIL_SOCIETY_ASSET_CREDITS.md",
+      "sha256": "1AEF3EE1B11FEC800C3F7913857B83AF9CAFFDCA629879D9F95873D2FFD9D30A",
+      "size": 24626,
+      "crlf": 153,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\HOK_KOREAN_CHAEBOL_CIVIL_SOCIETY_ASSET_CREDITS.md",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "de5330b486b9d67f0c2445f734656c1b5a7f6a57",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/data/HOK_KOREAN_CIVIC_DECISION_ICON_MANIFEST.json": {
+      "snapshot": "documents/docs/data/HOK_KOREAN_CIVIC_DECISION_ICON_MANIFEST.json",
+      "sha256": "5D0F5A7DA1978990FFF3EEE564945DD85F75B9A8C589633235F69748E4A7B84D",
+      "size": 13451,
+      "crlf": 288,
+      "bare_lf": 0,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\data\\HOK_KOREAN_CIVIC_DECISION_ICON_MANIFEST.json",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "1a2e8326f977ec016747b16d95bb5c597c079b7a",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    },
+    "docs/assets/korean-civic-decision-icons/sources/CREDITS.txt": {
+      "snapshot": "documents/docs/assets/korean-civic-decision-icons/sources/CREDITS.txt",
+      "sha256": "CF220DC66463D75163F7690AD77B02B662D0C05CA5D53DC62D33ED504512A7F5",
+      "size": 1029,
+      "crlf": 0,
+      "bare_lf": 14,
+      "bom": false,
+      "original_path": "C:\\hoi\\hearts_of_korea\\docs\\assets\\korean-civic-decision-icons\\sources\\CREDITS.txt",
+      "source_commit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+      "source_blob": "83efbe5261113f933a16698783d6803dfd593152",
+      "role": "unchanged donor provenance/specification; source-relative links retained"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+#20261118_kpopmodder: Resolve the new intelligence and democratic-support icons through dedicated project-owned image copies.
+spriteTypes = {
+	SpriteType = {
+		name = "GFX_HOK_KOR_focus_secret_intelligence_service"
+		texturefile = "gfx/interface/goals/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds"
+	}
+	SpriteType = {
+		name = "GFX_idea_HOK_KOR_secret_intelligence_service"
+		texturefile = "gfx/interface/ideas/HOK_KOR/democratic_intelligence/secret_intelligence_service.dds"
+	}
+	SpriteType = {
+		name = "GFX_HOK_KOR_decision_category_democratic_support"
+		texturefile = "gfx/interface/decisions/HOK_KOR/democratic_support/category.dds"
+	}
+	SpriteType = {
+		name = "GFX_HOK_KOR_decision_support_democracy_in_japan"
+		texturefile = "gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_japan.dds"
+	}
+	SpriteType = {
+		name = "GFX_HOK_KOR_decision_support_democracy_in_china"
+		texturefile = "gfx/interface/decisions/HOK_KOR/democratic_support/support_democracy_in_china.dds"
+	}
+}

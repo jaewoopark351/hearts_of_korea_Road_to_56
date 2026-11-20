@@ -1,5 +1,7 @@
 ﻿#20261108_kpopmodder: Keep the intended Nanjing capital at its actual RT56 state parent.
 capital = 1114 # Nanjing
+#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
+recruit_character = HOK_KCH_weng_wenhao
 
 # Starting tech
 set_technology = {

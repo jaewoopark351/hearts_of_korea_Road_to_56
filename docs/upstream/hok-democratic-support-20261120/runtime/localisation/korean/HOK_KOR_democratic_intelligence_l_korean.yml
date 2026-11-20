@@ -1,0 +1,7 @@
+﻿l_korean:
+#20261119_kpopmodder: Align the intelligence-service description with its shared military entry.
+#20261118_kpopmodder: Localise the Korean intelligence focus and permanent service without importing Britain's MI6 identity.
+ HOK_KOR_expand_secret_intelligence_service:0 "비밀 정보국 확장"
+ HOK_KOR_expand_secret_intelligence_service_desc:0 "아시아의 정세를 공관의 보고와 신문 기사만으로 읽을 수는 없습니다. 현지의 사정을 아는 연락원을 확보하고 암호 해독과 통신 감청, 공작을 맡을 전문 부서를 갖춰야 합니다. 우리 정부는 흩어져 있던 정보 활동을 비밀 정보국으로 모아, 국경 밖의 위협을 먼저 파악하고 해외 정보망을 안정적으로 운영할 것입니다."
+ HOK_KOR_secret_intelligence_service_idea:0 "비밀 정보국"
+ HOK_KOR_secret_intelligence_service_idea_desc:0 "해외 공관과 연락원들이 보낸 보고는 번역관과 분석관의 책상을 거쳐 정부의 판단 자료가 됩니다. 비밀 정보국은 암호와 통신을 다루는 기술자, 현지 사정에 밝은 공작원, 지원 물자를 운반할 연락망을 한 조직으로 묶습니다. 위험한 공작은 더욱 치밀하게 준비하고, 해외에서 뜻을 함께하는 사람들과는 끊어지지 않는 연락을 유지할 수 있게 되었습니다."

@@ -1,0 +1,16 @@
+﻿l_english:
+#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
+#20261119_kpopmodder: Use fixed country labels for the formal target list instead of dynamic country-name scopes.
+#20261119_kpopmodder: Match Chinese support and war-goal tooltips to the shared sixteen-country target set.
+#20261118_kpopmodder: Explain democratic support unlocks, grouped recipients, expiry and preservation of existing support.
+ HOK_KOR_democratic_support_category:0 "Support Asian Democrats"
+ HOK_KOR_democratic_support_category_desc:0 "Printing presses that produce a free newspaper and civic groups that meet in secret need funds as well as conviction. We will help democrats in China and Japan continue their work."
+ HOK_KOR_support_democracy_in_china:0 "Support Chinese Democrats"
+ HOK_KOR_support_democracy_in_china_desc:0 "We will fund leaflets distributed beyond the reach of warlord censorship and support local democratic organisations. Even in a China divided among rival factions, the voices of those who want a free government must not be silenced.\n\nAll existing designated recipients are supported together. If any recipient still has earlier support, another payment must wait until that support expires. Countries that appear after support begins are included from the next payment onwards. Once granted, support lasts for its remaining duration despite changes of government or diplomatic relations; it cannot be cancelled or refunded."
+ HOK_KOR_support_democracy_in_japan:0 "Support Japanese Democrats"
+ HOK_KOR_support_democracy_in_japan_desc:0 "We will send funds to Japanese journalists and civic groups who resist censorship. Those seeking to restore a free parliament and the rights of citizens must not be left isolated.\n\nIf Japan still has earlier support, another payment must wait until that support expires. Once granted, support lasts for its remaining duration despite changes of government or diplomatic relations; it cannot be cancelled or refunded."
+ HOK_KOR_democratic_support_china_recipient_exists_tt:0 "At least one designated Chinese recipient exists"
+ HOK_KOR_democratic_support_china_no_existing_support_tt:0 "No existing Chinese recipient has ongoing democratic support"
+ HOK_KOR_democratic_support_japan_no_existing_support_tt:0 "Japan has no ongoing democratic support"
+ HOK_KOR_democratic_support_china_effect_tt:0 "Grant §Y$KOR_democrat_sponsored_by_korea$§! for §Y180 days§! to all existing countries among China, Communist China and the 14 designated warlords.\nRecipients:\n$CHI$·$PRC_communism$·$SHX$·$GXC$\n$YUN$·$XSM$·$SIK$·$GDC$\n$SND$·$SIC$·$NXM$·$GSM$\n$XIC_neutrality$·$KHM$·$KUM$·$HBC$\nDaily democratic support in each recipient: §G+0.10§!\nCan be repeated after the support expires."
+ HOK_KOR_democratic_support_japan_effect_tt:0 "Grant §Y$KOR_democrat_sponsored_by_korea$§! to [JAP.GetName] for §Y180 days§!.\nDaily democratic support: §G+0.10§!\nCan be repeated after the support expires."

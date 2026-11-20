@@ -241,6 +241,9 @@ def build_outputs() -> dict[str, bytes]:
 
 
 def historical_bytes(relative: str | Path, data: bytes) -> bytes:
+    #20261120_kpopmodder: Reverse only the separately proven democratic successor before historical commander ancestry.
+    from upstream_democratic_support import historical_bytes as democratic_historical
+    data = democratic_historical(relative, data)
     name = canonical_name(relative)
     if name in PATHS and sha(data) == lock()['outputs'][name]['sha256']:
         if data != build_outputs()[name]: raise ValueError(f'commander final-output proof failed: {name}')
@@ -249,14 +252,20 @@ def historical_bytes(relative: str | Path, data: bytes) -> bytes:
 
 
 def finalize_one(relative: str | Path, data: bytes) -> bytes:
+    #20261120_kpopmodder: Preserve the reviewed democratic successor after all inherited commander outputs.
+    from upstream_democratic_support import finalize_one as democratic_finalize, historical_bytes as democratic_historical
+    data = democratic_historical(relative, data)
     name = canonical_name(relative)
-    if name not in PATHS: return data
+    if name not in PATHS: return democratic_finalize(relative, data)
     final = build_outputs()[name]
     if data not in (previous_bytes(name), final): raise ValueError(f'unreviewed commander predecessor: {name}')
-    return final
+    return democratic_finalize(relative, final)
 
 
 def preflight_outputs(outputs: dict) -> None:
+    #20261120_kpopmodder: Guard raw successor bytes and inspect only their exact registered commander view.
+    from upstream_democratic_support import preflight_outputs as democratic_preflight, historical_bytes as democratic_historical
+    democratic_preflight(outputs)
     seen = set()
     for relative, data in outputs.items():
         name = canonical_name(relative)
@@ -264,15 +273,17 @@ def preflight_outputs(outputs: dict) -> None:
         if name in seen: raise ValueError(f'duplicate commander output: {name}')
         seen.add(name)
         final = build_outputs()[name]
-        if data != final: raise ValueError(f'unregistered proposed commander bytes: {name}')
+        if democratic_historical(name, data) != final: raise ValueError(f'unregistered proposed commander bytes: {name}')
         path = ROOT / name
-        if not path.is_file() or path.read_bytes() not in (previous_bytes(name), final):
+        if not path.is_file() or democratic_historical(name, path.read_bytes()) not in (previous_bytes(name), final):
             raise ValueError(f'independently changed commander runtime: {name}')
 
 
 def ledger_bytes(previous: bytes) -> bytes:
+    #20261120_kpopmodder: Keep commander provenance beneath the independently verified democratic layer.
+    from upstream_democratic_support import historical_bytes as democratic_historical
     config, outputs = lock(), build_outputs()
-    if any((ROOT / name).read_bytes() != data for name,data in outputs.items()):
+    if any(democratic_historical(name, (ROOT / name).read_bytes()) != data for name,data in outputs.items()):
         raise ValueError('commander ledger/runtime mismatch')
     reader = csv.DictReader(io.StringIO(previous.decode('utf-8'), newline=''))
     fields = reader.fieldnames
@@ -318,7 +329,9 @@ def main() -> int:
     mode.add_argument('--check', action='store_true')
     args = parser.parse_args()
     try:
-        outputs = build_outputs()
+        #20261120_kpopmodder: Check the current democratic successor when the historical commander owner runs directly.
+        from upstream_democratic_support import finalize_one as democratic_finalize
+        outputs = {name:democratic_finalize(name,data) for name,data in build_outputs().items()}
         preflight_outputs(outputs)
         pending = [(ROOT/name,data) for name,data in outputs.items() if (ROOT/name).read_bytes() != data]
         if pending and not args.apply: raise ValueError('commander runtime differs from reviewed output')

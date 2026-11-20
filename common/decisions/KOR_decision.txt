@@ -1389,83 +1389,8 @@ KOR_China_national_reconstruction_category = {
 			KCH = {
 				annex_country = { target = CHI }
 				set_cosmetic_tag = KCH_china
-				hidden_effect = {
-					KCH = {
-						325 = { add_core_of = KCH }
-						326 = { add_core_of = KCH }
-						591 = { add_core_of = KCH }
-						592 = { add_core_of = KCH }
-						593 = { add_core_of = KCH }
-						594 = { add_core_of = KCH }
-						595 = { add_core_of = KCH }
-						596 = { add_core_of = KCH }
-						597 = { add_core_of = KCH }
-						598 = { add_core_of = KCH }
-						599 = { add_core_of = KCH }
-						600 = { add_core_of = KCH }
-						601 = { add_core_of = KCH }
-						602 = { add_core_of = KCH }
-						603 = { add_core_of = KCH }
-						604 = { add_core_of = KCH }
-						605 = { add_core_of = KCH }
-						606 = { add_core_of = KCH }
-						607 = { add_core_of = KCH }
-						608 = { add_core_of = KCH }
-						609 = { add_core_of = KCH }
-						610 = { add_core_of = KCH }
-						611 = { add_core_of = KCH }
-						612 = { add_core_of = KCH }
-						613 = { add_core_of = KCH }
-						614 = { add_core_of = KCH }
-						615 = { add_core_of = KCH }
-						616 = { add_core_of = KCH }
-						617 = { add_core_of = KCH }
-						618 = { add_core_of = KCH }
-						619 = { add_core_of = KCH }
-						620 = { add_core_of = KCH }
-						621 = { add_core_of = KCH }
-						622 = { add_core_of = KCH }
-						602 = { add_core_of = KCH }
-						603 = { add_core_of = KCH }
-						604 = { add_core_of = KCH }
-						605 = { add_core_of = KCH }
-						606 = { add_core_of = KCH }
-						607 = { add_core_of = KCH }
-						608 = { add_core_of = KCH }
-						609 = { add_core_of = KCH }
-						611 = { add_core_of = KCH }
-						728 = { add_core_of = KCH }
-						729 = { add_core_of = KCH }
-						744 = { add_core_of = KCH }
-						746 = { add_core_of = KCH }
-						747 = { add_core_of = KCH }
-						748 = { add_core_of = KCH }
-						749 = { add_core_of = KCH }
-						750 = { add_core_of = KCH }
-						751 = { add_core_of = KCH }
-						752 = { add_core_of = KCH }
-						753 = { add_core_of = KCH }
-						754 = { add_core_of = KCH }
-						755 = { add_core_of = KCH }
-						756 = { add_core_of = KCH }
-						#20261108_kpopmodder: Preserve the existing regional core policy on its RT56 successors.
-						1111 = { add_core_of = KCH }
-						1112 = { add_core_of = KCH }
-						1113 = { add_core_of = KCH }
-						1114 = { add_core_of = KCH }
-						1115 = { add_core_of = KCH }
-						1116 = { add_core_of = KCH }
-						1117 = { add_core_of = KCH }
-						1118 = { add_core_of = KCH }
-						1119 = { add_core_of = KCH }
-						1120 = { add_core_of = KCH }
-						1121 = { add_core_of = KCH }
-						1122 = { add_core_of = KCH }
-						1123 = { add_core_of = KCH }
-						1124 = { add_core_of = KCH }
-						1125 = { add_core_of = KCH }
-					}
-				}
+				#20261120_kpopmodder: Integrate democratic support, intelligence and Shandong with RT56 geography.
+				hidden_effect = { HOK_KOR_chinese_government_grant_mainland_cores = yes }
 			}
 		}
 	}

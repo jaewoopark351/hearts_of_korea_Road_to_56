@@ -1,0 +1,11 @@
+#20261118_kpopmodder: Show repeatable democratic support after either inherited support focus, including completed-focus saves.
+HOK_KOR_democratic_support_category = {
+	icon = GFX_HOK_KOR_decision_category_democratic_support
+	allowed = { original_tag = KOR }
+	visible = {
+		OR = {
+			has_completed_focus = KOR_support_for_democracy_in_china
+			has_completed_focus = KOR_support_for_democracy_in_japan
+		}
+	}
+}

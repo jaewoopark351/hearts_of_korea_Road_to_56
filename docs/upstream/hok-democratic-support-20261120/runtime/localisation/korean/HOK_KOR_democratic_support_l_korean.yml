@@ -1,0 +1,15 @@
+﻿l_korean:
+#20261119_kpopmodder: Use fixed country labels for the formal target list instead of dynamic country-name scopes.
+#20261119_kpopmodder: Match Chinese support and war-goal tooltips to the shared sixteen-country target set.
+#20261118_kpopmodder: Explain democratic support unlocks, grouped recipients, expiry and preservation of existing support.
+ HOK_KOR_democratic_support_category:0 "아시아 민주인사 지원"
+ HOK_KOR_democratic_support_category_desc:0 "자유로운 신문을 찍는 인쇄소와 비밀리에 모이는 시민단체에는 뜻만큼이나 자금이 필요합니다. 우리는 중국과 일본의 민주인사들이 활동을 이어갈 수 있도록 지원할 것입니다."
+ HOK_KOR_support_democracy_in_china:0 "중국 민주인사 지원"
+ HOK_KOR_support_democracy_in_china_desc:0 "군벌의 검열을 피해 배포되는 전단과 지역의 민주단체를 후원합니다. 여러 세력으로 갈라진 중국에서도 자유로운 정부를 바라는 사람들의 목소리가 사라지지 않도록 해야 합니다.\n\n현존하는 지정 대상국 전체를 한 번에 지원합니다. 어느 대상국에든 기존 지원이 남아 있으면 그 기간이 끝날 때까지 재지원할 수 없습니다. 지원 도중 새로 등장한 국가는 다음 지원 실행 때부터 포함됩니다. 시작된 지원은 정권이나 외교관계가 바뀌어도 남은 기간을 유지하며, 취소·환불되지 않습니다."
+ HOK_KOR_support_democracy_in_japan:0 "일본 민주인사 지원"
+ HOK_KOR_support_democracy_in_japan_desc:0 "검열에 맞서는 일본의 언론인과 시민단체에 활동 자금을 전달합니다. 자유로운 의회와 시민의 권리를 되찾으려는 이들이 고립되지 않도록 도와야 합니다.\n\n일본에 기존 지원이 남아 있으면 그 기간이 끝날 때까지 재지원할 수 없습니다. 시작된 지원은 정권이나 외교관계가 바뀌어도 남은 기간을 유지하며, 취소·환불되지 않습니다."
+ HOK_KOR_democratic_support_china_recipient_exists_tt:0 "지정된 중국 지원 대상국이 하나 이상 존재함"
+ HOK_KOR_democratic_support_china_no_existing_support_tt:0 "현존하는 중국 지원 대상국 어디에도 진행 중인 민주인사 지원이 없음"
+ HOK_KOR_democratic_support_japan_no_existing_support_tt:0 "일본에 진행 중인 민주인사 지원이 없음"
+ HOK_KOR_democratic_support_china_effect_tt:0 "중국·공산중국 및 14개 군벌 중 현존하는 국가 전체에 §Y180일§! 동안 §Y$KOR_democrat_sponsored_by_korea$§!을 부여합니다.\n지원 대상:\n$CHI$·$PRC_communism$·$SHX$·$GXC$\n$YUN$·$XSM$·$SIK$·$GDC$\n$SND$·$SIC$·$NXM$·$GSM$\n$XIC_neutrality$·$KHM$·$KUM$·$HBC$\n각 수혜국의 일일 민주주의 성장: §G+0.10§!\n지원 종료 후 다시 실행할 수 있습니다."
+ HOK_KOR_democratic_support_japan_effect_tt:0 "[JAP.GetName]에 §Y180일§! 동안 §Y$KOR_democrat_sponsored_by_korea$§!을 부여합니다.\n일일 민주주의 성장: §G+0.10§!\n지원 종료 후 다시 실행할 수 있습니다."

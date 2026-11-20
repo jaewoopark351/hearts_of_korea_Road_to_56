@@ -1,0 +1,22 @@
+#20261118_kpopmodder: Scale Japanese democratic revolt assets to current support without altering the Korean intervention chain.
+HOK_KOR_japanese_democratic_uprising = {
+	set_temp_variable = { HOK_KOR_japanese_democratic_revolt_share = party_popularity@democratic }
+	clamp_temp_variable = {
+		var = HOK_KOR_japanese_democratic_revolt_share
+		min = 0.10
+		max = 0.90
+	}
+	start_civil_war = {
+		ideology = democratic
+		size = var:HOK_KOR_japanese_democratic_revolt_share
+		army_ratio = var:HOK_KOR_japanese_democratic_revolt_share
+		navy_ratio = var:HOK_KOR_japanese_democratic_revolt_share
+		air_ratio = var:HOK_KOR_japanese_democratic_revolt_share
+		set_cosmetic_tag = KJP_democratic
+		load_focus_tree = generic_focus
+		KOR = {
+			add_to_faction = PREV
+			add_to_war = { targeted_alliance = PREV enemy = JAP hostility_reason = asked_to_join }
+		}
+	}
+}
