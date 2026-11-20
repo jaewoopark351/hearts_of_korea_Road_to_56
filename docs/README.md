@@ -6,6 +6,13 @@
 
 ## 현재 상태
 
+- 2026-11-20 후속 문서 작업에서 overview를 포함한 기존32개 도표를 상세화하고 전체 실행·개발 생성·민주 지원·정보국·CNDP·표시 조회 시퀀스6개를 추가했다. 현재 Mermaid 정본은38개이며 실제 파생물 생성·갤러리 확인·원본 보존 결과는 [전체 다이어그램 상세화 기록](implementation/2026-11-20-architecture-detail-expansion.md)을 따른다. 문서·도표만 바꾸며 게임 코드·자산·설정·기존 게임 검증 상태는 유지한다.
+- 2026-11-20 원본 민주인사 지원·정보국·산둥 정부를 **runtime28출력(기존6·신규22)에 반영**했다. RT56 본토는 Gyarong1075를 포함한64주, 만주/섬/조차지20주 제외로 적응했으며 기존 지도는 유지한다. 영어26키·DDS6개·AI와 생성/역투영/원장을 연결했다. 실제 한영 UI·조건별 효과·새 저장 재로드·지원 만료/수동 재구매와 일본 비맹주 초대 수선을 확인했으며, 자동 진단 실패·기존 정적86오류·남은 검증은 별도로 기록한다. [콘텐츠 구현·실제 검사·게임 검증 상태](implementation/2026-11-20-korean-democratic-support-intelligence-port.md)와 [지리 대응](implementation/2026-11-20-chinese-government-state-mapping.md)을 수정·재생성·검증 전에 읽는다. AGENTS·로컬 스킬과32개 구조도·다크 PNG/SVG·오프라인 갤러리도 도입했으며 [구조도 도입·표시 확인 기록](implementation/2026-11-20-architecture-diagram-adoption.md)을 따른다. 과거 계획의 미이식 상태와 이번 소스 반영, 문서 렌더와 실제 게임 UI·효과·저장 상태를 구분한다.
+
+- 2026-11-20 **앞선 문서화 단계**에는 원본 AGENTS.md·다이어그램 스킬과 구조 문서를 참고한 구조도 체계 도입 계획을 기록했다. 호환판용 조건부 지침·로컬 스킬, 구조/생성/지도/표시/수명주기 도표, 다크 PNG/SVG·갤러리·manifest와 갱신 절차가 대상이었다. 당시의 미적용·미작성 상태와 후속 구현을 구분한다. 해당 체계를 변경하거나 원본 도표를 적응하기 전에 [최초 계획](plans/2026-11-20-architecture-diagram-adoption-plan.md)과 [후속 도입·실제 표시 확인](implementation/2026-11-20-architecture-diagram-adoption.md)을 읽는다.
+
+- 2026-11-20 **앞선 문서화 단계**에는11월19일 원본 `f2356e2` 게임 업데이트와 `f180bc8` 구조 문서의 이식 계획을 추가했다. 마지막 반영 원본 `0c19f58` 이후107경로 중 runtime28개(신규22·수정6), 민주 지원·정보국·산둥 정부·일본 봉기, RT56 지리·영어·생성 소유권을 구분했다. 당시에는 게임 검사·실행·지침 동기화를 하지 않았으며 이후 구현은 위 최신 기록을 따른다. 이 계층을 수정·재생성·검증하기 전에 [최초 계획·기준선](plans/2026-11-19-korean-democratic-support-intelligence-port-plan.md)과 [후속 구현·검증](implementation/2026-11-20-korean-democratic-support-intelligence-port.md)을 읽는다. 설치1.20과 descriptor1.19.* 차이는 유지한다.
+
 - 2026-11-14 원본 `0c19f58`의 한국 지휘관 해금 이관을 **runtime5파일에 선택 반영**했다. 홍범도·김좌진·안중근은 새 게임에서 「다음 전쟁의 준비」 완료로 해금하며, 표식 도입 전 일반 국뽕 저장의 사용을 유지하는 원본 조건과 한영 안내를 함께 가져왔다. 기존 능력·역할·모집·중점 보상·다른 국뽕 효과와 RT56 소유권을 보존한다. 독립 소스138/0·소유 계약76/0·격리 writer 전환9/9, 원장1,577행 중5행만 갱신했다. 전체 정적은 현재 게임1.19.5/번역 등의 기준 차이로 **수정 전8 PASS·0 WARNING·85 ERROR → 수정 후9 PASS·0 WARNING·같은 원인85 ERROR**, 신규 원인0이다. 이 계층의 검토·수정·재생성·검증 전 [구현·소유권·실제 확인 상태](implementation/2026-11-14-korean-commander-unlock-port.md)와 [선택 입력 안내](upstream/hok-commander-unlock-20261114/README.md)를 읽는다. 실제 RT56 UI·지휘·저장은 미검증이며 기존 지도 이관의 새 게임 전용 경계도 유지한다.
 
 - 2026-11-12 최신 원본 첩보원 업데이트를 선택 반영했다. **독립 72/0·전환 계약 46/0·생성 경로 33/0, 전체 정적 전후 26 PASS·0 WARNING·같은 기존 16 ERROR, 신규 오류 0개다.** 현재 복장·배경 revision의 남녀 전용 그림8개와 KOR 목록·GFX를 가져와 기존 이름·과학자 소유 계층을 11→20출력으로 확장했다. 검은 중절모·정장·코트와 불투명 회색 배경을 채택하고 기존 로마자 이름56/11/14·고정 인물·RT56 외국 현지 모집을 보존한다. source10·문서5·선조1개를 동결했으며 관련 조건부 읽기와 HOK 소유 콘텐츠의 역사적 이름 지침을 적응한다. 해당 계층의 검토·수정·재생성·검증 전 [구현·범위·실제 확인 상태](implementation/2026-11-12-korean-operative-portrait-port.md)와 [선택 입력 안내](upstream/hok-operative-portraits-20261112/README.md)를 읽는다. 실제 RT56 모집·UI·저장은 미검증이다.
@@ -56,6 +63,12 @@
 
 | 분류 | 문서 | 상태 |
 |---|---|---|
+| 구현·선택 입력 | [민주 지원·정보국·산둥 정부](implementation/2026-11-20-korean-democratic-support-intelligence-port.md) / [선택 원본·영어·자산 출처](upstream/hok-democratic-support-20261120/README.md) | 해당 계층 수정·재생성·검증 전 읽음.28출력·64주·소유권·실제 소스/정적/게임 확인과 미검증 구분 |
+| 지리 입력 | [중국 정부 RT56 지역 대응](implementation/2026-11-20-chinese-government-state-mapping.md) / [대응 JSON](data/HOK_KOREAN_CHINESE_GOVERNMENT_RT56_MAPPING.json) | 본토·영토/코어·거점·인접·반복 상한 변경 전 읽음.64주·제외20주·16태그·원본province 대응과 실행 한계 |
+| 좌표 명세 | [민주 지원·정보국의475개 포트 배치](implementation/2026-11-20-democratic-support-layout.md) / [기계 명세](data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PORT_LAYOUT.json) | 해당 좌표/기준/선행/SHOW/HIDE·LaR 변경 전 읽음.18개 소스 모델·2011확인과 선택한 실제 UI 관측 범위를 구분 |
+| 구조도·스킬 | [구조 목차·그림 갤러리](architecture/README.md) / [도입·확인 기록](implementation/2026-11-20-architecture-diagram-adoption.md) | 구조/호출/생성/지도/표시 변경과 도표 작성·렌더링 전 관련 문서·유지 안내·로컬 스킬을 읽음.32개 도표·항상 다크·편집 원본/파생물·게임 증거 구분 |
+| 도입 계획 | [구조 문서·다이어그램·지침 체계](plans/2026-11-20-architecture-diagram-adoption-plan.md) | 문서화만. 지침/스킬·구조도·문서 그림/갤러리 도입 전 읽음. RT56 생성/지도/언어 적응·항상 다크·현재/예정 상태·갱신과 확인 범위 기록 |
+| 최초 계획·검토 | [11월19일 민주인사 지원·산둥 정부 업데이트](plans/2026-11-19-korean-democratic-support-intelligence-port-plan.md) | 앞선 문서화 단계의 계획이며 후속 구현 기록은 별도. 해당 계층 수정·재생성·검증 전 읽음. runtime28후보·지리·한영 정책·소유권·1.20 기준 차이와 실제 확인을 구분 |
 | 구현·선택 입력 | [한국 지휘관 중점 해금](implementation/2026-11-14-korean-commander-unlock-port.md) / [원본·선조·참조](upstream/hok-commander-unlock-20261114/README.md) | 해당 조건·표식·툴팁·시작 안내의 검토·수정·재생성·검증 전 읽음. 최신5출력·기존 저장 분기·생성 소유권과 소스/실제 실행 결과 구분 |
 | 검토 절차 | [변경 영향·누락 방지와 지침 출처](HOK_CHANGE_COVERAGE_REVIEW.md) | 현지화·주 참조 검토/변경 전 읽음. 호환판 한영 정책·RT56 지도 기준·사용처별 처리·검증 단계 구분 |
 | 계획·구현 | [한국 연구·장비 이름 한영 수선](plans/2026-11-10-korean-equipment-localisation-repair-plan.md) / [현재 구현·확인 기록](implementation/2026-11-10-korean-equipment-localisation-repair.md) | 해당 계층 수정·재생성·검증 전 읽음. 최초 문서 전용·v1–v5 실패 이력과 v6 병합+의존성의 실제 정적/UI/복구 결과를 구분 |

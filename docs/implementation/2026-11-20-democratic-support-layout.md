@@ -4,7 +4,7 @@
 
 ## 읽을 조건과 입력
 
-해당 중점의 좌표·기준·선행·SHOW/HIDE·직접 offset 또는 새 정보국 배치를 변경하기 전에 이 문서와 [현재 기계 명세](../data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PORT_LAYOUT.json), 프로젝트 배치 규칙, [전체 이식 계획](../plans/2026-11-19-korean-democratic-support-intelligence-port-plan.md)을 읽는다. 기존 11월 1일 압축은 [이전 포트 기록](2026-11-01-korean-democratic-layout-port.md)과 [그 좌표 JSON](../data/HOK_KOREAN_DEMOCRATIC_LAYOUT_COORDINATES.json)에 역사적 입력으로 유지한다. 이를 새 475개 트리 전체의 현행 스냅샷이라고 부르지 않는다.
+해당 중점의 좌표·기준·선행·SHOW/HIDE·직접 offset 또는 새 정보국 배치를 변경하기 전에 이 문서와 [현재 기계 명세](../data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PORT_LAYOUT.json), [프로젝트 배치 규칙](../../AGENTS.md), [전체 이식 계획](../plans/2026-11-19-korean-democratic-support-intelligence-port-plan.md)을 읽는다. 기존 11월 1일 압축은 [이전 포트 기록](2026-11-01-korean-democratic-layout-port.md)과 [그 좌표 JSON](../data/HOK_KOREAN_DEMOCRATIC_LAYOUT_COORDINATES.json)에 역사적 입력으로 유지한다. 이를 새 475개 트리 전체의 현행 스냅샷이라고 부르지 않는다.
 
 원본의 [배치 계획](../../../hearts_of_korea/docs/HOK_KOREAN_FOCUS_LAYOUT_PLAN.md), [좌표 기록](../../../hearts_of_korea/docs/HOK_KOREAN_FOCUS_LAYOUT_COORDINATES.md), [압축 사건](../../../hearts_of_korea/docs/incidents/2026-09-21-korean-focus-compact.md), [정치 압축 계획](../../../hearts_of_korea/docs/HOK_KOREAN_POLITICAL_COMPACTION_PLAN.md)과 [적용 사건](../../../hearts_of_korea/docs/incidents/2026-09-22-korean-political-compaction.md)을 먼저 읽고, 최신 [부분 delta 보관본](../upstream/hok-democratic-support-20261120/documents/docs/data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_LAYOUT.json)과 실제 포트 소스를 함께 해석했다. 원본 문서의 이전 326/362/474개 좌표, 옛 독립당 정보국 `(120,6)`와 현재 재무장 정보국 `(62,1)`은 서로 다른 단계다.
 

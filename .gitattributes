@@ -316,3 +316,6 @@ localisation/english/HOK_KOR_democratic_support_l_english.yml text eol=crlf
 localisation/korean/HOK_KOR_chinese_government_l_korean.yml text eol=crlf
 localisation/korean/HOK_KOR_democratic_intelligence_l_korean.yml text eol=lf
 localisation/korean/HOK_KOR_democratic_support_l_korean.yml text eol=crlf
+
+#20261120_kpopmodder: Preserve architecture Markdown source hashes across checkouts.
+docs/architecture/**/*.md text eol=lf

@@ -1,8 +1,8 @@
 # 2026년 11월 20일 민주인사 지원과 산둥 정부 선택 이식
 
-상태: **런타임28출력·지침/스킬·다크 구조도 구현 반영 · 선택 소스/UI/효과/새 저장 검증 기록 · 임시 설정 복원·기존175저장 보존 확인**. 전체 정적86오류와 실패한 자동 진단, 별도 수동 증거 및 미검증 범위를 아래에서 구분한다. 원본 콘텐츠와 AGENTS·스킬·구조 문서·다크 그림 체계를 함께 구현하라는 후속 요청에 따른다. [최초 콘텐츠 계획](../plans/2026-11-19-korean-democratic-support-intelligence-port-plan.md)과 구조도 도입 계획의 문서화 전용 상태는 이전 단계의 기록이다.
+상태: **런타임28출력·지침/스킬·다크 구조도 구현 반영 · 선택 소스/UI/효과/새 저장 검증 기록 · 임시 설정 복원·기존175저장 보존 확인**. 전체 정적86오류와 실패한 자동 진단, 별도 수동 증거 및 미검증 범위를 아래에서 구분한다. 원본 콘텐츠와 AGENTS·스킬·구조 문서·다크 그림 체계를 함께 구현하라는 후속 요청에 따른다. [최초 콘텐츠 계획](../plans/2026-11-19-korean-democratic-support-intelligence-port-plan.md)과 [구조도 도입 계획](../plans/2026-11-20-architecture-diagram-adoption-plan.md)의 문서화 전용 상태는 이전 단계의 기록이다.
 
-이 계층을 수정·재생성·검증하기 전에 이 문서, [원본 입력 안내](../upstream/hok-democratic-support-20261120/README.md), [지리 대응 기록](2026-11-20-chinese-government-state-mapping.md), [현지화 스킬](../skills/hok-rt56-localisation-review/SKILL.md), [변경 영향 절차](../HOK_CHANGE_COVERAGE_REVIEW.md)를 읽는다. 구조·호출·scope·표시·지도 관계를 바꿀 때는 구조 목차, 유지 안내와 다이어그램 스킬을 함께 읽는다. 실제 문서 그림의 확인 범위는 별도 도입 기록을 따른다.
+이 계층을 수정·재생성·검증하기 전에 이 문서, [원본 입력 안내](../upstream/hok-democratic-support-20261120/README.md), [지리 대응 기록](2026-11-20-chinese-government-state-mapping.md), [현지화 스킬](../skills/hok-rt56-localisation-review/SKILL.md), [변경 영향 절차](../HOK_CHANGE_COVERAGE_REVIEW.md)를 읽는다. 구조·호출·scope·표시·지도 관계를 바꿀 때는 [구조 목차](../architecture/README.md), [유지 안내](../architecture/maintenance.md)와 [다이어그램 스킬](../skills/hok-rt56-architecture-diagrams/SKILL.md)을 함께 읽는다. 실제 문서 그림의 확인 범위는 [별도 도입 기록](2026-11-20-architecture-diagram-adoption.md)을 따른다.
 
 ## 승인 범위와 기준선
 
@@ -78,7 +78,7 @@ donor의 영어 채널 한국어는 원본 사본에 그대로 보관하고 최�
 | 배치 명세 | [475개 좌표·배치 기록](2026-11-20-democratic-support-layout.md), `geography/qa/layout-source-checks.json`,2011 PASS/0 FAIL·18상태 | 소스 모델의 anchor/순환·범위·제한된 사각형 확인. 실제 선/아이콘/이름판·클릭/shine 아님 |
 | 전체 정적 최초 사후 | 수정 전8/0/86 → 최초 사후9/0/86 | 단순 개수 일치가 원인 일치를 뜻하지 않음. 아래 보정 이력 참조 |
 | 전체 정적 최종 | `static-final.txt`,9 PASS/0 WARNING/86 ERROR, exit1. `static-comparison-final.json`: 신규/해소 원인0·기존 원인 multiset 동일 | 설치/역사 입력·번역 계약 등 기존 실패를 유지한 결과. 전체 통과가 아님 |
-| 문서 그림 | 구조도 도입 기록 | 게임 UI·효과·저장 검증과 별개 |
+| 문서 그림 | [구조도 도입 기록](2026-11-20-architecture-diagram-adoption.md) | 게임 UI·효과·저장 검증과 별개 |
 | 일본 비맹주 수선 후 전체 정적 | `architecture/final-qa/static-post-faction-fix.txt`,477.77초·exit1·9 PASS/0 WARNING/86 ERROR. `static-comparison-post-faction-fix.json`: 신규/해소 원인0·기존86원인 multiset 동일 | 수선 전 전체 기록을 보존한 별도1회. 전체 통과·릴리즈 판정이 아님 |
 | 실제 R0/C0/C1·후속 실행 | 별도 승인 후R0 독일 지도·1월2일 진행, C0/C1 한영 한국 지도·새 정보국 그림/효과·지원 해금·산둥 조건 UI와 정상 종료를 확인. 외부`runtime/runs/`·`runtime/ui/`·두 UI index | 아래 사례별 실제 강제 효과·새 저장·제한된 재로드·실패/수선 이력을 따름. 정상 캠페인·구 저장 호환 판정과 구분 |
 

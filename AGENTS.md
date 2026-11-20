@@ -30,6 +30,13 @@ Apply these rules at the start of every task and consult the detailed sections b
 | Reviewing, changing, regenerating, or validating Korean-only portraits for newly recruited scientists or the selected Korean random-name exclusion | [Scientist integration, source ownership, and actual verification record](docs/implementation/2026-11-12-korean-scientist-update-port.md) |
 | Reviewing, changing, regenerating, or validating Korean-only portraits for newly recruited operatives, including foreign recruitment or cosmetic/anime integration | [Operative integration, current artwork sources, and actual verification record](docs/implementation/2026-11-12-korean-operative-portrait-port.md) |
 | Creating or revising images, reusing historical image inputs/recipes, resolving old `.local-artifacts` references, or changing recorded artifact/source-cache locations | [Development artifact archive and image-source lookup](docs/HOK_DEVELOPMENT_ARTIFACT_ARCHIVE.md) |
+| Reviewing the project structure or changing calls, scope, initialization, map/display references, or generated-file ownership | [Architecture index and ownership](docs/architecture/README.md) and [diagram maintenance](docs/architecture/maintenance.md); read the relevant topic before dependent work. |
+| Creating, changing, previewing, rendering, or exporting documentation diagrams and their gallery | [Local architecture-diagram skill](docs/skills/hok-rt56-architecture-diagrams/SKILL.md) and [always-dark maintenance](docs/architecture/maintenance.md#always-dark); preserve source/derived roles and the authorized mode. |
+
+## Documentation diagram maintenance
+
+- Keep documentation diagrams always dark in Mermaid source, Markdown previews, SVG/PNG, offline galleries, enlargement/download links and exports. A light OS/viewer setting or stored theme must not override that choice. This does not authorize recoloring game artwork or historical evidence screenshots.
+- Maintain the relevant architecture explanation when authorized work changes its relationships; when the relationships are unchanged, record why the diagram is retained. Use one Mermaid editing source per diagram and regenerate only the affected approved derivatives. Keep detailed inventories, source records and verification in the linked architecture documents.
 
 ## Scope and mission
 
@@ -446,7 +453,7 @@ Compatibility repair, refactoring, rebalance, and new port content are separate 
 For `descriptor.mod` and launcher `.mod` files:
 
 - Changing `supported_version` is not a compatibility fix.
-- The release architecture requires RT56 as the host dependency. The repository descriptor declares it, but the external launcher `.mod` does not yet match; do not call the package ready until descriptor, launcher playset, physical path, and documentation agree.
+- The release architecture requires RT56 as the host dependency. Before descriptor or release work, read [the external descriptor integration and verification record](docs/implementation/2026-11-10-korean-equipment-localisation-repair.md) and recheck the current repository descriptor, external launcher `.mod`, playset and physical path together. Historical mismatch or synchronisation records do not establish the current machine state or package readiness.
 - The HOK donor is not a default runtime dependency and must not be enabled alongside the compatibility port in target tests.
 - Treat `Korean Language` versus `The Road to 56 Korean Translation` as unresolved until the localisation contract is tested. Do not silently preserve, replace, or combine those dependencies.
 - Audit every `replace_path`; it can unload broad vanilla databases and cause distant failures.

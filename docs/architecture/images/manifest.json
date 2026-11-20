@@ -1,0 +1,1231 @@
+{
+  "schemaVersion": 1,
+  "generatedAtKST": "2026-11-20T13:13:18.746234+09:00",
+  "renderMode": "dark-only",
+  "sourceBaseCommit": "9a01955785bcdd827c9c85522537a0bfc57ed654",
+  "sourceIncludesUncommittedChanges": true,
+  "scope": "whole architecture detail expansion; documentation rendering only; no HOI4 runtime validation",
+  "editSource": "one Mermaid block per maintained Markdown anchor",
+  "diagrams": [
+    {
+      "id": "D01",
+      "title": "네 소스와 하나의 작업 결과",
+      "sourceMarkdown": "docs/architecture/overview.md",
+      "sourceAnchor": "d01-source-ownership",
+      "sourceMarkdownSha256": "30C501E8F5110D0238FB00CF5E145AB40999E46F1CA28C741A99FB7AF4A78F3D",
+      "mermaidSha256": "1EB61BBFF6CB41D3ADD9C743FC8FE9A1918F5BAA98D8B36384524F79F795B210",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 2141,
+      "height": 2111,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D01.dark.svg",
+      "svgSha256": "48356C5CB24B75F0EC7C6D78816B2183E5ACB76D5C02D07450EF55DDA69AE23C",
+      "svgBytes": 65107,
+      "png": "images/D01.dark.png",
+      "pngSha256": "512C727B494DB43951EA1B46C7F26B1CAD2488011C5518BD44A5DDF8124A94EB",
+      "pngBytes": 267777
+    },
+    {
+      "id": "D02",
+      "title": "게임 콘텐츠 모듈과 공용 접점",
+      "sourceMarkdown": "docs/architecture/overview.md",
+      "sourceAnchor": "d02-content-modules",
+      "sourceMarkdownSha256": "30C501E8F5110D0238FB00CF5E145AB40999E46F1CA28C741A99FB7AF4A78F3D",
+      "mermaidSha256": "700492F209CEC67A2364A273C7C08E6A132B4BD4E2ECB3A30A30BAB7357D2AA9",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1812,
+      "height": 1990,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D02.dark.svg",
+      "svgSha256": "7F61ED61C40BE7EFA63BFFF49BCB9BF69FED7C119F769F5FD1651C062CCA91B8",
+      "svgBytes": 97448,
+      "png": "images/D02.dark.png",
+      "pngSha256": "28CF83314E1F86CBC2CB78393A95FB73CA494902E3C8BFC453292995C3231C5A",
+      "pngBytes": 341679
+    },
+    {
+      "id": "D03",
+      "title": "국가·주·인물·조건·효과·표시의 관계",
+      "sourceMarkdown": "docs/architecture/domain-model.md",
+      "sourceAnchor": "d03-domain-relations",
+      "sourceMarkdownSha256": "14C0FA2121CF72A02D46C12EDE421B321E32F5796C7EF0F2936735FE47A17533",
+      "mermaidSha256": "AB0A3A70C0032DBD3A50D5C9083C6B162FC7DEE023E9F460D7F3424ADF073D07",
+      "group": "general",
+      "diagramType": "classDiagram",
+      "width": 2065,
+      "height": 1256,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D03.dark.svg",
+      "svgSha256": "65AFAADB85F2D86FBFCC2E0A54874843AE858B59F8AB51373E9037C412DA0233",
+      "svgBytes": 94100,
+      "png": "images/D03.dark.png",
+      "pngSha256": "F155792005AAEDB25DFF9219F416989A694752E3DC4063F6008A3D89AFDA7583",
+      "pngBytes": 270026
+    },
+    {
+      "id": "D04",
+      "title": "실제 호출부에서 PREV를 결정하는 세 경로",
+      "sourceMarkdown": "docs/architecture/domain-model.md",
+      "sourceAnchor": "d04-scope-context",
+      "sourceMarkdownSha256": "14C0FA2121CF72A02D46C12EDE421B321E32F5796C7EF0F2936735FE47A17533",
+      "mermaidSha256": "08132039F797AE593CAADB7488EAC1DE901F372D1DE28C1AAC677C1C2D90B3A4",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1058,
+      "height": 2325,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D04.dark.svg",
+      "svgSha256": "95265BF177A33EC620DFB7419D43B65A288D28D2DCB634D9B70802BCDC550915",
+      "svgBytes": 60520,
+      "png": "images/D04.dark.png",
+      "pngSha256": "CA96147C8387EDDDB3787F7A7EA0BF3736F7036E929D57CDE165B14FDC8B1FFF",
+      "pngBytes": 252089
+    },
+    {
+      "id": "D05",
+      "title": "진입점에서 조건·효과·데이터까지",
+      "sourceMarkdown": "docs/architecture/content-flow.md",
+      "sourceAnchor": "d05-call-and-reference",
+      "sourceMarkdownSha256": "305A4F70C25FF45B0B86DC1600851D69CA6AAE9FCE6659D3DDFAEF8D74A51C70",
+      "mermaidSha256": "56C24895646024793B67D8EE255688D45E3B48A9BDFECF90112BF4F50BDE06FA",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1983,
+      "height": 1762,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D05.dark.svg",
+      "svgSha256": "B021EB51545680B47BB17EBA436AE5419F268038BA4AEF0C23774A784619FB91",
+      "svgBytes": 57425,
+      "png": "images/D05.dark.png",
+      "pngSha256": "FF341C405E7D4C2AADBCA2E2132EF2380E052E852BC5ECF1B9B4ED66DB803A53",
+      "pngBytes": 276549
+    },
+    {
+      "id": "D06",
+      "title": "직접 선행·상호 배타·별도 가용 조건",
+      "sourceMarkdown": "docs/architecture/content-flow.md",
+      "sourceAnchor": "d06-focus-prerequisite",
+      "sourceMarkdownSha256": "305A4F70C25FF45B0B86DC1600851D69CA6AAE9FCE6659D3DDFAEF8D74A51C70",
+      "mermaidSha256": "0449D7DFB56A2DDB45A0D89C697EE83CBAD1C23C2831C1E90A044C4AA7BB6AE2",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 2452,
+      "height": 564,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D06.dark.svg",
+      "svgSha256": "0C7A522ADDE1BD5226AA3D33C0A42590914519871E3927989D52276EA8AE1876",
+      "svgBytes": 48533,
+      "png": "images/D06.dark.png",
+      "pngSha256": "B1BB9190A6AFB3D1BF65CBBFA28B125A7D4AB73042EAD6BF736070A71300D450",
+      "pngBytes": 171219
+    },
+    {
+      "id": "D07",
+      "title": "실제 relative_position_id와 로컬 좌표",
+      "sourceMarkdown": "docs/architecture/content-flow.md",
+      "sourceAnchor": "d07-focus-placement",
+      "sourceMarkdownSha256": "305A4F70C25FF45B0B86DC1600851D69CA6AAE9FCE6659D3DDFAEF8D74A51C70",
+      "mermaidSha256": "5F6E2818EEFF0FEDD6B0194B33F5827EF0207BF6FF3880F3CDEDA912302B17E0",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 2061,
+      "height": 544,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D07.dark.svg",
+      "svgSha256": "9503A89AB87FA4BFC3B79349AD41FF250DD6CCAE10F0DB7C2686498F339B7EC9",
+      "svgBytes": 43203,
+      "png": "images/D07.dark.png",
+      "pngSha256": "418A97863998DF3AABEFC25B4D99F65198641AB45A0E9E6F1A28ABBC0F98FDFE",
+      "pngBytes": 117531
+    },
+    {
+      "id": "D08",
+      "title": "입력에서 runtime과 원장까지",
+      "sourceMarkdown": "docs/architecture/source-and-generation.md",
+      "sourceAnchor": "d08-generation-pipeline",
+      "sourceMarkdownSha256": "CE11771D40F38511BAD3335EFDB9FE6F9DA2CC17FA86F7586DAF13E4F7C3EF7A",
+      "mermaidSha256": "02698BF31F04602B0B80589D2F354A395798B4EDF1074D816AC9D3BA1905F474",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1962,
+      "height": 2105,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D08.dark.svg",
+      "svgSha256": "2ED728E865A858386EFA8139A05CAF45B926C4025B3D5D7187F748E8243161F8",
+      "svgBytes": 66730,
+      "png": "images/D08.dark.png",
+      "pngSha256": "AF423DD4ACB7D4A034938225A4A985DB822F3FDDB3B991EB1FCC77DE8BE6D6DB",
+      "pngBytes": 278420
+    },
+    {
+      "id": "D09",
+      "title": "좌표·Province·State·전략 지역과 토폴로지",
+      "sourceMarkdown": "docs/architecture/map-data.md",
+      "sourceAnchor": "d09-map-databases",
+      "sourceMarkdownSha256": "44519E579A5174A3EF34437D9411A858CF851D4CE19DBC59446A15B0B7DAA84D",
+      "mermaidSha256": "DA0D8EC5CB27458148DC76D0C707090CE675DA6DBE3EBB1353CEB13B7091614A",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 2310,
+      "height": 1957,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D09.dark.svg",
+      "svgSha256": "5A1E0E151F4D4A79B3254A1E9B09E87C09789F56488B850A943D3028003F1856",
+      "svgBytes": 76046,
+      "png": "images/D09.dark.png",
+      "pngSha256": "BFD5DAF4B6F315F64DB79CCF167469DE743AA37157BCEEAC852760429346DBAB",
+      "pngBytes": 295519
+    },
+    {
+      "id": "D10",
+      "title": "지도 이관·주 분할·콘텐츠 지역 정렬의 구분",
+      "sourceMarkdown": "docs/architecture/map-data.md",
+      "sourceAnchor": "d10-map-migration",
+      "sourceMarkdownSha256": "44519E579A5174A3EF34437D9411A858CF851D4CE19DBC59446A15B0B7DAA84D",
+      "mermaidSha256": "4E3B9B17633CC8F3F2A008432C05B77E861EA49BE08D9A80B2831316D545CED8",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1836,
+      "height": 1548,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D10.dark.svg",
+      "svgSha256": "08395F5086967EE064C3B07A532A18982AD891967DF7D680CAA895C01EF995F4",
+      "svgBytes": 65577,
+      "png": "images/D10.dark.png",
+      "pngSha256": "C25D72D9CAB6B27584C5F43617A51215F0BE527AE4F8CF53E54672BEEF0BC1D2",
+      "pngBytes": 312086
+    },
+    {
+      "id": "D11",
+      "title": "소비자·언어·덮어쓰기 후보에서 문자열 치환까지",
+      "sourceMarkdown": "docs/architecture/presentation-assets.md",
+      "sourceAnchor": "d11-localisation-resolution",
+      "sourceMarkdownSha256": "5A74293BE2922EB0F04EB767E741409BF547D3D2B6B8D956EB2ECD55A8962C76",
+      "mermaidSha256": "4A9E3DAD3BBD8DD01E723814786F0313112E8B24BCB611C63A638D63070D7D8C",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1940,
+      "height": 1203,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D11.dark.svg",
+      "svgSha256": "F84C0A8152736EF7F1863F099F0E693E683321D1B97980664088479FCB49DF12",
+      "svgBytes": 57236,
+      "png": "images/D11.dark.png",
+      "pngSha256": "D89F704AA132A11D41727FAACE2588EA4F3BFA75F9D15B44500BEBD8709A27D9",
+      "pngBytes": 203220
+    },
+    {
+      "id": "D12",
+      "title": "콘텐츠·sprite·shader·모델·음성 registry와 payload",
+      "sourceMarkdown": "docs/architecture/presentation-assets.md",
+      "sourceAnchor": "d12-sprite-payload",
+      "sourceMarkdownSha256": "5A74293BE2922EB0F04EB767E741409BF547D3D2B6B8D956EB2ECD55A8962C76",
+      "mermaidSha256": "84E9972AB12563BA423E8D6724B56DA21C64F8F2D1E15DA9A6B9849927D6E10A",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1170,
+      "height": 1973,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D12.dark.svg",
+      "svgSha256": "7FE54931A31BA9F977A8E1DA0AC793C543CCEB62AF7EE7E013806FAE070C7B5E",
+      "svgBytes": 63669,
+      "png": "images/D12.dark.png",
+      "pngSha256": "4C357F3B4BC4FD11918915B156F2F7FB3349BF95EE20207BE91E2409806E4B32",
+      "pngBytes": 288110
+    },
+    {
+      "id": "D13",
+      "title": "목표 구성과 읽기 전용 출처",
+      "sourceMarkdown": "docs/architecture/load-and-lifecycle.md",
+      "sourceAnchor": "d13-physical-sources",
+      "sourceMarkdownSha256": "0910B2935B4A7DFAD71C18391C27F3C13F4561A445DFE91E2D2A2108306EA2CA",
+      "mermaidSha256": "6333F9BFA96522B042B559853A514B9F0F730F1C9180158957852EBF82DC0310",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1232,
+      "height": 1334,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D13.dark.svg",
+      "svgSha256": "BE70CD95800C0FC9E070FA5F2B961D323B59E2B514B7D3568969D7387AFF2E18",
+      "svgBytes": 46529,
+      "png": "images/D13.dark.png",
+      "pngSha256": "EC0842B9424E31CB77427E28AF9B4290069C0BE8E9A02610127B15BCB863C211",
+      "pngBytes": 164807
+    },
+    {
+      "id": "D14",
+      "title": "등록·새 게임·저장 복원의 구분",
+      "sourceMarkdown": "docs/architecture/load-and-lifecycle.md",
+      "sourceAnchor": "d14-runtime-lifecycle",
+      "sourceMarkdownSha256": "0910B2935B4A7DFAD71C18391C27F3C13F4561A445DFE91E2D2A2108306EA2CA",
+      "mermaidSha256": "C61F7BC457C8D4E348A20C1908404B7B5BC3FEEECC8FB3913ACE875675361BAF",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1622,
+      "height": 1291,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D14.dark.svg",
+      "svgSha256": "00224595A6F37483AC1978D478394363A63CD69D9E5C81295DE69A926F2315F5",
+      "svgBytes": 55880,
+      "png": "images/D14.dark.png",
+      "pngSha256": "2B9A28F6BD2D525D1790AFA0EAFEF79621DBAEED237E2E79DC1F195E038B30F8",
+      "pngBytes": 188161
+    },
+    {
+      "id": "D15",
+      "title": "중점·공유 조건·공용 핵심주·후속 인정",
+      "sourceMarkdown": "docs/architecture/shandong-government.md",
+      "sourceAnchor": "d15-call-and-shared-guards",
+      "sourceMarkdownSha256": "1A3A5777C09C2F03B1733C11AA4663C9F405F9CB012A63EF3B8A50687DCA34F4",
+      "mermaidSha256": "77EE3DAABF1EA33C037BB340E2FBB089F73EECD086A6B8BFE80F84D17F7DEB29",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1907,
+      "height": 1336,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D15.dark.svg",
+      "svgSha256": "D1D160F3A8826BF2505C4DF0AF4239492954846C78C0578A0EA18D491FA1AF32",
+      "svgBytes": 61596,
+      "png": "images/D15.dark.png",
+      "pngSha256": "8088BEFDD9B839A29190536A874B313D464914E11768419C2AF3970778EE6D57",
+      "pngBytes": 243196
+    },
+    {
+      "id": "D16",
+      "title": "한국·원국·생성국의 실제 처리 순서",
+      "sourceMarkdown": "docs/architecture/shandong-government.md",
+      "sourceAnchor": "d16-formation-order",
+      "sourceMarkdownSha256": "1A3A5777C09C2F03B1733C11AA4663C9F405F9CB012A63EF3B8A50687DCA34F4",
+      "mermaidSha256": "99DEC7B2977E09D0EFE2851D4EA830DD5D0A7EAE2C1B2A08D108A9D77B080CEE",
+      "group": "general",
+      "diagramType": "sequenceDiagram",
+      "width": 1450,
+      "height": 2572,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D16.dark.svg",
+      "svgSha256": "6FB2DC3B8D023E6FF79C603D68982B2E149370C95C1371667D0BF57B79999FCF",
+      "svgBytes": 53809,
+      "png": "images/D16.dark.png",
+      "pngSha256": "AC48509578E321371745551533A3DCF715B368325AF2F6E137345B566CA7737D",
+      "pngBytes": 356088
+    },
+    {
+      "id": "D17",
+      "title": "기본 영토·연결 확장·항공기·SND 잔여 분기",
+      "sourceMarkdown": "docs/architecture/shandong-government.md",
+      "sourceAnchor": "d17-territory-and-remainders",
+      "sourceMarkdownSha256": "1A3A5777C09C2F03B1733C11AA4663C9F405F9CB012A63EF3B8A50687DCA34F4",
+      "mermaidSha256": "704AEEFE3C9C5CA477180613FA8A45766596984657A7E9F62ED4D1F5D7F5DF25",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 856,
+      "height": 3608,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D17.dark.svg",
+      "svgSha256": "E65FBB63BEB05E96769DE14FA7AE7E6D4E34023F64A6028CF3F7538063ABB49C",
+      "svgBytes": 74692,
+      "png": "images/D17.dark.png",
+      "pngSha256": "A1F7E79A6C2A950622D0FD077DC4CA45284F904176A5D1B4CB07D87C85443825",
+      "pngBytes": 299890
+    },
+    {
+      "id": "D18",
+      "title": "전용 웡원하오의 정의·초기 모집·이동·승격·표시",
+      "sourceMarkdown": "docs/architecture/shandong-government.md",
+      "sourceAnchor": "d18-character-lifecycle",
+      "sourceMarkdownSha256": "1A3A5777C09C2F03B1733C11AA4663C9F405F9CB012A63EF3B8A50687DCA34F4",
+      "mermaidSha256": "0DC82DA9D19516CA3DD8757C016F9F0D2C1D2DC009C5F8904E1AE1791475ACEE",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1739,
+      "height": 712,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D18.dark.svg",
+      "svgSha256": "FE5D8344E7A4195BCA682C6269BAB241BA5C6F1B731138831ACFF2A67426D120",
+      "svgBytes": 44381,
+      "png": "images/D18.dark.png",
+      "pngSha256": "39980CEE51EF1F65251557847603CAC97EE2AAF9420A7629F331E755F5468D05",
+      "pngBytes": 162651
+    },
+    {
+      "id": "D19",
+      "title": "모집된 인물의 역할·중점 해금·기존 저장 분기",
+      "sourceMarkdown": "docs/architecture/commander-unlock.md",
+      "sourceAnchor": "d19-commander-save-guard",
+      "sourceMarkdownSha256": "DE9C33AA3C0057ACA6AC0CC2458B4D101D6452C7F653D2E756AA920B9F9C02A5",
+      "mermaidSha256": "AE923D30A66938EAA27325DDEA317827FBAFFBD848CF164B15A7B64A7C6699B5",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 1788,
+      "height": 1768,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D19.dark.svg",
+      "svgSha256": "1581A9199CD0E96A50919E2CB87E663A3E6FCC76DEDD8387ED4F08E376998747",
+      "svgBytes": 61804,
+      "png": "images/D19.dark.png",
+      "pngSha256": "CC47ACEA2D3EFB0BFC6C478E1F1FF487E3A304C5825151F134316C741CB92A89",
+      "pngBytes": 247626
+    },
+    {
+      "id": "D20",
+      "title": "최종 바이트 검사와 과거 계약의 역투영",
+      "sourceMarkdown": "docs/architecture/source-and-generation.md",
+      "sourceAnchor": "d20-raw-and-historical",
+      "sourceMarkdownSha256": "CE11771D40F38511BAD3335EFDB9FE6F9DA2CC17FA86F7586DAF13E4F7C3EF7A",
+      "mermaidSha256": "14A919F5A2C8B21982EC72313181B8A183F3EAD844CC985ECDFC926E50AE2C47",
+      "group": "general",
+      "diagramType": "flowchart",
+      "width": 975,
+      "height": 1816,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D20.dark.svg",
+      "svgSha256": "1CECD7568F37973016CBA7F260C1C060FDBEED6F08EEE835E7975936EC65E690",
+      "svgBytes": 44912,
+      "png": "images/D20.dark.png",
+      "pngSha256": "C1356322F953568C9EC0B4FE0773ACC69A6C758EDC664E07FB5C7646DDF00A02",
+      "pngBytes": 183048
+    },
+    {
+      "id": "D21",
+      "title": "프로젝트 전체 실행 경계와 저장의 시퀀스",
+      "sourceMarkdown": "docs/architecture/load-and-lifecycle.md",
+      "sourceAnchor": "d21-project-runtime-sequence",
+      "sourceMarkdownSha256": "0910B2935B4A7DFAD71C18391C27F3C13F4561A445DFE91E2D2A2108306EA2CA",
+      "mermaidSha256": "F4FD20790E53E212503557EA176796A5765253E9C04F9AD71B509154A4D38785",
+      "group": "general",
+      "diagramType": "sequenceDiagram",
+      "width": 2093,
+      "height": 1654,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D21.dark.svg",
+      "svgSha256": "E0A220153F2D4A0FA9059472783DC245F54E6E1E3267C95F5043EF547E6B1AA9",
+      "svgBytes": 50184,
+      "png": "images/D21.dark.png",
+      "pngSha256": "F7EC5645FD1B999C268184285C4BF14E7543689CBAB1B0C9E48D541DB21861A6",
+      "pngBytes": 264431
+    },
+    {
+      "id": "D22",
+      "title": "개발 생성·거부·문서 갱신의 시퀀스",
+      "sourceMarkdown": "docs/architecture/source-and-generation.md",
+      "sourceAnchor": "d22-development-sequence",
+      "sourceMarkdownSha256": "CE11771D40F38511BAD3335EFDB9FE6F9DA2CC17FA86F7586DAF13E4F7C3EF7A",
+      "mermaidSha256": "6737EDB87662952FF63FB37154BB723108574F7EC5ADB9CABDC11011D2FFAD6E",
+      "group": "general",
+      "diagramType": "sequenceDiagram",
+      "width": 1670,
+      "height": 1400,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D22.dark.svg",
+      "svgSha256": "543A0C41A6E7C4593227EB9E6B8A11B8728BC7233D84839C8C93272C20C2C5B7",
+      "svgBytes": 44704,
+      "png": "images/D22.dark.png",
+      "pngSha256": "729160941980F5618159BEC27D189A06C76E65D0337FD981A9CBB107E88914AD",
+      "pngBytes": 194815
+    },
+    {
+      "id": "D23",
+      "title": "반복 민주 지원의 구매·중복 차단·만료",
+      "sourceMarkdown": "docs/architecture/content-flow.md",
+      "sourceAnchor": "d23-support-cycle",
+      "sourceMarkdownSha256": "305A4F70C25FF45B0B86DC1600851D69CA6AAE9FCE6659D3DDFAEF8D74A51C70",
+      "mermaidSha256": "D7FF72A957957A813A559232D39D17F196802544EC076F4078F96489C2E950FF",
+      "group": "general",
+      "diagramType": "sequenceDiagram",
+      "width": 1139,
+      "height": 1185,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D23.dark.svg",
+      "svgSha256": "0F4697129C32927FB0523BD80AA9C574440E04DDC55ED4D39D31FA75499651BE",
+      "svgBytes": 36881,
+      "png": "images/D23.dark.png",
+      "pngSha256": "60DA928B87D918A85294907727AA88D846F500A9173AB8F87B87694ABF8A3B51",
+      "pngBytes": 137837
+    },
+    {
+      "id": "D24",
+      "title": "정보국 중점과 기존 기관 재사용",
+      "sourceMarkdown": "docs/architecture/content-flow.md",
+      "sourceAnchor": "d24-intelligence-sequence",
+      "sourceMarkdownSha256": "305A4F70C25FF45B0B86DC1600851D69CA6AAE9FCE6659D3DDFAEF8D74A51C70",
+      "mermaidSha256": "13DFC92EE3FB9C42DDEA2187B58C7916F80096F70C5C1DC5C29976A77CC2585B",
+      "group": "general",
+      "diagramType": "sequenceDiagram",
+      "width": 1073,
+      "height": 1019,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D24.dark.svg",
+      "svgSha256": "54A38C82569B5B42BAE1B14B83A61523102B8EC954074E55D94931CE0331E72A",
+      "svgBytes": 35112,
+      "png": "images/D24.dark.png",
+      "pngSha256": "050BDDCD66CB376D25077BA7142D680C7A59C9F8EDE1A7A3F8E55C22E0E88BD4",
+      "pngBytes": 121971
+    },
+    {
+      "id": "D25",
+      "title": "CNDP 전북 사업의 착수·취소·종료 재검사",
+      "sourceMarkdown": "docs/architecture/content-flow.md",
+      "sourceAnchor": "d25-cndp-sequence",
+      "sourceMarkdownSha256": "305A4F70C25FF45B0B86DC1600851D69CA6AAE9FCE6659D3DDFAEF8D74A51C70",
+      "mermaidSha256": "C7A6E706580C84BF214CA77F3C407161B6B769AA33375EFE35EC794C4CABC954",
+      "group": "general",
+      "diagramType": "sequenceDiagram",
+      "width": 1111,
+      "height": 1527,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D25.dark.svg",
+      "svgSha256": "0249C804E60DB9633E932AA319D0F3F4EB09F6721CE721999A362F472F93AE83",
+      "svgBytes": 40509,
+      "png": "images/D25.dark.png",
+      "pngSha256": "AC7AC755DE8157F486C8407364B39C73B649134621E6CDA4AFB978F7A6801128",
+      "pngBytes": 168339
+    },
+    {
+      "id": "D26",
+      "title": "표시 요청에서 최종 문자열·그림까지의 시퀀스",
+      "sourceMarkdown": "docs/architecture/presentation-assets.md",
+      "sourceAnchor": "d26-presentation-sequence",
+      "sourceMarkdownSha256": "5A74293BE2922EB0F04EB767E741409BF547D3D2B6B8D956EB2ECD55A8962C76",
+      "mermaidSha256": "4D23BFB2A35794184D4C8D0463FFA727FC7591CFB6959ABC90044C5F1421B8B9",
+      "group": "general",
+      "diagramType": "sequenceDiagram",
+      "width": 1950,
+      "height": 1192,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "images/D26.dark.svg",
+      "svgSha256": "D0376FC35137C69D313EB86B741C9E80C6E6C882BA69B36C02389D8BD60D00A1",
+      "svgBytes": 38871,
+      "png": "images/D26.dark.png",
+      "pngSha256": "16315C354C0C545910D795589816235E10F31E8616E6A189E50338821B83709F",
+      "pngBytes": 161615
+    },
+    {
+      "id": "S01",
+      "title": "주 데이터와 국가·프로빈스 관계",
+      "sourceMarkdown": "docs/architecture/states/definition-and-scope.md",
+      "sourceAnchor": "s01-state-concept",
+      "sourceMarkdownSha256": "F7676D94AC63C7852DB2539C9E931E3C5FC2B1D049C73CAE9FE2602CE7FFA012",
+      "mermaidSha256": "5C2A4FED8374A6C346AC759693DCE230836AB2EE5437674E0DE82F84A448AD39",
+      "group": "state",
+      "diagramType": "classDiagram",
+      "width": 1455,
+      "height": 1883,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S01.dark.svg",
+      "svgSha256": "BF4BA1C742B66380A8143EFA5F49D3782EFFDF66A33FDAF26127132DEA3D775C",
+      "svgBytes": 69905,
+      "png": "states/images/S01.dark.png",
+      "pngSha256": "D1B6D7CD93C98018E657D988F141E6A7B6199F199C5EE8FC998ACDB5B7AB8925",
+      "pngBytes": 241560
+    },
+    {
+      "id": "S02",
+      "title": "황해남917의 실제 중첩과 토큰",
+      "sourceMarkdown": "docs/architecture/states/definition-and-scope.md",
+      "sourceAnchor": "s02-state-file-tree",
+      "sourceMarkdownSha256": "F7676D94AC63C7852DB2539C9E931E3C5FC2B1D049C73CAE9FE2602CE7FFA012",
+      "mermaidSha256": "1B8CEBBA93038CB4DD4922EB7370A7E77A4798F6BA4489E371B00CE0EB5CB5F1",
+      "group": "state",
+      "diagramType": "flowchart",
+      "width": 1842,
+      "height": 1486,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S02.dark.svg",
+      "svgSha256": "A4F50955128A65628698F7A31DC5AAE0610708197D5ADD28AEE78F2BBF2A74EB",
+      "svgBytes": 60891,
+      "png": "states/images/S02.dark.png",
+      "pngSha256": "6D8F67F3B1CD95075DB98E5C6365F1C34C4A4ABBA4DE8548E77C6C3590688322",
+      "pngBytes": 269144
+    },
+    {
+      "id": "S03",
+      "title": "Country 조건과 State 조건의 분리",
+      "sourceMarkdown": "docs/architecture/states/definition-and-scope.md",
+      "sourceAnchor": "s03-country-state-scope",
+      "sourceMarkdownSha256": "F7676D94AC63C7852DB2539C9E931E3C5FC2B1D049C73CAE9FE2602CE7FFA012",
+      "mermaidSha256": "17B34F5B1D90F67C4ACB3D919F7D6A292FFAE76F3D784300DE1BFBEE739E6D72",
+      "group": "state",
+      "diagramType": "flowchart",
+      "width": 1173,
+      "height": 1944,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S03.dark.svg",
+      "svgSha256": "116E16CAA85272EFEEA658CBD501EBD87F8E9618E7DB4F9B6B9C0BAB0F7EF58B",
+      "svgBytes": 64187,
+      "png": "states/images/S03.dark.png",
+      "pngSha256": "3C0E807DE82793FC8280CE242C10804122B478AB68A51EBBC18A58ED5DC552A5",
+      "pngBytes": 261959
+    },
+    {
+      "id": "S04",
+      "title": "서로 다른 지리 집합과 네트워크",
+      "sourceMarkdown": "docs/architecture/states/geography-and-splits.md",
+      "sourceAnchor": "s04-province-state-region",
+      "sourceMarkdownSha256": "E2BFC2A549300EE4B231E8B06B8C4442FE445AC45360D2D2F2BA6CFC593A8F9F",
+      "mermaidSha256": "5FEF251744799F1861A9192846D5326C0AEEFBA59ED171AB97C5757535794A22",
+      "group": "state",
+      "diagramType": "flowchart",
+      "width": 2218,
+      "height": 1003,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S04.dark.svg",
+      "svgSha256": "50A54D42F086C5B5689C21B226FCA2BF6ADF98AB4347077DB1DBD98B8CE10A19",
+      "svgBytes": 54969,
+      "png": "states/images/S04.dark.png",
+      "pngSha256": "43BBFA875919B091DFBAC44E039B1331561BB46CEF398689F192DE9A7CAA5E81",
+      "pngBytes": 185206
+    },
+    {
+      "id": "S05",
+      "title": "한국9→15주 전체 분할과 포트ID 대응",
+      "sourceMarkdown": "docs/architecture/states/geography-and-splits.md",
+      "sourceAnchor": "s05-korean-split-map",
+      "sourceMarkdownSha256": "E2BFC2A549300EE4B231E8B06B8C4442FE445AC45360D2D2F2BA6CFC593A8F9F",
+      "mermaidSha256": "D7A358435288F3612A3321F4E37790B9DD197028B2505E60573C82028C09B387",
+      "group": "state",
+      "diagramType": "flowchart",
+      "width": 546,
+      "height": 1585,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S05.dark.svg",
+      "svgSha256": "3CC15C780C2A307279CD62A20A4352A523BD35B54C59C10575519B0644454874",
+      "svgBytes": 46094,
+      "png": "states/images/S05.dark.png",
+      "pngSha256": "37D10E3E7D84B1E1FF96FA527FF7D216BE234F0AAE29B7E02E4E0EF096812809",
+      "pngBytes": 190589
+    },
+    {
+      "id": "S06",
+      "title": "지역이 바뀔 때 따라갈 소비자",
+      "sourceMarkdown": "docs/architecture/states/geography-and-splits.md",
+      "sourceAnchor": "s06-reference-closure",
+      "sourceMarkdownSha256": "E2BFC2A549300EE4B231E8B06B8C4442FE445AC45360D2D2F2BA6CFC593A8F9F",
+      "mermaidSha256": "5ACEBB288693283FFAB61524ADA8A14A799AB99AC6790C6736D33FDFF9E4934E",
+      "group": "state",
+      "diagramType": "flowchart",
+      "width": 2535,
+      "height": 1628,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S06.dark.svg",
+      "svgSha256": "AD89B1B46E419275788869E8D17D93CC52903DBA9D0C296B2A03CEC41D02D213",
+      "svgBytes": 56763,
+      "png": "states/images/S06.dark.png",
+      "pngSha256": "A018F20E035190E806E244202820EF59616F6240613A6CBE632794281B82BF0B",
+      "pngBytes": 205420
+    },
+    {
+      "id": "S07",
+      "title": "국가와 주의 서로 다른 관계",
+      "sourceMarkdown": "docs/architecture/states/ownership-and-transfer.md",
+      "sourceAnchor": "s07-country-state-relations",
+      "sourceMarkdownSha256": "5FF4592FA1241ADFF2A8E06B2EFF40E022944658E95FB0B20A05444E8951C503",
+      "mermaidSha256": "71D7079891014131127F3A9471A628AE35C13CE3D6E0C5EA61091EF2B6840777",
+      "group": "state",
+      "diagramType": "classDiagram",
+      "width": 1390,
+      "height": 970,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S07.dark.svg",
+      "svgSha256": "68DA1889D9ED5E057D0BDD59C10E399FC12601F59463451E695560B07811E807",
+      "svgBytes": 61338,
+      "png": "states/images/S07.dark.png",
+      "pngSha256": "B1E97280ED72604CCE4FB7381ED6E2FCD43B95D6CB00ED996797866E680CABD2",
+      "pngBytes": 151309
+    },
+    {
+      "id": "S08",
+      "title": "이전 적격과 안전한 첫 거점",
+      "sourceMarkdown": "docs/architecture/states/ownership-and-transfer.md",
+      "sourceAnchor": "s08-transfer-eligibility",
+      "sourceMarkdownSha256": "5FF4592FA1241ADFF2A8E06B2EFF40E022944658E95FB0B20A05444E8951C503",
+      "mermaidSha256": "0D0C5A0067208ADA9D57EFB50B0435E395109E8297691E9CED08E23B99B20534",
+      "group": "state",
+      "diagramType": "flowchart",
+      "width": 1539,
+      "height": 5573,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S08.dark.svg",
+      "svgSha256": "4D5B1CD1BD65E5F282F5C4069F75DBD6B5EDC4502D99B1C207122BC5E0CA152A",
+      "svgBytes": 86684,
+      "png": "states/images/S08.dark.png",
+      "pngSha256": "0F2A686FBD348250969FA27C1AC74E64F09F83B3597F467CB03B561D106CDF3A",
+      "pngBytes": 474651
+    },
+    {
+      "id": "S09",
+      "title": "선택 표식과 실제 영토 이전",
+      "sourceMarkdown": "docs/architecture/states/ownership-and-transfer.md",
+      "sourceAnchor": "s09-selection-and-transfer",
+      "sourceMarkdownSha256": "5FF4592FA1241ADFF2A8E06B2EFF40E022944658E95FB0B20A05444E8951C503",
+      "mermaidSha256": "8B57F3253C12F741EF80097BBDEE0595422C5BC606109FE45C84FE2A7EF2D2F1",
+      "group": "state",
+      "diagramType": "sequenceDiagram",
+      "width": 1959,
+      "height": 2196,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S09.dark.svg",
+      "svgSha256": "63D6E76EEDE9093DA4B912313E4267203B5CEFB6B4CAEBEDF956CE03626204B8",
+      "svgBytes": 51783,
+      "png": "states/images/S09.dark.png",
+      "pngSha256": "2B94E597F980240777EE9D7A1D95E02DA2A83F29904F78E8DD4404BB87890C9A",
+      "pngBytes": 350061
+    },
+    {
+      "id": "S10",
+      "title": "주 데이터의 영향 범위",
+      "sourceMarkdown": "docs/architecture/states/change-impact.md",
+      "sourceAnchor": "s10-state-consumers",
+      "sourceMarkdownSha256": "A85410E63D061291D4F0CDB65441116C114066F626AE98AA7E173AB5E7D6A845",
+      "mermaidSha256": "B14B88FC99E9B0D9EB000ECDE598FB41FB883EB28B7ACAF8DD6749B491DFE9DB",
+      "group": "state",
+      "diagramType": "flowchart",
+      "width": 2427,
+      "height": 888,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S10.dark.svg",
+      "svgSha256": "6279C924E6C6FCCE94959192C941BF566770F1BDDBC4CE623C13793DC0F47D01",
+      "svgBytes": 48810,
+      "png": "states/images/S10.dark.png",
+      "pngSha256": "30644050CEAB2E4A916C5219609EFE276DC36BA8B67E533CC19A611B2EDC7E4E",
+      "pngBytes": 159280
+    },
+    {
+      "id": "S11",
+      "title": "국가 버전 표식과 주별 완료 표식",
+      "sourceMarkdown": "docs/architecture/states/change-impact.md",
+      "sourceAnchor": "s11-project-version-and-save",
+      "sourceMarkdownSha256": "A85410E63D061291D4F0CDB65441116C114066F626AE98AA7E173AB5E7D6A845",
+      "mermaidSha256": "8CE5963176C6982FD68681895DAF85635812EFA86D7E4A093ED5984BC0A205CB",
+      "group": "state",
+      "diagramType": "flowchart",
+      "width": 950,
+      "height": 2849,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S11.dark.svg",
+      "svgSha256": "CBB1936139424D5897BD0A78EF193389F4BB629CFAF70847499DA71629F3E8B4",
+      "svgBytes": 57337,
+      "png": "states/images/S11.dark.png",
+      "pngSha256": "5A8A5046650C39CF88D9D8EE06DEABBB2C8AD10F91005FAD3E34ADC95BB5C330",
+      "pngBytes": 248601
+    },
+    {
+      "id": "S12",
+      "title": "기본 공간·추가 슬롯·공유/유형별 상한",
+      "sourceMarkdown": "docs/architecture/states/change-impact.md",
+      "sourceAnchor": "s12-building-space",
+      "sourceMarkdownSha256": "A85410E63D061291D4F0CDB65441116C114066F626AE98AA7E173AB5E7D6A845",
+      "mermaidSha256": "E3FABB7127B07782C2B64F9D51ABB4EC025659F4FC8800D083D35539B60F7803",
+      "group": "state",
+      "diagramType": "flowchart",
+      "width": 1918,
+      "height": 1576,
+      "foreignObjects": 0,
+      "renderAction": "retained exact same Mermaid output",
+      "svg": "states/images/S12.dark.svg",
+      "svgSha256": "0E56D7A7D0F72DA9227A7FE5F96C9E3759E61D310DB0BC1F20E01E21AF022953",
+      "svgBytes": 56241,
+      "png": "states/images/S12.dark.png",
+      "pngSha256": "BFABCC0309BA3C9F0F1B31C8E3F0F4A3440E1EC08ABBDD91C1CB392FC7CBEF6A",
+      "pngBytes": 259734
+    }
+  ],
+  "sourceEvidence": {
+    "common/ai_strategy_plans/KOR_alternate_strategy_plan.txt": {
+      "sha256": "C93F9F367B3B986025503E74A7D8E3D57FA3CC02074508755EAFC9377060CBBB",
+      "bytes": 3086
+    },
+    "common/ai_strategy_plans/KOR_historical_strategy_plan.txt": {
+      "sha256": "DCDB00CBA8FBF552AA1E86DB40CD226FF31D5BD48D11829A8FA8AAF5766135A8",
+      "bytes": 10507
+    },
+    "common/buildings/02_landmark_buildings_HoK.txt": {
+      "sha256": "3CAC3AA7BDBBD24686E5B0638007DEE1694B234B1D3D5B3F6AEA52CDB32FA026",
+      "bytes": 778
+    },
+    "common/characters/HOK_KCH_characters.txt": {
+      "sha256": "57163327308F0AB3DF25F480D3289E4DF91D3B7C2E39B6FFCDA01411FB8B352D",
+      "bytes": 356
+    },
+    "common/characters/KOR.txt": {
+      "sha256": "A8908A052E432DA681DEBAA505F59DD8F4DD648CB99F481B2A55DAC338A01DF2",
+      "bytes": 31462
+    },
+    "common/decisions/HOK_KOR_democratic_support.txt": {
+      "sha256": "0C5F4B297608FDF411E87FA627C1FE28AB94B4523CFA631AFF6148FFFA7BC6CF",
+      "bytes": 2735
+    },
+    "common/decisions/KOR_decision.txt": {
+      "sha256": "C140F0713F53DFDF0E95D9D9AAD73CBA3652F9C5B3AA0B6A3DD31920B882F47C",
+      "bytes": 78852
+    },
+    "common/dynamic_modifiers/HOK_KOR_manchurian_followup.txt": {
+      "sha256": "650FB00A2AD75FE0CB485DF4A9CC9C2A46C5342E32DC623F832BFD2B8EF41A7E",
+      "bytes": 6558
+    },
+    "common/factions/templates/HOK_KOR_factions.txt": {
+      "sha256": "0A9CCB696C96F5BF8D20BAEEB1D0D90C503805213B6EEB055CBF5404F067118C",
+      "bytes": 2378
+    },
+    "common/ideas/HOK_KOR_democratic_intelligence.txt": {
+      "sha256": "6485BFC1FF809CBE4554C722F9BC26677D48032A95FFE456804CDF31C927B24A",
+      "bytes": 1169
+    },
+    "common/ideas/korea.txt": {
+      "sha256": "71CCFABB75832A31D80090410AAFFC2D1B3BF97A86A11026EE4ECF39B5991F23",
+      "bytes": 17596
+    },
+    "common/military_industrial_organization/organizations/KOR_organization.txt": {
+      "sha256": "5D6A7630565416E4777A6225900FA95E9C8703008D51AAD3F9549F76F8188300",
+      "bytes": 12867
+    },
+    "common/national_focus/korea.txt": {
+      "sha256": "265D1E087E00ACEDAA12A4A4BBD3B573DB6919DA08196504874D0B49F3C53F48",
+      "bytes": 522588
+    },
+    "common/on_actions/HOK_KOR_civic_on_actions.txt": {
+      "sha256": "730400147518E52EC2125BDAC5E5BAF9AB4E88BAC47DC20619C8635C37093EC7",
+      "bytes": 442
+    },
+    "common/on_actions/HOK_KOR_soyang_water_gates.txt": {
+      "sha256": "D8DF5F18155B2CDE75AAA342A67E54C0896A8ED0D5B961819902BE2F6A5F661E",
+      "bytes": 830
+    },
+    "common/raids/HOK_KOR_naval_commando_raids.txt": {
+      "sha256": "3AC4C377A30F4C4A540D76A8CCD475DF08E7DA5559709E626023AA27D2ED76E7",
+      "bytes": 6662
+    },
+    "common/scripted_effects/HOK_KOR_chinese_government_effects.txt": {
+      "sha256": "CDFE37068613F20248ECE6EF32EFF2C4FDFC60B3333EAE04938209F2715B66BE",
+      "bytes": 8534
+    },
+    "common/scripted_effects/HOK_KOR_civic_effects.txt": {
+      "sha256": "91F8B01BD60230433F94020F36E445FCF60F384DF400DF72D742BFDB0BB6FEC8",
+      "bytes": 14579
+    },
+    "common/scripted_effects/HOK_KOR_democratic_intelligence_effects.txt": {
+      "sha256": "8684B6498B3866B102676E1B995BBCAFE306984B708B7720777FB5472C2C8A5C",
+      "bytes": 1118
+    },
+    "common/scripted_effects/HOK_KOR_research_network_effects.txt": {
+      "sha256": "C5607E444BDE56CD0A688EE9EACB3224A09B85C641AA29351322A5854FB36863",
+      "bytes": 5390
+    },
+    "common/scripted_effects/HOK_KOR_soyang_water_gates.txt": {
+      "sha256": "4549B3786662C77465B889FE8608F5FFE91FFB1F77D46B649C02384DA2586A85",
+      "bytes": 2736
+    },
+    "common/scripted_effects/HOK_KOR_us_defense_effects.txt": {
+      "sha256": "AC2C89A840E61A9A804041C1185705F730DE76DCB3A88154A9815BBB7519D218",
+      "bytes": 4949
+    },
+    "common/scripted_triggers/HOK_KOR_chinese_democratic_support_triggers.txt": {
+      "sha256": "F68C3EA786FE95FA77CAE7D4A9283586874B37EEC1F4DB1790777FCAF336B316",
+      "bytes": 553
+    },
+    "common/scripted_triggers/HOK_KOR_chinese_government_state_triggers.txt": {
+      "sha256": "4CEFAB1FFD5FA1425B6C4E5AFFAC3D4CFBAA97ADA25725339E3439E02169DFDC",
+      "bytes": 3353
+    },
+    "common/scripted_triggers/HOK_KOR_civic_triggers.txt": {
+      "sha256": "19B00FDD3C42398F9DD32A9966A2295CA44F7D98399AFB59F81A2809B3D3E4B9",
+      "bytes": 2314
+    },
+    "common/scripted_triggers/HOK_KOR_cndp_triggers.txt": {
+      "sha256": "90769AAC3E161ECABB3F87B697B1F5D6B368407E56594FE2274CABB1EDE50273",
+      "bytes": 16842
+    },
+    "descriptor.mod": {
+      "sha256": "FA0058A9E90B6BBEEA4433F31723406ED1CAB513E6273B00C11A26C7AFE96C8E",
+      "bytes": 300
+    },
+    "docs/data/HOK_KOREAN_CHINESE_GOVERNMENT_RT56_MAPPING.json": {
+      "sha256": "2672A5C295B2010D95B20013C69FB723DF474245CC0156A59DDA4A4EEED1480A",
+      "bytes": 263641
+    },
+    "docs/data/HOK_KOREAN_DEMOCRATIC_SUPPORT_INTELLIGENCE_PORT_LAYOUT.json": {
+      "sha256": "8D5C97E21D5903D1F17AF83C37DAFC34BB8E6EB4B9016AC74807566240190364",
+      "bytes": 238534
+    },
+    "docs/data/HOK_KOREAN_STATE_SPLIT_PORT_MAPPING.json": {
+      "sha256": "767B422AAD8C3C6D099AC415A1F31AB64B827A0ECC0FC71D8A6B3C38C2408E29",
+      "bytes": 38923
+    },
+    "events/HOK_KOR_civic_events.txt": {
+      "sha256": "E0FC4A82884BB1E3969E649C469E93DAC39130DB2D94BA2AA937292B74B08B78",
+      "bytes": 11120
+    },
+    "events/korea.txt": {
+      "sha256": "6E0323A5166B548953052E6D66DB0E2773116032DB363603DB03C4868C17E767",
+      "bytes": 57173
+    },
+    "gfx/entities/_HoK_units_planes.asset": {
+      "sha256": "736CBD46614B16DF8956F9A7F1987E11258EADAE103C19D040F566EF49CD1CBD",
+      "bytes": 13343
+    },
+    "gfx/entities/kor_planes.gfx": {
+      "sha256": "0D2074313DC0C996920578533559FFD9A5827632273B028D67DD79AE589EE867",
+      "bytes": 1986
+    },
+    "gfx/interface/equipmentdesigner/graphic_db/00_hok_plane_icons.txt": {
+      "sha256": "4DCC92781BEDD39CEAFDD745E4469E32BC21FA4873A628DC18B91A0FC7D47B39",
+      "bytes": 6659
+    },
+    "history/countries/KCH - Korean China.txt": {
+      "sha256": "6DA12D896CD61ABF3118F4B1FC1A11B9921EABE5CB3464A8AEB4489CE0CD74B5",
+      "bytes": 3520
+    },
+    "history/countries/KOR - Korea.txt": {
+      "sha256": "68F9298E2EC6644F1AEF49F29E214AECB70437C6F5DFEC71C74263D1374F179E",
+      "bytes": 12353
+    },
+    "history/states/1144-Gangwon.txt": {
+      "sha256": "466000A6D5EB0491CB3C40FE16913E5E96945585E67A5381EF8F486EAEBD1FFB",
+      "bytes": 542
+    },
+    "history/states/1145-Chungcheong.txt": {
+      "sha256": "E69EB8485498F0EC21EAA797E011ACC273C95C7926933720DFF1B30CC74A4C1E",
+      "bytes": 557
+    },
+    "history/states/1146-Jeju.txt": {
+      "sha256": "CA71A5C45B371F47B6F2150BB6B82FAD258FF8A028F79588EBC8B6D397AD04A4",
+      "bytes": 354
+    },
+    "history/states/1148-Gyeongsangnam.txt": {
+      "sha256": "329A1F169EA75B67C1042F221325BC2FE2541C6073A7926EBE9821C6CED57492",
+      "bytes": 669
+    },
+    "history/states/1149-Chungcheongbuk.txt": {
+      "sha256": "C017B1F0E63CD5629BB34F2D0DA9D291A6EFCC20EEEBF046D6587AA24E2DE0F2",
+      "bytes": 432
+    },
+    "history/states/1150-Jeollanam.txt": {
+      "sha256": "5934C1CFD44F8AACC7CCC679287BFED862BC161F3DFC3E299C93FA1CC665C4F2",
+      "bytes": 635
+    },
+    "history/states/1151-Pyeonganbuk.txt": {
+      "sha256": "D0CFD17CA0E4FC91E624C0CD6BD3800F9D9C829E05C9BD7C1A2E0C7D96E0B313",
+      "bytes": 709
+    },
+    "history/states/1152-Hamgyeongbuk.txt": {
+      "sha256": "3D2FB3584C24C1E60F7BDEB03F292275D776A4CEB029DEB873E1E129C5A6AFB0",
+      "bytes": 738
+    },
+    "history/states/1153-Hwanghaebuk.txt": {
+      "sha256": "D477A60E4245BEF92E6C3A27D2D0CFD5B4460B007B56C5ECEBB8745F335A7561",
+      "bytes": 463
+    },
+    "history/states/525-South Korea.txt": {
+      "sha256": "4FCA4FCBE292353F6531A1D336B37A885D5090DB0316A92440E84D4D3A7BEB75",
+      "bytes": 1037
+    },
+    "history/states/527-North Korea.txt": {
+      "sha256": "78E9E98E5E921B7E1B17D0C13F5B8A985D00292255F877F98E60A266494F1351",
+      "bytes": 784
+    },
+    "history/states/917-Hwanghae.txt": {
+      "sha256": "6864D0E762BDECA2056454749CEFF94EBA25FE7E782901861602E3CD2332ED5B",
+      "bytes": 528
+    },
+    "history/states/918-Hamgyong.txt": {
+      "sha256": "443F774810F07F9B676C10B27D850041B4962D02F628931EB6A2FB640E36BFD9",
+      "bytes": 778
+    },
+    "history/states/919-Jeolla.txt": {
+      "sha256": "3CF3C1CAC70879AA7FD11989309560A3D16E294EEC5BFD9B3BCB4F7AC611A258",
+      "bytes": 590
+    },
+    "history/states/920-Gyeongsang.txt": {
+      "sha256": "5C38702762ECB67552A7E770F5182CC1A8D2DA3986ED2866D475BAD3D2FF234C",
+      "bytes": 626
+    },
+    "interface/HOK_KOR_civic_influence.gui": {
+      "sha256": "AB47F30966970CD115C841894D60BFF014FCBEC180FE3F61D7E2404A0A540B2E",
+      "bytes": 7449
+    },
+    "interface/HOK_KOR_democratic_support_intelligence.gfx": {
+      "sha256": "FC4FA99783FEDEAB254CB74D6DCBB4677A3166E3482117EDBC9F7E5F8E57B591",
+      "bytes": 1016
+    },
+    "interface/HOK_KOR_democratic_support_intelligence_shine.gfx": {
+      "sha256": "6F04422BCBB68E8D3A7920841B4C8220AC8016E72C5075C529AB1D7F0ECFAFCB",
+      "bytes": 1366
+    },
+    "interface/HOK_KOR_focus_icons.gfx": {
+      "sha256": "9AFFC632E198FAA0F59CC828ACCF5FACE3C3B3D3AE1076DBE1D5B5201D4F9370",
+      "bytes": 9128
+    },
+    "interface/HOK_KOR_focus_icons_shine.gfx": {
+      "sha256": "BABBC6DA242A0D5DEDAD1D447833DE98039AF849C29316405B064486719F2AB1",
+      "bytes": 87942
+    },
+    "interface/HOK_KOR_operative_portraits.gfx": {
+      "sha256": "8FA84E7F71D52C6D8684153EDC4E636840E83FA7730C4306E8C7C6A0B956342B",
+      "bytes": 1351
+    },
+    "interface/HOK_KOR_scientist_portraits.gfx": {
+      "sha256": "1EFADE94088E08B0EE8F0AE072DACCC2E78FC543827AF3B932042E88987B3745",
+      "bytes": 1316
+    },
+    "interface/HOK_KOR_spirit_icons.gfx": {
+      "sha256": "370C376A54D639A5A433D1C96364B08D58A763BC5AC787F0FBCF62468E6E1E9D",
+      "bytes": 4431
+    },
+    "localisation/english/HOK_KOR_chinese_government_l_english.yml": {
+      "sha256": "2330CE821CD2657A9AF73851DC6EA4F1E7F4357322DFD4F4B723281448B460FD",
+      "bytes": 2598
+    },
+    "localisation/english/HOK_KOR_research_network_l_english.yml": {
+      "sha256": "19A3F7547811E2945C5B69A563B67F627FB0ECFA6973D7C4106950DF07098C06",
+      "bytes": 2254
+    },
+    "localisation/english/HOK_KOR_state_split_l_english.yml": {
+      "sha256": "29FEA1084E1DAC5BB7795E240B946F85D26CA574B7B2B868D2ED01D6E7592149",
+      "bytes": 606
+    },
+    "localisation/english/replace/zz_HOK_KOR_equipment_overrides_l_english.yml": {
+      "sha256": "F1C4044B30BBE48D1702AF4D4757963601C6427AC1CE10FF6D4ACFFE17EAF967",
+      "bytes": 1072
+    },
+    "localisation/korean/HOK_KOR_chinese_government_l_korean.yml": {
+      "sha256": "8BFBB679DE0619C2DCDE08CCEEE514EE01DE3385F704B703BB4EBAA4C9040CC0",
+      "bytes": 2596
+    },
+    "localisation/korean/HOK_KOR_state_split_l_korean.yml": {
+      "sha256": "E17611595CEE3D5CD0B3DCDA2EC40F31B66F542BACA4B7313842D8B2AB136B41",
+      "bytes": 573
+    },
+    "localisation/korean/replace/r56e_equip_motor_mech_l_korean.yml": {
+      "sha256": "DF40639AF64C8C307CD6CEBE5327CBFE2228B0B4C79B82D33F83C96450376F8A",
+      "bytes": 82181
+    },
+    "map/buildings.txt": {
+      "sha256": "FC70C7C85B9FD8CD9567477C648A80E8F29454EB88D270DE6D189EDB3124BEFA",
+      "bytes": 3604759
+    },
+    "map/railways.txt": {
+      "sha256": "D424E72B580B35C836B0881D6D6C18744B5C747C1652BD25D3E555D65FFED89E",
+      "bytes": 30413
+    },
+    "map/strategicregions/186-Korea.txt": {
+      "sha256": "4F548FC9A047DB27C0641C667914C90D058BDC98422A556DE58512641350E878",
+      "bytes": 3713
+    },
+    "map/supply_nodes.txt": {
+      "sha256": "E4C9A49AE1F6AA9A889B623E5BECE5CD571582EA848969E111D9DD6B3AFE9FF6",
+      "bytes": 6073
+    },
+    "map/unitstacks.txt": {
+      "sha256": "6CA860D64056D192043602E5552CE8FCAD37BADCEB5853D376A5340A6170E75D",
+      "bytes": 10567200
+    },
+    "portraits/00_portraits_KOR.txt": {
+      "sha256": "9825E25CD274449311AB43CE75DA29B15EA4DA98455164D5C8E0DE3B36F29181",
+      "bytes": 1505
+    },
+    "sound/r56_vo_Korean.asset": {
+      "sha256": "49D0C69AECCD813536A81828AD5FE3D739A91399663740A80A6D654862982282",
+      "bytes": 4551
+    },
+    "tools/build_east_asia_overrides.py": {
+      "sha256": "BE4551F3E9E10068C94FD8ADA4C366B0163CA822C8E40124A44E56C3D5C28275",
+      "bytes": 33428
+    },
+    "tools/build_integration_manifest.py": {
+      "sha256": "9D21FAB3131E6E93FF172F7DFB6DDAD7530A15835D461B0C64B746785ECAE0A4",
+      "bytes": 93887
+    },
+    "tools/build_korean_assets.py": {
+      "sha256": "4881E2A61E2D03F0521A702B5C7793CC7AAC5F35E7F7965126F3346EDE66F6C3",
+      "bytes": 23805
+    },
+    "tools/build_korean_focus_update.py": {
+      "sha256": "215D3F310BEB69318F56240A453331F4CAE8FF6C4686A3AAEBC0DC764ED1192B",
+      "bytes": 35588
+    },
+    "tools/build_rt56_map.py": {
+      "sha256": "271E8B5BE0CEE8857EF354AEC071B42D45BC433829A1BA7755404BA4CFD0A99C",
+      "bytes": 55371
+    },
+    "tools/build_shared_overrides.py": {
+      "sha256": "529D492FD575DF575A2D9EF1C6D0F44E8E5C7DF22E0EAE9DC9E52D6C30A11278",
+      "bytes": 24385
+    },
+    "tools/english_terminology.py": {
+      "sha256": "DCFCF0123EC4713990E7096FC89F0D058D2D169333F1B2CC8CA19D81F6E03489",
+      "bytes": 10883
+    },
+    "tools/hok_commander_unlock_lock.json": {
+      "sha256": "F8EFB1C28AE3A583BEE4B4BCA2418E6DA0B2D18AA51C853B5109AEF6119A52FF",
+      "bytes": 2686
+    },
+    "tools/hok_democratic_support_lock.json": {
+      "sha256": "FBEFD48163C16E46F3CF4BCFD4BE123C0887A7E8BE64EE626AFDBADAE61CEF84",
+      "bytes": 41461
+    },
+    "tools/korean_state_split.py": {
+      "sha256": "2AF8F9AADED4D30DD749FC2DE0F7BE5D51CDBC65E044F22D953E1BC3CFE5A72B",
+      "bytes": 22161
+    },
+    "tools/korean_state_split_content.py": {
+      "sha256": "61E3610062DE8F981B1A947333BED8DAF890E854E183356900B3C193330B6075",
+      "bytes": 13414
+    },
+    "tools/korean_state_split_shared.py": {
+      "sha256": "91A9A912C9BF6B651288F2C724DB4B4AACFE34B3B55D2AE308D1C13D692DC419",
+      "bytes": 25097
+    },
+    "tools/migrate_hok_ids.py": {
+      "sha256": "061C7B3290DB49636D6D52D0ABAB0267C622849671BD3ADC6C8B1A2F863EE9DF",
+      "bytes": 45398
+    },
+    "tools/review_followup.py": {
+      "sha256": "52F6F6CF1A72EEB175DB2B0A1CE60854F4DB0064784715CFFA690D42181FB8AA",
+      "bytes": 12651
+    },
+    "tools/source_snapshot.py": {
+      "sha256": "1C125156D80F0F50ED193D6306116EFA9CD32B5FCEBE615338D1DBDA871F54D2",
+      "bytes": 118495
+    },
+    "tools/upstream_commanders.py": {
+      "sha256": "BF762DA66D64D667C22E11E3E3B964F4EFD6EF7E44209502F98985D30EF662CB",
+      "bytes": 18685
+    },
+    "tools/upstream_democratic_support.py": {
+      "sha256": "CA050059BBD34CE2BE142B3A0CB088D96D979DF9199B325179B27B87254FBCAB",
+      "bytes": 23562
+    },
+    "tools/upstream_us_defense.py": {
+      "sha256": "DF362396F95D35CF1AF82908130A905CCD27E1B959F85D096F37024A590EE415",
+      "bytes": 19379
+    }
+  },
+  "renderer": {
+    "mermaid": "12.3.0",
+    "bundlePath": "C:\\hoi\\test\\shandong-dominion-20261119\\mermaid-12.3.0.min.js",
+    "bundleSha256": "336DF803D87A38B70A01E736E666C8F7601D2CE42F5E47C8FAFE5D721074B9A3",
+    "playwright": "1.65.2",
+    "executablePath": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+    "font": "Malgun Gothic, Arial, sans-serif",
+    "config": {
+      "startOnLoad": false,
+      "securityLevel": "strict",
+      "theme": "dark",
+      "fontFamily": "Malgun Gothic, Arial, sans-serif",
+      "htmlLabels": false,
+      "markdownAutoWrap": false,
+      "themeVariables": {
+        "fontFamily": "Malgun Gothic, Arial, sans-serif",
+        "fontSize": "18px",
+        "darkMode": true,
+        "background": "#111827",
+        "mainBkg": "#1f2d45",
+        "primaryColor": "#1f2d45",
+        "primaryTextColor": "#edf3fc",
+        "primaryBorderColor": "#789cd4",
+        "lineColor": "#b7cbe3",
+        "secondaryColor": "#203743",
+        "secondaryTextColor": "#edf3fc",
+        "secondaryBorderColor": "#77a3b8",
+        "tertiaryColor": "#27382d",
+        "tertiaryTextColor": "#edf3fc",
+        "tertiaryBorderColor": "#82aa90",
+        "textColor": "#edf3fc",
+        "classText": "#edf3fc",
+        "edgeLabelBackground": "#162337",
+        "clusterBkg": "#192637",
+        "clusterBorder": "#667e9d",
+        "noteBkgColor": "#40371b",
+        "noteTextColor": "#fff4cb",
+        "noteBorderColor": "#a78d4b",
+        "actorBkg": "#1f2d45",
+        "actorTextColor": "#edf3fc",
+        "actorBorder": "#789cd4",
+        "signalColor": "#b7cbe3",
+        "signalTextColor": "#edf3fc",
+        "labelBoxBkgColor": "#1f2d45",
+        "labelBoxBorderColor": "#789cd4",
+        "labelTextColor": "#edf3fc",
+        "loopTextColor": "#edf3fc",
+        "activationBkgColor": "#263c54",
+        "activationBorderColor": "#789cd4",
+        "sequenceNumberColor": "#0e1726"
+      },
+      "flowchart": {
+        "htmlLabels": false,
+        "useMaxWidth": false,
+        "nodeSpacing": 35,
+        "rankSpacing": 55,
+        "padding": 16,
+        "curve": "linear",
+        "wrappingWidth": 400
+      },
+      "class": {
+        "useMaxWidth": false
+      },
+      "sequence": {
+        "useMaxWidth": false,
+        "showSequenceNumbers": true,
+        "diagramMarginX": 30,
+        "diagramMarginY": 20,
+        "noteFontSize": 16,
+        "messageFontSize": 16,
+        "actorFontSize": 18
+      }
+    },
+    "helperLocation": "C:\\hoi\\test\\hok-rt56-architecture-detail-20261120-01\\render_architecture.py",
+    "helperSha256": "8522DAE68362A98E6CCB6311EFE91F3FF566C9B537AA2B59642990917B5DB33E",
+    "temporaryOutputRoot": "C:\\hoi\\test\\hok-rt56-architecture-detail-20261120-01\\output",
+    "deviceScaleFactor": 1.5,
+    "chromiumVersion": "158.0.8127.37"
+  },
+  "provenance": {
+    "donorCommit": "f180bc8089e2a17f310b1fafa091d3f152063df3",
+    "role": "adapted document questions and Mermaid practices; original HOK/donor authorship preserved; no donor image copy",
+    "donorSource": "C:/hoi/hearts_of_korea/docs/architecture/"
+  },
+  "gallery": {
+    "theme": "dark",
+    "themeSwitching": false,
+    "readsStoredTheme": false,
+    "externalRequests": false
+  }
+}

@@ -1,8 +1,12 @@
 # Hearts of Korea × The Road to 56 Compatibility
 
-> 상태: **최신 HOK 한국 콘텐츠·MAN 후속 조건 반영 / 보완 fixture 134 PASS·임시 파일 없는 한국 새 게임 부분 검증 / 릴리즈 검증은 별도**
+> **2026-11-20 선택 업데이트:** 민주인사 반복 지원·정보국·RT56 64주 산둥 정부·일본 봉기와 생성 절차를 반영했다. RT56 대조군·한영 UI, 조건별 효과·새 저장 재로드와 지원 만료/직접 재구매를 확인하고 일본 비맹주 초대를 수선했다. 자동 진단 실패와 수동 증거는 [구현·검증 기록](docs/implementation/2026-11-20-korean-democratic-support-intelligence-port.md)에서 구분한다. 전체 정적 검사의 기존 오류86건과 장기·멀티·구 저장·릴리즈 검증은 별도다.
+
+> **2026-09-22 당시 기록:** 한국 콘텐츠·MAN 후속 조건 반영 / 보완 fixture 134 PASS·임시 파일 없는 한국 새 게임 부분 검증 / 릴리즈 검증은 별도
 >
 > 초기 C1·R0 대조와 C0의 첫 MAN 수선 실패를 보존했다. 후속 MAN 조건을 적용한 기본 fixture는 **118 PASS / 1 FAIL / 7 SKIP**, 부탄의 종속 상태 때문에 실패한 시험 구성을 NEP로 보완한 alternate는 **134 PASS / 0 FAIL / 0 SKIP**다. 두 실행에서 MAN 반복 오류가 관측되지 않았으며 임시 파일을 제거한 한국 새 게임에서도 중점 선택·완료와 한국어 UI를 확인했다. 전체 런타임 검증이나 릴리즈 준비 완료를 뜻하지 않는다. [실행 증거와 한계](docs/audits/2026-09-22-korean-update-runtime.md)
+
+**2026-11-20 구조 문서 체계:** RT56 소유권·고정 입력과 생성기·한국15주·실제 영어/한국어·게임 수명주기를 설명하는 [구조 목차](docs/architecture/README.md)와 [오프라인 다크 갤러리](docs/architecture/images/index.html)를 제공한다. Mermaid가 편집 정본이며 그림 생성·표시 확인과 게임 UI·효과·저장 검증은 분리한다. [도입·출처·실제 확인 기록](docs/implementation/2026-11-20-architecture-diagram-adoption.md)을 따른다.
 
 이 저장소는 Hearts of Korea(HOK)의 한국 콘텐츠를 **현재 The Road to 56(RT56)을 호스트로 삼아 다시 이식하는 별도 신규 모드**다. `C:\hoi\hearts_of_korea`는 읽기 전용 donor이며 플레이할 때 함께 켜는 모드가 아니다.
 
